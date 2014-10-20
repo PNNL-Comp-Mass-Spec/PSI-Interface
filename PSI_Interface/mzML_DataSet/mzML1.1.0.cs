@@ -26,351 +26,351 @@ namespace PSI_Interface.mzML_DataSet {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class MzMLDataSet : global::System.Data.DataSet {
         
-        private mzMLDataTable tablemzML;
+        protected mzMLDataTable tablemzML;
         
-        private cvListDataTable tablecvList;
+        protected cvListDataTable tablecvList;
         
-        private cvDataTable tablecv;
+        protected cvDataTable tablecv;
         
-        private fileDescriptionDataTable tablefileDescription;
+        protected fileDescriptionDataTable tablefileDescription;
         
-        private fileContentDataTable tablefileContent;
+        protected fileContentDataTable tablefileContent;
         
-        private referenceableParamGroupRefDataTable tablereferenceableParamGroupRef;
+        protected referenceableParamGroupRefDataTable tablereferenceableParamGroupRef;
         
-        private cvParamDataTable tablecvParam;
+        protected cvParamDataTable tablecvParam;
         
-        private userParamDataTable tableuserParam;
+        protected userParamDataTable tableuserParam;
         
-        private sourceFileListDataTable tablesourceFileList;
+        protected sourceFileListDataTable tablesourceFileList;
         
-        private sourceFileDataTable tablesourceFile;
+        protected sourceFileDataTable tablesourceFile;
         
-        private contactDataTable tablecontact;
+        protected contactDataTable tablecontact;
         
-        private referenceableParamGroupListDataTable tablereferenceableParamGroupList;
+        protected referenceableParamGroupListDataTable tablereferenceableParamGroupList;
         
-        private referenceableParamGroupDataTable tablereferenceableParamGroup;
+        protected referenceableParamGroupDataTable tablereferenceableParamGroup;
         
-        private sampleListDataTable tablesampleList;
+        protected sampleListDataTable tablesampleList;
         
-        private sampleDataTable tablesample;
+        protected sampleDataTable tablesample;
         
-        private softwareListDataTable tablesoftwareList;
+        protected softwareListDataTable tablesoftwareList;
         
-        private softwareDataTable tablesoftware;
+        protected softwareDataTable tablesoftware;
         
-        private scanSettingsListDataTable tablescanSettingsList;
+        protected scanSettingsListDataTable tablescanSettingsList;
         
-        private scanSettingsDataTable tablescanSettings;
+        protected scanSettingsDataTable tablescanSettings;
         
-        private sourceFileRefListDataTable tablesourceFileRefList;
+        protected sourceFileRefListDataTable tablesourceFileRefList;
         
-        private sourceFileRefDataTable tablesourceFileRef;
+        protected sourceFileRefDataTable tablesourceFileRef;
         
-        private targetListDataTable tabletargetList;
+        protected targetListDataTable tabletargetList;
         
-        private targetDataTable tabletarget;
+        protected targetDataTable tabletarget;
         
-        private instrumentConfigurationListDataTable tableinstrumentConfigurationList;
+        protected instrumentConfigurationListDataTable tableinstrumentConfigurationList;
         
-        private instrumentConfigurationDataTable tableinstrumentConfiguration;
+        protected instrumentConfigurationDataTable tableinstrumentConfiguration;
         
-        private componentListDataTable tablecomponentList;
+        protected componentListDataTable tablecomponentList;
         
-        private sourceDataTable tablesource;
+        protected sourceDataTable tablesource;
         
-        private analyzerDataTable tableanalyzer;
+        protected analyzerDataTable tableanalyzer;
         
-        private detectorDataTable tabledetector;
+        protected detectorDataTable tabledetector;
         
-        private softwareRefDataTable tablesoftwareRef;
+        protected softwareRefDataTable tablesoftwareRef;
         
-        private dataProcessingListDataTable tabledataProcessingList;
+        protected dataProcessingListDataTable tabledataProcessingList;
         
-        private dataProcessingDataTable tabledataProcessing;
+        protected dataProcessingDataTable tabledataProcessing;
         
-        private processingMethodDataTable tableprocessingMethod;
+        protected processingMethodDataTable tableprocessingMethod;
         
-        private runDataTable tablerun;
+        protected runDataTable tablerun;
         
-        private spectrumListDataTable tablespectrumList;
+        protected spectrumListDataTable tablespectrumList;
         
-        private spectrumDataTable tablespectrum;
+        protected spectrumDataTable tablespectrum;
         
-        private scanListDataTable tablescanList;
+        protected scanListDataTable tablescanList;
         
-        private scanDataTable tablescan;
+        protected scanDataTable tablescan;
         
-        private scanWindowListDataTable tablescanWindowList;
+        protected scanWindowListDataTable tablescanWindowList;
         
-        private scanWindowDataTable tablescanWindow;
+        protected scanWindowDataTable tablescanWindow;
         
-        private precursorListDataTable tableprecursorList;
+        protected precursorListDataTable tableprecursorList;
         
-        private precursorDataTable tableprecursor;
+        protected precursorDataTable tableprecursor;
         
-        private isolationWindowDataTable tableisolationWindow;
+        protected isolationWindowDataTable tableisolationWindow;
         
-        private selectedIonListDataTable tableselectedIonList;
+        protected selectedIonListDataTable tableselectedIonList;
         
-        private selectedIonDataTable tableselectedIon;
+        protected selectedIonDataTable tableselectedIon;
         
-        private activationDataTable tableactivation;
+        protected activationDataTable tableactivation;
         
-        private productListDataTable tableproductList;
+        protected productListDataTable tableproductList;
         
-        private productDataTable tableproduct;
+        protected productDataTable tableproduct;
         
-        private binaryDataArrayListDataTable tablebinaryDataArrayList;
+        protected binaryDataArrayListDataTable tablebinaryDataArrayList;
         
-        private binaryDataArrayDataTable tablebinaryDataArray;
+        protected binaryDataArrayDataTable tablebinaryDataArray;
         
-        private chromatogramListDataTable tablechromatogramList;
+        protected chromatogramListDataTable tablechromatogramList;
         
-        private chromatogramDataTable tablechromatogram;
+        protected chromatogramDataTable tablechromatogram;
         
-        private global::System.Data.DataRelation relationmzML_cvList;
+        protected global::System.Data.DataRelation relationmzML_cvList;
         
-        private global::System.Data.DataRelation relationcvList_cv;
+        protected global::System.Data.DataRelation relationcvList_cv;
         
-        private global::System.Data.DataRelation relationmzML_fileDescription;
+        protected global::System.Data.DataRelation relationmzML_fileDescription;
         
-        private global::System.Data.DataRelation relationfileDescription_fileContent;
+        protected global::System.Data.DataRelation relationfileDescription_fileContent;
         
-        private global::System.Data.DataRelation relationfileContent_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationfileContent_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationsourceFile_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationsourceFile_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationcontact_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationcontact_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationsample_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationsample_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationsoftware_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationsoftware_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationtarget_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationtarget_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationscanSettings_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationscanSettings_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationsource_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationsource_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationanalyzer_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationanalyzer_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationdetector_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationdetector_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationinstrumentConfiguration_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationinstrumentConfiguration_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationprocessingMethod_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationprocessingMethod_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationscanWindow_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationscanWindow_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationscan_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationscan_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationscanList_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationscanList_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationisolationWindow_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationisolationWindow_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationselectedIon_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationselectedIon_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationactivation_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationactivation_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationbinaryDataArray_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationbinaryDataArray_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationspectrum_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationspectrum_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationchromatogram_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationchromatogram_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationrun_referenceableParamGroupRef;
+        protected global::System.Data.DataRelation relationrun_referenceableParamGroupRef;
         
-        private global::System.Data.DataRelation relationfileContent_cvParam;
+        protected global::System.Data.DataRelation relationfileContent_cvParam;
         
-        private global::System.Data.DataRelation relationsourceFile_cvParam;
+        protected global::System.Data.DataRelation relationsourceFile_cvParam;
         
-        private global::System.Data.DataRelation relationcontact_cvParam;
+        protected global::System.Data.DataRelation relationcontact_cvParam;
         
-        private global::System.Data.DataRelation relationreferenceableParamGroup_cvParam;
+        protected global::System.Data.DataRelation relationreferenceableParamGroup_cvParam;
         
-        private global::System.Data.DataRelation relationsample_cvParam;
+        protected global::System.Data.DataRelation relationsample_cvParam;
         
-        private global::System.Data.DataRelation relationsoftware_cvParam;
+        protected global::System.Data.DataRelation relationsoftware_cvParam;
         
-        private global::System.Data.DataRelation relationtarget_cvParam;
+        protected global::System.Data.DataRelation relationtarget_cvParam;
         
-        private global::System.Data.DataRelation relationscanSettings_cvParam;
+        protected global::System.Data.DataRelation relationscanSettings_cvParam;
         
-        private global::System.Data.DataRelation relationsource_cvParam;
+        protected global::System.Data.DataRelation relationsource_cvParam;
         
-        private global::System.Data.DataRelation relationanalyzer_cvParam;
+        protected global::System.Data.DataRelation relationanalyzer_cvParam;
         
-        private global::System.Data.DataRelation relationdetector_cvParam;
+        protected global::System.Data.DataRelation relationdetector_cvParam;
         
-        private global::System.Data.DataRelation relationinstrumentConfiguration_cvParam;
+        protected global::System.Data.DataRelation relationinstrumentConfiguration_cvParam;
         
-        private global::System.Data.DataRelation relationprocessingMethod_cvParam;
+        protected global::System.Data.DataRelation relationprocessingMethod_cvParam;
         
-        private global::System.Data.DataRelation relationscanWindow_cvParam;
+        protected global::System.Data.DataRelation relationscanWindow_cvParam;
         
-        private global::System.Data.DataRelation relationscan_cvParam;
+        protected global::System.Data.DataRelation relationscan_cvParam;
         
-        private global::System.Data.DataRelation relationscanList_cvParam;
+        protected global::System.Data.DataRelation relationscanList_cvParam;
         
-        private global::System.Data.DataRelation relationisolationWindow_cvParam;
+        protected global::System.Data.DataRelation relationisolationWindow_cvParam;
         
-        private global::System.Data.DataRelation relationselectedIon_cvParam;
+        protected global::System.Data.DataRelation relationselectedIon_cvParam;
         
-        private global::System.Data.DataRelation relationactivation_cvParam;
+        protected global::System.Data.DataRelation relationactivation_cvParam;
         
-        private global::System.Data.DataRelation relationbinaryDataArray_cvParam;
+        protected global::System.Data.DataRelation relationbinaryDataArray_cvParam;
         
-        private global::System.Data.DataRelation relationspectrum_cvParam;
+        protected global::System.Data.DataRelation relationspectrum_cvParam;
         
-        private global::System.Data.DataRelation relationchromatogram_cvParam;
+        protected global::System.Data.DataRelation relationchromatogram_cvParam;
         
-        private global::System.Data.DataRelation relationrun_cvParam;
+        protected global::System.Data.DataRelation relationrun_cvParam;
         
-        private global::System.Data.DataRelation relationfileContent_userParam;
+        protected global::System.Data.DataRelation relationfileContent_userParam;
         
-        private global::System.Data.DataRelation relationsourceFile_userParam;
+        protected global::System.Data.DataRelation relationsourceFile_userParam;
         
-        private global::System.Data.DataRelation relationcontact_userParam;
+        protected global::System.Data.DataRelation relationcontact_userParam;
         
-        private global::System.Data.DataRelation relationreferenceableParamGroup_userParam;
+        protected global::System.Data.DataRelation relationreferenceableParamGroup_userParam;
         
-        private global::System.Data.DataRelation relationsample_userParam;
+        protected global::System.Data.DataRelation relationsample_userParam;
         
-        private global::System.Data.DataRelation relationsoftware_userParam;
+        protected global::System.Data.DataRelation relationsoftware_userParam;
         
-        private global::System.Data.DataRelation relationtarget_userParam;
+        protected global::System.Data.DataRelation relationtarget_userParam;
         
-        private global::System.Data.DataRelation relationscanSettings_userParam;
+        protected global::System.Data.DataRelation relationscanSettings_userParam;
         
-        private global::System.Data.DataRelation relationsource_userParam;
+        protected global::System.Data.DataRelation relationsource_userParam;
         
-        private global::System.Data.DataRelation relationanalyzer_userParam;
+        protected global::System.Data.DataRelation relationanalyzer_userParam;
         
-        private global::System.Data.DataRelation relationdetector_userParam;
+        protected global::System.Data.DataRelation relationdetector_userParam;
         
-        private global::System.Data.DataRelation relationinstrumentConfiguration_userParam;
+        protected global::System.Data.DataRelation relationinstrumentConfiguration_userParam;
         
-        private global::System.Data.DataRelation relationprocessingMethod_userParam;
+        protected global::System.Data.DataRelation relationprocessingMethod_userParam;
         
-        private global::System.Data.DataRelation relationscanWindow_userParam;
+        protected global::System.Data.DataRelation relationscanWindow_userParam;
         
-        private global::System.Data.DataRelation relationscan_userParam;
+        protected global::System.Data.DataRelation relationscan_userParam;
         
-        private global::System.Data.DataRelation relationscanList_userParam;
+        protected global::System.Data.DataRelation relationscanList_userParam;
         
-        private global::System.Data.DataRelation relationisolationWindow_userParam;
+        protected global::System.Data.DataRelation relationisolationWindow_userParam;
         
-        private global::System.Data.DataRelation relationselectedIon_userParam;
+        protected global::System.Data.DataRelation relationselectedIon_userParam;
         
-        private global::System.Data.DataRelation relationactivation_userParam;
+        protected global::System.Data.DataRelation relationactivation_userParam;
         
-        private global::System.Data.DataRelation relationbinaryDataArray_userParam;
+        protected global::System.Data.DataRelation relationbinaryDataArray_userParam;
         
-        private global::System.Data.DataRelation relationspectrum_userParam;
+        protected global::System.Data.DataRelation relationspectrum_userParam;
         
-        private global::System.Data.DataRelation relationchromatogram_userParam;
+        protected global::System.Data.DataRelation relationchromatogram_userParam;
         
-        private global::System.Data.DataRelation relationrun_userParam;
+        protected global::System.Data.DataRelation relationrun_userParam;
         
-        private global::System.Data.DataRelation relationfileDescription_sourceFileList;
+        protected global::System.Data.DataRelation relationfileDescription_sourceFileList;
         
-        private global::System.Data.DataRelation relationsourceFileList_sourceFile;
+        protected global::System.Data.DataRelation relationsourceFileList_sourceFile;
         
-        private global::System.Data.DataRelation relationfileDescription_contact;
+        protected global::System.Data.DataRelation relationfileDescription_contact;
         
-        private global::System.Data.DataRelation relationmzML_referenceableParamGroupList;
+        protected global::System.Data.DataRelation relationmzML_referenceableParamGroupList;
         
-        private global::System.Data.DataRelation relationreferenceableParamGroupList_referenceableParamGroup;
+        protected global::System.Data.DataRelation relationreferenceableParamGroupList_referenceableParamGroup;
         
-        private global::System.Data.DataRelation relationmzML_sampleList;
+        protected global::System.Data.DataRelation relationmzML_sampleList;
         
-        private global::System.Data.DataRelation relationsampleList_sample;
+        protected global::System.Data.DataRelation relationsampleList_sample;
         
-        private global::System.Data.DataRelation relationmzML_softwareList;
+        protected global::System.Data.DataRelation relationmzML_softwareList;
         
-        private global::System.Data.DataRelation relationsoftwareList_software;
+        protected global::System.Data.DataRelation relationsoftwareList_software;
         
-        private global::System.Data.DataRelation relationmzML_scanSettingsList;
+        protected global::System.Data.DataRelation relationmzML_scanSettingsList;
         
-        private global::System.Data.DataRelation relationscanSettingsList_scanSettings;
+        protected global::System.Data.DataRelation relationscanSettingsList_scanSettings;
         
-        private global::System.Data.DataRelation relationscanSettings_sourceFileRefList;
+        protected global::System.Data.DataRelation relationscanSettings_sourceFileRefList;
         
-        private global::System.Data.DataRelation relationsourceFileRefList_sourceFileRef;
+        protected global::System.Data.DataRelation relationsourceFileRefList_sourceFileRef;
         
-        private global::System.Data.DataRelation relationscanSettings_targetList;
+        protected global::System.Data.DataRelation relationscanSettings_targetList;
         
-        private global::System.Data.DataRelation relationtargetList_target;
+        protected global::System.Data.DataRelation relationtargetList_target;
         
-        private global::System.Data.DataRelation relationmzML_instrumentConfigurationList;
+        protected global::System.Data.DataRelation relationmzML_instrumentConfigurationList;
         
-        private global::System.Data.DataRelation relationinstrumentConfigurationList_instrumentConfiguration;
+        protected global::System.Data.DataRelation relationinstrumentConfigurationList_instrumentConfiguration;
         
-        private global::System.Data.DataRelation relationinstrumentConfiguration_componentList;
+        protected global::System.Data.DataRelation relationinstrumentConfiguration_componentList;
         
-        private global::System.Data.DataRelation relationcomponentList_source;
+        protected global::System.Data.DataRelation relationcomponentList_source;
         
-        private global::System.Data.DataRelation relationcomponentList_analyzer;
+        protected global::System.Data.DataRelation relationcomponentList_analyzer;
         
-        private global::System.Data.DataRelation relationcomponentList_detector;
+        protected global::System.Data.DataRelation relationcomponentList_detector;
         
-        private global::System.Data.DataRelation relationinstrumentConfiguration_softwareRef;
+        protected global::System.Data.DataRelation relationinstrumentConfiguration_softwareRef;
         
-        private global::System.Data.DataRelation relationmzML_dataProcessingList;
+        protected global::System.Data.DataRelation relationmzML_dataProcessingList;
         
-        private global::System.Data.DataRelation relationdataProcessingList_dataProcessing;
+        protected global::System.Data.DataRelation relationdataProcessingList_dataProcessing;
         
-        private global::System.Data.DataRelation relationdataProcessing_processingMethod;
+        protected global::System.Data.DataRelation relationdataProcessing_processingMethod;
         
-        private global::System.Data.DataRelation relationmzML_run;
+        protected global::System.Data.DataRelation relationmzML_run;
         
-        private global::System.Data.DataRelation relationrun_spectrumList;
+        protected global::System.Data.DataRelation relationrun_spectrumList;
         
-        private global::System.Data.DataRelation relationspectrumList_spectrum;
+        protected global::System.Data.DataRelation relationspectrumList_spectrum;
         
-        private global::System.Data.DataRelation relationspectrum_scanList;
+        protected global::System.Data.DataRelation relationspectrum_scanList;
         
-        private global::System.Data.DataRelation relationscanList_scan;
+        protected global::System.Data.DataRelation relationscanList_scan;
         
-        private global::System.Data.DataRelation relationscan_scanWindowList;
+        protected global::System.Data.DataRelation relationscan_scanWindowList;
         
-        private global::System.Data.DataRelation relationscanWindowList_scanWindow;
+        protected global::System.Data.DataRelation relationscanWindowList_scanWindow;
         
-        private global::System.Data.DataRelation relationspectrum_precursorList;
+        protected global::System.Data.DataRelation relationspectrum_precursorList;
         
-        private global::System.Data.DataRelation relationprecursorList_precursor;
+        protected global::System.Data.DataRelation relationprecursorList_precursor;
         
-        private global::System.Data.DataRelation relationchromatogram_precursor;
+        protected global::System.Data.DataRelation relationchromatogram_precursor;
         
-        private global::System.Data.DataRelation relationprecursor_isolationWindow;
+        protected global::System.Data.DataRelation relationprecursor_isolationWindow;
         
-        private global::System.Data.DataRelation relationproduct_isolationWindow;
+        protected global::System.Data.DataRelation relationproduct_isolationWindow;
         
-        private global::System.Data.DataRelation relationprecursor_selectedIonList;
+        protected global::System.Data.DataRelation relationprecursor_selectedIonList;
         
-        private global::System.Data.DataRelation relationselectedIonList_selectedIon;
+        protected global::System.Data.DataRelation relationselectedIonList_selectedIon;
         
-        private global::System.Data.DataRelation relationprecursor_activation;
+        protected global::System.Data.DataRelation relationprecursor_activation;
         
-        private global::System.Data.DataRelation relationspectrum_productList;
+        protected global::System.Data.DataRelation relationspectrum_productList;
         
-        private global::System.Data.DataRelation relationproductList_product;
+        protected global::System.Data.DataRelation relationproductList_product;
         
-        private global::System.Data.DataRelation relationchromatogram_product;
+        protected global::System.Data.DataRelation relationchromatogram_product;
         
-        private global::System.Data.DataRelation relationspectrum_binaryDataArrayList;
+        protected global::System.Data.DataRelation relationspectrum_binaryDataArrayList;
         
-        private global::System.Data.DataRelation relationchromatogram_binaryDataArrayList;
+        protected global::System.Data.DataRelation relationchromatogram_binaryDataArrayList;
         
-        private global::System.Data.DataRelation relationbinaryDataArrayList_binaryDataArray;
+        protected global::System.Data.DataRelation relationbinaryDataArrayList_binaryDataArray;
         
-        private global::System.Data.DataRelation relationrun_chromatogramList;
+        protected global::System.Data.DataRelation relationrun_chromatogramList;
         
-        private global::System.Data.DataRelation relationchromatogramList_chromatogram;
+        protected global::System.Data.DataRelation relationchromatogramList_chromatogram;
         
-        private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
+        protected global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public MzMLDataSet() {
@@ -1718,7 +1718,7 @@ namespace PSI_Interface.mzML_DataSet {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitClass() {
+        protected void InitClass() {
             this.DataSetName = "MzMLDataSet";
             this.Prefix = "";
             this.Namespace = "http://psi.hupo.org/ms/mzml";
@@ -3273,267 +3273,267 @@ namespace PSI_Interface.mzML_DataSet {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializemzML() {
+        protected bool ShouldSerializemzML() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializecvList() {
+        protected bool ShouldSerializecvList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializecv() {
+        protected bool ShouldSerializecv() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializefileDescription() {
+        protected bool ShouldSerializefileDescription() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializefileContent() {
+        protected bool ShouldSerializefileContent() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializereferenceableParamGroupRef() {
+        protected bool ShouldSerializereferenceableParamGroupRef() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializecvParam() {
+        protected bool ShouldSerializecvParam() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeuserParam() {
+        protected bool ShouldSerializeuserParam() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesourceFileList() {
+        protected bool ShouldSerializesourceFileList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesourceFile() {
+        protected bool ShouldSerializesourceFile() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializecontact() {
+        protected bool ShouldSerializecontact() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializereferenceableParamGroupList() {
+        protected bool ShouldSerializereferenceableParamGroupList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializereferenceableParamGroup() {
+        protected bool ShouldSerializereferenceableParamGroup() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesampleList() {
+        protected bool ShouldSerializesampleList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesample() {
+        protected bool ShouldSerializesample() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesoftwareList() {
+        protected bool ShouldSerializesoftwareList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesoftware() {
+        protected bool ShouldSerializesoftware() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializescanSettingsList() {
+        protected bool ShouldSerializescanSettingsList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializescanSettings() {
+        protected bool ShouldSerializescanSettings() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesourceFileRefList() {
+        protected bool ShouldSerializesourceFileRefList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesourceFileRef() {
+        protected bool ShouldSerializesourceFileRef() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializetargetList() {
+        protected bool ShouldSerializetargetList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializetarget() {
+        protected bool ShouldSerializetarget() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeinstrumentConfigurationList() {
+        protected bool ShouldSerializeinstrumentConfigurationList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeinstrumentConfiguration() {
+        protected bool ShouldSerializeinstrumentConfiguration() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializecomponentList() {
+        protected bool ShouldSerializecomponentList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesource() {
+        protected bool ShouldSerializesource() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeanalyzer() {
+        protected bool ShouldSerializeanalyzer() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializedetector() {
+        protected bool ShouldSerializedetector() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesoftwareRef() {
+        protected bool ShouldSerializesoftwareRef() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializedataProcessingList() {
+        protected bool ShouldSerializedataProcessingList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializedataProcessing() {
+        protected bool ShouldSerializedataProcessing() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeprocessingMethod() {
+        protected bool ShouldSerializeprocessingMethod() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializerun() {
+        protected bool ShouldSerializerun() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializespectrumList() {
+        protected bool ShouldSerializespectrumList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializespectrum() {
+        protected bool ShouldSerializespectrum() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializescanList() {
+        protected bool ShouldSerializescanList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializescan() {
+        protected bool ShouldSerializescan() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializescanWindowList() {
+        protected bool ShouldSerializescanWindowList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializescanWindow() {
+        protected bool ShouldSerializescanWindow() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeprecursorList() {
+        protected bool ShouldSerializeprecursorList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeprecursor() {
+        protected bool ShouldSerializeprecursor() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeisolationWindow() {
+        protected bool ShouldSerializeisolationWindow() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeselectedIonList() {
+        protected bool ShouldSerializeselectedIonList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeselectedIon() {
+        protected bool ShouldSerializeselectedIon() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeactivation() {
+        protected bool ShouldSerializeactivation() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeproductList() {
+        protected bool ShouldSerializeproductList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeproduct() {
+        protected bool ShouldSerializeproduct() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializebinaryDataArrayList() {
+        protected bool ShouldSerializebinaryDataArrayList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializebinaryDataArray() {
+        protected bool ShouldSerializebinaryDataArray() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializechromatogramList() {
+        protected bool ShouldSerializechromatogramList() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializechromatogram() {
+        protected bool ShouldSerializechromatogram() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
+        protected void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
             }
@@ -3688,282 +3688,365 @@ namespace PSI_Interface.mzML_DataSet {
         public delegate void chromatogramListRowChangeEventHandler(object sender, chromatogramListRowChangeEvent e);
         
         public delegate void chromatogramRowChangeEventHandler(object sender, chromatogramRowChangeEvent e);
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class mzMLDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
-            
-            private global::System.Data.DataColumn columnaccession;
-            
-            private global::System.Data.DataColumn columnversion;
-            
-            private global::System.Data.DataColumn columnid;
-            
-            private global::System.Data.DataColumn columnmzML_Id;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public mzMLDataTable() {
-                this.TableName = "mzML";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal mzMLDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected mzMLDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn accessionColumn {
-                get {
-                    return this.columnaccession;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn versionColumn {
-                get {
-                    return this.columnversion;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn idColumn {
-                get {
-                    return this.columnid;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn mzML_IdColumn {
-                get {
-                    return this.columnmzML_Id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public mzMLRow this[int index] {
-                get {
-                    return ((mzMLRow)(this.Rows[index]));
-                }
-            }
-            
-            public event mzMLRowChangeEventHandler mzMLRowChanging;
-            
-            public event mzMLRowChangeEventHandler mzMLRowChanged;
-            
-            public event mzMLRowChangeEventHandler mzMLRowDeleting;
-            
-            public event mzMLRowChangeEventHandler mzMLRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddmzMLRow(mzMLRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public mzMLRow AddmzMLRow(string accession, string version, string id) {
-                mzMLRow rowmzMLRow = ((mzMLRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
+
+		/// <summary>
+		///Represents the strongly named DataTable class.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+		[global::System.Serializable()]
+		[global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+		public partial class mzMLDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable
+		{
+
+			private global::System.Data.DataColumn columnaccession;
+
+			private global::System.Data.DataColumn columnversion;
+
+			private global::System.Data.DataColumn columnid;
+
+			private global::System.Data.DataColumn columnmzML_Id;
+
+			private global::System.Data.DataColumn columnindexedmzML_Id;
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public mzMLDataTable()
+			{
+				this.TableName = "mzML";
+				this.BeginInit();
+				this.InitClass();
+				this.EndInit();
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			internal mzMLDataTable(global::System.Data.DataTable table)
+			{
+				this.TableName = table.TableName;
+				if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+				{
+					this.CaseSensitive = table.CaseSensitive;
+				}
+				if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+				{
+					this.Locale = table.Locale;
+				}
+				if ((table.Namespace != table.DataSet.Namespace))
+				{
+					this.Namespace = table.Namespace;
+				}
+				this.Prefix = table.Prefix;
+				this.MinimumCapacity = table.MinimumCapacity;
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected mzMLDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+				base(info, context)
+			{
+				this.InitVars();
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public global::System.Data.DataColumn accessionColumn
+			{
+				get
+				{
+					return this.columnaccession;
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public global::System.Data.DataColumn versionColumn
+			{
+				get
+				{
+					return this.columnversion;
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public global::System.Data.DataColumn idColumn
+			{
+				get
+				{
+					return this.columnid;
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public global::System.Data.DataColumn mzML_IdColumn
+			{
+				get
+				{
+					return this.columnmzML_Id;
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public global::System.Data.DataColumn indexedmzML_IdColumn
+			{
+				get
+				{
+					return this.columnindexedmzML_Id;
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			[global::System.ComponentModel.Browsable(false)]
+			public int Count
+			{
+				get
+				{
+					return this.Rows.Count;
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public mzMLRow this[int index]
+			{
+				get
+				{
+					return ((mzMLRow)(this.Rows[index]));
+				}
+			}
+
+			public event mzMLRowChangeEventHandler mzMLRowChanging;
+
+			public event mzMLRowChangeEventHandler mzMLRowChanged;
+
+			public event mzMLRowChangeEventHandler mzMLRowDeleting;
+
+			public event mzMLRowChangeEventHandler mzMLRowDeleted;
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public void AddmzMLRow(mzMLRow row)
+			{
+				this.Rows.Add(row);
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public mzMLRow AddmzMLRow(string accession, string version, string id)
+			{
+				mzMLRow rowmzMLRow = ((mzMLRow)(this.NewRow()));
+				object[] columnValuesArray = new object[] {
                         accession,
                         version,
                         id,
+                        null, // indexedmzML Column ID - leave null
                         null};
-                rowmzMLRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowmzMLRow);
-                return rowmzMLRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                mzMLDataTable cln = ((mzMLDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new mzMLDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnaccession = base.Columns["accession"];
-                this.columnversion = base.Columns["version"];
-                this.columnid = base.Columns["id"];
-                this.columnmzML_Id = base.Columns["mzML_Id"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnaccession = new global::System.Data.DataColumn("accession", typeof(string), null, global::System.Data.MappingType.Attribute);
-                base.Columns.Add(this.columnaccession);
-                this.columnversion = new global::System.Data.DataColumn("version", typeof(string), null, global::System.Data.MappingType.Attribute);
-                base.Columns.Add(this.columnversion);
-                this.columnid = new global::System.Data.DataColumn("id", typeof(string), null, global::System.Data.MappingType.Attribute);
-                base.Columns.Add(this.columnid);
-                this.columnmzML_Id = new global::System.Data.DataColumn("mzML_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-                base.Columns.Add(this.columnmzML_Id);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+				rowmzMLRow.ItemArray = columnValuesArray;
+				this.Rows.Add(rowmzMLRow);
+				return rowmzMLRow;
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public mzMLRow AddmzMLRow(string accession, string version, string id, IndexedMzMLDataSet.indexedmzMLRow parentindexedmzMLRowByindexedmzML_mzML)
+			{
+				mzMLRow rowmzMLRow = ((mzMLRow)(this.NewRow()));
+				object[] columnValuesArray = new object[] {
+                        accession,
+                        version,
+                        id,
+                        null,
+                        null};
+				if ((parentindexedmzMLRowByindexedmzML_mzML != null))
+				{
+					columnValuesArray[4] = parentindexedmzMLRowByindexedmzML_mzML[2];
+				}
+				rowmzMLRow.ItemArray = columnValuesArray;
+				this.Rows.Add(rowmzMLRow);
+				return rowmzMLRow;
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public virtual global::System.Collections.IEnumerator GetEnumerator()
+			{
+				return this.Rows.GetEnumerator();
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public override global::System.Data.DataTable Clone()
+			{
+				mzMLDataTable cln = ((mzMLDataTable)(base.Clone()));
+				cln.InitVars();
+				return cln;
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected override global::System.Data.DataTable CreateInstance()
+			{
+				return new mzMLDataTable();
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			internal void InitVars()
+			{
+				this.columnaccession = base.Columns["accession"];
+				this.columnversion = base.Columns["version"];
+				this.columnid = base.Columns["id"];
+				this.columnmzML_Id = base.Columns["mzML_Id"];
+				this.columnindexedmzML_Id = base.Columns["indexedmzML_Id"];
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			private void InitClass()
+			{
+				this.columnaccession = new global::System.Data.DataColumn("accession", typeof(string), null, global::System.Data.MappingType.Attribute);
+				base.Columns.Add(this.columnaccession);
+				this.columnversion = new global::System.Data.DataColumn("version", typeof(string), null, global::System.Data.MappingType.Attribute);
+				base.Columns.Add(this.columnversion);
+				this.columnid = new global::System.Data.DataColumn("id", typeof(string), null, global::System.Data.MappingType.Attribute);
+				base.Columns.Add(this.columnid);
+				this.columnmzML_Id = new global::System.Data.DataColumn("mzML_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+				base.Columns.Add(this.columnmzML_Id);
+				this.columnindexedmzML_Id = new global::System.Data.DataColumn("indexedmzML_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+				base.Columns.Add(this.columnindexedmzML_Id);
+				this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnmzML_Id}, true));
-                this.columnaccession.Namespace = "";
-                this.columnversion.AllowDBNull = false;
-                this.columnversion.Namespace = "";
-                this.columnid.Namespace = "";
-                this.columnmzML_Id.AutoIncrement = true;
-                this.columnmzML_Id.AllowDBNull = false;
-                this.columnmzML_Id.Unique = true;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public mzMLRow NewmzMLRow() {
-                return ((mzMLRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new mzMLRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(mzMLRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.mzMLRowChanged != null)) {
-                    this.mzMLRowChanged(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.mzMLRowChanging != null)) {
-                    this.mzMLRowChanging(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.mzMLRowDeleted != null)) {
-                    this.mzMLRowDeleted(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.mzMLRowDeleting != null)) {
-                    this.mzMLRowDeleting(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovemzMLRow(mzMLRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                MzMLDataSet ds = new MzMLDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "mzMLDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
+				this.columnaccession.Namespace = "";
+				this.columnversion.AllowDBNull = false;
+				this.columnversion.Namespace = "";
+				this.columnid.Namespace = "";
+				this.columnmzML_Id.AutoIncrement = true;
+				this.columnmzML_Id.AllowDBNull = false;
+				this.columnmzML_Id.Unique = true;
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public mzMLRow NewmzMLRow()
+			{
+				return ((mzMLRow)(this.NewRow()));
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+			{
+				return new mzMLRow(builder);
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected override global::System.Type GetRowType()
+			{
+				return typeof(mzMLRow);
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+			{
+				base.OnRowChanged(e);
+				if ((this.mzMLRowChanged != null))
+				{
+					this.mzMLRowChanged(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+			{
+				base.OnRowChanging(e);
+				if ((this.mzMLRowChanging != null))
+				{
+					this.mzMLRowChanging(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+			{
+				base.OnRowDeleted(e);
+				if ((this.mzMLRowDeleted != null))
+				{
+					this.mzMLRowDeleted(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+			{
+				base.OnRowDeleting(e);
+				if ((this.mzMLRowDeleting != null))
+				{
+					this.mzMLRowDeleting(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public void RemovemzMLRow(mzMLRow row)
+			{
+				this.Rows.Remove(row);
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+			{
+				global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+				global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+				MzMLDataSet ds = new MzMLDataSet();
+				//IndexedMzMLDataSet ds = new IndexedMzMLDataSet();
+				global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+				any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+				any1.MinOccurs = new decimal(0);
+				any1.MaxOccurs = decimal.MaxValue;
+				any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+				sequence.Items.Add(any1);
+				global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+				any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+				any2.MinOccurs = new decimal(1);
+				any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+				sequence.Items.Add(any2);
+				global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+				attribute1.Name = "namespace";
+				attribute1.FixedValue = ds.Namespace;
+				type.Attributes.Add(attribute1);
+				global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+				attribute2.Name = "tableTypeName";
+				attribute2.FixedValue = "mzMLDataTable";
+				type.Attributes.Add(attribute2);
+				type.Particle = sequence;
+				global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+				if (xs.Contains(dsSchema.TargetNamespace))
+				{
+					global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+					global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+					try
+					{
+						global::System.Xml.Schema.XmlSchema schema = null;
+						dsSchema.Write(s1);
+						for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); )
+						{
+							schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+							s2.SetLength(0);
+							schema.Write(s2);
+							if ((s1.Length == s2.Length))
+							{
+								s1.Position = 0;
+								s2.Position = 0;
+								for (; ((s1.Position != s1.Length)
+											&& (s1.ReadByte() == s2.ReadByte())); )
+								{
+									;
+								}
+								if ((s1.Position == s1.Length))
+								{
+									return type;
+								}
+							}
+						}
+					}
+					finally
+					{
+						if ((s1 != null))
+						{
+							s1.Close();
+						}
+						if ((s2 != null))
+						{
+							s2.Close();
+						}
+					}
+				}
+				xs.Add(dsSchema);
+				return type;
+			}
+		}
         
         /// <summary>
         ///Represents the strongly named DataTable class.
