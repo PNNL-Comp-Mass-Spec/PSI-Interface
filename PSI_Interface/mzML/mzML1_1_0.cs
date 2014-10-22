@@ -470,17 +470,6 @@ namespace PSI_Interface.mzML {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string name {
             get {
                 return this.nameField;
@@ -489,6 +478,34 @@ namespace PSI_Interface.mzML {
                 this.nameField = value;
             }
         }
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public string value
+		{
+			get
+			{
+				return this.valueField;
+			}
+			set
+			{
+				this.valueField = value;
+			}
+		}
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
+		public string unitCvRef
+		{
+			get
+			{
+				return this.unitCvRefField;
+			}
+			set
+			{
+				this.unitCvRefField = value;
+			}
+		}
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -509,17 +526,6 @@ namespace PSI_Interface.mzML {
             }
             set {
                 this.unitNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
-        public string unitCvRef {
-            get {
-                return this.unitCvRefField;
-            }
-            set {
-                this.unitCvRefField = value;
             }
         }
     }
@@ -662,6 +668,20 @@ namespace PSI_Interface.mzML {
                 this.binaryDataArrayListField = value;
             }
         }
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
+		public string index
+		{
+			get
+			{
+				return this.indexField;
+			}
+			set
+			{
+				this.indexField = value;
+			}
+		}
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -671,17 +691,6 @@ namespace PSI_Interface.mzML {
             }
             set {
                 this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-        public string index {
-            get {
-                return this.indexField;
-            }
-            set {
-                this.indexField = value;
             }
         }
         
@@ -1154,6 +1163,20 @@ namespace PSI_Interface.mzML {
                 this.binaryDataArrayListField = value;
             }
         }
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
+		public string index
+		{
+			get
+			{
+				return this.indexField;
+			}
+			set
+			{
+				this.indexField = value;
+			}
+		}
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1174,17 +1197,6 @@ namespace PSI_Interface.mzML {
             }
             set {
                 this.spotIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-        public string index {
-            get {
-                return this.indexField;
-            }
-            set {
-                this.indexField = value;
             }
         }
         
@@ -1357,6 +1369,20 @@ namespace PSI_Interface.mzML {
                 this.defaultInstrumentConfigurationRefField = value;
             }
         }
+
+		/// <remarks/>
+		[System.Xml.Serialization.XmlAttributeAttribute()]
+		public System.DateTime startTimeStamp
+		{
+			get
+			{
+				return this.startTimeStampField;
+			}
+			set
+			{
+				this.startTimeStampField = value;
+			}
+		}
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType="IDREF")]
@@ -1377,17 +1403,6 @@ namespace PSI_Interface.mzML {
             }
             set {
                 this.sampleRefField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime startTimeStamp {
-            get {
-                return this.startTimeStampField;
-            }
-            set {
-                this.startTimeStampField = value;
             }
         }
         

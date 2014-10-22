@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSI_Interface", "PSI_Interface\PSI_Interface.csproj", "{96F29CF8-7B30-471C-BCAB-C15C87D7DBB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV_Generator", "CV_Generator\CV_Generator.csproj", "{DE900D24-6F59-4095-91AA-2807530AFA05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface_Tests", "Interface_Tests\Interface_Tests.csproj", "{EA617FB6-A9BA-43DE-89B1-4B88F66BFCE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{96F29CF8-7B30-471C-BCAB-C15C87D7DBB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96F29CF8-7B30-471C-BCAB-C15C87D7DBB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96F29CF8-7B30-471C-BCAB-C15C87D7DBB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE900D24-6F59-4095-91AA-2807530AFA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE900D24-6F59-4095-91AA-2807530AFA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE900D24-6F59-4095-91AA-2807530AFA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE900D24-6F59-4095-91AA-2807530AFA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA617FB6-A9BA-43DE-89B1-4B88F66BFCE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA617FB6-A9BA-43DE-89B1-4B88F66BFCE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA617FB6-A9BA-43DE-89B1-4B88F66BFCE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA617FB6-A9BA-43DE-89B1-4B88F66BFCE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
