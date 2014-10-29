@@ -5,9 +5,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
-namespace PSI_Interface.mzML
+namespace PSI_Interface.MSData.mzML
 {
 	public class MzMLWriter
 	{
@@ -21,7 +22,7 @@ namespace PSI_Interface.mzML
 
 		private int _bufferSize = 16384;
 
-		private Stream _writer;
+		private XmlWriter _writer;
 
 		private Type _mzMLType;
 
@@ -56,11 +57,18 @@ namespace PSI_Interface.mzML
 
 		private void ConfigureWriter()
 		{
-			_writer = new FileStream(_filePath, FileMode.Create, FileAccess.Write, FileShare.None, _bufferSize);
+			Stream writer = new FileStream(_filePath, FileMode.Create, FileAccess.Write, FileShare.None, _bufferSize);
 			if (_filePath.EndsWith(".gz"))
 			{
-				_writer = new GZipStream(_writer, CompressionMode.Compress);
+				writer = new GZipStream(writer, CompressionMode.Compress);
 			}
+			var xSettings = new XmlWriterSettings();
+			xSettings.CloseOutput = true;
+			xSettings.NewLineChars = "\n";
+			xSettings.Indent = true;
+			xSettings.Encoding = Encoding.UTF8;
+			//xSettings.WriteEndDocumentOnClose = false; // This will be necessary to properly output a checksum for indexedmzML.
+			_writer = XmlWriter.Create(new StreamWriter(writer, Encoding.UTF8, _bufferSize), xSettings);
 		}
 	}
 }

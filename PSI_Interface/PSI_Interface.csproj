@@ -42,16 +42,21 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="CV\CV.cs" />
-    <Compile Include="mzIdentML\mzIdentML1_1_0.cs" />
-    <Compile Include="mzML\mzML1_1_0.cs" />
-    <Compile Include="mzML\mzML1_1_1_idx.cs" />
-    <Compile Include="mzML\MzMLReader.cs" />
-    <Compile Include="mzML\MzMLSchemaType.cs" />
-    <Compile Include="mzML\MzMLWriter.cs" />
-    <Compile Include="mzML_DataSet\mzML1.1.0.cs">
+    <Compile Include="IdentData\IdentData.cs" />
+    <Compile Include="IdentData\mzIdentML\mzIdentML1_1_0.cs" />
+    <Compile Include="IdentData\mzIdentML\MzIdentMLReader.cs" />
+    <Compile Include="IdentData\mzIdentML\MzIdentMLWriter.cs" />
+    <Compile Include="MSData\MSData.cs" />
+    <Compile Include="MSData\mzML\mzML1_1_0.cs" />
+    <Compile Include="MSData\mzML\mzML1_1_1_idx.cs" />
+    <Compile Include="MSData\mzML\MzMLReader.cs" />
+    <Compile Include="MSData\mzML\MzMLSchemaType.cs" />
+    <Compile Include="MSData\mzML\MzMLWriter.cs" />
+    <Compile Include="MSData\mzML\mzML_Adds.cs" />
+    <Compile Include="MSData\mzML_DataSet\mzML1.1.0.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="mzML_DataSet\mzML1.1.1_idx.cs">
+    <Compile Include="MSData\mzML_DataSet\mzML1.1.1_idx.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +64,7 @@
   <ItemGroup>
     <Content Include="ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

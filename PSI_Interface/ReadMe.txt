@@ -9,3 +9,8 @@ mzML1_1_1_idx.cs:  xsd mzML1.1.1_idx.xsd /dataset /namespace:PSI_Interface.mzML 
 For mzML1_1_1_idx.cs, many lines must be commented out to remove their conflicts with the contents of mzML1_1_0.cs
 mzIdentML schema uses xsd:union and xsd:list, so it cannot be transformed into a Dataset Subclass.
 mzML can be transformed into a Dataset Subclass, which might be useful (in-memory cache)
+
+
+
+TODO:
+Separate the objects from the serialization; This will require some work, but may allow easier adaptation to updated schemas (just add a new serialization class)

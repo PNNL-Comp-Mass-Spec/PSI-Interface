@@ -52,6 +52,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="mzIdentMLTests\mzIdentMLReadTests.cs" />
+    <Compile Include="mzIdentMLTests\mzIdentMLWriteTests.cs" />
     <Compile Include="mzMLTests\mzMLReadTests.cs" />
     <Compile Include="mzMLTests\mzMLWriteTests.cs" />
     <Compile Include="TestPath.cs" />
@@ -59,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CVTests\" />
-    <Folder Include="mzIdentMLTests\" />
     <Folder Include="mzMLDataSetTests\" />
   </ItemGroup>
   <ItemGroup>

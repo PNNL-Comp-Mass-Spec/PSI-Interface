@@ -2,7 +2,7 @@
 using System.IO;
 using Interface_Tests;
 using NUnit.Framework;
-using PSI_Interface.mzML;
+using PSI_Interface.MSData.mzML;
 
 namespace Interface_Tests.mzMLTests
 {
@@ -46,7 +46,7 @@ namespace Interface_Tests.mzMLTests
 		[Test]
 		[TestCase(@"mzML\VA139IMSMS_noIndex.mzML", @"mzML\output\VA139IMSMS_noIndex.mzML", 3145)]
 		[TestCase(@"mzML\VA139IMSMS_noIndex.mzML.gz", @"mzML\output\VA139IMSMS_noIndex.mzML.gz", 3145)]
-		public void MzMLTest(string inPath, string outPath, int expectedSpectra)
+		public void MzMLWriteTest(string inPath, string outPath, int expectedSpectra)
 		{
 			var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
 			mzMLType mzMLData = reader.Read();
@@ -63,7 +63,7 @@ namespace Interface_Tests.mzMLTests
 		[TestCase(@"mzML\VA139IMSMS_compressed.mzML", 3145)]
 		[TestCase(@"mzML\VA139IMSMS.mzML.gz", 3145)]
 		[TestCase(@"mzML\sample1-A_BB2_01_922.mzML", 43574)]
-		public void MzMLIndexedTest(string path, int expectedSpectra)
+		public void MzMLIndexedWriteTest(string path, int expectedSpectra)
 		{
 			var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, path));
 			mzMLType mzMLData = reader.Read();
