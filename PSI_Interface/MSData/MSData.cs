@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+/*********************************************************************************************************************************
+ * Work TODO:
+ * TODO: Conversion from array of bytes to numeric arrays (BinaryDataArray)
+ * TODO: Fix count reporting - no "setting" capability, but report list/array size
+ * TODO: Some structure cleanup
+ * TODO: Configuration for linking CVRefs, ReferenceableParamGroupRefs, InstrumentConfigurations, Etc.
+ ********************************************************************************************************************************/
 
 namespace PSI_Interface.MSData
 {
