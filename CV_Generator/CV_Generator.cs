@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PSI_Interface.CV
+namespace CV_Generator
 {
-	public partial class CV
+	class CV_Generator
 	{
-
 	}
 }

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="CV\CV.cs" />
+    <Compile Include="CV\CV_gen.cs" />
     <Compile Include="IdentData\IdentData.cs" />
     <Compile Include="IdentData\mzIdentML\mzIdentML1_1_0.cs" />
     <Compile Include="IdentData\mzIdentML\MzIdentMLReader.cs" />
