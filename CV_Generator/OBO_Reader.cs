@@ -59,13 +59,16 @@ namespace CV_Generator
 							FileData.Header = new OBO_File.OBO_Header(data);
 							break;
 						case "[term]":
-							FileData.Terms.Add(new OBO_File.OBO_Term(data));
+							var term = new OBO_File.OBO_Term(data);
+							FileData.Terms.Add(term.Id, term);
 							break;
 						case "[typedef]":
-							FileData.Typedefs.Add(new OBO_File.OBO_Typedef(data));
+							var typeDef = new OBO_File.OBO_Typedef(data);
+							FileData.Typedefs.Add(typeDef.Id, typeDef);
 							break;
 						case "[instance]":
-							FileData.Instances.Add(new OBO_File.OBO_Instance(data));
+							var instance = new OBO_File.OBO_Instance(data);
+							FileData.Instances.Add(instance.Id, instance);
 							break;
 					}
 				}

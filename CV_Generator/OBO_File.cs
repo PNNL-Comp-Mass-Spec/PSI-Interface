@@ -28,9 +28,10 @@ namespace CV_Generator
 				}
 			}
 		}
-		public readonly List<OBO_Term> Terms;
-		public readonly List<OBO_Typedef> Typedefs;
-		public readonly List<OBO_Instance> Instances;
+
+		public readonly Dictionary<string, OBO_Term> Terms;
+		public readonly Dictionary<string, OBO_Typedef> Typedefs;
+		public readonly Dictionary<string, OBO_Instance> Instances;
 		private static readonly Dictionary<string, int> Ids = new Dictionary<string, int>();
 
 		public string Url { get; private set; }
@@ -55,9 +56,9 @@ namespace CV_Generator
 
 		public OBO_File(string url)
 		{
-			Terms = new List<OBO_Term>();
-			Typedefs = new List<OBO_Typedef>();
-			Instances = new List<OBO_Instance>();
+			Terms = new Dictionary<string, OBO_Term>();
+			Typedefs = new Dictionary<string, OBO_Typedef>();
+			Instances = new Dictionary<string, OBO_Instance>();
 			Url = url;
 			IsGeneratedId = false;
 			SetNameAndId();
