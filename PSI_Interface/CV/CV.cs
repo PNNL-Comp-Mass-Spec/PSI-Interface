@@ -31,6 +31,11 @@ namespace PSI_Interface.CV
             }
         }
 
+	    public CV()
+	    {
+	        PopulateTermData();
+	    }
+
         /*public readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();
         public readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();
         public readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();

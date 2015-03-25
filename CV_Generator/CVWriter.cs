@@ -44,7 +44,8 @@ namespace CV_Generator
 				//file.WriteLine(TermInfoType("        "));
 				file.WriteLine(RelationsTypes("        "));
 				file.WriteLine(GenerateRelationOtherTypesEnum("        "));
-				file.WriteLine(GenerateCVEnumAndNames("        "));
+                file.WriteLine(GenerateCVEnum("        "));
+                file.WriteLine(GenerateTermInfoObject("        "));
 				file.WriteLine(RelationsIsAEnum("        "));
 				// Write main class close...
                 file.WriteLine(ClassClose());
@@ -106,11 +107,12 @@ namespace CV_Generator
 
 		private string RelationsTypes(string indent)
 		{
-			return
-				indent + "public readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();\n" +
-				indent + "public readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();\n" +
-				indent + "public readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();\n" +
-				indent + "public readonly Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>>();\n";
+		    return
+		        indent + "public readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();\n" +
+		        indent + "public readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();\n" +
+		        indent + "public readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();\n" +
+		        indent + "public readonly Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>>();\n" +
+		        indent + "public readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();\n";
 		}
 
 		private const string RelationsOtherTypesEnumName = "RelationsOtherTypes";
@@ -150,49 +152,66 @@ namespace CV_Generator
 			return enumData + indent + "}\n";
 		}
 
-		private string GenerateCVEnumAndNames(string indent)
-		{
-		    string invalidSymbols = @" @/[():^?*+<=!~`#$%&{}|;'.,>\"; // WARNING: '-' must be at beginning or end, in middle it must be escaped, or it is interpreted as a range
-		    string invalidSymbolsEscaped = System.Text.RegularExpressions.Regex.Escape(invalidSymbols);
-		    string invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]"; // add all whitespace matching, manually escape the ']', since above call doesn't
+        private Dictionary<string, OBO_File.OBO_Term> _cvEnumData = new Dictionary<string, OBO_File.OBO_Term>();
 
-			var names = new Dictionary<string, OBO_File.OBO_Term>();
-			const string obsol = "_OBSOLETE";
-			foreach (var obo in _allObo)
-			{
-				if (obo.IsGeneratedId && obo.Terms.Count > 0)
-				{
-					string tempId = obo.Terms.Values.ToList()[0].Id;
-					tempId = tempId.Split(':')[0];
-					obo.Id = tempId;
-				}
-				var id = obo.Id;
+	    private void PopulateCVEnumData()
+	    {
+            string invalidSymbols = @" @/[():^?*+<=!~`#$%&{}|;'.,>\"; // WARNING: '-' must be at beginning or end, in middle it must be escaped, or it is interpreted as a range
+            string invalidSymbolsEscaped = System.Text.RegularExpressions.Regex.Escape(invalidSymbols);
+            string invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]"; // add all whitespace matching, manually escape the ']', since above call doesn't
 
-				foreach (var term in obo.Terms.Values)
-				{
-					string name = id + "_";
-					//name += term.Name.Replace(' ', '_');
+            // Add "CVID_Unknown" to the list first
+	        var unknown = new OBO_File.OBO_Term();
+	        unknown.Id = "??:0000000";
+	        unknown.Name = "CVID_Unknown";
+	        unknown.EnumName = "CVID_Unknown";
+	        unknown.Def = "CVID_Unknown [Unknown]";
+	        unknown.IsObsolete = false;
+            _cvEnumData.Add("CVID_Unknown", unknown);
+
+            const string obsol = "_OBSOLETE";
+            foreach (var obo in _allObo)
+            {
+                if (obo.IsGeneratedId && obo.Terms.Count > 0)
+                {
+                    string tempId = obo.Terms.Values.ToList()[0].Id;
+                    tempId = tempId.Split(':')[0];
+                    obo.Id = tempId;
+                }
+                var id = obo.Id;
+
+                foreach (var term in obo.Terms.Values)
+                {
+                    string name = id + "_";
+                    //name += term.Name.Replace(' ', '_');
                     name += System.Text.RegularExpressions.Regex.Replace(term.Name, invalidSymbolsRegex, "_");
                     //name += System.Text.RegularExpressions.Regex.Replace(term.Name.Replace(' ', '_'), invalidSymbolsRegex, "_");
-					if (term.IsObsolete)
-					{
-						name += obsol;
-					}
-					string tName = name;
-					int counter = 0;
-					while (names.ContainsKey(name))
-					{
-						counter++;
-						name = tName + counter;
-					}
-					names.Add(name, term);
-					term.EnumName = name;
-				}
-			}
+                    if (term.IsObsolete)
+                    {
+                        name += obsol;
+                    }
+                    string tName = name;
+                    int counter = 0;
+                    while (_cvEnumData.ContainsKey(name))
+                    {
+                        counter++;
+                        name = tName + counter;
+                    }
+                    _cvEnumData.Add(name, term);
+                    term.EnumName = name;
+                }
+            }
+	    }
+
+		private string GenerateCVEnum(string indent)
+        {
+            if (_cvEnumData.Count == 0)
+            {
+                PopulateCVEnumData();
+            }
 
 			string enumData = indent + "public enum CVID : int\n" + indent + "{\n";
-			enumData += indent + "\tCVID_Unknown,\n\n";
-			foreach (var term in names.Values)
+			foreach (var term in _cvEnumData.Values)
 			{
 				if (!string.IsNullOrWhiteSpace(term.Def))
 				{
@@ -202,6 +221,22 @@ namespace CV_Generator
 			}
 			return enumData + indent + "}\n";
 		}
+
+        private string GenerateTermInfoObject(string indent)
+        {
+            if (_cvEnumData.Count == 0)
+            {
+                PopulateCVEnumData();
+            }
+
+            string dictData = indent + "private void PopulateTermData()\n" + indent + "{\n";
+            foreach (var term in _cvEnumData.Values)
+            {
+                dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
+                            term.EnumName + ", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
+            }
+            return dictData + indent + "}\n\n";
+        }
 
 		private readonly Dictionary<string, OBO_File.OBO_Term> _bigTermDict = new Dictionary<string, OBO_File.OBO_Term>();
 		private bool _bigTermDictPopulated = false;
