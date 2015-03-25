@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CV_Generator
+﻿namespace CV_Generator
 {
 	public class Unimod_obo_Reader
 	{

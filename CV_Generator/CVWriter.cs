@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CV_Generator
 {
@@ -36,22 +32,23 @@ namespace CV_Generator
 			_allObo.AddRange(_psiMsImports);
 		}
 
-		private void WriteFile(string filename)
+		public void WriteFile(string filename)
 		{
 			using (StreamWriter file = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
 			{
 				file.WriteLine(Header());
 				file.WriteLine(UsingAndNamespace());
 				// Write main class open...
+                file.WriteLine(ClassOpen());
 				PopulateTermDict();
-				file.WriteLine(TermInfoType("\t\t"));
-				file.WriteLine(RelationsTypes("\t\t"));
-				file.WriteLine(GenerateRelationOtherTypesEnum("\t\t"));
-				file.WriteLine(GenerateCVEnumAndNames("\t\t"));
-				file.WriteLine(RelationsIsAEnum("\t\t"));
+				//file.WriteLine(TermInfoType("        "));
+				file.WriteLine(RelationsTypes("        "));
+				file.WriteLine(GenerateRelationOtherTypesEnum("        "));
+				file.WriteLine(GenerateCVEnumAndNames("        "));
+				file.WriteLine(RelationsIsAEnum("        "));
 				// Write main class close...
-
-
+                file.WriteLine(ClassClose());
+                file.WriteLine(NamespaceClose());
 			}
 		}
 
@@ -65,28 +62,45 @@ namespace CV_Generator
 		private string UsingAndNamespace()
 		{
 			return "// Using statements:\n" +
+                "using System.Collections.Generic;\n" +
 				"\n" +
 				"namespace PSI_Interface.CV\n{\n";
 		}
+
+	    private string ClassOpen()
+	    {
+	        return "    public partial class CV\n" +
+	               "    {\n";
+	    }
+
+	    private string ClassClose()
+	    {
+	        return "    }\n";
+	    }
+
+	    private string NamespaceClose()
+	    {
+	        return "}\n";
+	    }
 
 		private string TermInfoType(string indent)
 		{
 			return indent + "public class TermInfo\n" +
 				   indent + "{\n" +
-				   indent + "\tpublic CVID Cvid { get; private set; }\n" +
-				   indent + "\tpublic string Id { get; private set; }\n" +
-			       indent + "\tpublic string Name { get; private set; }\n" +
-				   indent + "\tpublic string Definition { get; private set; }\n" +
-				   indent + "\tpublic bool isObsolete { get; private set; }\n" +
-				   indent + "\t\n" +
-				   indent + "\tpublic TermInfo(CVID pCVID, string pId, string pName, string pDef, bool pIsObs)\n" +
-				   indent + "\t{\n" +
-				   indent + "\t\tCvid = pCVID;\n" +
-				   indent + "\t\tId = pId;\n" +
-				   indent + "\t\tName = pName;\n" +
-				   indent + "\t\tDefinition = pDef;\n" +
-				   indent + "\t\tIsObsolete = pIsObs;\n" +
-				   indent + "\t}\n" +
+				   indent + "    public CVID Cvid { get; private set; }\n" +
+				   indent + "    public string Id { get; private set; }\n" +
+			       indent + "    public string Name { get; private set; }\n" +
+				   indent + "    public string Definition { get; private set; }\n" +
+				   indent + "    public bool isObsolete { get; private set; }\n" +
+				   indent + "    \n" +
+				   indent + "    public TermInfo(CVID pCVID, string pId, string pName, string pDef, bool pIsObs)\n" +
+				   indent + "    {\n" +
+				   indent + "        Cvid = pCVID;\n" +
+				   indent + "        Id = pId;\n" +
+				   indent + "        Name = pName;\n" +
+				   indent + "        Definition = pDef;\n" +
+				   indent + "        IsObsolete = pIsObs;\n" +
+				   indent + "    }\n" +
 				   indent + "}\n";
 		}
 
@@ -131,13 +145,17 @@ namespace CV_Generator
 			}
 			foreach (var key in dict.Keys)
 			{
-				enumData += indent + "\t" + key + ",\n";
+				enumData += indent + "    " + key + ",\n";
 			}
 			return enumData + indent + "}\n";
 		}
 
 		private string GenerateCVEnumAndNames(string indent)
 		{
+		    string invalidSymbols = @" @/[():^?*+<=!~`#$%&{}|;'.,>\"; // WARNING: '-' must be at beginning or end, in middle it must be escaped, or it is interpreted as a range
+		    string invalidSymbolsEscaped = System.Text.RegularExpressions.Regex.Escape(invalidSymbols);
+		    string invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]"; // add all whitespace matching, manually escape the ']', since above call doesn't
+
 			var names = new Dictionary<string, OBO_File.OBO_Term>();
 			const string obsol = "_OBSOLETE";
 			foreach (var obo in _allObo)
@@ -153,7 +171,9 @@ namespace CV_Generator
 				foreach (var term in obo.Terms.Values)
 				{
 					string name = id + "_";
-					name += term.Name.Replace(' ', '_');
+					//name += term.Name.Replace(' ', '_');
+                    name += System.Text.RegularExpressions.Regex.Replace(term.Name, invalidSymbolsRegex, "_");
+                    //name += System.Text.RegularExpressions.Regex.Replace(term.Name.Replace(' ', '_'), invalidSymbolsRegex, "_");
 					if (term.IsObsolete)
 					{
 						name += obsol;
@@ -176,9 +196,9 @@ namespace CV_Generator
 			{
 				if (!string.IsNullOrWhiteSpace(term.Def))
 				{
-					enumData += indent + "\t// " + term.DefShort + "\n";
+					enumData += indent + "    // " + term.DefShort + "\n";
 				}
-				enumData += indent + "\t" + term.EnumName + ",\n\n";
+				enumData += indent + "    " + term.EnumName + ",\n\n";
 			}
 			return enumData + indent + "}\n";
 		}
@@ -232,10 +252,10 @@ namespace CV_Generator
 			foreach (var item in items)
 			{
 				//RelationsIsA.Add("name", new List<string> { "ref", "ref2", });
-				fillData += indent + "\tRelationsIsA.Add(" + item.Key + ", new List<CVID> { ";
+				fillData += indent + "    RelationsIsA.Add(" + "CVID." + item.Key + ", new List<CVID> { ";
 				foreach (var map in item.Value)
 				{
-					fillData += map + ", ";
+					fillData += "CVID." + map + ", ";
 				}
 				fillData += "});\n";
 			}

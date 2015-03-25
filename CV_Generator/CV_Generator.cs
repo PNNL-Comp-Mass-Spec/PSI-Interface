@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CV_Generator
 {
-	class CV_Generator
+	public class CV_Generator
 	{
+        [STAThread]
+	    public static void Main(string[] args)
+        {
+            var cvCreator = new CVWriter();
+            cvCreator.WriteFile("CV_generated.cs");
+        }
 	}
 }

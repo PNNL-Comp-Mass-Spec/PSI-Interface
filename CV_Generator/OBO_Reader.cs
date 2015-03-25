@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CV_Generator
 {
@@ -60,7 +57,16 @@ namespace CV_Generator
 							break;
 						case "[term]":
 							var term = new OBO_File.OBO_Term(data);
-							FileData.Terms.Add(term.Id, term);
+					        if (FileData.Terms.ContainsKey(term.Id))
+					        {
+					            Console.WriteLine("Warning: Duplicate term id found");
+					            Console.WriteLine("\tFirst term: \t\"" + FileData.Terms[term.Id].Id + "\": \"" +
+					                              FileData.Terms[term.Id].Def + "\".");
+					            Console.WriteLine("\tConflict term: \t\"" + term.Id + "\": \"" + term.Def + "\".");
+					            Console.WriteLine("\tChanging conflict id to \"" + term.Id + "_\"");
+					            term.Id = term.Id + "_";
+					        }
+					        FileData.Terms.Add(term.Id, term);
 							break;
 						case "[typedef]":
 							var typeDef = new OBO_File.OBO_Typedef(data);

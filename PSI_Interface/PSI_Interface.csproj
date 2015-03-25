@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -38,19 +41,24 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Serialization" />
+    <Reference Include="zlib.net">
+      <HintPath>..\packages\zlib.net.1.0.4.0\lib\zlib.net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="CV\CV.cs" />
-    <Compile Include="CV\CV_gen.cs" />
+    <Compile Include="CV\CV_generated.cs" />
     <Compile Include="IdentData\IdentData.cs" />
     <Compile Include="IdentData\mzIdentML\mzIdentML1_1_0.cs" />
     <Compile Include="IdentData\mzIdentML\MzIdentMLReader.cs" />
     <Compile Include="IdentData\mzIdentML\MzIdentMLWriter.cs" />
+    <Compile Include="MSData\Base64Conversion.cs" />
     <Compile Include="MSData\MSData.cs" />
     <Compile Include="MSData\mzML\mzML1_1_0.cs" />
     <Compile Include="MSData\mzML\mzML1_1_1_idx.cs" />
     <Compile Include="MSData\mzML\MzMLReader.cs" />
+    <Compile Include="MSData\mzML\MzMLReader_randomAccess.cs" />
     <Compile Include="MSData\mzML\MzMLSchemaType.cs" />
     <Compile Include="MSData\mzML\MzMLWriter.cs" />
     <Compile Include="MSData\mzML\mzML_Adds.cs" />
@@ -60,12 +68,15 @@
     <Compile Include="MSData\mzML_DataSet\mzML1.1.1_idx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MSData\Zlib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
