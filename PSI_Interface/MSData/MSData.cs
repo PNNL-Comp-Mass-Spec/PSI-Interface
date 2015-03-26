@@ -9,7 +9,13 @@ using System.Threading.Tasks;
  * TODO: Fix count reporting - no "setting" capability, but report list/array size
  * TODO: Some structure cleanup
  * TODO: Configuration for linking CVRefs, ReferenceableParamGroupRefs, InstrumentConfigurations, Etc.
+ * 
+ * NOTE: this is the primary interface, since there are many checks and like that cannot be managed properly in the serialization class.
+ *       they may be combined in the future once everything is figured out, but for now it will be easier to copy things over from mzML when reading and over to mzML when writing.
+ * 
+ * 
  ********************************************************************************************************************************/
+using PSI_Interface.CV;
 
 namespace PSI_Interface.MSData
 {
@@ -21,6 +27,7 @@ namespace PSI_Interface.MSData
 	/// the initial processing of that data (to the level of the peak list)</remarks>
 	public class MSData
 	{
+	    private CVTranslator _cvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file TODO: may be better placed in CVListType.
 		private CVListType _cvList;
 		private FileDescriptionType fileDescriptionField;
 		private ReferenceableParamGroupListType referenceableParamGroupListField;
@@ -38,7 +45,11 @@ namespace PSI_Interface.MSData
 		public CVListType cvList
 		{
 			get { return _cvList; }
-			set { _cvList = value; }
+		    set
+		    {
+		        _cvList = value;
+		        _cvTranslator = new CVTranslator(_cvList.cv);
+		    }
 		}
 
 		/// min 1, max 1
@@ -137,7 +148,7 @@ namespace PSI_Interface.MSData
 		public CVType[] cv
 		{
 			get { return cvs.ToArray(); }
-			set { cvs = value.ToList(); }
+            set { cvs = value.ToList(); } // TODO: recreate the CVTranslator when setting... (Add a hook that runs whenever it is modified?)
 		}
 
 		/// <remarks>The number of CV definitions in this mzML file.</remarks>
@@ -415,7 +426,24 @@ namespace PSI_Interface.MSData
 		private string unitAccessionField;
 		private string unitNameField;
 		private string unitCvRefField;
-		private CVType UnitCVRef;
+        private CVType UnitCVRef;
+
+        private CV.CV.CVID _cvid;
+        private CV.CV.CVID _unitsCvid;
+
+        //[System.Xml.Serialization.XmlIgnore]
+        public CV.CV.CVID cvid
+        {
+            get { return _cvid; }
+            set { _cvid = value; }
+        }
+
+        //[System.Xml.Serialization.XmlIgnore]
+        public CV.CV.CVID unitsCvid
+        {
+            get { return _unitsCvid; }
+            set { _unitsCvid = value; }
+        }
 
 		/// <remarks>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</remarks>
 		/// Required Attribute
@@ -440,8 +468,8 @@ namespace PSI_Interface.MSData
 		/// string
 		public string accession
 		{
-			get { return accessionField; }
-			set { accessionField = value; }
+            get { return accessionField; } // TODO: change this return to a value mapped from the cvid
+            set { accessionField = value; } // TODO: map this to a cvid, and store the cvid, and don't store the accession
 		}
 
 		/// <remarks>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</remarks>
@@ -449,8 +477,8 @@ namespace PSI_Interface.MSData
 		/// string
 		public string name
 		{
-			get { return nameField; }
-			set { nameField = value; }
+            get { return nameField; } // TODO: change this return to a value mapped from the cvid
+            set { nameField = value; } // TODO: remove this when accession to cvid mapping is complete
 		}
 
 		/// <remarks>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</remarks>
@@ -485,8 +513,8 @@ namespace PSI_Interface.MSData
 		/// string
 		public string unitAccession
 		{
-			get { return unitAccessionField; }
-			set { unitAccessionField = value; }
+            get { return unitAccessionField; } // TODO: change this return to a value mapped from the cvid
+            set { unitAccessionField = value; } // TODO: map this to a cvid, and store the cvid, and don't store the accession
 		}
 
 		/// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
@@ -494,8 +522,8 @@ namespace PSI_Interface.MSData
 		/// string
 		public string unitName
 		{
-			get { return unitNameField; }
-			set { unitNameField = value; }
+            get { return unitNameField; } // TODO: change this return to a value mapped from the cvid
+            set { unitNameField = value; } // TODO: remove this when accession to cvid mapping is complete
 		}
 	}
 
@@ -805,14 +833,53 @@ namespace PSI_Interface.MSData
 		private byte[] binaryField;
 		private string arrayLengthField;
 		private string dataProcessingRefField;
-		private string encodedLengthField;
+        private string encodedLengthField;
+
+        // Data values that are processed from the other data; some is converted, some is from the cvParams.
+        private double[] _data;
+        private int _dataWidth;
+        private bool _isCompressed;
+        private int _dataLength;
+
+        //[System.Xml.Serialization.XmlIgnore] // can use this attribute to ignore a field/property.
+        public double[] data
+        {
+            get { return _data; }
+            set { _data = value; }
+        }
+
+        public int dataWidth
+        {
+            get { return _dataWidth; }
+            set { _dataWidth = value; }
+        }
+
+        public bool isCompressed
+        {
+            get { return _isCompressed; }
+            set { _isCompressed = value; }
+        }
+
+        public int dataLength
+        {
+            get { return _dataLength; }
+            set { _dataLength = value; }
+        }
 
 		/// <remarks>The actual base64 encoded binary data. The byte order is always 'little endian'.</remarks>
 		/// base64Binary
 		public byte[] binary
 		{
-			get { return binaryField; }
-			set { binaryField = value; }
+            get
+            {
+                //return binaryField;
+                return Base64Conversion.EncodeBytes(_data, _dataWidth, _isCompressed);
+            }
+		    set
+		    {
+		        //binaryField = value;
+		        _data = Base64Conversion.DecodeBytes(value, _dataWidth, _dataLength, _isCompressed);
+		    }
 		}
 
 		/// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType. 

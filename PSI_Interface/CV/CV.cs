@@ -6,12 +6,31 @@ using System.Threading.Tasks;
 
 namespace PSI_Interface.CV
 {
-	public partial class CV
+	public static partial class CV
 	{
-        /*public enum CVID : int
-        {
-            MS_Unknown
-        }*/
+        public static readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();
+        public static readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();
+        public static readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();
+        public static readonly Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>>();
+        public static readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();
+        public static readonly List<CVInfo> CVInfoList = new List<CVInfo>();
+        public static readonly Dictionary<string, CVID> TermAccessionLookup = new Dictionary<string, CVID>();
+
+	    public class CVInfo
+	    {
+            public string Id { get; private set; }
+            public string Name { get; private set; }
+            public string URI { get; private set; }
+            public string Version { get; private set; }
+
+	        public CVInfo(string pId, string pName, string pURI, string pVersion)
+	        {
+	            Id = pId;
+	            Name = pName;
+	            URI = pURI;
+	            Version = pVersion;
+	        }
+	    }
 
         public class TermInfo
         {
@@ -31,24 +50,19 @@ namespace PSI_Interface.CV
             }
         }
 
-	    public CV()
+	    static CV()
 	    {
 	        PopulateTermData();
+            FillRelationsIsA();
+            CreateLookups();
 	    }
 
-        /*public readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();
-        public readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();
-        public readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();
-        public readonly Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>>();
-
-        public enum RelationsOtherTypes : int
-        {
-            has_units,
-            Unknown,
-            has_order,
-            has_domain,
-            has_regexp,
-
-        }*/
+	    private static void CreateLookups()
+	    {
+	        foreach (var term in TermData.Values)
+	        {
+	            TermAccessionLookup.Add(term.Id, term.Cvid);
+	        }
+	    }
 	}
 }

@@ -42,7 +42,7 @@ namespace CV_Generator
                 file.WriteLine(ClassOpen());
 				PopulateTermDict();
 				//file.WriteLine(TermInfoType("        "));
-				file.WriteLine(RelationsTypes("        "));
+				//file.WriteLine(RelationsTypes("        "));
 				file.WriteLine(GenerateRelationOtherTypesEnum("        "));
                 file.WriteLine(GenerateCVEnum("        "));
                 file.WriteLine(GenerateTermInfoObject("        "));
@@ -70,7 +70,7 @@ namespace CV_Generator
 
 	    private string ClassOpen()
 	    {
-	        return "    public partial class CV\n" +
+	        return "    public static partial class CV\n" +
 	               "    {\n";
 	    }
 
@@ -108,11 +108,11 @@ namespace CV_Generator
 		private string RelationsTypes(string indent)
 		{
 		    return
-		        indent + "public readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();\n" +
-		        indent + "public readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();\n" +
-		        indent + "public readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();\n" +
-		        indent + "public readonly Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>>();\n" +
-		        indent + "public readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();\n";
+		        indent + "public static readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();\n" +
+		        indent + "public static readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();\n" +
+		        indent + "public static readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();\n" +
+		        indent + "public static readonly Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>>();\n" +
+		        indent + "public static readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();\n";
 		}
 
 		private const string RelationsOtherTypesEnumName = "RelationsOtherTypes";
@@ -229,11 +229,14 @@ namespace CV_Generator
                 PopulateCVEnumData();
             }
 
-            string dictData = indent + "private void PopulateTermData()\n" + indent + "{\n";
+            string dictData = indent + "private static void PopulateTermData()\n" + indent + "{\n";
             foreach (var term in _cvEnumData.Values)
             {
                 dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
                             term.EnumName + ", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
+                //TermData as list
+                //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
+                //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
             }
             return dictData + indent + "}\n\n";
         }
@@ -283,7 +286,7 @@ namespace CV_Generator
 				}
 			}
 
-			string fillData = indent + "private void FillRelationsIsA()\n" + indent + "{\n";
+			string fillData = indent + "private static void FillRelationsIsA()\n" + indent + "{\n";
 			foreach (var item in items)
 			{
 				//RelationsIsA.Add("name", new List<string> { "ref", "ref2", });

@@ -12,7 +12,16 @@ namespace PSI_Interface.MSData
                 //throw NotSupportedException("Invalid bitsPerValue");
                 return null;
             }
-            byte[] bytes = Convert.FromBase64String(encoded);
+            return DecodeBytes(Convert.FromBase64String(encoded), bytesPerValue, expectedLength, isCompressed);
+        }
+
+        public static string EncodeString(double[] data, int bytesPerValue, bool compress)
+        {
+            return Convert.ToBase64String(EncodeBytes(data, bytesPerValue, compress));
+        }
+
+        public static double[] DecodeBytes(byte[] bytes, int bytesPerValue, int expectedLength, bool isCompressed)
+        {
             if (isCompressed)
             {
                 bytes = Zlib.DecompressZLib(bytes, expectedLength * bytesPerValue);
@@ -46,7 +55,7 @@ namespace PSI_Interface.MSData
             return data;
         }
 
-        public static string EncodeString(double[] data, int bytesPerValue, bool compress)
+        public static byte[] EncodeBytes(double[] data, int bytesPerValue, bool compress)
         {
             //if (bytesPerValue % 4 != 0)
             if (bytesPerValue != 4 || bytesPerValue != 8)
@@ -84,7 +93,7 @@ namespace PSI_Interface.MSData
                 int finalSize;
                 bytes = Zlib.CompressZLib(bytes, out finalSize);
             }
-            return Convert.ToBase64String(bytes);
+            return bytes;
         }
     }
 }

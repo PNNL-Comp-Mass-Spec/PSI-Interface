@@ -8,14 +8,8 @@ using System.Collections.Generic;
 namespace PSI_Interface.CV
 {
 
-    public partial class CV
+    public static partial class CV
     {
-
-        public readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();
-        public readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();
-        public readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();
-        public readonly Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>>();
-        public readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();
 
         public enum RelationsOtherTypes : int
         {
@@ -17724,7 +17718,7 @@ namespace PSI_Interface.CV
 
         }
 
-        private void PopulateTermData()
+        private static void PopulateTermData()
         {
             TermData.Add(CVID.CVID_Unknown, new TermInfo(CVID.CVID_Unknown, @"??:0000000", @"CVID_Unknown", @"CVID_Unknown", false));
             TermData.Add(CVID.MS_Proteomics_Standards_Initiative_Mass_Spectrometry_Vocabularies, new TermInfo(CVID.MS_Proteomics_Standards_Initiative_Mass_Spectrometry_Vocabularies, @"MS:0000000", @"Proteomics Standards Initiative Mass Spectrometry Vocabularies", @"Proteomics Standards Initiative Mass Spectrometry Vocabularies.", false));
@@ -23920,7 +23914,7 @@ namespace PSI_Interface.CV
         }
 
 
-        private void FillRelationsIsA()
+        private static void FillRelationsIsA()
         {
             RelationsIsA.Add(CVID.MS_sample_number, new List<CVID> { CVID.MS_sample_attribute, });
             RelationsIsA.Add(CVID.MS_sample_name, new List<CVID> { CVID.MS_sample_attribute, });
