@@ -56,18 +56,21 @@
     <Compile Include="IdentData\mzIdentML\MzIdentMLWriter.cs" />
     <Compile Include="MSData\Base64Conversion.cs" />
     <Compile Include="MSData\MSData.cs" />
+    <Compile Include="MSData\mzML\MSData_mzML.cs" />
     <Compile Include="MSData\mzML\mzML1_1_0.cs" />
     <Compile Include="MSData\mzML\mzML1_1_1_idx.cs" />
     <Compile Include="MSData\mzML\MzMLReader.cs" />
     <Compile Include="MSData\mzML\MzMLReader_randomAccess.cs" />
     <Compile Include="MSData\mzML\MzMLSchemaType.cs" />
     <Compile Include="MSData\mzML\MzMLWriter.cs" />
+    <Compile Include="MSData\mzML\mzML_Extra.cs" />
     <Compile Include="MSData\mzML_DataSet\mzML1.1.0.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MSData\mzML_DataSet\mzML1.1.1_idx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MSData\MzML_MSData.cs" />
     <Compile Include="MSData\Zlib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

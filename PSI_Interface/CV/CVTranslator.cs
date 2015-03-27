@@ -52,7 +52,32 @@ namespace PSI_Interface.CV
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/") + 1);
                     if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
                     {
-                        _oboToFile.Add(cv.Id, fcv.id);
+                        _oboToFile.Add(cv.Id, fcv.Id);
+                    }
+                }
+                if (!_oboToFile.ContainsKey(cv.Id))
+                {
+                    _oboToFile.Add(cv.Id, cv.Id);
+                }
+            }
+
+            foreach (var mapping in _oboToFile)
+            {
+                _fileToObo.Add(mapping.Value, mapping.Key);
+            }
+        }
+
+        public CVTranslator(List<CVType> fileCvInfo)
+        {
+            foreach (var cv in CV.CVInfoList)
+            {
+                foreach (var fcv in fileCvInfo)
+                {
+                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/") + 1);
+                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/") + 1);
+                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
+                    {
+                        _oboToFile.Add(cv.Id, fcv.Id);
                     }
                 }
                 if (!_oboToFile.ContainsKey(cv.Id))
