@@ -3,7 +3,6 @@
 // 
 
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace PSI_Interface.MSData.mzML
 {
@@ -467,6 +466,7 @@ namespace PSI_Interface.MSData.mzML
         //public SelectedIonListType selectedIonList
 
         /// <remarks>The type and energy level used for activation.</remarks>
+        /// min 1, max 1
         //public ParamGroupType activation
 
         /// <remarks>For precursor spectra that are local to this document, this attribute must be used to reference the 'id' attribute of the spectrum corresponding to the precursor spectrum.</remarks>
@@ -544,8 +544,13 @@ namespace PSI_Interface.MSData.mzML
     {
         public BinaryDataArrayType(PSI_Interface.MSData.BinaryDataArrayType bda) : base(bda)
         {
-            this.binary = bda.binary;
-            this.arrayLength = bda.ArrayLength;
+            this.binary = bda.Binary;
+            this.arrayLength = null;
+            if (bda.DataType != PSI_Interface.MSData.BinaryDataArrayType.ArrayType.m_z &&
+                bda.DataType != PSI_Interface.MSData.BinaryDataArrayType.ArrayType.intensity && bda.ArrayLength > 0)
+            {
+                this.arrayLength = bda.ArrayLength.ToString(); // TODO: check to make sure length is different from default first....
+            }
             this.dataProcessingRef = bda.DataProcessingRef;
             this.encodedLength = binary.Length.ToString();
         }
@@ -582,7 +587,7 @@ namespace PSI_Interface.MSData.mzML
         public ScanListType(PSI_Interface.MSData.ScanListType scans) : base(scans)
         {
             this.scanField = new List<ScanType>();
-            foreach (var s in scans.scan)
+            foreach (var s in scans.Scan)
             {
                 this.scanField.Add(new ScanType(s));
             }
@@ -605,11 +610,11 @@ namespace PSI_Interface.MSData.mzML
     {
         public ScanType(PSI_Interface.MSData.ScanType scan) : base(scan)
         {
-            this.scanWindowList = new ScanWindowListType(scan.scanWindowList);
-            this.spectrumRef = scan.spectrumRef;
-            this.sourceFileRef = scan.sourceFileRef;
-            this.externalSpectrumID = scan.externalSpectrumID;
-            this.instrumentConfigurationRef = scan.instrumentConfigurationRef;
+            this.scanWindowList = new ScanWindowListType(scan.ScanWindowList);
+            this.spectrumRef = scan.SpectrumRef;
+            this.sourceFileRef = scan.SourceFileRef;
+            this.externalSpectrumID = scan.ExternalSpectrumID;
+            this.instrumentConfigurationRef = scan.InstrumentConfigurationRef;
         }
 
         /// <remarks>Container for a list of scan windows.</remarks>
@@ -917,7 +922,7 @@ namespace PSI_Interface.MSData.mzML
         /// min 1, max 1
         //public BinaryDataArrayListType BinaryDataArrayList
 
-        /// <remarks>The zero-based index for this chromatogram in the chromatogram list</remarks>
+        /// <remarks>The zero-based index for this chromatogram in the chromatogram List</remarks>
         /// Required Attribute
         /// non-negative integer
         //public string index

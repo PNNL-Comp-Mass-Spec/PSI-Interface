@@ -5,7 +5,7 @@ namespace PSI_Interface.CV
 {
     public class CVTranslator
     {
-        private readonly Dictionary<string, string> _fileToObo = new Dictionary<string, string>(); 
+        private readonly Dictionary<string, string> _fileToObo = new Dictionary<string, string>();
         private readonly Dictionary<string, string> _oboToFile = new Dictionary<string, string>();
 
         public CVTranslator()
@@ -92,16 +92,19 @@ namespace PSI_Interface.CV
             }
         }
 
+        // TODO: Accession should always match id, it is the CVRef that changes according to the CV
         public string ConvertFileAccession(string accession)
         {
             return ConvertAccession(accession, _fileToObo);
         }
 
+        // TODO: Accession should always match id, it is the CVRef that changes according to the CV
         public string ConvertOboAccession(string accession)
         {
             return ConvertAccession(accession, _oboToFile);
         }
 
+        // TODO: Accession should always match id, it is the CVRef that changes according to the CV
         private string ConvertAccession(string accession, Dictionary<string, string> map)
         {
             string[] parts = accession.Split(new[] {':'});
@@ -111,5 +114,24 @@ namespace PSI_Interface.CV
             }
             return null;
         }
-    }
+
+        public string ConvertFileCVRef(string cvRef)
+        {
+            return ConvertCVRef(cvRef, _fileToObo);
+        }
+
+        public string ConvertOboCVRef(string cvRef)
+        {
+            return ConvertCVRef(cvRef, _oboToFile);
+        }
+
+        private string ConvertCVRef(string cvRef, Dictionary<string, string> map)
+        {
+            if (map.ContainsKey(cvRef))
+            {
+                return map[cvRef];
+            }
+            return null;
+        }
+}
 }

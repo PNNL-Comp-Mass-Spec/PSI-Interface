@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
 /*********************************************************************************************************************************
  * Work TODO:
  * TODO: Conversion from array of bytes to numeric arrays (BinaryDataArray)
@@ -27,113 +24,162 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
-        private CVTranslator _cvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file TODO: may be better placed in CVListType.
-        private List<CVType> _cvList;
+        internal CVTranslator CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+        private MSDataList<CVType> _cvList;
         private FileDescriptionType _fileDescription;
-        private List<ReferenceableParamGroupType> _referenceableParamGroupList;
-        private List<SampleType> _sampleList;
-        private List<SoftwareType> _softwareList;
-        private List<ScanSettingsType> _scanSettingsList;
-        private List<InstrumentConfigurationType> _instrumentConfigurationList;
-        private List<DataProcessingType> _dataProcessingList;
+        private MSDataList<ReferenceableParamGroupType> _referenceableParamGroupList;
+        private MSDataList<SampleType> _sampleList;
+        private MSDataList<SoftwareType> _softwareList;
+        private MSDataList<ScanSettingsType> _scanSettingsList;
+        private MSDataList<InstrumentConfigurationType> _instrumentConfigurationList;
+        private MSDataList<DataProcessingType> _dataProcessingList;
         private RunType _run;
-        private string _accession;
-        private string _version;
-        private string _id;
-
+        
         /// min 1, max 1
-        public List<CVType> CVList
+        public MSDataList<CVType> CVList // TODO: enforce quantity
         {
-            get { return _cvList; }
+            get { return this._cvList; }
             set
             {
-                _cvList = value;
-                _cvTranslator = new CVTranslator(_cvList);
+                this._cvList = value;
+                if (this._cvList != null)
+                {
+                    this._cvList.MsData = this;
+                    CvTranslator = new CVTranslator(this._cvList);
+                }
+                else
+                {
+                    CvTranslator = new CVTranslator();
+                }
             }
         }
 
         /// min 1, max 1
-        public FileDescriptionType FileDescription
+        public FileDescriptionType FileDescription // TODO: enforce quantity
         {
-            get { return _fileDescription; }
-            set { _fileDescription = value; }
+            get { return this._fileDescription; }
+            set
+            {
+                this._fileDescription = value;
+                if (this._fileDescription != null)
+                {
+                    this._fileDescription.MsData = this;
+                }
+            }
         }
 
         /// min 0, max 1
-        public List<ReferenceableParamGroupType> ReferenceableParamGroupList
+        public MSDataList<ReferenceableParamGroupType> ReferenceableParamGroupList
         {
-            get { return _referenceableParamGroupList; }
-            set { _referenceableParamGroupList = value; }
+            get { return this._referenceableParamGroupList; }
+            set
+            {
+                this._referenceableParamGroupList = value;
+                if (this._referenceableParamGroupList != null)
+                {
+                    this._referenceableParamGroupList.MsData = this;
+                }
+            }
         }
 
         /// min 0, max 1
-        public List<SampleType> SampleList
+        public MSDataList<SampleType> SampleList
         {
-            get { return _sampleList; }
-            set { _sampleList = value; }
+            get { return this._sampleList; }
+            set
+            {
+                this._sampleList = value;
+                if (this._sampleList != null)
+                {
+                    this._sampleList.MsData = this;
+                }
+            }
         }
 
         /// min 1, max 1
-        public List<SoftwareType> SoftwareList
+        public MSDataList<SoftwareType> SoftwareList // TODO: enforce quantity
         {
-            get { return _softwareList; }
-            set { _softwareList = value; }
+            get { return this._softwareList; }
+            set
+            {
+                this._softwareList = value;
+                if (this._softwareList != null)
+                {
+                    this._softwareList.MsData = this;
+                }
+            }
         }
 
         /// min 0, max 1
-        public List<ScanSettingsType> ScanSettingsList
+        public MSDataList<ScanSettingsType> ScanSettingsList
         {
-            get { return _scanSettingsList; }
-            set { _scanSettingsList = value; }
+            get { return this._scanSettingsList; }
+            set
+            {
+                this._scanSettingsList = value;
+                if (this._scanSettingsList != null)
+                {
+                    this._scanSettingsList.MsData = this;
+                }
+            }
         }
 
         /// min 1, max 1
-        public List<InstrumentConfigurationType> InstrumentConfigurationList
+        public MSDataList<InstrumentConfigurationType> InstrumentConfigurationList // TODO: enforce quantity
         {
-            get { return _instrumentConfigurationList; }
-            set { _instrumentConfigurationList = value; }
+            get { return this._instrumentConfigurationList; }
+            set
+            {
+                this._instrumentConfigurationList = value;
+                if (this._instrumentConfigurationList != null)
+                {
+                    this._instrumentConfigurationList.MsData = this;
+                }
+            }
         }
 
         /// min 1, max 1
-        public List<DataProcessingType> DataProcessingList
+        public MSDataList<DataProcessingType> DataProcessingList // TODO: enforce quantity
         {
-            get { return _dataProcessingList; }
-            set { _dataProcessingList = value; }
+            get { return this._dataProcessingList; }
+            set
+            {
+                this._dataProcessingList = value;
+                if (this._dataProcessingList != null)
+                {
+                    this._dataProcessingList.MsData = this;
+                }
+            }
         }
 
         /// min 1, max 1
-        public RunType Run
+        public RunType Run // TODO: enforce quantity
         {
-            get { return _run; }
-            set { _run = value; }
+            get { return this._run; }
+            set
+            {
+                this._run = value;
+                if (this._run != null)
+                {
+                    this._run.MsData = this;
+                }
+            }
         }
 
         /// <remarks>An optional accession number for the mzML document used for storage, e.g. in PRIDE.</remarks>
         /// Optional Attribute
         /// string
-        public string Accession
-        {
-            get { return _accession; }
-            set { _accession = value; }
-        }
+        public string Accession { get; set; } // TODO: what?
 
         /// <remarks>An optional id for the mzML document used for referencing from external files. It is recommended to use LSIDs when possible.</remarks>
         /// Optional Attribute
         /// string
-        public string Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public string Id { get; set; } // TODO: enforce validity?
 
         /// <remarks>The version of this mzML document.</remarks>
         /// Required Attribute
         /// string
-        public string Version
-        {
-            get { return _version; }
-            set { _version = value; }
-        }
+        public string Version { get; set; } // TODO: Enforce requirement
     }
     /*
     /// <summary>
@@ -171,30 +217,25 @@ namespace PSI_Interface.MSData
     /// <remarks>Information about an ontology or CV source and a short 'lookup' tag to refer to.</remarks>
     public partial class CVType
     {
-        //private string _id;
-        //private string _fullName;
-        //private string _version;
-        //private string _uRI;
-
         /// <remarks>The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description (e.g., from the cvLabel attribute, in CVParamType elements).</remarks>
         /// Required Attribute
         /// ID
-        public string Id { get; set; }
+        public string Id { get; set; } // TODO: enforce requirement, uniqueness among dataset
 
         /// <remarks>The usual name for the resource (e.g. The PSI-MS Controlled Vocabulary).</remarks>
         /// Required Attribute
         /// string
-        public string FullName { get; set; }
+        public string FullName { get; set; } // TODO: enforce requirement
 
         /// <remarks>The version of the CV from which the referred-to terms are drawn.</remarks>
         /// Optional Attribute
         /// string
-        public string Version { get; set; }
+        public string Version { get; set; } // TODO: enforce requirement
 
         /// <remarks>The URI for the resource.</remarks>
         /// Required Attribute
         /// anyURI
-        public string URI { get; set; }
+        public string URI { get; set; } // TODO: enforce requirement
     }
     /*
     /// <summary>
@@ -229,20 +270,30 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the way in which a particular software was used.</remarks>
     public partial class DataProcessingType
     {
-        //private List<ProcessingMethodType> _processingMethod = new List<ProcessingMethodType>();
-        //private string _id;
+        private MSDataList<ProcessingMethodType> _processingMethod;
 
         /// <remarks>Description of the default peak processing method. 
         /// This element describes the base method used in the generation of a particular mzML file. 
         /// Variable methods should be described in the appropriate acquisition section - if 
         /// no acquisition-specific details are found, then this information serves as the default.</remarks>
         /// min 1, max unbounded
-        public List<ProcessingMethodType> ProcessingMethod { get; set; }
+        public MSDataList<ProcessingMethodType> ProcessingMethod // TODO: enforce quantity
+        {
+            get { return this._processingMethod; }
+            set
+            {
+                this._processingMethod = value;
+                if (this._processingMethod != null)
+                {
+                    this._processingMethod.MsData = this.MsData;
+                }
+            }
+        }
 
         /// <remarks>A unique identifier for this data processing that is unique across all DataProcessingTypes.</remarks>
         /// Required Attribute
         /// ID
-        public string Id { get; set; }
+        public string Id { get; set; } // TODO: enforce requirement, uniqueness among DataProcessing in dataset
     }
 
     /// <summary>
@@ -250,18 +301,15 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class ProcessingMethodType : ParamGroupType
     {
-        //private uint _order;
-        //private string _softwareRef;
-
         /// <remarks>This attributes allows a series of consecutive steps to be placed in the correct order.</remarks>
         /// Required Attribute
         /// non-negative integer
-        public uint Order { get; set; }
+        public uint Order { get; set; } // TODO: enforce requirement, 1 to n contiguous
 
         /// <remarks>This attribute must reference the 'id' of the appropriate SoftwareType.</remarks>
         /// Required Attribute
         /// IDREF
-        public string SoftwareRef { get; set; }
+        public string SoftwareRef { get; set; } // TODO: enforce requirement, validity
     }
 
     /// <summary>
@@ -270,30 +318,56 @@ namespace PSI_Interface.MSData
     /// <remarks>Structure allowing the use of a controlled (cvParam) or uncontrolled vocabulary (userParam), or a reference to a predefined set of these in this mzML file (paramGroupRef).</remarks>
     public partial class ParamGroupType
     {
-        //private List<ReferenceableParamGroupRefType> _referenceableParamGroupRef;
-        //private List<ParamGroupType> _paramGroupRefs;
-        //private List<CVParamType> _cvParam;
-        //private List<UserParamType> _userParam;
-        public ParamGroupType()
-        {
-            ReferenceableParamGroupRef = new List<ReferenceableParamGroupRefType>();
-            CVParam = new List<CVParamType>();
-            UserParam = new List<UserParamType>();
-        }
+        private MSDataList<ReferenceableParamGroupRefType> _referenceableParamGroupRef;
+        private MSDataList<CVParamType> _cVParam;
+        private MSDataList<UserParamType> _userParam;
 
         /// min 0, max unbounded
-        public List<ReferenceableParamGroupRefType> ReferenceableParamGroupRef { get; set; }
+        public MSDataList<ReferenceableParamGroupRefType> ReferenceableParamGroupRef
+        {
+            get { return this._referenceableParamGroupRef; }
+            set
+            {
+                this._referenceableParamGroupRef = value;
+                if (this._referenceableParamGroupRef != null)
+                {
+                    this._referenceableParamGroupRef.MsData = this.MsData;
+                }
+            }
+        }
         //public ParamGroupType[] referenceableParamGroupRef
         //{
-        //  get { return _paramGroupRefs.ToArray(); }
-        //  set { _paramGroupRefs = value.ToList(); }
+        //  get { return this._paramGroupRefs.ToArray(); }
+        //  set { this._paramGroupRefs = value.ToList(); }
         //}
 
         /// min 0, max unbounded
-        public List<CVParamType> CVParam { get; set; }
+        public MSDataList<CVParamType> CVParam
+        {
+            get { return this._cVParam; }
+            set
+            {
+                this._cVParam = value;
+                if (this._cVParam != null)
+                {
+                    this._cVParam.MsData = this.MsData;
+                }
+            }
+        }
 
         /// min 0, max unbounded
-        public List<UserParamType> UserParam { get; set; }
+        public MSDataList<UserParamType> UserParam
+        {
+            get { return this._userParam; }
+            set
+            {
+                this._userParam = value;
+                if (this._userParam != null)
+                {
+                    this._userParam.MsData = this.MsData;
+                }
+            }
+        }
     }
     /*
     /// <summary>
@@ -328,20 +402,41 @@ namespace PSI_Interface.MSData
     /// <remarks>A collection of CVParam and UserParam elements that can be referenced from elsewhere in this mzML document by using the 'paramGroupRef' element in that location to reference the 'id' attribute value of this element.</remarks>
     public partial class ReferenceableParamGroupType
     {
-        //private List<CVParamType> _cvParam;
-        //private List<UserParamType> _userParam;
-        //private string _id;
+        private MSDataList<CVParamType> _cVParam;
+        private MSDataList<UserParamType> _userParam;
 
         /// min 0, max unbounded
-        public List<CVParamType> CVParam { get; set; }
+        public MSDataList<CVParamType> CVParam
+        {
+            get { return this._cVParam; }
+            set
+            {
+                this._cVParam = value;
+                if (this._cVParam != null)
+                {
+                    this._cVParam.MsData = this.MsData;
+                }
+            }
+        }
 
         /// min 0, max unbounded
-        public List<UserParamType> UserParam { get; set; }
+        public MSDataList<UserParamType> UserParam
+        {
+            get { return this._userParam; }
+            set
+            {
+                this._userParam = value;
+                if (this._userParam != null)
+                {
+                    this._userParam.MsData = this.MsData;
+                }
+            }
+        }
 
         /// <remarks>The identifier with which to reference this ReferenceableParamGroup.</remarks>
         /// Required Attribute
         /// ID
-        public string Id { get; set; }
+        public string Id { get; set; } // TODO: enforce requirement, uniqueness
     }
 
     /// <summary>
@@ -350,12 +445,10 @@ namespace PSI_Interface.MSData
     /// <remarks>A reference to a previously defined ParamGroup, which is a reusable container of one or more cvParams.</remarks>
     public partial class ReferenceableParamGroupRefType
     {
-        //private string _ref;
-
         /// <remarks>Reference to the id attribute in a referenceableParamGroup.</remarks>
         /// Required Attribute
         /// IDREF
-        public string @Ref { get; set; }
+        public string @Ref { get; set; } // TODO: enforce requirement, validity
     }
 
     /// <summary>
@@ -375,20 +468,20 @@ namespace PSI_Interface.MSData
         private CVType _UnitCVRef;
 
         private CV.CV.CVID _cvid;
-        private CV.CV.CVID _unitsCvid;
+        private CV.CV.CVID _unitCvid;
 
         //[System.Xml.Serialization.XmlIgnore]
         public CV.CV.CVID Cvid
         {
-            get { return _cvid; }
-            set { _cvid = value; }
+            get { return this._cvid; }
+            set { this._cvid = value; }
         }
 
         //[System.Xml.Serialization.XmlIgnore]
-        public CV.CV.CVID UnitsCvid
+        public CV.CV.CVID UnitCvid
         {
-            get { return _unitsCvid; }
-            set { _unitsCvid = value; }
+            get { return this._unitCvid; }
+            set { this._unitCvid = value; }
         }
 
         /// <remarks>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</remarks>
@@ -398,12 +491,13 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                return _cvRef;
-                return _CVRef.Id;
+                return this.Accession.Split(new[] { ':' })[0];
+                //return this._cvRef;
+                //return this._CVRef.Id;
             }
             set
             {
-                _cvRef = value;
+                //this._cvRef = value;
                 // have to set up a dictionary or something similar...
                 //CVRef = cvs[value];
             }
@@ -414,8 +508,24 @@ namespace PSI_Interface.MSData
         /// string
         public string Accession
         {
-            get { return _accession; } // TODO: change this return to a value mapped from the cvid
-            set { _accession = value; } // TODO: map this to a cvid, and store the cvid, and don't store the accession
+            get
+            {
+                return MsData.CvTranslator.ConvertOboAccession(CV.CV.TermData[this.Cvid].Id);
+                //return this._accession;
+            } // TODO: change this return to a value mapped from the cvid
+            set
+            {
+                this._accession = value;
+                var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
+                if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                {
+                    this.Cvid = CV.CV.TermAccessionLookup[oboAcc];
+                }
+                else
+                {
+                    this.Cvid = CV.CV.CVID.CVID_Unknown;
+                }
+            } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }
 
         /// <remarks>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</remarks>
@@ -423,8 +533,12 @@ namespace PSI_Interface.MSData
         /// string
         public string Name
         {
-            get { return _name; } // TODO: change this return to a value mapped from the cvid
-            set { _name = value; } // TODO: remove this when accession to cvid mapping is complete
+            get
+            {
+                return CV.CV.TermData[this.Cvid].Name;
+                //return this._name;
+            } // TODO: change this return to a value mapped from the cvid
+            set { this._name = value; } // TODO: remove this when accession to cvid mapping is complete
         }
 
         /// <remarks>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</remarks>
@@ -432,8 +546,8 @@ namespace PSI_Interface.MSData
         /// string
         public string Value
         {
-            get { return _value; }
-            set { _value = value; }
+            get { return this._value; }
+            set { this._value = value; }
         }
 
         /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
@@ -443,12 +557,13 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                return _unitCvRef;
-                return _UnitCVRef.Id;
+                return this.UnitAccession.Split(new[] { ':' })[0];
+                //return this._unitCvRef;
+                //return this._UnitCVRef.Id;
             }
             set
             {
-                _unitCvRef = value;
+                //this._unitCvRef = value;
                 // have to set up a dictionary or something similar...
                 //UnitCVRef = cvs[value];
             }
@@ -459,8 +574,24 @@ namespace PSI_Interface.MSData
         /// string
         public string UnitAccession
         {
-            get { return _unitAccession; } // TODO: change this return to a value mapped from the cvid
-            set { _unitAccession = value; } // TODO: map this to a cvid, and store the cvid, and don't store the accession
+            get
+            {
+                return MsData.CvTranslator.ConvertOboAccession(CV.CV.TermData[this.UnitCvid].Id);
+                //return this._unitAccession;
+            } // TODO: change this return to a value mapped from the cvid
+            set
+            {
+                this._unitAccession = value;
+                var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
+                if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                {
+                    this.UnitCvid = CV.CV.TermAccessionLookup[oboAcc];
+                }
+                else
+                {
+                    this.UnitCvid = CV.CV.CVID.CVID_Unknown;
+                }
+            } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }
 
         /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
@@ -468,8 +599,12 @@ namespace PSI_Interface.MSData
         /// string
         public string UnitName
         {
-            get { return _unitName; } // TODO: change this return to a value mapped from the cvid
-            set { _unitName = value; } // TODO: remove this when accession to cvid mapping is complete
+            get
+            {
+                return CV.CV.TermData[this.UnitCvid].Name;
+                //return this._unitName;
+            } // TODO: change this return to a value mapped from the cvid
+            set { this._unitName = value; } // TODO: remove this when accession to cvid mapping is complete
         }
     }
 
@@ -481,48 +616,56 @@ namespace PSI_Interface.MSData
     /// CV term available, and if so, use the CV term instead</remarks>
     public partial class UserParamType
     {
-        private string _name;
-        private string _type;
-        private string _value;
         private string _unitAccession;
         private string _unitName;
         private string _unitCvRef;
-        private CVType _UnitCVRef;
+        private CV.CV.CVID _unitCvid;
+        private CVType _unitCVRef;
+
+        public CV.CV.CVID UnitCvid
+        {
+            get { return this._unitCvid; }
+            set { this._unitCvid = value; }
+        }
 
         /// <remarks>The name for the parameter.</remarks>
         /// Required Attribute
         /// string
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
         /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>
         /// Optional Attribute
         /// string
-        public string Type
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
+        public string Type { get; set; }
 
         /// <remarks>The value for the parameter, where appropriate.</remarks>
         /// Optional Attribute
         /// string
-        public string Value
-        {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public string Value { get; set; }
 
         /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
         /// Optional Attribute
         /// string
         public string UnitAccession
         {
-            get { return _unitAccession; }
-            set { _unitAccession = value; }
+            get
+            {
+                return MsData.CvTranslator.ConvertOboAccession(CV.CV.TermData[this.UnitCvid].Id);
+                //return this._unitAccession;
+            }
+            set
+            {
+                this._unitAccession = value;
+                var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
+                if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                {
+                    this.UnitCvid = CV.CV.TermAccessionLookup[oboAcc];
+                }
+                else
+                {
+                    this.UnitCvid = CV.CV.CVID.CVID_Unknown;
+                }
+            }
         }
 
         /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
@@ -530,8 +673,12 @@ namespace PSI_Interface.MSData
         /// string
         public string UnitName
         {
-            get { return _unitName; }
-            set { _unitName = value; }
+            get
+            {
+                return CV.CV.TermData[this.UnitCvid].Name;
+                //return this._unitName;
+            }
+            set { this._unitName = value; }
         }
 
         /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
@@ -541,17 +688,19 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                return _unitCvRef;
-                return _UnitCVRef.Id;
+                return this.UnitAccession.Split(new[] {':'})[0];
+                //return this._unitCvRef;
+                //return this._unitCVRef.Id;
             }
             set
             {
-                _unitCvRef = value;
+                this._unitCvRef = value;
                 // have to set up a dictionary or something similar...
                 //UnitCVRef = cvs[value];
             }
         }
     }
+
     /*
     /// <summary>
     /// mzML PrecursorListType
@@ -579,70 +728,79 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML PrecursorType
     /// </summary>
     /// <remarks>The method of precursor ion selection and activation</remarks>
     public partial class PrecursorType
     {
-        private ParamGroupType isolationWindowField;
-        private List<ParamGroupType> selectedIonListField;
-        private ParamGroupType activationField;
-        private string spectrumRefField;
-        private string sourceFileRefField;
-        private string externalSpectrumIDField;
+        private ParamGroupType _isolationWindow;
+        private MSDataList<ParamGroupType> _selectedIonList;
+        private ParamGroupType _activation;
 
         /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
         /// min 0, max 1
         public ParamGroupType IsolationWindow
         {
-            get { return isolationWindowField; }
-            set { isolationWindowField = value; }
+            get { return this._isolationWindow; }
+            set
+            {
+                this._isolationWindow = value;
+                if (this._isolationWindow != null)
+                {
+                    this._isolationWindow.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>A list of ions that were selected.</remarks>
         /// min 0, max 1
         //public SelectedIonListType selectedIonList
-        public List<ParamGroupType> SelectedIonList
+        public MSDataList<ParamGroupType> SelectedIonList
         {
-            get { return selectedIonListField; }
-            set { selectedIonListField = value; }
+            get { return this._selectedIonList; }
+            set
+            {
+                this._selectedIonList = value;
+                if (this._selectedIonList != null)
+                {
+                    this._selectedIonList.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>The type and energy level used for activation.</remarks>
+        /// min 1, max 1
         public ParamGroupType Activation
         {
-            get { return activationField; }
-            set { activationField = value; }
+            get { return this._activation; }
+            set
+            {
+                this._activation = value;
+                if (this._activation != null)
+                {
+                    this._activation.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>For precursor spectra that are local to this document, this attribute must be used to reference the 'id' attribute of the spectrum corresponding to the precursor spectrum.</remarks>
         /// Optional Attribute
         /// string
-        public string SpectrumRef
-        {
-            get { return spectrumRefField; }
-            set { spectrumRefField = value; }
-        }
+        public string SpectrumRef { get; set; } // TODO: enforce validity, proper usage
 
         /// <remarks>For precursor spectra that are external to this document, this attribute must reference the 'id' attribute of a sourceFile representing that external document.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string SourceFileRef
-        {
-            get { return sourceFileRefField; }
-            set { sourceFileRefField = value; }
-        }
+        public string SourceFileRef { get; set; } // TODO: enforce validity
 
         /// <remarks>For precursor spectra that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</remarks>
         /// Optional Attribute
         /// string
-        public string ExternalSpectrumID
-        {
-            get { return externalSpectrumIDField; }
-            set { externalSpectrumIDField = value; }
-        }
+        public string ExternalSpectrumID { get; set; } // TODO: enforce validity
     }
+
     /*
     /// <summary>
     /// mzML SelectedIonListType
@@ -699,6 +857,7 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML BinaryDataArrayType
     /// </summary>
@@ -706,56 +865,183 @@ namespace PSI_Interface.MSData
     /// Computers using a different endian style must convert to/from little endian when writing/reading mzML</remarks>
     public partial class BinaryDataArrayType : ParamGroupType
     {
-        private byte[] binaryField;
-        private string arrayLengthField;
-        private string dataProcessingRefField;
-        private string encodedLengthField;
+        //CV Rules: 
+        //MUST supply a *child* term of MS:1000572 (binary data compression type) only once
+        //  e.g.: MS:1000574 (zlib compression)
+        //  e.g.: MS:1000576 (no compression)
+        //MUST supply a *child* term of MS:1000513 (binary data array) only once
+        //  e.g.: MS:1000514 (m/z array)
+        //  e.g.: MS:1000515 (intensity array)
+        //  e.g.: MS:1000516 (charge array)
+        //  e.g.: MS:1000517 (signal to noise array)
+        //  e.g.: MS:1000595 (time array)
+        //  e.g.: MS:1000617 (wavelength array)
+        //  e.g.: MS:1000786 (non-standard data array)
+        //  e.g.: MS:1000820 (flow rate array)
+        //  e.g.: MS:1000821 (pressure array)
+        //  e.g.: MS:1000822 (temperature array)
+        //MUST supply a *child* term of MS:1000518 (binary data type) only once
+        //  e.g.: MS:1000521 (32-bit float)
+        //  e.g.: MS:1000523 (64-bit float)
+        public enum ArrayType : int
+        {
+            m_z,
+            intensity,
+            charge,
+            signal_to_noise,
+            time,
+            wavelength,
+            non_standard_data,
+            flow_rate,
+            pressure,
+            temperature,
+        }
+
+        private static readonly Dictionary<ArrayType, CV.CV.CVID> _typeMap = new Dictionary<ArrayType, CV.CV.CVID>()
+        {
+            {ArrayType.m_z, CV.CV.CVID.MS_m_z_array},
+            {ArrayType.intensity, CV.CV.CVID.MS_intensity_array},
+            {ArrayType.charge, CV.CV.CVID.MS_charge_array},
+            {ArrayType.signal_to_noise, CV.CV.CVID.MS_signal_to_noise_array},
+            {ArrayType.time, CV.CV.CVID.MS_time_array},
+            {ArrayType.wavelength, CV.CV.CVID.MS_wavelength_array},
+            {ArrayType.non_standard_data, CV.CV.CVID.MS_non_standard_data_array},
+            {ArrayType.flow_rate, CV.CV.CVID.MS_flow_rate_array},
+            {ArrayType.pressure, CV.CV.CVID.MS_pressure_array},
+            {ArrayType.temperature, CV.CV.CVID.MS_temperature_array},
+        };
+
+        private static readonly Dictionary<CV.CV.CVID, ArrayType> _revTypeMap = new Dictionary<CV.CV.CVID, ArrayType>()
+        {
+            {CV.CV.CVID.MS_m_z_array, ArrayType.m_z},
+            {CV.CV.CVID.MS_intensity_array, ArrayType.intensity},
+            {CV.CV.CVID.MS_charge_array, ArrayType.charge},
+            {CV.CV.CVID.MS_signal_to_noise_array, ArrayType.signal_to_noise},
+            {CV.CV.CVID.MS_time_array, ArrayType.time},
+            {CV.CV.CVID.MS_wavelength_array, ArrayType.wavelength},
+            {CV.CV.CVID.MS_non_standard_data_array, ArrayType.non_standard_data},
+            {CV.CV.CVID.MS_flow_rate_array, ArrayType.flow_rate},
+            {CV.CV.CVID.MS_pressure_array, ArrayType.pressure},
+            {CV.CV.CVID.MS_temperature_array, ArrayType.temperature},
+        };
 
         // Data values that are processed from the other data; some is converted, some is from the cvParams.
+        private int _expectedArrayLength; // Only used for reading from mzML, so no external access. // TODO: is this superceded by bdaDefaultArrayLength?
         private double[] _data;
+        private ArrayType _dataType;
         private int _dataWidth;
         private bool _isCompressed;
-        private int _dataLength;
 
         //[System.Xml.Serialization.XmlIgnore] // can use this attribute to ignore a field/property.
-        public double[] data
+        public double[] Data
         {
-            get { return _data; }
-            set { _data = value; }
+            get { return this._data; }
+            set { this._data = value; }
         }
 
-        public int dataWidth
+        public ArrayType DataType
         {
-            get { return _dataWidth; }
-            set { _dataWidth = value; }
+            get { return this._dataType; }
+            set
+            {
+                this._dataType = value;
+                // Make sure the appropriate cvParam is set...
+                for (int i = 0; i < CVParam.Count; i++)
+                {
+                    foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_array])
+                    {
+                        if (CVParam[i].Cvid == cvid)
+                        {
+                            CVParam.RemoveAt(i);
+                            i--;
+                            break; // break out of inner loop.
+                        }
+                    }
+                }
+                var cv = new CVParamType();
+                cv.Cvid = _typeMap[_dataType];
+                CVParam.Add(cv);
+            }
         }
 
-        public bool isCompressed
+        public int DataWidth
         {
-            get { return _isCompressed; }
-            set { _isCompressed = value; }
+            get { return this._dataWidth; }
+            set
+            {
+                if (value != 4 && value != 8)
+                {
+                    // only 4 and 8 are valid, 2 is obsolete
+                    return;
+                }
+                this._dataWidth = value;
+                // Make sure the appropriate cvParam is set...
+                for (int i = 0; i < CVParam.Count; i++)
+                {
+                    foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_type])
+                    {
+                        if (CVParam[i].Cvid == cvid)
+                        {
+                            CVParam.RemoveAt(i);
+                            i--;
+                            break; // break out of inner loop.
+                        }
+                    }
+                }
+                var cv = new CVParamType();
+                cv.Cvid = CV.CV.CVID.CVID_Unknown;
+                if (this._dataWidth == 4)
+                {
+                    cv.Cvid = CV.CV.CVID.MS_32_bit_float;
+                }
+                else if (this._dataWidth == 8)
+                {
+                    cv.Cvid = CV.CV.CVID.MS_64_bit_float;
+                }
+                CVParam.Add(cv);
+            }
         }
 
-        public int dataLength
+        public bool IsCompressed
         {
-            get { return _dataLength; }
-            set { _dataLength = value; }
+            get { return this._isCompressed; }
+            set
+            {
+                this._isCompressed = value;
+                // Make sure the appropriate cvParam is set...
+                for (int i = 0; i < CVParam.Count; i++)
+                {
+                    foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_compression_type])
+                    {
+                        if (CVParam[i].Cvid == cvid)
+                        {
+                            CVParam.RemoveAt(i);
+                            i--;
+                            break; // break out of inner loop.
+                        }
+                    }
+                }
+                CVParamType cv = new CVParamType();
+                cv.Cvid = CV.CV.CVID.MS_no_compression;
+                if (this._isCompressed)
+                {
+                    cv.Cvid = CV.CV.CVID.MS_zlib_compression;
+                }
+                CVParam.Add(cv);
+            }
+        }
+
+        public int DataLength
+        {
+            get { return this._data.Length; }
         }
 
         /// <remarks>The actual base64 encoded binary data. The byte order is always 'little endian'.</remarks>
         /// base64Binary
-        public byte[] binary
+        public byte[] Binary
         {
-            get
-            {
-                //return binaryField;
-                return Base64Conversion.EncodeBytes(_data, _dataWidth, _isCompressed);
-            }
-            set
-            {
-                //binaryField = value;
-                _data = Base64Conversion.DecodeBytes(value, _dataWidth, _dataLength, _isCompressed);
-            }
+            get { return Base64Conversion.EncodeBytes(this._data, this._dataWidth, this._isCompressed); }
+            set { this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, (int)ArrayLength, this._isCompressed); }
         }
 
         /// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType. 
@@ -764,114 +1050,82 @@ namespace PSI_Interface.MSData
         /// safely choose to ignore arrays of lengths different from the one defined in the 'defaultArrayLength' SpectrumType element.</remarks>
         /// Optional Attribute
         /// non-negative integer
-        public string ArrayLength
-        {
-            get { return arrayLengthField; }
-            set { arrayLengthField = value; }
-        }
+        public uint ArrayLength { get; set; } // TODO: enforce appropriate usage
 
         /// <remarks>This optional attribute may reference the 'id' attribute of the appropriate dataProcessing.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string DataProcessingRef
-        {
-            get { return dataProcessingRefField; }
-            set { dataProcessingRefField = value; }
-        }
-
-        /// <remarks>The encoded length of the binary data array.</remarks>
-        /// Required Attribute
-        /// non-negative integer
-        public string EncodedLength
-        {
-            get { return encodedLengthField; }
-            set { encodedLengthField = value; }
-        }
+        public string DataProcessingRef { get; set; } // TODO: enforce validity
     }
-    
+
     /// <summary>
     /// mzML ScanListType
     /// </summary>
     /// <remarks>List and descriptions of scans.</remarks>
     public partial class ScanListType : ParamGroupType
     {
-        private List<ScanType> scanField;
-        private string countField;
+        private MSDataList<ScanType> _scan;
 
         /// min 1, max unbounded
-        public List<ScanType> scan
+        public MSDataList<ScanType> Scan // TODO: enforce quantity
         {
-            get { return scanField; }
-            set { scanField = value; }
-        }
-
-        /// <remarks>the number of scans defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
-        public string count
-        {
-            get { return countField; }
-            set { countField = value; }
+            get { return this._scan; }
+            set
+            {
+                this._scan = value;
+                if (this._scan != null)
+                {
+                    this._scan.MsData = this.MsData;
+                }
+            }
         }
     }
-    
+
     /// <summary>
     /// mzML ScanType
     /// </summary>
     /// <remarks>Scan or acquisition from original raw file used to create this peak list, as specified in sourceF</remarks>
     public partial class ScanType : ParamGroupType
     {
-        private List<ParamGroupType> scanWindowListField;
-        private string spectrumRefField;
-        private string sourceFileRefField;
-        private string externalSpectrumIDField;
-        private string instrumentConfigurationRefField;
+        private MSDataList<ParamGroupType> _scanWindowList;
 
         /// <remarks>Container for a list of scan windows.</remarks>
         /// min 0, max 1
         //public ScanWindowListType scanWindowList
-        public List<ParamGroupType> scanWindowList
+        public MSDataList<ParamGroupType> ScanWindowList
         {
-            get { return scanWindowListField; }
-            set { scanWindowListField = value; }
+            get { return this._scanWindowList; }
+            set
+            {
+                this._scanWindowList = value;
+                if (this._scanWindowList != null)
+                {
+                    this._scanWindowList.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>For scans that are local to this document, this attribute can be used to reference the 'id' attribute of the spectrum corresponding to the scan.</remarks>
         /// Optional Attribute
         /// string
-        public string spectrumRef
-        {
-            get { return spectrumRefField; }
-            set { spectrumRefField = value; }
-        }
+        public string SpectrumRef { get; set; } // TODO: enforce validity
 
         /// <remarks>If this attribute is set, it must reference the 'id' attribute of a sourceFile representing the external document containing the spectrum referred to by 'externalSpectrumID'.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string sourceFileRef
-        {
-            get { return sourceFileRefField; }
-            set { sourceFileRefField = value; }
-        }
+        public string SourceFileRef { get; set; } // TODO: enforce validity
 
         /// <remarks>For scans that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</remarks>
         /// Optional Attribute
         /// string
-        public string externalSpectrumID
-        {
-            get { return externalSpectrumIDField; }
-            set { externalSpectrumIDField = value; }
-        }
+        public string ExternalSpectrumID { get; set; } // TODO: enforce validity
 
         /// <remarks>This attribute can optionally reference the 'id' attribute of the appropriate instrument configuration.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string instrumentConfigurationRef
-        {
-            get { return instrumentConfigurationRefField; }
-            set { instrumentConfigurationRefField = value; }
-        }
+        public string InstrumentConfigurationRef { get; set; } // TODO: enforce validity
     }
+
     /*
     /// <summary>
     /// mzML ScanWindowListType
@@ -900,30 +1154,27 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML SpectrumListType
     /// </summary>
     /// <remarks>List and descriptions of spectra.</remarks>
     public partial class SpectrumListType
     {
-        private List<SpectrumType> spectrumField;
-        private string countField;
-        private string defaultDataProcessingRefField;
+        private MSDataList<SpectrumType> _spectrum;
 
         /// min 0, max unbounded
-        public List<SpectrumType> Spectrum
+        public MSDataList<SpectrumType> Spectrum
         {
-            get { return spectrumField; }
-            set { spectrumField = value; }
-        }
-
-        /// <remarks>The number of spectra defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
-        public string Count
-        {
-            get { return countField; }
-            set { countField = value; }
+            get { return this._spectrum; }
+            set
+            {
+                this._spectrum = value;
+                if (this._spectrum != null)
+                {
+                    this._spectrum.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>This attribute MUST reference the 'id' of the default data processing for the spectrum list. 
@@ -931,11 +1182,7 @@ namespace PSI_Interface.MSData
         /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
         /// Required Attribute
         /// IDREF
-        public string DefaultDataProcessingRef
-        {
-            get { return defaultDataProcessingRefField; }
-            set { defaultDataProcessingRefField = value; }
-        }
+        public string DefaultDataProcessingRef { get; set; } // TODO: enforce requirement, validity
     }
 
     /// <summary>
@@ -945,101 +1192,137 @@ namespace PSI_Interface.MSData
     /// Also describes some of the parameters for the mass spectrometer for a given acquisition (or list of acquisitions).</remarks>
     public partial class SpectrumType : ParamGroupType
     {
-        private ScanListType scanListField;
-        private List<PrecursorType> precursorListField;
-        private List<ProductType> productListField;
-        private List<BinaryDataArrayType> binaryDataArrayListField;
-        private string idField;
-        private string spotIDField;
-        private string indexField;
-        private int defaultArrayLengthField;
-        private string dataProcessingRefField;
-        private string sourceFileRefField;
+        private ScanListType _scanList;
+        private MSDataList<PrecursorType> _precursorList;
+        private MSDataList<ProductType> _productList;
+        private MSDataList<BinaryDataArrayType> _binaryDataArrayList;
+        private int _defaultArrayLength;
 
         /// min 0, max 1
         public ScanListType ScanList
         {
-            get { return scanListField; }
-            set { scanListField = value; }
+            get { return this._scanList; }
+            set
+            {
+                this._scanList = value;
+                if (this._scanList != null)
+                {
+                    this._scanList.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 0, max 1
-        public List<PrecursorType> PrecursorList
+        public MSDataList<PrecursorType> PrecursorList
         {
-            get { return precursorListField; }
-            set { precursorListField = value; }
+            get { return this._precursorList; }
+            set
+            {
+                this._precursorList = value;
+                if (this._precursorList != null)
+                {
+                    this._precursorList.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 0, max 1
-        public List<ProductType> ProductList
+        public MSDataList<ProductType> ProductList
         {
-            get { return productListField; }
-            set { productListField = value; }
+            get { return this._productList; }
+            set
+            {
+                this._productList = value;
+                if (this._productList != null)
+                {
+                    this._productList.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 0, max 1
-        public List<BinaryDataArrayType> BinaryDataArrayList
+        public MSDataList<BinaryDataArrayType> BinaryDataArrayList
         {
-            get { return binaryDataArrayListField; }
-            set { binaryDataArrayListField = value; }
+            get { return this._binaryDataArrayList; }
+            set
+            {
+                this._binaryDataArrayList = value;
+                if (this._binaryDataArrayList != null)
+                {
+                    this._binaryDataArrayList.MsData = this.MsData;
+                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                }
+            }
         }
 
         /// <remarks>The zero-based, consecutive index of  the spectrum in the SpectrumList.</remarks>
         /// Required Attribute
         /// non-negative integer
-        public string Index
-        {
-            get { return indexField; }
-            set { indexField = value; }
-        }
+        public string Index { get; set; } // TODO: enforce requirement, 0-n contiguous values in spectrumList
 
         /// <remarks>The native identifier for a spectrum. For unmerged native spectra or spectra from older open file formats, 
         /// the format of the identifier is defined in the PSI-MS CV and referred to in the mzML header. 
         /// External documents may use this identifier together with the mzML filename or accession to reference a particular spectrum.</remarks>
         /// Required Attribute
         /// Regex: "\S+=\S+( \S+=\S+)*"
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: enforce consistency? (same style?)
 
         /// <remarks>The identifier for the spot from which this spectrum was derived, if a MALDI or similar run.</remarks>
         /// Optional Attribute
         /// string
-        public string SpotID
-        {
-            get { return spotIDField; }
-            set { spotIDField = value; }
-        }
+        public string SpotID { get; set; }
 
         /// <remarks>Default length of binary data arrays contained in this element.</remarks>
         /// Required Attribute
         /// integer
         public int DefaultArrayLength
         {
-            get { return defaultArrayLengthField; }
-            set { defaultArrayLengthField = value; }
+            get
+            {
+                int mzLength = 0;
+                int intensityLength = 0;
+                foreach (var bda in BinaryDataArrayList)
+                {
+                    if (bda.DataType == BinaryDataArrayType.ArrayType.m_z)
+                    {
+                        mzLength = bda.DataLength;
+                    }
+                    else if (bda.DataType == BinaryDataArrayType.ArrayType.intensity)
+                    {
+                        intensityLength = bda.DataLength;
+                    }
+                }
+                if (mzLength == intensityLength)
+                {
+                    this._defaultArrayLength = mzLength;
+                    return mzLength;
+                }
+                else
+                {
+                    throw new InvalidDataException("Spectrum: m/z and intensity arrays are not the same length.");
+                }
+            }
+            set
+            {
+                this._defaultArrayLength = value;
+                if (this._binaryDataArrayList != null)
+                {
+                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                }
+            }
         }
 
         /// <remarks>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string DataProcessingRef
-        {
-            get { return dataProcessingRefField; }
-            set { dataProcessingRefField = value; }
-        }
+        public string DataProcessingRef { get; set; } // TODO: enforce validity
 
         /// <remarks>This attribute can optionally reference the 'id' of the appropriate sourceFile.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string SourceFileRef
-        {
-            get { return sourceFileRefField; }
-            set { sourceFileRefField = value; }
-        }
+        public string SourceFileRef { get; set; } // TODO: enforce validity
     }
+
     /*
     /// <summary>
     /// mzML ProductListType
@@ -1067,20 +1350,28 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML ProductType
     /// </summary>
     /// <remarks>The method of product ion selection and activation in a precursor ion scan</remarks>
     public partial class ProductType
     {
-        private ParamGroupType isolationWindowField;
+        private ParamGroupType _isolationWindow;
 
         /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
         /// min 0, max 1
         public ParamGroupType IsolationWindow
         {
-            get { return isolationWindowField; }
-            set { isolationWindowField = value; }
+            get { return this._isolationWindow; }
+            set
+            {
+                this._isolationWindow = value;
+                if (this._isolationWindow != null)
+                {
+                    this._isolationWindow.MsData = this.MsData;
+                }
+            }
         }
     }
 
@@ -1090,85 +1381,78 @@ namespace PSI_Interface.MSData
     /// <remarks>A run in mzML should correspond to a single, consecutive and coherent set of scans on an instrument.</remarks>
     public partial class RunType : ParamGroupType
     {
-        private SpectrumListType spectrumListField;
-        private ChromatogramListType chromatogramListField;
-        private string idField;
-        private string defaultInstrumentConfigurationRefField;
-        private string defaultSourceFileRefField;
-        private string sampleRefField;
-        private System.DateTime startTimeStampField;
-        private bool startTimeStampFieldSpecified;
+        private SpectrumListType _spectrumList;
+        private ChromatogramListType _chromatogramList;
+        private System.DateTime _startTimeStampField;
 
         /// <remarks>All mass spectra and the acquisitions underlying them are described and attached here. 
         /// Subsidiary data arrays are also both described and attached here.</remarks>
         /// min 0, max 1
         public SpectrumListType SpectrumList
         {
-            get { return spectrumListField; }
-            set { spectrumListField = value; }
+            get { return this._spectrumList; }
+            set
+            {
+                this._spectrumList = value;
+                if (this._spectrumList != null)
+                {
+                    this._spectrumList.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>All chromatograms for this run.</remarks>
         /// min 0, max 1
         public ChromatogramListType ChromatogramList
         {
-            get { return chromatogramListField; }
-            set { chromatogramListField = value; }
+            get { return this._chromatogramList; }
+            set
+            {
+                this._chromatogramList = value;
+                if (this._chromatogramList != null)
+                {
+                    this._chromatogramList.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>A unique identifier for this run.</remarks>
         /// Required Attribute
         /// ID
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: enforce uniqueness
 
         /// <remarks>This attribute must reference the 'id' of the default instrument configuration. 
         /// If a scan does not reference an instrument configuration, it implicitly refers to this configuration.</remarks>
         /// Required Attribute
         /// IDREF
-        public string DefaultInstrumentConfigurationRef
-        {
-            get { return defaultInstrumentConfigurationRefField; }
-            set { defaultInstrumentConfigurationRefField = value; }
-        }
+        public string DefaultInstrumentConfigurationRef { get; set; } // TODO: enforce requirement, validity
 
         /// <remarks>This attribute can optionally reference the 'id' of the default source file. 
         /// If a spectrum or scan does not reference a source file and this attribute is set, then it implicitly refers to this source file.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string DefaultSourceFileRef
-        {
-            get { return defaultSourceFileRefField; }
-            set { defaultSourceFileRefField = value; }
-        }
+        public string DefaultSourceFileRef { get; set; } // TODO: enforce validity
 
         /// <remarks>This attribute must reference the 'id' of the appropriate sample.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string SampleRef
-        {
-            get { return sampleRefField; }
-            set { sampleRefField = value; }
-        }
+        public string SampleRef { get; set; } // TODO: enforce validity
 
         /// <remarks>The optional start timestamp of the run, in UT.</remarks>
         /// Optional Attribute
         /// DateTime
         public System.DateTime StartTimeStamp
         {
-            get { return startTimeStampField; }
-            set { startTimeStampField = value; }
+            get { return this._startTimeStampField; }
+            set
+            {
+                this._startTimeStampField = value;
+                StartTimeStampSpecified = true;
+            }
         }
 
         /// "Ignored" Attribute - only used to signify existence of valid value in startTimeStamp
-        public bool StartTimeStampSpecified
-        {
-            get { return startTimeStampFieldSpecified; }
-            set { startTimeStampFieldSpecified = value; }
-        }
+        public bool StartTimeStampSpecified { get; private set; }
     }
 
     /// <summary>
@@ -1177,25 +1461,21 @@ namespace PSI_Interface.MSData
     /// <remarks>List of chromatograms.</remarks>
     public partial class ChromatogramListType
     {
-        private List<ChromatogramType> chromatogramField;
-        private string countField;
-        private string defaultDataProcessingRefField;
+        private MSDataList<ChromatogramType> _chromatogram;
 
         /// <remarks></remarks>
         /// min 1, max unbounded
-        public List<ChromatogramType> Chromatogram
+        public MSDataList<ChromatogramType> Chromatogram // TODO: enforce quantity
         {
-            get { return chromatogramField; }
-            set { chromatogramField = value; }
-        }
-
-        /// <remarks>The number of chromatograms defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// Non-negative integer
-        public string Count
-        {
-            get { return countField; }
-            set { countField = value; }
+            get { return this._chromatogram; }
+            set
+            {
+                this._chromatogram = value;
+                if (this._chromatogram != null)
+                {
+                    this._chromatogram.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>This attribute MUST reference the 'id' of the default data processing for the chromatogram list. 
@@ -1203,84 +1483,119 @@ namespace PSI_Interface.MSData
         /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
         /// Required Attribute
         /// IDREF
-        public string DefaultDataProcessingRef
-        {
-            get { return defaultDataProcessingRefField; }
-            set { defaultDataProcessingRefField = value; }
-        }
+        public string DefaultDataProcessingRef { get; set; } // TODO: enforce requirement, validity of reference in dataset
     }
-    
+
     /// <summary>
     /// mzML ChromatogramType
     /// </summary>
     /// <remarks>A single Chromatogram</remarks>
     public partial class ChromatogramType : ParamGroupType
     {
-        private PrecursorType precursorField;
-        private ProductType productField;
-        private List<BinaryDataArrayType> binaryDataArrayListField;
-        private string idField;
-        private string indexField;
-        private int defaultArrayLengthField;
-        private string dataProcessingRefField;
+        private PrecursorType _precursor;
+        private ProductType _product;
+        private MSDataList<BinaryDataArrayType> _binaryDataArrayList;
+        private int _defaultArrayLength;
 
         /// min 0, max 1
         public PrecursorType Precursor
         {
-            get { return this.precursorField; }
-            set { precursorField = value; }
+            get { return this._precursor; }
+            set
+            {
+                this._precursor = value;
+                if (this._precursor != null)
+                {
+                    this._precursor.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 0, max 1
         public ProductType Product
         {
-            get { return productField; }
-            set { productField = value; }
+            get { return this._product; }
+            set
+            {
+                this._product = value;
+                if (this._product != null)
+                {
+                    this._product.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 1, max 1
-        public List<BinaryDataArrayType> BinaryDataArrayList
+        public MSDataList<BinaryDataArrayType> BinaryDataArrayList // TODO: enforce requirement
         {
-            get { return binaryDataArrayListField; }
-            set { binaryDataArrayListField = value; }
+            get { return this._binaryDataArrayList; }
+            set
+            {
+                this._binaryDataArrayList = value;
+                if (this._binaryDataArrayList != null)
+                {
+                    this._binaryDataArrayList.MsData = this.MsData;
+                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                }
+            }
         }
 
         /// <remarks>The zero-based index for this chromatogram in the chromatogram list</remarks>
         /// Required Attribute
         /// non-negative integer
-        public string Index
-        {
-            get { return indexField; }
-            set { indexField = value; }
-        }
+        public string Index { get; set; } // TODO: enforce requirement, 0-n contiguous values in chromatogram list.
 
         /// <remarks>A unique identifier for this chromatogram</remarks>
         /// Required Attribute
         /// string
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: enforce requirement
 
         /// <remarks>Default length of binary data arrays contained in this element.</remarks>
         /// Required Attribute
         /// integer
         public int DefaultArrayLength
         {
-            get { return defaultArrayLengthField; }
-            set { defaultArrayLengthField = value; }
+            get
+            {
+                int timeLength = 0;
+                int intensityLength = 0;
+                foreach (var bda in BinaryDataArrayList)
+                {
+                    if (bda.DataType == BinaryDataArrayType.ArrayType.time)
+                    {
+                        timeLength = bda.DataLength;
+                    }
+                    else if (bda.DataType == BinaryDataArrayType.ArrayType.intensity)
+                    {
+                        intensityLength = bda.DataLength;
+                    }
+                }
+                if (timeLength == intensityLength)
+                {
+                    this._defaultArrayLength = timeLength;
+                    return timeLength;
+                }
+                else
+                {
+                    throw new InvalidDataException("Spectrum: m/z and intensity arrays are not the same length.");
+                }
+            }
+            set
+            {
+                this._defaultArrayLength = value;
+                if (this._binaryDataArrayList != null)
+                {
+                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                }
+            }
         }
 
         /// <remarks>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string DataProcessingRef
-        {
-            get { return dataProcessingRefField; }
-            set { dataProcessingRefField = value; }
-        }
+        public string DataProcessingRef { get; set; }
     }
+
     /*
     /// <summary>
     /// mzML ScanSettingListType
@@ -1308,42 +1623,53 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML ScanSettingsType
     /// </summary>
     /// <remarks>Description of the acquisition settings of the instrument prior to the start of the run.</remarks>
     public partial class ScanSettingsType : ParamGroupType
     {
-        private List<SourceFileRefType> sourceFileRefListField;
-        private List<ParamGroupType> targetListField;
-        private string idField;
+        private MSDataList<SourceFileRefType> _sourceFileRefList;
+        private MSDataList<ParamGroupType> _targetList;
 
         /// <remarks>List with the source files containing the acquisition settings.</remarks>
         /// min 0, max 1
-        public List<SourceFileRefType> SourceFileRefList
+        public MSDataList<SourceFileRefType> SourceFileRefList
         {
-            get { return sourceFileRefListField; }
-            set { sourceFileRefListField = value; }
+            get { return this._sourceFileRefList; }
+            set
+            {
+                this._sourceFileRefList = value;
+                if (this._sourceFileRefList != null)
+                {
+                    this._sourceFileRefList.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>Target list (or 'inclusion list') configured prior to the run.</remarks>
         /// min 0, max 1
         //public TargetListType targetList
-        public List<ParamGroupType> TargetList
+        public MSDataList<ParamGroupType> TargetList
         {
-            get { return targetListField; }
-            set { targetListField = value; }
+            get { return this._targetList; }
+            set
+            {
+                this._targetList = value;
+                if (this._targetList != null)
+                {
+                    this._targetList.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>A unique identifier for this acquisition setting.</remarks>
         /// Required Attribute
         /// ID
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: Enforce requirement
     }
+
     /*
     /// <summary>
     /// mzML SourceFileRefListType
@@ -1371,23 +1697,19 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML SourceFileRefType
     /// </summary>
     /// <remarks></remarks>
     public partial class SourceFileRefType
     {
-        private string refField;
-
         /// <remarks>This attribute must reference the 'id' of the appropriate sourceFile.</remarks>
         /// Required Attribute
         /// IDREF
-        public string @Ref
-        {
-            get { return refField; }
-            set { refField = value; }
-        }
+        public string @Ref { get; set; } // TODO: enforce requirement
     }
+
     /*
     /// <summary>
     /// mzML TargetListType
@@ -1443,33 +1765,24 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML SoftwareType
     /// </summary>
     /// <remarks>Software information</remarks>
     public partial class SoftwareType : ParamGroupType
     {
-        private string idField;
-        private string versionField;
-
         /// <remarks>An identifier for this software that is unique across all SoftwareTypes.</remarks>
         /// Required Attribute
         /// ID
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: enforce requirement and uniqueness in dataset
 
         /// <remarks>The software version.</remarks>
         /// Required Attribute
         /// string
-        public string Version
-        {
-            get { return versionField; }
-            set { versionField = value; }
-        }
+        public string Version { get; set; } // TODO: enforce requirement
     }
+
     /*
     /// <summary>
     /// mzML InstrumentConfigurationListType
@@ -1501,6 +1814,7 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML InstrumentConfigurationType
     /// </summary>
@@ -1510,41 +1824,45 @@ namespace PSI_Interface.MSData
     /// the components that is used in the document. For software configuration, use a ReferenceableParamGroup element</remarks>
     public partial class InstrumentConfigurationType : ParamGroupType
     {
-        private ComponentListType componentListField;
-        private SoftwareRefType softwareRefField;
-        private string idField;
-        private string scanSettingsRefField;
+        private ComponentListType _componentList;
+        private SoftwareRefType _softwareRef;
 
         /// min 0, max 1
         public ComponentListType ComponentList
         {
-            get { return componentListField; }
-            set { componentListField = value; }
+            get { return this._componentList; }
+            set
+            {
+                this._componentList = value;
+                if (this._componentList != null)
+                {
+                    this._componentList.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 0, max 1
         public SoftwareRefType SoftwareRef
         {
-            get { return softwareRefField; }
-            set { softwareRefField = value; }
+            get { return this._softwareRef; }
+            set
+            {
+                this._softwareRef = value;
+                if (this._softwareRef != null)
+                {
+                    this._softwareRef.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>An identifier for this instrument configuration.</remarks>
         /// Required Attribute
         /// ID
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: enforce requirement
 
         /// Optional Attribute
         /// IDREF
-        public string ScanSettingsRef
-        {
-            get { return scanSettingsRefField; }
-            set { scanSettingsRefField = value; }
-        }
+        public string ScanSettingsRef { get; set; }
     }
 
     /// <summary>
@@ -1553,42 +1871,53 @@ namespace PSI_Interface.MSData
     /// <remarks>List with the different components used in the mass spectrometer. At least one source, one mass analyzer and one detector need to be specified.</remarks>
     public partial class ComponentListType
     {
-        private List<SourceComponentType> sourceField;
-        private List<AnalyzerComponentType> analyzerField;
-        private List<DetectorComponentType> detectorField;
-        private string countField;
+        private MSDataList<SourceComponentType> _source;
+        private MSDataList<AnalyzerComponentType> _analyzer;
+        private MSDataList<DetectorComponentType> _detector;
 
         /// <remarks>A source component.</remarks>
         /// min 1, max unbounded
-        public List<SourceComponentType> Source
+        public MSDataList<SourceComponentType> Source // TODO: enforce quantity
         {
-            get { return sourceField; }
-            set { sourceField = value; }
+            get { return this._source; }
+            set
+            {
+                this._source = value;
+                if (this._source != null)
+                {
+                    this._source.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>A mass analyzer (or mass filter) component.</remarks>
         /// min 1, max unbounded
-        public List<AnalyzerComponentType> Analyzer
+        public MSDataList<AnalyzerComponentType> Analyzer // TODO: enforce quantity
         {
-            get { return analyzerField; }
-            set { analyzerField = value; }
+            get { return this._analyzer; }
+            set
+            {
+                this._analyzer = value;
+                if (this._analyzer != null)
+                {
+                    this._analyzer.MsData = this.MsData;
+                }
+            }
         }
 
         /// <remarks>A detector component.</remarks>
         /// min 1, max unbounded
-        public List<DetectorComponentType> Detector
+        public MSDataList<DetectorComponentType> Detector //TODO: enforce quantity
         {
-            get { return detectorField; }
-            set { detectorField = value; }
-        }
-
-        /// <remarks>The number of components in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
-        public string Count
-        {
-            get { return countField; }
-            set { countField = value; }
+            get { return this._detector; }
+            set
+            {
+                this._detector = value;
+                if (this._detector != null)
+                {
+                    this._detector.MsData = this.MsData;
+                }
+            }
         }
     }
 
@@ -1597,18 +1926,12 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class ComponentType : ParamGroupType
     {
-        private int orderField;
-
         /// <remarks>This attribute must be used to indicate the order in which the components 
         /// are encountered from source to detector (e.g., in a Q-TOF, the quadrupole would 
         /// have the lower order number, and the TOF the higher number of the two).</remarks>
         /// Required Attribute
         /// integer
-        public int Order
-        {
-            get { return orderField; }
-            set { orderField = value; }
-        }
+        public int Order { get; set; } // TODO: restrict to ordering from 1 to n in dataset, no gaps.
     }
 
     /// <summary>
@@ -1647,17 +1970,12 @@ namespace PSI_Interface.MSData
     /// <remarks>Reference to a previously defined software element</remarks>
     public partial class SoftwareRefType
     {
-        private string refField;
-
         /// <remarks>This attribute must be used to reference the 'id' attribute of a software element.</remarks>
         /// Required Attribute
         /// IDREF
-        public string @Ref
-        {
-            get { return refField; }
-            set { refField = value; }
-        }
+        public string @Ref { get; set; } // TODO: restrict to existing software element 'id' attribute // TODO: enforce required attribute (constructor?)
     }
+
     /*
     /// <summary>
     /// mzML SampleListType
@@ -1685,33 +2003,24 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML SampleType
     /// </summary>
     /// <remarks>Expansible description of the sample used to generate the dataset, named in sampleName.</remarks>
     public partial class SampleType : ParamGroupType
     {
-        private string idField;
-        private string nameField;
-
         /// <remarks>A unique identifier across the samples with which to reference this sample description.</remarks>
         /// Required Attribute
         /// ID
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: restrict to unique in dataset // TODO: enforce required attribute (constructor?)
 
         /// <remarks>An optional name for the sample description, mostly intended as a quick mnemonic.</remarks>
         /// Optional Attribute
         /// string
-        public string Name
-        {
-            get { return nameField; }
-            set { nameField = value; }
-        }
+        public string Name { get; set; }
     }
+
     /*
     /// <summary>
     /// mzML SourceFileListType
@@ -1739,42 +2048,27 @@ namespace PSI_Interface.MSData
         }
     }
     */
+
     /// <summary>
     /// mzML SourceFileType
     /// </summary>
     /// <remarks>Description of the source file, including location and type.</remarks>
     public partial class SourceFileType : ParamGroupType
     {
-        private string idField;
-        private string nameField;
-        private string locationField;
-
         /// <remarks>An identifier for this file.</remarks>
         /// Required Attribute
         /// ID
-        public string Id
-        {
-            get { return idField; }
-            set { idField = value; }
-        }
+        public string Id { get; set; } // TODO: enforce required attribute
 
         /// <remarks>Name of the source file, without reference to location (either URI or local path).</remarks>
         /// Required Attribute
         /// string
-        public string Name
-        {
-            get { return nameField; }
-            set { nameField = value; }
-        }
+        public string Name { get; set; } // TODO: enforce required attribute
 
         /// <remarks>URI-formatted location where the file was retrieved.</remarks>
         /// Required Attribute
         /// anyURI
-        public string Location
-        {
-            get { return locationField; }
-            set { locationField = value; }
-        }
+        public string Location { get; set; } // TODO: enforce required attribute
     }
 
     /// <summary>
@@ -1783,32 +2077,53 @@ namespace PSI_Interface.MSData
     /// <remarks>Information pertaining to the entire mzML file (i.e. not specific to any part of the data set) is stored here.</remarks>
     public partial class FileDescriptionType
     {
-        private ParamGroupType fileContentField;
-        private List<SourceFileType> sourceFileListField;
-        private List<ParamGroupType> contactField;
+        private ParamGroupType _fileContent;
+        private MSDataList<SourceFileType> _sourceFileList;
+        private MSDataList<ParamGroupType> _contact;
 
         /// <remarks>This summarizes the different types of spectra that can be expected in the file. 
         /// This is expected to aid processing software in skipping files that do not contain appropriate 
         /// spectrum types for it. It should also describe the nativeID format used in the file by referring to an appropriate CV term.</remarks>
         /// min 1, max 1
-        public ParamGroupType FileContent
+        public ParamGroupType FileContent // TODO: enforce quantity
         {
-            get { return fileContentField; }
-            set { fileContentField = value; }
+            get { return this._fileContent; }
+            set
+            {
+                this._fileContent = value;
+                if (this._fileContent != null)
+                {
+                    this._fileContent.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 0, max 1
-        public List<SourceFileType> SourceFileList
+        public MSDataList<SourceFileType> SourceFileList
         {
-            get { return sourceFileListField; }
-            set { sourceFileListField = value; }
+            get { return this._sourceFileList; }
+            set
+            {
+                this._sourceFileList = value;
+                if (this._sourceFileList != null)
+                {
+                    this._sourceFileList.MsData = this.MsData;
+                }
+            }
         }
 
         /// min 0, max unbounded
-        public List<ParamGroupType> Contact
+        public MSDataList<ParamGroupType> Contact
         {
-            get { return contactField; }
-            set { contactField = value; }
+            get { return this._contact; }
+            set
+            {
+                this._contact = value;
+                if (this._contact != null)
+                {
+                    this._contact.MsData = this.MsData;
+                }
+            }
         }
     }
 }

@@ -1700,7 +1700,8 @@ namespace PSI_Interface.MSData.mzML
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
         public string count
         {
-            get { return (this.sourceField.Count + this.analyzerField.Count + this.detectorField.Count).ToString(); }
+            // This usage, as bad as it may seem, is probably more reliable than other conversions - Convert.ToInt32(bool) apparently converts "true" to 1.
+            get { return ((this.sourceField.Count > 0 ? 1 : 0) + (this.analyzerField.Count > 0 ? 1 : 0) + (this.detectorField.Count > 0 ? 1 : 0)).ToString(); }
             set {}
         }
     }

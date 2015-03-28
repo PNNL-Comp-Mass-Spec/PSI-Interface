@@ -3,7 +3,6 @@
 // 
 
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace PSI_Interface.MSData.mzML
 {
@@ -26,9 +25,9 @@ namespace PSI_Interface.MSData.mzML
             this.instrumentConfigurationList = null;
             this.dataProcessingList = null;
             this.run = null;
-            this.accession = string.Empty;
-            this.id = string.Empty;
-            this.version = string.Empty;
+            this.accession = null;
+            this.id = null;
+            this.version = null;
         }
         /// min 1, max 1
         //public CVListType cvList
@@ -101,10 +100,10 @@ namespace PSI_Interface.MSData.mzML
     {
         public CVType()
         {
-            this.id = string.Empty;
-            this.fullName = string.Empty;
-            this.version = string.Empty;
-            this.URI = string.Empty;
+            this.id = null;
+            this.fullName = null;
+            this.version = null;
+            this.URI = null;
         }
 
         /// <remarks>The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description (e.g., from the cvLabel attribute, in CVParamType elements).</remarks>
@@ -157,7 +156,7 @@ namespace PSI_Interface.MSData.mzML
         public DataProcessingType()
         {
             this.processingMethodField = new List<ProcessingMethodType>();
-            this.id = string.Empty;
+            this.id = null;
         }
 
         /// <remarks>Description of the default peak processing method. 
@@ -180,8 +179,8 @@ namespace PSI_Interface.MSData.mzML
     {
         public ProcessingMethodType()
         {
-            this.order = string.Empty;
-            this.softwareRef = string.Empty;
+            this.order = null;
+            this.softwareRef = null;
         }
 
         /// <remarks>This attributes allows a series of consecutive steps to be placed in the correct order.</remarks>
@@ -248,7 +247,7 @@ namespace PSI_Interface.MSData.mzML
         {
             this.cvParamField = new List<CVParamType>();
             this.userParamField = new List<UserParamType>();
-            this.id = string.Empty;
+            this.id = null;
         }
 
         /// min 0, max unbounded
@@ -271,7 +270,7 @@ namespace PSI_Interface.MSData.mzML
     {
         public ReferenceableParamGroupRefType()
         {
-            this.@ref = string.Empty;
+            this.@ref = null;
         }
 
         /// <remarks>Reference to the id attribute in a referenceableParamGroup.</remarks>
@@ -288,13 +287,13 @@ namespace PSI_Interface.MSData.mzML
     {
         public CVParamType()
         {
-            this.cvRef = string.Empty;
-            this.accession = string.Empty;
-            this.name = string.Empty;
-            this.value = string.Empty;
-            this.unitCvRef = string.Empty;
-            this.unitAccession = string.Empty;
-            this.unitName = string.Empty;
+            this.cvRef = null;
+            this.accession = null;
+            this.name = null;
+            this.value = null;
+            this.unitCvRef = null;
+            this.unitAccession = null;
+            this.unitName = null;
         }
 
         /// <remarks>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</remarks>
@@ -343,12 +342,12 @@ namespace PSI_Interface.MSData.mzML
     {
         public UserParamType()
         {
-            this.name = string.Empty;
-            this.type = string.Empty;
-            this.value = string.Empty;
-            this.unitAccession = string.Empty;
-            this.unitName = string.Empty;
-            this.unitCvRef = string.Empty;
+            this.name = null;
+            this.type = null;
+            this.value = null;
+            this.unitAccession = null;
+            this.unitName = null;
+            this.unitCvRef = null;
         }
 
         /// <remarks>The name for the parameter.</remarks>
@@ -413,9 +412,9 @@ namespace PSI_Interface.MSData.mzML
             this.isolationWindow = null;
             this.selectedIonList = null;
             this.activation = null;
-            this.spectrumRef = string.Empty;
-            this.sourceFileRef = string.Empty;
-            this.externalSpectrumID = string.Empty;
+            this.spectrumRef = null;
+            this.sourceFileRef = null;
+            this.externalSpectrumID = null;
         }
 
         /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
@@ -427,6 +426,7 @@ namespace PSI_Interface.MSData.mzML
         //public SelectedIonListType selectedIonList
 
         /// <remarks>The type and energy level used for activation.</remarks>
+        /// min 1, max 1
         //public ParamGroupType activation
 
         /// <remarks>For precursor spectra that are local to this document, this attribute must be used to reference the 'id' attribute of the spectrum corresponding to the precursor spectrum.</remarks>
@@ -497,9 +497,9 @@ namespace PSI_Interface.MSData.mzML
         public BinaryDataArrayType()
         {
             this.binary = null;
-            this.arrayLength = string.Empty;
-            this.dataProcessingRef = string.Empty;
-            this.encodedLength = string.Empty;
+            this.arrayLength = null;
+            this.dataProcessingRef = null;
+            this.encodedLength = null;
         }
 
         /// <remarks>The actual base64 encoded binary data. The byte order is always 'little endian'.</remarks>
@@ -554,10 +554,10 @@ namespace PSI_Interface.MSData.mzML
         public ScanType()
         {
             this.scanWindowList = null;
-            this.spectrumRef = string.Empty;
-            this.sourceFileRef = string.Empty;
-            this.externalSpectrumID = string.Empty;
-            this.instrumentConfigurationRef = string.Empty;
+            this.spectrumRef = null;
+            this.sourceFileRef = null;
+            this.externalSpectrumID = null;
+            this.instrumentConfigurationRef = null;
         }
 
         /// <remarks>Container for a list of scan windows.</remarks>
@@ -615,7 +615,7 @@ namespace PSI_Interface.MSData.mzML
         public SpectrumListType()
         {
             this.spectrumField = new List<SpectrumType>();
-            this.defaultDataProcessingRef = string.Empty;
+            this.defaultDataProcessingRef = null;
         }
 
         /// min 0, max unbounded
@@ -647,12 +647,12 @@ namespace PSI_Interface.MSData.mzML
             this.precursorList = null;
             this.productList = null;
             this.binaryDataArrayList = null;
-            this.id = string.Empty;
-            this.spotID = string.Empty;
-            this.index = string.Empty;
+            this.id = null;
+            this.spotID = null;
+            this.index = null;
             this.defaultArrayLength = 0;
-            this.dataProcessingRef = string.Empty;
-            this.sourceFileRef = string.Empty;
+            this.dataProcessingRef = null;
+            this.sourceFileRef = null;
         }
 
         /// min 0, max 1
@@ -746,10 +746,10 @@ namespace PSI_Interface.MSData.mzML
         {
             this.spectrumList = null;
             this.chromatogramList = null;
-            this.id = string.Empty;
-            this.defaultInstrumentConfigurationRef = string.Empty;
-            this.defaultSourceFileRef = string.Empty;
-            this.sampleRef = string.Empty;
+            this.id = null;
+            this.defaultInstrumentConfigurationRef = null;
+            this.defaultSourceFileRef = null;
+            this.sampleRef = null;
             this.startTimeStamp = System.DateTime.Now;
             this.startTimeStampSpecified = startTimeStamp != null;
         }
@@ -803,7 +803,7 @@ namespace PSI_Interface.MSData.mzML
         public ChromatogramListType()
         {
             this.chromatogramField = new List<ChromatogramType>();
-            this.defaultDataProcessingRef = string.Empty;
+            this.defaultDataProcessingRef = null;
         }
 
         /// <remarks></remarks>
@@ -834,10 +834,10 @@ namespace PSI_Interface.MSData.mzML
             this.precursor = null;
             this.product = null;
             this.binaryDataArrayList = null;
-            this.index = string.Empty;
-            this.id = string.Empty;
+            this.index = null;
+            this.id = null;
             this.defaultArrayLength = 0;
-            this.dataProcessingRef = string.Empty;
+            this.dataProcessingRef = null;
         }
 
         /// min 0, max 1
@@ -849,7 +849,7 @@ namespace PSI_Interface.MSData.mzML
         /// min 1, max 1
         //public BinaryDataArrayListType BinaryDataArrayList
 
-        /// <remarks>The zero-based index for this chromatogram in the chromatogram list</remarks>
+        /// <remarks>The zero-based index for this chromatogram in the chromatogram List</remarks>
         /// Required Attribute
         /// non-negative integer
         //public string index
@@ -900,7 +900,7 @@ namespace PSI_Interface.MSData.mzML
         {
             this.sourceFileRefList = null;
             this.targetList = null;
-            this.id = string.Empty;
+            this.id = null;
         }
 
         /// <remarks>List with the source files containing the acquisition settings.</remarks>
@@ -945,7 +945,7 @@ namespace PSI_Interface.MSData.mzML
     {
         public SourceFileRefType()
         {
-            this.@ref = string.Empty;
+            this.@ref = null;
         }
 
         /// <remarks>This attribute must reference the 'id' of the appropriate sourceFile.</remarks>
@@ -1003,8 +1003,8 @@ namespace PSI_Interface.MSData.mzML
     {
         public SoftwareType()
         {
-            this.id = string.Empty;
-            this.version = string.Empty;
+            this.id = null;
+            this.version = null;
         }
 
         /// <remarks>An identifier for this software that is unique across all SoftwareTypes.</remarks>
@@ -1055,8 +1055,8 @@ namespace PSI_Interface.MSData.mzML
         {
             this.componentList = null;
             this.softwareRef = null;
-            this.id = string.Empty;
-            this.scanSettingsRef = string.Empty;
+            this.id = null;
+            this.scanSettingsRef = null;
         }
 
         /// min 0, max 1
@@ -1168,7 +1168,7 @@ namespace PSI_Interface.MSData.mzML
     {
         public SoftwareRefType()
         {
-            this.@ref = string.Empty;
+            this.@ref = null;
         }
 
         /// <remarks>This attribute must be used to reference the 'id' attribute of a software element.</remarks>
@@ -1205,8 +1205,8 @@ namespace PSI_Interface.MSData.mzML
     {
         public SampleType()
         {
-            this.id = string.Empty;
-            this.name = string.Empty;
+            this.id = null;
+            this.name = null;
         }
 
         /// <remarks>A unique identifier across the samples with which to reference this sample description.</remarks>
@@ -1248,9 +1248,9 @@ namespace PSI_Interface.MSData.mzML
     {
         public SourceFileType()
         {
-            this.id = string.Empty;
-            this.name = string.Empty;
-            this.location = string.Empty;
+            this.id = null;
+            this.name = null;
+            this.location = null;
         }
 
         /// <remarks>An identifier for this file.</remarks>

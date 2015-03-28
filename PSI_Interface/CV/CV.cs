@@ -9,6 +9,7 @@ namespace PSI_Interface.CV
 	public static partial class CV
 	{
         public static readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();
+        public static readonly Dictionary<CVID, List<CVID>> RelationsChildren = new Dictionary<CVID, List<CVID>>();
         public static readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();
         public static readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();
         public static readonly Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>>();
@@ -55,6 +56,7 @@ namespace PSI_Interface.CV
 	        PopulateTermData();
             FillRelationsIsA();
             CreateLookups();
+            CreateParentRelations();
 	    }
 
 	    private static void CreateLookups()
@@ -62,6 +64,24 @@ namespace PSI_Interface.CV
 	        foreach (var term in TermData.Values)
 	        {
 	            TermAccessionLookup.Add(term.Id, term.Cvid);
+	        }
+	    }
+
+	    private static void CreateParentRelations()
+	    {
+	        foreach (var cvid in RelationsIsA)
+	        {
+	            foreach (var parent in cvid.Value)
+	            {
+	                if (RelationsChildren.ContainsKey(parent))
+	                {
+	                    RelationsChildren[parent].Add(cvid.Key);
+	                }
+	                else
+	                {
+	                    RelationsChildren.Add(parent, new List<CVID>(){ cvid.Key });
+	                }
+	            }
 	        }
 	    }
 	}
