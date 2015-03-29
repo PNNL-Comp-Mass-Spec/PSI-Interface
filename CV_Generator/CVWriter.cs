@@ -40,6 +40,7 @@ namespace CV_Generator
 				file.WriteLine(UsingAndNamespace());
 				// Write main class open...
                 file.WriteLine(ClassOpen());
+                file.WriteLine(CVInfoList("        "));
 				PopulateTermDict();
 				//file.WriteLine(TermInfoType("        "));
 				//file.WriteLine(RelationsTypes("        "));
@@ -82,6 +83,18 @@ namespace CV_Generator
 	    private string NamespaceClose()
 	    {
 	        return "}\n";
+	    }
+
+	    private string CVInfoList(string indent)
+	    {
+	        string values = indent + "public static void PopulateCVInfoList()\n" +
+	                        indent + "{\n";
+	        foreach (var cv in _allObo)
+	        {
+                values += indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));\n";
+	        }
+            values += indent + "}\n";
+	        return values;
 	    }
 
 		private string TermInfoType(string indent)
@@ -153,6 +166,7 @@ namespace CV_Generator
 		}
 
         private Dictionary<string, OBO_File.OBO_Term> _cvEnumData = new Dictionary<string, OBO_File.OBO_Term>();
+        private Dictionary<string, Dictionary<string, OBO_File.OBO_Term>> _cvMapData = new Dictionary<string, Dictionary<string, OBO_File.OBO_Term>>();
 
 	    private void PopulateCVEnumData()
 	    {
@@ -168,6 +182,7 @@ namespace CV_Generator
 	        unknown.Def = "CVID_Unknown [Unknown]";
 	        unknown.IsObsolete = false;
             _cvEnumData.Add("CVID_Unknown", unknown);
+            _cvMapData.Add("??", new Dictionary<string, OBO_File.OBO_Term>() { { "CVID_Unknown", unknown } });
 
             const string obsol = "_OBSOLETE";
             foreach (var obo in _allObo)
@@ -179,6 +194,8 @@ namespace CV_Generator
                     obo.Id = tempId;
                 }
                 var id = obo.Id;
+                var parent = new Dictionary<string, OBO_File.OBO_Term>();
+                _cvMapData.Add(id, parent);
 
                 foreach (var term in obo.Terms.Values)
                 {
@@ -198,6 +215,7 @@ namespace CV_Generator
                         name = tName + counter;
                     }
                     _cvEnumData.Add(name, term);
+                    parent.Add(name, term);
                     term.EnumName = name;
                 }
             }
@@ -230,13 +248,24 @@ namespace CV_Generator
             }
 
             string dictData = indent + "private static void PopulateTermData()\n" + indent + "{\n";
-            foreach (var term in _cvEnumData.Values)
+            /*foreach (var term in _cvEnumData.Values)
             {
                 dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
                             term.EnumName + ", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
                 //TermData as list
                 //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
                 //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
+            }*/
+            foreach (var cv in _cvMapData)
+            {
+                foreach (var term in cv.Value.Values)
+                {
+                    dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
+                                term.EnumName + ", @\"" + cv.Key + "\", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
+                    //TermData as list
+                    //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
+                    //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
+                }
             }
             return dictData + indent + "}\n\n";
         }

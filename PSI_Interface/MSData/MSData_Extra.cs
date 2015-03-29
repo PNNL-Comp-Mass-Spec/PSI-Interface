@@ -211,11 +211,11 @@ namespace PSI_Interface.MSData
         {
             this.CVRef = null;
             this.Accession = null;
-            this.Name = null;
+            //this.Name = null;
             this.Value = null;
             this.UnitCVRef = null;
             this.UnitAccession = null;
-            this.UnitName = null;
+            //this.UnitName = null;
         }
     }
 
@@ -233,7 +233,7 @@ namespace PSI_Interface.MSData
             this.Type = null;
             this.Value = null;
             this.UnitAccession = null;
-            this.UnitName = null;
+            //this.UnitName = null;
             this.UnitCVRef = null;
         }
     }

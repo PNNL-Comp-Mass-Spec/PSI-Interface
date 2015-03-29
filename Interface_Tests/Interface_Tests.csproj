@@ -44,10 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CVTests\CVTests.cs" />
+    <Compile Include="MSDataTests\MSDataReadTests.cs" />
     <Compile Include="mzIdentMLTests\mzIdentMLReadTests.cs" />
     <Compile Include="mzIdentMLTests\mzIdentMLWriteTests.cs" />
-    <Compile Include="mzMLTests\mzMLReadTests.cs" />
-    <Compile Include="mzMLTests\mzMLWriteTests.cs" />
+    <Compile Include="MSDataTests\mzMLTests\mzMLReadTests.cs" />
+    <Compile Include="MSDataTests\mzMLTests\mzMLWriteTests.cs" />
     <Compile Include="TestPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -458,46 +458,39 @@ namespace PSI_Interface.MSData
     public partial class CVParamType
     {
         private string _cvRef;
-        private CVType _CVRef;
-        private string _accession;
+        //private CVType _CVRef;
+        //private string _accession;
         private string _value;
-        private string _name;
-        private string _unitAccession;
-        private string _unitName;
+        //private string _name;
+        //private string _unitAccession;
+        //private string _unitName;
         private string _unitCvRef;
-        private CVType _UnitCVRef;
+        //private CVType _UnitCVRef;
 
-        private CV.CV.CVID _cvid;
-        private CV.CV.CVID _unitCvid;
-
-        //[System.Xml.Serialization.XmlIgnore]
-        public CV.CV.CVID Cvid
-        {
-            get { return this._cvid; }
-            set { this._cvid = value; }
-        }
+        //private CV.CV.CVID _cvid;
+        //private CV.CV.CVID _unitCvid;
 
         //[System.Xml.Serialization.XmlIgnore]
-        public CV.CV.CVID UnitCvid
-        {
-            get { return this._unitCvid; }
-            set { this._unitCvid = value; }
-        }
+        public CV.CV.CVID Cvid { get; set; }
+
+        //[System.Xml.Serialization.XmlIgnore]
+        public CV.CV.CVID UnitCvid { get; set; }
 
         /// <remarks>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</remarks>
         /// Required Attribute
         /// IDREF
-        public string CVRef
+        internal string CVRef
         {
             get
             {
-                return this.Accession.Split(new[] { ':' })[0];
+                //return this.Accession.Split(new[] { ':' })[0];
+                return this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.Cvid].CVRef);
                 //return this._cvRef;
                 //return this._CVRef.Id;
             }
             set
             {
-                //this._cvRef = value;
+                this._cvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
                 // have to set up a dictionary or something similar...
                 //CVRef = cvs[value];
             }
@@ -506,20 +499,22 @@ namespace PSI_Interface.MSData
         /// <remarks>The accession number of the referred-to term in the named resource (e.g.: MS:000012).</remarks>
         /// Required Attribute
         /// string
-        public string Accession
+        internal string Accession
         {
             get
             {
-                return MsData.CvTranslator.ConvertOboAccession(CV.CV.TermData[this.Cvid].Id);
+                return CV.CV.TermData[this.Cvid].Id;
                 //return this._accession;
             } // TODO: change this return to a value mapped from the cvid
             set
             {
-                this._accession = value;
-                var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
-                if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                //this._accession = value;
+                //var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
+                //if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                if (CV.CV.TermAccessionLookup.ContainsKey(_cvRef) && CV.CV.TermAccessionLookup[_cvRef].ContainsKey(value))
                 {
-                    this.Cvid = CV.CV.TermAccessionLookup[oboAcc];
+                    //this.Cvid = CV.CV.TermAccessionLookup[oboAcc];
+                    this.Cvid = CV.CV.TermAccessionLookup[_cvRef][value];
                 }
                 else
                 {
@@ -531,14 +526,14 @@ namespace PSI_Interface.MSData
         /// <remarks>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</remarks>
         /// Required Attribute
         /// string
-        public string Name
+        internal string Name
         {
             get
             {
                 return CV.CV.TermData[this.Cvid].Name;
                 //return this._name;
             } // TODO: change this return to a value mapped from the cvid
-            set { this._name = value; } // TODO: remove this when accession to cvid mapping is complete
+            //set { this._name = value; } // TODO: remove this when accession to cvid mapping is complete
         }
 
         /// <remarks>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</remarks>
@@ -548,22 +543,23 @@ namespace PSI_Interface.MSData
         {
             get { return this._value; }
             set { this._value = value; }
-        }
+        } // TODO: Perform validation of the value according to CVID/UnitCVID?
 
         /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string UnitCVRef
+        internal string UnitCVRef
         {
             get
             {
-                return this.UnitAccession.Split(new[] { ':' })[0];
+                //return this.UnitAccession.Split(new[] { ':' })[0];
+                return this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.UnitCvid].CVRef);
                 //return this._unitCvRef;
                 //return this._UnitCVRef.Id;
             }
             set
             {
-                //this._unitCvRef = value;
+                this._unitCvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
                 // have to set up a dictionary or something similar...
                 //UnitCVRef = cvs[value];
             }
@@ -572,20 +568,21 @@ namespace PSI_Interface.MSData
         /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
         /// Optional Attribute
         /// string
-        public string UnitAccession
+        internal string UnitAccession
         {
             get
             {
-                return MsData.CvTranslator.ConvertOboAccession(CV.CV.TermData[this.UnitCvid].Id);
+                return CV.CV.TermData[this.UnitCvid].Id;
                 //return this._unitAccession;
             } // TODO: change this return to a value mapped from the cvid
             set
             {
-                this._unitAccession = value;
-                var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
-                if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                //this._unitAccession = value;
+                //var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
+                //if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                if (CV.CV.TermAccessionLookup.ContainsKey(_unitCvRef) && CV.CV.TermAccessionLookup[_unitCvRef].ContainsKey(value))
                 {
-                    this.UnitCvid = CV.CV.TermAccessionLookup[oboAcc];
+                    this.UnitCvid = CV.CV.TermAccessionLookup[_unitCvRef][value];
                 }
                 else
                 {
@@ -597,14 +594,14 @@ namespace PSI_Interface.MSData
         /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
         /// Optional Attribute
         /// string
-        public string UnitName
+        internal string UnitName
         {
             get
             {
                 return CV.CV.TermData[this.UnitCvid].Name;
                 //return this._unitName;
             } // TODO: change this return to a value mapped from the cvid
-            set { this._unitName = value; } // TODO: remove this when accession to cvid mapping is complete
+            //set { this._unitName = value; } // TODO: remove this when accession to cvid mapping is complete
         }
     }
 
@@ -616,17 +613,13 @@ namespace PSI_Interface.MSData
     /// CV term available, and if so, use the CV term instead</remarks>
     public partial class UserParamType
     {
-        private string _unitAccession;
-        private string _unitName;
+        //private string _unitAccession;
+        //private string _unitName;
         private string _unitCvRef;
-        private CV.CV.CVID _unitCvid;
-        private CVType _unitCVRef;
+        //private CV.CV.CVID _unitCvid;
+        //private CVType _unitCVRef;
 
-        public CV.CV.CVID UnitCvid
-        {
-            get { return this._unitCvid; }
-            set { this._unitCvid = value; }
-        }
+        public CV.CV.CVID UnitCvid { get; set; }
 
         /// <remarks>The name for the parameter.</remarks>
         /// Required Attribute
@@ -646,7 +639,7 @@ namespace PSI_Interface.MSData
         /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
         /// Optional Attribute
         /// string
-        public string UnitAccession
+        internal string UnitAccession
         {
             get
             {
@@ -655,11 +648,12 @@ namespace PSI_Interface.MSData
             }
             set
             {
-                this._unitAccession = value;
-                var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
-                if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                //this._unitAccession = value;
+                //var oboAcc = MsData.CvTranslator.ConvertFileAccession(value);
+                //if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
+                if (CV.CV.TermAccessionLookup.ContainsKey(_unitCvRef) && CV.CV.TermAccessionLookup[_unitCvRef].ContainsKey(value))
                 {
-                    this.UnitCvid = CV.CV.TermAccessionLookup[oboAcc];
+                    this.UnitCvid = CV.CV.TermAccessionLookup[_unitCvRef][value];
                 }
                 else
                 {
@@ -671,30 +665,32 @@ namespace PSI_Interface.MSData
         /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
         /// Optional Attribute
         /// string
-        public string UnitName
+        internal string UnitName
         {
             get
             {
                 return CV.CV.TermData[this.UnitCvid].Name;
                 //return this._unitName;
             }
-            set { this._unitName = value; }
+            //set { this._unitName = value; }
         }
 
         /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
         /// Optional Attribute
         /// IDREF
-        public string UnitCVRef
+        internal string UnitCVRef
         {
             get
             {
-                return this.UnitAccession.Split(new[] {':'})[0];
+                //return this.UnitAccession.Split(new[] {':'})[0];
+                return this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.UnitCvid].CVRef);
                 //return this._unitCvRef;
                 //return this._unitCVRef.Id;
             }
             set
             {
-                this._unitCvRef = value;
+                //this._unitCvRef = value;
+                this._unitCvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
                 // have to set up a dictionary or something similar...
                 //UnitCVRef = cvs[value];
             }

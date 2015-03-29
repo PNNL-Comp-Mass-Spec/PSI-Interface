@@ -260,14 +260,13 @@ namespace PSI_Interface.MSData
     {
         public CVParamType(PSI_Interface.MSData.mzML.CVParamType cvp)
         {
-            // TODO: Figure out translator thoughts.....
+            this.CVRef = cvp.cvRef;
             this.Accession = cvp.accession;
-            this.CVRef = cvp.cvRef; // TODO: shouldn't be needed.
-            this.Name = cvp.name; // TODO: shouldn't be needed.
+            //this.Name = cvp.name; // TODO: shouldn't be needed.
             this.Value = cvp.value;
+            this.UnitCVRef = cvp.unitCvRef;
             this.UnitAccession = cvp.unitAccession;
-            this.UnitCVRef = cvp.unitCvRef; // TODO: shouldn't be needed.
-            this.UnitName = cvp.unitName; // TODO: shouldn't be needed.
+            //this.UnitName = cvp.unitName; // TODO: shouldn't be needed.
         }
     }
 
@@ -284,9 +283,9 @@ namespace PSI_Interface.MSData
             this.Name = up.name;
             this.Type = up.type;
             this.Value = up.value;
+            this.UnitCVRef = up.unitCvRef;
             this.UnitAccession = up.unitAccession;
-            this.UnitName = up.unitName; // TODO: shouldn't be needed.
-            this.UnitCVRef = up.unitCvRef; // TODO: shouldn't be needed.
+            //this.UnitName = up.unitName; // TODO: shouldn't be needed.
         }
     }
 

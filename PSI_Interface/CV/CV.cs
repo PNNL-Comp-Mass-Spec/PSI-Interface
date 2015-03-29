@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace PSI_Interface.CV
         public static readonly Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>>();
         public static readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();
         public static readonly List<CVInfo> CVInfoList = new List<CVInfo>();
-        public static readonly Dictionary<string, CVID> TermAccessionLookup = new Dictionary<string, CVID>();
+        public static readonly Dictionary<string, Dictionary<string, CVID>> TermAccessionLookup = new Dictionary<string, Dictionary<string, CVID>>();
 
 	    public class CVInfo
 	    {
@@ -36,14 +37,16 @@ namespace PSI_Interface.CV
         public class TermInfo
         {
             public CVID Cvid { get; private set; }
+            public string CVRef { get; private set; }
             public string Id { get; private set; }
             public string Name { get; private set; }
             public string Definition { get; private set; }
             public bool IsObsolete { get; private set; }
 
-            public TermInfo(CVID pCVID, string pId, string pName, string pDef, bool pIsObs)
+            public TermInfo(CVID pCVID, string pCVRef, string pId, string pName, string pDef, bool pIsObs)
             {
                 Cvid = pCVID;
+                CVRef = pCVRef;
                 Id = pId;
                 Name = pName;
                 Definition = pDef;
@@ -53,6 +56,7 @@ namespace PSI_Interface.CV
 
 	    static CV()
 	    {
+	        PopulateCVInfoList();
 	        PopulateTermData();
             FillRelationsIsA();
             CreateLookups();
@@ -61,9 +65,20 @@ namespace PSI_Interface.CV
 
 	    private static void CreateLookups()
 	    {
+	        if (CVInfoList.Count <= 0)
+	        {
+	            return;
+	        }
 	        foreach (var term in TermData.Values)
 	        {
-	            TermAccessionLookup.Add(term.Id, term.Cvid);
+	            if (TermAccessionLookup.ContainsKey(term.CVRef))
+	            {
+	                TermAccessionLookup[term.CVRef].Add(term.Id, term.Cvid);
+	            }
+	            else
+	            {
+	                TermAccessionLookup.Add(term.CVRef, new Dictionary<string, CVID>() {{term.Id, term.Cvid}});
+	            }
 	        }
 	    }
 
