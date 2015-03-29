@@ -427,14 +427,14 @@ namespace PSI_Interface.MSData.mzML
         private List<UserParamType> userParamField;
         private string idField;
 
-        [System.Xml.Serialization.XmlElementAttribute("cvParam")]
+        [System.Xml.Serialization.XmlIgnore]
         public List<CVParamType> cvParamList
         {
             get { return this.cvParamField; }
             set { this.cvParamField = value; }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("userParam")]
+        [System.Xml.Serialization.XmlIgnore]
         public List<UserParamType> userParamList
         {
             get { return this.userParamField; }
