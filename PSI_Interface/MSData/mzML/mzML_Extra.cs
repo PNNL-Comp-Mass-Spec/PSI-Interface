@@ -80,7 +80,7 @@ namespace PSI_Interface.MSData.mzML
     {
         public CVListType()
         {
-            this.cvList = new List<CVType>();
+            this.cv = new List<CVType>();
         }
 
         /// min 1, max unbounded

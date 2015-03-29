@@ -205,16 +205,20 @@ namespace PSI_Interface.MSData
     /// mzML CVParamType
     /// </summary>
     /// <remarks>This element holds additional data or annotation. Only controlled values are allowed here.</remarks>
-    public partial class CVParamType : MSDataInternalTypeAbstract
+    public partial class CVParamType : ParamType
     {
         public CVParamType()
         {
-            this.CVRef = null;
-            this.Accession = null;
+            //this.CVRef = null;
+            this._cvRef = "??";
+            this.Cvid = CV.CV.CVID.CVID_Unknown;
+            //this.Accession = null;
             //this.Name = null;
             this.Value = null;
-            this.UnitCVRef = null;
-            this.UnitAccession = null;
+            //this.UnitCVRef = null;
+            //this._unitCvRef = "??";
+            //this.UnitCvid = CV.CV.CVID.CVID_Unknown;
+            //this.UnitAccession = null;
             //this.UnitName = null;
         }
     }
@@ -225,16 +229,36 @@ namespace PSI_Interface.MSData
     /// <remarks>Uncontrolled user parameters (essentially allowing free text). 
     /// Before using these, one should verify whether there is an appropriate 
     /// CV term available, and if so, use the CV term instead</remarks>
-    public partial class UserParamType : MSDataInternalTypeAbstract
+    public partial class UserParamType : ParamType
     {
         public UserParamType()
         {
             this.Name = null;
             this.Type = null;
             this.Value = null;
-            this.UnitAccession = null;
+            //this.UnitCVRef = null;
+            //this._unitCvRef = "??";
+            //this.UnitCvid = CV.CV.CVID.CVID_Unknown;
+            //this.UnitAccession = null;
             //this.UnitName = null;
-            this.UnitCVRef = null;
+        }
+    }
+
+    /// <summary>
+    /// ParamType
+    /// </summary>
+    /// <remarks>Base type for CVParam and UserParam to reduce code duplication.</remarks>
+    public partial class ParamType : MSDataInternalTypeAbstract
+    {
+        public ParamType()
+        {
+            //this.Value = null;
+            //this.UnitCVRef = null;
+            this._unitsSet = false;
+            this._unitCvRef = null;
+            this.UnitCvid = CV.CV.CVID.CVID_Unknown;
+            //this.UnitAccession = null;
+            //this.UnitName = null;
         }
     }
 

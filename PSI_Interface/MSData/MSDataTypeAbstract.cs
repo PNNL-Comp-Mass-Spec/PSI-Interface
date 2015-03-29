@@ -5,6 +5,16 @@
     /// </summary>
     public class MSDataInternalTypeAbstract
     {
+        internal MSDataInternalTypeAbstract()
+        {
+            this.MsData = new MSData();
+        }
+
+        internal MSDataInternalTypeAbstract(MSData instance)
+        {
+            this.MsData = instance;
+        }
+
         internal MSData MsData { get; set; }
 
         internal int BdaDefaultArrayLength { get; set; }

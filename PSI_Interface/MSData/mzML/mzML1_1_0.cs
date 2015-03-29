@@ -139,19 +139,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<CVType> cvField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<CVType> cvList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cv")]
+        public List<CVType> cv
         {
             get { return this.cvField; }
             set { this.cvField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("cv")]
-        public CVType[] cv
-        {
-            get { return this.cvField.ToArray(); }
-            set { this.cvField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -220,19 +213,11 @@ namespace PSI_Interface.MSData.mzML
         private List<DataProcessingType> dataProcessingField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnore]
-        public List<DataProcessingType> dataProcessingList
+        [System.Xml.Serialization.XmlElementAttribute("dataProcessing")]
+        public List<DataProcessingType> dataProcessing
         {
             get { return this.dataProcessingField; }
             set { this.dataProcessingField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("dataProcessing")]
-        public DataProcessingType[] dataProcessing
-        {
-            get { return this.dataProcessingField.ToArray(); }
-            set { this.dataProcessingField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -255,19 +240,12 @@ namespace PSI_Interface.MSData.mzML
         private List<ProcessingMethodType> processingMethodField;
         private string idField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ProcessingMethodType> processingMethodList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("processingMethod")]
+        public List<ProcessingMethodType> processingMethod
         {
             get { return this.processingMethodField; }
             set { this.processingMethodField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("processingMethod")]
-        public ProcessingMethodType[] processingMethod
-        {
-            get { return this.processingMethodField.ToArray(); }
-            set { this.processingMethodField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -335,49 +313,28 @@ namespace PSI_Interface.MSData.mzML
         private List<CVParamType> cvParamField;
         private List<UserParamType> userParamField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ReferenceableParamGroupRefType> referenceableParamGroupRefList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("referenceableParamGroupRef")]
+        public List<ReferenceableParamGroupRefType> referenceableParamGroupRef
         {
             get { return this.referenceableParamGroupRefField; }
             set { this.referenceableParamGroupRefField = value; }
         }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<CVParamType> cvParamList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cvParam")]
+        public List<CVParamType> cvParam
         {
             get { return this.cvParamField; }
             set { this.cvParamField = value; }
         }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<UserParamType> userParamList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("userParam")]
+        public List<UserParamType> userParam
         {
             get { return this.userParamField; }
             set { this.userParamField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("referenceableParamGroupRef")]
-        public ReferenceableParamGroupRefType[] referenceableParamGroupRef
-        {
-            get { return this.referenceableParamGroupRefField.ToArray(); }
-            set { this.referenceableParamGroupRefField = value.ToList(); }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("cvParam")]
-        public CVParamType[] cvParam
-        {
-            get { return this.cvParamField.ToArray(); }
-            set { this.cvParamField = value.ToList(); }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("userParam")]
-        public UserParamType[] userParam
-        {
-            get { return this.userParamField.ToArray(); }
-            set { this.userParamField = value.ToList(); }
         }
     }
 
@@ -391,19 +348,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<ReferenceableParamGroupType> referenceableParamGroupField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ReferenceableParamGroupType> referenceableParamGroupList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("referenceableParamGroup")]
+        public List<ReferenceableParamGroupType> referenceableParamGroup
         {
             get { return this.referenceableParamGroupField; }
             set { this.referenceableParamGroupField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("referenceableParamGroup")]
-        public ReferenceableParamGroupType[] referenceableParamGroup
-        {
-            get { return this.referenceableParamGroupField.ToArray(); }
-            set { this.referenceableParamGroupField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -427,34 +377,20 @@ namespace PSI_Interface.MSData.mzML
         private List<UserParamType> userParamField;
         private string idField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<CVParamType> cvParamList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cvParam")]
+        public List<CVParamType> cvParam
         {
             get { return this.cvParamField; }
             set { this.cvParamField = value; }
         }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<UserParamType> userParamList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("userParam")]
+        public List<UserParamType> userParam
         {
             get { return this.userParamField; }
             set { this.userParamField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("cvParam")]
-        public CVParamType[] cvParam
-        {
-            get { return this.cvParamField.ToArray(); }
-            set { this.cvParamField = value.ToList(); }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("userParam")]
-        public UserParamType[] userParam
-        {
-            get { return this.userParamField.ToArray(); }
-            set { this.userParamField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -632,19 +568,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<PrecursorType> precursorField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<PrecursorType> precursorList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("precursor")]
+        public List<PrecursorType> precursor
         {
             get { return this.precursorField; }
             set { this.precursorField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("precursor")]
-        public PrecursorType[] precursor
-        {
-            get { return this.precursorField.ToArray(); }
-            set { this.precursorField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -727,19 +656,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<ParamGroupType> selectedIonField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ParamGroupType> selectedIonList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("selectedIon")]
+        public List<ParamGroupType> selectedIon
         {
             get { return this.selectedIonField; }
             set { this.selectedIonField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("selectedIon")]
-        public ParamGroupType[] selectedIon
-        {
-            get { return this.selectedIonField.ToArray(); }
-            set { this.selectedIonField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -761,19 +683,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<BinaryDataArrayType> binaryDataArrayField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<BinaryDataArrayType> binaryDataArrayList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("binaryDataArray")]
+        public List<BinaryDataArrayType> binaryDataArray
         {
             get { return this.binaryDataArrayField; }
             set { this.binaryDataArrayField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("binaryDataArray")]
-        public BinaryDataArrayType[] binaryDataArray
-        {
-            get { return this.binaryDataArrayField.ToArray(); }
-            set { this.binaryDataArrayField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -841,19 +756,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<ScanType> scanField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ScanType> scanList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("scan")]
+        public List<ScanType> scan
         {
             get { return this.scanField; }
             set { this.scanField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("scan")]
-        public ScanType[] scan
-        {
-            get { return this.scanField.ToArray(); }
-            set { this.scanField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -929,19 +837,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<ParamGroupType> scanWindowField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ParamGroupType> scanWindowList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("scanWindow")]
+        public List<ParamGroupType> scanWindow
         {
             get { return this.scanWindowField; }
             set { this.scanWindowField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("scanWindow")]
-        public ParamGroupType[] scanWindow
-        {
-            get { return this.scanWindowField.ToArray(); }
-            set { this.scanWindowField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -964,19 +865,12 @@ namespace PSI_Interface.MSData.mzML
         private List<SpectrumType> spectrumField;
         private string defaultDataProcessingRefField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<SpectrumType> spectrumList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("spectrum")]
+        public List<SpectrumType> spectrum
         {
             get { return this.spectrumField; }
             set { this.spectrumField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("spectrum")]
-        public SpectrumType[] spectrum
-        {
-            get { return this.spectrumField.ToArray(); }
-            set { this.spectrumField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1102,19 +996,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<ProductType> productField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ProductType> productList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("product")]
+        public List<ProductType> product
         {
             get { return this.productField; }
             set { this.productField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("product")]
-        public ProductType[] product
-        {
-            get { return this.productField.ToArray(); }
-            set { this.productField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1235,19 +1122,12 @@ namespace PSI_Interface.MSData.mzML
         private List<ChromatogramType> chromatogramField;
         private string defaultDataProcessingRefField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ChromatogramType> chromatogramList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("chromatogram")]
+        public List<ChromatogramType> chromatogram
         {
             get { return this.chromatogramField; }
             set { this.chromatogramField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("chromatogram")]
-        public ChromatogramType[] chromatogram
-        {
-            get { return this.chromatogramField.ToArray(); }
-            set { this.chromatogramField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1348,19 +1228,11 @@ namespace PSI_Interface.MSData.mzML
         private List<ScanSettingsType> scanSettingsField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ScanSettingsType> scanSettingsList
+        [System.Xml.Serialization.XmlElementAttribute("scanSettings")]
+        public List<ScanSettingsType> scanSettings
         {
             get { return this.scanSettingsField; }
             set { this.scanSettingsField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("scanSettings")]
-        public ScanSettingsType[] scanSettings
-        {
-            get { return this.scanSettingsField.ToArray(); }
-            set { this.scanSettingsField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1417,19 +1289,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<SourceFileRefType> sourceFileRefField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<SourceFileRefType> sourceFileRefList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("sourceFileRef")]
+        public List<SourceFileRefType> sourceFileRef
         {
             get { return this.sourceFileRefField; }
             set { this.sourceFileRefField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("sourceFileRef")]
-        public SourceFileRefType[] sourceFileRef
-        {
-            get { return this.sourceFileRefField.ToArray(); }
-            set { this.sourceFileRefField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1471,19 +1336,11 @@ namespace PSI_Interface.MSData.mzML
         private List<ParamGroupType> targetField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ParamGroupType> targetList
+        [System.Xml.Serialization.XmlElementAttribute("target")]
+        public List<ParamGroupType> target
         {
             get { return this.targetField; }
             set { this.targetField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("target")]
-        public ParamGroupType[] target
-        {
-            get { return this.targetField.ToArray(); }
-            set { this.targetField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1505,19 +1362,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<SoftwareType> softwareField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<SoftwareType> softwareList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("software")]
+        public List<SoftwareType> software
         {
             get { return this.softwareField; }
             set { this.softwareField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("software")]
-        public SoftwareType[] software
-        {
-            get { return this.softwareField.ToArray(); }
-            set { this.softwareField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1568,19 +1418,11 @@ namespace PSI_Interface.MSData.mzML
         private List<InstrumentConfigurationType> instrumentConfigurationField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnore]
-        public List<InstrumentConfigurationType> instrumentConfigurationList
+        [System.Xml.Serialization.XmlElementAttribute("instrumentConfiguration")]
+        public List<InstrumentConfigurationType> instrumentConfiguration
         {
             get { return this.instrumentConfigurationField; }
             set { this.instrumentConfigurationField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("instrumentConfiguration")]
-        public InstrumentConfigurationType[] instrumentConfiguration
-        {
-            get { return this.instrumentConfigurationField.ToArray(); }
-            set { this.instrumentConfigurationField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1649,51 +1491,27 @@ namespace PSI_Interface.MSData.mzML
         private List<DetectorComponentType> detectorField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnore]
-        public List<SourceComponentType> sourceList
+        [System.Xml.Serialization.XmlElementAttribute("source")]
+        public List<SourceComponentType> source
         {
             get { return this.sourceField; }
             set { this.sourceField = value; }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnore]
-        public List<AnalyzerComponentType> analyzerList
+        [System.Xml.Serialization.XmlElementAttribute("analyzer")]
+        public List<AnalyzerComponentType> analyzer
         {
             get { return this.analyzerField; }
             set { this.analyzerField = value; }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnore]
-        public List<DetectorComponentType> detectorList
+        [System.Xml.Serialization.XmlElementAttribute("detector")]
+        public List<DetectorComponentType> detector
         {
             get { return this.detectorField; }
             set { this.detectorField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("source")]
-        public SourceComponentType[] source
-        {
-            get { return this.sourceField.ToArray(); }
-            set { this.sourceField = value.ToList(); }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("analyzer")]
-        public AnalyzerComponentType[] analyzer
-        {
-            get { return this.analyzerField.ToArray(); }
-            set { this.analyzerField = value.ToList(); }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("detector")]
-        public DetectorComponentType[] detector
-        {
-            get { return this.detectorField.ToArray(); }
-            set { this.detectorField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1787,19 +1605,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<SampleType> sampleField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<SampleType> sampleList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("sample")]
+        public List<SampleType> sample
         {
             get { return this.sampleField; }
             set { this.sampleField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("sample")]
-        public SampleType[] sample
-        {
-            get { return this.sampleField.ToArray(); }
-            set { this.sampleField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1849,19 +1660,12 @@ namespace PSI_Interface.MSData.mzML
     {
         private List<SourceFileType> sourceFileField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<SourceFileType> sourceFileList
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("sourceFile")]
+        public List<SourceFileType> sourceFile
         {
             get { return this.sourceFileField; }
             set { this.sourceFileField = value; }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("sourceFile")]
-        public SourceFileType[] sourceFile
-        {
-            get { return this.sourceFileField.ToArray(); }
-            set { this.sourceFileField = value.ToList(); }
         }
 
         /// <remarks/>
@@ -1922,13 +1726,6 @@ namespace PSI_Interface.MSData.mzML
         private SourceFileListType sourceFileListField;
         private List<ParamGroupType> contactField;
 
-        [System.Xml.Serialization.XmlIgnore]
-        public List<ParamGroupType> contactList
-        {
-            get { return this.contactField; }
-            set { this.contactField = value; }
-        }
-
         /// <remarks/>
         public ParamGroupType fileContent
         {
@@ -1945,10 +1742,10 @@ namespace PSI_Interface.MSData.mzML
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("contact")]
-        public ParamGroupType[] contact
+        public List<ParamGroupType> contact
         {
-            get { return this.contactField.ToArray(); }
-            set { this.contactField = value.ToList(); }
+            get { return this.contactField; }
+            set { this.contactField = value; }
         }
     }
 }

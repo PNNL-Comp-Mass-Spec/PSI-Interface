@@ -49,7 +49,7 @@ namespace Interface_Tests.MSDataTests.mzMLTests
 			var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
 			mzMLType mzMLData = reader.Read();
 			Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count.ToString(), "Stored Count");
-			Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Length, "Array length");
+			Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Count, "Array length");
 			var writer = new MzMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outPath));
 			writer.MzMLType = MzMLSchemaType.MzML;
 			writer.Write(mzMLData);
