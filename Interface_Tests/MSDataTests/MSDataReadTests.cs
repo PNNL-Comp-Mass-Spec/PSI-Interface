@@ -51,7 +51,7 @@ namespace Interface_Tests.MSDataTests
             //mzMLType mzMLData = reader.Read();
             MSData mzMLData = new MSData(reader.Read());
 			//Assert.AreEqual(expectedSpectra.ToString(), mzMLData.Run.SpectrumList.Spectrum.Count.ToString(), "Stored Count");
-			Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectrum.Count, "Array length");
+			Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Array length");
 		}
 
 		[Test]
@@ -65,7 +65,7 @@ namespace Interface_Tests.MSDataTests
             //mzMLType mzMLData = reader.Read();
             MSData mzMLData = new MSData(reader.Read());
 			//Assert.AreEqual(expectedSpectra.ToString(), mzMLData.Run.SpectrumList.Spectrum.Count.ToString(), "Stored Count");
-            Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectrum.Count, "Array length");
+            Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Array length");
 		}
     }
 }

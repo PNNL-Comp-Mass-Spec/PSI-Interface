@@ -17,6 +17,6 @@
 
         internal MSData MsData { get; set; }
 
-        internal int BdaDefaultArrayLength { get; set; }
+        internal int BdaDefaultArrayLength { get; set; } // Specifically needed for MSData -> mzML, for determining if ArrayLength should be specified.
     }
 }

@@ -25,18 +25,18 @@ namespace PSI_Interface.MSData
     public partial class MSData
     {
         internal CVTranslator CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
-        private MSDataList<CVType> _cvList;
-        private FileDescriptionType _fileDescription;
-        private MSDataList<ReferenceableParamGroupType> _referenceableParamGroupList;
-        private MSDataList<SampleType> _sampleList;
-        private MSDataList<SoftwareType> _softwareList;
-        private MSDataList<ScanSettingsType> _scanSettingsList;
-        private MSDataList<InstrumentConfigurationType> _instrumentConfigurationList;
-        private MSDataList<DataProcessingType> _dataProcessingList;
-        private RunType _run;
+        private MSDataList<CVInfo> _cvList;
+        private FileDescription _fileDescription;
+        private MSDataList<ReferenceableParamGroup> _referenceableParamGroupList;
+        private MSDataList<SampleInfo> _sampleList;
+        private MSDataList<SoftwareInfo> _softwareList;
+        private MSDataList<ScanSettingsInfo> _scanSettingsList;
+        private MSDataList<InstrumentConfigurationInfo> _instrumentConfigurationList;
+        private MSDataList<DataProcessingInfo> _dataProcessingList;
+        private Run _run;
         
         /// min 1, max 1
-        public MSDataList<CVType> CVList // TODO: enforce quantity
+        public MSDataList<CVInfo> CVList // TODO: enforce quantity
         {
             get { return this._cvList; }
             set
@@ -55,7 +55,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 1, max 1
-        public FileDescriptionType FileDescription // TODO: enforce quantity
+        public FileDescription FileDescription // TODO: enforce quantity
         {
             get { return this._fileDescription; }
             set
@@ -69,7 +69,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public MSDataList<ReferenceableParamGroupType> ReferenceableParamGroupList
+        public MSDataList<ReferenceableParamGroup> ReferenceableParamGroupList
         {
             get { return this._referenceableParamGroupList; }
             set
@@ -83,7 +83,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public MSDataList<SampleType> SampleList
+        public MSDataList<SampleInfo> SampleList
         {
             get { return this._sampleList; }
             set
@@ -97,7 +97,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 1, max 1
-        public MSDataList<SoftwareType> SoftwareList // TODO: enforce quantity
+        public MSDataList<SoftwareInfo> SoftwareList // TODO: enforce quantity
         {
             get { return this._softwareList; }
             set
@@ -111,7 +111,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public MSDataList<ScanSettingsType> ScanSettingsList
+        public MSDataList<ScanSettingsInfo> ScanSettingsList
         {
             get { return this._scanSettingsList; }
             set
@@ -125,7 +125,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 1, max 1
-        public MSDataList<InstrumentConfigurationType> InstrumentConfigurationList // TODO: enforce quantity
+        public MSDataList<InstrumentConfigurationInfo> InstrumentConfigurationList // TODO: enforce quantity
         {
             get { return this._instrumentConfigurationList; }
             set
@@ -139,7 +139,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 1, max 1
-        public MSDataList<DataProcessingType> DataProcessingList // TODO: enforce quantity
+        public MSDataList<DataProcessingInfo> DataProcessingList // TODO: enforce quantity
         {
             get { return this._dataProcessingList; }
             set
@@ -153,7 +153,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 1, max 1
-        public RunType Run // TODO: enforce quantity
+        public Run Run // TODO: enforce quantity
         {
             get { return this._run; }
             set
@@ -215,7 +215,7 @@ namespace PSI_Interface.MSData
     /// mzML CVType
     /// </summary>
     /// <remarks>Information about an ontology or CV source and a short 'lookup' tag to refer to.</remarks>
-    public partial class CVType
+    public partial class CVInfo
     {
         /// <remarks>The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description (e.g., from the cvLabel attribute, in CVParamType elements).</remarks>
         /// Required Attribute
@@ -268,24 +268,24 @@ namespace PSI_Interface.MSData
     /// mzML DataProcessingType
     /// </summary>
     /// <remarks>Description of the way in which a particular software was used.</remarks>
-    public partial class DataProcessingType
+    public partial class DataProcessingInfo
     {
-        private MSDataList<ProcessingMethodType> _processingMethod;
+        private MSDataList<ProcessingMethodInfo> _processingMethods;
 
         /// <remarks>Description of the default peak processing method. 
         /// This element describes the base method used in the generation of a particular mzML file. 
         /// Variable methods should be described in the appropriate acquisition section - if 
         /// no acquisition-specific details are found, then this information serves as the default.</remarks>
         /// min 1, max unbounded
-        public MSDataList<ProcessingMethodType> ProcessingMethod // TODO: enforce quantity
+        public MSDataList<ProcessingMethodInfo> ProcessingMethods // TODO: enforce quantity
         {
-            get { return this._processingMethod; }
+            get { return this._processingMethods; }
             set
             {
-                this._processingMethod = value;
-                if (this._processingMethod != null)
+                this._processingMethods = value;
+                if (this._processingMethods != null)
                 {
-                    this._processingMethod.MsData = this.MsData;
+                    this._processingMethods.MsData = this.MsData;
                 }
             }
         }
@@ -299,7 +299,7 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML ProcessingMethodType
     /// </summary>
-    public partial class ProcessingMethodType : ParamGroupType
+    public partial class ProcessingMethodInfo : ParamGroup
     {
         /// <remarks>This attributes allows a series of consecutive steps to be placed in the correct order.</remarks>
         /// Required Attribute
@@ -316,22 +316,22 @@ namespace PSI_Interface.MSData
     /// mzML ParamGroupType
     /// </summary>
     /// <remarks>Structure allowing the use of a controlled (cvParam) or uncontrolled vocabulary (userParam), or a reference to a predefined set of these in this mzML file (paramGroupRef).</remarks>
-    public partial class ParamGroupType
+    public partial class ParamGroup
     {
-        private MSDataList<ReferenceableParamGroupRefType> _referenceableParamGroupRef;
-        private MSDataList<CVParamType> _cVParam;
-        private MSDataList<UserParamType> _userParam;
+        private MSDataList<ReferenceableParamGroupRef> _referenceableParamGroupRefs;
+        private MSDataList<CVParam> _cVParams;
+        private MSDataList<UserParam> _userParams;
 
         /// min 0, max unbounded
-        public MSDataList<ReferenceableParamGroupRefType> ReferenceableParamGroupRef
+        public MSDataList<ReferenceableParamGroupRef> ReferenceableParamGroupRefs
         {
-            get { return this._referenceableParamGroupRef; }
+            get { return this._referenceableParamGroupRefs; }
             set
             {
-                this._referenceableParamGroupRef = value;
-                if (this._referenceableParamGroupRef != null)
+                this._referenceableParamGroupRefs = value;
+                if (this._referenceableParamGroupRefs != null)
                 {
-                    this._referenceableParamGroupRef.MsData = this.MsData;
+                    this._referenceableParamGroupRefs.MsData = this.MsData;
                 }
             }
         }
@@ -342,29 +342,29 @@ namespace PSI_Interface.MSData
         //}
 
         /// min 0, max unbounded
-        public MSDataList<CVParamType> CVParam
+        public MSDataList<CVParam> CVParams
         {
-            get { return this._cVParam; }
+            get { return this._cVParams; }
             set
             {
-                this._cVParam = value;
-                if (this._cVParam != null)
+                this._cVParams = value;
+                if (this._cVParams != null)
                 {
-                    this._cVParam.MsData = this.MsData;
+                    this._cVParams.MsData = this.MsData;
                 }
             }
         }
 
         /// min 0, max unbounded
-        public MSDataList<UserParamType> UserParam
+        public MSDataList<UserParam> UserParams
         {
-            get { return this._userParam; }
+            get { return this._userParams; }
             set
             {
-                this._userParam = value;
-                if (this._userParam != null)
+                this._userParams = value;
+                if (this._userParams != null)
                 {
-                    this._userParam.MsData = this.MsData;
+                    this._userParams.MsData = this.MsData;
                 }
             }
         }
@@ -400,35 +400,35 @@ namespace PSI_Interface.MSData
     /// mzML ReferenceableParamGroupType
     /// </summary>
     /// <remarks>A collection of CVParam and UserParam elements that can be referenced from elsewhere in this mzML document by using the 'paramGroupRef' element in that location to reference the 'id' attribute value of this element.</remarks>
-    public partial class ReferenceableParamGroupType
+    public partial class ReferenceableParamGroup
     {
-        private MSDataList<CVParamType> _cVParam;
-        private MSDataList<UserParamType> _userParam;
+        private MSDataList<CVParam> _cVParams;
+        private MSDataList<UserParam> _userParams;
 
         /// min 0, max unbounded
-        public MSDataList<CVParamType> CVParam
+        public MSDataList<CVParam> CVParams
         {
-            get { return this._cVParam; }
+            get { return this._cVParams; }
             set
             {
-                this._cVParam = value;
-                if (this._cVParam != null)
+                this._cVParams = value;
+                if (this._cVParams != null)
                 {
-                    this._cVParam.MsData = this.MsData;
+                    this._cVParams.MsData = this.MsData;
                 }
             }
         }
 
         /// min 0, max unbounded
-        public MSDataList<UserParamType> UserParam
+        public MSDataList<UserParam> UserParams
         {
-            get { return this._userParam; }
+            get { return this._userParams; }
             set
             {
-                this._userParam = value;
-                if (this._userParam != null)
+                this._userParams = value;
+                if (this._userParams != null)
                 {
-                    this._userParam.MsData = this.MsData;
+                    this._userParams.MsData = this.MsData;
                 }
             }
         }
@@ -443,7 +443,7 @@ namespace PSI_Interface.MSData
     /// mzML ReferenceableParamGroupRefType
     /// </summary>
     /// <remarks>A reference to a previously defined ParamGroup, which is a reusable container of one or more cvParams.</remarks>
-    public partial class ReferenceableParamGroupRefType
+    public partial class ReferenceableParamGroupRef
     {
         /// <remarks>Reference to the id attribute in a referenceableParamGroup.</remarks>
         /// Required Attribute
@@ -455,7 +455,7 @@ namespace PSI_Interface.MSData
     /// mzML CVParamType
     /// </summary>
     /// <remarks>This element holds additional data or annotation. Only controlled values are allowed here.</remarks>
-    public partial class CVParamType
+    public partial class CVParam
     {
         private string _cvRef = "??";
         //private CVType _CVRef;
@@ -611,7 +611,7 @@ namespace PSI_Interface.MSData
     /// <remarks>Uncontrolled user parameters (essentially allowing free text). 
     /// Before using these, one should verify whether there is an appropriate 
     /// CV term available, and if so, use the CV term instead</remarks>
-    public partial class UserParamType
+    public partial class UserParam
     {
         //private string _unitAccession;
         //private string _unitName;
@@ -698,10 +698,10 @@ namespace PSI_Interface.MSData
     }
 
     /// <summary>
-    /// ParamType
+    /// ParamBase
     /// </summary>
     /// <remarks>Base type for CVParam and UserParam to reduce code duplication.</remarks>
-    public partial class ParamType
+    public partial class ParamBase
     {
         //private string _unitAccession;
         //private string _unitName;
@@ -805,11 +805,11 @@ namespace PSI_Interface.MSData
     /// <remarks>List and descriptions of precursor isolations to the spectrum currently being described, ordered.</remarks>
     public partial class PrecursorListType
     {
-        private List<PrecursorType> precursorField;
+        private List<Precursor> precursorField;
         private string countField;
 
         /// min 1, max unbounded
-        public PrecursorType[] precursor
+        public Precursor[] precursor
         {
             get { return precursorField.ToArray(); }
             set { precursorField = value.ToList(); }
@@ -830,15 +830,15 @@ namespace PSI_Interface.MSData
     /// mzML PrecursorType
     /// </summary>
     /// <remarks>The method of precursor ion selection and activation</remarks>
-    public partial class PrecursorType
+    public partial class Precursor
     {
-        private ParamGroupType _isolationWindow;
-        private MSDataList<ParamGroupType> _selectedIonList;
-        private ParamGroupType _activation;
+        private ParamGroup _isolationWindow;
+        private MSDataList<ParamGroup> _selectedIonList;
+        private ParamGroup _activation;
 
         /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
         /// min 0, max 1
-        public ParamGroupType IsolationWindow
+        public ParamGroup IsolationWindow
         {
             get { return this._isolationWindow; }
             set
@@ -854,7 +854,7 @@ namespace PSI_Interface.MSData
         /// <remarks>A list of ions that were selected.</remarks>
         /// min 0, max 1
         //public SelectedIonListType selectedIonList
-        public MSDataList<ParamGroupType> SelectedIonList
+        public MSDataList<ParamGroup> SelectedIonList
         {
             get { return this._selectedIonList; }
             set
@@ -869,7 +869,7 @@ namespace PSI_Interface.MSData
 
         /// <remarks>The type and energy level used for activation.</remarks>
         /// min 1, max 1
-        public ParamGroupType Activation
+        public ParamGroup Activation
         {
             get { return this._activation; }
             set
@@ -960,7 +960,7 @@ namespace PSI_Interface.MSData
     /// </summary>
     /// <remarks>The structure into which encoded binary data goes. Byte ordering is always little endian (Intel style). 
     /// Computers using a different endian style must convert to/from little endian when writing/reading mzML</remarks>
-    public partial class BinaryDataArrayType : ParamGroupType
+    public partial class BinaryDataArray : ParamGroup
     {
         //CV Rules: 
         //MUST supply a *child* term of MS:1000572 (binary data compression type) only once
@@ -1023,7 +1023,7 @@ namespace PSI_Interface.MSData
         };
 
         // Data values that are processed from the other data; some is converted, some is from the cvParams.
-        private int _expectedArrayLength; // Only used for reading from mzML, so no external access. // TODO: is this superceded by bdaDefaultArrayLength?
+        private int _arrayLength; // Only used for reading from mzML, so no external access. // TODO: is this superceded by bdaDefaultArrayLength?
         private double[] _data;
         private ArrayType _dataType;
         private int _dataWidth;
@@ -1043,21 +1043,21 @@ namespace PSI_Interface.MSData
             {
                 this._dataType = value;
                 // Make sure the appropriate cvParam is set...
-                for (int i = 0; i < CVParam.Count; i++)
+                for (int i = 0; i < CVParams.Count; i++)
                 {
                     foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_array])
                     {
-                        if (CVParam[i].Cvid == cvid)
+                        if (CVParams[i].Cvid == cvid)
                         {
-                            CVParam.RemoveAt(i);
+                            CVParams.RemoveAt(i);
                             i--;
                             break; // break out of inner loop.
                         }
                     }
                 }
-                var cv = new CVParamType();
+                var cv = new CVParam();
                 cv.Cvid = _typeMap[_dataType];
-                CVParam.Add(cv);
+                CVParams.Add(cv);
             }
         }
 
@@ -1073,19 +1073,19 @@ namespace PSI_Interface.MSData
                 }
                 this._dataWidth = value;
                 // Make sure the appropriate cvParam is set...
-                for (int i = 0; i < CVParam.Count; i++)
+                for (int i = 0; i < CVParams.Count; i++)
                 {
                     foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_type])
                     {
-                        if (CVParam[i].Cvid == cvid)
+                        if (CVParams[i].Cvid == cvid)
                         {
-                            CVParam.RemoveAt(i);
+                            CVParams.RemoveAt(i);
                             i--;
                             break; // break out of inner loop.
                         }
                     }
                 }
-                var cv = new CVParamType();
+                var cv = new CVParam();
                 cv.Cvid = CV.CV.CVID.CVID_Unknown;
                 if (this._dataWidth == 4)
                 {
@@ -1095,7 +1095,7 @@ namespace PSI_Interface.MSData
                 {
                     cv.Cvid = CV.CV.CVID.MS_64_bit_float;
                 }
-                CVParam.Add(cv);
+                CVParams.Add(cv);
             }
         }
 
@@ -1106,25 +1106,25 @@ namespace PSI_Interface.MSData
             {
                 this._isCompressed = value;
                 // Make sure the appropriate cvParam is set...
-                for (int i = 0; i < CVParam.Count; i++)
+                for (int i = 0; i < CVParams.Count; i++)
                 {
                     foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_compression_type])
                     {
-                        if (CVParam[i].Cvid == cvid)
+                        if (CVParams[i].Cvid == cvid)
                         {
-                            CVParam.RemoveAt(i);
+                            CVParams.RemoveAt(i);
                             i--;
                             break; // break out of inner loop.
                         }
                     }
                 }
-                CVParamType cv = new CVParamType();
+                CVParam cv = new CVParam();
                 cv.Cvid = CV.CV.CVID.MS_no_compression;
                 if (this._isCompressed)
                 {
                     cv.Cvid = CV.CV.CVID.MS_zlib_compression;
                 }
-                CVParam.Add(cv);
+                CVParams.Add(cv);
             }
         }
 
@@ -1138,7 +1138,7 @@ namespace PSI_Interface.MSData
         public byte[] Binary
         {
             get { return Base64Conversion.EncodeBytes(this._data, this._dataWidth, this._isCompressed); }
-            set { this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, (int)ArrayLength, this._isCompressed); }
+            set { this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, this._arrayLength, this._isCompressed); }
         }
 
         /// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType. 
@@ -1147,7 +1147,11 @@ namespace PSI_Interface.MSData
         /// safely choose to ignore arrays of lengths different from the one defined in the 'defaultArrayLength' SpectrumType element.</remarks>
         /// Optional Attribute
         /// non-negative integer
-        public uint ArrayLength { get; set; } // TODO: enforce appropriate usage
+        public int ArrayLength // TODO: enforce appropriate usage
+        {
+            get { return this._data.Length; } // Return value solely based upon present data
+            private set { this._arrayLength = value; } // Allow setting from other constructors.
+        }
 
         /// <remarks>This optional attribute may reference the 'id' attribute of the appropriate dataProcessing.</remarks>
         /// Optional Attribute
@@ -1159,12 +1163,12 @@ namespace PSI_Interface.MSData
     /// mzML ScanListType
     /// </summary>
     /// <remarks>List and descriptions of scans.</remarks>
-    public partial class ScanListType : ParamGroupType
+    public partial class ScanList : ParamGroup
     {
-        private MSDataList<ScanType> _scan;
+        private MSDataList<Scan> _scan;
 
         /// min 1, max unbounded
-        public MSDataList<ScanType> Scan // TODO: enforce quantity
+        public MSDataList<Scan> Scan // TODO: enforce quantity
         {
             get { return this._scan; }
             set
@@ -1182,14 +1186,14 @@ namespace PSI_Interface.MSData
     /// mzML ScanType
     /// </summary>
     /// <remarks>Scan or acquisition from original raw file used to create this peak list, as specified in sourceF</remarks>
-    public partial class ScanType : ParamGroupType
+    public partial class Scan : ParamGroup
     {
-        private MSDataList<ParamGroupType> _scanWindowList;
+        private MSDataList<ParamGroup> _scanWindowList;
 
         /// <remarks>Container for a list of scan windows.</remarks>
         /// min 0, max 1
         //public ScanWindowListType scanWindowList
-        public MSDataList<ParamGroupType> ScanWindowList
+        public MSDataList<ParamGroup> ScanWindowList
         {
             get { return this._scanWindowList; }
             set
@@ -1256,20 +1260,20 @@ namespace PSI_Interface.MSData
     /// mzML SpectrumListType
     /// </summary>
     /// <remarks>List and descriptions of spectra.</remarks>
-    public partial class SpectrumListType
+    public partial class SpectrumList
     {
-        private MSDataList<SpectrumType> _spectrum;
+        private MSDataList<Spectrum> _spectra;
 
         /// min 0, max unbounded
-        public MSDataList<SpectrumType> Spectrum
+        public MSDataList<Spectrum> Spectra
         {
-            get { return this._spectrum; }
+            get { return this._spectra; }
             set
             {
-                this._spectrum = value;
-                if (this._spectrum != null)
+                this._spectra = value;
+                if (this._spectra != null)
                 {
-                    this._spectrum.MsData = this.MsData;
+                    this._spectra.MsData = this.MsData;
                 }
             }
         }
@@ -1287,16 +1291,16 @@ namespace PSI_Interface.MSData
     /// </summary>
     /// <remarks>The structure that captures the generation of a peak list (including the underlying acquisitions). 
     /// Also describes some of the parameters for the mass spectrometer for a given acquisition (or list of acquisitions).</remarks>
-    public partial class SpectrumType : ParamGroupType
+    public partial class Spectrum : ParamGroup
     {
-        private ScanListType _scanList;
-        private MSDataList<PrecursorType> _precursorList;
-        private MSDataList<ProductType> _productList;
-        private MSDataList<BinaryDataArrayType> _binaryDataArrayList;
+        private ScanList _scanList;
+        private MSDataList<Precursor> _precursorList;
+        private MSDataList<Product> _productList;
+        private MSDataList<BinaryDataArray> _binaryDataArrayList;
         private int _defaultArrayLength;
 
         /// min 0, max 1
-        public ScanListType ScanList
+        public ScanList ScanList
         {
             get { return this._scanList; }
             set
@@ -1310,7 +1314,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public MSDataList<PrecursorType> PrecursorList
+        public MSDataList<Precursor> PrecursorList
         {
             get { return this._precursorList; }
             set
@@ -1324,7 +1328,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public MSDataList<ProductType> ProductList
+        public MSDataList<Product> ProductList
         {
             get { return this._productList; }
             set
@@ -1338,7 +1342,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public MSDataList<BinaryDataArrayType> BinaryDataArrayList
+        public MSDataList<BinaryDataArray> BinaryDataArrayList
         {
             get { return this._binaryDataArrayList; }
             set
@@ -1380,11 +1384,11 @@ namespace PSI_Interface.MSData
                 int intensityLength = 0;
                 foreach (var bda in BinaryDataArrayList)
                 {
-                    if (bda.DataType == BinaryDataArrayType.ArrayType.m_z)
+                    if (bda.DataType == BinaryDataArray.ArrayType.m_z)
                     {
                         mzLength = bda.DataLength;
                     }
-                    else if (bda.DataType == BinaryDataArrayType.ArrayType.intensity)
+                    else if (bda.DataType == BinaryDataArray.ArrayType.intensity)
                     {
                         intensityLength = bda.DataLength;
                     }
@@ -1392,6 +1396,10 @@ namespace PSI_Interface.MSData
                 if (mzLength == intensityLength)
                 {
                     this._defaultArrayLength = mzLength;
+                    if (this._binaryDataArrayList != null)
+                    {
+                        this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                    }
                     return mzLength;
                 }
                 else
@@ -1452,13 +1460,13 @@ namespace PSI_Interface.MSData
     /// mzML ProductType
     /// </summary>
     /// <remarks>The method of product ion selection and activation in a precursor ion scan</remarks>
-    public partial class ProductType
+    public partial class Product
     {
-        private ParamGroupType _isolationWindow;
+        private ParamGroup _isolationWindow;
 
         /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
         /// min 0, max 1
-        public ParamGroupType IsolationWindow
+        public ParamGroup IsolationWindow
         {
             get { return this._isolationWindow; }
             set
@@ -1476,16 +1484,16 @@ namespace PSI_Interface.MSData
     /// mzML RunType
     /// </summary>
     /// <remarks>A run in mzML should correspond to a single, consecutive and coherent set of scans on an instrument.</remarks>
-    public partial class RunType : ParamGroupType
+    public partial class Run : ParamGroup
     {
-        private SpectrumListType _spectrumList;
-        private ChromatogramListType _chromatogramList;
+        private SpectrumList _spectrumList;
+        private ChromatogramList _chromatogramList;
         private System.DateTime _startTimeStampField;
 
         /// <remarks>All mass spectra and the acquisitions underlying them are described and attached here. 
         /// Subsidiary data arrays are also both described and attached here.</remarks>
         /// min 0, max 1
-        public SpectrumListType SpectrumList
+        public SpectrumList SpectrumList
         {
             get { return this._spectrumList; }
             set
@@ -1500,7 +1508,7 @@ namespace PSI_Interface.MSData
 
         /// <remarks>All chromatograms for this run.</remarks>
         /// min 0, max 1
-        public ChromatogramListType ChromatogramList
+        public ChromatogramList ChromatogramList
         {
             get { return this._chromatogramList; }
             set
@@ -1556,21 +1564,21 @@ namespace PSI_Interface.MSData
     /// mzML ChromatogramListType
     /// </summary>
     /// <remarks>List of chromatograms.</remarks>
-    public partial class ChromatogramListType
+    public partial class ChromatogramList
     {
-        private MSDataList<ChromatogramType> _chromatogram;
+        private MSDataList<Chromatogram> _chromatograms;
 
         /// <remarks></remarks>
         /// min 1, max unbounded
-        public MSDataList<ChromatogramType> Chromatogram // TODO: enforce quantity
+        public MSDataList<Chromatogram> Chromatograms // TODO: enforce quantity
         {
-            get { return this._chromatogram; }
+            get { return this._chromatograms; }
             set
             {
-                this._chromatogram = value;
-                if (this._chromatogram != null)
+                this._chromatograms = value;
+                if (this._chromatograms != null)
                 {
-                    this._chromatogram.MsData = this.MsData;
+                    this._chromatograms.MsData = this.MsData;
                 }
             }
         }
@@ -1587,15 +1595,15 @@ namespace PSI_Interface.MSData
     /// mzML ChromatogramType
     /// </summary>
     /// <remarks>A single Chromatogram</remarks>
-    public partial class ChromatogramType : ParamGroupType
+    public partial class Chromatogram : ParamGroup
     {
-        private PrecursorType _precursor;
-        private ProductType _product;
-        private MSDataList<BinaryDataArrayType> _binaryDataArrayList;
+        private Precursor _precursor;
+        private Product _product;
+        private MSDataList<BinaryDataArray> _binaryDataArrayList;
         private int _defaultArrayLength;
 
         /// min 0, max 1
-        public PrecursorType Precursor
+        public Precursor Precursor
         {
             get { return this._precursor; }
             set
@@ -1609,7 +1617,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public ProductType Product
+        public Product Product
         {
             get { return this._product; }
             set
@@ -1623,7 +1631,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 1, max 1
-        public MSDataList<BinaryDataArrayType> BinaryDataArrayList // TODO: enforce requirement
+        public MSDataList<BinaryDataArray> BinaryDataArrayList // TODO: enforce requirement
         {
             get { return this._binaryDataArrayList; }
             set
@@ -1658,11 +1666,11 @@ namespace PSI_Interface.MSData
                 int intensityLength = 0;
                 foreach (var bda in BinaryDataArrayList)
                 {
-                    if (bda.DataType == BinaryDataArrayType.ArrayType.time)
+                    if (bda.DataType == BinaryDataArray.ArrayType.time)
                     {
                         timeLength = bda.DataLength;
                     }
-                    else if (bda.DataType == BinaryDataArrayType.ArrayType.intensity)
+                    else if (bda.DataType == BinaryDataArray.ArrayType.intensity)
                     {
                         intensityLength = bda.DataLength;
                     }
@@ -1670,6 +1678,10 @@ namespace PSI_Interface.MSData
                 if (timeLength == intensityLength)
                 {
                     this._defaultArrayLength = timeLength;
+                    if (this._binaryDataArrayList != null)
+                    {
+                        this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                    }
                     return timeLength;
                 }
                 else
@@ -1725,14 +1737,14 @@ namespace PSI_Interface.MSData
     /// mzML ScanSettingsType
     /// </summary>
     /// <remarks>Description of the acquisition settings of the instrument prior to the start of the run.</remarks>
-    public partial class ScanSettingsType : ParamGroupType
+    public partial class ScanSettingsInfo : ParamGroup
     {
-        private MSDataList<SourceFileRefType> _sourceFileRefList;
-        private MSDataList<ParamGroupType> _targetList;
+        private MSDataList<SourceFileRef> _sourceFileRefList;
+        private MSDataList<ParamGroup> _targetList;
 
         /// <remarks>List with the source files containing the acquisition settings.</remarks>
         /// min 0, max 1
-        public MSDataList<SourceFileRefType> SourceFileRefList
+        public MSDataList<SourceFileRef> SourceFileRefList
         {
             get { return this._sourceFileRefList; }
             set
@@ -1748,7 +1760,7 @@ namespace PSI_Interface.MSData
         /// <remarks>Target list (or 'inclusion list') configured prior to the run.</remarks>
         /// min 0, max 1
         //public TargetListType targetList
-        public MSDataList<ParamGroupType> TargetList
+        public MSDataList<ParamGroup> TargetList
         {
             get { return this._targetList; }
             set
@@ -1799,7 +1811,7 @@ namespace PSI_Interface.MSData
     /// mzML SourceFileRefType
     /// </summary>
     /// <remarks></remarks>
-    public partial class SourceFileRefType
+    public partial class SourceFileRef
     {
         /// <remarks>This attribute must reference the 'id' of the appropriate sourceFile.</remarks>
         /// Required Attribute
@@ -1867,7 +1879,7 @@ namespace PSI_Interface.MSData
     /// mzML SoftwareType
     /// </summary>
     /// <remarks>Software information</remarks>
-    public partial class SoftwareType : ParamGroupType
+    public partial class SoftwareInfo : ParamGroup
     {
         /// <remarks>An identifier for this software that is unique across all SoftwareTypes.</remarks>
         /// Required Attribute
@@ -1919,13 +1931,13 @@ namespace PSI_Interface.MSData
     /// Each configuration must have one (and only one) of the three different components used for an analysis. 
     /// For hybrid instruments, such as an LTQ-FT, there must be one configuration for each permutation of 
     /// the components that is used in the document. For software configuration, use a ReferenceableParamGroup element</remarks>
-    public partial class InstrumentConfigurationType : ParamGroupType
+    public partial class InstrumentConfigurationInfo : ParamGroup
     {
-        private ComponentListType _componentList;
-        private SoftwareRefType _softwareRef;
+        private ComponentList _componentList;
+        private SoftwareRef _softwareRef;
 
         /// min 0, max 1
-        public ComponentListType ComponentList
+        public ComponentList ComponentList
         {
             get { return this._componentList; }
             set
@@ -1939,7 +1951,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public SoftwareRefType SoftwareRef
+        public SoftwareRef SoftwareRef
         {
             get { return this._softwareRef; }
             set
@@ -1966,15 +1978,15 @@ namespace PSI_Interface.MSData
     /// mzML ComponentListType
     /// </summary>
     /// <remarks>List with the different components used in the mass spectrometer. At least one source, one mass analyzer and one detector need to be specified.</remarks>
-    public partial class ComponentListType
+    public partial class ComponentList
     {
-        private MSDataList<SourceComponentType> _source;
-        private MSDataList<AnalyzerComponentType> _analyzer;
-        private MSDataList<DetectorComponentType> _detector;
+        private MSDataList<SourceComponent> _source;
+        private MSDataList<AnalyzerComponent> _analyzer;
+        private MSDataList<DetectorComponent> _detector;
 
         /// <remarks>A source component.</remarks>
         /// min 1, max unbounded
-        public MSDataList<SourceComponentType> Source // TODO: enforce quantity
+        public MSDataList<SourceComponent> Sources // TODO: enforce quantity
         {
             get { return this._source; }
             set
@@ -1989,7 +2001,7 @@ namespace PSI_Interface.MSData
 
         /// <remarks>A mass analyzer (or mass filter) component.</remarks>
         /// min 1, max unbounded
-        public MSDataList<AnalyzerComponentType> Analyzer // TODO: enforce quantity
+        public MSDataList<AnalyzerComponent> Analyzers // TODO: enforce quantity
         {
             get { return this._analyzer; }
             set
@@ -2004,7 +2016,7 @@ namespace PSI_Interface.MSData
 
         /// <remarks>A detector component.</remarks>
         /// min 1, max unbounded
-        public MSDataList<DetectorComponentType> Detector //TODO: enforce quantity
+        public MSDataList<DetectorComponent> Detectors //TODO: enforce quantity
         {
             get { return this._detector; }
             set
@@ -2021,7 +2033,7 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML ComponentType
     /// </summary>
-    public partial class ComponentType : ParamGroupType
+    public partial class Component : ParamGroup
     {
         /// <remarks>This attribute must be used to indicate the order in which the components 
         /// are encountered from source to detector (e.g., in a Q-TOF, the quadrupole would 
@@ -2037,7 +2049,7 @@ namespace PSI_Interface.MSData
     /// <remarks>This element must be used to describe a Source Component Type. 
     /// This is a PRIDE3-specific modification of the core MzML schema that does not 
     /// have any impact on the base schema validation.</remarks>
-    public partial class SourceComponentType : ComponentType
+    public partial class SourceComponent : Component
     {
     }
 
@@ -2047,7 +2059,7 @@ namespace PSI_Interface.MSData
     /// <remarks>This element must be used to describe an Analyzer Component Type. 
     /// This is a PRIDE3-specific modification of the core MzML schema that does not 
     /// have any impact on the base schema validation.</remarks>
-    public partial class AnalyzerComponentType : ComponentType
+    public partial class AnalyzerComponent : Component
     {
     }
 
@@ -2057,7 +2069,7 @@ namespace PSI_Interface.MSData
     /// <remarks>This element must be used to describe a Detector Component Type. 
     /// This is a PRIDE3-specific modification of the core MzML schema that does not 
     /// have any impact on the base schema validation.</remarks>
-    public partial class DetectorComponentType : ComponentType
+    public partial class DetectorComponent : Component
     {
     }
 
@@ -2065,7 +2077,7 @@ namespace PSI_Interface.MSData
     /// mzML SoftwareRefType
     /// </summary>
     /// <remarks>Reference to a previously defined software element</remarks>
-    public partial class SoftwareRefType
+    public partial class SoftwareRef
     {
         /// <remarks>This attribute must be used to reference the 'id' attribute of a software element.</remarks>
         /// Required Attribute
@@ -2105,7 +2117,7 @@ namespace PSI_Interface.MSData
     /// mzML SampleType
     /// </summary>
     /// <remarks>Expansible description of the sample used to generate the dataset, named in sampleName.</remarks>
-    public partial class SampleType : ParamGroupType
+    public partial class SampleInfo : ParamGroup
     {
         /// <remarks>A unique identifier across the samples with which to reference this sample description.</remarks>
         /// Required Attribute
@@ -2150,7 +2162,7 @@ namespace PSI_Interface.MSData
     /// mzML SourceFileType
     /// </summary>
     /// <remarks>Description of the source file, including location and type.</remarks>
-    public partial class SourceFileType : ParamGroupType
+    public partial class SourceFileInfo : ParamGroup
     {
         /// <remarks>An identifier for this file.</remarks>
         /// Required Attribute
@@ -2172,17 +2184,17 @@ namespace PSI_Interface.MSData
     /// mzML FileDescriptionType
     /// </summary>
     /// <remarks>Information pertaining to the entire mzML file (i.e. not specific to any part of the data set) is stored here.</remarks>
-    public partial class FileDescriptionType
+    public partial class FileDescription
     {
-        private ParamGroupType _fileContent;
-        private MSDataList<SourceFileType> _sourceFileList;
-        private MSDataList<ParamGroupType> _contact;
+        private ParamGroup _fileContent;
+        private MSDataList<SourceFileInfo> _sourceFileList;
+        private MSDataList<ParamGroup> _contact;
 
         /// <remarks>This summarizes the different types of spectra that can be expected in the file. 
         /// This is expected to aid processing software in skipping files that do not contain appropriate 
         /// spectrum types for it. It should also describe the nativeID format used in the file by referring to an appropriate CV term.</remarks>
         /// min 1, max 1
-        public ParamGroupType FileContent // TODO: enforce quantity
+        public ParamGroup FileContentInfo // TODO: enforce quantity
         {
             get { return this._fileContent; }
             set
@@ -2196,7 +2208,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max 1
-        public MSDataList<SourceFileType> SourceFileList
+        public MSDataList<SourceFileInfo> SourceFileList
         {
             get { return this._sourceFileList; }
             set
@@ -2210,7 +2222,7 @@ namespace PSI_Interface.MSData
         }
 
         /// min 0, max unbounded
-        public MSDataList<ParamGroupType> Contact
+        public MSDataList<ParamGroup> ContactInfo
         {
             get { return this._contact; }
             set

@@ -42,7 +42,7 @@ namespace PSI_Interface.CV
             }
         }
 
-        public CVTranslator(CVType[] fileCvInfo)
+        public CVTranslator(CVInfo[] fileCvInfo)
         {
             foreach (var cv in CV.CVInfoList)
             {
@@ -67,7 +67,7 @@ namespace PSI_Interface.CV
             }
         }
 
-        public CVTranslator(List<CVType> fileCvInfo)
+        public CVTranslator(List<CVInfo> fileCvInfo)
         {
             foreach (var cv in CV.CVInfoList)
             {
