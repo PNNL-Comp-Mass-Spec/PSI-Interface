@@ -3,7 +3,7 @@
     /// <summary>
     /// Class specifically for usage with the MSData required types, for the data pass-through for CVParam translation
     /// </summary>
-    public class MSDataInternalTypeAbstract
+    public abstract class MSDataInternalTypeAbstract
     {
         internal MSDataInternalTypeAbstract()
         {

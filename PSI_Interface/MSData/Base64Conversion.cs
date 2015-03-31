@@ -9,7 +9,7 @@ namespace PSI_Interface.MSData
         {
             if (bytesPerValue % 4 != 0)
             {
-                //throw NotSupportedException("Invalid bitsPerValue");
+                //throw new NotSupportedException("Invalid bitsPerValue");
                 return null;
             }
             return DecodeBytes(Convert.FromBase64String(encoded), bytesPerValue, expectedLength, isCompressed);

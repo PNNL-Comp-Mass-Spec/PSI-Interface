@@ -45,11 +45,11 @@ namespace PSI_Interface.MSData
                 if (this._cvList != null)
                 {
                     this._cvList.MsData = this;
-                    CvTranslator = new CVTranslator(this._cvList);
+                    this.CvTranslator = new CVTranslator(this._cvList);
                 }
                 else
                 {
-                    CvTranslator = new CVTranslator();
+                    this.CvTranslator = new CVTranslator();
                 }
             }
         }

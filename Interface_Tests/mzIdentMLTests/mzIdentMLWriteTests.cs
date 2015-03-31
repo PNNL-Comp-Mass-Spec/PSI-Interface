@@ -54,18 +54,18 @@ namespace Interface_Tests.mzIdentMLTests
 			int specItems = 0;
 			foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
 			{
-				specResults += specList.SpectrumIdentificationResult.Length;
+				specResults += specList.SpectrumIdentificationResult.Count;
 				foreach (var specResult in specList.SpectrumIdentificationResult)
 				{
-					specItems += specResult.SpectrumIdentificationItem.Length;
+					specItems += specResult.SpectrumIdentificationItem.Count;
 				}
 			}
-			Assert.AreEqual(expectedSpecLists, identData.DataCollection.AnalysisData.SpectrumIdentificationList.Length, "Spectrum Identification Lists");
+			Assert.AreEqual(expectedSpecLists, identData.DataCollection.AnalysisData.SpectrumIdentificationList.Count, "Spectrum Identification Lists");
 			//Assert.AreEqual(expectedSpecResults, identData.DataCollection.AnalysisData.SpectrumIdentificationList[0].SpectrumIdentificationResult.Length, "Spectrum Identification Results");
 			Assert.AreEqual(expectedSpecResults, specResults, "Spectrum Identification Results");
 			Assert.AreEqual(expectedSpecItems, specItems, "Spectrum Identification Items");
-			Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptide.Length, "Peptide Matches");
-			Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequence.Length, "DB Sequences");
+			Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptide.Count, "Peptide Matches");
+			Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequence.Count, "DB Sequences");
 
 			var writer = new MzIdentMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outPath));
 			writer.Write(identData);

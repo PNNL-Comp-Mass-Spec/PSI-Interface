@@ -17,7 +17,7 @@ namespace PSI_Interface.CV
             }
         }
 
-        public CVTranslator(List<CV.CVInfo> fileCvInfo)
+        public CVTranslator(IEnumerable<CV.CVInfo> fileCvInfo)
         {
             foreach (var cv in CV.CVInfoList)
             {
@@ -42,7 +42,7 @@ namespace PSI_Interface.CV
             }
         }
 
-        public CVTranslator(CVInfo[] fileCvInfo)
+        public CVTranslator(IEnumerable<PSI_Interface.IdentData.CVInfo> fileCvInfo)
         {
             foreach (var cv in CV.CVInfoList)
             {
@@ -67,7 +67,7 @@ namespace PSI_Interface.CV
             }
         }
 
-        public CVTranslator(List<CVInfo> fileCvInfo)
+        public CVTranslator(IEnumerable<CVInfo> fileCvInfo)
         {
             foreach (var cv in CV.CVInfoList)
             {
@@ -90,29 +90,6 @@ namespace PSI_Interface.CV
             {
                 _fileToObo.Add(mapping.Value, mapping.Key);
             }
-        }
-
-        // TODO: Accession should always match id, it is the CVRef that changes according to the CV
-        public string ConvertFileAccession(string accession)
-        {
-            return ConvertAccession(accession, _fileToObo);
-        }
-
-        // TODO: Accession should always match id, it is the CVRef that changes according to the CV
-        public string ConvertOboAccession(string accession)
-        {
-            return ConvertAccession(accession, _oboToFile);
-        }
-
-        // TODO: Accession should always match id, it is the CVRef that changes according to the CV
-        private string ConvertAccession(string accession, Dictionary<string, string> map)
-        {
-            string[] parts = accession.Split(new[] {':'});
-            if (map.ContainsKey(parts[0]))
-            {
-                return map[parts[0]] + ":" + parts[1];
-            }
-            return null;
         }
 
         public string ConvertFileCVRef(string cvRef)

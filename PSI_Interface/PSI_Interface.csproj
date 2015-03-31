@@ -50,12 +50,14 @@
     <Compile Include="CV\CV.cs" />
     <Compile Include="CV\CVTranslator.cs" />
     <Compile Include="CV\CV_generated.cs" />
+    <Compile Include="IdentData\IdentDataInternalTypeAbstract.cs" />
     <Compile Include="IdentData\IdentData.cs" />
+    <Compile Include="IdentData\IdentDataList.cs" />
     <Compile Include="IdentData\mzIdentML\mzIdentML1_1_0.cs" />
     <Compile Include="IdentData\mzIdentML\MzIdentMLReader.cs" />
     <Compile Include="IdentData\mzIdentML\MzIdentMLWriter.cs" />
     <Compile Include="MSData\Base64Conversion.cs" />
-    <Compile Include="MSData\MSDataTypeAbstract.cs" />
+    <Compile Include="MSData\MSDataInternalTypeAbstract.cs" />
     <Compile Include="MSData\MSDataList.cs" />
     <Compile Include="MSData\MSData.cs" />
     <Compile Include="MSData\MSData_Extra.cs" />

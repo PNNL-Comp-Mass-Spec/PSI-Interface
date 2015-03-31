@@ -39,7 +39,7 @@ namespace PSI_Interface.MSData
                 _msData = value;
                 foreach (T item in this)
                 {
-                    item.MsData = this.MsData;
+                    item.MsData = this._msData;
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace PSI_Interface.MSData
             //{
             //    OnAdd(this, null);
             //}
-            item.MsData = this.MsData;
+            item.MsData = this._msData;
             item.BdaDefaultArrayLength = this._defaultArrayLength;
             base.Add(item);
         }
@@ -72,7 +72,7 @@ namespace PSI_Interface.MSData
         {
             foreach (var item in items)
             {
-                item.MsData = this.MsData;
+                item.MsData = this._msData;
                 item.BdaDefaultArrayLength = this._defaultArrayLength;
                 base.Add(item);
             }
