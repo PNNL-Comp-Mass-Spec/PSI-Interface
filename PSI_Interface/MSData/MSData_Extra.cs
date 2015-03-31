@@ -256,7 +256,7 @@ namespace PSI_Interface.MSData
             //this.UnitCVRef = null;
             this._unitsSet = false;
             this._unitCvRef = null;
-            this.UnitCvid = CV.CV.CVID.CVID_Unknown;
+            this._unitCvid = CV.CV.CVID.CVID_Unknown;
             //this.UnitAccession = null;
             //this.UnitName = null;
         }

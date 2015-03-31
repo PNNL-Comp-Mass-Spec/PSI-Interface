@@ -2,6 +2,7 @@
 // Data translation code from MSData to mzML.
 // 
 
+using System;
 using PSI_Interface.MSData;
 using System.Collections.Generic;
 
@@ -677,7 +678,9 @@ namespace PSI_Interface.MSData.mzML
                 this.arrayLengthField = bda.ArrayLength.ToString();
             }
             this.dataProcessingRefField = bda.DataProcessingRef;
-            this.encodedLengthField = binary.Length.ToString();
+            // Not the length of the binary array, but the length of the base64 string...
+            //this.encodedLengthField = binary.Length.ToString();
+            this.encodedLengthField = Convert.ToBase64String(binary).Length.ToString();
         }
 
         /// <remarks>The actual base64 encoded binary data. The byte order is always 'little endian'.</remarks>

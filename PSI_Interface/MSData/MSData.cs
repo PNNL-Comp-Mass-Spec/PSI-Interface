@@ -771,11 +771,11 @@ namespace PSI_Interface.MSData
                 if (value != null && CV.CV.TermAccessionLookup.ContainsKey(_unitCvRef) && CV.CV.TermAccessionLookup[_unitCvRef].ContainsKey(value))
                 {
                     this._unitsSet = true;
-                    this.UnitCvid = CV.CV.TermAccessionLookup[_unitCvRef][value];
+                    this._unitCvid = CV.CV.TermAccessionLookup[_unitCvRef][value];
                 }
                 else
                 {
-                    this.UnitCvid = CV.CV.CVID.CVID_Unknown;
+                    this._unitCvid = CV.CV.CVID.CVID_Unknown;
                 }
             } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }

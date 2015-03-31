@@ -58,7 +58,7 @@ namespace PSI_Interface.MSData
         public static byte[] EncodeBytes(double[] data, int bytesPerValue, bool compress)
         {
             //if (bytesPerValue % 4 != 0)
-            if (bytesPerValue != 4 || bytesPerValue != 8)
+            if (bytesPerValue != 4 && bytesPerValue != 8)
             {
                 //throw NotSupportedException("Invalid bitsPerValue");
                 return null;
