@@ -8,9 +8,11 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, 
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
-    public partial class IdentData : IdentifiableType
+    public partial class IdentData : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        internal CVTranslator CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+        internal CVTranslator CvTranslator = new CVTranslator();
+            // Create a generic translator by default; must be re-mapped when reading a file
+
         private IdentDataList<CVInfo> _cvList;
         private IdentDataList<AnalysisSoftwareInfo> _analysisSoftwareList;
         private ProviderInfo _provider;
@@ -24,6 +26,27 @@ namespace PSI_Interface.IdentData
         private System.DateTime _creationDate;
         private bool _creationDateSpecified;
         private string _version;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// min 1, max 1
         public IdentDataList<CVInfo> CVList
@@ -245,7 +268,7 @@ namespace PSI_Interface.IdentData
         public string SpectrumIdentificationItemRef
         {
             get { return this._spectrumIdentificationItemRef; }
-            set { this._spectrumIdentificationItemRef = value; }
+            set { _spectrumIdentificationItemRef = value; }
         }
     }
 
@@ -278,7 +301,7 @@ namespace PSI_Interface.IdentData
         public string PeptideEvidenceRef
         {
             get { return this._peptideEvidenceRef; }
-            set { this._peptideEvidenceRef = value; }
+            set { _peptideEvidenceRef = value; }
         }
     }
 
@@ -306,7 +329,7 @@ namespace PSI_Interface.IdentData
         public string MeasureRef
         {
             get { return this._measureRef; }
-            set { this._measureRef = value; }
+            set { _measureRef = value; }
         }
     }
 
@@ -414,7 +437,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The name of the parameter.</remarks>
         /// Required Attribute
         /// string
-        public string Name
+        public override string Name
         {
             get { return this._name; }
             set { this._name = value; }
@@ -423,7 +446,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The user-entered value of the parameter.</remarks>
         /// Optional Attribute
         /// string
-        public string Value
+        public override string Value
         {
             get { return this._value; }
             set { this._value = value; }
@@ -444,7 +467,17 @@ namespace PSI_Interface.IdentData
         private string _unitName;
         private string _unitCvRef;
 
-        // Name and value are not included here, because name will be handled differently in CVParams, and value can also have restrictions based on the CVParam.
+        // Name and value are abstract properties, because name will be handled differently in CVParams, and value can also have restrictions based on the CVParam.
+
+        /// <remarks>The name of the parameter.</remarks>
+        /// Required Attribute
+        /// string
+        public abstract string Name { get; set; }
+
+        /// <remarks>The user-entered value of the parameter.</remarks>
+        /// Optional Attribute
+        /// string
+        public abstract string Value { get; set; }
 
         public CV.CV.CVID UnitCvid
         {
@@ -493,7 +526,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The name of the parameter.</remarks>
         /// Required Attribute
         /// string
-        public string Name
+        public override string Name
         {
             get { return this._name; }
             set { this._name = value; }
@@ -502,7 +535,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The user-entered value of the parameter.</remarks>
         /// Optional Attribute
         /// string
-        public string Value
+        public override string Value
         {
             get { return this._value; }
             set { this._value = value; }
@@ -515,6 +548,24 @@ namespace PSI_Interface.IdentData
         {
             get { return this._type; }
             set { this._type = value; }
+        }
+    }
+
+    public partial class CVParamGroup : IdentDataInternalTypeAbstract
+    {
+        private IdentDataList<CVParamType> _cvParams;
+
+        public IdentDataList<CVParamType> CVParams
+        {
+            get { return this._cvParams; }
+            set
+            {
+                this._cvParams = value;
+                if (this._cvParams != null)
+                {
+                    this._cvParams.IdentData = this.IdentData;
+                }
+            }
         }
     }
 
@@ -533,7 +584,7 @@ namespace PSI_Interface.IdentData
         public string PeptideEvidenceRef
         {
             get { return this._peptideEvidenceRef; }
-            set { this._peptideEvidenceRef = value; }
+            set { _peptideEvidenceRef = value; }
         }
     }
 
@@ -579,7 +630,7 @@ namespace PSI_Interface.IdentData
     /// MzIdentML SpectrumIdentificationListType
     /// </summary>
     /// <remarks>Represents the set of all search results from SpectrumIdentification.</remarks>
-    public partial class SpectrumIdentificationListType : IdentifiableType
+    public partial class SpectrumIdentificationListType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<MeasureType> _fragmentationTable;
         private IdentDataList<SpectrumIdentificationResultType> _spectrumIdentificationResult;
@@ -587,6 +638,27 @@ namespace PSI_Interface.IdentData
         private IdentDataList<UserParamType> _userParams;
         private long _numSequencesSearched;
         private bool _numSequencesSearchedSpecified;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// min 0, max 1
         public IdentDataList<MeasureType> FragmentationTable
@@ -670,32 +742,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>FragmentationTableType: Contains the types of measures that will be reported in generic arrays 
     /// for each SpectrumIdentificationItem e.g. product ion m/z, product ion intensity, product ion m/z error</remarks>
     /// <remarks>FragmentationTableType: child element Measure of type MeasureType, min 1, max unbounded</remarks>
-    public partial class MeasureType : IdentifiableType
+    public partial class MeasureType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<CVParamType> _cvParams;
-
-        /// min 1, max unbounded
-        public IdentDataList<CVParamType> CVParams
-        {
-            get { return this._cvParams; }
-            set
-            {
-                this._cvParams = value;
-                if (this._cvParams != null)
-                {
-                    this._cvParams.IdentData = this.IdentData;
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML IdentifiableType
-    /// </summary>
-    /// <remarks>Other classes in the model can be specified as sub-classes, inheriting from Identifiable. 
-    /// Identifiable gives classes a unique identifier within the scope and a name that need not be unique.</remarks>
-    public abstract class IdentifiableType : IdentDataInternalTypeAbstract
-    {
         private string _id;
         private string _name;
 
@@ -717,44 +766,90 @@ namespace PSI_Interface.IdentData
             get { return this._name; }
             set { this._name = value; }
         }
+
+        /// min 1, max unbounded
+        public IdentDataList<CVParamType> CVParams
+        {
+            get { return this._cvParams; }
+            set
+            {
+                this._cvParams = value;
+                if (this._cvParams != null)
+                {
+                    this._cvParams.IdentData = this.IdentData;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// MzIdentML IdentifiableType
+    /// </summary>
+    /// <remarks>Other classes in the model can be specified as sub-classes, inheriting from Identifiable. 
+    /// Identifiable gives classes a unique identifier within the scope and a name that need not be unique.</remarks>
+    public interface IIdentifiableType
+    {
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        string Id { get; set; }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        string Name { get; set; }
     }
 
     /// <summary>
     /// MzIdentML BibliographicReferenceType
     /// </summary>
     /// <remarks>Represents bibliographic references.</remarks>
-    public partial class BibliographicReferenceType : IdentifiableType
+    public partial class BibliographicReferenceType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private int _year;
         private bool _yearSpecified;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The names of the authors of the reference.</remarks>
         /// Optional Attribute
         /// string
-        public string Authors
-        {
-            get; set; }
+        public string Authors { get; set; }
 
         /// <remarks>The name of the journal, book etc.</remarks>
         /// Optional Attribute
         /// string
-        public string Publication
-        {
-            get; set; }
+        public string Publication { get; set; }
 
         /// <remarks>The publisher of the publication.</remarks>
         /// Optional Attribute
         /// string
-        public string Publisher
-        {
-            get; set; }
+        public string Publisher { get; set; }
 
         /// <remarks>The editor(s) of the reference.</remarks>
         /// Optional Attribute
         /// string
-        public string Editor
-        {
-            get; set; }
+        public string Editor { get; set; }
 
         /// <remarks>The year of publication.</remarks>
         /// Optional Attribute
@@ -775,50 +870,61 @@ namespace PSI_Interface.IdentData
         /// <remarks>The volume name or number.</remarks>
         /// Optional Attribute
         /// string
-        public string Volume { get;
-            set;
-        }
+        public string Volume { get; set; }
 
         /// <remarks>The issue name or number.</remarks>
         /// Optional Attribute
         /// string
-        public string Issue { get;
-            set;
-        }
+        public string Issue { get; set; }
 
         /// <remarks>The page numbers.</remarks>
         /// Optional Attribute
         /// string
-        public string Pages
-        {
-            get; set; }
+        public string Pages { get; set; }
 
         /// <remarks>The title of the BibliographicReference.</remarks>
         /// Optional Attribute
         /// string
-        public string Title
-        {
-            get; set; }
+        public string Title { get; set; }
 
         /// <remarks>The DOI of the referenced publication.</remarks>
         /// Optional Attribute
         /// string
-        public string DOI
-        {
-            get; set; }
+        public string DOI { get; set; }
     }
 
     /// <summary>
     /// MzIdentML ProteinDetectionHypothesisType
     /// </summary>
     /// <remarks>A single result of the ProteinDetection analysis (i.e. a protein).</remarks>
-    public partial class ProteinDetectionHypothesisType : IdentifiableType
+    public partial class ProteinDetectionHypothesisType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<PeptideHypothesisType> _peptideHypothesis;
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
         private string _dBSequenceRef;
         private bool _passThreshold;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// min 1, max unbounded
         public IdentDataList<PeptideHypothesisType> PeptideHypothesis
@@ -871,7 +977,7 @@ namespace PSI_Interface.IdentData
         public string DBSequenceRef
         {
             get { return this._dBSequenceRef; }
-            set { this._dBSequenceRef = value; }
+            set { _dBSequenceRef = value; }
         }
 
         /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given 
@@ -889,11 +995,32 @@ namespace PSI_Interface.IdentData
     /// MzIdentML ProteinAmbiguityGroupType
     /// </summary>
     /// <remarks>A set of logically related results from a protein detection, for example to represent conflicting assignments of peptides to proteins.</remarks>
-    public partial class ProteinAmbiguityGroupType : IdentifiableType
+    public partial class ProteinAmbiguityGroupType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<ProteinDetectionHypothesisType> _proteinDetectionHypothesis;
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// min 1, max unbounded
         public IdentDataList<ProteinDetectionHypothesisType> ProteinDetectionHypothesis
@@ -944,11 +1071,32 @@ namespace PSI_Interface.IdentData
     /// MzIdentML ProteinDetectionListType
     /// </summary>
     /// <remarks>The protein list resulting from a protein detection process.</remarks>
-    public partial class ProteinDetectionListType : IdentifiableType
+    public partial class ProteinDetectionListType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<ProteinAmbiguityGroupType> _proteinAmbiguityGroup;
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// min 0, max unbounded
         public IdentDataList<ProteinAmbiguityGroupType> ProteinAmbiguityGroup
@@ -1001,7 +1149,7 @@ namespace PSI_Interface.IdentData
     /// <remarks>An identification of a single (poly)peptide, resulting from querying an input spectra, along with 
     /// the set of confidence values for that identification. PeptideEvidence elements should be given for all 
     /// mappings of the corresponding Peptide sequence within protein sequences.</remarks>
-    public partial class SpectrumIdentificationItemType : IdentifiableType
+    public partial class SpectrumIdentificationItemType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<PeptideEvidenceRefType> _peptideEvidenceRef;
         private IdentDataList<IonTypeType> _fragmentation;
@@ -1018,6 +1166,27 @@ namespace PSI_Interface.IdentData
         private bool _passThreshold;
         private string _massTableRef;
         private string _sampleRef;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// min 1, max unbounded
         public IdentDataList<PeptideEvidenceRefType> PeptideEvidenceRef
@@ -1183,13 +1352,34 @@ namespace PSI_Interface.IdentData
     /// <remarks>All identifications made from searching one spectrum. For PMF data, all peptide identifications 
     /// will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked 
     /// SpectrumIdentificationItems corresponding to possible different peptide IDs.</remarks>
-    public partial class SpectrumIdentificationResultType : IdentifiableType
+    public partial class SpectrumIdentificationResultType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<SpectrumIdentificationItemType> _spectrumIdentificationItems;
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
         private string _spectrumID;
         private string spectraData__ref;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// min 1, max unbounded
         public IdentDataList<SpectrumIdentificationItemType> SpectrumIdentificationItems
@@ -1261,11 +1451,78 @@ namespace PSI_Interface.IdentData
     /// MzIdentML ExternalDataType
     /// </summary>
     /// <remarks>Data external to the XML instance document. The location of the data file is given in the location attribute.</remarks>
-    public partial class ExternalDataType : IdentifiableType
+    public interface IExternalDataType : IIdentifiableType
     {
+        /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
+        /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
+        /// min 0, max 1
+        string ExternalFormatDocumentation { get; set; }
+
+        /// min 0, max 1
+        FileFormatType FileFormat { get; set; }
+
+        /// <remarks>The location of the data file.</remarks>
+        /// Required Attribute
+        /// string
+        string Location { get; set; }
+    }
+
+    /// <summary>
+    /// MzIdentML FileFormatType
+    /// </summary>
+    /// <remarks>The format of the ExternalData file, for example "tiff" for image files.</remarks>
+    public partial class FileFormatType : IdentDataInternalTypeAbstract
+    {
+        private CVParamType _cvParams;
+
+        /// <remarks>cvParam capturing file formats</remarks>
+        /// Optional Attribute
+        /// min 1, max 1
+        public CVParamType CVParams
+        {
+            get { return this._cvParams; }
+            set
+            {
+                this._cvParams = value;
+                if (this._cvParams != null)
+                {
+                    this._cvParams.IdentData = this.IdentData;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// MzIdentML SpectraDataType
+    /// </summary>
+    /// <remarks>A data set containing spectra data (consisting of one or more spectra).</remarks>
+    public partial class SpectraDataType : IdentDataInternalTypeAbstract, IExternalDataType
+    {
+        private SpectrumIDFormatType _spectrumIDFormat;
         private string _externalFormatDocumentation;
         private FileFormatType _fileFormat;
         private string _location;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
@@ -1298,40 +1555,6 @@ namespace PSI_Interface.IdentData
             get { return this._location; }
             set { this._location = value; }
         }
-    }
-
-    /// <summary>
-    /// MzIdentML FileFormatType
-    /// </summary>
-    /// <remarks>The format of the ExternalData file, for example "tiff" for image files.</remarks>
-    public partial class FileFormatType : IdentDataInternalTypeAbstract
-    {
-        private CVParamType _cvParams;
-
-        /// <remarks>cvParam capturing file formats</remarks>
-        /// Optional Attribute
-        /// min 1, max 1
-        public CVParamType CVParams
-        {
-            get { return this._cvParams; }
-            set
-            {
-                this._cvParams = value;
-                if (this._cvParams != null)
-                {
-                    this._cvParams.IdentData = this.IdentData;
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML SpectraDataType
-    /// </summary>
-    /// <remarks>A data set containing spectra data (consisting of one or more spectra).</remarks>
-    public partial class SpectraDataType : ExternalDataType
-    {
-        private SpectrumIDFormatType _spectrumIDFormat;
 
         /// min 1, max 1
         public SpectrumIDFormatType SpectrumIDFormat
@@ -1376,10 +1599,66 @@ namespace PSI_Interface.IdentData
     /// MzIdentML SourceFileType
     /// </summary>
     /// <remarks>A file from which this mzIdentML instance was created.</remarks>
-    public partial class SourceFileType : ExternalDataType
+    public partial class SourceFileType : IdentDataInternalTypeAbstract, IExternalDataType
     {
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
+        private string _externalFormatDocumentation;
+        private FileFormatType _fileFormat;
+        private string _location;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
+
+        /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
+        /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
+        /// min 0, max 1
+        public string ExternalFormatDocumentation
+        {
+            get { return this._externalFormatDocumentation; }
+            set { this._externalFormatDocumentation = value; }
+        }
+
+        /// min 0, max 1
+        public FileFormatType FileFormat
+        {
+            get { return this._fileFormat; }
+            set
+            {
+                this._fileFormat = value;
+                if (this._fileFormat != null)
+                {
+                    this._fileFormat.IdentData = this.IdentData;
+                }
+            }
+        }
+
+        /// <remarks>The location of the data file.</remarks>
+        /// Required Attribute
+        /// string
+        public string Location
+        {
+            get { return this._location; }
+            set { this._location = value; }
+        }
 
         /// <remarks>___ParamGroup___:Any additional parameters description the source file.</remarks>
         /// min 0, max unbounded
@@ -1416,7 +1695,7 @@ namespace PSI_Interface.IdentData
     /// MzIdentML SearchDatabaseType
     /// </summary>
     /// <remarks>A database for searching mass spectra. Examples include a set of amino acid sequence entries, or annotated spectra libraries.</remarks>
-    public partial class SearchDatabaseType : ExternalDataType
+    public partial class SearchDatabaseType : IdentDataInternalTypeAbstract, IExternalDataType
     {
         private ParamType _databaseName;
         private IdentDataList<CVParamType> _cvParams;
@@ -1427,6 +1706,62 @@ namespace PSI_Interface.IdentData
         private bool _numDatabaseSequencesSpecified;
         private long _numResidues;
         private bool _numResiduesSpecified;
+        private string _externalFormatDocumentation;
+        private FileFormatType _fileFormat;
+        private string _location;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
+
+        /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
+        /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
+        /// min 0, max 1
+        public string ExternalFormatDocumentation
+        {
+            get { return this._externalFormatDocumentation; }
+            set { this._externalFormatDocumentation = value; }
+        }
+
+        /// min 0, max 1
+        public FileFormatType FileFormat
+        {
+            get { return this._fileFormat; }
+            set
+            {
+                this._fileFormat = value;
+                if (this._fileFormat != null)
+                {
+                    this._fileFormat.IdentData = this.IdentData;
+                }
+            }
+        }
+
+        /// <remarks>The location of the data file.</remarks>
+        /// Required Attribute
+        /// string
+        public string Location
+        {
+            get { return this._location; }
+            set { this._location = value; }
+        }
 
         /// <remarks>The database name may be given as a cvParam if it maps exactly to one of the release databases listed in the CV, otherwise a userParam should be used.</remarks>
         /// min 1, max 1
@@ -1543,11 +1878,32 @@ namespace PSI_Interface.IdentData
     /// MzIdentML ProteinDetectionProtocolType
     /// </summary>
     /// <remarks>The parameters and settings of a ProteinDetection process.</remarks>
-    public partial class ProteinDetectionProtocolType : IdentifiableType
+    public partial class ProteinDetectionProtocolType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private ParamListType _analysisParams;
         private ParamListType _threshold;
         private string _analysisSoftwareRef;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The parameters and settings for the protein detection given as CV terms.</remarks>
         /// min 0, max 1
@@ -1586,7 +1942,7 @@ namespace PSI_Interface.IdentData
         public string AnalysisSoftwareRef
         {
             get { return this._analysisSoftwareRef; }
-            set { this._analysisSoftwareRef = value; }
+            set { _analysisSoftwareRef = value; }
         }
     }
 
@@ -1617,9 +1973,30 @@ namespace PSI_Interface.IdentData
     /// MzIdentML TranslationTableType
     /// </summary>
     /// <remarks>The table used to translate codons into nucleic acids e.g. by reference to the NCBI translation table.</remarks>
-    public partial class TranslationTableType : IdentifiableType
+    public partial class TranslationTableType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<CVParamType> _cvParams;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The details specifying this translation table are captured as cvParams, e.g. translation table, translation 
         /// start codons and translation table description (see specification document and mapping file)</remarks>
@@ -1642,13 +2019,34 @@ namespace PSI_Interface.IdentData
     /// MzIdentML MassTableType
     /// </summary>
     /// <remarks>The masses of residues used in the search.</remarks>
-    public partial class MassTableType : IdentifiableType
+    public partial class MassTableType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<ResidueType> _residue;
         private IdentDataList<AmbiguousResidueType> _ambiguousResidue;
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
         private List<string> _msLevel;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The specification of a single residue within the mass table.</remarks>
         /// min 0, max unbounded
@@ -1802,7 +2200,7 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The details of an individual cleavage enzyme should be provided by giving a regular expression 
     /// or a CV term if a "standard" enzyme cleavage has been performed.</remarks>
-    public partial class EnzymeType : IdentifiableType
+    public partial class EnzymeType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private string _siteRegexp;
         private ParamListType _enzymeName;
@@ -1814,6 +2212,27 @@ namespace PSI_Interface.IdentData
         private bool _missedCleavagesSpecified;
         private int _minDistance;
         private bool _minDistanceSpecified;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>Regular expression for specifying the enzyme cleavage site.</remarks>
         /// min 0, max 1
@@ -1911,7 +2330,7 @@ namespace PSI_Interface.IdentData
     /// MzIdentML SpectrumIdentificationProtocolType
     /// </summary>
     /// <remarks>The parameters and settings of a SpectrumIdentification analysis.</remarks>
-    public partial class SpectrumIdentificationProtocolType : IdentifiableType
+    public partial class SpectrumIdentificationProtocolType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private ParamType _searchType;
         private ParamListType _additionalSearchParams;
@@ -1924,6 +2343,27 @@ namespace PSI_Interface.IdentData
         private IdentDataList<FilterInfo> _databaseFilters;
         private DatabaseTranslationType _databaseTranslation;
         private string _analysisSoftwareRef;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The type of search performed e.g. PMF, Tag searches, MS-MS</remarks>
         /// min 1, max 1
@@ -2074,7 +2514,7 @@ namespace PSI_Interface.IdentData
         public string AnalysisSoftwareRef
         {
             get { return this._analysisSoftwareRef; }
-            set { this._analysisSoftwareRef = value; }
+            set { _analysisSoftwareRef = value; }
         }
     }
 
@@ -2315,10 +2755,31 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The use of a protocol with the requisite Parameters and ParameterValues. 
     /// ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both) as output.</remarks>
-    public abstract class ProtocolApplicationType : IdentifiableType
+    public abstract class ProtocolApplicationType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private System.DateTime _activityDate;
         private bool _activityDateSpecified;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>When the protocol was applied.</remarks>
         /// Optional Attribute
@@ -2367,7 +2828,7 @@ namespace PSI_Interface.IdentData
         public string ProteinDetectionListRef
         {
             get { return this._proteinDetectionListRef; }
-            set { this._proteinDetectionListRef = value; }
+            set { _proteinDetectionListRef = value; }
         }
 
         /// <remarks>A reference to the detection protocol used for this ProteinDetection.</remarks>
@@ -2376,7 +2837,7 @@ namespace PSI_Interface.IdentData
         public string ProteinDetectionProtocolRef
         {
             get { return this._proteinDetectionProtocolRef; }
-            set { this._proteinDetectionProtocolRef = value; }
+            set { _proteinDetectionProtocolRef = value; }
         }
     }
 
@@ -2394,7 +2855,7 @@ namespace PSI_Interface.IdentData
         public string SpectrumIdentificationListRef
         {
             get { return this._spectrumIdentificationListRef; }
-            set { this._spectrumIdentificationListRef = value; }
+            set { _spectrumIdentificationListRef = value; }
         }
     }
 
@@ -2445,7 +2906,7 @@ namespace PSI_Interface.IdentData
         public string SpectrumIdentificationProtocolRef
         {
             get { return this._spectrumIdentificationProtocolRef; }
-            set { this._spectrumIdentificationProtocolRef = value; }
+            set { _spectrumIdentificationProtocolRef = value; }
         }
 
         /// <remarks>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</remarks>
@@ -2454,7 +2915,7 @@ namespace PSI_Interface.IdentData
         public string SpectrumIdentificationListRef
         {
             get { return this._spectrumIdentificationListRef; }
-            set { this._spectrumIdentificationListRef = value; }
+            set { _spectrumIdentificationListRef = value; }
         }
     }
 
@@ -2472,7 +2933,7 @@ namespace PSI_Interface.IdentData
         public string SpectraDataRef
         {
             get { return this._spectraDataRef; }
-            set { this._spectraDataRef = value; }
+            set { _spectraDataRef = value; }
         }
     }
 
@@ -2490,7 +2951,7 @@ namespace PSI_Interface.IdentData
         public string SearchDatabaseRef
         {
             get { return this._searchDatabaseRef; }
-            set { this._searchDatabaseRef = value; }
+            set { _searchDatabaseRef = value; }
         }
     }
 
@@ -2499,7 +2960,7 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>PeptideEvidence links a specific Peptide element to a specific position in a DBSequence. 
     /// There must only be one PeptideEvidence item per Peptide-to-DBSequence-position.</remarks>
-    public partial class PeptideEvidenceType : IdentifiableType
+    public partial class PeptideEvidenceType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
@@ -2515,6 +2976,27 @@ namespace PSI_Interface.IdentData
         private int _frame;
         private bool _frameSpecified;
         private bool _isDecoy;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         public PeptideEvidenceType()
         {
@@ -2661,13 +3143,34 @@ namespace PSI_Interface.IdentData
     /// MzIdentML PeptideType
     /// </summary>
     /// <remarks>One (poly)peptide (a sequence with modifications). The combination of Peptide sequence and modifications must be unique in the file.</remarks>
-    public partial class PeptideType : IdentifiableType
+    public partial class PeptideType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private string _peptideSequence;
         private IdentDataList<ModificationType> _modification;
         private IdentDataList<SubstitutionModificationType> _substitutionModification;
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The amino acid sequence of the (poly)peptide. If a substitution modification has been found, the original sequence should be reported.</remarks>
         /// min 1, max 1
@@ -2928,7 +3431,7 @@ namespace PSI_Interface.IdentData
     /// <remarks>A database sequence from the specified SearchDatabase (nucleic acid or amino acid). 
     /// If the sequence is nucleic acid, the source nucleic acid sequence should be given in 
     /// the seq attribute rather than a translated sequence.</remarks>
-    public partial class DBSequenceType : IdentifiableType
+    public partial class DBSequenceType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private string _seq;
         private IdentDataList<CVParamType> _cvParams;
@@ -2937,6 +3440,27 @@ namespace PSI_Interface.IdentData
         private bool _lengthSpecified;
         private string searchDatabase__ref;
         private string _accession;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The actual sequence of amino acids or nucleic acid.</remarks>
         /// min 0, max 1
@@ -3022,12 +3546,33 @@ namespace PSI_Interface.IdentData
     /// <remarks>AnalysisSampleCollectionType: The samples analysed can optionally be recorded using CV terms for descriptions. 
     /// If a composite sample has been analysed, the subsample association can be used to build a hierarchical description.</remarks>
     /// <remarks>AnalysisSampleCollectionType: child element Sample of type SampleType, min 1, max unbounded</remarks>
-    public partial class SampleType : IdentifiableType
+    public partial class SampleType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<ContactRoleType> _contactRoles;
         private IdentDataList<SubSampleType> _subSamples;
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>Contact details for the Material. The association to ContactRole could specify, for example, the creator or provider of the Material.</remarks>
         /// min 0, max unbounded
@@ -3162,7 +3707,7 @@ namespace PSI_Interface.IdentData
         public string SampleRef
         {
             get { return this._sampleRef; }
-            set { this._sampleRef = value; }
+            set { _sampleRef = value; }
         }
     }
 
@@ -3172,10 +3717,31 @@ namespace PSI_Interface.IdentData
     /// <remarks>A contact is either a person or an organization.</remarks>
     /// <remarks>AuditCollectionType: The complete set of Contacts (people and organisations) for this file.</remarks>
     /// <remarks>AuditCollectionType: min 1, max unbounded, for PersonType XOR OrganizationType</remarks>
-    public abstract class AbstractContactType : IdentifiableType
+    public abstract class AbstractContactType : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private IdentDataList<CVParamType> _cvParams;
         private IdentDataList<UserParamType> _userParams;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>___ParamGroup___: Attributes of this contact such as address, email, telephone etc.</remarks>
         /// min 0, max unbounded
@@ -3246,7 +3812,7 @@ namespace PSI_Interface.IdentData
         public string organizationRef
         {
             get { return this._organizationRef; }
-            set { this._organizationRef = value; }
+            set { _organizationRef = value; }
         }
     }
 
@@ -3312,17 +3878,42 @@ namespace PSI_Interface.IdentData
         /// <remarks>>A reference to the organization this contact belongs to.</remarks>
         /// Required Attribute
         /// string
-        public string OrganizationRef { get { return this._organizationRef; } set { this._organizationRef = value; } }
+        public string OrganizationRef
+        {
+            get { return this._organizationRef; }
+            set { this._organizationRef = value; }
+        }
     }
 
     /// <summary>
     /// MzIdentML ProviderType
     /// </summary>
     /// <remarks>The provider of the document in terms of the Contact and the software the produced the document instance.</remarks>
-    public partial class ProviderInfo : IdentifiableType
+    public partial class ProviderInfo : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private ContactRoleType _contactRole;
         private string _analysisSoftwareRef;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The Contact that provided the document instance.</remarks>
         /// min 0, max 1
@@ -3356,13 +3947,34 @@ namespace PSI_Interface.IdentData
     /// 
     /// <remarks>AnalysisSoftwareListType: The software packages used to perform the analyses.</remarks>
     /// <remarks>AnalysisSoftwareListType: child element AnalysisSoftware of type AnalysisSoftwareType, min 1, max unbounded</remarks>
-    public partial class AnalysisSoftwareInfo : IdentifiableType
+    public partial class AnalysisSoftwareInfo : IdentDataInternalTypeAbstract, IIdentifiableType
     {
         private ContactRoleType _contactRole;
         private ParamType _softwareName;
         private string _customizations;
         private string _version;
         private string _uri;
+        private string _id;
+        private string _name;
+
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
+        /// Required Attribute
+        /// string
+        public string Id
+        {
+            get { return this._id; }
+            set { this._id = value; }
+        }
+
+        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
+        /// Required Attribute
+        /// string
+        public string Name
+        {
+            get { return this._name; }
+            set { this._name = value; }
+        }
 
         /// <remarks>The contact details of the organisation or person that produced the software</remarks>
         /// min 0, max 1
