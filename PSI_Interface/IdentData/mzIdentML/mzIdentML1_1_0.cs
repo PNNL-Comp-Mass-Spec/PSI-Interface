@@ -419,6 +419,46 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
+    public partial class ParamType
+    {
+        private AbstractParamType itemField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cvParam", typeof(CVParamType))]
+        [System.Xml.Serialization.XmlElementAttribute("userParam", typeof(UserParamType))]
+        public AbstractParamType Item
+        {
+            get { return this.itemField; }
+            set { this.itemField = value; }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
+    public partial class ParamListType
+    {
+        private List<AbstractParamType> itemsField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("cvParam", typeof(CVParamType))]
+        [System.Xml.Serialization.XmlElementAttribute("userParam", typeof(UserParamType))]
+        public List<AbstractParamType> Items
+        {
+            get { return this.itemsField; }
+            set { this.itemsField = value; }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
     public partial class PeptideEvidenceRefType
     {
         private string peptideEvidence_refField;
@@ -465,7 +505,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SpectrumIdentificationListType : IdentifiableType
+    public partial class SpectrumIdentificationListType : IdentifiableType, IParamGroup
     {
         private List<MeasureType> fragmentationTableField;
         private List<SpectrumIdentificationResultType> spectrumIdentificationResultField;
@@ -529,7 +569,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class MeasureType : IdentifiableType
+    public partial class MeasureType : IdentifiableType, ICVParamGroup
     {
         private List<CVParamType> cvParamField;
 
@@ -715,7 +755,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class ProteinDetectionHypothesisType : IdentifiableType
+    public partial class ProteinDetectionHypothesisType : IdentifiableType, IParamGroup
     {
         private List<PeptideHypothesisType> peptideHypothesisField;
         private List<CVParamType> cvParamField;
@@ -770,7 +810,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class ProteinAmbiguityGroupType : IdentifiableType
+    public partial class ProteinAmbiguityGroupType : IdentifiableType, IParamGroup
     {
         private List<ProteinDetectionHypothesisType> proteinDetectionHypothesisField;
         private List<CVParamType> cvParamField;
@@ -807,7 +847,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class ProteinDetectionListType : IdentifiableType
+    public partial class ProteinDetectionListType : IdentifiableType, IParamGroup
     {
         private List<ProteinAmbiguityGroupType> proteinAmbiguityGroupField;
         private List<CVParamType> cvParamField;
@@ -844,7 +884,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SpectrumIdentificationItemType : IdentifiableType
+    public partial class SpectrumIdentificationItemType : IdentifiableType, IParamGroup
     {
         private List<PeptideEvidenceRefType> peptideEvidenceRefField;
         private List<IonTypeType> fragmentationField;
@@ -989,7 +1029,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SpectrumIdentificationResultType : IdentifiableType
+    public partial class SpectrumIdentificationResultType : IdentifiableType, IParamGroup
     {
         private List<SpectrumIdentificationItemType> spectrumIdentificationItemField;
         private List<CVParamType> cvParamField;
@@ -1137,7 +1177,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SourceFileType : ExternalDataType
+    public partial class SourceFileType : ExternalDataType, IParamGroup
     {
         private List<CVParamType> cvParamField;
         private List<UserParamType> userParamField;
@@ -1165,7 +1205,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SearchDatabaseType : ExternalDataType
+    public partial class SearchDatabaseType : ExternalDataType, ICVParamGroup
     {
         private ParamType databaseNameField;
         private List<CVParamType> cvParamField;
@@ -1255,26 +1295,6 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class ParamType
-    {
-        private AbstractParamType itemField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("cvParam", typeof (CVParamType))]
-        [System.Xml.Serialization.XmlElementAttribute("userParam", typeof (UserParamType))]
-        public AbstractParamType Item
-        {
-            get { return this.itemField; }
-            set { this.itemField = value; }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
     public partial class ProteinDetectionProtocolType : IdentifiableType
     {
         private ParamListType analysisParamsField;
@@ -1310,27 +1330,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class ParamListType
-    {
-        private List<AbstractParamType> itemsField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("cvParam", typeof (CVParamType))]
-        [System.Xml.Serialization.XmlElementAttribute("userParam", typeof (UserParamType))]
-        public List<AbstractParamType> Items
-        {
-            get { return this.itemsField; }
-            set { this.itemsField = value; }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class TranslationTableType : IdentifiableType
+    public partial class TranslationTableType : IdentifiableType, ICVParamGroup
     {
         private List<CVParamType> cvParamField;
 
@@ -1349,7 +1349,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class MassTableType : IdentifiableType
+    public partial class MassTableType : IdentifiableType, IParamGroup
     {
         private List<ResidueType> residueField;
         private List<AmbiguousResidueType> ambiguousResidueField;
@@ -1432,7 +1432,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class AmbiguousResidueType
+    public partial class AmbiguousResidueType : IParamGroup
     {
         private List<CVParamType> cvParamField;
         private List<UserParamType> userParamField;
@@ -1671,7 +1671,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SpecificityRulesType
+    public partial class SpecificityRulesType : ICVParamGroup
     {
         private List<CVParamType> cvParamField;
 
@@ -1690,7 +1690,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SearchModificationType
+    public partial class SearchModificationType : ICVParamGroup
     {
         private List<SpecificityRulesType> specificityRulesField;
         private List<CVParamType> cvParamField;
@@ -2015,7 +2015,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class PeptideEvidenceType : IdentifiableType
+    public partial class PeptideEvidenceType : IdentifiableType, IParamGroup
     {
         private List<CVParamType> cvParamField;
         private List<UserParamType> userParamField;
@@ -2030,12 +2030,12 @@ namespace PSI_Interface.IdentData.mzIdentML
         private string translationTable_refField;
         private int frameField;
         private bool frameFieldSpecified;
-        private bool isDecoyField;
+        private bool isDecoyField = false;
 
-        public PeptideEvidenceType()
-        {
-            this.isDecoyField = false;
-        }
+        //public PeptideEvidenceType() Want the default constructor elsewhere...
+        //{
+        //    this.isDecoyField = false;
+        //}
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("cvParam")]
@@ -2157,7 +2157,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class PeptideType : IdentifiableType
+    public partial class PeptideType : IdentifiableType, IParamGroup
     {
         private string peptideSequenceField;
         private List<ModificationType> modificationField;
@@ -2211,7 +2211,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class ModificationType
+    public partial class ModificationType : ICVParamGroup
     {
         private List<CVParamType> cvParamField;
         private int locationField;
@@ -2375,7 +2375,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class DBSequenceType : IdentifiableType
+    public partial class DBSequenceType : IdentifiableType, IParamGroup
     {
         private string seqField;
         private List<CVParamType> cvParamField;
@@ -2447,7 +2447,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public partial class SampleType : IdentifiableType
+    public partial class SampleType : IdentifiableType, IParamGroup
     {
         private List<ContactRoleType> contactRoleField;
         private List<SubSampleType> subSampleField;
@@ -2559,7 +2559,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
-    public abstract partial class AbstractContactType : IdentifiableType
+    public abstract partial class AbstractContactType : IdentifiableType, IParamGroup
     {
         private List<CVParamType> cvParamField;
         private List<UserParamType> userParamField;

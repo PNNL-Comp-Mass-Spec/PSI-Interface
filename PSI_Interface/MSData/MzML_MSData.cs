@@ -10,6 +10,8 @@
  * 
  * 
  ********************************************************************************************************************************/
+
+using PSI_Interface.CV;
 using PSI_Interface.MSData.mzML;
 
 namespace PSI_Interface.MSData
@@ -42,6 +44,7 @@ namespace PSI_Interface.MSData
                 {
                     this.CVList.Add(new CVInfo(cv, this));
                 }
+                this.CvTranslator = new CVTranslator(this.CVList);
             }
             if (mzML.fileDescription != null)
             {
