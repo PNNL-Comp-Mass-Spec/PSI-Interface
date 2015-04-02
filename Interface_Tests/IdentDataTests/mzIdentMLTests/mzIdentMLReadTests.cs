@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using PSI_Interface.IdentData.mzIdentML;
 
-namespace Interface_Tests.mzIdentMLTests
+namespace Interface_Tests.IdentDataTests.mzIdentMLTests
 {
-	class mzIdentMLWriteTests
+	class mzIdentMLReadTests
 	{
-		public mzIdentMLWriteTests()
+		public mzIdentMLReadTests()
 		{
 			//
 			// TODO: Add constructor logic here
@@ -19,7 +19,6 @@ namespace Interface_Tests.mzIdentMLTests
 		}
 
 		#region Additional test attributes
-
 		//
 		// You can use the following additional attributes as you write your tests:
 		//
@@ -39,16 +38,15 @@ namespace Interface_Tests.mzIdentMLTests
 		// [TestCleanup()]
 		// public void MyTestCleanup() { }
 		//
-
 		#endregion
 
 		[Test]
-		[TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", 1, 10894, 11612, 8806, 4507)]
-		[TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", 1, 10894, 11612, 8806, 4507)]
-		[TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", @"MzIdentML\output\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
-		public void MzIdentMLWriteTest(string inPath, string outPath, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
+		[TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", 1, 10894, 11612, 8806, 4507)]
+		[TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", 1, 10894, 11612, 8806, 4507)]
+		[TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
+		public void MzIdentMLReadTest(string path, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
 		{
-			var reader = new MzIdentMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
+			var reader = new MzIdentMLReader(Path.Combine(TestPath.ExtTestDataDirectory, path));
 			MzIdentMLType identData = reader.Read();
 			int specResults = 0;
 			int specItems = 0;
@@ -66,23 +64,6 @@ namespace Interface_Tests.mzIdentMLTests
 			Assert.AreEqual(expectedSpecItems, specItems, "Spectrum Identification Items");
 			Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptide.Count, "Peptide Matches");
 			Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequence.Count, "DB Sequences");
-
-			var writer = new MzIdentMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outPath));
-			writer.Write(identData);
 		}
-
-		/*
-		[Test]
-		[TestCase(@"mzML\VA139IMSMS.mzML", 3145)]
-		[TestCase(@"mzML\VA139IMSMS_compressed.mzML", 3145)]
-		[TestCase(@"mzML\VA139IMSMS.mzML.gz", 3145)]
-		[TestCase(@"mzML\sample1-A_BB2_01_922.mzML", 43574)]
-		public void MzMLIndexedTest(string path, int expectedSpectra)
-		{
-			var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, path));
-			mzMLType mzMLData = reader.Read();
-			Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count.ToString(), "Stored Count");
-			Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Length, "Array length");
-		}*/
 	}
 }

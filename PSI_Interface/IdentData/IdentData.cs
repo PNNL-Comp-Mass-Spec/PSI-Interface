@@ -403,8 +403,8 @@ namespace PSI_Interface.IdentData
     {
         private string _cvRef;
         private CV.CV.CVID _cvid;
-        private string _name;
-        private string _accession;
+        //private string _name;
+        //private string _accession;
         private string _value;
 
         public CV.CV.CVID Cvid
@@ -418,8 +418,16 @@ namespace PSI_Interface.IdentData
         /// string
         public string CVRef
         {
-            get { return this._cvRef; }
-            set { this._cvRef = value; }
+            get
+            {
+                //return this._cvRef; 
+                return this.IdentData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.Cvid].CVRef);
+            }
+            set
+            {
+                this._cvRef = this.IdentData.CvTranslator.ConvertFileCVRef(value);
+                //this._cvRef = value;
+            }
         }
 
         /// <remarks>The accession or ID number of this CV term in the source CV.</remarks>
@@ -427,8 +435,25 @@ namespace PSI_Interface.IdentData
         /// string
         public string Accession
         {
-            get { return this._accession; }
-            set { this._accession = value; }
+            get
+            {
+                return CV.CV.TermData[this.Cvid].Id;
+                //return this._accession; 
+            }
+            set
+            {
+                //this._accession = value; 
+                if (CV.CV.TermAccessionLookup.ContainsKey(_cvRef) &&
+                    CV.CV.TermAccessionLookup[_cvRef].ContainsKey(value))
+                {
+                    //this.Cvid = CV.CV.TermAccessionLookup[oboAcc];
+                    this.Cvid = CV.CV.TermAccessionLookup[_cvRef][value];
+                }
+                else
+                {
+                    this.Cvid = CV.CV.CVID.CVID_Unknown;
+                }
+            }
         }
 
         /// <remarks>The name of the parameter.</remarks>
@@ -436,8 +461,15 @@ namespace PSI_Interface.IdentData
         /// string
         public override string Name
         {
-            get { return this._name; }
-            set { this._name = value; }
+            get
+            {
+                return CV.CV.TermData[this.Cvid].Name;
+                //return this._name; 
+            }
+            set
+            {
+                /*this._name = value;*/
+            } // Don't want to do anything here. public interface uses CVID
         }
 
         /// <remarks>The user-entered value of the parameter.</remarks>
@@ -460,9 +492,10 @@ namespace PSI_Interface.IdentData
     public abstract partial class ParamBase : IdentDataInternalTypeAbstract
     {
         private CV.CV.CVID _unitCvid;
-        private string _unitAccession;
-        private string _unitName;
+        //private string _unitAccession;
+        //private string _unitName;
         private string _unitCvRef;
+        private bool _unitsSet = false;
 
         // Name and value are abstract properties, because name will be handled differently in CVParams, and value can also have restrictions based on the CVParam.
 
@@ -479,7 +512,11 @@ namespace PSI_Interface.IdentData
         public CV.CV.CVID UnitCvid
         {
             get { return this._unitCvid; }
-            set { this._unitCvid = value; }
+            set
+            {
+                this._unitCvid = value;
+                this._unitsSet = true;
+            }
         }
 
         /// <remarks>An accession number identifying the unit within the OBO foundry Unit CV.</remarks>
@@ -487,8 +524,29 @@ namespace PSI_Interface.IdentData
         /// string
         public string UnitAccession
         {
-            get { return this._unitAccession; }
-            set { this._unitAccession = value; }
+            get
+            {
+                if (this._unitsSet)
+                {
+                    return CV.CV.TermData[this.UnitCvid].Id;
+                }
+                return null;
+                //return this._unitAccession; 
+            }
+            set
+            {
+                //this._unitAccession = value; 
+                if (value != null && CV.CV.TermAccessionLookup.ContainsKey(_unitCvRef) &&
+                    CV.CV.TermAccessionLookup[_unitCvRef].ContainsKey(value))
+                {
+                    this._unitsSet = true;
+                    this._unitCvid = CV.CV.TermAccessionLookup[_unitCvRef][value];
+                }
+                else
+                {
+                    this._unitCvid = CV.CV.CVID.CVID_Unknown;
+                }
+            }
         }
 
         /// <remarks>The name of the unit.</remarks>
@@ -496,8 +554,16 @@ namespace PSI_Interface.IdentData
         /// string
         public string UnitName
         {
-            get { return this._unitName; }
-            set { this._unitName = value; }
+            get
+            {
+                if (this._unitsSet)
+                {
+                    return CV.CV.TermData[this.UnitCvid].Name;
+                }
+                return null;
+                //return this._unitName; 
+            }
+            //set { this._unitName = value; }
         }
 
         /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this file.</remarks>
@@ -505,8 +571,23 @@ namespace PSI_Interface.IdentData
         /// string
         public string UnitCvRef
         {
-            get { return this._unitCvRef; }
-            set { this._unitCvRef = value; }
+            get
+            {
+                if (this._unitsSet)
+                {
+                    return this.IdentData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.UnitCvid].CVRef);
+                }
+                return null;
+                //return this._unitCvRef; 
+            }
+            set
+            {
+                this._unitCvRef = value;
+                if (value != null)
+                {
+                    this._unitCvRef = this.IdentData.CvTranslator.ConvertFileCVRef(value);
+                }
+            }
         }
     }
 

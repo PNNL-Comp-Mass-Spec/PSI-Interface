@@ -239,8 +239,8 @@ namespace PSI_Interface.IdentData
         public CVParam()
         {
             this._cvRef = null;
-            this._name = null;
-            this._accession = null;
+            //this._name = null;
+            //this._accession = null;
             this._value = null;
 
             this._cvid = CV.CV.CVID.CVID_Unknown;
@@ -280,9 +280,10 @@ namespace PSI_Interface.IdentData
     {
         public ParamBase()
         {
-            this._unitAccession = null;
-            this._unitName = null;
+            //this._unitAccession = null;
+            //this._unitName = null;
             this._unitCvRef = null;
+            this._unitsSet = false;
 
             this._unitCvid = CV.CV.CVID.CVID_Unknown;
         }

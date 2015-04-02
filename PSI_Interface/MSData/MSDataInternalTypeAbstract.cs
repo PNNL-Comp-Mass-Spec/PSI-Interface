@@ -40,6 +40,7 @@ namespace PSI_Interface.MSData
         private void CascadeProperties()
         {
             //foreach (var prop in this.GetType().GetProperties()) // Only will return public properties...
+            // Cascade property setting on down the hierarchy. TODO: TEST THIS EXTENSIVELY!!!
             foreach (var prop in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
             {
                 if (prop.GetValue(this) != null)

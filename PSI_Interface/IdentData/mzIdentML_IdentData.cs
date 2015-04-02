@@ -338,12 +338,13 @@ namespace PSI_Interface.IdentData
         public CVParam(CVParamType cvp, IdentData idata)
             : base(cvp, idata)
         {
-            this._cvRef = cvp.cvRef;
-            this._name = cvp.name;
-            this._accession = cvp.accession;
+            this.CVRef = cvp.cvRef;
+            //this._name = cvp.name;
+            //this._accession = cvp.accession;
+            this.Accession = cvp.accession;
             this._value = cvp.value;
 
-            this._cvid = CV.CV.CVID.CVID_Unknown;
+            //this._cvid = CV.CV.CVID.CVID_Unknown;
         }
 
         //public CV.CV.CVID Cvid
@@ -381,11 +382,13 @@ namespace PSI_Interface.IdentData
         public ParamBase(AbstractParamType ap, IdentData idata)
             : base(idata)
         {
-            this._unitCvRef = ap.unitCvRef;
-            this._unitAccession = ap.unitAccession;
-            this._unitName = ap.unitName;
+            this._unitsSet = false;
+            this.UnitCvRef = ap.unitCvRef;
+            //this._unitAccession = ap.unitAccession;
+            this.UnitAccession = ap.unitAccession;
+            //this._unitName = ap.unitName;
 
-            this._unitCvid = CV.CV.CVID.CVID_Unknown;
+            //this._unitCvid = CV.CV.CVID.CVID_Unknown;
         }
 
         // Name and value are abstract properties, because name will be handled differently in CVParams, and value can also have restrictions based on the CVParam.
@@ -623,6 +626,14 @@ namespace PSI_Interface.IdentData
                 foreach (var f in sil.FragmentationTable)
                 {
                     this._fragmentationTable.Add(new Measure(f, this.IdentData));
+                }
+            }
+            if (sil.SpectrumIdentificationResult != null)
+            {
+                this._spectrumIdentificationResult = new IdentDataList<SpectrumIdentificationResult>();
+                foreach (var sir in sil.SpectrumIdentificationResult)
+                {
+                    this._spectrumIdentificationResult.Add(new SpectrumIdentificationResult(sir, this.IdentData));
                 }
             }
         }
