@@ -2544,9 +2544,9 @@ namespace PSI_Interface.IdentData
             set
             {
                 this._parentTolerance = value;
-                if (this._fragmentTolerance != null)
+                if (this._parentTolerance != null)
                 {
-                    this._fragmentTolerance.IdentData = this.IdentData;
+                    this._parentTolerance.IdentData = this.IdentData;
                 }
             }
         }

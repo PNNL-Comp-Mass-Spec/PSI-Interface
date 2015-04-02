@@ -216,12 +216,17 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <remarks>A single entry from an ontology or a controlled vocabulary.</remarks>
     /// <remarks>ToleranceType: The tolerance of the search given as a plus and minus value with units.</remarks>
     /// <remarks>ToleranceType: child element cvParam of type CVParamType, min 1, max unbounded "CV terms capturing the tolerance plus and minus values."</remarks>
-    public partial class CVParamType : AbstractParamType
+    public partial class CVParamType/* : AbstractParamType*/
     {
         public CVParamType()
         {
             this.accession = null;
             this.cvRef = null;
+            this.name = null;
+            this.value = null;
+            this.unitCvRef = null;
+            this.unitAccession = null;
+            this.unitName = null;
         }
 
         /// <remarks>A reference to the cv element from which this term originates.</remarks>
@@ -245,7 +250,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         //public override string Value
     }
 
-    /// <summary>
+    /*/// <summary>
     /// MzIdentML AbstractParamType; Used instead of: ParamType, ParamGroup, ParamListType
     /// </summary>
     /// <remarks>Abstract entity allowing either cvParam or userParam to be referenced in other schemas.</remarks>
@@ -289,16 +294,21 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Optional Attribute
         /// string
         //public string UnitCvRef
-    }
+    }*/
 
     /// <summary>
     /// MzIdentML UserParamType
     /// </summary>
     /// <remarks>A single user-defined parameter.</remarks>
-    public partial class UserParamType : AbstractParamType
+    public partial class UserParamType/* : AbstractParamType*/
     {
         public UserParamType()
         {
+            this.name = null;
+            this.value = null;
+            this.unitAccession = null;
+            this.unitName = null;
+            this.unitCvRef = null;
             this.type = null;
         }
 
