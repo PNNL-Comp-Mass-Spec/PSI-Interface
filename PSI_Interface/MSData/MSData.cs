@@ -24,7 +24,7 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
-        internal CVTranslator CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+        internal CVTranslator CvTranslator;// = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
         private MSDataList<CVInfo> _cvList;
         private FileDescription _fileDescription;
         private MSDataList<ReferenceableParamGroup> _referenceableParamGroupList;

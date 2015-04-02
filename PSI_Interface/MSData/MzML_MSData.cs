@@ -27,6 +27,7 @@ namespace PSI_Interface.MSData
         public MSData(mzMLType mzML)
         {
             // Default values....
+            this.CvTranslator = new CVTranslator();
             this.CVList = null;
             this.FileDescription = null;
             this.ReferenceableParamGroupList = null;

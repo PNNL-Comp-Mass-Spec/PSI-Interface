@@ -10,7 +10,7 @@ namespace PSI_Interface.IdentData
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
     public partial class IdentData : IIdentifiableType
     {
-        internal CVTranslator CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+        internal CVTranslator CvTranslator; // = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
         private IdentDataList<CVInfo> _cvList;
         private IdentDataList<AnalysisSoftwareInfo> _analysisSoftwareList;
         private ProviderInfo _provider;

@@ -6,7 +6,7 @@ namespace PSI_Interface.IdentData
     {
         internal IdentDataInternalTypeAbstract()
         {
-            this.IdentData = null;
+            this._identData = new IdentData(false);
         }
 
         internal IdentDataInternalTypeAbstract(IdentData parent)
@@ -22,23 +22,31 @@ namespace PSI_Interface.IdentData
             set
             {
                 this._identData = value;
-                //foreach (var prop in this.GetType().GetProperties()) // Only will return public properties...
-                // Cascade property setting on down the hierarchy. TODO: TEST THIS EXTENSIVELY!!!
-                /*foreach (var prop in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
+                if (this._identData != null)
                 {
-                    if (prop.GetValue(this) != null)
-                    {
-                        if (prop.GetValue(this) is IdentDataInternalTypeAbstract)
-                        {
-                            ((IdentDataInternalTypeAbstract)(prop.GetValue(this))).IdentData = this._identData;
-                        }
-                        if (prop.GetValue(this) is IdentDataList<IdentDataInternalTypeAbstract>)
-                        {
-                            ((IdentDataList<IdentDataInternalTypeAbstract>) (prop.GetValue(this))).IdentData = this._identData;
-                        }
-                    }
-                }*/
+                    this.CascadeProperties();
+                }
             }
+        }
+
+        private void CascadeProperties()
+        {
+            //foreach (var prop in this.GetType().GetProperties()) // Only will return public properties...
+            // Cascade property setting on down the hierarchy. TODO: TEST THIS EXTENSIVELY!!!
+            /*foreach (var prop in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
+            {
+                if (prop.GetValue(this) != null)
+                {
+                    if (prop.GetValue(this) is IdentDataInternalTypeAbstract)
+                    {
+                        ((IdentDataInternalTypeAbstract)(prop.GetValue(this))).IdentData = this._identData;
+                    }
+                    if (prop.GetValue(this) is IdentDataList<IdentDataInternalTypeAbstract>)
+                    {
+                        ((IdentDataList<IdentDataInternalTypeAbstract>) (prop.GetValue(this))).IdentData = this._identData;
+                    }
+                }
+            }*/
         }
     }
 }

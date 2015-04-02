@@ -9,7 +9,7 @@ namespace PSI_Interface.MSData
     {
         internal MSDataInternalTypeAbstract()
         {
-            this.MsData = new MSData();
+            this._msData = new MSData(false);
         }
 
         internal MSDataInternalTypeAbstract(MSData instance)
@@ -30,7 +30,7 @@ namespace PSI_Interface.MSData
                 this._msData = value;
                 if (this._msData != null)
                 {
-                    CascadeProperties();
+                    this.CascadeProperties();
                 }
             }
         }
@@ -41,7 +41,7 @@ namespace PSI_Interface.MSData
         {
             //foreach (var prop in this.GetType().GetProperties()) // Only will return public properties...
             // Cascade property setting on down the hierarchy. TODO: TEST THIS EXTENSIVELY!!!
-            foreach (var prop in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
+            /*foreach (var prop in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
             {
                 if (prop.GetValue(this) != null)
                 {
@@ -55,7 +55,7 @@ namespace PSI_Interface.MSData
                         ((MSDataList<MSDataInternalTypeAbstract>)(prop.GetValue(this))).MsData = this._msData;
                     }
                 }
-            }
+            }*/
         }
     }
 }

@@ -7,9 +7,9 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, 
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
-    public partial class IdentData : IdentDataInternalTypeAbstract, IIdentifiableType
+    public partial class IdentData : IIdentifiableType
     {
-        public IdentData()
+        public IdentData(bool CreateTranslator = true)
         {
             this._id = null;
             this._name = null;
@@ -17,7 +17,12 @@ namespace PSI_Interface.IdentData
             this._creationDate = System.DateTime.Now;
             this.CreationDateSpecified = false;
 
-            this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+            //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+            this.CvTranslator = null;
+            if (CreateTranslator)
+            {
+                this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+            }
             this._cvList = null;
             this._analysisSoftwareList = null;
             this._provider = null;

@@ -12,6 +12,7 @@
  ********************************************************************************************************************************/
 
 using System.Collections.Generic;
+using PSI_Interface.CV;
 
 namespace PSI_Interface.MSData
 {
@@ -23,8 +24,13 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
-        public MSData()
+        public MSData(bool createTranslator = true)
         {
+            this.CvTranslator = null;
+            if (createTranslator)
+            {
+                this.CvTranslator = new CVTranslator();
+            }
             this.CVList = null;
             this.FileDescription = null;
             this.ReferenceableParamGroupList = null;

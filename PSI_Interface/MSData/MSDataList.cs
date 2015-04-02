@@ -10,7 +10,9 @@ namespace PSI_Interface.MSData
     public class MSDataList<T> : List<T> where T : MSDataInternalTypeAbstract
     {
         public MSDataList()
-        { }
+        {
+            this._msData = new MSData(false);
+        }
         //public event EventHandler OnAdd;
 
         // Experiment at implicitly converting from a List<T> to a MSDataList<T> fails (not allowed on base class of type);
@@ -25,6 +27,7 @@ namespace PSI_Interface.MSData
 
         public MSDataList(IEnumerable<T> items)
         {
+            this._msData = new MSData(false);
             this.AddRange(items);
         }
 

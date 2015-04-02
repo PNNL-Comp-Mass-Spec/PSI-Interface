@@ -34,19 +34,19 @@ namespace PSI_Interface.IdentData
 
             if (mzid.cvList != null)
             {
-                this._cvList = new IdentDataList<CVInfo>();
+                this.CVList = new IdentDataList<CVInfo>();
                 foreach (var cv in mzid.cvList)
                 {
-                    this._cvList.Add(new CVInfo(cv, this));
+                    this.CVList.Add(new CVInfo(cv, this));
                 }
                 this.CvTranslator = new CVTranslator(this._cvList);
             }
             if (mzid.AnalysisSoftwareList != null)
             {
-                this._analysisSoftwareList = new IdentDataList<AnalysisSoftwareInfo>();
+                this.AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareInfo>();
                 foreach (var asl in mzid.AnalysisSoftwareList)
                 {
-                    this._analysisSoftwareList.Add(new AnalysisSoftwareInfo(asl, this));
+                    this.AnalysisSoftwareList.Add(new AnalysisSoftwareInfo(asl, this));
                 }
             }
             if (mzid.Provider != null)
@@ -55,25 +55,25 @@ namespace PSI_Interface.IdentData
             }
             if (mzid.AuditCollection != null)
             {
-                this._auditCollection = new IdentDataList<AbstractContactInfo>();
+                this.AuditCollection = new IdentDataList<AbstractContactInfo>();
                 foreach (var ac in mzid.AuditCollection)
                 {
                     if (ac is PersonType)
                     {
-                        this._auditCollection.Add(new PersonInfo(ac as PersonType, this));
+                        this.AuditCollection.Add(new PersonInfo(ac as PersonType, this));
                     }
                     else if (ac is OrganizationType)
                     {
-                        this._auditCollection.Add(new Organization(ac as OrganizationType, this));
+                        this.AuditCollection.Add(new Organization(ac as OrganizationType, this));
                     }
                 }
             }
             if (mzid.AnalysisSampleCollection != null)
             {
-                this._analysisSampleCollection = new IdentDataList<SampleInfo>();
+                this.AnalysisSampleCollection = new IdentDataList<SampleInfo>();
                 foreach (var asc in mzid.AnalysisSampleCollection)
                 {
-                    this._analysisSampleCollection.Add(new SampleInfo(asc, this));
+                    this.AnalysisSampleCollection.Add(new SampleInfo(asc, this));
                 }
             }
             if (mzid.SequenceCollection != null)
@@ -94,10 +94,10 @@ namespace PSI_Interface.IdentData
             }
             if (mzid.BibliographicReference != null)
             {
-                this._bibliographicReference = new IdentDataList<BibliographicReference>();
+                this.BibliographicReferences = new IdentDataList<BibliographicReference>();
                 foreach (var br in mzid.BibliographicReference)
                 {
-                    this._bibliographicReference.Add(new BibliographicReference(br, this));
+                    this.BibliographicReferences.Add(new BibliographicReference(br, this));
                 }
             }
         }
@@ -234,10 +234,10 @@ namespace PSI_Interface.IdentData
 
             if (ph.SpectrumIdentificationItemRef != null)
             {
-                this._spectrumIdentificationItemRef = new IdentDataList<SpectrumIdentificationItemRefInfo>();
+                this.SpectrumIdentificationItemRef = new IdentDataList<SpectrumIdentificationItemRefInfo>();
                 foreach (var siir in ph.SpectrumIdentificationItemRef)
                 {
-                    this._spectrumIdentificationItemRef.Add(new SpectrumIdentificationItemRefInfo(siir, this.IdentData));
+                    this.SpectrumIdentificationItemRef.Add(new SpectrumIdentificationItemRefInfo(siir, this.IdentData));
                 }
             }
         }
@@ -301,10 +301,10 @@ namespace PSI_Interface.IdentData
 
             if (it.FragmentArray != null)
             {
-                this._fragmentArray = new IdentDataList<FragmentArray>();
+                this.FragmentArray = new IdentDataList<FragmentArray>();
                 foreach (var f in it.FragmentArray)
                 {
-                    this._fragmentArray.Add(new FragmentArray(f, this.IdentData));
+                    this.FragmentArray.Add(new FragmentArray(f, this.IdentData));
                 }
             }
         }
@@ -460,10 +460,10 @@ namespace PSI_Interface.IdentData
 
             if (cvpg.cvParam != null)
             {
-                this._cvParams = new IdentDataList<CVParam>();
+                this.CVParams = new IdentDataList<CVParam>();
                 foreach (var cvp in cvpg.cvParam)
                 {
-                    this._cvParams.Add(new CVParam(cvp, this.IdentData));
+                    this.CVParams.Add(new CVParam(cvp, this.IdentData));
                 }
             }
         }
@@ -480,10 +480,10 @@ namespace PSI_Interface.IdentData
 
             if (pg.userParam != null)
             {
-                this._userParams = new IdentDataList<UserParam>();
+                this.UserParams = new IdentDataList<UserParam>();
                 foreach (var up in pg.userParam)
                 {
-                    this._userParams.Add(new UserParam(up, this.IdentData));
+                    this.UserParams.Add(new UserParam(up, this.IdentData));
                 }
             }
         }
@@ -532,16 +532,16 @@ namespace PSI_Interface.IdentData
 
             if (pl != null)
             {
-                this._items = new IdentDataList<ParamBase>();
+                this.Items = new IdentDataList<ParamBase>();
                 foreach (var p in pl.Items)
                 {
                     if (p is CVParamType)
                     {
-                        this._items.Add(new CVParam(p as CVParamType, this.IdentData));
+                        this.Items.Add(new CVParam(p as CVParamType, this.IdentData));
                     }
                     else if (p is UserParamType)
                     {
-                        this._items.Add(new UserParam(p as UserParamType, this.IdentData));
+                        this.Items.Add(new UserParam(p as UserParamType, this.IdentData));
                     }
                 }
             }
@@ -584,10 +584,10 @@ namespace PSI_Interface.IdentData
 
             if (ad.SpectrumIdentificationList != null)
             {
-                this._spectrumIdentificationList = new IdentDataList<SpectrumIdentificationList>();
+                this.SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationList>();
                 foreach (var sil in ad.SpectrumIdentificationList)
                 {
-                    this._spectrumIdentificationList.Add(new SpectrumIdentificationList(sil, this.IdentData));
+                    this.SpectrumIdentificationList.Add(new SpectrumIdentificationList(sil, this.IdentData));
                 }
             }
             if (ad.ProteinDetectionList != null)
@@ -622,18 +622,18 @@ namespace PSI_Interface.IdentData
 
             if (sil.FragmentationTable != null)
             {
-                this._fragmentationTable = new IdentDataList<Measure>();
+                this.FragmentationTable = new IdentDataList<Measure>();
                 foreach (var f in sil.FragmentationTable)
                 {
-                    this._fragmentationTable.Add(new Measure(f, this.IdentData));
+                    this.FragmentationTable.Add(new Measure(f, this.IdentData));
                 }
             }
             if (sil.SpectrumIdentificationResult != null)
             {
-                this._spectrumIdentificationResult = new IdentDataList<SpectrumIdentificationResult>();
+                this.SpectrumIdentificationResult = new IdentDataList<SpectrumIdentificationResult>();
                 foreach (var sir in sil.SpectrumIdentificationResult)
                 {
-                    this._spectrumIdentificationResult.Add(new SpectrumIdentificationResult(sir, this.IdentData));
+                    this.SpectrumIdentificationResult.Add(new SpectrumIdentificationResult(sir, this.IdentData));
                 }
             }
         }
@@ -835,10 +835,10 @@ namespace PSI_Interface.IdentData
 
             if (pdh.PeptideHypothesis != null)
             {
-                this._peptideHypothesis = new IdentDataList<PeptideHypothesis>();
+                this.PeptideHypothesis = new IdentDataList<PeptideHypothesis>();
                 foreach (var ph in pdh.PeptideHypothesis)
                 {
-                    this._peptideHypothesis.Add(new PeptideHypothesis(ph, this.IdentData));
+                    this.PeptideHypothesis.Add(new PeptideHypothesis(ph, this.IdentData));
                 }
             }
         }
@@ -894,10 +894,10 @@ namespace PSI_Interface.IdentData
 
             if (pag.ProteinDetectionHypothesis != null)
             {
-                this._proteinDetectionHypothesis = new IdentDataList<ProteinDetectionHypothesis>();
+                this.ProteinDetectionHypothesis = new IdentDataList<ProteinDetectionHypothesis>();
                 foreach (var pdh in pag.ProteinDetectionHypothesis)
                 {
-                    this._proteinDetectionHypothesis.Add(new ProteinDetectionHypothesis(pdh, this.IdentData));
+                    this.ProteinDetectionHypothesis.Add(new ProteinDetectionHypothesis(pdh, this.IdentData));
                 }
             }
         }
@@ -941,10 +941,10 @@ namespace PSI_Interface.IdentData
 
             if (pdl.ProteinAmbiguityGroup != null)
             {
-                this._proteinAmbiguityGroup = new IdentDataList<ProteinAmbiguityGroup>();
+                this.ProteinAmbiguityGroup = new IdentDataList<ProteinAmbiguityGroup>();
                 foreach (var pag in pdl.ProteinAmbiguityGroup)
                 {
-                    this._proteinAmbiguityGroup.Add(new ProteinAmbiguityGroup(pag, this.IdentData));
+                    this.ProteinAmbiguityGroup.Add(new ProteinAmbiguityGroup(pag, this.IdentData));
                 }
             }
         }
@@ -1002,18 +1002,18 @@ namespace PSI_Interface.IdentData
 
             if (sii.PeptideEvidenceRef != null)
             {
-                this._peptideEvidenceRef = new IdentDataList<PeptideEvidenceRefInfo>();
+                this.PeptideEvidenceRef = new IdentDataList<PeptideEvidenceRefInfo>();
                 foreach (var pe in sii.PeptideEvidenceRef)
                 {
-                    this._peptideEvidenceRef.Add(new PeptideEvidenceRefInfo(pe, this.IdentData));
+                    this.PeptideEvidenceRef.Add(new PeptideEvidenceRefInfo(pe, this.IdentData));
                 }
             }
             if (sii.Fragmentation != null)
             {
-                this._fragmentation = new IdentDataList<IonTypeInfo>();
+                this.Fragmentation = new IdentDataList<IonTypeInfo>();
                 foreach (var f in sii.Fragmentation)
                 {
-                    this._fragmentation.Add(new IonTypeInfo(f, this.IdentData));
+                    this.Fragmentation.Add(new IonTypeInfo(f, this.IdentData));
                 }
             }
         }
@@ -1119,10 +1119,10 @@ namespace PSI_Interface.IdentData
 
             if (sir.SpectrumIdentificationItem != null)
             {
-                this._spectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItem>();
+                this.SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItem>();
                 foreach (var sii in sir.SpectrumIdentificationItem)
                 {
-                    this._spectrumIdentificationItems.Add(new SpectrumIdentificationItem(sii, this.IdentData));
+                    this.SpectrumIdentificationItems.Add(new SpectrumIdentificationItem(sii, this.IdentData));
                 }
             }
         }
@@ -1541,18 +1541,18 @@ namespace PSI_Interface.IdentData
 
             if (mt.Residue != null)
             {
-                this._residue = new IdentDataList<Residue>();
+                this.Residue = new IdentDataList<Residue>();
                 foreach (var r in mt.Residue)
                 {
-                    this._residue.Add(new Residue(r, this.IdentData));
+                    this.Residue.Add(new Residue(r, this.IdentData));
                 }
             }
             if (mt.AmbiguousResidue != null)
             {
-                this._ambiguousResidue = new IdentDataList<AmbiguousResidue>();
+                this.AmbiguousResidue = new IdentDataList<AmbiguousResidue>();
                 foreach (var ar in mt.AmbiguousResidue)
                 {
-                    this._ambiguousResidue.Add(new AmbiguousResidue(ar, this.IdentData));
+                    this.AmbiguousResidue.Add(new AmbiguousResidue(ar, this.IdentData));
                 }
             }
             if (mt.msLevel != null)
@@ -1841,10 +1841,10 @@ namespace PSI_Interface.IdentData
 
             if (sm.SpecificityRules != null)
             {
-                this._specificityRules = new IdentDataList<SpecificityRulesList>();
+                this.SpecificityRules = new IdentDataList<SpecificityRulesList>();
                 foreach (var sr in sm.SpecificityRules)
                 {
-                    this._specificityRules.Add(new SpecificityRulesList(sr, this.IdentData));
+                    this.SpecificityRules.Add(new SpecificityRulesList(sr, this.IdentData));
                 }
             }
         }
@@ -1890,10 +1890,10 @@ namespace PSI_Interface.IdentData
 
             if (el.Enzyme != null)
             {
-                this._enzymes = new IdentDataList<Enzyme>();
+                this.Enzymes = new IdentDataList<Enzyme>();
                 foreach (var e in el.Enzyme)
                 {
-                    this._enzymes.Add(new Enzyme(e, this.IdentData));
+                    this.Enzymes.Add(new Enzyme(e, this.IdentData));
                 }
             }
         }
@@ -1967,10 +1967,10 @@ namespace PSI_Interface.IdentData
 
             if (dt.TranslationTable != null)
             {
-                this._translationTable = new IdentDataList<TranslationTable>();
+                this.TranslationTable = new IdentDataList<TranslationTable>();
                 foreach (var t in dt.TranslationTable)
                 {
-                    this._translationTable.Add(new TranslationTable(t, this.IdentData));
+                    this.TranslationTable.Add(new TranslationTable(t, this.IdentData));
                 }
             }
             if (dt.frames != null)
@@ -2040,10 +2040,10 @@ namespace PSI_Interface.IdentData
 
             if (pd.InputSpectrumIdentifications != null)
             {
-                this._inputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentifications>();
+                this.InputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentifications>();
                 foreach (var isi in pd.InputSpectrumIdentifications)
                 {
-                    this._inputSpectrumIdentifications.Add(new InputSpectrumIdentifications(isi, this.IdentData));
+                    this.InputSpectrumIdentifications.Add(new InputSpectrumIdentifications(isi, this.IdentData));
                 }
             }
         }
@@ -2098,18 +2098,18 @@ namespace PSI_Interface.IdentData
 
             if (si.InputSpectra != null)
             {
-                this._inputSpectra = new IdentDataList<InputSpectraRef>();
+                this.InputSpectra = new IdentDataList<InputSpectraRef>();
                 foreach (var ispec in si.InputSpectra)
                 {
-                    this._inputSpectra.Add(new InputSpectraRef(ispec, this.IdentData));
+                    this.InputSpectra.Add(new InputSpectraRef(ispec, this.IdentData));
                 }
             }
             if (si.SearchDatabaseRef != null)
             {
-                this._searchDatabaseRef = new IdentDataList<SearchDatabaseRefInfo>();
+                this.SearchDatabaseRef = new IdentDataList<SearchDatabaseRefInfo>();
                 foreach (var sd in si.SearchDatabaseRef)
                 {
-                    this._searchDatabaseRef.Add(new SearchDatabaseRefInfo(sd, this.IdentData));
+                    this.SearchDatabaseRef.Add(new SearchDatabaseRefInfo(sd, this.IdentData));
                 }
             }
         }
@@ -2521,18 +2521,18 @@ namespace PSI_Interface.IdentData
 
             if (s.ContactRole != null)
             {
-                this._contactRoles = new IdentDataList<ContactRoleInfo>();
+                this.ContactRoles = new IdentDataList<ContactRoleInfo>();
                 foreach (var cr in s.ContactRole)
                 {
-                    this._contactRoles.Add(new ContactRoleInfo(cr, this.IdentData));
+                    this.ContactRoles.Add(new ContactRoleInfo(cr, this.IdentData));
                 }
             }
             if (s.SubSample != null)
             {
-                this._subSamples = new IdentDataList<SubSample>();
+                this.SubSamples = new IdentDataList<SubSample>();
                 foreach (var ss in s.SubSample)
                 {
-                    this._subSamples.Add(new SubSample(ss, this.IdentData));
+                    this.SubSamples.Add(new SubSample(ss, this.IdentData));
                 }
             }
         }
@@ -2727,10 +2727,10 @@ namespace PSI_Interface.IdentData
 
             if (p.Affiliation != null)
             {
-                this._affiliation = new IdentDataList<AffiliationInfo>();
+                this.Affiliation = new IdentDataList<AffiliationInfo>();
                 foreach (var a in p.Affiliation)
                 {
-                    this._affiliation.Add(new AffiliationInfo(a, this.IdentData));
+                    this.Affiliation.Add(new AffiliationInfo(a, this.IdentData));
                 }
             }
         }
@@ -2891,26 +2891,26 @@ namespace PSI_Interface.IdentData
 
             if (i.SourceFile != null)
             {
-                this._sourceFile = new IdentDataList<SourceFileInfo>();
+                this.SourceFile = new IdentDataList<SourceFileInfo>();
                 foreach (var sf in i.SourceFile)
                 {
-                    this._sourceFile.Add(new SourceFileInfo(sf, this.IdentData));
+                    this.SourceFile.Add(new SourceFileInfo(sf, this.IdentData));
                 }
             }
             if (i.SearchDatabase != null)
             {
-                this._searchDatabase = new IdentDataList<SearchDatabaseInfo>();
+                this.SearchDatabase = new IdentDataList<SearchDatabaseInfo>();
                 foreach (var sd in i.SearchDatabase)
                 {
-                    this._searchDatabase.Add(new SearchDatabaseInfo(sd, this.IdentData));
+                    this.SearchDatabase.Add(new SearchDatabaseInfo(sd, this.IdentData));
                 }
             }
             if (i.SpectraData != null)
             {
-                this._spectraData = new IdentDataList<SpectraData>();
+                this.SpectraData = new IdentDataList<SpectraData>();
                 foreach (var sd in i.SpectraData)
                 {
-                    this._spectraData.Add(new SpectraData(sd, this.IdentData));
+                    this.SpectraData.Add(new SpectraData(sd, this.IdentData));
                 }
             }
         }
@@ -2968,10 +2968,10 @@ namespace PSI_Interface.IdentData
 
             if (apc.SpectrumIdentificationProtocol != null)
             {
-                this._spectrumIdentificationProtocol = new IdentDataList<SpectrumIdentificationProtocol>();
+                this.SpectrumIdentificationProtocol = new IdentDataList<SpectrumIdentificationProtocol>();
                 foreach (var sip in apc.SpectrumIdentificationProtocol)
                 {
-                    this._spectrumIdentificationProtocol.Add(new SpectrumIdentificationProtocol(sip, this.IdentData));
+                    this.SpectrumIdentificationProtocol.Add(new SpectrumIdentificationProtocol(sip, this.IdentData));
                 }
             }
             if (apc.ProteinDetectionProtocol != null)
@@ -3002,10 +3002,10 @@ namespace PSI_Interface.IdentData
 
             if (ac.SpectrumIdentification != null)
             {
-                this._spectrumIdentification = new IdentDataList<SpectrumIdentification>();
+                this.SpectrumIdentification = new IdentDataList<SpectrumIdentification>();
                 foreach (var si in ac.SpectrumIdentification)
                 {
-                    this._spectrumIdentification.Add(new SpectrumIdentification(si, this.IdentData));
+                    this.SpectrumIdentification.Add(new SpectrumIdentification(si, this.IdentData));
                 }
             }
         }
@@ -3033,26 +3033,26 @@ namespace PSI_Interface.IdentData
 
             if (sc.DBSequence != null)
             {
-                this._dBSequences = new IdentDataList<DBSequence>();
+                this.DBSequences = new IdentDataList<DBSequence>();
                 foreach (var dbs in sc.DBSequence)
                 {
-                    this._dBSequences.Add(new DBSequence(dbs, this.IdentData));
+                    this.DBSequences.Add(new DBSequence(dbs, this.IdentData));
                 }
             }
             if (sc.Peptide != null)
             {
-                this._peptides = new IdentDataList<Peptide>();
+                this.Peptides = new IdentDataList<Peptide>();
                 foreach (var p in sc.Peptide)
                 {
-                    this._peptides.Add(new Peptide(p, this.IdentData));
+                    this.Peptides.Add(new Peptide(p, this.IdentData));
                 }
             }
             if (sc.PeptideEvidence != null)
             {
-                this._peptideEvidences = new IdentDataList<PeptideEvidence>();
+                this.PeptideEvidences = new IdentDataList<PeptideEvidence>();
                 foreach (var pe in sc.PeptideEvidence)
                 {
-                    this._peptideEvidences.Add(new PeptideEvidence(pe, this.IdentData));
+                    this.PeptideEvidences.Add(new PeptideEvidence(pe, this.IdentData));
                 }
             }
         }

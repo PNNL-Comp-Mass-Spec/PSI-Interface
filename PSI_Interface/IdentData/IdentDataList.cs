@@ -15,6 +15,7 @@ namespace PSI_Interface.IdentData
     {
         public IdentDataList()
         {
+            this._identData = new IdentData(false);
         }
 
         //public event EventHandler OnAdd;
@@ -31,6 +32,7 @@ namespace PSI_Interface.IdentData
 
         public IdentDataList(IEnumerable<T> items)
         {
+            this._identData = new IdentData(false);
             this.AddRange(items);
         }
 
