@@ -1,4 +1,6 @@
-﻿using PSI_Interface.CV;
+﻿using System;
+using System.Collections.Generic;
+using PSI_Interface.CV;
 
 namespace PSI_Interface.IdentData
 {
@@ -21,7 +23,8 @@ namespace PSI_Interface.IdentData
             this.CvTranslator = null;
             if (CreateTranslator)
             {
-                this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+                //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
+                this.DefaultCV(); // Create a generic translator by default; must be re-mapped when reading a file
             }
             this._cvList = null;
             this._analysisSoftwareList = null;
@@ -33,6 +36,25 @@ namespace PSI_Interface.IdentData
             this._analysisProtocolCollection = null;
             this._dataCollection = null;
             this._bibliographicReference = null;
+        }
+
+        public void DefaultCV()
+        {
+            this.CVList = new IdentDataList<CVInfo>();
+            foreach (var cv in CV.CV.CVInfoList)
+            {
+                if (cv.Id.ToLower() == "pato" || cv.Id.ToLower() == "unimod")
+                {
+                    continue;
+                }
+                var newcv = new CVInfo();
+                newcv.FullName = cv.Name;
+                newcv.Id = cv.Id;
+                newcv.URI = cv.URI;
+                newcv.Version = cv.Version;
+                this.CVList.Add(newcv);
+            }
+            this.CvTranslator = new CVTranslator(this.CVList);
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 

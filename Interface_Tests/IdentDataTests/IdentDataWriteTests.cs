@@ -45,7 +45,8 @@ namespace Interface_Tests.IdentDataTests
 
 		[Test]
 		[TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", 1, 10894, 11612, 8806, 4507)]
-		[TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", 1, 10894, 11612, 8806, 4507)]
+        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", 1, 10894, 11612, 8806, 4507)]
+        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz_mod.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz_mod.mzid", 1, 10894, 11612, 8806, 4507)]
 		[TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", @"MzIdentML\output\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
 		public void MzIdentMLWriteTest(string inPath, string outPath, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
 		{
@@ -71,6 +72,7 @@ namespace Interface_Tests.IdentDataTests
 
 			var writer = new MzIdentMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outPath));
 			//writer.Write(identData);
+            identData.DefaultCV();
 			writer.Write(new MzIdentMLType(identData));;
 		}
 

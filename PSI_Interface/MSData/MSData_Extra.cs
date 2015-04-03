@@ -29,7 +29,8 @@ namespace PSI_Interface.MSData
             this.CvTranslator = null;
             if (createTranslator)
             {
-                this.CvTranslator = new CVTranslator();
+                //this.CvTranslator = new CVTranslator();
+                this.DefaultCV();
             }
             this.CVList = null;
             this.FileDescription = null;
@@ -43,6 +44,25 @@ namespace PSI_Interface.MSData
             this.Accession = null;
             this.Id = null;
             this.Version = null;
+        }
+
+        public void DefaultCV()
+        {
+            this.CVList = new MSDataList<CVInfo>();
+            foreach (var cv in CV.CV.CVInfoList)
+            {
+                if (cv.Id == "PATO")
+                {
+                    continue;
+                }
+                var newcv = new CVInfo();
+                newcv.FullName = cv.Name;
+                newcv.Id = cv.Id;
+                newcv.URI = cv.URI;
+                newcv.Version = cv.Version;
+                this.CVList.Add(newcv);
+            }
+            this.CvTranslator = new CVTranslator(this.CVList);
         }
     }
     /*
