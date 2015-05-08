@@ -51,7 +51,7 @@ namespace PSI_Interface.MSData
             this.CVList = new MSDataList<CVInfo>();
             foreach (var cv in CV.CV.CVInfoList)
             {
-                if (cv.Id == "PATO")
+                if (cv.Id.ToLower() == "pato" || cv.Id.ToLower() == "unimod")
                 {
                     continue;
                 }

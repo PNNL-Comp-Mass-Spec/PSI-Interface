@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="MSData\MzML_MSData.cs" />
     <Compile Include="MSData\Zlib.cs" />
+    <Compile Include="NativeIdConversion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

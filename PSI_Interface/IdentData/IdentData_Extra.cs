@@ -11,7 +11,7 @@ namespace PSI_Interface.IdentData
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
     public partial class IdentData : IIdentifiableType
     {
-        public IdentData(bool CreateTranslator = true)
+        public IdentData(bool createTranslator = true)
         {
             this._id = null;
             this._name = null;
@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData
 
             //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
             this.CvTranslator = null;
-            if (CreateTranslator)
+            if (createTranslator)
             {
                 //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
                 this.DefaultCV(); // Create a generic translator by default; must be re-mapped when reading a file
@@ -43,7 +43,7 @@ namespace PSI_Interface.IdentData
             this.CVList = new IdentDataList<CVInfo>();
             foreach (var cv in CV.CV.CVInfoList)
             {
-                if (cv.Id.ToLower() == "pato" || cv.Id.ToLower() == "unimod")
+                if (cv.Id.ToLower() == "pato")
                 {
                     continue;
                 }
