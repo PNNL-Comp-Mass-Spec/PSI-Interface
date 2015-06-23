@@ -3690,364 +3690,364 @@ namespace PSI_Interface.MSData.mzML_DataSet
         
         public delegate void chromatogramRowChangeEventHandler(object sender, chromatogramRowChangeEvent e);
 
-		/// <summary>
-		///Represents the strongly named DataTable class.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-		[global::System.Serializable()]
-		[global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-		public partial class mzMLDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable
-		{
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class mzMLDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable
+        {
 
-			private global::System.Data.DataColumn columnaccession;
+            private global::System.Data.DataColumn columnaccession;
 
-			private global::System.Data.DataColumn columnversion;
+            private global::System.Data.DataColumn columnversion;
 
-			private global::System.Data.DataColumn columnid;
+            private global::System.Data.DataColumn columnid;
 
-			private global::System.Data.DataColumn columnmzML_Id;
+            private global::System.Data.DataColumn columnmzML_Id;
 
-			private global::System.Data.DataColumn columnindexedmzML_Id;
+            private global::System.Data.DataColumn columnindexedmzML_Id;
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public mzMLDataTable()
-			{
-				this.TableName = "mzML";
-				this.BeginInit();
-				this.InitClass();
-				this.EndInit();
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public mzMLDataTable()
+            {
+                this.TableName = "mzML";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			internal mzMLDataTable(global::System.Data.DataTable table)
-			{
-				this.TableName = table.TableName;
-				if ((table.CaseSensitive != table.DataSet.CaseSensitive))
-				{
-					this.CaseSensitive = table.CaseSensitive;
-				}
-				if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
-				{
-					this.Locale = table.Locale;
-				}
-				if ((table.Namespace != table.DataSet.Namespace))
-				{
-					this.Namespace = table.Namespace;
-				}
-				this.Prefix = table.Prefix;
-				this.MinimumCapacity = table.MinimumCapacity;
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal mzMLDataTable(global::System.Data.DataTable table)
+            {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive))
+                {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString()))
+                {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace))
+                {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected mzMLDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
-				base(info, context)
-			{
-				this.InitVars();
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected mzMLDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) :
+                base(info, context)
+            {
+                this.InitVars();
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public global::System.Data.DataColumn accessionColumn
-			{
-				get
-				{
-					return this.columnaccession;
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn accessionColumn
+            {
+                get
+                {
+                    return this.columnaccession;
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public global::System.Data.DataColumn versionColumn
-			{
-				get
-				{
-					return this.columnversion;
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn versionColumn
+            {
+                get
+                {
+                    return this.columnversion;
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public global::System.Data.DataColumn idColumn
-			{
-				get
-				{
-					return this.columnid;
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn idColumn
+            {
+                get
+                {
+                    return this.columnid;
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public global::System.Data.DataColumn mzML_IdColumn
-			{
-				get
-				{
-					return this.columnmzML_Id;
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn mzML_IdColumn
+            {
+                get
+                {
+                    return this.columnmzML_Id;
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public global::System.Data.DataColumn indexedmzML_IdColumn
-			{
-				get
-				{
-					return this.columnindexedmzML_Id;
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn indexedmzML_IdColumn
+            {
+                get
+                {
+                    return this.columnindexedmzML_Id;
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			[global::System.ComponentModel.Browsable(false)]
-			public int Count
-			{
-				get
-				{
-					return this.Rows.Count;
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count
+            {
+                get
+                {
+                    return this.Rows.Count;
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public mzMLRow this[int index]
-			{
-				get
-				{
-					return ((mzMLRow)(this.Rows[index]));
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public mzMLRow this[int index]
+            {
+                get
+                {
+                    return ((mzMLRow)(this.Rows[index]));
+                }
+            }
 
-			public event mzMLRowChangeEventHandler mzMLRowChanging;
+            public event mzMLRowChangeEventHandler mzMLRowChanging;
 
-			public event mzMLRowChangeEventHandler mzMLRowChanged;
+            public event mzMLRowChangeEventHandler mzMLRowChanged;
 
-			public event mzMLRowChangeEventHandler mzMLRowDeleting;
+            public event mzMLRowChangeEventHandler mzMLRowDeleting;
 
-			public event mzMLRowChangeEventHandler mzMLRowDeleted;
+            public event mzMLRowChangeEventHandler mzMLRowDeleted;
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public void AddmzMLRow(mzMLRow row)
-			{
-				this.Rows.Add(row);
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddmzMLRow(mzMLRow row)
+            {
+                this.Rows.Add(row);
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public mzMLRow AddmzMLRow(string accession, string version, string id)
-			{
-				mzMLRow rowmzMLRow = ((mzMLRow)(this.NewRow()));
-				object[] columnValuesArray = new object[] {
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public mzMLRow AddmzMLRow(string accession, string version, string id)
+            {
+                mzMLRow rowmzMLRow = ((mzMLRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
                         accession,
                         version,
                         id,
                         null, // indexedmzML Column ID - leave null
                         null};
-				rowmzMLRow.ItemArray = columnValuesArray;
-				this.Rows.Add(rowmzMLRow);
-				return rowmzMLRow;
-			}
+                rowmzMLRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowmzMLRow);
+                return rowmzMLRow;
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public mzMLRow AddmzMLRow(string accession, string version, string id, IndexedMzMLDataSet.indexedmzMLRow parentindexedmzMLRowByindexedmzML_mzML)
-			{
-				mzMLRow rowmzMLRow = ((mzMLRow)(this.NewRow()));
-				object[] columnValuesArray = new object[] {
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public mzMLRow AddmzMLRow(string accession, string version, string id, IndexedMzMLDataSet.indexedmzMLRow parentindexedmzMLRowByindexedmzML_mzML)
+            {
+                mzMLRow rowmzMLRow = ((mzMLRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
                         accession,
                         version,
                         id,
                         null,
                         null};
-				if ((parentindexedmzMLRowByindexedmzML_mzML != null))
-				{
-					columnValuesArray[4] = parentindexedmzMLRowByindexedmzML_mzML[2];
-				}
-				rowmzMLRow.ItemArray = columnValuesArray;
-				this.Rows.Add(rowmzMLRow);
-				return rowmzMLRow;
-			}
+                if ((parentindexedmzMLRowByindexedmzML_mzML != null))
+                {
+                    columnValuesArray[4] = parentindexedmzMLRowByindexedmzML_mzML[2];
+                }
+                rowmzMLRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowmzMLRow);
+                return rowmzMLRow;
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public virtual global::System.Collections.IEnumerator GetEnumerator()
-			{
-				return this.Rows.GetEnumerator();
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public virtual global::System.Collections.IEnumerator GetEnumerator()
+            {
+                return this.Rows.GetEnumerator();
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public override global::System.Data.DataTable Clone()
-			{
-				mzMLDataTable cln = ((mzMLDataTable)(base.Clone()));
-				cln.InitVars();
-				return cln;
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone()
+            {
+                mzMLDataTable cln = ((mzMLDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected override global::System.Data.DataTable CreateInstance()
-			{
-				return new mzMLDataTable();
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance()
+            {
+                return new mzMLDataTable();
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			internal void InitVars()
-			{
-				this.columnaccession = base.Columns["accession"];
-				this.columnversion = base.Columns["version"];
-				this.columnid = base.Columns["id"];
-				this.columnmzML_Id = base.Columns["mzML_Id"];
-				this.columnindexedmzML_Id = base.Columns["indexedmzML_Id"];
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars()
+            {
+                this.columnaccession = base.Columns["accession"];
+                this.columnversion = base.Columns["version"];
+                this.columnid = base.Columns["id"];
+                this.columnmzML_Id = base.Columns["mzML_Id"];
+                this.columnindexedmzML_Id = base.Columns["indexedmzML_Id"];
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			private void InitClass()
-			{
-				this.columnaccession = new global::System.Data.DataColumn("accession", typeof(string), null, global::System.Data.MappingType.Attribute);
-				base.Columns.Add(this.columnaccession);
-				this.columnversion = new global::System.Data.DataColumn("version", typeof(string), null, global::System.Data.MappingType.Attribute);
-				base.Columns.Add(this.columnversion);
-				this.columnid = new global::System.Data.DataColumn("id", typeof(string), null, global::System.Data.MappingType.Attribute);
-				base.Columns.Add(this.columnid);
-				this.columnmzML_Id = new global::System.Data.DataColumn("mzML_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-				base.Columns.Add(this.columnmzML_Id);
-				this.columnindexedmzML_Id = new global::System.Data.DataColumn("indexedmzML_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
-				base.Columns.Add(this.columnindexedmzML_Id);
-				this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass()
+            {
+                this.columnaccession = new global::System.Data.DataColumn("accession", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnaccession);
+                this.columnversion = new global::System.Data.DataColumn("version", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnversion);
+                this.columnid = new global::System.Data.DataColumn("id", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnid);
+                this.columnmzML_Id = new global::System.Data.DataColumn("mzML_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnmzML_Id);
+                this.columnindexedmzML_Id = new global::System.Data.DataColumn("indexedmzML_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
+                base.Columns.Add(this.columnindexedmzML_Id);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnmzML_Id}, true));
-				this.columnaccession.Namespace = "";
-				this.columnversion.AllowDBNull = false;
-				this.columnversion.Namespace = "";
-				this.columnid.Namespace = "";
-				this.columnmzML_Id.AutoIncrement = true;
-				this.columnmzML_Id.AllowDBNull = false;
-				this.columnmzML_Id.Unique = true;
-			}
+                this.columnaccession.Namespace = "";
+                this.columnversion.AllowDBNull = false;
+                this.columnversion.Namespace = "";
+                this.columnid.Namespace = "";
+                this.columnmzML_Id.AutoIncrement = true;
+                this.columnmzML_Id.AllowDBNull = false;
+                this.columnmzML_Id.Unique = true;
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public mzMLRow NewmzMLRow()
-			{
-				return ((mzMLRow)(this.NewRow()));
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public mzMLRow NewmzMLRow()
+            {
+                return ((mzMLRow)(this.NewRow()));
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
-			{
-				return new mzMLRow(builder);
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder)
+            {
+                return new mzMLRow(builder);
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected override global::System.Type GetRowType()
-			{
-				return typeof(mzMLRow);
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType()
+            {
+                return typeof(mzMLRow);
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
-			{
-				base.OnRowChanged(e);
-				if ((this.mzMLRowChanged != null))
-				{
-					this.mzMLRowChanged(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e)
+            {
+                base.OnRowChanged(e);
+                if ((this.mzMLRowChanged != null))
+                {
+                    this.mzMLRowChanged(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
-			{
-				base.OnRowChanging(e);
-				if ((this.mzMLRowChanging != null))
-				{
-					this.mzMLRowChanging(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e)
+            {
+                base.OnRowChanging(e);
+                if ((this.mzMLRowChanging != null))
+                {
+                    this.mzMLRowChanging(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
-			{
-				base.OnRowDeleted(e);
-				if ((this.mzMLRowDeleted != null))
-				{
-					this.mzMLRowDeleted(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e)
+            {
+                base.OnRowDeleted(e);
+                if ((this.mzMLRowDeleted != null))
+                {
+                    this.mzMLRowDeleted(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
-			{
-				base.OnRowDeleting(e);
-				if ((this.mzMLRowDeleting != null))
-				{
-					this.mzMLRowDeleting(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
-				}
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e)
+            {
+                base.OnRowDeleting(e);
+                if ((this.mzMLRowDeleting != null))
+                {
+                    this.mzMLRowDeleting(this, new mzMLRowChangeEvent(((mzMLRow)(e.Row)), e.Action));
+                }
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public void RemovemzMLRow(mzMLRow row)
-			{
-				this.Rows.Remove(row);
-			}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemovemzMLRow(mzMLRow row)
+            {
+                this.Rows.Remove(row);
+            }
 
-			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-			public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
-			{
-				global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-				global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-				MzMLDataSet ds = new MzMLDataSet();
-				//IndexedMzMLDataSet ds = new IndexedMzMLDataSet();
-				global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-				any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-				any1.MinOccurs = new decimal(0);
-				any1.MaxOccurs = decimal.MaxValue;
-				any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-				sequence.Items.Add(any1);
-				global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-				any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-				any2.MinOccurs = new decimal(1);
-				any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-				sequence.Items.Add(any2);
-				global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-				attribute1.Name = "namespace";
-				attribute1.FixedValue = ds.Namespace;
-				type.Attributes.Add(attribute1);
-				global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-				attribute2.Name = "tableTypeName";
-				attribute2.FixedValue = "mzMLDataTable";
-				type.Attributes.Add(attribute2);
-				type.Particle = sequence;
-				global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-				if (xs.Contains(dsSchema.TargetNamespace))
-				{
-					global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-					global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-					try
-					{
-						global::System.Xml.Schema.XmlSchema schema = null;
-						dsSchema.Write(s1);
-						for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); )
-						{
-							schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-							s2.SetLength(0);
-							schema.Write(s2);
-							if ((s1.Length == s2.Length))
-							{
-								s1.Position = 0;
-								s2.Position = 0;
-								for (; ((s1.Position != s1.Length)
-											&& (s1.ReadByte() == s2.ReadByte())); )
-								{
-									;
-								}
-								if ((s1.Position == s1.Length))
-								{
-									return type;
-								}
-							}
-						}
-					}
-					finally
-					{
-						if ((s1 != null))
-						{
-							s1.Close();
-						}
-						if ((s2 != null))
-						{
-							s2.Close();
-						}
-					}
-				}
-				xs.Add(dsSchema);
-				return type;
-			}
-		}
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs)
+            {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                MzMLDataSet ds = new MzMLDataSet();
+                //IndexedMzMLDataSet ds = new IndexedMzMLDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "mzMLDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace))
+                {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try
+                    {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); )
+                        {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length))
+                            {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length)
+                                            && (s1.ReadByte() == s2.ReadByte())); )
+                                {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length))
+                                {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        if ((s1 != null))
+                        {
+                            s1.Close();
+                        }
+                        if ((s2 != null))
+                        {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
         
         /// <summary>
         ///Represents the strongly named DataTable class.

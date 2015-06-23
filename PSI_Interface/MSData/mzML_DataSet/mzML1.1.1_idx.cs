@@ -25,8 +25,8 @@ namespace PSI_Interface.MSData.mzML_DataSet
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("IndexedMzMLDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-	public partial class IndexedMzMLDataSet : MzMLDataSet
-	{
+    public partial class IndexedMzMLDataSet : MzMLDataSet
+    {
         
         private indexedmzMLDataTable tableindexedmzML;
         
@@ -55,7 +55,7 @@ namespace PSI_Interface.MSData.mzML_DataSet
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-		protected IndexedMzMLDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected IndexedMzMLDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -315,7 +315,7 @@ namespace PSI_Interface.MSData.mzML_DataSet
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public override global::System.Data.DataSet Clone() {
-			IndexedMzMLDataSet cln = ((IndexedMzMLDataSet)(base.Clone()));
+            IndexedMzMLDataSet cln = ((IndexedMzMLDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -2637,7 +2637,7 @@ namespace PSI_Interface.MSData.mzML_DataSet
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public new static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-			IndexedMzMLDataSet ds = new IndexedMzMLDataSet();
+            IndexedMzMLDataSet ds = new IndexedMzMLDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -2890,7 +2890,7 @@ namespace PSI_Interface.MSData.mzML_DataSet
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-				IndexedMzMLDataSet ds = new IndexedMzMLDataSet();
+                IndexedMzMLDataSet ds = new IndexedMzMLDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);

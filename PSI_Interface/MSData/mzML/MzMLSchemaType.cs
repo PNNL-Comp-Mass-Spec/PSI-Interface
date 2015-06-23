@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PSI_Interface.MSData.mzML
 {
-	public enum MzMLSchemaType : byte
-	{
-		MzML,
-		IndexedMzML,
-	}
+    public enum MzMLSchemaType : byte
+    {
+        MzML,
+        IndexedMzML,
+    }
 }
