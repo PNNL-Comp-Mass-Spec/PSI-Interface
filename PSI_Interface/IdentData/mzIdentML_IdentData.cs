@@ -89,7 +89,7 @@ namespace PSI_Interface.IdentData
             {
                 this._provider = new ProviderInfo(mzid.Provider, this);
             }
-            // Referenced by SpectrumIdentification, ProteinDetection, SpectrumIdentificationItem, references AnalysisSoftwareInfo
+            // Referenced by SpectrumIdentification, ProteinDetection, SpectrumIdentificationItem, PeptideEvidence, references AnalysisSoftwareInfo
             if (mzid.AnalysisProtocolCollection != null)
             {
                 this._analysisProtocolCollection = new AnalysisProtocolCollection(mzid.AnalysisProtocolCollection, this);
@@ -101,7 +101,8 @@ namespace PSI_Interface.IdentData
                 this._dataCollection = new DataCollection();
                 this._dataCollection.Inputs = new InputsInfo(mzid.DataCollection.Inputs, this);
             }
-            // Referenced by SpectrumIdentificationItem, ProteinDetectionHypothesis, PeptideHypothesis, references InputsInfo.DBSequence
+            // Referenced by SpectrumIdentificationItem, ProteinDetectionHypothesis, PeptideHypothesis
+            // References InputsInfo.DBSequence, AnalysisProtocolCollection.SoftwareIdentificationProtocol.DatabaseTranslation.TranslationTable
             if (mzid.SequenceCollection != null)
             {
                 this._sequenceCollection = new SequenceCollection(mzid.SequenceCollection, this);
