@@ -31,6 +31,7 @@ namespace PSI_Interface.IdentData
             this._dataCollection = null;
             this._bibliographicReference = null;
 
+            // Referenced by anything using CV/User params
             if (mzid.cvList != null && mzid.cvList.Count > 0)
             {
                 this.CVList = new IdentDataList<CVInfo>();
@@ -40,18 +41,16 @@ namespace PSI_Interface.IdentData
                 }
                 this.CvTranslator = new CVTranslator(this._cvList);
             }
-            if (mzid.AnalysisSoftwareList != null && mzid.AnalysisSoftwareList.Count > 0)
+            // Referenced by nothing
+            if (mzid.BibliographicReference != null && mzid.BibliographicReference.Count > 0)
             {
-                this.AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareInfo>();
-                foreach (var asl in mzid.AnalysisSoftwareList)
+                this.BibliographicReferences = new IdentDataList<BibliographicReference>();
+                foreach (var br in mzid.BibliographicReference)
                 {
-                    this.AnalysisSoftwareList.Add(new AnalysisSoftwareInfo(asl, this));
+                    this.BibliographicReferences.Add(new BibliographicReference(br, this));
                 }
             }
-            if (mzid.Provider != null)
-            {
-                this._provider = new ProviderInfo(mzid.Provider, this);
-            }
+            // Referenced by anything using organization, person, contactRoleInfo - SampleInfo, ProviderInfo, AnalysisSoftwareInfo
             if (mzid.AuditCollection != null && mzid.AuditCollection.Count > 0)
             {
                 this.AuditCollection = new IdentDataList<AbstractContactInfo>();
@@ -67,6 +66,7 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
+            // Referenced by anything using SampleInfo: SubSample, SpectrumIdentificationItem
             if (mzid.AnalysisSampleCollection != null && mzid.AnalysisSampleCollection.Count > 0)
             {
                 this.AnalysisSampleCollection = new IdentDataList<SampleInfo>();
@@ -75,29 +75,46 @@ namespace PSI_Interface.IdentData
                     this.AnalysisSampleCollection.Add(new SampleInfo(asc, this));
                 }
             }
-            if (mzid.SequenceCollection != null)
+            // Referenced by ProviderInfo, ProteinDetectionProtocol, SpectrumIdentificationProtocol, references AbstractContactInfo through ContactRoleInfo
+            if (mzid.AnalysisSoftwareList != null && mzid.AnalysisSoftwareList.Count > 0)
             {
-                this._sequenceCollection = new SequenceCollection(mzid.SequenceCollection, this);
+                this.AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareInfo>();
+                foreach (var asl in mzid.AnalysisSoftwareList)
+                {
+                    this.AnalysisSoftwareList.Add(new AnalysisSoftwareInfo(asl, this));
+                }
             }
-            if (mzid.AnalysisCollection != null)
+            // Referenced by nothing, references AnalysisSoftwareInfo
+            if (mzid.Provider != null)
             {
-                this._analysisCollection = new AnalysisCollection(mzid.AnalysisCollection, this);
+                this._provider = new ProviderInfo(mzid.Provider, this);
             }
+            // Referenced by SpectrumIdentification, ProteinDetection, SpectrumIdentificationItem, references AnalysisSoftwareInfo
             if (mzid.AnalysisProtocolCollection != null)
             {
                 this._analysisProtocolCollection = new AnalysisProtocolCollection(mzid.AnalysisProtocolCollection, this);
             }
+            // InputsInfo referenced by DBSequence, SpectrumIdentification.SearchDatabaseRefInfo, SpectrumIdentificationResult, SpectrumIdentification.InputSpectraRef
             if (mzid.DataCollection != null)
             {
-                this._dataCollection = new DataCollection(mzid.DataCollection, this);
+                //this._dataCollection = new DataCollection(mzid.DataCollection, this);
+                this._dataCollection = new DataCollection();
+                this._dataCollection.Inputs = new InputsInfo(mzid.DataCollection.Inputs, this);
             }
-            if (mzid.BibliographicReference != null && mzid.BibliographicReference.Count > 0)
+            // Referenced by SpectrumIdentificationItem, ProteinDetectionHypothesis, PeptideHypothesis, references InputsInfo.DBSequence
+            if (mzid.SequenceCollection != null)
             {
-                this.BibliographicReferences = new IdentDataList<BibliographicReference>();
-                foreach (var br in mzid.BibliographicReference)
-                {
-                    this.BibliographicReferences.Add(new BibliographicReference(br, this));
-                }
+                this._sequenceCollection = new SequenceCollection(mzid.SequenceCollection, this);
+            }
+            // AnalysisData referenced by SpectrumIdentification, InputSpectrumIdentifications, ProteinDetection, references Peptides, PeptideEvidence, SampleInfo, MassTable, 
+            if (mzid.DataCollection != null)
+            {
+                this._dataCollection.AnalysisData = new AnalysisData(mzid.DataCollection.AnalysisData, this);
+            }
+            // References SpectrumIdentificationProtocol, SpectrumIdentificationList, SpectraData, SeqrchDatabaseInfo, ProteinDetectionList, ProteinDetectionProtocol
+            if (mzid.AnalysisCollection != null)
+            {
+                this._analysisCollection = new AnalysisCollection(mzid.AnalysisCollection, this);
             }
         }
 
@@ -209,7 +226,7 @@ namespace PSI_Interface.IdentData
         public SpectrumIdentificationItemRefInfo(SpectrumIdentificationItemRefType siir, IdentData idata)
             : base(idata)
         {
-            this._spectrumIdentificationItemRef = siir.spectrumIdentificationItem_ref;
+            this.SpectrumIdentificationItemRef = siir.spectrumIdentificationItem_ref;
         }
 
         /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
@@ -227,7 +244,7 @@ namespace PSI_Interface.IdentData
         public PeptideHypothesis(PeptideHypothesisType ph, IdentData idata)
             : base(idata)
         {
-            this._peptideEvidenceRef = ph.peptideEvidence_ref;
+            this.PeptideEvidenceRef = ph.peptideEvidence_ref;
 
             this._spectrumIdentificationItemRef = null;
 
@@ -259,7 +276,7 @@ namespace PSI_Interface.IdentData
         public FragmentArray(FragmentArrayType fa, IdentData idata)
             : base(idata)
         {
-            this._measureRef = fa.measure_ref;
+            this.MeasureRef = fa.measure_ref;
 
             this._values = null;
             if (fa.values != null)
@@ -586,7 +603,7 @@ namespace PSI_Interface.IdentData
         public PeptideEvidenceRefInfo(PeptideEvidenceRefType per, IdentData idata)
             : base(idata)
         {
-            this._peptideEvidenceRef = per.peptideEvidence_ref;
+            this.PeptideEvidenceRef = per.peptideEvidence_ref;
         }
 
         /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
@@ -853,7 +870,7 @@ namespace PSI_Interface.IdentData
         {
             this._id = pdh.id;
             this._name = pdh.name;
-            this._dBSequenceRef = pdh.dBSequence_ref;
+            this.DBSequenceRef = pdh.dBSequence_ref;
             this._passThreshold = pdh.passThreshold;
 
             this._peptideHypothesis = null;
@@ -1016,11 +1033,11 @@ namespace PSI_Interface.IdentData
             this.CalculatedMassToChargeSpecified = sii.calculatedMassToChargeSpecified;
             this._calculatedPI = sii.calculatedPI;
             this.CalculatedPISpecified = sii.calculatedPISpecified;
-            this._peptideRef = sii.peptide_ref;
+            this.PeptideRef = sii.peptide_ref;
             this._rank = sii.rank;
             this._passThreshold = sii.passThreshold;
-            this._massTableRef = sii.massTable_ref;
-            this._sampleRef = sii.sample_ref;
+            this.MassTableRef = sii.massTable_ref;
+            this.SampleRef = sii.sample_ref;
 
             this._peptideEvidenceRef = null;
             this._fragmentation = null;
@@ -1138,7 +1155,7 @@ namespace PSI_Interface.IdentData
             this._id = sir.id;
             this._name = sir.name;
             this._spectrumID = sir.spectrumID;
-            this._spectraDataRef = sir.spectraData_ref;
+            this.SpectraDataRef = sir.spectraData_ref;
 
             this._spectrumIdentificationItems = null;
 
@@ -1477,7 +1494,7 @@ namespace PSI_Interface.IdentData
         {
             this._id = pdp.id;
             this._name = pdp.name;
-            this._analysisSoftwareRef = pdp.analysisSoftware_ref;
+            this.AnalysisSoftwareRef = pdp.analysisSoftware_ref;
 
             this._analysisParams = null;
             this._threshold = null;
@@ -1765,7 +1782,7 @@ namespace PSI_Interface.IdentData
         {
             this._id = sip.id;
             this._name = sip.name;
-            this._analysisSoftwareRef = sip.analysisSoftware_ref;
+            this.AnalysisSoftwareRef = sip.analysisSoftware_ref;
 
             this._searchType = null;
             this._additionalSearchParams = null;
@@ -2119,8 +2136,8 @@ namespace PSI_Interface.IdentData
         public ProteinDetection(ProteinDetectionType pd, IdentData idata)
             : base(pd, idata)
         {
-            this._proteinDetectionListRef = pd.proteinDetectionList_ref;
-            this._proteinDetectionProtocolRef = pd.proteinDetectionProtocol_ref;
+            this.ProteinDetectionListRef = pd.proteinDetectionList_ref;
+            this.ProteinDetectionProtocolRef = pd.proteinDetectionProtocol_ref;
 
             this._inputSpectrumIdentifications = null;
 
@@ -2157,7 +2174,7 @@ namespace PSI_Interface.IdentData
         public InputSpectrumIdentifications(InputSpectrumIdentificationsType isi, IdentData idata)
             : base(idata)
         {
-            this._spectrumIdentificationListRef = isi.spectrumIdentificationList_ref;
+            this.SpectrumIdentificationListRef = isi.spectrumIdentificationList_ref;
         }
 
         /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
@@ -2176,8 +2193,8 @@ namespace PSI_Interface.IdentData
         public SpectrumIdentification(SpectrumIdentificationType si, IdentData idata)
             : base(si, idata)
         {
-            this._spectrumIdentificationProtocolRef = si.spectrumIdentificationProtocol_ref;
-            this._spectrumIdentificationListRef = si.spectrumIdentificationList_ref;
+            this.SpectrumIdentificationProtocolRef = si.spectrumIdentificationProtocol_ref;
+            this.SpectrumIdentificationListRef = si.spectrumIdentificationList_ref;
 
             this._inputSpectra = null;
             this._searchDatabaseRef = null;
@@ -2227,7 +2244,7 @@ namespace PSI_Interface.IdentData
         public InputSpectraRef(InputSpectraType isr, IdentData idata)
             : base(idata)
         {
-            this._spectraDataRef = isr.spectraData_ref;
+            this.SpectraDataRef = isr.spectraData_ref;
         }
 
         /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
@@ -2245,7 +2262,7 @@ namespace PSI_Interface.IdentData
         public SearchDatabaseRefInfo(SearchDatabaseRefType sdr, IdentData idata)
             : base(idata)
         {
-            this._searchDatabaseRef = sdr.searchDatabase_ref;
+            this.SearchDatabaseRef = sdr.searchDatabase_ref;
         }
 
         /// <remarks>A reference to the database searched.</remarks>
@@ -2264,15 +2281,15 @@ namespace PSI_Interface.IdentData
         public PeptideEvidence(PeptideEvidenceType pe, IdentData idata)
             : base(pe, idata)
         {
-            this._dBSequenceRef = pe.dBSequence_ref;
-            this._peptideRef = pe.peptide_ref;
+            this.DBSequenceRef = pe.dBSequence_ref;
+            this.PeptideRef = pe.peptide_ref;
             this._start = pe.start;
             this.StartSpecified = pe.startSpecified;
             this._end = pe.end;
             this.EndSpecified = pe.endSpecified;
             this._pre = pe.pre;
             this._post = pe.post;
-            this._translationTableRef = pe.translationTable_ref;
+            this.TranslationTableRef = pe.translationTable_ref;
             this._frame = pe.frame;
             this.FrameSpecified = pe.frameSpecified;
             this._isDecoy = pe.isDecoy;
@@ -2537,7 +2554,7 @@ namespace PSI_Interface.IdentData
             this._seq = dbs.Seq;
             this._length = dbs.length;
             this.LengthSpecified = dbs.lengthSpecified;
-            this._searchDatabaseRef = dbs.searchDatabase_ref;
+            this.SearchDatabaseRef = dbs.searchDatabase_ref;
             this._accession = dbs.accession;
         }
 
@@ -2661,7 +2678,7 @@ namespace PSI_Interface.IdentData
         public ContactRoleInfo(ContactRoleType cr, IdentData idata)
             : base(idata)
         {
-            this._contactRef = cr.contact_ref;
+            this.ContactRef = cr.contact_ref;
 
             this._role = null;
 
@@ -2711,7 +2728,7 @@ namespace PSI_Interface.IdentData
         public SubSample(SubSampleType ss, IdentData idata)
             : base(idata)
         {
-            this._sampleRef = ss.sample_ref;
+            this.SampleRef = ss.sample_ref;
         }
 
         /// <remarks>A reference to the child sample.</remarks>
@@ -2778,15 +2795,30 @@ namespace PSI_Interface.IdentData
     }
 
     /// <summary>
+    /// Base class for identical ParentOrganization and AffiliationInfo
+    /// </summary>
+    public partial class OrganizationRefType : IdentDataInternalTypeAbstract
+    {
+        public OrganizationRefType(IdentData idata)
+            : base(idata)
+        { }
+
+        /// <remarks>A reference to the organization this contact belongs to.</remarks>
+        /// Required Attribute
+        /// string
+        //public string OrganizationRef
+    }
+
+    /// <summary>
     /// MzIdentML ParentOrganizationType
     /// </summary>
     /// <remarks>The containing organization (the university or business which a lab belongs to, etc.)</remarks>
-    public partial class ParentOrganization : IdentDataInternalTypeAbstract
+    public partial class ParentOrganization : OrganizationRefType
     {
         public ParentOrganization(ParentOrganizationType po, IdentData idata)
             : base(idata)
         {
-            this._organizationRef = po.organization_ref;
+            this.OrganizationRef = po.organization_ref;
         }
 
         /// <remarks>A reference to the organization this contact belongs to.</remarks>
@@ -2841,12 +2873,12 @@ namespace PSI_Interface.IdentData
     /// <summary>
     /// MzIdentML AffiliationType
     /// </summary>
-    public partial class AffiliationInfo : IdentDataInternalTypeAbstract
+    public partial class AffiliationInfo : OrganizationRefType
     {
         public AffiliationInfo(AffiliationType a, IdentData idata)
             : base(idata)
         {
-            this._organizationRef = a.organization_ref;
+            this.OrganizationRef = a.organization_ref;
         }
 
         /// <remarks>>A reference to the organization this contact belongs to.</remarks>
@@ -2866,7 +2898,9 @@ namespace PSI_Interface.IdentData
         {
             this._id = p.id;
             this._name = p.name;
-            this._analysisSoftwareRef = p.analysisSoftware_ref;
+            this.AnalysisSoftwareRef = p.analysisSoftware_ref;
+
+            idata.Provider = this;
 
             this._contactRole = null;
 
@@ -3023,6 +3057,8 @@ namespace PSI_Interface.IdentData
             this._inputs = null;
             this._analysisData = null;
 
+            idata.DataCollection = this;
+
             if (dc.Inputs != null)
             {
                 this._inputs = new InputsInfo(dc.Inputs, this.IdentData);
@@ -3051,6 +3087,8 @@ namespace PSI_Interface.IdentData
         {
             this._spectrumIdentificationProtocol = null;
             this._proteinDetectionProtocol = null;
+
+            idata.AnalysisProtocolCollection = this;
 
             if (apc.SpectrumIdentificationProtocol != null && apc.SpectrumIdentificationProtocol.Count > 0)
             {
@@ -3086,6 +3124,8 @@ namespace PSI_Interface.IdentData
             this._spectrumIdentification = null;
             this._proteinDetection = null;
 
+            idata.AnalysisCollection = this;
+
             if (ac.SpectrumIdentification != null && ac.SpectrumIdentification.Count > 0)
             {
                 this.SpectrumIdentification = new IdentDataList<SpectrumIdentification>();
@@ -3093,6 +3133,10 @@ namespace PSI_Interface.IdentData
                 {
                     this.SpectrumIdentification.Add(new SpectrumIdentification(si, this.IdentData));
                 }
+            }
+            if (ac.ProteinDetection != null)
+            {
+                this.ProteinDetection = new ProteinDetection(ac.ProteinDetection, this.IdentData);
             }
         }
 
@@ -3116,6 +3160,8 @@ namespace PSI_Interface.IdentData
             this._dBSequences = null;
             this._peptides = null;
             this._peptideEvidences = null;
+
+            idata.SequenceCollection = this;
 
             if (sc.DBSequence != null && sc.DBSequence.Count > 0)
             {

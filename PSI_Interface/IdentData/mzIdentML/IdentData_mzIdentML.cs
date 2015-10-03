@@ -1968,7 +1968,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.startSpecified = pe.StartSpecified;
             this.end = pe.End;
             this.endSpecified = pe.EndSpecified;
-            this.translationTable_ref = pe.TranslationTable_ref;
+            this.translationTable_ref = pe.TranslationTableRef;
             this.frame = pe.Frame;
             this.frameSpecified = pe.FrameSpecified;
             this.peptide_ref = pe.PeptideRef;

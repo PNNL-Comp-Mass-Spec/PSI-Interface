@@ -13,7 +13,7 @@ namespace PSI_Interface.CV
 
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "http://psidev.cvs.sourceforge.net/viewvc/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo", "3.74.0"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "http://psidev.cvs.sourceforge.net/viewvc/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo", "3.78.0"));
             CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "https://psi-pi.googlecode.com/svn/trunk/cv/unimod.obo", "2012:03:09 11:26"));
             CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://pato.googlecode.com/svn/trunk/quality.obo", "15:08:2014 14:45"));
             CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://unit-ontology.googlecode.com/svn/trunk/unit.obo", "09:04:2014 13:37"));
@@ -5296,7 +5296,7 @@ namespace PSI_Interface.CV
             // Normalization as performed by Progenesis LC-MS.
             MS_Progenesis_normalization,
 
-            // Estimation of the q-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
+            // Estimation of the q-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs, possibly with different mass modifications, mapping to the same sequence have been collapsed to one entry).
             MS_distinct_peptide_level_q_value,
 
             // Estimation of the q-value for proteins.
@@ -6556,8 +6556,8 @@ namespace PSI_Interface.CV
             // A program in the TPP that calculates protein-level probabilities based on input PSM or peptide-level probabilities from PeptideProphet or iProphet. The output is written in the protXML format.
             MS_ProteinProphet,
 
-            // A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.
-            MS_ASAPRatio,
+            // OBSOLETE A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.
+            MS_ASAPRatio_OBSOLETE,
 
             // A program in the TPP that calculates PSM-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.
             MS_XPRESS,
@@ -7410,6 +7410,12 @@ namespace PSI_Interface.CV
 
             // Estimated statistical threshold used for spectrum identification.
             MS_spectrum_identification_statistical_threshold,
+
+            // A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.
+            MS_ASAPRatio,
+
+            // Tide open-source sequence search program developed at the University of Washington.
+            MS_Tide,
 
             // The root node of the unimod modifications ontology.
             UNIMOD_unimod_root_node,
@@ -19482,7 +19488,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Progenesis_automatic_alignment, new TermInfo(CVID.MS_Progenesis_automatic_alignment, @"MS", @"MS:1001865", @"Progenesis automatic alignment", @"Automatic RT alignment of Progenesis software.", false));
             TermData.Add(CVID.MS_Progenesis_manual_alignment, new TermInfo(CVID.MS_Progenesis_manual_alignment, @"MS", @"MS:1001866", @"Progenesis manual alignment", @"RT alignment of Progenesis software using automatic and manual vectors.", false));
             TermData.Add(CVID.MS_Progenesis_normalization, new TermInfo(CVID.MS_Progenesis_normalization, @"MS", @"MS:1001867", @"Progenesis normalization", @"Normalization as performed by Progenesis LC-MS.", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_q_value, new TermInfo(CVID.MS_distinct_peptide_level_q_value, @"MS", @"MS:1001868", @"distinct peptide-level q-value", @"Estimation of the q-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_distinct_peptide_level_q_value, new TermInfo(CVID.MS_distinct_peptide_level_q_value, @"MS", @"MS:1001868", @"distinct peptide-level q-value", @"Estimation of the q-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs, possibly with different mass modifications, mapping to the same sequence have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_protein_level_q_value, new TermInfo(CVID.MS_protein_level_q_value, @"MS", @"MS:1001869", @"protein-level q-value", @"Estimation of the q-value for proteins.", false));
             TermData.Add(CVID.MS_distinct_peptide_level_p_value, new TermInfo(CVID.MS_distinct_peptide_level_p_value, @"MS", @"MS:1001870", @"distinct peptide-level p-value", @"Estimation of the p-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_protein_level_p_value, new TermInfo(CVID.MS_protein_level_p_value, @"MS", @"MS:1001871", @"protein-level p-value", @"Estimation of the p-value for proteins.", false));
@@ -19902,7 +19908,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_PeptideProphet, new TermInfo(CVID.MS_PeptideProphet, @"MS", @"MS:1002287", @"PeptideProphet", @"A program in the TPP that calculates PSM probabilities for MS2 proteomics data searched with any of the supported sequence or spectral library search engines via the pepXML format.", false));
             TermData.Add(CVID.MS_iProphet, new TermInfo(CVID.MS_iProphet, @"MS", @"MS:1002288", @"iProphet", @"A program in the TPP that calculates distinct peptide probabilities based on several lines of corroborating evidence including search results from multiple search engines via the pepXML format.", false));
             TermData.Add(CVID.MS_ProteinProphet, new TermInfo(CVID.MS_ProteinProphet, @"MS", @"MS:1002289", @"ProteinProphet", @"A program in the TPP that calculates protein-level probabilities based on input PSM or peptide-level probabilities from PeptideProphet or iProphet. The output is written in the protXML format.", false));
-            TermData.Add(CVID.MS_ASAPRatio, new TermInfo(CVID.MS_ASAPRatio, @"MS", @"MS:1002289_", @"ASAPRatio", @"A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.", false));
+            TermData.Add(CVID.MS_ASAPRatio_OBSOLETE, new TermInfo(CVID.MS_ASAPRatio_OBSOLETE, @"MS", @"MS:1002289_", @"ASAPRatio", @"OBSOLETE A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.", true));
             TermData.Add(CVID.MS_XPRESS, new TermInfo(CVID.MS_XPRESS, @"MS", @"MS:1002290", @"XPRESS", @"A program in the TPP that calculates PSM-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.", false));
             TermData.Add(CVID.MS_Libra, new TermInfo(CVID.MS_Libra, @"MS", @"MS:1002291", @"Libra", @"A program in the TPP that calculates PSM, peptide, and protein-level abundances based on N-channel isobaric label peptide data such as iTRAQ, TMT, etc.", false));
             TermData.Add(CVID.MS_PTMProphet, new TermInfo(CVID.MS_PTMProphet, @"MS", @"MS:1002292", @"PTMProphet", @"A program in the TPP that calculates PTM localization probabilities by re-analyzing the peaks that are available to distinguish between possible modification sites.", false));
@@ -20187,6 +20193,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_spectrum_multiply_subsumable_protein, new TermInfo(CVID.MS_spectrum_multiply_subsumable_protein, @"MS", @"MS:1002571", @"spectrum multiply subsumable protein", @"A protein for which the matched spectra are the same, or a subset of, the matched spectra for two or more other proteins combined. These other proteins need not all be in the same group.", false));
             TermData.Add(CVID.MS_protein_detection_statistical_threshold, new TermInfo(CVID.MS_protein_detection_statistical_threshold, @"MS", @"MS:1002572", @"protein detection statistical threshold", @"Estimated statistical threshold used for protein detection.", false));
             TermData.Add(CVID.MS_spectrum_identification_statistical_threshold, new TermInfo(CVID.MS_spectrum_identification_statistical_threshold, @"MS", @"MS:1002573", @"spectrum identification statistical threshold", @"Estimated statistical threshold used for spectrum identification.", false));
+            TermData.Add(CVID.MS_ASAPRatio, new TermInfo(CVID.MS_ASAPRatio, @"MS", @"MS:1002574", @"ASAPRatio", @"A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.", false));
+            TermData.Add(CVID.MS_Tide, new TermInfo(CVID.MS_Tide, @"MS", @"MS:1002575", @"Tide", @"Tide open-source sequence search program developed at the University of Washington.", false));
             TermData.Add(CVID.UNIMOD_unimod_root_node, new TermInfo(CVID.UNIMOD_unimod_root_node, @"UNIMOD", @"UNIMOD:0", @"unimod root node", @"The root node of the unimod modifications ontology.", false));
             TermData.Add(CVID.UNIMOD_Acetyl, new TermInfo(CVID.UNIMOD_Acetyl, @"UNIMOD", @"UNIMOD:1", @"Acetyl", @"Acetylation.", false));
             TermData.Add(CVID.UNIMOD_Amidated, new TermInfo(CVID.UNIMOD_Amidated, @"UNIMOD", @"UNIMOD:2", @"Amidated", @"Amidation.", false));
@@ -24017,8 +24025,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Waters_instrument_model, new List<CVID> { CVID.MS_instrument_model, });
             RelationsIsA.Add(CVID.MS_centroid_spectrum, new List<CVID> { CVID.MS_spectrum_representation, });
             RelationsIsA.Add(CVID.MS_profile_spectrum, new List<CVID> { CVID.MS_spectrum_representation, });
-            RelationsIsA.Add(CVID.MS_negative_scan, new List<CVID> { CVID.PATO_polarity, CVID.MS_scan_polarity, });
-            RelationsIsA.Add(CVID.MS_positive_scan, new List<CVID> { CVID.PATO_polarity, CVID.MS_scan_polarity, });
+            RelationsIsA.Add(CVID.MS_negative_scan, new List<CVID> { CVID.PATO_polarity, CVID.MS_scan_polarity, CVID.MS_chromatogram_attribute, });
+            RelationsIsA.Add(CVID.MS_positive_scan, new List<CVID> { CVID.PATO_polarity, CVID.MS_scan_polarity, CVID.MS_chromatogram_attribute, });
             RelationsIsA.Add(CVID.MS_number_of_detector_counts, new List<CVID> { CVID.MS_intensity_unit, });
             RelationsIsA.Add(CVID.MS_percent_of_base_peak, new List<CVID> { CVID.MS_intensity_unit, });
             RelationsIsA.Add(CVID.MS_collision_induced_dissociation, new List<CVID> { CVID.MS_dissociation_method, });
@@ -25406,7 +25414,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Progenesis_automatic_alignment, new List<CVID> { CVID.MS_quantification_data_processing, });
             RelationsIsA.Add(CVID.MS_Progenesis_manual_alignment, new List<CVID> { CVID.MS_quantification_data_processing, });
             RelationsIsA.Add(CVID.MS_Progenesis_normalization, new List<CVID> { CVID.MS_quantification_data_processing, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_q_value, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
+            RelationsIsA.Add(CVID.MS_distinct_peptide_level_q_value, new List<CVID> { CVID.MS_peptide_level_statistical_threshold, });
             RelationsIsA.Add(CVID.MS_protein_level_q_value, new List<CVID> { CVID.MS_protein_identification_confidence_metric, });
             RelationsIsA.Add(CVID.MS_distinct_peptide_level_p_value, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
             RelationsIsA.Add(CVID.MS_protein_level_p_value, new List<CVID> { CVID.MS_protein_identification_confidence_metric, });
@@ -25809,7 +25817,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PeptideProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_iProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_ProteinProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
-            RelationsIsA.Add(CVID.MS_ASAPRatio, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
+            RelationsIsA.Add(CVID.MS_ASAPRatio_OBSOLETE, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_XPRESS, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_Libra, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_PTMProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
@@ -25985,9 +25993,9 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PSM_level_global_confidence, new List<CVID> { CVID.MS_PSM_level_result_details, });
             RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, });
             RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_score, new List<CVID> { CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_distinct_peptides, });
             RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_group_score, new List<CVID> { CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_group_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_protein_groups, });
             RelationsIsA.Add(CVID.MS_PeptideShaker_protein_group_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_trap_type_collision_induced_dissociation, new List<CVID> { CVID.MS_collision_induced_dissociation, });
             RelationsIsA.Add(CVID.MS_ion_series_considered_in_search, new List<CVID> { CVID.MS_search_input_details, });
@@ -26090,6 +26098,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_spectrum_multiply_subsumable_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_protein_detection_statistical_threshold, new List<CVID> { CVID.MS_statistical_threshold, });
             RelationsIsA.Add(CVID.MS_spectrum_identification_statistical_threshold, new List<CVID> { CVID.MS_statistical_threshold, });
+            RelationsIsA.Add(CVID.MS_ASAPRatio, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
+            RelationsIsA.Add(CVID.MS_Tide, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.UNIMOD_Acetyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Amidated, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });

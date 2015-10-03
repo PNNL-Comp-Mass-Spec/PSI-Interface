@@ -39,10 +39,13 @@ namespace PSI_Interface.MSData
             get { return _msData; }
             set
             {
-                _msData = value;
-                foreach (T item in this)
+                if (!ReferenceEquals(this._msData, value))
                 {
-                    item.MsData = this._msData;
+                    this._msData = value;
+                    foreach (T item in this)
+                    {
+                        item.MsData = this._msData;
+                    }
                 }
             }
         }

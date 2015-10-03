@@ -258,14 +258,42 @@ namespace PSI_Interface.IdentData
     public partial class SpectrumIdentificationItemRefInfo : IdentDataInternalTypeAbstract
     {
         private string _spectrumIdentificationItemRef;
+        private SpectrumIdentificationItem _spectrumIdentificationItem;
 
         /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
         /// Required Attribute
         /// string
-        public string SpectrumIdentificationItemRef
+        protected internal string SpectrumIdentificationItemRef
         {
-            get { return this._spectrumIdentificationItemRef; }
-            set { _spectrumIdentificationItemRef = value; }
+            get
+            {
+                if (this._spectrumIdentificationItem != null)
+                {
+                    return this._spectrumIdentificationItem.Id;
+                }
+                return this._spectrumIdentificationItemRef;
+            }
+            set
+            {
+                this._spectrumIdentificationItemRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._spectrumIdentificationItem = this.IdentData.FindSpectrumIdentificationItem(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
+        /// Required Attribute
+        /// string
+        public SpectrumIdentificationItem SpectrumIdentificationItem
+        {
+            get { return this._spectrumIdentificationItem; }
+            set
+            {
+                this._spectrumIdentificationItem = value;
+                this._spectrumIdentificationItemRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -277,6 +305,7 @@ namespace PSI_Interface.IdentData
     {
         private IdentDataList<SpectrumIdentificationItemRefInfo> _spectrumIdentificationItemRef;
         private string _peptideEvidenceRef;
+        private PeptideEvidence _peptideEvidence;
 
         /// min 1, max unbounded
         public IdentDataList<SpectrumIdentificationItemRefInfo> SpectrumIdentificationItemRef
@@ -295,10 +324,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the PeptideEvidence element on which this hypothesis is based.</remarks>
         /// Required Attribute
         /// string
-        public string PeptideEvidenceRef
+        protected internal string PeptideEvidenceRef
         {
-            get { return this._peptideEvidenceRef; }
-            set { _peptideEvidenceRef = value; }
+            get
+            {
+                if (this._peptideEvidence != null)
+                {
+                    return this._peptideEvidence.Id;
+                }
+                return this._peptideEvidenceRef;
+            }
+            set
+            {
+                this._peptideEvidenceRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._peptideEvidence = this.IdentData.FindPeptideEvidence(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the PeptideEvidence element on which this hypothesis is based.</remarks>
+        /// Required Attribute
+        /// string
+        public PeptideEvidence PeptideEvidence
+        {
+            get { return this._peptideEvidence; }
+            set
+            {
+                this._peptideEvidence = value;
+                this._peptideEvidenceRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -310,6 +366,7 @@ namespace PSI_Interface.IdentData
     {
         private List<float> _values;
         private string _measureRef;
+        private Measure _measure;
 
         /// <remarks>The values of this particular measure, corresponding to the index defined in ion type</remarks>
         /// Required Attribute
@@ -323,10 +380,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the Measure defined in the FragmentationTable</remarks>
         /// Required Attribute
         /// string
-        public string MeasureRef
+        protected internal string MeasureRef
         {
-            get { return this._measureRef; }
-            set { _measureRef = value; }
+            get
+            {
+                if (this._measure != null)
+                {
+                    return this._measure.Id;
+                }
+                return this._measureRef;
+            }
+            internal set
+            {
+                this._measureRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._measure = this.IdentData.FindMeasure(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the Measure defined in the FragmentationTable</remarks>
+        /// Required Attribute
+        /// string
+        public Measure Measure
+        {
+            get { return this._measure; }
+            set
+            {
+                this._measure = value;
+                this._measureRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -719,14 +803,42 @@ namespace PSI_Interface.IdentData
     public partial class PeptideEvidenceRefInfo : IdentDataInternalTypeAbstract
     {
         private string _peptideEvidenceRef;
+        private PeptideEvidence _peptideEvidence;
 
         /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
         /// Required Attribute
         /// string
-        public string PeptideEvidenceRef
+        protected internal string PeptideEvidenceRef
         {
-            get { return this._peptideEvidenceRef; }
-            set { _peptideEvidenceRef = value; }
+            get
+            {
+                if (this._peptideEvidence != null)
+                {
+                    return this._peptideEvidence.Id;
+                }
+                return this._peptideEvidenceRef;
+            }
+            set
+            {
+                this._peptideEvidenceRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._peptideEvidence = this.IdentData.FindPeptideEvidence(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
+        /// Required Attribute
+        /// string
+        public PeptideEvidence PeptideEvidence
+        {
+            get { return this._peptideEvidence; }
+            set
+            {
+                this._peptideEvidence = value;
+                this._peptideEvidenceRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -1043,6 +1155,7 @@ namespace PSI_Interface.IdentData
         //private IdentDataList<CVParamType> _cvParams;
         //private IdentDataList<UserParamType> _userParams;
         private string _dBSequenceRef;
+        private DBSequence _dBSequence;
         private bool _passThreshold;
         private string _id;
         private string _name;
@@ -1114,10 +1227,38 @@ namespace PSI_Interface.IdentData
         /// elements referenced from here also map to the DBSequence.</remarks>
         /// Optional Attribute
         /// string
-        public string DBSequenceRef
+        protected internal string DBSequenceRef
         {
-            get { return this._dBSequenceRef; }
-            set { _dBSequenceRef = value; }
+            get
+            {
+                if (this._dBSequence != null)
+                {
+                    return this._dBSequence.Id;
+                }
+                return this._dBSequenceRef;
+            }
+            set
+            {
+                this._dBSequenceRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._dBSequence = this.IdentData.FindDbSequence(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence 
+        /// elements referenced from here also map to the DBSequence.</remarks>
+        /// Optional Attribute
+        /// string
+        public DBSequence DBSequence
+        {
+            get { return this._dBSequence; }
+            set
+            {
+                this._dBSequence = value;
+                this._dBSequenceRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given 
@@ -1300,10 +1441,13 @@ namespace PSI_Interface.IdentData
         private double _calculatedMassToCharge;
         private float _calculatedPI;
         private string _peptideRef;
+        private Peptide _peptide;
         private int _rank;
         private bool _passThreshold;
         private string _massTableRef;
+        private MassTable _massTable;
         private string _sampleRef;
+        private SampleInfo _sample;
         private string _id;
         private string _name;
 
@@ -1438,10 +1582,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
         /// Optional Attribute
         /// string
-        public string PeptideRef
+        protected internal string PeptideRef
         {
-            get { return this._peptideRef; }
-            set { this._peptideRef = value; }
+            get
+            {
+                if (this._peptide != null)
+                {
+                    return this._peptide.Id;
+                }
+                return this._peptideRef;
+            }
+            set
+            {
+                this._peptideRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._peptide = this.IdentData.FindPeptide(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
+        /// Optional Attribute
+        /// string
+        public Peptide Peptide
+        {
+            get { return this._peptide; }
+            set
+            {
+                this._peptide = value;
+                this._peptideRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>For an MS/MS result set, this is the rank of the identification quality as scored by the search engine. 
@@ -1468,19 +1639,73 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference should be given to the MassTable used to calculate the sequenceMass only if more than one MassTable has been given.</remarks>
         /// Optional Attribute
         /// string
-        public string MassTableRef
+        protected internal string MassTableRef
         {
-            get { return this._massTableRef; }
-            set { this._massTableRef = value; }
+            get
+            {
+                if (this._massTable != null)
+                {
+                    return this._massTable.Id;
+                }
+                return this._massTableRef;
+            }
+            set
+            {
+                this._massTableRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._massTable = this.IdentData.FindMassTable(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference should be given to the MassTable used to calculate the sequenceMass only if more than one MassTable has been given.</remarks>
+        /// Optional Attribute
+        /// string
+        public MassTable MassTable
+        {
+            get { return this._massTable; }
+            set
+            {
+                this._massTable = value;
+                this._massTableRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>A reference should be provided to link the SpectrumIdentificationItem to a Sample 
         /// if more than one sample has been described in the AnalysisSampleCollection.</remarks>
         /// Optional Attribute
-        public string SampleRef
+        protected internal string SampleRef
         {
-            get { return this._sampleRef; }
-            set { this._sampleRef = value; }
+            get
+            {
+                if (this._sample != null)
+                {
+                    return this._sample.Id;
+                }
+                return this._sampleRef;
+            }
+            set
+            {
+                this._sampleRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._sample = this.IdentData.FindSample(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference should be provided to link the SpectrumIdentificationItem to a Sample 
+        /// if more than one sample has been described in the AnalysisSampleCollection.</remarks>
+        /// Optional Attribute
+        public SampleInfo Sample
+        {
+            get { return this._sample; }
+            set
+            {
+                this._sample = value;
+                this._sampleRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -1497,6 +1722,7 @@ namespace PSI_Interface.IdentData
         //private IdentDataList<UserParamType> _userParams;
         private string _spectrumID;
         private string _spectraDataRef;
+        private SpectraData _spectraData;
         private string _id;
         private string _name;
 
@@ -1578,10 +1804,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to a spectra data set (e.g. a spectra file).</remarks>
         /// Required Attribute
         /// string
-        public string SpectraDataRef
+        protected internal string SpectraDataRef
         {
-            get { return _spectraDataRef; }
-            set { _spectraDataRef = value; }
+            get
+            {
+                if (this._spectraData != null)
+                {
+                    return this._spectraData.Id;
+                }
+                return this._spectraDataRef;
+            }
+            set
+            {
+                this._spectraDataRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._spectraData = this.IdentData.FindSpectraData(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to a spectra data set (e.g. a spectra file).</remarks>
+        /// Required Attribute
+        /// string
+        public SpectraData SpectraData
+        {
+            get { return this._spectraData; }
+            set
+            {
+                this._spectraData = value;
+                this._spectraDataRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -1995,6 +2248,7 @@ namespace PSI_Interface.IdentData
         private ParamList _analysisParams;
         private ParamList _threshold;
         private string _analysisSoftwareRef;
+        private AnalysisSoftwareInfo _analysisSoftware;
         private string _id;
         private string _name;
 
@@ -2051,10 +2305,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>The protein detection software used, given as a reference to the SoftwareCollection section.</remarks>
         /// Required Attribute
         /// string
-        public string AnalysisSoftwareRef
+        protected internal string AnalysisSoftwareRef
         {
-            get { return this._analysisSoftwareRef; }
-            set { _analysisSoftwareRef = value; }
+            get
+            {
+                if (this._analysisSoftware != null)
+                {
+                    return this._analysisSoftware.Id;
+                }
+                return this._analysisSoftwareRef;
+            }
+            set
+            {
+                this._analysisSoftwareRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._analysisSoftware = this.IdentData.FindAnalysisSoftware(value);
+                }
+            }
+        }
+
+        /// <remarks>The protein detection software used, given as a reference to the SoftwareCollection section.</remarks>
+        /// Required Attribute
+        /// string
+        public AnalysisSoftwareInfo AnalysisSoftware
+        {
+            get { return this._analysisSoftware; }
+            set
+            {
+                this._analysisSoftware = value;
+                this._analysisSoftwareRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -2429,6 +2710,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<FilterInfo> _databaseFilters;
         private DatabaseTranslation _databaseTranslation;
         private string _analysisSoftwareRef;
+        private AnalysisSoftwareInfo _analysisSoftware;
         private string _id;
         private string _name;
 
@@ -2597,10 +2879,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>The search algorithm used, given as a reference to the SoftwareCollection section.</remarks>
         /// Required Attribute
         /// string
-        public string AnalysisSoftwareRef
+        protected internal string AnalysisSoftwareRef
         {
-            get { return this._analysisSoftwareRef; }
-            set { _analysisSoftwareRef = value; }
+            get
+            {
+                if (this._analysisSoftware != null)
+                {
+                    return this._analysisSoftware.Id;
+                }
+                return this._analysisSoftwareRef;
+            }
+            set
+            {
+                this._analysisSoftwareRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._analysisSoftware = this.IdentData.FindAnalysisSoftware(value);
+                }
+            }
+        }
+
+        /// <remarks>The search algorithm used, given as a reference to the SoftwareCollection section.</remarks>
+        /// Required Attribute
+        /// string
+        public AnalysisSoftwareInfo AnalysisSoftware
+        {
+            get { return this._analysisSoftware; }
+            set
+            {
+                this._analysisSoftware = value;
+                this._analysisSoftwareRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -2763,7 +3072,7 @@ namespace PSI_Interface.IdentData
             get { return this._filterType; }
             set
             {
-                _filterType = value;
+                this._filterType = value;
                 if (this._filterType != null)
                 {
                     this._filterType.IdentData = this.IdentData;
@@ -2890,7 +3199,9 @@ namespace PSI_Interface.IdentData
     {
         private IdentDataList<InputSpectrumIdentifications> _inputSpectrumIdentifications;
         private string _proteinDetectionListRef;
+        private ProteinDetectionList _proteinDetectionList;
         private string _proteinDetectionProtocolRef;
+        private ProteinDetectionProtocol _proteinDetectionProtocol;
 
         /// min 1, max unbounded
         public IdentDataList<InputSpectrumIdentifications> InputSpectrumIdentifications
@@ -2909,19 +3220,73 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the ProteinDetectionList in the DataCollection section.</remarks>
         /// Required Attribute
         /// string
-        public string ProteinDetectionListRef
+        protected internal string ProteinDetectionListRef
         {
-            get { return this._proteinDetectionListRef; }
-            set { _proteinDetectionListRef = value; }
+            get
+            {
+                if (this._proteinDetectionList != null)
+                {
+                    return this._proteinDetectionList.Id;
+                }
+                return this._proteinDetectionListRef;
+            }
+            set
+            {
+                this._proteinDetectionListRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._proteinDetectionList = this.IdentData.FindProteinDetectionList(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the ProteinDetectionList in the DataCollection section.</remarks>
+        /// Required Attribute
+        /// string
+        public ProteinDetectionList ProteinDetectionList
+        {
+            get { return this._proteinDetectionList; }
+            set
+            {
+                this._proteinDetectionList = value;
+                this._proteinDetectionListRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>A reference to the detection protocol used for this ProteinDetection.</remarks>
         /// Required Attribute
         /// string
-        public string ProteinDetectionProtocolRef
+        protected internal string ProteinDetectionProtocolRef
         {
-            get { return this._proteinDetectionProtocolRef; }
-            set { _proteinDetectionProtocolRef = value; }
+            get
+            {
+                if (this._proteinDetectionProtocol != null)
+                {
+                    return this._proteinDetectionProtocol.Id;
+                }
+                return this._proteinDetectionProtocolRef;
+            }
+            set
+            {
+                this._proteinDetectionProtocolRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._proteinDetectionProtocol = this.IdentData.FindProteinDetectionProtocol(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the detection protocol used for this ProteinDetection.</remarks>
+        /// Required Attribute
+        /// string
+        public ProteinDetectionProtocol ProteinDetectionProtocol
+        {
+            get { return this._proteinDetectionProtocol; }
+            set
+            {
+                this._proteinDetectionProtocol = value;
+                this._proteinDetectionProtocolRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -2932,14 +3297,42 @@ namespace PSI_Interface.IdentData
     public partial class InputSpectrumIdentifications : IdentDataInternalTypeAbstract
     {
         private string _spectrumIdentificationListRef;
+        private SpectrumIdentificationList _spectrumIdentificationList;
 
         /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
         /// Required Attribute
         /// string
-        public string SpectrumIdentificationListRef
+        protected internal string SpectrumIdentificationListRef
         {
-            get { return this._spectrumIdentificationListRef; }
-            set { _spectrumIdentificationListRef = value; }
+            get
+            {
+                if (this._spectrumIdentificationList != null)
+                {
+                    return this._spectrumIdentificationList.Id;
+                }
+                return this._spectrumIdentificationListRef;
+            }
+            set
+            {
+                this._spectrumIdentificationListRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._spectrumIdentificationList = this.IdentData.FindSpectrumIdentificationList(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
+        /// Required Attribute
+        /// string
+        public SpectrumIdentificationList SpectrumIdentificationList
+        {
+            get { return this._spectrumIdentificationList; }
+            set
+            {
+                this._spectrumIdentificationList = value;
+                this._spectrumIdentificationListRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -2953,7 +3346,9 @@ namespace PSI_Interface.IdentData
         private IdentDataList<InputSpectraRef> _inputSpectra;
         private IdentDataList<SearchDatabaseRefInfo> _searchDatabaseRef;
         private string _spectrumIdentificationProtocolRef;
+        private SpectrumIdentificationProtocol _spectrumIdentificationProtocol;
         private string _spectrumIdentificationListRef;
+        private SpectrumIdentificationList _spectrumIdentificationList;
 
         /// <remarks>One of the spectra data sets used.</remarks>
         /// min 1, max unbounded
@@ -2987,19 +3382,73 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the search protocol used for this SpectrumIdentification.</remarks>
         /// Required Attribute
         /// string
-        public string SpectrumIdentificationProtocolRef
+        protected internal string SpectrumIdentificationProtocolRef
         {
-            get { return this._spectrumIdentificationProtocolRef; }
-            set { _spectrumIdentificationProtocolRef = value; }
+            get
+            {
+                if (this._spectrumIdentificationProtocol != null)
+                {
+                    return this._spectrumIdentificationProtocol.Id;
+                }
+                return this._spectrumIdentificationProtocolRef;
+            }
+            set
+            {
+                this._spectrumIdentificationProtocolRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._spectrumIdentificationProtocol = this.IdentData.FindSpectrumIdentificationProtocol(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the search protocol used for this SpectrumIdentification.</remarks>
+        /// Required Attribute
+        /// string
+        public SpectrumIdentificationProtocol SpectrumIdentificationProtocol
+        {
+            get { return this._spectrumIdentificationProtocol; }
+            set
+            {
+                this._spectrumIdentificationProtocol = value;
+                this._spectrumIdentificationProtocolRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</remarks>
         /// Required Attribute
         /// string
-        public string SpectrumIdentificationListRef
+        protected internal string SpectrumIdentificationListRef
         {
-            get { return this._spectrumIdentificationListRef; }
-            set { _spectrumIdentificationListRef = value; }
+            get
+            {
+                if (this._spectrumIdentificationList != null)
+                {
+                    return this._spectrumIdentificationList.Id;
+                }
+                return this._spectrumIdentificationListRef;
+            }
+            set
+            {
+                this._spectrumIdentificationListRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._spectrumIdentificationList = this.IdentData.FindSpectrumIdentificationList(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</remarks>
+        /// Required Attribute
+        /// string
+        public SpectrumIdentificationList SpectrumIdentificationList
+        {
+            get { return this._spectrumIdentificationList; }
+            set
+            {
+                this._spectrumIdentificationList = value;
+                this._spectrumIdentificationListRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -3010,14 +3459,42 @@ namespace PSI_Interface.IdentData
     public partial class InputSpectraRef : IdentDataInternalTypeAbstract
     {
         private string _spectraDataRef;
+        private SpectraData _spectraData;
 
         /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
         /// Optional Attribute
         /// string
-        public string SpectraDataRef
+        protected internal string SpectraDataRef
         {
-            get { return this._spectraDataRef; }
-            set { _spectraDataRef = value; }
+            get
+            {
+                if (this._spectraData != null)
+                {
+                    return this._spectraData.Id;
+                }
+                return this._spectraDataRef;
+            }
+            set
+            {
+                this._spectraDataRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._spectraData = this.IdentData.FindSpectraData(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
+        /// Optional Attribute
+        /// string
+        public SpectraData SpectraData
+        {
+            get { return this._spectraData; }
+            set
+            {
+                this._spectraData = value;
+                this._spectraDataRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -3028,14 +3505,42 @@ namespace PSI_Interface.IdentData
     public partial class SearchDatabaseRefInfo : IdentDataInternalTypeAbstract
     {
         private string _searchDatabaseRef;
+        private SearchDatabaseInfo _searchDatabase;
 
         /// <remarks>A reference to the database searched.</remarks>
         /// Optional Attribute
         /// string
-        public string SearchDatabaseRef
+        protected internal string SearchDatabaseRef
         {
-            get { return this._searchDatabaseRef; }
-            set { this._searchDatabaseRef = value; }
+            get
+            {
+                if (this._searchDatabase != null)
+                {
+                    return this._searchDatabase.Id;
+                }
+                return this._searchDatabaseRef;
+            }
+            set
+            {
+                this._searchDatabaseRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._searchDatabase = this.IdentData.FindSearchDatabase(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the database searched.</remarks>
+        /// Optional Attribute
+        /// string
+        public SearchDatabaseInfo SearchDatabase
+        {
+            get { return this._searchDatabase; }
+            set
+            {
+                this._searchDatabase = value;
+                this._searchDatabaseRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -3049,12 +3554,15 @@ namespace PSI_Interface.IdentData
         //private IdentDataList<CVParamType> _cvParams;
         //private IdentDataList<UserParamType> _userParams;
         private string _dBSequenceRef;
+        private DBSequence _dBSequence;
         private string _peptideRef;
+        private Peptide _peptide;
         private int _start;
         private int _end;
         private string _pre;
         private string _post;
         private string _translationTableRef;
+        private TranslationTable _translationTable;
         private int _frame;
         private bool _isDecoy;
         private string _id;
@@ -3063,7 +3571,7 @@ namespace PSI_Interface.IdentData
         // Taken care of elsewhere
         //public PeptideEvidence()
         //{
-        //    _isDecoy = false;
+        //    this._isDecoy = false;
         //}
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -3180,10 +3688,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</remarks>
         /// Optional Attribute
         /// string
-        public string TranslationTable_ref
+        protected internal string TranslationTableRef
         {
-            get { return _translationTableRef; }
-            set { _translationTableRef = value; }
+            get
+            {
+                if (this._translationTable != null)
+                {
+                    return this._translationTable.Id;
+                }
+                return this._translationTableRef;
+            }
+            set
+            {
+                this._translationTableRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._translationTable = this.IdentData.FindTranslationTable(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</remarks>
+        /// Optional Attribute
+        /// string
+        public TranslationTable TranslationTable
+        {
+            get { return this._translationTable; }
+            set
+            {
+                this._translationTable = value;
+                this._translationTableRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>The translation frame of this sequence if this is PeptideEvidence derived from nucleic acid sequence</remarks>
@@ -3205,19 +3740,73 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
         /// Required Attribute
         /// string
-        public string PeptideRef
+        protected internal string PeptideRef
         {
-            get { return _peptideRef; }
-            set { _peptideRef = value; }
+            get
+            {
+                if (this._peptide != null)
+                {
+                    return this._peptide.Id;
+                }
+                return this._peptideRef;
+            }
+            set
+            {
+                this._peptideRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._peptide = this.IdentData.FindPeptide(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
+        /// Required Attribute
+        /// string
+        public Peptide Peptide
+        {
+            get { return this._peptide; }
+            set
+            {
+                this._peptide = value;
+                this._peptideRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>A reference to the protein sequence in which the specified peptide has been linked.</remarks>
         /// Required Attribute
         /// string
-        public string DBSequenceRef
+        protected internal string DBSequenceRef
         {
-            get { return _dBSequenceRef; }
-            set { _dBSequenceRef = value; }
+            get
+            {
+                if (this._dBSequence != null)
+                {
+                    return this._dBSequence.Id;
+                }
+                return this._dBSequenceRef;
+            }
+            set
+            {
+                this._dBSequenceRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._dBSequence = this.IdentData.FindDbSequence(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the protein sequence in which the specified peptide has been linked.</remarks>
+        /// Required Attribute
+        /// string
+        public DBSequence DBSequence
+        {
+            get { return this._dBSequence; }
+            set
+            {
+                this._dBSequence = value;
+                this._dBSequenceRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -3514,6 +4103,7 @@ namespace PSI_Interface.IdentData
         //private IdentDataList<UserParamType> _userParams;
         private int _length;
         private string _searchDatabaseRef;
+        private SearchDatabaseInfo _searchDatabase;
         private string _accession;
         private string _id;
         private string _name;
@@ -3587,10 +4177,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>The source database of this sequence.</remarks>
         /// Required Attribute
         /// string
-        public string SearchDatabaseRef
+        protected internal string SearchDatabaseRef
         {
-            get { return _searchDatabaseRef; }
-            set { _searchDatabaseRef = value; }
+            get
+            {
+                if (this._searchDatabase != null)
+                {
+                    return this._searchDatabase.Id;
+                }
+                return this._searchDatabaseRef;
+            }
+            set
+            {
+                this._searchDatabaseRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._searchDatabase = this.IdentData.FindSearchDatabase(value);
+                }
+            }
+        }
+
+        /// <remarks>The source database of this sequence.</remarks>
+        /// Required Attribute
+        /// string
+        public SearchDatabaseInfo SearchDatabase
+        {
+            get { return this._searchDatabase; }
+            set
+            {
+                this._searchDatabase = value;
+                this._searchDatabaseRef = value != null ? value.Id : string.Empty;
+            }
         }
 
         /// <remarks>The length of the sequence as a number of bases or residues.</remarks>
@@ -3719,6 +4336,7 @@ namespace PSI_Interface.IdentData
     {
         private RoleInfo _role;
         private string _contactRef;
+        private AbstractContactInfo _contact;
 
         /// min 1, max 1
         public RoleInfo Role
@@ -3737,10 +4355,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>When a ContactRole is used, it specifies which Contact the role is associated with.</remarks>
         /// Required Attribute
         /// string
-        public string ContactRef
+        protected internal string ContactRef
         {
-            get { return _contactRef; }
-            set { _contactRef = value; }
+            get
+            {
+                if (this._contact != null)
+                {
+                    return this._contact.Id;
+                }
+                return this._contactRef;
+            }
+            set
+            {
+                this._contactRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._contact = this.IdentData.FindContact(value);
+                }
+            }
+        }
+
+        /// <remarks>When a ContactRole is used, it specifies which Contact the role is associated with.</remarks>
+        /// Required Attribute
+        /// string
+        public AbstractContactInfo Contact
+        {
+            get { return this._contact; }
+            set
+            {
+                this._contact = value;
+                this._contactRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -3775,14 +4420,42 @@ namespace PSI_Interface.IdentData
     public partial class SubSample : IdentDataInternalTypeAbstract
     {
         private string _sampleRef;
+        private SampleInfo _sample;
 
         /// <remarks>A reference to the child sample.</remarks>
         /// Required  Attribute
         /// string
-        public string SampleRef
+        protected internal string SampleRef
         {
-            get { return this._sampleRef; }
-            set { _sampleRef = value; }
+            get
+            {
+                if (this._sample != null)
+                {
+                    return this._sample.Id;
+                }
+                return this._sampleRef;
+            }
+            set
+            {
+                this._sampleRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._sample = this.IdentData.FindSample(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the child sample.</remarks>
+        /// Required  Attribute
+        /// string
+        public SampleInfo Sample
+        {
+            get { return this._sample; }
+            set
+            {
+                this._sample = value;
+                this._sampleRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 
@@ -3874,22 +4547,56 @@ namespace PSI_Interface.IdentData
     }
 
     /// <summary>
-    /// MzIdentML ParentOrganizationType
+    /// Base class for identical ParentOrganization and AffiliationInfo
     /// </summary>
-    /// <remarks>The containing organization (the university or business which a lab belongs to, etc.)</remarks>
-    public partial class ParentOrganization : IdentDataInternalTypeAbstract
+    public partial class OrganizationRefType : IdentDataInternalTypeAbstract
     {
         private string _organizationRef;
+        private Organization _organization;
 
         /// <remarks>A reference to the organization this contact belongs to.</remarks>
         /// Required Attribute
         /// string
-        public string OrganizationRef
+        protected internal string OrganizationRef
         {
-            get { return this._organizationRef; }
-            set { _organizationRef = value; }
+            get
+            {
+                if (this._organization != null)
+                {
+                    return this._organization.Id;
+                }
+                return this._organizationRef;
+            }
+            set
+            {
+                this._organizationRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._organization = this.IdentData.FindOrganization(value);
+                }
+            }
+        }
+
+        /// <remarks>A reference to the organization this contact belongs to.</remarks>
+        /// Required Attribute
+        /// string
+        public Organization Organization
+        {
+            get { return this._organization; }
+            set
+            {
+                this._organization = value;
+                this._organizationRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
+
+    /// <summary>
+    /// MzIdentML ParentOrganizationType
+    /// </summary>
+    /// <remarks>The containing organization (the university or business which a lab belongs to, etc.)</remarks>
+    public partial class ParentOrganization : OrganizationRefType
+    { }
 
     /// <summary>
     /// MzIdentML PersonType
@@ -3946,19 +4653,8 @@ namespace PSI_Interface.IdentData
     /// <summary>
     /// MzIdentML AffiliationType
     /// </summary>
-    public partial class AffiliationInfo : IdentDataInternalTypeAbstract
-    {
-        private string _organizationRef;
-
-        /// <remarks>>A reference to the organization this contact belongs to.</remarks>
-        /// Required Attribute
-        /// string
-        public string OrganizationRef
-        {
-            get { return this._organizationRef; }
-            set { this._organizationRef = value; }
-        }
-    }
+    public partial class AffiliationInfo : OrganizationRefType
+    { }
 
     /// <summary>
     /// MzIdentML ProviderType
@@ -3968,6 +4664,7 @@ namespace PSI_Interface.IdentData
     {
         private ContactRoleInfo _contactRole;
         private string _analysisSoftwareRef;
+        private AnalysisSoftwareInfo _analysisSoftware;
         private string _id;
         private string _name;
 
@@ -4008,10 +4705,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>The Software that produced the document instance.</remarks>
         /// Optional Attribute
         /// string
-        public string AnalysisSoftwareRef
+        protected internal string AnalysisSoftwareRef
         {
-            get { return this._analysisSoftwareRef; }
-            set { this._analysisSoftwareRef = value; }
+            get
+            {
+                if (this._analysisSoftware != null)
+                {
+                    return this._analysisSoftware.Id;
+                }
+                return this._analysisSoftwareRef;
+            }
+            set
+            {
+                this._analysisSoftwareRef = value;
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    this._analysisSoftware = this.IdentData.FindAnalysisSoftware(value);
+                }
+            }
+        }
+
+        /// <remarks>The Software that produced the document instance.</remarks>
+        /// Optional Attribute
+        /// string
+        public AnalysisSoftwareInfo AnalysisSoftware
+        {
+            get { return this._analysisSoftware; }
+            set
+            {
+                this._analysisSoftware = value;
+                this._analysisSoftwareRef = value != null ? value.Id : string.Empty;
+            }
         }
     }
 

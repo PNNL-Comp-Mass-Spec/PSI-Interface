@@ -113,6 +113,374 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string, regex: "(1\.1\.\d+)"
         //public string Version
+
+        protected internal SpectrumIdentificationItem FindSpectrumIdentificationItem(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
+                {
+                    foreach (var sir in sil.SpectrumIdentificationResult)
+                    {
+                        foreach (var sii in sir.SpectrumIdentificationItems)
+                        {
+                            if (sii.Id == id)
+                            {
+                                return sii;
+                            }
+                        }
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal DBSequence FindDbSequence(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var dbs in this.SequenceCollection.DBSequences)
+                {
+                    if (dbs.Id == id)
+                    {
+                        return dbs;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal Peptide FindPeptide(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var pep in this.SequenceCollection.Peptides)
+                {
+                    if (pep.Id == id)
+                    {
+                        return pep;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal PeptideEvidence FindPeptideEvidence(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var pepEv in this.SequenceCollection.PeptideEvidences)
+                {
+                    if (pepEv.Id == id)
+                    {
+                        return pepEv;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal Measure FindMeasure(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
+                {
+                    foreach (var m in sil.FragmentationTable)
+                    {
+                        if (m.Id == id)
+                        {
+                            return m;
+                        }
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal MassTable FindMassTable(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocol)
+                {
+                    foreach (var mt in sip.MassTable)
+                    {
+                        if (mt.Id == id)
+                        {
+                            return mt;
+                        }
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal SampleInfo FindSample(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var s in this.AnalysisSampleCollection)
+                {
+                    if (s.Id == id)
+                    {
+                        return s;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal AnalysisSoftwareInfo FindAnalysisSoftware(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var s in this.AnalysisSoftwareList)
+                {
+                    if (s.Id == id)
+                    {
+                        return s;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal Organization FindOrganization(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var ac in this.AuditCollection)
+                {
+                    var o = ac as Organization;
+
+                    if (o != null && o.Id == id)
+                    {
+                        return o;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal AbstractContactInfo FindContact(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var ac in this.AuditCollection)
+                {
+                    if (ac.Id == id)
+                    {
+                        return ac;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal SearchDatabaseInfo FindSearchDatabase(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sd in this.DataCollection.Inputs.SearchDatabase)
+                {
+                    if (sd.Id == id)
+                    {
+                        return sd;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal SpectraData FindSpectraData(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sd in this.DataCollection.Inputs.SpectraData)
+                {
+                    if (sd.Id == id)
+                    {
+                        return sd;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal SpectrumIdentificationList FindSpectrumIdentificationList(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
+                {
+                    if (sil.Id == id)
+                    {
+                        return sil;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal SpectrumIdentificationProtocol FindSpectrumIdentificationProtocol(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocol)
+                {
+                    if (sip.Id == id)
+                    {
+                        return sip;
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal ProteinDetectionProtocol FindProteinDetectionProtocol(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                if (this.AnalysisProtocolCollection.ProteinDetectionProtocol.Id == id)
+                {
+                    return this.AnalysisProtocolCollection.ProteinDetectionProtocol;
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal ProteinDetectionList FindProteinDetectionList(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                if (this.DataCollection.AnalysisData.ProteinDetectionList.Id == id)
+                {
+                    return this.DataCollection.AnalysisData.ProteinDetectionList;
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
+
+        protected internal TranslationTable FindTranslationTable(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            try
+            {
+                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocol)
+                {
+                    foreach (var tt in sip.DatabaseTranslation.TranslationTable)
+                    {
+                        if (tt.Id == id)
+                        {
+                            return tt;
+                        }
+                    }
+                }
+            }
+            catch // Ignore errors; must resolve reference later...
+            { }
+            return null;
+        }
     }
 
     /// <summary>
@@ -2263,15 +2631,29 @@ namespace PSI_Interface.IdentData
     }
 
     /// <summary>
-    /// MzIdentML ParentOrganizationType
+    /// Base class for identical ParentOrganization and AffiliationInfo
     /// </summary>
-    /// <remarks>The containing organization (the university or business which a lab belongs to, etc.)</remarks>
-    public partial class ParentOrganization : IdentDataInternalTypeAbstract
+    public partial class OrganizationRefType : IdentDataInternalTypeAbstract
     {
-        public ParentOrganization()
+        public OrganizationRefType()
         {
             this._organizationRef = null;
         }
+
+        /// <remarks>A reference to the organization this contact belongs to.</remarks>
+        /// Required Attribute
+        /// string
+        //public string OrganizationRef
+    }
+
+    /// <summary>
+    /// MzIdentML ParentOrganizationType
+    /// </summary>
+    /// <remarks>The containing organization (the university or business which a lab belongs to, etc.)</remarks>
+    public partial class ParentOrganization : OrganizationRefType
+    {
+        public ParentOrganization() : base()
+        { }
 
         /// <remarks>A reference to the organization this contact belongs to.</remarks>
         /// Required Attribute
@@ -2315,12 +2697,10 @@ namespace PSI_Interface.IdentData
     /// <summary>
     /// MzIdentML AffiliationType
     /// </summary>
-    public partial class AffiliationInfo : IdentDataInternalTypeAbstract
+    public partial class AffiliationInfo : OrganizationRefType
     {
-        public AffiliationInfo()
-        {
-            this._organizationRef = null;
-        }
+        public AffiliationInfo() : base()
+        { }
 
         /// <remarks>>A reference to the organization this contact belongs to.</remarks>
         /// Required Attribute

@@ -27,10 +27,13 @@ namespace PSI_Interface.MSData
             }
             set
             {
-                this._msData = value;
-                if (this._msData != null)
+                if (!ReferenceEquals(this._msData, value))
                 {
-                    this.CascadeProperties();
+                    this._msData = value;
+                    if (this._msData != null)
+                    {
+                        this.CascadeProperties();
+                    }
                 }
             }
         }

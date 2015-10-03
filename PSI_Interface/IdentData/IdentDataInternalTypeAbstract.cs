@@ -21,10 +21,13 @@ namespace PSI_Interface.IdentData
             get { return this._identData; }
             set
             {
-                this._identData = value;
-                if (this._identData != null)
+                if (!ReferenceEquals(this._identData, value))
                 {
-                    this.CascadeProperties();
+                    this._identData = value;
+                    if (this._identData != null)
+                    {
+                        this.CascadeProperties();
+                    }
                 }
             }
         }

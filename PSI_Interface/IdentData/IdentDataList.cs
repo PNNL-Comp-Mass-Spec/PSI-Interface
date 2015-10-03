@@ -43,10 +43,13 @@ namespace PSI_Interface.IdentData
             get { return _identData; }
             set
             {
-                _identData = value;
-                foreach (T item in this)
+                if (!ReferenceEquals(this._identData, value))
                 {
-                    item.IdentData = this._identData;
+                    _identData = value;
+                    foreach (T item in this)
+                    {
+                        item.IdentData = this._identData;
+                    }
                 }
             }
         }
