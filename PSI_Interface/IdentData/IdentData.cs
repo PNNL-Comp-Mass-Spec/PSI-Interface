@@ -206,7 +206,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool CreationDateSpecified { get; private set; }
+        protected internal bool CreationDateSpecified { get; private set; }
 
         /// <remarks>The version of the schema this instance document refers to, in the format x.y.z. 
         /// Changes to z should not affect prevent instance documents from validating.</remarks>
@@ -985,7 +985,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool NumSequencesSearchedSpecified { get; private set; }
+        protected internal bool NumSequencesSearchedSpecified { get; private set; }
     }
 
     /// <summary>
@@ -1117,7 +1117,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool YearSpecified { get; private set; }
+        protected internal bool YearSpecified { get; private set; }
 
         /// <remarks>The volume name or number.</remarks>
         /// Optional Attribute
@@ -1560,7 +1560,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool CalculatedMassToChargeSpecified { get; private set; }
+        protected internal bool CalculatedMassToChargeSpecified { get; private set; }
 
         /// <remarks>The calculated isoelectric point of the (poly)peptide, with relevant modifications included. 
         /// Do not supply this value if the PI cannot be calcuated properly.</remarks>
@@ -1577,7 +1577,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool CalculatedPISpecified { get; private set; }
+        protected internal bool CalculatedPISpecified { get; private set; }
 
         /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
         /// Optional Attribute
@@ -2203,7 +2203,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool ReleaseDateSpecified { get; private set; }
+        protected internal bool ReleaseDateSpecified { get; private set; }
 
         /// <remarks>The total number of sequences in the database.</remarks>
         /// Optional Attribute
@@ -2219,7 +2219,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool NumDatabaseSequencesSpecified { get; private set; }
+        protected internal bool NumDatabaseSequencesSpecified { get; private set; }
 
         /// <remarks>The number of residues in the database.</remarks>
         /// Optional Attribute
@@ -2236,7 +2236,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks></remarks>
         /// Attribute Existence
-        public bool NumResiduesSpecified { get; private set; }
+        protected internal bool NumResiduesSpecified { get; private set; }
     }
 
     /// <summary>
@@ -2658,7 +2658,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool SemiSpecificSpecified { get; private set; }
+        protected internal bool SemiSpecificSpecified { get; private set; }
 
         /// <remarks>The number of missed cleavage sites allowed by the search. The attribute must be provided if an enzyme has been used.</remarks>
         /// Optional Attribute
@@ -2674,7 +2674,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool MissedCleavagesSpecified { get; private set; }
+        protected internal bool MissedCleavagesSpecified { get; private set; }
 
         /// <remarks>Minimal distance for another cleavage (minimum: 1).</remarks>
         /// Optional Attribute
@@ -2690,7 +2690,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool MinDistanceSpecified { get; private set; }
+        protected internal bool MinDistanceSpecified { get; private set; }
     }
 
     /// <summary>
@@ -3049,7 +3049,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool IndependentSpecified { get; private set; }
+        protected internal bool IndependentSpecified { get; private set; }
     }
 
     /// <summary>
@@ -3188,7 +3188,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool ActivityDateSpecified { get; private set; }
+        protected internal bool ActivityDateSpecified { get; private set; }
     }
 
     /// <summary>
@@ -3666,7 +3666,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool StartSpecified { get; private set; }
+        protected internal bool StartSpecified { get; private set; }
 
         /// <remarks>The index position of the last amino acid of the peptide inside the protein sequence, where the first 
         /// amino acid of the protein sequence is position 1. Must be provided unless this is a de novo search.</remarks>
@@ -3683,7 +3683,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool EndSpecified { get; private set; }
+        protected internal bool EndSpecified { get; private set; }
 
         /// <remarks>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</remarks>
         /// Optional Attribute
@@ -3735,7 +3735,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool FrameSpecified { get; private set; }
+        protected internal bool FrameSpecified { get; private set; }
 
         /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
         /// Required Attribute
@@ -3961,7 +3961,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool LocationSpecified { get; private set; }
+        protected internal bool LocationSpecified { get; private set; }
 
         /// <remarks>Specification of the residue (amino acid) on which the modification occurs. If multiple values 
         /// are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of 
@@ -3988,7 +3988,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool AvgMassDeltaSpecified { get; private set; }
+        protected internal bool AvgMassDeltaSpecified { get; private set; }
 
         /// <remarks>Atomic mass delta when assuming only the most common isotope of elements in Daltons.</remarks>
         /// Optional Attribute
@@ -4004,7 +4004,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool MonoisotopicMassDeltaSpecified { get; private set; }
+        protected internal bool MonoisotopicMassDeltaSpecified { get; private set; }
     }
 
     /// <summary>
@@ -4053,7 +4053,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool LocationSpecified { get; private set; }
+        protected internal bool LocationSpecified { get; private set; }
 
         /// <remarks>Atomic mass delta considering the natural distribution of isotopes in Daltons. 
         /// This should only be reported if the original amino acid is known i.e. it is not "X"</remarks>
@@ -4070,7 +4070,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool AvgMassDeltaSpecified { get; private set; }
+        protected internal bool AvgMassDeltaSpecified { get; private set; }
 
         /// <remarks>Atomic mass delta when assuming only the most common isotope of elements in Daltons. 
         /// This should only be reported if the original amino acid is known i.e. it is not "X"</remarks>
@@ -4087,7 +4087,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool MonoisotopicMassDeltaSpecified { get; private set; }
+        protected internal bool MonoisotopicMassDeltaSpecified { get; private set; }
     }
 
     /// <summary>
@@ -4224,7 +4224,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// Attribute Existence
-        public bool LengthSpecified { get; private set; }
+        protected internal bool LengthSpecified { get; private set; }
     }
 
     /// <summary>
