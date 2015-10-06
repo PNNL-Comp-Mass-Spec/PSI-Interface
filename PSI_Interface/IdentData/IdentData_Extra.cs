@@ -519,6 +519,28 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (CVList != null ? CVList.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisSoftwareList != null ? AnalysisSoftwareList.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Provider != null ? Provider.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AuditCollection != null ? AuditCollection.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisSampleCollection != null ? AnalysisSampleCollection.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SequenceCollection != null ? SequenceCollection.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisCollection != null ? AnalysisCollection.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisProtocolCollection != null ? AnalysisProtocolCollection.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DataCollection != null ? DataCollection.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (BibliographicReferences != null ? BibliographicReferences.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ CreationDate.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Id != null ? Id.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -585,6 +607,17 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (FullName != null ? FullName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (URI != null ? URI.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -633,6 +666,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (SpectrumIdentificationItem != null ? SpectrumIdentificationItem.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -686,6 +728,16 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (PeptideEvidence != null ? PeptideEvidence.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationItems != null ? SpectrumIdentificationItems.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -738,6 +790,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Measure != null ? Measure.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Values != null ? Values.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -805,6 +867,18 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = Charge;
+                hashCode = (hashCode * 397) ^ (FragmentArrays != null ? FragmentArrays.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Index != null ? Index.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParam != null ? CVParam.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -868,12 +942,24 @@ namespace PSI_Interface.IdentData
                 return false;
             }
 
-            if (this.CVRef == other.CVRef && this.Cvid == other.Cvid && this.Value == other.Value &&
-                Equals(this.UnitCvRef, other.UnitCvRef) && this.UnitCvid == other.UnitCvid)
+            if (this.Cvid == other.Cvid && this.Value == other.Value &&
+                this.UnitCvid == other.UnitCvid)
             {
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Cvid.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Value != null ? Value.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ UnitCvid.GetHashCode();
+                return hashCode;
+            }
         }
     }
 
@@ -946,11 +1032,21 @@ namespace PSI_Interface.IdentData
                 return false;
             }
 
-            if (this.Name == other.Name && Equals(this.UnitCvRef, other.UnitCvRef) && this.UnitCvid == other.UnitCvid)
+            if (this.Name == other.Name && this.UnitCvid == other.UnitCvid)
             {
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ UnitCvid.GetHashCode();
+                return hashCode;
+            }
         }
     }
 
@@ -1004,11 +1100,23 @@ namespace PSI_Interface.IdentData
             }
 
             if (this.Name == other.Name && this.Value == other.Value && this.Type == other.Type &&
-                Equals(this.UnitCvRef, other.UnitCvRef) && this.UnitCvid == other.UnitCvid)
+                this.UnitCvid == other.UnitCvid)
             {
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Value != null ? Value.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Type != null ? Type.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ UnitCvid.GetHashCode();
+                return hashCode;
+            }
         }
     }
 
@@ -1048,6 +1156,15 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (CVParams != null ? CVParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     public partial class ParamGroupObj : CVParamGroupObj
@@ -1085,6 +1202,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -1129,6 +1256,15 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Item != null ? Item.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -1171,6 +1307,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Items != null ? Items.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -1220,6 +1365,15 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (PeptideEvidence != null ? PeptideEvidence.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -1267,6 +1421,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (SpectrumIdentificationList != null ? SpectrumIdentificationList.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ProteinDetectionList != null ? ProteinDetectionList.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -1350,6 +1514,20 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ NumSequencesSearched.GetHashCode();
+                hashCode = (hashCode * 397) ^ (FragmentationTables != null ? FragmentationTables.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationResults != null ? SpectrumIdentificationResults.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -1407,6 +1585,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -1551,6 +1739,23 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Authors != null ? Authors.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DOI != null ? DOI.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Year;
+                hashCode = (hashCode * 397) ^ (Publication != null ? Publication.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Publisher != null ? Publisher.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Editor != null ? Editor.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Pages != null ? Pages.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Title != null ? Title.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -1633,6 +1838,20 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ PassThreshold.GetHashCode();
+                hashCode = (hashCode * 397) ^ (DBSequence != null ? DBSequence.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (PeptideHypotheses != null ? PeptideHypotheses.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -1699,6 +1918,18 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ProteinDetectionHypotheses != null ? ProteinDetectionHypotheses.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -1764,6 +1995,18 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ProteinAmbiguityGroups != null ? ProteinAmbiguityGroups.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -1913,6 +2156,28 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ ChargeState;
+                hashCode = (hashCode * 397) ^ ExperimentalMassToCharge.GetHashCode();
+                hashCode = (hashCode * 397) ^ CalculatedMassToCharge.GetHashCode();
+                hashCode = (hashCode * 397) ^ CalculatedPI.GetHashCode();
+                hashCode = (hashCode * 397) ^ Rank;
+                hashCode = (hashCode * 397) ^ PassThreshold.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Peptide != null ? Peptide.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (MassTable != null ? MassTable.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Sample != null ? Sample.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (PeptideEvidences != null ? PeptideEvidences.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Fragmentations != null ? Fragmentations.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -1999,6 +2264,20 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumID != null ? SpectrumID.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationItems != null ? SpectrumIdentificationItems.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectraData != null ? SpectraData.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -2070,6 +2349,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (CVParam != null ? CVParam.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -2146,6 +2434,19 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ExternalFormatDocumentation != null ? ExternalFormatDocumentation.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Location != null ? Location.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIDFormat != null ? SpectrumIDFormat.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FileFormat != null ? FileFormat.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -2189,6 +2490,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (CVParam != null ? CVParam.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -2268,6 +2578,20 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ExternalFormatDocumentation != null ? ExternalFormatDocumentation.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Location != null ? Location.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FileFormat != null ? FileFormat.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -2388,6 +2712,23 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ NumDatabaseSequences.GetHashCode();
+                hashCode = (hashCode * 397) ^ NumResidues.GetHashCode();
+                hashCode = (hashCode * 397) ^ (ExternalFormatDocumentation != null ? ExternalFormatDocumentation.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Location != null ? Location.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DatabaseName != null ? DatabaseName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FileFormat != null ? FileFormat.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -2460,6 +2801,18 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisSoftware != null ? AnalysisSoftware.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisParams != null ? AnalysisParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Threshold != null ? Threshold.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -2516,6 +2869,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -2596,6 +2959,20 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Residues != null ? Residues.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AmbiguousResidues != null ? AmbiguousResidues.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (MsLevels != null ? MsLevels.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -2645,6 +3022,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Code != null ? Code.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Mass.GetHashCode();
+                return hashCode;
+            }
         }
     }
 
@@ -2700,6 +3087,17 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Code != null ? Code.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -2812,6 +3210,22 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SiteRegexp != null ? SiteRegexp.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (NTermGain != null ? NTermGain.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CTermGain != null ? CTermGain.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ SemiSpecific.GetHashCode();
+                hashCode = (hashCode * 397) ^ MissedCleavages.GetHashCode();
+                hashCode = (hashCode * 397) ^ MinDistance.GetHashCode();
+                hashCode = (hashCode * 397) ^ (EnzymeName != null ? EnzymeName.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -2922,6 +3336,26 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisSoftware != null ? AnalysisSoftware.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SearchType != null ? SearchType.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AdditionalSearchParams != null ? AdditionalSearchParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (MassTables != null ? MassTables.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ModificationParams != null ? ModificationParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Enzymes != null ? Enzymes.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FragmentTolerances != null ? FragmentTolerances.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ParentTolerances != null ? ParentTolerances.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Threshold != null ? Threshold.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DatabaseFilters != null ? DatabaseFilters.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DatabaseTranslation != null ? DatabaseTranslation.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3011,6 +3445,19 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = FixedMod.GetHashCode();
+                hashCode = (hashCode * 397) ^ MassDelta.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Residues != null ? Residues.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpecificityRules != null ? SpecificityRules.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3064,6 +3511,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = Independent.GetHashCode();
+                hashCode = (hashCode * 397) ^ (Enzymes != null ? Enzymes.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -3123,6 +3580,17 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (FilterType != null ? FilterType.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Include != null ? Include.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Exclude != null ? Exclude.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3172,6 +3640,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (TranslationTables != null ? TranslationTables.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Frames != null ? Frames.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -3236,6 +3714,15 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3296,6 +3783,18 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (InputSpectrumIdentifications != null ? InputSpectrumIdentifications.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ProteinDetectionList != null ? ProteinDetectionList.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ProteinDetectionProtocol != null ? ProteinDetectionProtocol.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3342,6 +3841,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (SpectrumIdentificationList != null ? SpectrumIdentificationList.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -3409,6 +3917,18 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (InputSpectra != null ? InputSpectra.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationList != null ? SpectrumIdentificationList.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationProtocol != null ? SpectrumIdentificationProtocol.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3456,6 +3976,15 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (SpectraData != null ? SpectraData.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3502,6 +4031,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (SearchDatabase != null ? SearchDatabase.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -3629,6 +4167,26 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ IsDecoy.GetHashCode();
+                hashCode = (hashCode * 397) ^ Start;
+                hashCode = (hashCode * 397) ^ End;
+                hashCode = (hashCode * 397) ^ Pre.GetHashCode();
+                hashCode = (hashCode * 397) ^ Post.GetHashCode();
+                hashCode = (hashCode * 397) ^ Frame;
+                hashCode = (hashCode * 397) ^ (TranslationTable != null ? TranslationTable.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Peptide != null ? Peptide.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (DBSequence != null ? DBSequence.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -3705,6 +4263,20 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (PeptideSequence != null ? PeptideSequence.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Modifications != null ? Modifications.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SubstitutionModifications != null ? SubstitutionModifications.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -3794,11 +4366,24 @@ namespace PSI_Interface.IdentData
 
             if (this.AvgMassDelta.Equals(other.AvgMassDelta) &&
                 this.MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) && this.Location == other.Location &&
-                ListUtils.ListEqualsUnOrdered(this.Residues, other.Residues))
+                ListUtils.ListEqualsUnOrdered(this.Residues, other.Residues) && Equals(this.CVParams, other.CVParams))
             {
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = AvgMassDelta.GetHashCode();
+                hashCode = (hashCode * 397) ^ MonoisotopicMassDelta.GetHashCode();
+                hashCode = (hashCode * 397) ^ Location;
+                hashCode = (hashCode * 397) ^ (Residues != null ? Residues.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -3886,6 +4471,19 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = AvgMassDelta.GetHashCode();
+                hashCode = (hashCode * 397) ^ Location;
+                hashCode = (hashCode * 397) ^ MonoisotopicMassDelta.GetHashCode();
+                hashCode = (hashCode * 397) ^ (OriginalResidue != null ? OriginalResidue.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ReplacementResidue != null ? ReplacementResidue.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -3980,6 +4578,21 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Accession != null ? Accession.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Length;
+                hashCode = (hashCode * 397) ^ (Seq != null ? Seq.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SearchDatabase != null ? SearchDatabase.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -4059,6 +4672,19 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ContactRoles != null ? ContactRoles.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SubSamples != null ? SubSamples.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -4112,6 +4738,16 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Contact != null ? Contact.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Role != null ? Role.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -4155,6 +4791,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (CVParam != null ? CVParam.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4202,6 +4847,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Sample != null ? Sample.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4266,6 +4920,17 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -4310,6 +4975,18 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Parent != null ? Parent.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4356,6 +5033,15 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Organization != null ? Organization.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4434,6 +5120,21 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LastName != null ? LastName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FirstName != null ? FirstName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (MidInitials != null ? MidInitials.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Affiliations != null ? Affiliations.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4514,6 +5215,17 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ContactRole != null ? ContactRole.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisSoftware != null ? AnalysisSoftware.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4600,6 +5312,20 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Customizations != null ? Customizations.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (URI != null ? URI.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ContactRole != null ? ContactRole.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SoftwareName != null ? SoftwareName.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -4652,6 +5378,17 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (SourceFiles != null ? SourceFiles.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SearchDatabases != null ? SearchDatabases.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectraDataList != null ? SpectraDataList.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -4698,6 +5435,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Inputs != null ? Inputs.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (AnalysisData != null ? AnalysisData.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4747,6 +5494,16 @@ namespace PSI_Interface.IdentData
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (ProteinDetectionProtocol != null ? ProteinDetectionProtocol.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationProtocols != null ? SpectrumIdentificationProtocols.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
     }
 
     /// <summary>
@@ -4795,6 +5552,16 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (ProteinDetection != null ? ProteinDetection.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentifications != null ? SpectrumIdentifications.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 
@@ -4848,6 +5615,17 @@ namespace PSI_Interface.IdentData
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (DBSequences != null ? DBSequences.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Peptides != null ? Peptides.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (PeptideEvidences != null ? PeptideEvidences.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 }

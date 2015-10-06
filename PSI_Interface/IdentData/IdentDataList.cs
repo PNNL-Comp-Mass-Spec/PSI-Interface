@@ -117,5 +117,22 @@ namespace PSI_Interface.IdentData
             }
             return true;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                if (this.Count == 0)
+                {
+                    return 0;
+                }
+                var hashCode = 1;
+                foreach (var item in this)
+                {
+                    hashCode = (hashCode * 397) ^ item.GetHashCode();
+                }
+                return hashCode;
+            }
+        }
     }
 }
