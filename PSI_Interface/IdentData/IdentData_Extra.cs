@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using PSI_Interface.CV;
 using PSI_Interface.Utils;
 
@@ -115,6 +116,17 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string, regex: "(1\.1\.\d+)"
         //public string Version
+
+        public void RebuildLists()
+        {
+            // TODO: Not Implementing for now
+            //_auditCollection.Clear();
+            //_analysisSoftwareList.Clear();
+            //_analysisSampleCollection.Clear();
+            AnalysisProtocolCollection.RebuildSIPList();
+            SequenceCollection.RebuildLists();
+            DataCollection.RebuildLists();
+        }
 
         protected internal SpectrumIdentificationItemObj FindSpectrumIdentificationItem(string id)
         {
@@ -1388,11 +1400,21 @@ namespace PSI_Interface.IdentData
             this._proteinDetectionList = null;
         }
 
+        //private long _idCounter = 0;
+
         /// min 1, max unbounded
         //public IdentDataList<SpectrumIdentificationList> SpectrumIdentificationList
 
         /// min 0, max 1
         //public ProteinDetectionList ProteinDetectionList
+
+        internal void RebuildLists()
+        {
+            // Don't do anything; we'll assume this data is correct, to avoid losing any data.
+            //_idCounter = 0;
+            // Don't clear; primary data container
+            //_spectrumIdentificationList.Clear();
+        }
 
         public override bool Equals(object other)
         {
@@ -5341,6 +5363,9 @@ namespace PSI_Interface.IdentData
             this._spectraDataList = null;
         }
 
+        private long _specDataIdCounter = 0;
+        private long _searchDbIdCounter = 0;
+
         /// min 0, max unbounded
         //public IdentDataList<SourceFileInfo> SourceFile
 
@@ -5349,6 +5374,80 @@ namespace PSI_Interface.IdentData
 
         /// min 1, max unbounde
         //public IdentDataList<SpectraData> SpectraData
+
+        internal void RebuildLists()
+        {
+            RebuildSearchDatabaseList();
+            RebuildSpectraDataList();
+        }
+
+        private void RebuildSearchDatabaseList()
+        {
+            _searchDbIdCounter = 0;
+            _searchDatabases.Clear();
+
+            foreach (var dbSeq in this.IdentData.SequenceCollection.DBSequences)
+            {
+                if (_searchDatabases.Any(item => item.Equals(dbSeq.SearchDatabase)))
+                {
+                    continue;
+                }
+
+                dbSeq.SearchDatabase.Id = "dBSeq_" + _searchDbIdCounter;
+                _searchDbIdCounter++;
+                _searchDatabases.Add(dbSeq.SearchDatabase);
+            }
+
+            foreach (var specId in this.IdentData.AnalysisCollection.SpectrumIdentifications)
+            {
+                foreach (var dbSeq in specId.SearchDatabases)
+                {
+                    if (_searchDatabases.Any(item => item.Equals(dbSeq.SearchDatabase)))
+                    {
+                        continue;
+                    }
+
+                    dbSeq.SearchDatabase.Id = "dBSeq_" + _searchDbIdCounter;
+                    _searchDbIdCounter++;
+                    _searchDatabases.Add(dbSeq.SearchDatabase);
+                }
+            }
+        }
+
+        private void RebuildSpectraDataList()
+        {
+            _specDataIdCounter = 0;
+            _spectraDataList.Clear();
+
+            foreach (var sil in this.IdentData.DataCollection.AnalysisData.SpectrumIdentificationList)
+            {
+                foreach (var spectraData in sil.SpectrumIdentificationResults)
+            {
+                if (_spectraDataList.Any(item => item.Equals(spectraData.SpectraData)))
+                {
+                    continue;
+                }
+
+                spectraData.SpectraData.Id = "SID_" + _specDataIdCounter;
+                _specDataIdCounter++;
+                _spectraDataList.Add(spectraData.SpectraData);
+            }}
+
+            foreach (var specId in this.IdentData.AnalysisCollection.SpectrumIdentifications)
+            {
+                foreach (var spectraData in specId.InputSpectra)
+                {
+                    if (_spectraDataList.Any(item => item.Equals(spectraData.SpectraData)))
+                    {
+                        continue;
+                    }
+
+                    spectraData.SpectraData.Id = "SID_" + _specDataIdCounter;
+                    _specDataIdCounter++;
+                    _spectraDataList.Add(spectraData.SpectraData);
+                }
+            }
+        }
 
         public override bool Equals(object other)
         {
@@ -5409,6 +5508,12 @@ namespace PSI_Interface.IdentData
         /// min 1, max 1
         //public AnalysisData AnalysisData
 
+        internal void RebuildLists()
+        {
+            Inputs.RebuildLists();
+            AnalysisData.RebuildLists();
+        }
+
         public override bool Equals(object other)
         {
             var o = other as DataCollectionObj;
@@ -5460,11 +5565,31 @@ namespace PSI_Interface.IdentData
             this._proteinDetectionProtocol = null;
         }
 
+        private static long _idCounter = 0;
+
         /// min 1, max unbounded
         //public IdentDataList<SpectrumIdentificationProtocol> SpectrumIdentificationProtocol
 
         /// min 0, max 1
         //public ProteinDetectionProtocol ProteinDetectionProtocol
+
+        internal void RebuildSIPList()
+        {
+            _idCounter = 0;
+            _spectrumIdentificationProtocols.Clear();
+
+            foreach (var specId in this.IdentData.AnalysisCollection.SpectrumIdentifications)
+            {
+                if (_spectrumIdentificationProtocols.Any(item => item.Equals(specId.SpectrumIdentificationProtocol)))
+                {
+                    continue;
+                }
+
+                specId.SpectrumIdentificationProtocol.Id = "SpecIdentProtocol_" + _idCounter;
+                _idCounter++;
+                _spectrumIdentificationProtocols.Add(specId.SpectrumIdentificationProtocol);
+            }
+        }
 
         public override bool Equals(object other)
         {
@@ -5579,6 +5704,10 @@ namespace PSI_Interface.IdentData
             this._peptideEvidences = null;
         }
 
+        private long _dBSeqIdCounter = 0;
+        private long _pepIdCounter = 0;
+        private long _pepEvIdCounter = 0;
+
         /// min 1, max unbounded
         //public IdentDataList<DBSequence> DBSequences
 
@@ -5587,6 +5716,94 @@ namespace PSI_Interface.IdentData
 
         /// min 0, max unbounded
         //public IdentDataList<PeptideEvidence> PeptideEvidences
+
+        internal void RebuildLists()
+        {
+            RebuildPeptideEvidenceList();
+            RebuildPeptideList();
+            RebuildDbSequenceList();
+        }
+
+        private void RebuildPeptideEvidenceList()
+        {
+            _pepEvIdCounter = 0;
+            _peptideEvidences.Clear();
+
+            foreach (var sil in this.IdentData.DataCollection.AnalysisData.SpectrumIdentificationList)
+            {
+                foreach (var sir in sil.SpectrumIdentificationResults)
+                {
+                    foreach (var sii in sir.SpectrumIdentificationItems)
+                    {
+                        foreach (var pepEv in sii.PeptideEvidences)
+                        {
+                            if (_peptideEvidences.Any(item => item.Equals(pepEv.PeptideEvidence)))
+                            {
+                                continue;
+                            }
+
+                            pepEv.PeptideEvidence.Id = "Pep_" + _pepEvIdCounter;
+                            _pepEvIdCounter++;
+                            _peptideEvidences.Add(pepEv.PeptideEvidence);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void RebuildPeptideList()
+        {
+            _pepIdCounter = 0;
+            _peptides.Clear();
+
+            foreach (var sil in this.IdentData.DataCollection.AnalysisData.SpectrumIdentificationList)
+            {
+                foreach (var sir in sil.SpectrumIdentificationResults)
+                {
+                    foreach (var sii in sir.SpectrumIdentificationItems)
+                    {
+                        if (_peptides.Any(item => item.Equals(sii.Peptide)))
+                        {
+                            continue;
+                        }
+
+                        sii.Peptide.Id = "Pep_" + _pepIdCounter;
+                        _pepIdCounter++;
+                        _peptides.Add(sii.Peptide);
+                    }
+                }
+            }
+
+            foreach (var pepEv in _peptideEvidences)
+            {
+                if (_peptides.Any(item => item.Equals(pepEv.Peptide)))
+                {
+                    continue;
+                }
+
+                pepEv.Peptide.Id = "Pep_" + _pepIdCounter;
+                _pepIdCounter++;
+                _peptides.Add(pepEv.Peptide);
+            }
+        }
+
+        private void RebuildDbSequenceList()
+        {
+            _dBSeqIdCounter = 0;
+            _dBSequences.Clear();
+
+            foreach (var pepEv in _peptideEvidences)
+            {
+                if (_dBSequences.Any(item => item.Equals(pepEv.DBSequence)))
+                {
+                    continue;
+                }
+
+                pepEv.DBSequence.Id = "DBSeq_" + _dBSeqIdCounter;
+                _dBSeqIdCounter++;
+                _dBSequences.Add(pepEv.DBSequence);
+            }
+        }
 
         public override bool Equals(object other)
         {
