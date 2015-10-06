@@ -2310,7 +2310,7 @@ namespace PSI_Interface.IdentData
         /// </summary>
         public void ReRankBySpecEValue()
         {
-            var siiIdBase = this.Id.ToUpper().Replace("SID", "SIR").Replace("SIR", "SII") + "_";
+            var siiIdBase = this.Id.ToUpper().Replace("SIR", "SII") + "_";
             this.SpectrumIdentificationItems.Sort((a, b) => a.GetSpecEValue().CompareTo(b.GetSpecEValue()));
             for (var i = 0; i < this.SpectrumIdentificationItems.Count; i++)
             {
@@ -5468,7 +5468,7 @@ namespace PSI_Interface.IdentData
                     continue;
                 }
 
-                dbSeq.SearchDatabase.Id = "dBSeq_" + _searchDbIdCounter;
+                dbSeq.SearchDatabase.Id = "SearchDB_" + _searchDbIdCounter;
                 _searchDbIdCounter++;
                 _searchDatabases.Add(dbSeq.SearchDatabase);
             }
@@ -5482,7 +5482,7 @@ namespace PSI_Interface.IdentData
                         continue;
                     }
 
-                    dbSeq.SearchDatabase.Id = "dBSeq_" + _searchDbIdCounter;
+                    dbSeq.SearchDatabase.Id = "SearchDB_" + _searchDbIdCounter;
                     _searchDbIdCounter++;
                     _searchDatabases.Add(dbSeq.SearchDatabase);
                 }
