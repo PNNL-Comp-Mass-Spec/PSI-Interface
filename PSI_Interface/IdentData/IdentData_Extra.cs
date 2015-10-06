@@ -911,6 +911,16 @@ namespace PSI_Interface.IdentData
             this._cvid = CV.CV.CVID.CVID_Unknown;
         }
 
+        public CVParamObj(CV.CV.CVID cvid, string value)
+        {
+            this._cvRef = null;
+            //this._name = null;
+            //this._accession = null;
+            this._value = value;
+
+            this._cvid = cvid;
+        }
+
         //public CV.CV.CVID Cvid
 
         /// <remarks>A reference to the cv element from which this term originates.</remarks>
@@ -932,6 +942,11 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// string
         //public override string Value
+
+        public T ValueAs<T>() where T : IConvertible
+        {
+            return (T) Convert.ChangeType(Value, typeof (T));
+        }
 
         public override bool Equals(object other)
         {
@@ -1505,6 +1520,16 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool NumSequencesSearchedSpecified
+
+        public void Sort()
+        {
+            foreach (var sir in this.SpectrumIdentificationResults)
+            {
+                sir.Sort();
+            }
+            this.SpectrumIdentificationResults.Sort((a, b) => 
+                a.BestSpecEVal().CompareTo(b.BestSpecEVal()));
+        }
 
         public override bool Equals(object other)
         {
@@ -2143,6 +2168,11 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         //public string SampleRef
 
+        public double GetSpecEValue()
+        {
+            return this.CVParams.GetCvParam(CV.CV.CVID.MS_MS_GF_SpecEValue, "1").ValueAs<double>();
+        }
+
         public override bool Equals(object other)
         {
             var o = other as SpectrumIdentificationItemObj;
@@ -2255,6 +2285,47 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string SpectraDataRef
+
+        /// <summary>
+        /// Sort the SpectrumIdentificationItems by rank, ascending
+        /// </summary>
+        public void Sort()
+        {
+            this.SpectrumIdentificationItems.Sort((a, b) => a.Rank.CompareTo(b.Rank));
+        }
+
+        /// <summary>
+        /// The lowest specEvalue in the SpectrumIdentificationItems
+        /// </summary>
+        /// <returns></returns>
+        public double BestSpecEVal()
+        {
+            this.Sort();
+            return this.SpectrumIdentificationItems.First().GetSpecEValue();
+        }
+
+        /// <summary>
+        /// Changes the rank so that items are ranked by specEValue, ascending
+        /// </summary>
+        public void ReRankBySpecEValue()
+        {
+            this.SpectrumIdentificationItems.Sort((a, b) => a.GetSpecEValue().CompareTo(b.GetSpecEValue()));
+            for (var i = 0; i < this.SpectrumIdentificationItems.Count; i++)
+            {
+                this.SpectrumIdentificationItems[i].Rank = i + 1;
+            }
+            this.Sort();
+        }
+
+        /// <summary>
+        /// Remove all SpectrumIdentificationItems that have a specEValue greater than the best specEValue in the list.
+        /// </summary>
+        public void RemoveMatchesNotBestSpecEValue()
+        {
+            this.ReRankBySpecEValue();
+            var best = this.SpectrumIdentificationItems.First().GetSpecEValue();
+            this.SpectrumIdentificationItems.RemoveAll(item => item.GetSpecEValue() > best);
+        }
 
         public override bool Equals(object other)
         {

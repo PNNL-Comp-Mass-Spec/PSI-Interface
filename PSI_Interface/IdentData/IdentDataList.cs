@@ -135,4 +135,47 @@ namespace PSI_Interface.IdentData
             }
         }
     }
+
+    /// <summary>
+    /// Extensions that require certain data types
+    /// </summary>
+    public static class IdentDataListExtensions
+    {
+        public static CVParamObj GetCvParam(this IdentDataList<CVParamObj> cvParamList, CV.CV.CVID cvid, string valueIfNotFound)
+        {
+            var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);
+            if (cvParamList == null || cvParamList.Count == 0)
+            {
+                return defaultCvParam;
+            }
+
+            foreach (var cvp in cvParamList)
+            {
+                if (cvp.Cvid == cvid)
+                {
+                    return cvp;
+                }
+            }
+            return defaultCvParam;
+        }
+
+        public static CVParamObj GetCvParam(this IdentDataList<ParamBaseObj> paramList, CV.CV.CVID cvid, string valueIfNotFound)
+        {
+            var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);
+            if (paramList == null || paramList.Count == 0)
+            {
+                return defaultCvParam;
+            }
+
+            foreach (var p in paramList)
+            {
+                var cvp = p as CVParamObj;
+                if (cvp != null && cvp.Cvid == cvid)
+                {
+                    return cvp;
+                }
+            }
+            return defaultCvParam;
+        }
+    }
 }
