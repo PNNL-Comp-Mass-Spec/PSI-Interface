@@ -49,13 +49,13 @@ namespace Interface_Tests.IdentDataTests
         {
             var reader = new MzIdentMLReader(Path.Combine(TestPath.ExtTestDataDirectory, path));
             //MzIdentMLType identData = reader.Read();
-            IdentData identData = new IdentData(reader.Read());
+            IdentDataObj identData = new IdentDataObj(reader.Read());
             int specResults = 0;
             int specItems = 0;
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
             {
-                specResults += specList.SpectrumIdentificationResult.Count;
-                foreach (var specResult in specList.SpectrumIdentificationResult)
+                specResults += specList.SpectrumIdentificationResults.Count;
+                foreach (var specResult in specList.SpectrumIdentificationResults)
                 {
                     specItems += specResult.SpectrumIdentificationItems.Count;
                 }

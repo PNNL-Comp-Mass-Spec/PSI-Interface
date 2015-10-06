@@ -15,7 +15,7 @@ namespace PSI_Interface.IdentData
     {
         public IdentDataList()
         {
-            this._identData = new IdentData(false);
+            this._identData = new IdentDataObj(false);
         }
 
         //public event EventHandler OnAdd;
@@ -32,13 +32,13 @@ namespace PSI_Interface.IdentData
 
         public IdentDataList(IEnumerable<T> items)
         {
-            this._identData = new IdentData(false);
+            this._identData = new IdentDataObj(false);
             this.AddRange(items);
         }
 
-        private IdentData _identData;
+        private IdentDataObj _identData;
 
-        public IdentData IdentData
+        public IdentDataObj IdentData
         {
             get { return _identData; }
             set
@@ -71,6 +71,51 @@ namespace PSI_Interface.IdentData
                 item.IdentData = this._identData;
                 base.Add(item);
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            var o = obj as IdentDataList<T>;
+            if (o == null)
+            {
+                return false;
+            }
+            return this.Equals(o);
+        }
+
+        public bool Equals(IdentDataList<T> other)
+        {
+            if (this.Count == 0 && (other == null || other.Count == 0))
+            {
+                return true;
+            }
+            if (other == null || other.Count == 0)
+            {
+                return false;
+            }
+            if (this.Count != other.Count)
+            {
+                return false;
+            }
+            foreach (var item in this)
+            {
+                var found = false;
+
+                foreach (var item2 in other)
+                {
+                    if (item.Equals(item2))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

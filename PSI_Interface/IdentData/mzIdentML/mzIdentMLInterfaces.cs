@@ -19,7 +19,7 @@ namespace PSI_Interface.IdentData.mzIdentML
 
     internal static class ParamGroupFunctions
     {
-        public static void CopyParamGroup(IParamGroup target, ParamGroup source)
+        public static void CopyParamGroup(IParamGroup target, ParamGroupObj source)
         {
             CopyCVParamGroup(target, source);
             target.userParam = null;
@@ -33,7 +33,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
         }
 
-        public static void CopyCVParamGroup(ICVParamGroup target, CVParamGroup source)
+        public static void CopyCVParamGroup(ICVParamGroup target, CVParamGroupObj source)
         {
             target.cvParam = null;
             if (source.CVParams != null)

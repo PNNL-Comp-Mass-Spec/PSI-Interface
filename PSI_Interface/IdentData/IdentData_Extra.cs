@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using PSI_Interface.CV;
+using PSI_Interface.Utils;
 
 namespace PSI_Interface.IdentData
 {
@@ -9,9 +11,9 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, 
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
-    public partial class IdentData : IIdentifiableType
+    public partial class IdentDataObj : IIdentifiableType
     {
-        public IdentData(bool createTranslator = true)
+        public IdentDataObj(bool createTranslator = true)
         {
             this._id = null;
             this._name = null;
@@ -35,7 +37,7 @@ namespace PSI_Interface.IdentData
             this._analysisCollection = null;
             this._analysisProtocolCollection = null;
             this._dataCollection = null;
-            this._bibliographicReference = null;
+            this._bibliographicReferences = null;
         }
 
         public void DefaultCV()
@@ -114,7 +116,7 @@ namespace PSI_Interface.IdentData
         /// string, regex: "(1\.1\.\d+)"
         //public string Version
 
-        protected internal SpectrumIdentificationItem FindSpectrumIdentificationItem(string id)
+        protected internal SpectrumIdentificationItemObj FindSpectrumIdentificationItem(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -124,7 +126,7 @@ namespace PSI_Interface.IdentData
             {
                 foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
                 {
-                    foreach (var sir in sil.SpectrumIdentificationResult)
+                    foreach (var sir in sil.SpectrumIdentificationResults)
                     {
                         foreach (var sii in sir.SpectrumIdentificationItems)
                         {
@@ -141,7 +143,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal DBSequence FindDbSequence(string id)
+        protected internal DbSequenceObj FindDbSequence(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -162,7 +164,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal Peptide FindPeptide(string id)
+        protected internal PeptideObj FindPeptide(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -183,7 +185,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal PeptideEvidence FindPeptideEvidence(string id)
+        protected internal PeptideEvidenceObj FindPeptideEvidence(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -204,7 +206,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal Measure FindMeasure(string id)
+        protected internal MeasureObj FindMeasure(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -214,7 +216,7 @@ namespace PSI_Interface.IdentData
             {
                 foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
                 {
-                    foreach (var m in sil.FragmentationTable)
+                    foreach (var m in sil.FragmentationTables)
                     {
                         if (m.Id == id)
                         {
@@ -228,7 +230,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal MassTable FindMassTable(string id)
+        protected internal MassTableObj FindMassTable(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -236,9 +238,9 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocol)
+                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
                 {
-                    foreach (var mt in sip.MassTable)
+                    foreach (var mt in sip.MassTables)
                     {
                         if (mt.Id == id)
                         {
@@ -252,7 +254,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal SampleInfo FindSample(string id)
+        protected internal SampleObj FindSample(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -273,7 +275,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal AnalysisSoftwareInfo FindAnalysisSoftware(string id)
+        protected internal AnalysisSoftwareObj FindAnalysisSoftware(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -294,7 +296,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal Organization FindOrganization(string id)
+        protected internal OrganizationObj FindOrganization(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -304,7 +306,7 @@ namespace PSI_Interface.IdentData
             {
                 foreach (var ac in this.AuditCollection)
                 {
-                    var o = ac as Organization;
+                    var o = ac as OrganizationObj;
 
                     if (o != null && o.Id == id)
                     {
@@ -317,7 +319,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal AbstractContactInfo FindContact(string id)
+        protected internal AbstractContactObj FindContact(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -346,7 +348,7 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sd in this.DataCollection.Inputs.SearchDatabase)
+                foreach (var sd in this.DataCollection.Inputs.SearchDatabases)
                 {
                     if (sd.Id == id)
                     {
@@ -359,7 +361,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal SpectraData FindSpectraData(string id)
+        protected internal SpectraDataObj FindSpectraData(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -367,7 +369,7 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sd in this.DataCollection.Inputs.SpectraData)
+                foreach (var sd in this.DataCollection.Inputs.SpectraDataList)
                 {
                     if (sd.Id == id)
                     {
@@ -380,7 +382,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal SpectrumIdentificationList FindSpectrumIdentificationList(string id)
+        protected internal SpectrumIdentificationListObj FindSpectrumIdentificationList(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -401,7 +403,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal SpectrumIdentificationProtocol FindSpectrumIdentificationProtocol(string id)
+        protected internal SpectrumIdentificationProtocolObj FindSpectrumIdentificationProtocol(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -409,7 +411,7 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocol)
+                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
                 {
                     if (sip.Id == id)
                     {
@@ -422,7 +424,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal ProteinDetectionProtocol FindProteinDetectionProtocol(string id)
+        protected internal ProteinDetectionProtocolObj FindProteinDetectionProtocol(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -440,7 +442,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal ProteinDetectionList FindProteinDetectionList(string id)
+        protected internal ProteinDetectionListObj FindProteinDetectionList(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -458,7 +460,7 @@ namespace PSI_Interface.IdentData
             return null;
         }
 
-        protected internal TranslationTable FindTranslationTable(string id)
+        protected internal TranslationTableObj FindTranslationTable(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -466,9 +468,9 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocol)
+                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
                 {
-                    foreach (var tt in sip.DatabaseTranslation.TranslationTable)
+                    foreach (var tt in sip.DatabaseTranslation.TranslationTables)
                     {
                         if (tt.Id == id)
                         {
@@ -480,6 +482,42 @@ namespace PSI_Interface.IdentData
             catch // Ignore errors; must resolve reference later...
             { }
             return null;
+        }
+
+        public override bool Equals(object other)
+        {
+            var o = other as IdentDataObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(IdentDataObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.Version == other.Version && Equals(this.CVList, other.CVList) &&
+                Equals(this.AnalysisSoftwareList, other.AnalysisSoftwareList) && Equals(this.Provider, other.Provider) &&
+                Equals(this.AuditCollection, other.AuditCollection) &&
+                Equals(this.AnalysisSampleCollection, other.AnalysisSampleCollection) &&
+                Equals(this.SequenceCollection, other.SequenceCollection) &&
+                Equals(this.AnalysisCollection, other.AnalysisCollection) &&
+                Equals(this.AnalysisProtocolCollection, other.AnalysisProtocolCollection) &&
+                Equals(this.DataCollection, other.DataCollection) &&
+                Equals(this.BibliographicReferences, other.BibliographicReferences))
+            {
+                return true;
+            }
+            return false;
         }
     }
 
@@ -519,6 +557,34 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string Id
+
+        public override bool Equals(object other)
+        {
+            var o = other as CVInfo;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(CVInfo other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.FullName == other.FullName && this.Version == other.Version && this.URI == other.URI)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -527,30 +593,61 @@ namespace PSI_Interface.IdentData
     /// <remarks>Reference(s) to the SpectrumIdentificationItem element(s) that support the given PeptideEvidence element. 
     /// Using these references it is possible to indicate which spectra were actually accepted as evidence for this 
     /// peptide identification in the given protein.</remarks>
-    public partial class SpectrumIdentificationItemRefInfo : IdentDataInternalTypeAbstract
+    public partial class SpectrumIdentificationItemRefObj : IdentDataInternalTypeAbstract
     {
-        public SpectrumIdentificationItemRefInfo()
+        public SpectrumIdentificationItemRefObj()
         {
             this._spectrumIdentificationItemRef = null;
+
+            this._spectrumIdentificationItem = null;
         }
 
         /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
         /// Required Attribute
         /// string
         //public string SpectrumIdentificationItemRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectrumIdentificationItemRefObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectrumIdentificationItemRefObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.SpectrumIdentificationItem, other.SpectrumIdentificationItem))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML PeptideHypothesisType
     /// </summary>
     /// <remarks>Peptide evidence on which this ProteinHypothesis is based by reference to a PeptideEvidence element.</remarks>
-    public partial class PeptideHypothesis : IdentDataInternalTypeAbstract
+    public partial class PeptideHypothesisObj : IdentDataInternalTypeAbstract
     {
-        public PeptideHypothesis()
+        public PeptideHypothesisObj()
         {
             this._peptideEvidenceRef = null;
 
-            this._spectrumIdentificationItemRef = null;
+            this._peptideEvidence = null;
+            this._spectrumIdentificationItems = null;
         }
 
         /// min 1, max unbounded
@@ -560,18 +657,48 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string PeptideEvidenceRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as PeptideHypothesisObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(PeptideHypothesisObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.PeptideEvidence, other.PeptideEvidence) &&
+                Equals(this.SpectrumIdentificationItems, other.SpectrumIdentificationItems))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML FragmentArrayType
     /// </summary>
     /// <remarks>An array of values for a given type of measure and for a particular ion type, in parallel to the index of ions identified.</remarks>
-    public partial class FragmentArray : IdentDataInternalTypeAbstract
+    public partial class FragmentArrayObj : IdentDataInternalTypeAbstract
     {
-        public FragmentArray()
+        public FragmentArrayObj()
         {
             this._measureRef = null;
 
+            this._measure = null;
             this._values = null;
         }
 
@@ -584,6 +711,34 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string MeasureRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as FragmentArrayObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(FragmentArrayObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.Measure, other.Measure) && Equals(this.Values, other.Values))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -594,13 +749,13 @@ namespace PSI_Interface.IdentData
     /// will be reported in parallel arrays below</remarks>
     /// <remarks>FragmentationType: The product ions identified in this result.</remarks>
     /// <remarks>FragmentationType: child element IonType, of type IonTypeType, min 1, max unbounded</remarks>
-    public partial class IonTypeInfo : IdentDataInternalTypeAbstract
+    public partial class IonTypeObj : IdentDataInternalTypeAbstract
     {
-        public IonTypeInfo()
+        public IonTypeObj()
         {
             this._charge = 0;
 
-            this._fragmentArray = null;
+            this._fragmentArrays = null;
             this._cvParam = null;
             this._index = null;
         }
@@ -621,6 +776,35 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// integer
         //public int Charge
+
+        public override bool Equals(object other)
+        {
+            var o = other as IonTypeObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(IonTypeObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Charge == other.Charge && Equals(this.FragmentArrays, other.FragmentArrays) &&
+                Equals(this.CVParam, other.CVParam) && Equals(this.Index, other.Index))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -629,9 +813,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>A single entry from an ontology or a controlled vocabulary.</remarks>
     /// <remarks>ToleranceType: The tolerance of the search given as a plus and minus value with units.</remarks>
     /// <remarks>ToleranceType: child element cvParam of type CVParamType, min 1, max unbounded "CV terms capturing the tolerance plus and minus values."</remarks>
-    public partial class CVParam : ParamBase
+    public partial class CVParamObj : ParamBaseObj
     {
-        public CVParam()
+        public CVParamObj()
         {
             this._cvRef = null;
             //this._name = null;
@@ -662,6 +846,35 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// string
         //public override string Value
+
+        public override bool Equals(object other)
+        {
+            var o = other as CVParamObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(CVParamObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.CVRef == other.CVRef && this.Cvid == other.Cvid && this.Value == other.Value &&
+                Equals(this.UnitCvRef, other.UnitCvRef) && this.UnitCvid == other.UnitCvid)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -671,9 +884,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>PramGroup: A choice of either a cvParam or userParam.</remarks>
     /// <remarks>ParamType: Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
     /// <remarks>ParamListType: Helper type to allow multiple cvParams or userParams to be given for an element.</remarks>
-    public abstract partial class ParamBase : IdentDataInternalTypeAbstract
+    public abstract partial class ParamBaseObj : IdentDataInternalTypeAbstract
     {
-        public ParamBase()
+        public ParamBaseObj()
         {
             //this._unitAccession = null;
             //this._unitName = null;
@@ -711,15 +924,43 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// string
         //public string UnitCvRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as ParamBaseObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ParamBaseObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.UnitCvRef, other.UnitCvRef) && this.UnitCvid == other.UnitCvid)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML UserParamType
     /// </summary>
     /// <remarks>A single user-defined parameter.</remarks>
-    public partial class UserParam : ParamBase
+    public partial class UserParamObj : ParamBaseObj
     {
-        public UserParam()
+        public UserParamObj()
         {
             this._name = null;
             this._value = null;
@@ -740,56 +981,197 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// string
         //public string Type
+
+        public override bool Equals(object other)
+        {
+            var o = other as UserParamObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(UserParamObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.Value == other.Value && this.Type == other.Type &&
+                Equals(this.UnitCvRef, other.UnitCvRef) && this.UnitCvid == other.UnitCvid)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
-    public partial class CVParamGroup : IdentDataInternalTypeAbstract
+    public partial class CVParamGroupObj : IdentDataInternalTypeAbstract
     {
-        public CVParamGroup()
+        public CVParamGroupObj()
         {
             this._cvParams = null;
         }
 
         //public IdentDataList<CVParam> CVParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as CVParamGroupObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(CVParamGroupObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.CVParams, other.CVParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
-    public partial class ParamGroup : CVParamGroup
+    public partial class ParamGroupObj : CVParamGroupObj
     {
-        public ParamGroup()
+        public ParamGroupObj()
         {
             this._userParams = null;
         }
 
         //public IdentDataList<UserParam> UserParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as ParamGroupObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ParamGroupObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ParamType
     /// </summary>
     /// <remarks>Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
-    public partial class Param : IdentDataInternalTypeAbstract
+    public partial class ParamObj : IdentDataInternalTypeAbstract
     {
-        public Param()
+        public ParamObj()
         {
             this._item = null;
         }
 
         /// min 1, max 1
         //public ParamBase Item
+
+        public override bool Equals(object other)
+        {
+            var o = other as ParamObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ParamObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.Item, other.Item))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ParamListType
     /// </summary>
     /// <remarks>Helper type to allow multiple cvParams or userParams to be given for an element.</remarks>
-    public partial class ParamList : IdentDataInternalTypeAbstract
+    public partial class ParamListObj : IdentDataInternalTypeAbstract
     {
-        public ParamList()
+        public ParamListObj()
         {
             this._items = null;
         }
 
         /// min 1, max unbounded
         //public IdentDataList<ParamBase> Items
+
+        public override bool Equals(object other)
+        {
+            var o = other as ParamListObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ParamListObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.Items, other.Items))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -797,26 +1179,56 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>Reference to the PeptideEvidence element identified. If a specific sequence can be assigned to multiple 
     /// proteins and or positions in a protein all possible PeptideEvidence elements should be referenced here.</remarks>
-    public partial class PeptideEvidenceRefInfo : IdentDataInternalTypeAbstract
+    public partial class PeptideEvidenceRefObj : IdentDataInternalTypeAbstract
     {
-        public PeptideEvidenceRefInfo()
+        public PeptideEvidenceRefObj()
         {
             this._peptideEvidenceRef = null;
+
+            this._peptideEvidence = null;
         }
 
         /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
         /// Required Attribute
         /// string
         //public string PeptideEvidenceRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as PeptideEvidenceRefObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(PeptideEvidenceRefObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.PeptideEvidence, other.PeptideEvidence))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML AnalysisDataType
     /// </summary>
     /// <remarks>Data sets generated by the analyses, including peptide and protein lists.</remarks>
-    public partial class AnalysisData : IdentDataInternalTypeAbstract
+    public partial class AnalysisDataObj : IdentDataInternalTypeAbstract
     {
-        public AnalysisData()
+        public AnalysisDataObj()
         {
             this._spectrumIdentificationList = null;
             this._proteinDetectionList = null;
@@ -827,23 +1239,52 @@ namespace PSI_Interface.IdentData
 
         /// min 0, max 1
         //public ProteinDetectionList ProteinDetectionList
+
+        public override bool Equals(object other)
+        {
+            var o = other as AnalysisDataObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(AnalysisDataObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.SpectrumIdentificationList, other.SpectrumIdentificationList) &&
+                Equals(this.ProteinDetectionList, other.ProteinDetectionList))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SpectrumIdentificationListType
     /// </summary>
     /// <remarks>Represents the set of all search results from SpectrumIdentification.</remarks>
-    public partial class SpectrumIdentificationList : ParamGroup, IIdentifiableType
+    public partial class SpectrumIdentificationListObj : ParamGroupObj, IIdentifiableType
     {
-        public SpectrumIdentificationList()
+        public SpectrumIdentificationListObj()
         {
             this._id = null;
             this._name = null;
             this._numSequencesSearched = -1;
             this.NumSequencesSearchedSpecified = false;
 
-            this._fragmentationTable = null;
-            this._spectrumIdentificationResult = null;
+            this._fragmentationTables = null;
+            this._spectrumIdentificationResults = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -878,6 +1319,37 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool NumSequencesSearchedSpecified
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectrumIdentificationListObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectrumIdentificationListObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.NumSequencesSearched == other.NumSequencesSearched &&
+                Equals(this.FragmentationTables, other.FragmentationTables) &&
+                Equals(this.SpectrumIdentificationResults, other.SpectrumIdentificationResults) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -887,9 +1359,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>FragmentationTableType: Contains the types of measures that will be reported in generic arrays 
     /// for each SpectrumIdentificationItem e.g. product ion m/z, product ion intensity, product ion m/z error</remarks>
     /// <remarks>FragmentationTableType: child element Measure of type MeasureType, min 1, max unbounded</remarks>
-    public partial class Measure : CVParamGroup, IIdentifiableType
+    public partial class MeasureObj : CVParamGroupObj, IIdentifiableType
     {
-        public Measure()
+        public MeasureObj()
         {
             this._id = null;
             this._name = null;
@@ -908,6 +1380,34 @@ namespace PSI_Interface.IdentData
 
         /// min 1, max unbounded
         //public IdentDataList<CVParamType> CVParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as MeasureObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(MeasureObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.CVParams, other.CVParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -939,9 +1439,9 @@ namespace PSI_Interface.IdentData
     /// MzIdentML BibliographicReferenceType
     /// </summary>
     /// <remarks>Represents bibliographic references.</remarks>
-    public partial class BibliographicReference : IdentDataInternalTypeAbstract, IIdentifiableType
+    public partial class BibliographicReferenceObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public BibliographicReference()
+        public BibliographicReferenceObj()
         {
             this._year = 1990;
             this.YearSpecified = false;
@@ -1021,22 +1521,53 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// string
         //public string DOI
+
+        public override bool Equals(object other)
+        {
+            var o = other as BibliographicReferenceObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(BibliographicReferenceObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.Authors == other.Authors && this.DOI == other.DOI &&
+                this.Year == other.Year && this.Publication == other.Publication && this.Publisher == other.Publisher &&
+                this.Editor == other.Editor && this.Pages == other.Pages && this.Title == other.Title)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ProteinDetectionHypothesisType
     /// </summary>
     /// <remarks>A single result of the ProteinDetection analysis (i.e. a protein).</remarks>
-    public partial class ProteinDetectionHypothesis : ParamGroup, IIdentifiableType
+    public partial class ProteinDetectionHypothesisObj : ParamGroupObj, IIdentifiableType
     {
-        public ProteinDetectionHypothesis()
+        public ProteinDetectionHypothesisObj()
         {
             this._id = null;
             this._name = null;
             this._dBSequenceRef = null;
             this._passThreshold = false;
 
-            this._peptideHypothesis = null;
+            this._dBSequence = null;
+            this._peptideHypotheses = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -1072,20 +1603,50 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// boolean
         //public bool PassThreshold
+
+        public override bool Equals(object other)
+        {
+            var o = other as ProteinDetectionHypothesisObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ProteinDetectionHypothesisObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.PassThreshold == other.PassThreshold &&
+                Equals(this.DBSequence, other.DBSequence) && Equals(this.PeptideHypotheses, other.PeptideHypotheses) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ProteinAmbiguityGroupType
     /// </summary>
     /// <remarks>A set of logically related results from a protein detection, for example to represent conflicting assignments of peptides to proteins.</remarks>
-    public partial class ProteinAmbiguityGroup : ParamGroup, IIdentifiableType
+    public partial class ProteinAmbiguityGroupObj : ParamGroupObj, IIdentifiableType
     {
-        public ProteinAmbiguityGroup()
+        public ProteinAmbiguityGroupObj()
         {
             this._id = null;
             this._name = null;
 
-            this._proteinDetectionHypothesis = null;
+            this._proteinDetectionHypotheses = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -1109,20 +1670,49 @@ namespace PSI_Interface.IdentData
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
         //public IdentDataList<UserParamType> UserParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as ProteinAmbiguityGroupObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ProteinAmbiguityGroupObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.ProteinDetectionHypotheses, other.ProteinDetectionHypotheses) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ProteinDetectionListType
     /// </summary>
     /// <remarks>The protein list resulting from a protein detection process.</remarks>
-    public partial class ProteinDetectionList : ParamGroup, IIdentifiableType
+    public partial class ProteinDetectionListObj : ParamGroupObj, IIdentifiableType
     {
-        public ProteinDetectionList()
+        public ProteinDetectionListObj()
         {
             this._id = null;
             this._name = null;
 
-            this._proteinAmbiguityGroup = null;
+            this._proteinAmbiguityGroups = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -1146,6 +1736,35 @@ namespace PSI_Interface.IdentData
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
         //public IdentDataList<UserParamType> UserParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as ProteinDetectionListObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ProteinDetectionListObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.ProteinAmbiguityGroups, other.ProteinAmbiguityGroups) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -1154,9 +1773,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>An identification of a single (poly)peptide, resulting from querying an input spectra, along with 
     /// the set of confidence values for that identification. PeptideEvidence elements should be given for all 
     /// mappings of the corresponding Peptide sequence within protein sequences.</remarks>
-    public partial class SpectrumIdentificationItem : ParamGroup, IIdentifiableType
+    public partial class SpectrumIdentificationItemObj : ParamGroupObj, IIdentifiableType
     {
-        public SpectrumIdentificationItem()
+        public SpectrumIdentificationItemObj()
         {
             this._id = null;
             this._name = null;
@@ -1172,8 +1791,11 @@ namespace PSI_Interface.IdentData
             this._massTableRef = null;
             this._sampleRef = null;
 
-            this._peptideEvidenceRef = null;
-            this._fragmentation = null;
+            this._peptide = null;
+            this._massTable = null;
+            this._sample = null;
+            this._peptideEvidences = null;
+            this._fragmentations = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -1255,6 +1877,42 @@ namespace PSI_Interface.IdentData
         /// if more than one sample has been described in the AnalysisSampleCollection.</remarks>
         /// Optional Attribute
         //public string SampleRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectrumIdentificationItemObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectrumIdentificationItemObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.ChargeState == other.ChargeState &&
+                this.ExperimentalMassToCharge.Equals(other.ExperimentalMassToCharge) &&
+                this.CalculatedMassToCharge.Equals(other.CalculatedMassToCharge) &&
+                this.CalculatedPI.Equals(other.CalculatedPI) && this.Rank == other.Rank &&
+                this.PassThreshold == other.PassThreshold && Equals(this.Peptide, other.Peptide) &&
+                Equals(this.MassTable, other.MassTable) && Equals(this.Sample, other.Sample) &&
+                Equals(this.PeptideEvidences, other.PeptideEvidences) &&
+                Equals(this.Fragmentations, other.Fragmentations) && Equals(this.CVParams, other.CVParams) &&
+                Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -1263,15 +1921,16 @@ namespace PSI_Interface.IdentData
     /// <remarks>All identifications made from searching one spectrum. For PMF data, all peptide identifications 
     /// will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked 
     /// SpectrumIdentificationItems corresponding to possible different peptide IDs.</remarks>
-    public partial class SpectrumIdentificationResult : ParamGroup, IIdentifiableType
+    public partial class SpectrumIdentificationResultObj : ParamGroupObj, IIdentifiableType
     {
-        public SpectrumIdentificationResult()
+        public SpectrumIdentificationResultObj()
         {
             this._id = null;
             this._name = null;
             this._spectrumID = null;
             this._spectraDataRef = null;
 
+            this._spectraData = null;
             this._spectrumIdentificationItems = null;
         }
 
@@ -1309,6 +1968,37 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string SpectraDataRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectrumIdentificationResultObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectrumIdentificationResultObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.SpectrumID == other.SpectrumID &&
+                Equals(this.SpectrumIdentificationItems, other.SpectrumIdentificationItems) &&
+                Equals(this.SpectraData, other.SpectraData) && Equals(this.CVParams, other.CVParams) &&
+                Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -1353,15 +2043,43 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// min 1, max 1
         //public CVParam CVParam
+
+        public override bool Equals(object other)
+        {
+            var o = other as FileFormatInfo;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(FileFormatInfo other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.CVParam, other.CVParam))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SpectraDataType
     /// </summary>
     /// <remarks>A data set containing spectra data (consisting of one or more spectra).</remarks>
-    public partial class SpectraData : IdentDataInternalTypeAbstract, IExternalDataType
+    public partial class SpectraDataObj : IdentDataInternalTypeAbstract, IExternalDataType
     {
-        public SpectraData()
+        public SpectraDataObj()
         {
             this._id = null;
             this._name = null;
@@ -1398,15 +2116,45 @@ namespace PSI_Interface.IdentData
 
         /// min 1, max 1
         //public SpectrumIDFormat SpectrumIDFormat
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectraDataObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectraDataObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                Path.GetFileName(this.Location) == Path.GetFileName(other.Location) && Equals(this.SpectrumIDFormat, other.SpectrumIDFormat) &&
+                Equals(this.FileFormat, other.FileFormat))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SpectrumIDFormatType
     /// </summary>
     /// <remarks>The format of the spectrum identifier within the source file</remarks>
-    public partial class SpectrumIDFormat : IdentDataInternalTypeAbstract
+    public partial class SpectrumIDFormatObj : IdentDataInternalTypeAbstract
     {
-        public SpectrumIDFormat()
+        public SpectrumIDFormatObj()
         {
             this._cvParam = null;
         }
@@ -1414,13 +2162,41 @@ namespace PSI_Interface.IdentData
         /// <remarks>CV term capturing the type of identifier used.</remarks>
         /// min 1, max 1
         //public CVParam CVParam
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectrumIDFormatObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectrumIDFormatObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.CVParam, other.CVParam))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SourceFileType
     /// </summary>
     /// <remarks>A file from which this mzIdentML instance was created.</remarks>
-    public partial class SourceFileInfo : ParamGroup, IExternalDataType
+    public partial class SourceFileInfo : ParamGroupObj, IExternalDataType
     {
         public SourceFileInfo()
         {
@@ -1463,13 +2239,43 @@ namespace PSI_Interface.IdentData
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
         //public IdentDataList<UserParamType> UserParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as SourceFileInfo;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SourceFileInfo other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                Path.GetFileName(this.Location) == Path.GetFileName(other.Location) && Equals(this.FileFormat, other.FileFormat) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SearchDatabaseType
     /// </summary>
     /// <remarks>A database for searching mass spectra. Examples include a set of amino acid sequence entries, or annotated spectra libraries.</remarks>
-    public partial class SearchDatabaseInfo : CVParamGroup, IExternalDataType
+    public partial class SearchDatabaseInfo : CVParamGroupObj, IExternalDataType
     {
         public SearchDatabaseInfo()
         {
@@ -1549,20 +2355,54 @@ namespace PSI_Interface.IdentData
         /// <remarks></remarks>
         /// Attribute Existence
         //public bool NumResiduesSpecified
+
+        public override bool Equals(object other)
+        {
+            var o = other as SearchDatabaseInfo;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SearchDatabaseInfo other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.Version == other.Version &&
+                this.NumDatabaseSequences == other.NumDatabaseSequences && this.NumResidues == other.NumResidues &&
+                this.ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                Path.GetFileName(this.Location) == Path.GetFileName(other.Location) &&
+                Equals(this.DatabaseName, other.DatabaseName) && Equals(this.FileFormat, other.FileFormat) &&
+                Equals(this.CVParams, other.CVParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ProteinDetectionProtocolType
     /// </summary>
     /// <remarks>The parameters and settings of a ProteinDetection process.</remarks>
-    public partial class ProteinDetectionProtocol : IdentDataInternalTypeAbstract, IIdentifiableType
+    public partial class ProteinDetectionProtocolObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public ProteinDetectionProtocol()
+        public ProteinDetectionProtocolObj()
         {
             this._id = null;
             this._name = null;
             this._analysisSoftwareRef = null;
 
+            this._analysisSoftware = null;
             this._analysisParams = null;
             this._threshold = null;
         }
@@ -1591,15 +2431,44 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string AnalysisSoftwareRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as ProteinDetectionProtocolObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ProteinDetectionProtocolObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.AnalysisSoftware, other.AnalysisSoftware) &&
+                Equals(this.AnalysisParams, other.AnalysisParams) && Equals(this.Threshold, other.Threshold))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML TranslationTableType
     /// </summary>
     /// <remarks>The table used to translate codons into nucleic acids e.g. by reference to the NCBI translation table.</remarks>
-    public partial class TranslationTable : CVParamGroup, IIdentifiableType
+    public partial class TranslationTableObj : CVParamGroupObj, IIdentifiableType
     {
-        public TranslationTable()
+        public TranslationTableObj()
         {
             this._id = null;
             this._name = null;
@@ -1620,22 +2489,50 @@ namespace PSI_Interface.IdentData
         /// start codons and translation table description (see specification document and mapping file)</remarks>
         /// min 0, max unbounded
         //public IdentDataList<CVParamType> CVParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as TranslationTableObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(TranslationTableObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.CVParams, other.CVParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML MassTableType
     /// </summary>
     /// <remarks>The masses of residues used in the search.</remarks>
-    public partial class MassTable : ParamGroup, IIdentifiableType
+    public partial class MassTableObj : ParamGroupObj, IIdentifiableType
     {
-        public MassTable()
+        public MassTableObj()
         {
             this._id = null;
             this._name = null;
 
-            this._residue = null;
-            this._ambiguousResidue = null;
-            this._msLevel = null;
+            this._residues = null;
+            this._ambiguousResidues = null;
+            this._msLevels = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -1668,14 +2565,45 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// integer(s), space separated
         //public List<string> MsLevel
+
+        public override bool Equals(object other)
+        {
+            var o = other as MassTableObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(MassTableObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.Residues, other.Residues) &&
+                Equals(this.AmbiguousResidues, other.AmbiguousResidues) &&
+                ListUtils.ListEqualsUnOrdered(this.MsLevels, other.MsLevels) && Equals(this.CVParams, other.CVParams) &&
+                Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ResidueType
     /// </summary>
-    public partial class Residue : IdentDataInternalTypeAbstract
+    public partial class ResidueObj : IdentDataInternalTypeAbstract
     {
-        public Residue()
+        public ResidueObj()
         {
             this._code = null;
             this._mass = -1;
@@ -1690,6 +2618,34 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// float
         //public float Mass
+
+        public override bool Equals(object other)
+        {
+            var o = other as ResidueObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ResidueObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Code == other.Code && this.Mass.Equals(other.Mass))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -1697,9 +2653,9 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>Ambiguous residues e.g. X can be specified by the Code attribute and a set of parameters 
     /// for example giving the different masses that will be used in the search.</remarks>
-    public partial class AmbiguousResidue : ParamGroup
+    public partial class AmbiguousResidueObj : ParamGroupObj
     {
-        public AmbiguousResidue()
+        public AmbiguousResidueObj()
         {
             this._code = null;
         }
@@ -1716,6 +2672,35 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// chars, string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
         //public string Code
+
+        public override bool Equals(object other)
+        {
+            var o = other as AmbiguousResidueObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(AmbiguousResidueObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Code == other.Code && Equals(this.CVParams, other.CVParams) &&
+                Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -1723,9 +2708,9 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The details of an individual cleavage enzyme should be provided by giving a regular expression 
     /// or a CV term if a "standard" enzyme cleavage has been performed.</remarks>
-    public partial class Enzyme : IdentDataInternalTypeAbstract, IIdentifiableType
+    public partial class EnzymeObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public Enzyme()
+        public EnzymeObj()
         {
             this._id = null;
             this._name = null;
@@ -1796,27 +2781,59 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool MinDistanceSpecified
+
+        public override bool Equals(object other)
+        {
+            var o = other as EnzymeObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(EnzymeObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.SiteRegexp == other.SiteRegexp && this.NTermGain == other.NTermGain &&
+                this.CTermGain == other.CTermGain && this.SemiSpecific == other.SemiSpecific &&
+                this.MissedCleavages == other.MissedCleavages && this.MinDistance == other.MinDistance &&
+                Equals(this.EnzymeName, other.EnzymeName))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SpectrumIdentificationProtocolType
     /// </summary>
     /// <remarks>The parameters and settings of a SpectrumIdentification analysis.</remarks>
-    public partial class SpectrumIdentificationProtocol : IdentDataInternalTypeAbstract, IIdentifiableType
+    public partial class SpectrumIdentificationProtocolObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public SpectrumIdentificationProtocol()
+        public SpectrumIdentificationProtocolObj()
         {
             this._id = null;
             this._name = null;
             this._analysisSoftwareRef = null;
 
+            this._analysisSoftware = null;
             this._searchType = null;
             this._additionalSearchParams = null;
             this._modificationParams = null;
             this._enzymes = null;
-            this._massTable = null;
-            this._fragmentTolerance = null;
-            this._parentTolerance = null;
+            this._massTables = null;
+            this._fragmentTolerances = null;
+            this._parentTolerances = null;
             this._threshold = null;
             this._databaseFilters = null;
             this._databaseTranslation = null;
@@ -1870,6 +2887,41 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string AnalysisSoftwareRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectrumIdentificationProtocolObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectrumIdentificationProtocolObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.AnalysisSoftware, other.AnalysisSoftware) &&
+                Equals(this.SearchType, other.SearchType) &&
+                Equals(this.AdditionalSearchParams, other.AdditionalSearchParams) &&
+                Equals(this.MassTables, other.MassTables) && Equals(this.ModificationParams, other.ModificationParams) &&
+                Equals(this.Enzymes, other.Enzymes) && Equals(this.FragmentTolerances, other.FragmentTolerances) &&
+                Equals(this.ParentTolerances, other.ParentTolerances) && Equals(this.Threshold, other.Threshold) &&
+                Equals(this.DatabaseFilters, other.DatabaseFilters) &&
+                Equals(this.DatabaseTranslation, other.DatabaseTranslation))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -1878,9 +2930,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>The specificity rules of the searched modification including for example 
     /// the probability of a modification's presence or peptide or protein termini. Standard 
     /// fixed or variable status should be provided by the attribute fixedMod.</remarks>
-    public partial class SpecificityRulesList : CVParamGroup
+    public partial class SpecificityRulesListObj : CVParamGroupObj
     {
-        public SpecificityRulesList()
+        public SpecificityRulesListObj()
         {
         }
 
@@ -1895,9 +2947,9 @@ namespace PSI_Interface.IdentData
     /// modification, the mass, the specificity and whether it is a static modification.</remarks>
     /// <remarks>ModificationParamsType: The specification of static/variable modifications (e.g. Oxidation of Methionine) that are to be considered in the spectra search.</remarks>
     /// <remarks>ModificationParamsType: child element SearchModification, of type SearchModificationType, min 1, max unbounded</remarks>
-    public partial class SearchModification : CVParamGroup
+    public partial class SearchModificationObj : CVParamGroupObj
     {
-        public SearchModification()
+        public SearchModificationObj()
         {
             this._fixedMod = false;
             this._massDelta = 0;
@@ -1929,15 +2981,45 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// listOfCharsOrAny: string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."
         //public string Residues
+
+        public override bool Equals(object other)
+        {
+            var o = other as SearchModificationObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SearchModificationObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.FixedMod == other.FixedMod && this.MassDelta.Equals(other.MassDelta) &&
+                this.Residues == other.Residues && Equals(this.SpecificityRules, other.SpecificityRules) &&
+                Equals(this.CVParams, other.CVParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML EnzymesType
     /// </summary>
     /// <remarks>The list of enzymes used in experiment</remarks>
-    public partial class EnzymeList : IdentDataInternalTypeAbstract
+    public partial class EnzymeListObj : IdentDataInternalTypeAbstract
     {
-        public EnzymeList()
+        public EnzymeListObj()
         {
             this._independent = false;
             this.IndependentSpecified = false;
@@ -1955,6 +3037,34 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool IndependentSpecified
+
+        public override bool Equals(object other)
+        {
+            var o = other as EnzymeListObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(EnzymeListObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Independent == other.Independent && Equals(this.Enzymes, other.Enzymes))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -1984,17 +3094,46 @@ namespace PSI_Interface.IdentData
         /// <remarks>All sequences fulfilling the specifed criteria are excluded.</remarks>
         /// min 0, max 1
         //public ParamList Exclude
+
+        public override bool Equals(object other)
+        {
+            var o = other as FilterInfo;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(FilterInfo other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.FilterType, other.FilterType) && Equals(this.Include, other.Include) &&
+                Equals(this.Exclude, other.Exclude))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML DatabaseTranslationType
     /// </summary>
     /// <remarks>A specification of how a nucleic acid sequence database was translated for searching.</remarks>
-    public partial class DatabaseTranslation : IdentDataInternalTypeAbstract
+    public partial class DatabaseTranslationObj : IdentDataInternalTypeAbstract
     {
-        public DatabaseTranslation()
+        public DatabaseTranslationObj()
         {
-            this._translationTable = null;
+            this._translationTables = null;
             this._frames = null;
         }
 
@@ -2005,6 +3144,35 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// listOfAllowedFrames: space-separated string, valid values -3, -2, -1, 1, 2, 3
         //public List<int> Frames
+
+        public override bool Equals(object other)
+        {
+            var o = other as DatabaseTranslationObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(DatabaseTranslationObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.TranslationTables, other.TranslationTables) &&
+                ListUtils.ListEqualsUnOrdered(this.Frames, other.Frames))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2012,9 +3180,9 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The use of a protocol with the requisite Parameters and ParameterValues. 
     /// ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both) as output.</remarks>
-    public abstract partial class ProtocolApplication : IdentDataInternalTypeAbstract, IIdentifiableType
+    public abstract partial class ProtocolApplicationObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public ProtocolApplication()
+        public ProtocolApplicationObj()
         {
             this._id = null;
             this._name = null;
@@ -2040,19 +3208,49 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool ActivityDateSpecified
+
+        public override bool Equals(object other)
+        {
+            var o = other as ProtocolApplicationObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ProtocolApplicationObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ProteinDetectionType
     /// </summary>
     /// <remarks>An Analysis which assembles a set of peptides (e.g. from a spectra search analysis) to proteins.</remarks>
-    public partial class ProteinDetection : ProtocolApplication
+    public partial class ProteinDetectionObj : ProtocolApplicationObj
     {
-        public ProteinDetection()
+        public ProteinDetectionObj()
         {
             this._proteinDetectionListRef = null;
             this._proteinDetectionProtocolRef = null;
 
+            this._proteinDetectionList = null;
+            this._proteinDetectionProtocol = null;
             this._inputSpectrumIdentifications = null;
         }
 
@@ -2068,23 +3266,83 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string ProteinDetectionProtocolRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as ProteinDetectionObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ProteinDetectionObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.InputSpectrumIdentifications, other.InputSpectrumIdentifications) &&
+                Equals(this.ProteinDetectionList, other.ProteinDetectionList) &&
+                Equals(this.ProteinDetectionProtocol, other.ProteinDetectionProtocol))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML InputSpectrumIdentificationsType
     /// </summary>
     /// <remarks>The lists of spectrum identifications that are input to the protein detection process.</remarks>
-    public partial class InputSpectrumIdentifications : IdentDataInternalTypeAbstract
+    public partial class InputSpectrumIdentificationsObj : IdentDataInternalTypeAbstract
     {
-        public InputSpectrumIdentifications()
+        public InputSpectrumIdentificationsObj()
         {
             this._spectrumIdentificationListRef = null;
+
+            this._spectrumIdentificationList = null;
         }
 
         /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
         /// Required Attribute
         /// string
         //public string SpectrumIdentificationListRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as InputSpectrumIdentificationsObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(InputSpectrumIdentificationsObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.SpectrumIdentificationList, other.SpectrumIdentificationList))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2092,15 +3350,17 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>An Analysis which tries to identify peptides in input spectra, referencing the database searched, 
     /// the input spectra, the output results and the protocol that is run.</remarks>
-    public partial class SpectrumIdentification : ProtocolApplication
+    public partial class SpectrumIdentificationObj : ProtocolApplicationObj
     {
-        public SpectrumIdentification()
+        public SpectrumIdentificationObj()
         {
             this._spectrumIdentificationProtocolRef = null;
             this._spectrumIdentificationListRef = null;
 
+            this._spectrumIdentificationProtocol = null;
+            this._spectrumIdentificationList = null;
             this._inputSpectra = null;
-            this._searchDatabaseRef = null;
+            this._searchDatabases = null;
         }
 
         /// <remarks>One of the spectra data sets used.</remarks>
@@ -2119,40 +3379,130 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string SpectrumIdentificationListRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as SpectrumIdentificationObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SpectrumIdentificationObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.InputSpectra, other.InputSpectra) &&
+                Equals(this.SpectrumIdentificationList, other.SpectrumIdentificationList) &&
+                Equals(this.SpectrumIdentificationProtocol, other.SpectrumIdentificationProtocol))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML InputSpectraType
     /// </summary>
     /// <remarks>The attribute referencing an identifier within the SpectraData section.</remarks>
-    public partial class InputSpectraRef : IdentDataInternalTypeAbstract
+    public partial class InputSpectraRefObj : IdentDataInternalTypeAbstract
     {
-        public InputSpectraRef()
+        public InputSpectraRefObj()
         {
             this._spectraDataRef = null;
+
+            this._spectraData = null;
         }
 
         /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
         /// Optional Attribute
         /// string
         //public string SpectraDataRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as InputSpectraRefObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(InputSpectraRefObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.SpectraData, other.SpectraData))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SearchDatabaseRefType
     /// </summary>
     /// <remarks>One of the search databases used.</remarks>
-    public partial class SearchDatabaseRefInfo : IdentDataInternalTypeAbstract
+    public partial class SearchDatabaseRefObj : IdentDataInternalTypeAbstract
     {
-        public SearchDatabaseRefInfo()
+        public SearchDatabaseRefObj()
         {
             this._searchDatabaseRef = null;
+
+            this._searchDatabase = null;
         }
 
         /// <remarks>A reference to the database searched.</remarks>
         /// Optional Attribute
         /// string
         //public string SearchDatabaseRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as SearchDatabaseRefObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SearchDatabaseRefObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.SearchDatabase, other.SearchDatabase))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2160,9 +3510,9 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>PeptideEvidence links a specific Peptide element to a specific position in a DBSequence. 
     /// There must only be one PeptideEvidence item per Peptide-to-DBSequence-position.</remarks>
-    public partial class PeptideEvidence : ParamGroup, IIdentifiableType
+    public partial class PeptideEvidenceObj : ParamGroupObj, IIdentifiableType
     {
-        public PeptideEvidence()
+        public PeptideEvidenceObj()
         {
             this._dBSequenceRef = null;
             this._peptideRef = null;
@@ -2178,6 +3528,10 @@ namespace PSI_Interface.IdentData
             this._isDecoy = false;
             this._id = null;
             this._name = null;
+
+            this._dBSequence = null;
+            this._peptide = null;
+            this._translationTable = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -2244,22 +3598,53 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string DBSequenceRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as PeptideEvidenceObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(PeptideEvidenceObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+            if (this.IsDecoy == other.IsDecoy && this.Start == other.Start && this.End == other.End &&
+                this.Pre == other.Pre && this.Post == other.Post && this.Frame == other.Frame && this.Name == other.Name &&
+                Equals(this.TranslationTable, other.TranslationTable) && Equals(this.Peptide, other.Peptide) &&
+                Equals(this.DBSequence, other.DBSequence) && Equals(this.CVParams, other.CVParams) &&
+                Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML PeptideType
     /// </summary>
     /// <remarks>One (poly)peptide (a sequence with modifications). The combination of Peptide sequence and modifications must be unique in the file.</remarks>
-    public partial class Peptide : ParamGroup, IIdentifiableType
+    public partial class PeptideObj : ParamGroupObj, IIdentifiableType
     {
-        public Peptide()
+        public PeptideObj()
         {
             this._id = null;
             this._name = null;
             this._peptideSequence = null;
 
-            this._modification = null;
-            this._substitutionModification = null;
+            this._modifications = null;
+            this._substitutionModifications = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -2290,6 +3675,37 @@ namespace PSI_Interface.IdentData
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
         //public IdentDataList<UserParamType> UserParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as PeptideObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(PeptideObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.PeptideSequence == other.PeptideSequence &&
+                Equals(this.Modifications, other.Modifications) &&
+                Equals(this.SubstitutionModifications, other.SubstitutionModifications) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2303,9 +3719,9 @@ namespace PSI_Interface.IdentData
     /// modificationâ€ CV term that must be used instead. A neutral loss should be defined as an additional CVParam 
     /// within Modification. If more complex information should be given about neutral losses (such as presence/absence 
     /// on particular product ions), this can additionally be encoded within the FragmentationArray.</remarks>
-    public partial class Modification : CVParamGroup
+    public partial class ModificationObj : CVParamGroupObj
     {
-        public Modification()
+        public ModificationObj()
         {
             this._location = -1;
             this.LocationSpecified = false;
@@ -2354,15 +3770,45 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool MonoisotopicMassDeltaSpecified
+
+        public override bool Equals(object other)
+        {
+            var o = other as ModificationObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ModificationObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.AvgMassDelta.Equals(other.AvgMassDelta) &&
+                this.MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) && this.Location == other.Location &&
+                ListUtils.ListEqualsUnOrdered(this.Residues, other.Residues))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SubstitutionModificationType
     /// </summary>
     /// <remarks>A modification where one residue is substituted by another (amino acid change).</remarks>
-    public partial class SubstitutionModification : IdentDataInternalTypeAbstract
+    public partial class SubstitutionModificationObj : IdentDataInternalTypeAbstract
     {
-        public SubstitutionModification()
+        public SubstitutionModificationObj()
         {
             this._originalResidue = null;
             this._replacementResidue = null;
@@ -2411,6 +3857,36 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool MonoisotopicMassDeltaSpecified
+
+        public override bool Equals(object other)
+        {
+            var o = other as SubstitutionModificationObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SubstitutionModificationObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.AvgMassDelta.Equals(other.AvgMassDelta) && this.Location == other.Location &&
+                this.MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) &&
+                this.OriginalResidue == other.OriginalResidue && this.ReplacementResidue == other.ReplacementResidue)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2419,9 +3895,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>A database sequence from the specified SearchDatabase (nucleic acid or amino acid). 
     /// If the sequence is nucleic acid, the source nucleic acid sequence should be given in 
     /// the seq attribute rather than a translated sequence.</remarks>
-    public partial class DBSequence : ParamGroup, IIdentifiableType
+    public partial class DbSequenceObj : ParamGroupObj, IIdentifiableType
     {
-        public DBSequence()
+        public DbSequenceObj()
         {
             this._id = null;
             this._name = null;
@@ -2430,6 +3906,8 @@ namespace PSI_Interface.IdentData
             this.LengthSpecified = false;
             this._searchDatabaseRef = null;
             this._accession = null;
+
+            this._searchDatabase = null;
         }
 
         /// <remarks>An identifier is an unambiguous string that is unique within the scope 
@@ -2472,6 +3950,36 @@ namespace PSI_Interface.IdentData
 
         /// Attribute Existence
         //public bool LengthSpecified
+
+        public new bool Equals(object other)
+        {
+            var o = other as DbSequenceObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(DbSequenceObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Accession == other.Accession && this.Length == other.Length && this.Name == other.Name &&
+                this.Seq == other.Seq && Equals(this.SearchDatabase, other.SearchDatabase) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2485,9 +3993,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>AnalysisSampleCollectionType: The samples analysed can optionally be recorded using CV terms for descriptions. 
     /// If a composite sample has been analysed, the subsample association can be used to build a hierarchical description.</remarks>
     /// <remarks>AnalysisSampleCollectionType: child element Sample of type SampleType, min 1, max unbounded</remarks>
-    public partial class SampleInfo : ParamGroup, IIdentifiableType
+    public partial class SampleObj : ParamGroupObj, IIdentifiableType
     {
-        public SampleInfo()
+        public SampleObj()
         {
             this._id = null;
             this._name = null;
@@ -2521,6 +4029,36 @@ namespace PSI_Interface.IdentData
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
         //public IdentDataList<UserParamType> UserParams
+
+        public new bool Equals(object other)
+        {
+            var o = other as SampleObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SampleObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.ContactRoles, other.ContactRoles) &&
+                Equals(this.SubSamples, other.SubSamples) && Equals(this.CVParams, other.CVParams) &&
+                Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2529,12 +4067,13 @@ namespace PSI_Interface.IdentData
     /// <remarks>The role that a Contact plays in an organization or with respect to the associating class. 
     /// A Contact may have several Roles within scope, and as such, associations to ContactRole 
     /// allow the use of a Contact in a certain manner. Examples might include a provider, or a data analyst.</remarks>
-    public partial class ContactRoleInfo : IdentDataInternalTypeAbstract
+    public partial class ContactRoleObj : IdentDataInternalTypeAbstract
     {
-        public ContactRoleInfo()
+        public ContactRoleObj()
         {
             this._contactRef = null;
 
+            this._contact = null;
             this._role = null;
         }
 
@@ -2545,15 +4084,43 @@ namespace PSI_Interface.IdentData
         /// Required Attribute
         /// string
         //public string ContactRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as ContactRoleObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ContactRoleObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.Contact, other.Contact) && Equals(this.Role, other.Role))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML RoleType
     /// </summary>
     /// <remarks>The roles (lab equipment sales, contractor, etc.) the Contact fills.</remarks>
-    public partial class RoleInfo : IdentDataInternalTypeAbstract
+    public partial class RoleObj : IdentDataInternalTypeAbstract
     {
-        public RoleInfo()
+        public RoleObj()
         {
             this._cvParam = null;
         }
@@ -2561,23 +4128,81 @@ namespace PSI_Interface.IdentData
         /// <remarks>CV term for contact roles, such as software provider.</remarks>
         /// min 1, max 1
         //public CVParam CVParam
+
+        public override bool Equals(object other)
+        {
+            var o = other as RoleObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(RoleObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.CVParam, other.CVParam))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML SubSampleType
     /// </summary>
     /// <remarks>References to the individual component samples within a mixed parent sample.</remarks>
-    public partial class SubSample : IdentDataInternalTypeAbstract
+    public partial class SubSampleObj : IdentDataInternalTypeAbstract
     {
-        public SubSample()
+        public SubSampleObj()
         {
             this._sampleRef = null;
+
+            this._sample = null;
         }
 
         /// <remarks>A reference to the child sample.</remarks>
         /// Required  Attribute
         /// string
         //public string SampleRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as SubSampleObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SubSampleObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.Sample, other.Sample))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2586,9 +4211,9 @@ namespace PSI_Interface.IdentData
     /// <remarks>A contact is either a person or an organization.</remarks>
     /// <remarks>AuditCollectionType: The complete set of Contacts (people and organisations) for this file.</remarks>
     /// <remarks>AuditCollectionType: min 1, max unbounded, for PersonType XOR OrganizationType</remarks>
-    public abstract partial class AbstractContactInfo : ParamGroup, IIdentifiableType
+    public abstract partial class AbstractContactObj : ParamGroupObj, IIdentifiableType
     {
-        public AbstractContactInfo()
+        public AbstractContactObj()
         {
             this._id = null;
             this._name = null;
@@ -2612,6 +4237,35 @@ namespace PSI_Interface.IdentData
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
         //public IdentDataList<UserParamType> UserParams
+
+        public override bool Equals(object other)
+        {
+            var o = other as AbstractContactObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(AbstractContactObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.CVParams, other.CVParams) &&
+                Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2619,40 +4273,99 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>Organizations are entities like companies, universities, government agencies. 
     /// Any additional information such as the address, email etc. should be supplied either as CV parameters or as user parameters.</remarks>
-    public partial class Organization : AbstractContactInfo
+    public partial class OrganizationObj : AbstractContactObj
     {
-        public Organization()
+        public OrganizationObj()
         {
             this._parent = null;
         }
 
         /// min 0, max 1
         //public ParentOrganization Parent
+
+        public override bool Equals(object other)
+        {
+            var o = other as OrganizationObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(OrganizationObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.Parent, other.Parent) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// Base class for identical ParentOrganization and AffiliationInfo
     /// </summary>
-    public partial class OrganizationRefType : IdentDataInternalTypeAbstract
+    public partial class OrganizationRefObj : IdentDataInternalTypeAbstract
     {
-        public OrganizationRefType()
+        public OrganizationRefObj()
         {
             this._organizationRef = null;
+
+            this._organization = null;
         }
 
         /// <remarks>A reference to the organization this contact belongs to.</remarks>
         /// Required Attribute
         /// string
         //public string OrganizationRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as OrganizationRefObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(OrganizationRefObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.Organization, other.Organization))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML ParentOrganizationType
     /// </summary>
     /// <remarks>The containing organization (the university or business which a lab belongs to, etc.)</remarks>
-    public partial class ParentOrganization : OrganizationRefType
+    public partial class ParentOrganizationObj : OrganizationRefObj
     {
-        public ParentOrganization() : base()
+        public ParentOrganizationObj() : base()
         { }
 
         /// <remarks>A reference to the organization this contact belongs to.</remarks>
@@ -2666,15 +4379,15 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>A person's name and contact details. Any additional information such as the address, 
     /// contact email etc. should be supplied using CV parameters or user parameters.</remarks>
-    public partial class PersonInfo : AbstractContactInfo
+    public partial class PersonObj : AbstractContactObj
     {
-        public PersonInfo()
+        public PersonObj()
         {
             this._lastName = null;
             this._firstName = null;
             this._midInitials = null;
 
-            this._affiliation = null;
+            this._affiliations = null;
         }
 
         /// <remarks>The organization a person belongs to.</remarks>
@@ -2692,14 +4405,44 @@ namespace PSI_Interface.IdentData
         /// <remarks>The Person's middle initial.</remarks>
         /// Optional Attribute
         //public string MidInitials
+
+        public override bool Equals(object other)
+        {
+            var o = other as PersonObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(PersonObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.LastName == other.LastName && this.FirstName == other.FirstName &&
+                this.MidInitials == other.MidInitials && Equals(this.Affiliations, other.Affiliations) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML AffiliationType
     /// </summary>
-    public partial class AffiliationInfo : OrganizationRefType
+    public partial class AffiliationObj : OrganizationRefObj
     {
-        public AffiliationInfo() : base()
+        public AffiliationObj() : base()
         { }
 
         /// <remarks>>A reference to the organization this contact belongs to.</remarks>
@@ -2712,14 +4455,15 @@ namespace PSI_Interface.IdentData
     /// MzIdentML ProviderType
     /// </summary>
     /// <remarks>The provider of the document in terms of the Contact and the software the produced the document instance.</remarks>
-    public partial class ProviderInfo : IdentDataInternalTypeAbstract, IIdentifiableType
+    public partial class ProviderObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public ProviderInfo()
+        public ProviderObj()
         {
             this._id = null;
             this._name = null;
             this._analysisSoftwareRef = null;
 
+            this._analysisSoftware = null;
             this._contactRole = null;
         }
 
@@ -2742,6 +4486,35 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// string
         //public string AnalysisSoftwareRef
+
+        public override bool Equals(object other)
+        {
+            var o = other as ProviderObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(ProviderObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && Equals(this.ContactRole, other.ContactRole) &&
+                Equals(this.AnalysisSoftware, other.AnalysisSoftware))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2751,9 +4524,9 @@ namespace PSI_Interface.IdentData
     /// 
     /// <remarks>AnalysisSoftwareListType: The software packages used to perform the analyses.</remarks>
     /// <remarks>AnalysisSoftwareListType: child element AnalysisSoftware of type AnalysisSoftwareType, min 1, max unbounded</remarks>
-    public partial class AnalysisSoftwareInfo : IdentDataInternalTypeAbstract, IIdentifiableType
+    public partial class AnalysisSoftwareObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public AnalysisSoftwareInfo()
+        public AnalysisSoftwareObj()
         {
             this._id = null;
             this._name = null;
@@ -2797,19 +4570,49 @@ namespace PSI_Interface.IdentData
         /// Optional Attribute
         /// anyURI
         //public string URI
+
+        public override bool Equals(object other)
+        {
+            var o = other as AnalysisSoftwareObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(AnalysisSoftwareObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.Customizations == other.Customizations && this.URI == other.URI &&
+                this.Version == other.Version && Equals(this.ContactRole, other.ContactRole) &&
+                Equals(this.SoftwareName, other.SoftwareName))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML InputsType
     /// </summary>
     /// <remarks>The inputs to the analyses including the databases searched, the spectral data and the source file converted to mzIdentML.</remarks>
-    public partial class InputsInfo : IdentDataInternalTypeAbstract
+    public partial class InputsObj : IdentDataInternalTypeAbstract
     {
-        public InputsInfo()
+        public InputsObj()
         {
-            this._sourceFile = null;
-            this._searchDatabase = null;
-            this._spectraData = null;
+            this._sourceFiles = null;
+            this._searchDatabases = null;
+            this._spectraDataList = null;
         }
 
         /// min 0, max unbounded
@@ -2820,15 +4623,44 @@ namespace PSI_Interface.IdentData
 
         /// min 1, max unbounde
         //public IdentDataList<SpectraData> SpectraData
+
+        public override bool Equals(object other)
+        {
+            var o = other as InputsObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(InputsObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.SourceFiles, other.SourceFiles) && Equals(this.SearchDatabases, other.SearchDatabases) &&
+                Equals(this.SpectraDataList, other.SpectraDataList))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML DataCollectionType
     /// </summary>
     /// <remarks>The collection of input and output data sets of the analyses.</remarks>
-    public partial class DataCollection : IdentDataInternalTypeAbstract
+    public partial class DataCollectionObj : IdentDataInternalTypeAbstract
     {
-        public DataCollection()
+        public DataCollectionObj()
         {
             this._inputs = null;
             this._analysisData = null;
@@ -2839,17 +4671,45 @@ namespace PSI_Interface.IdentData
 
         /// min 1, max 1
         //public AnalysisData AnalysisData
+
+        public override bool Equals(object other)
+        {
+            var o = other as DataCollectionObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(DataCollectionObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.Inputs, other.Inputs) && Equals(this.AnalysisData, other.AnalysisData))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
     /// MzIdentML AnalysisProtocolCollectionType
     /// </summary>
     /// <remarks>The collection of protocols which include the parameters and settings of the performed analyses.</remarks>
-    public partial class AnalysisProtocolCollection : IdentDataInternalTypeAbstract
+    public partial class AnalysisProtocolCollectionObj : IdentDataInternalTypeAbstract
     {
-        public AnalysisProtocolCollection()
+        public AnalysisProtocolCollectionObj()
         {
-            this._spectrumIdentificationProtocol = null;
+            this._spectrumIdentificationProtocols = null;
             this._proteinDetectionProtocol = null;
         }
 
@@ -2858,6 +4718,35 @@ namespace PSI_Interface.IdentData
 
         /// min 0, max 1
         //public ProteinDetectionProtocol ProteinDetectionProtocol
+
+        public override bool Equals(object other)
+        {
+            var o = other as AnalysisProtocolCollectionObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(AnalysisProtocolCollectionObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.ProteinDetectionProtocol, other.ProteinDetectionProtocol) &&
+                Equals(this.SpectrumIdentificationProtocols, other.SpectrumIdentificationProtocols))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2865,11 +4754,11 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The analyses performed to get the results, which map the input and output data sets. 
     /// Analyses are for example: SpectrumIdentification (resulting in peptides) or ProteinDetection (assemble proteins from peptides).</remarks>
-    public partial class AnalysisCollection : IdentDataInternalTypeAbstract
+    public partial class AnalysisCollectionObj : IdentDataInternalTypeAbstract
     {
-        public AnalysisCollection()
+        public AnalysisCollectionObj()
         {
-            this._spectrumIdentification = null;
+            this._spectrumIdentifications = null;
             this._proteinDetection = null;
         }
 
@@ -2878,6 +4767,35 @@ namespace PSI_Interface.IdentData
 
         /// min 0, max 1
         //public ProteinDetection ProteinDetection
+
+        public override bool Equals(object other)
+        {
+            var o = other as AnalysisCollectionObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(AnalysisCollectionObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.ProteinDetection, other.ProteinDetection) &&
+                Equals(this.SpectrumIdentifications, other.SpectrumIdentifications))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -2885,9 +4803,9 @@ namespace PSI_Interface.IdentData
     /// </summary>
     /// <remarks>The collection of sequences (DBSequence or Peptide) identified and their relationship between 
     /// each other (PeptideEvidence) to be referenced elsewhere in the results.</remarks>
-    public partial class SequenceCollection : IdentDataInternalTypeAbstract
+    public partial class SequenceCollectionObj : IdentDataInternalTypeAbstract
     {
-        public SequenceCollection()
+        public SequenceCollectionObj()
         {
             this._dBSequences = null;
             this._peptides = null;
@@ -2902,5 +4820,34 @@ namespace PSI_Interface.IdentData
 
         /// min 0, max unbounded
         //public IdentDataList<PeptideEvidence> PeptideEvidences
+
+        public override bool Equals(object other)
+        {
+            var o = other as SequenceCollectionObj;
+            if (o == null)
+            {
+                return false;
+            }
+            return Equals(o);
+        }
+
+        public bool Equals(SequenceCollectionObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (Equals(this.DBSequences, other.DBSequences) && Equals(this.Peptides, other.Peptides) &&
+                Equals(this.PeptideEvidences, other.PeptideEvidences))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

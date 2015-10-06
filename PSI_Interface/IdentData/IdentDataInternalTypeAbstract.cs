@@ -6,17 +6,17 @@ namespace PSI_Interface.IdentData
     {
         internal IdentDataInternalTypeAbstract()
         {
-            this._identData = new IdentData(false);
+            this._identData = new IdentDataObj(false);
         }
 
-        internal IdentDataInternalTypeAbstract(IdentData parent)
+        internal IdentDataInternalTypeAbstract(IdentDataObj parent)
         {
             this.IdentData = parent;
         }
 
-        private IdentData _identData;
+        private IdentDataObj _identData;
 
-        internal IdentData IdentData
+        internal IdentDataObj IdentData
         {
             get { return this._identData; }
             set
