@@ -2306,13 +2306,17 @@ namespace PSI_Interface.IdentData
 
         /// <summary>
         /// Changes the rank so that items are ranked by specEValue, ascending
+        /// Also re-writes the ids
         /// </summary>
         public void ReRankBySpecEValue()
         {
+            var siiIdBase = this.Id.ToUpper().Replace("SID", "SIR").Replace("SIR", "SII") + "_";
             this.SpectrumIdentificationItems.Sort((a, b) => a.GetSpecEValue().CompareTo(b.GetSpecEValue()));
             for (var i = 0; i < this.SpectrumIdentificationItems.Count; i++)
             {
-                this.SpectrumIdentificationItems[i].Rank = i + 1;
+                var rank = i + 1;
+                this.SpectrumIdentificationItems[i].Rank = rank;
+                this.SpectrumIdentificationItems[i].Id = siiIdBase + rank;
             }
             this.Sort();
         }
