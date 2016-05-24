@@ -4,10 +4,10 @@ namespace CV_Generator
 {
     public class PSI_MS_obo_Reader
     {
-        // http://psidev.cvs.sourceforge.net/viewvc/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo
+        // https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo
         public OBO_File FileData;
         public List<OBO_File> ImportedFileData = new List<OBO_File>();
-        public const string Url = "http://psidev.cvs.sourceforge.net/viewvc/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo";
+        public const string Url = "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo";
 
         public void Read()
         {

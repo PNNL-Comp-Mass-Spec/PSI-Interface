@@ -13,10 +13,10 @@ namespace PSI_Interface.CV
 
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "http://psidev.cvs.sourceforge.net/viewvc/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo", "3.78.0"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "https://psi-pi.googlecode.com/svn/trunk/cv/unimod.obo", "2012:03:09 11:26"));
-            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://pato.googlecode.com/svn/trunk/quality.obo", "15:08:2014 14:45"));
-            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://unit-ontology.googlecode.com/svn/trunk/unit.obo", "09:04:2014 13:37"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "3.88.1"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:02:01 14:24"));
+            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "https://raw.githubusercontent.com/pato-ontology/pato/master/pato.obo", "releases/2016-05-22"));
+            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/unit.obo", "09:04:2014 13:37"));
         }
 
         public enum RelationsOtherTypes : int
@@ -39,7 +39,6 @@ namespace PSI_Interface.CV
             has_ratio_quality,
             has_relative_magnitude,
             increased_in_magnitude_relative_to,
-            inheres_in,
             inversely_associated_with,
             is_magnitude_of,
             is_measurement_of,
@@ -420,7 +419,7 @@ namespace PSI_Interface.CV
             MS_transient_recorder,
 
             // The brand of instruments from the joint venture between Applied Biosystems and MDS Analytical Technologies (formerly MDS SCIEX). Previously branded as \ Applied Biosystems|MDS SCIEX\ .
-            MS_AB_SCIEX_instrument_model,
+            MS_SCIEX_instrument_model,
 
             // Bruker Daltonics' instrument model.
             MS_Bruker_Daltonics_instrument_model,
@@ -1706,7 +1705,7 @@ namespace PSI_Interface.CV
             // OBSOLETE Time Unit.
             MS_time_unit_OBSOLETE,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX software for data acquisition.
+            // SCIEX or Applied Biosystems|MDS SCIEX software for data acquisition.
             MS_Analyst,
 
             // OBSOLETE Maldi Spot Identifier.
@@ -2006,19 +2005,19 @@ namespace PSI_Interface.CV
             // Thermo Scientific software for data analysis of peptides and proteins.
             MS_Proteome_Discoverer,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX QTRAP 3200.
+            // SCIEX or Applied Biosystems|MDS SCIEX QTRAP 3200.
             MS_3200_QTRAP,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX 4800 Plus MALDI TOF-TOF Analyzer.
+            // SCIEX or Applied Biosystems|MDS SCIEX 4800 Plus MALDI TOF-TOF Analyzer.
             MS_4800_Plus_MALDI_TOF_TOF,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX API 3200 MS.
+            // SCIEX or Applied Biosystems|MDS SCIEX API 3200 MS.
             MS_API_3200,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX API 5000 MS.
+            // SCIEX or Applied Biosystems|MDS SCIEX API 5000 MS.
             MS_API_5000,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX QSTAR Elite.
+            // SCIEX or Applied Biosystems|MDS SCIEX QSTAR Elite.
             MS_QSTAR_Elite,
 
             // Applied Biosystems|MDS SCIEX QSTAR Pulsar.
@@ -2030,16 +2029,16 @@ namespace PSI_Interface.CV
             // Applied Biosystems|MDS SCIEX 4800 Proteomics Analyzer.
             MS_4800_Proteomics_Analyzer,
 
-            // AB SCIEX or Applied Biosystems software for data acquisition and analysis.
+            // SCIEX or Applied Biosystems software for data acquisition and analysis.
             MS_4000_Series_Explorer_Software,
 
-            // AB SCIEX or Applied Biosystems software for data acquisition and analysis.
+            // SCIEX or Applied Biosystems software for data acquisition and analysis.
             MS_GPS_Explorer,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX software metabolite identification.
+            // SCIEX or Applied Biosystems|MDS SCIEX software metabolite identification.
             MS_LightSight_Software,
 
-            // AB SCIEX or Applied Biosystems|MDS SCIEX software for protein ID and quant.
+            // SCIEX or Applied Biosystems|MDS SCIEX software for protein ID and quant.
             MS_ProteinPilot_Software,
 
             // Applied Biosystems|MDS SCIEX software for tissue imaging.
@@ -2066,7 +2065,7 @@ namespace PSI_Interface.CV
             // Applied Biosystems|MDS SCIEX software for MS-BLAST identification.
             MS_Pro_BLAST,
 
-            // AB SCIEX Cliquid software for data analysis and quantitation.
+            // SCIEX Cliquid software for data analysis and quantitation.
             MS_Cliquid,
 
             // Applied Biosystems|MDS SCIEX software for MRM assay development.
@@ -2120,8 +2119,8 @@ namespace PSI_Interface.CV
             // Agilent software for data acquisition and analysis.
             MS_Agilent_software,
 
-            // AB SCIEX or Applied Biosystems software for data acquisition and analysis.
-            MS_AB_SCIEX_software,
+            // SCIEX or Applied Biosystems software for data acquisition and analysis.
+            MS_SCIEX_software,
 
             // Applied Biosystems|MDS SCIEX software for data acquisition and analysis.
             MS_Applied_Biosystems_software,
@@ -2657,7 +2656,7 @@ namespace PSI_Interface.CV
             // The gas pressure of the collision gas used for collisional excitation.
             MS_collision_gas_pressure,
 
-            // OBSOLETE AB SCIEX or Applied Biosystems|MDS SCIEX QTRAP 4000.
+            // OBSOLETE SCIEX or Applied Biosystems|MDS SCIEX QTRAP 4000.
             MS_4000_QTRAP_OBSOLETE,
 
             // Software used to predict, select, or optimize transitions or analyze the results of selected reaction monitoring runs.
@@ -2843,7 +2842,7 @@ namespace PSI_Interface.CV
             // Applied Biosystems|MDS SCIEX QTRAP 5500.
             MS_QTRAP_5500,
 
-            // AB SCIEX TripleTOF 5600, a quadrupole - quadrupole - time-of-flight mass spectrometer.
+            // SCIEX TripleTOF 5600, a quadrupole - quadrupole - time-of-flight mass spectrometer.
             MS_TripleTOF_5600,
 
             // Encoding of modifications of the protein sequence from the specified accession, written in PEFF notation.
@@ -3486,8 +3485,8 @@ namespace PSI_Interface.CV
             // PerSeptive peak list file format.
             MS_PerSeptive_PKS_format,
 
-            // PE Sciex peak list file format.
-            MS_Sciex_API_III_format,
+            // PE SCIEX peak list file format.
+            MS_SCIEX_API_III_format,
 
             // Bruker data exchange XML format.
             MS_Bruker_XML_format,
@@ -4142,16 +4141,16 @@ namespace PSI_Interface.CV
             MS_null_terminated_ASCII_string,
 
             // Native format defined by jobRun=xsd:nonNegativeInteger spotLabel=xsd:string spectrum=xsd:nonNegativeInteger.
-            MS_AB_SCIEX_TOF_TOF_nativeID_format,
+            MS_SCIEX_TOF_TOF_nativeID_format,
 
             // Applied Biosystems/MDS Analytical Technologies TOF/TOF instrument database.
-            MS_AB_SCIEX_TOF_TOF_database,
+            MS_SCIEX_TOF_TOF_database,
 
-            // AB SCIEX or Applied Biosystems|MDS Analytical Technologies AB SCIEX TOF/TOF 5800 Analyzer.
-            MS_TOF_TOF_5800,
+            // SCIEX 5800 TOF-TOF Analyzer.
+            MS_5800_TOF_TOF,
 
-            // AB SCIEX or Applied Biosystems software for TOF/TOF data acquisition and analysis.
-            MS_AB_SCIEX_TOF_TOF_Series_Explorer_Software,
+            // SCIEX or Applied Biosystems software for TOF/TOF data acquisition and analysis.
+            MS_SCIEX_TOF_TOF_Series_Explorer_Software,
 
             // Normalization of data point intensities.
             MS_intensity_normalization,
@@ -4373,10 +4372,10 @@ namespace PSI_Interface.CV
             MS_MALDI_Solutions,
 
             // Native format defined by file=xsd:IDREF.
-            MS_AB_SCIEX_TOF_TOF_T2D_nativeID_format,
+            MS_SCIEX_TOF_TOF_T2D_nativeID_format,
 
             // Applied Biosystems/MDS Analytical Technologies TOF/TOF instrument export format.
-            MS_AB_SCIEX_TOF_TOF_T2D_format,
+            MS_SCIEX_TOF_TOF_T2D_format,
 
             // Scaffold analysis software.
             MS_Scaffold,
@@ -5203,7 +5202,7 @@ namespace PSI_Interface.CV
             // Spectral counting workflow (number of identified MS2 spectra as approximation of peptide / protein quant).
             MS_spectral_counting_quantitation_analysis,
 
-            // Quantification analysis using the AB SCIEX iTRAQ isobaric labelling workflow, wherein 2-8 reporter ions are measured in MS2 spectra near 114 m/z.
+            // Quantification analysis using the SCIEX iTRAQ isobaric labelling workflow, wherein 2-8 reporter ions are measured in MS2 spectra near 114 m/z.
             MS_iTRAQ_quantitation_analysis,
 
             // Selected Reaction Monitoring workflow (XIC quantitation of precursor / fragment mass pair).
@@ -5642,10 +5641,10 @@ namespace PSI_Interface.CV
             MS_MaxQuant_PTM_Delta_Score,
 
             // Ascore software.
-            MS_Ascore,
+            MS_Ascore_software,
 
             // A-score for PTM site location at the PSM-level.
-            MS_Ascore1,
+            MS_Ascore,
 
             // H-Score for peptide phosphorylation site location.
             MS_H_Score,
@@ -6556,9 +6555,6 @@ namespace PSI_Interface.CV
             // A program in the TPP that calculates protein-level probabilities based on input PSM or peptide-level probabilities from PeptideProphet or iProphet. The output is written in the protXML format.
             MS_ProteinProphet,
 
-            // OBSOLETE A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.
-            MS_ASAPRatio_OBSOLETE,
-
             // A program in the TPP that calculates PSM-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.
             MS_XPRESS,
 
@@ -7186,8 +7182,8 @@ namespace PSI_Interface.CV
             // Group PSMs by distinct peptide sequence with taking modifications and charge into account.
             MS_group_PSMs_by_sequence_with_modifications_and_charge,
 
-            // Peptide level score.
-            MS_peptide_level_score,
+            // OBSOLETE Peptide level score.
+            MS_peptide_level_score_OBSOLETE,
 
             // A Boolean attribute to determine whether the peptide has passed the threshold indicated in the file.
             MS_peptide_passes_threshold,
@@ -7219,8 +7215,8 @@ namespace PSI_Interface.CV
             // The Cross-linking donor, assigned according to the following rules: the export software SHOULD use the following rules to choose the cross-link donor as the: longer peptide, then higher peptide neutral mass, then alphabetical order.
             MS_cross_link_donor,
 
-            // Cross-linking receiver, assigned according to the following rules: the export software SHOULD use the following rules to choose the cross-link donor as the: longer peptide, then higher peptide neutral mass, then alphabetical order.
-            MS_cross_link_receiver,
+            // Cross-linking acceptor, assigned according to the following rules: the export software SHOULD use the following rules to choose the cross-link donor as the: longer peptide, then higher peptide neutral mass, then alphabetical order.
+            MS_cross_link_acceptor,
 
             // Cross-linked spectrum identification item.
             MS_cross_link_spectrum_identification_item,
@@ -7288,7 +7284,7 @@ namespace PSI_Interface.CV
             // Native format defined by frame=xsd:nonNegativeInteger scan=xsd:nonNegativeInteger frameType=xsd:nonNegativeInteger.
             MS_UIMF_nativeID_format,
 
-            // AB SCIEX TripleTOF 6600, a quadrupole - quadrupole - time-of-flight mass spectrometer.
+            // SCIEX TripleTOF 6600, a quadrupole - quadrupole - time-of-flight mass spectrometer.
             MS_TripleTOF_6600,
 
             // The ProLuCID result 'XCorr'.
@@ -7416,6 +7412,282 @@ namespace PSI_Interface.CV
 
             // Tide open-source sequence search program developed at the University of Washington.
             MS_Tide,
+
+            // Andromeda result file output format.
+            MS_Andromeda_result_file,
+
+            // SCIEX 2000 QTRAP.
+            MS_2000_QTRAP,
+
+            // SCIEX 2500 QTRAP.
+            MS_2500_QTRAP,
+
+            // SCIEX 3500 QTRAP.
+            MS_3500_QTRAP,
+
+            // SCIEX QTRAP 4500.
+            MS_QTRAP_4500,
+
+            // SCIEX QTRAP 6500.
+            MS_QTRAP_6500,
+
+            // SCIEX QTRAP 6500+.
+            MS_QTRAP_6500_,
+
+            // SCIEX TripleTOF 4600 time-of-flight mass spectrometer.
+            MS_TripleTOF_4600,
+
+            // SCIEX TripleTOF 5600+ time-of-flight mass spectrometer.
+            MS_TripleTOF_5600_,
+
+            // Applied Biosystems/MDS SCIEX API 100 MS.
+            MS_API_100,
+
+            // Applied Biosystems/MDS SCIEX API 100LC MS.
+            MS_API_100LC,
+
+            // Applied Biosystems/MDS SCIEX API 165 MS.
+            MS_API_165,
+
+            // Applied Biosystems/MDS SCIEX API 300 MS.
+            MS_API_300,
+
+            // Applied Biosystems/MDS SCIEX API 350 MS.
+            MS_API_350,
+
+            // Applied Biosystems/MDS SCIEX API 365 MS.
+            MS_API_365,
+
+            // SCIEX Triple Quad 3500.
+            MS_Triple_Quad_3500,
+
+            // SCIEX Triple Quad 4500.
+            MS_Triple_Quad_4500,
+
+            // SCIEX Triple Quad 5500.
+            MS_Triple_Quad_5500,
+
+            // SCIEX Triple Quad 6500.
+            MS_Triple_Quad_6500,
+
+            // SCIEX Triple Quad 6500+.
+            MS_Triple_Quad_6500_,
+
+            // The SEQUEST-like sequence search engine ProLuCID, developed in the Yates Lab at the Scripps Research Institute.
+            MS_ProLuCID,
+
+            // MS1 file format for MS1 spectral data.
+            MS_MS1_format,
+
+            // Analysis software designed to reassemble the SEQUEST peptide identifications and to highlight the most significant matches.
+            MS_DTASelect,
+
+            // The Splash, is an unique identifier for Spectra, as the InChI Key is an unique identifier for chemical compounds.
+            MS_splash_key,
+
+            // Internal data and submission format of the PRIDE database.
+            MS_PRIDE_XML,
+
+            // Tabular result format for proteomics and metabolomics experiments.
+            MS_mzTab,
+
+            // Reagent used in labeled quantification methods.
+            MS_quantification_reagent,
+
+            // Isotope coded affinity tag reagent.
+            MS_ICAT_reagent,
+
+            // The name of the sample labelled with the heavy ICAT label.
+            MS_ICAT_heavy_reagent,
+
+            // The name of the sample labelled with the light ICAT label.
+            MS_ICAT_light_reagent,
+
+            // Isotope coded protein labeling reagent.
+            MS_ICPL_reagent,
+
+            // The name of the sample labelled with the ICPL reagent 0.
+            MS_ICPL_reagent_0,
+
+            // The name of the sample labelled with the ICPL reagent 4.
+            MS_ICPL_reagent_4,
+
+            // The name of the sample labelled with the ICPL reagent 6.
+            MS_ICPL_reagent_6,
+
+            // The name of the sample labelled with the ICPL reagent 10.
+            MS_ICPL_reagent_10,
+
+            // Stable isotope labeling with amino acids in cell culture reagent.
+            MS_SILAC_reagent,
+
+            // The name of the sample labelled with the heavy SILAC label.
+            MS_SILAC_heavy_reagent,
+
+            // The name of the sample labelled with the medium SILAC label.
+            MS_SILAC_medium_reagent,
+
+            // The name of the sample labelled with the light SILAC label.
+            MS_SILAC_light_reagent,
+
+            // Tandem mass tag reagent.
+            MS_TMT_reagent,
+
+            // The name of the sample labelled with the TMT reagent 126.
+            MS_TMT_reagent_126,
+
+            // The name of the sample labelled with the TMT reagent 127.
+            MS_TMT_reagent_127,
+
+            // The name of the sample labelled with the TMT reagent 128.
+            MS_TMT_reagent_128,
+
+            // The name of the sample labelled with the TMT reagent 129.
+            MS_TMT_reagent_129,
+
+            // The name of the sample labelled with the TMT reagent 130.
+            MS_TMT_reagent_130,
+
+            // The name of the sample labelled with the TMT reagent 131.
+            MS_TMT_reagent_131,
+
+            // Isobaric tag for relative and absolute quantitation reagent.
+            MS_iTRAQ_reagent,
+
+            // The name of the sample labelled with the iTRAQ reagent 113.
+            MS_iTRAQ_reagent_113,
+
+            // The name of the sample labelled with the iTRAQ reagent 114.
+            MS_iTRAQ_reagent_114,
+
+            // The name of the sample labelled with the iTRAQ reagent 115.
+            MS_iTRAQ_reagent_115,
+
+            // The name of the sample labelled with the iTRAQ reagent 116.
+            MS_iTRAQ_reagent_116,
+
+            // The name of the sample labelled with the iTRAQ reagent 117.
+            MS_iTRAQ_reagent_117,
+
+            // The name of the sample labelled with the iTRAQ reagent 118.
+            MS_iTRAQ_reagent_118,
+
+            // The name of the sample labelled with the iTRAQ reagent 119.
+            MS_iTRAQ_reagent_119,
+
+            // The name of the sample labelled with the iTRAQ reagent 121.
+            MS_iTRAQ_reagent_121,
+
+            // A dissociation process combining electron-transfer and higher-energy collision dissociation (EThcD). It combines ETD (reaction time) followed by HCD (activation energy).
+            MS_Electron_Transfer_Higher_Energy_Collision_Dissociation__EThcD_,
+
+            // Dataset identifier issued by the jPOST repository. A dataset can refer to either a single sample as part of a study, or all samples that are part of the study corresponding to a publication.
+            MS_jPOST_dataset_identifier,
+
+            // URI that allows the access to one dataset in the jPOST repository. A dataset can refer to either a single sample as part of a study, or all samples that are part of the study corresponding to a publication.
+            MS_jPOST_dataset_URI,
+
+            // Thermo Scientific Q Exactive Plus.
+            MS_Q_Exactive_Plus,
+
+            // Proteogenomics search performed.
+            MS_proteogenomics_search,
+
+            // Proteogenomics attribute.
+            MS_proteogenomics_attribute,
+
+            // The name or number of the chromosome to which a given peptide has been mapped.
+            MS_chromosome_name,
+
+            // The strand (+ or -) to which the peptide has been mapped.
+            MS_chromosome_strand,
+
+            // OBSOLETE The overall start position on the chromosome to which a peptide has been mapped i.e. the position of the first base of the first codon, using a zero-based counting system.
+            MS_peptide_start_on_chromosome_OBSOLETE,
+
+            // The overall end position on the chromosome to which a peptide has been mapped i.e. the position of the third base of the last codon, using a zero-based counting system.
+            MS_peptide_end_on_chromosome,
+
+            // The number of exons to which the peptide has been mapped.
+            MS_peptide_exon_count,
+
+            // A comma separated list of the number of DNA bases within each exon to which a peptide has been mapped. Assuming standard operation of a search engine, the peptide exon sizes should sum to exactly three times the peptide length.
+            MS_peptide_exon_nucleotide_sizes,
+
+            // A comma separated list of start positions within exons to which the peptide has been mapped, relative to peptide-chromosome start, assuming a zero-based counting system. The first value MUST match the value in peptide start on chromosome.
+            MS_peptide_start_positions_on_chromosome,
+
+            // The reference genome and versioning string as used for mapping. All coordinates are within this frame of reference.
+            MS_genome_reference_version,
+
+            // Mass Spectrometry Development Kit (MSDK) is a Java library of algorithms for processing of mass spectrometry data.
+            MS_MSDK,
+
+            // Describes how the native spectrum identifiers that have been combined prior to searching or interpretation are formated.
+            MS_native_spectrum_identifier_format__combined_spectra,
+
+            // Thermo comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_Thermo_nativeID_format__combined_spectra,
+
+            // Waters comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_Waters_nativeID_format__combined_spectra,
+
+            // WIFF comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_WIFF_nativeID_format__combined_spectra,
+
+            // Bruker/Agilent comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_Bruker_Agilent_YEP_nativeID_format__combined_spectra,
+
+            // Bruker BAF comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_Bruker_BAF_nativeID_format__combined_spectra,
+
+            // Bruker FID comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_Bruker_FID_nativeID_format__combined_spectra,
+
+            // Comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_multiple_peak_list_nativeID_format__combined_spectra,
+
+            // Comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_single_peak_list_nativeID_format__combined_spectra,
+
+            // Comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_scan_number_only_nativeID_format__combined_spectra,
+
+            // Comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_spectrum_identifier_nativeID_format__combined_spectra,
+
+            // Comma separated list of spectra that have been combined prior to searching or interpretation.
+            MS_mzML_unique_identifier__combined_spectra,
+
+            // Identification parameter for the search engine run.
+            MS_identification_parameter,
+
+            // Text-based format used by UniProtKB for sequence entries.
+            MS_UniProtKB_text_sequence_format,
+
+            // XML-based format used by UniProtKB for sequence entries.
+            MS_UniProtKB_XML_sequence_format,
+
+            // Morpheus search engine.
+            MS_Morpheus,
+
+            // Morpheus score for PSMs.
+            MS_Morpheus_Morpheus_score,
+
+            // Summed Morpheus score for protein groups.
+            MS_Morpheus_summed_Morpheus_score,
+
+            // Parent term for protein interaction scores derived from cross-linking.
+            MS_protein_interaction_scores_derived_from_cross_linking,
+
+            // (
+            MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking,
+
+            // Bruker Daltonics' impact II.
+            MS_impact_II,
+
+            // Bruker Daltonics' impact HD.
+            MS_impact_HD,
 
             // The root node of the unimod modifications ontology.
             UNIMOD_unimod_root_node,
@@ -7552,7 +7824,7 @@ namespace PSI_Interface.CV
             // 4-hydroxynonenal (HNE).
             UNIMOD_HNE,
 
-            // N-glucuronylation.
+            // Hexuronic acid.
             UNIMOD_Glucuronyl,
 
             // Glutathione disulfide.
@@ -7649,7 +7921,7 @@ namespace PSI_Interface.CV
             UNIMOD_IBTP,
 
             // Ubiquitinylation residue.
-            UNIMOD_GlyGly,
+            UNIMOD_GG,
 
             // Formylation.
             UNIMOD_Formyl,
@@ -7663,7 +7935,7 @@ namespace PSI_Interface.CV
             // 3-sulfanylpropanoyl.
             UNIMOD_Thioacyl,
 
-            // Fluorophenylalanine replacement of phenylalanine.
+            // Fluorination.
             UNIMOD_Fluoro,
 
             // 5-Iodoacetamidofluorescein (Molecular Probe, Eugene, OR).
@@ -7756,14 +8028,14 @@ namespace PSI_Interface.CV
             // Hex1HexNAc1NeuAc2.
             UNIMOD_Hex_1_HexNAc_1_NeuAc_2_,
 
-            // Hex3HexNAc2P1.
-            UNIMOD_Hex_3_HexNAc_2_P_1_,
+            // Hex(3) HexNAc(2) Phos.
+            UNIMOD_Hex_3_HexNAc_2_Phos_1_,
 
             // Selenium replaces sulfur.
             UNIMOD_Delta_S__1_Se_1_,
 
             // Glycosylated asparagine 18O labeling.
-            UNIMOD_Delta_H_1_O__1_18O_1_,
+            UNIMOD_Delta_H_1_N__1_18O_1_,
 
             // Shimadzu NBS-13C.
             UNIMOD_NBS_13C_6_,
@@ -8011,10 +8283,10 @@ namespace PSI_Interface.CV
             // S-Ethylcystine from Serine.
             UNIMOD_Delta_H_4_C_2_O__1_S_1_,
 
-            // Monomethylated arginine.
+            // Monomethylation.
             UNIMOD_Methyl_2H_3_13C_1_,
 
-            // Dimethylated arginine.
+            // Dimethylation.
             UNIMOD_Dimethyl_2H_6_13C_2_,
 
             // Thiophosphate labeled with biotin-HPDP.
@@ -8182,7 +8454,7 @@ namespace PSI_Interface.CV
             // Lactic acid from N-term Ser.
             UNIMOD_Ser__LacticAcid,
 
-            // AMP binding site.
+            // AMP.
             UNIMOD_Phosphoadenosine,
 
             // Hydroxycinnamyl.
@@ -8438,7 +8710,7 @@ namespace PSI_Interface.CV
             UNIMOD_Dibromo,
 
             // Ubiquitination.
-            UNIMOD_LeuArgGlyGly,
+            UNIMOD_LRGG,
 
             // CLIP_TRAQ_3.
             UNIMOD_CLIP_TRAQ_3,
@@ -9008,10 +9280,10 @@ namespace PSI_Interface.CV
             UNIMOD_AEC_MAEC_2H_4_,
 
             // Hex1HexNAc1.
-            UNIMOD_Hex1HexNAc1,
+            UNIMOD_Hex_1_HexNAc_1_,
 
             // 13C6 labeled ubiquitinylation residue.
-            UNIMOD_Label_13C_6__GlyGly,
+            UNIMOD_Label_13C_6__GG,
 
             // Was PentylamineBiotin.
             UNIMOD_Biotin_Thermo_21345,
@@ -9065,10 +9337,7 @@ namespace PSI_Interface.CV
             UNIMOD_cGMP_RMP_loss,
 
             // Ubiquitination 2H4 lysine.
-            UNIMOD_Label_2H_4__GlyGly,
-
-            // 13C(8) 15N(2) Silac label.
-            UNIMOD_Label_13C_8_15N_2_,
+            UNIMOD_Label_2H_4__GG,
 
             // Methylglyoxal-derived hydroimidazolone.
             UNIMOD_MG_H1,
@@ -9083,7 +9352,7 @@ namespace PSI_Interface.CV
             UNIMOD_Label_13C_1_2H_3_,
 
             // 13C(6) 15N(2) Lysine glygly.
-            UNIMOD_Label_13C_6_15N_2__GlyGly,
+            UNIMOD_Label_13C_6_15N_2__GG,
 
             // Bruker Daltonics SERVA-ICPL(TM) quantification chemistry, +10 Da form.
             UNIMOD_ICPL_13C_6_2H_4_,
@@ -9160,7 +9429,7 @@ namespace PSI_Interface.CV
             // Lys->Met substitution and sulfoxidation.
             UNIMOD_Lys__MetOx,
 
-            // Galactosyl hydroxylysine.
+            // Gluconoylation.
             UNIMOD_Galactosyl,
 
             // Modified SMCC maleimide with 3-(dimethylamino)-1-propylamine.
@@ -9182,7 +9451,7 @@ namespace PSI_Interface.CV
             UNIMOD_Ethoxyformyl,
 
             // 13C(4) 15N(2) Lysine glygly.
-            UNIMOD_Label_13C_4_15N_2__GlyGly,
+            UNIMOD_Label_13C_4_15N_2__GG,
 
             // Ethyl amino.
             UNIMOD_ethylamino,
@@ -9190,8 +9459,8 @@ namespace PSI_Interface.CV
             // 2-OH-ethyl thio-Ser.
             UNIMOD_MercaptoEthanol,
 
-            // Solvolysis of amide group on Asn or Gln by ethanol.
-            UNIMOD_EthylAmide,
+            // Deamidation followed by esterification with ethanol.
+            UNIMOD_Ethyl_Deamidated,
 
             // SUMOylation by SUMO-2/3 (formic acid cleavage).
             UNIMOD_VFQQQTGG,
@@ -9208,7 +9477,7 @@ namespace PSI_Interface.CV
             // Chlorination of tyrosine residues.
             UNIMOD_Chlorination,
 
-            // Dichlorination of tyrosine residues.
+            // Dichlorination.
             UNIMOD_dichlorination,
 
             // Cysteine modifier.
@@ -9340,9 +9609,6 @@ namespace PSI_Interface.CV
             // Aminotyrosine with sulfation.
             UNIMOD_sulfo_amino,
 
-            // N-biotinyl-6-aminohexanoyl.
-            UNIMOD_BHAc,
-
             // Azidohomoalanine (AHA) bound to propargylglycine-NH2 (alkyne).
             UNIMOD_AHA_Alkyne,
 
@@ -9368,7 +9634,7 @@ namespace PSI_Interface.CV
             UNIMOD_Label_13C_6_15N_4__Dimethyl_2H_6_13C_2_,
 
             // Sec Iodoacetamide derivative.
-            UNIMOD_SecCarbamidomethyl,
+            UNIMOD_Cys__CamSec,
 
             // Addition of Carbon to cysteine.
             UNIMOD_Thiazolidine,
@@ -9394,7 +9660,7 @@ namespace PSI_Interface.CV
             // Isotope-Coded Dimedone heavy form.
             UNIMOD_ICDID_2H_6_,
 
-            // Monolink of DSS/BS3 crosslinker to Lys or N-terminus.
+            // Water-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.
             UNIMOD_Xlink_DSS,
 
             // Monolink of EGS crosslinker to Lys or N-terminus.
@@ -9422,10 +9688,10 @@ namespace PSI_Interface.CV
             UNIMOD_2_nitrobenzyl,
 
             // N-ethylmaleimide on selenocysteines.
-            UNIMOD_SecNEM,
+            UNIMOD_Cys__SecNEM,
 
             // D5 N-ethylmaleimide on selenocysteines.
-            UNIMOD_SecNEM_2H_5_,
+            UNIMOD_Cys__SecNEM_2H_5_,
 
             // Thiadiazolydation of Cys.
             UNIMOD_Thiadiazole,
@@ -10142,7 +10408,7 @@ namespace PSI_Interface.CV
             UNIMOD_UgiJoullieProGlyProGly,
 
             // Glycosylation with IME linked Hex(2) NeuAc.
-            UNIMOD_IMEHex_2_NeuAc,
+            UNIMOD_IMEHex_2_NeuAc_1_,
 
             // Loss of arginine due to transpeptidation.
             UNIMOD_Arg_loss,
@@ -10201,9 +10467,6 @@ namespace PSI_Interface.CV
             // Propiophenone.
             UNIMOD_Propiophenone,
 
-            // 1,3 dipolar cycloaddition of ethynyluridine to azidohomoalanine.
-            UNIMOD_AhaEthynylUridine,
-
             // Reduced acrolein addition +58.
             UNIMOD_Delta_H_6_C_3_O_1_,
 
@@ -10218,12 +10481,6 @@ namespace PSI_Interface.CV
 
             // 2-ethyl-3-hydroxy-1,3-diphenylpentan-1-one.
             UNIMOD_EHD_diphenylpentanone,
-
-            // Cys modified with bipy ligand.
-            UNIMOD_Bipyridine,
-
-            // Serine modified with p-vinylphenylmethylsulfonyl group.
-            UNIMOD_VinylPMS,
 
             // Maleimide-Biotin + 2Water.
             UNIMOD_Biotin_Thermo_21901_2H2O,
@@ -10249,9 +10506,1254 @@ namespace PSI_Interface.CV
             // N-ethylmaleimideSulfurWater.
             UNIMOD_NEMsulfurWater,
 
+            // BisANS with loss of both sulfonates.
+            UNIMOD_bisANS_sulfonates,
+
+            // Chemical reaction with 2,4-dinitro-1-chloro benzene (DNCB).
+            UNIMOD_DNCB_hapten,
+
+            // Biotin-PEG11-maleimide.
+            UNIMOD_Biotin_Thermo_21911,
+
+            // Native iodoacetyl Tandem Mass TagÂ®.
+            UNIMOD_iodoTMT,
+
+            // Sixplex iodoacetyl Tandem Mass TagÂ®.
+            UNIMOD_iodoTMT6plex,
+
+            // Phosphogluconoylation.
+            UNIMOD_Phosphogluconoylation,
+
+            // Reaction with phenyl salicylate (PS).
+            UNIMOD_PS_Hapten,
+
+            // Cy3 Maleimide mono-Reactive dye.
+            UNIMOD_Cy3_maleimide,
+
+            // Modification of the lysine side chain from NH2 to guanidine with a H removed in favor of a benzyl group.
+            UNIMOD_benzylguanidine,
+
+            // A fixed +1 charge tag attached to the N-terminus of peptides.
+            UNIMOD_CarboxymethylDMAP,
+
+            // Formation of five membered aromatic heterocycle.
+            UNIMOD_azole,
+
+            // Phosphate-ribosylation.
+            UNIMOD_phosphoRibosyl,
+
+            // D5 N-ethylmaleimide+water on cysteines.
+            UNIMOD_NEM_2H_5__H2O,
+
+            // Crotonylation.
+            UNIMOD_Crotonyl,
+
+            // O-ethyl, N-dimethyl phosphate.
+            UNIMOD_O_Et_N_diMePhospho,
+
+            // N-dimethylphosphate.
+            UNIMOD_N_dimethylphosphate,
+
+            // Hex1dHex1.
+            UNIMOD_dHex_1_Hex_1_,
+
+            // 3-fold methylated lysine labelled with Acetyl_heavy.
+            UNIMOD_Methyl_2H_3__Acetyl_2H_3_,
+
+            // Oxidised 2H(3) labelled Methionine.
+            UNIMOD_Label_2H_3__Oxidation,
+
+            // 3-fold methylation with deuterated methyl groups.
+            UNIMOD_Trimethyl_2H_9_,
+
+            // Heavy acetylation.
+            UNIMOD_Acetyl_13C_2_,
+
+            // Hex2dHex1.
+            UNIMOD_dHex_1_Hex_2_,
+
+            // Hex3dHex1.
+            UNIMOD_dHex_1_Hex_3_,
+
+            // Hex4dHex1.
+            UNIMOD_dHex_1_Hex_4_,
+
+            // Hex5dHex1.
+            UNIMOD_dHex_1_Hex_5_,
+
+            // Hex6dHex1.
+            UNIMOD_dHex_1_Hex_6_,
+
+            // Reaction with methyl vinyl sulfone.
+            UNIMOD_methylsulfonylethyl,
+
+            // Reaction with ethyl vinyl sulfone.
+            UNIMOD_ethylsulfonylethyl,
+
+            // Reaction with phenyl vinyl sulfone.
+            UNIMOD_phenylsulfonylethyl,
+
+            // PLP bound to lysine reduced by sodium borohydride (NaBH4) to create amine linkage.
+            UNIMOD_PyridoxalPhosphateH2,
+
+            // Methionine oxidation to homocysteic acid.
+            UNIMOD_Homocysteic_acid,
+
+            // Conversion of carboxylic acid to hydroxamic acid.
+            UNIMOD_Hydroxamic_acid,
+
+            // 3-phosphoglyceryl.
+            UNIMOD_3_phosphoglyceryl,
+
+            // Modification by hydroxylated mechloroethamine (HN-2).
+            UNIMOD_HN2_mustard,
+
+            // Modification by hydroxylated tris-(2-chloroethyl)amine (HN-3).
+            UNIMOD_HN3_mustard,
+
+            // N-ethylmaleimide on cysteine sulfenic acid.
+            UNIMOD_Oxidation_NEM,
+
+            // Fluorescein-hexanoate-NHS hydrolysis.
+            UNIMOD_NHS_fluorescein,
+
+            // Representative mass and accurate mass for 114.
+            UNIMOD_DiART6plex,
+
+            // Accurate mass for DiART6plex 115.
+            UNIMOD_DiART6plex115,
+
+            // Accurate mass for DiART6plex 116 and 119.
+            UNIMOD_DiART6plex116_119,
+
+            // Accurate mass for DiART6plex 117.
+            UNIMOD_DiART6plex117,
+
+            // Accurate mass for DiART6plex 118.
+            UNIMOD_DiART6plex118,
+
+            // Iodoacetanilide derivative.
+            UNIMOD_Iodoacetanilide,
+
+            // 13C labelled iodoacetanilide derivative.
+            UNIMOD_Iodoacetanilide_13C_6_,
+
+            // Diaminopimelic acid-DSP monolinked.
+            UNIMOD_Dap_DSP,
+
+            // N-Acetylmuramic acid.
+            UNIMOD_MurNAc,
+
+            // Label:2H(7)15N(4).
+            UNIMOD_Label_2H_7_15N_4_,
+
+            // Label:2H(6)15N(1).
+            UNIMOD_Label_2H_6_15N_1_,
+
+            // Sumoylation by SUMO-1 after Cyanogen bromide (CNBr) cleavage.
+            UNIMOD_EEEDVIEVYQEQTGG,
+
+            // Sumoylation by SUMO-2/3 after Cyanogen bromide (CNBr) cleavage.
+            UNIMOD_EDEDTIDVFQQQTGG,
+
+            // Hex(5) HexNAc(4) NeuAc(2).
+            UNIMOD_Hex_5_HexNAc_4_NeuAc_2_,
+
+            // Hex(5) HexNAc(4) NeuAc.
+            UNIMOD_Hex_5_HexNAc_4_NeuAc_1_,
+
+            // DHex Hex(5) HexNAc(4) NeuAc.
+            UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_1_,
+
+            // DHex Hex(5) HexNAc(4) NeuAc(2).
+            UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_2_,
+
+            // O3S1HexNAc1.
+            UNIMOD_s_GlcNAc,
+
+            // H1O3P1Hex2.
+            UNIMOD_PhosphoHex_2_,
+
+            // 3-fold methylation with fully labelled methyl groups.
+            UNIMOD_Trimethyl_13C_3_2H_9_,
+
+            // Loss of ammonia (15N).
+            UNIMOD_15N_oxobutanoic,
+
+            // Spermine adduct.
+            UNIMOD_spermine,
+
+            // Spermidine adduct.
+            UNIMOD_spermidine,
+
+            // Biotin_PEG4.
+            UNIMOD_Biotin_Thermo_21330,
+
+            // Pentose.
+            UNIMOD_Pentose,
+
+            // Hex Pent.
+            UNIMOD_Hex_1_Pent_1_,
+
+            // Hex HexA.
+            UNIMOD_Hex_1_HexA_1_,
+
+            // Hex Pent(2).
+            UNIMOD_Hex_1_Pent_2_,
+
+            // Hex HexNAc Phos.
+            UNIMOD_Hex_1_HexNAc_1_Phos_1_,
+
+            // Hex HexNAc Sulf.
+            UNIMOD_Hex_1_HexNAc_1_Sulf_1_,
+
+            // Hex NeuAc.
+            UNIMOD_Hex_1_NeuAc_1_,
+
+            // Hex NeuGc.
+            UNIMOD_Hex_1_NeuGc_1_,
+
+            // HexNAc(3).
+            UNIMOD_HexNAc_3_,
+
+            // HexNAc NeuAc.
+            UNIMOD_HexNAc_1_NeuAc_1_,
+
+            // HexNAc NeuGc.
+            UNIMOD_HexNAc_1_NeuGc_1_,
+
+            // Hex HexNAc dHex Me.
+            UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_1_,
+
+            // Hex HexNAc dHex Me(2).
+            UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_2_,
+
+            // Hex(2) HexNAc.
+            UNIMOD_Hex_2_HexNAc_1_,
+
+            // Hex HexA HexNAc.
+            UNIMOD_Hex_1_HexA_1_HexNAc_1_,
+
+            // Hex(2) HexNAc Me.
+            UNIMOD_Hex_2_HexNAc_1_Me_1_,
+
+            // Hex(3) Phos.
+            UNIMOD_Hex_3_Phos_1_,
+
+            // Hex NeuAc Pent.
+            UNIMOD_Hex_1_NeuAc_1_Pent_1_,
+
+            // Hex(2) HexNAc Sulf.
+            UNIMOD_Hex_2_HexNAc_1_Sulf_1_,
+
+            // Hex(2) NeuAc.
+            UNIMOD_Hex_2_NeuAc_1_,
+
+            // Hex2 dHex2.
+            UNIMOD_dHex_2_Hex_2_,
+
+            // DHex Hex(2) HexA.
+            UNIMOD_dHex_1_Hex_2_HexA_1_,
+
+            // Hex HexNAc(2) Sulf.
+            UNIMOD_Hex_1_HexNAc_2_Sulf_1_,
+
+            // Hex(4).
+            UNIMOD_Hex_4_,
+
+            // DHex Hex(2) HexNAc(2) Pent.
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_Pent_1_,
+
+            // Hex(2) HexNAc(2) NeuAc.
+            UNIMOD_Hex_2_HexNAc_2_NeuAc_1_,
+
+            // Hex(3) HexNAc(2) Pent.
+            UNIMOD_Hex_3_HexNAc_2_Pent_1_,
+
+            // Hex(4) HexNAc(2).
+            UNIMOD_Hex_4_HexNAc_2_,
+
+            // DHex Hex(4) HexNAc Pent.
+            UNIMOD_dHex_1_Hex_4_HexNAc_1_Pent_1_,
+
+            // DHex Hex(3) HexNAc(2) Pent.
+            UNIMOD_dHex_1_Hex_3_HexNAc_2_Pent_1_,
+
+            // Hex(3) HexNAc(2) NeuAc.
+            UNIMOD_Hex_3_HexNAc_2_NeuAc_1_,
+
+            // Hex(4) HexNAc(2) Pent.
+            UNIMOD_Hex_4_HexNAc_2_Pent_1_,
+
+            // Hex(3) HexNAc(3) Pent.
+            UNIMOD_Hex_3_HexNAc_3_Pent_1_,
+
+            // Hex(5) HexNAc(2) Phos.
+            UNIMOD_Hex_5_HexNAc_2_Phos_1_,
+
+            // DHex Hex(4) HexNAc(2) Pent.
+            UNIMOD_dHex_1_Hex_4_HexNAc_2_Pent_1_,
+
+            // Hex(7) HexNAc.
+            UNIMOD_Hex_7_HexNAc_1_,
+
+            // Hex(4) HexNAc(2) NeuAc.
+            UNIMOD_Hex_4_HexNAc_2_NeuAc_1_,
+
+            // DHex Hex(5) HexNAc(2).
+            UNIMOD_dHex_1_Hex_5_HexNAc_2_,
+
+            // DHex Hex(3) HexNAc(3) Pent.
+            UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_1_,
+
+            // Hex(3) HexNAc(4) Sulf.
+            UNIMOD_Hex_3_HexNAc_4_Sulf_1_,
+
+            // Hex(6) HexNAc(2).
+            UNIMOD_Hex_6_HexNAc_2_,
+
+            // Hex(4) HexNAc(3) Pent.
+            UNIMOD_Hex_4_HexNAc_3_Pent_1_,
+
+            // DHex Hex(4) HexNAc(3).
+            UNIMOD_dHex_1_Hex_4_HexNAc_3_,
+
+            // Hex(5) HexNAc(3).
+            UNIMOD_Hex_5_HexNAc_3_,
+
+            // Hex(3) HexNAc(4) Pent.
+            UNIMOD_Hex_3_HexNAc_4_Pent_1_,
+
+            // Hex(6) HexNAc(2) Phos.
+            UNIMOD_Hex_6_HexNAc_2_Phos_1_,
+
+            // DHex Hex(4) HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_4_HexNAc_3_Sulf_1_,
+
+            // DHex Hex(5) HexNAc(2) Pent.
+            UNIMOD_dHex_1_Hex_5_HexNAc_2_Pent_1_,
+
+            // Hex(8) HexNAc.
+            UNIMOD_Hex_8_HexNAc_1_,
+
+            // DHex Hex(3) HexNAc(3) Pent(2).
+            UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_2_,
+
+            // DHex(2) Hex(3) HexNAc(3) Pent.
+            UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_1_,
+
+            // DHex Hex(3) HexNAc(4) Sulf.
+            UNIMOD_dHex_1_Hex_3_HexNAc_4_Sulf_1_,
+
+            // DHex Hex(6) HexNAc(2).
+            UNIMOD_dHex_1_Hex_6_HexNAc_2_,
+
+            // DHex Hex(4) HexNAc(3) Pent.
+            UNIMOD_dHex_1_Hex_4_HexNAc_3_Pent_1_,
+
+            // Hex(4) HexNAc(4) Sulf.
+            UNIMOD_Hex_4_HexNAc_4_Sulf_1_,
+
+            // Hex(7) HexNAc(2).
+            UNIMOD_Hex_7_HexNAc_2_,
+
+            // DHex(2) Hex(4) HexNAc(3).
+            UNIMOD_dHex_2_Hex_4_HexNAc_3_,
+
+            // Hex(5) HexNAc(3) Pent.
+            UNIMOD_Hex_5_HexNAc_3_Pent_1_,
+
+            // Hex(4) HexNAc(3) NeuGc.
+            UNIMOD_Hex_4_HexNAc_3_NeuGc_1_,
+
+            // DHex Hex(5) HexNAc(3).
+            UNIMOD_dHex_1_Hex_5_HexNAc_3_,
+
+            // DHex Hex(3) HexNAc(4) Pent.
+            UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_1_,
+
+            // Hex(3) HexNAc(5) Sulf.
+            UNIMOD_Hex_3_HexNAc_5_Sulf_1_,
+
+            // Hex(6) HexNAc(3).
+            UNIMOD_Hex_6_HexNAc_3_,
+
+            // Hex(3) HexNAc(4) NeuAc.
+            UNIMOD_Hex_3_HexNAc_4_NeuAc_1_,
+
+            // Hex(4) HexNAc(4) Pent.
+            UNIMOD_Hex_4_HexNAc_4_Pent_1_,
+
+            // Hex(7) HexNAc(2) Phos.
+            UNIMOD_Hex_7_HexNAc_2_Phos_1_,
+
+            // Hex(4) HexNAc(4) Me(2) Pent.
+            UNIMOD_Hex_4_HexNAc_4_Me_2_Pent_1_,
+
+            // DHex Hex(3) HexNAc(3) Pent(3).
+            UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_3_,
+
+            // DHex Hex(5) HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_5_HexNAc_3_Sulf_1_,
+
+            // DHex(2) Hex(3) HexNAc(3) Pent(2).
+            UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_2_,
+
+            // Hex(6) HexNAc(3) Phos.
+            UNIMOD_Hex_6_HexNAc_3_Phos_1_,
+
+            // Hex(4) HexNAc(5).
+            UNIMOD_Hex_4_HexNAc_5_,
+
+            // DHex(3) Hex(3) HexNAc(3) Pent.
+            UNIMOD_dHex_3_Hex_3_HexNAc_3_Pent_1_,
+
+            // DHex(2) Hex(4) HexNAc(3) Pent.
+            UNIMOD_dHex_2_Hex_4_HexNAc_3_Pent_1_,
+
+            // DHex Hex(4) HexNAc(4) Sulf.
+            UNIMOD_dHex_1_Hex_4_HexNAc_4_Sulf_1_,
+
+            // DHex Hex(7) HexNAc(2).
+            UNIMOD_dHex_1_Hex_7_HexNAc_2_,
+
+            // DHex Hex(4) HexNAc(3) NeuAc.
+            UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_,
+
+            // Hex(7) HexNAc(2) Phos(2).
+            UNIMOD_Hex_7_HexNAc_2_Phos_2_,
+
+            // Hex(5) HexNAc(4) Sulf.
+            UNIMOD_Hex_5_HexNAc_4_Sulf_1_,
+
+            // Hex(8) HexNAc(2).
+            UNIMOD_Hex_8_HexNAc_2_,
+
+            // DHex Hex(3) HexNAc(4) Pent(2).
+            UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_2_,
+
+            // DHex Hex(4) HexNAc(3) NeuGc.
+            UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuGc_1_,
+
+            // DHex(2) Hex(3) HexNAc(4) Pent.
+            UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_1_,
+
+            // DHex Hex(3) HexNAc(5) Sulf.
+            UNIMOD_dHex_1_Hex_3_HexNAc_5_Sulf_1_,
+
+            // DHex Hex(6) HexNAc(3).
+            UNIMOD_dHex_1_Hex_6_HexNAc_3_,
+
+            // DHex Hex(3) HexNAc(4) NeuAc.
+            UNIMOD_dHex_1_Hex_3_HexNAc_4_NeuAc_1_,
+
+            // DHex(3) Hex(3) HexNAc(4).
+            UNIMOD_dHex_3_Hex_3_HexNAc_4_,
+
+            // DHex Hex(4) HexNAc(4) Pent.
+            UNIMOD_dHex_1_Hex_4_HexNAc_4_Pent_1_,
+
+            // Hex(4) HexNAc(5) Sulf.
+            UNIMOD_Hex_4_HexNAc_5_Sulf_1_,
+
+            // Hex(7) HexNAc(3).
+            UNIMOD_Hex_7_HexNAc_3_,
+
+            // DHex Hex(4) HexNAc(3) NeuAc Sulf.
+            UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_,
+
+            // Hex(5) HexNAc(4) Me(2) Pent.
+            UNIMOD_Hex_5_HexNAc_4_Me_2_Pent_1_,
+
+            // Hex(3) HexNAc(6) Sulf.
+            UNIMOD_Hex_3_HexNAc_6_Sulf_1_,
+
+            // DHex Hex(6) HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_6_HexNAc_3_Sulf_1_,
+
+            // DHex Hex(4) HexNAc(5).
+            UNIMOD_dHex_1_Hex_4_HexNAc_5_,
+
+            // DHex Hex(5) HexA HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_1_,
+
+            // Hex(7) HexNAc(3) Phos.
+            UNIMOD_Hex_7_HexNAc_3_Phos_1_,
+
+            // Hex(6) HexNAc(4) Me(3).
+            UNIMOD_Hex_6_HexNAc_4_Me_3_,
+
+            // DHex(2) Hex(4) HexNAc(4) Sulf.
+            UNIMOD_dHex_2_Hex_4_HexNAc_4_Sulf_1_,
+
+            // Hex(4) HexNAc(3) NeuAc(2).
+            UNIMOD_Hex_4_HexNAc_3_NeuAc_2_,
+
+            // DHex Hex(3) HexNAc(4) Pent(3).
+            UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_3_,
+
+            // DHex(2) Hex(5) HexNAc(3) Pent.
+            UNIMOD_dHex_2_Hex_5_HexNAc_3_Pent_1_,
+
+            // DHex Hex(5) HexNAc(4) Sulf.
+            UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_1_,
+
+            // DHex(2) Hex(3) HexNAc(4) Pent(2).
+            UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_2_,
+
+            // DHex Hex(5) HexNAc(3) NeuAc.
+            UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_,
+
+            // Hex(3) HexNAc(6) Sulf(2).
+            UNIMOD_Hex_3_HexNAc_6_Sulf_2_,
+
+            // Hex(9) HexNAc(2).
+            UNIMOD_Hex_9_HexNAc_2_,
+
+            // Hex(4) HexNAc(6).
+            UNIMOD_Hex_4_HexNAc_6_,
+
+            // DHex(3) Hex(3) HexNAc(4) Pent.
+            UNIMOD_dHex_3_Hex_3_HexNAc_4_Pent_1_,
+
+            // DHex Hex(5) HexNAc(3) NeuGc.
+            UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_,
+
+            // DHex(2) Hex(4) HexNAc(4) Pent.
+            UNIMOD_dHex_2_Hex_4_HexNAc_4_Pent_1_,
+
+            // DHex Hex(4) HexNAc(5) Sulf.
+            UNIMOD_dHex_1_Hex_4_HexNAc_5_Sulf_1_,
+
+            // DHex Hex(7) HexNAc(3).
+            UNIMOD_dHex_1_Hex_7_HexNAc_3_,
+
+            // DHex Hex(5) HexNAc(4) Pent.
+            UNIMOD_dHex_1_Hex_5_HexNAc_4_Pent_1_,
+
+            // DHex Hex(5) HexA HexNAc(3) Sulf(2).
+            UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_2_,
+
+            // Hex(3) HexNAc(7).
+            UNIMOD_Hex_3_HexNAc_7_,
+
+            // DHex(2) Hex(5) HexNAc(4).
+            UNIMOD_dHex_2_Hex_5_HexNAc_4_,
+
+            // DHex(2) Hex(4) HexNAc(3) NeuAc Sulf.
+            UNIMOD_dHex_2_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_,
+
+            // DHex Hex(5) HexNAc(4) Sulf(2).
+            UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_2_,
+
+            // DHex Hex(5) HexNAc(4) Me(2) Pent.
+            UNIMOD_dHex_1_Hex_5_HexNAc_4_Me_2_Pent_1_,
+
+            // Hex(5) HexNAc(4) NeuGc.
+            UNIMOD_Hex_5_HexNAc_4_NeuGc_1_,
+
+            // DHex Hex(3) HexNAc(6) Sulf.
+            UNIMOD_dHex_1_Hex_3_HexNAc_6_Sulf_1_,
+
+            // DHex Hex(6) HexNAc(4).
+            UNIMOD_dHex_1_Hex_6_HexNAc_4_,
+
+            // DHex Hex(5) HexNAc(3) NeuAc Sulf.
+            UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_Sulf_1_,
+
+            // Hex(7) HexNAc(4).
+            UNIMOD_Hex_7_HexNAc_4_,
+
+            // DHex Hex(5) HexNAc(3) NeuGc Sulf.
+            UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_Sulf_1_,
+
+            // Hex(4) HexNAc(5) NeuAc.
+            UNIMOD_Hex_4_HexNAc_5_NeuAc_1_,
+
+            // Hex(6) HexNAc(4) Me(3) Pent.
+            UNIMOD_Hex_6_HexNAc_4_Me_3_Pent_1_,
+
+            // DHex Hex(7) HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_7_HexNAc_3_Sulf_1_,
+
+            // DHex Hex(7) HexNAc(3) Phos.
+            UNIMOD_dHex_1_Hex_7_HexNAc_3_Phos_1_,
+
+            // DHex Hex(5) HexNAc(5).
+            UNIMOD_dHex_1_Hex_5_HexNAc_5_,
+
+            // DHex Hex(4) HexNAc(4) NeuAc Sulf.
+            UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_Sulf_1_,
+
+            // DHex(3) Hex(4) HexNAc(4) Sulf.
+            UNIMOD_dHex_3_Hex_4_HexNAc_4_Sulf_1_,
+
+            // Hex(3) HexNAc(7) Sulf.
+            UNIMOD_Hex_3_HexNAc_7_Sulf_1_,
+
+            // Hex(6) HexNAc(5).
+            UNIMOD_Hex_6_HexNAc_5_,
+
+            // Hex(5) HexNAc(4) NeuAc Sulf.
+            UNIMOD_Hex_5_HexNAc_4_NeuAc_1_Sulf_1_,
+
+            // Hex(3) HexNAc(6) NeuAc.
+            UNIMOD_Hex_3_HexNAc_6_NeuAc_1_,
+
+            // DHex(2) Hex(3) HexNAc(6).
+            UNIMOD_dHex_2_Hex_3_HexNAc_6_,
+
+            // Hex HexNAc NeuGc.
+            UNIMOD_Hex_1_HexNAc_1_NeuGc_1_,
+
+            // DHex Hex(2) HexNAc.
+            UNIMOD_dHex_1_Hex_2_HexNAc_1_,
+
+            // HexNAc(3) Sulf.
+            UNIMOD_HexNAc_3_Sulf_1_,
+
+            // Hex(3) HexNAc.
+            UNIMOD_Hex_3_HexNAc_1_,
+
+            // Hex HexNAc Kdn Sulf.
+            UNIMOD_Hex_1_HexNAc_1_Kdn_1_Sulf_1_,
+
+            // HexNAc(2) NeuAc.
+            UNIMOD_HexNAc_2_NeuAc_1_,
+
+            // HexNAc Kdn(2).
+            UNIMOD_HexNAc_1_Kdn_2_,
+
+            // Hex(3) HexNAc Me.
+            UNIMOD_Hex_3_HexNAc_1_Me_1_,
+
+            // Hex(2) HexA Pent Sulf.
+            UNIMOD_Hex_2_HexA_1_Pent_1_Sulf_1_,
+
+            // HexNAc(2) NeuGc.
+            UNIMOD_HexNAc_2_NeuGc_1_,
+
+            // Hex(4) Phos.
+            UNIMOD_Hex_4_Phos_1_,
+
+            // Hex HexNAc NeuAc Sulf.
+            UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Sulf_1_,
+
+            // Hex HexA HexNAc(2).
+            UNIMOD_Hex_1_HexA_1_HexNAc_2_,
+
+            // DHex Hex(2) HexNAc Sulf.
+            UNIMOD_dHex_1_Hex_2_HexNAc_1_Sulf_1_,
+
+            // DHex HexNAc(3).
+            UNIMOD_dHex_1_HexNAc_3_,
+
+            // DHex Hex HexNAc Kdn.
+            UNIMOD_dHex_1_Hex_1_HexNAc_1_Kdn_1_,
+
+            // Hex HexNAc(3).
+            UNIMOD_Hex_1_HexNAc_3_,
+
+            // HexNAc(2) NeuAc Sulf.
+            UNIMOD_HexNAc_2_NeuAc_1_Sulf_1_,
+
+            // DHex(2) Hex(3).
+            UNIMOD_dHex_2_Hex_3_,
+
+            // Hex(2) HexA HexNAc Sulf.
+            UNIMOD_Hex_2_HexA_1_HexNAc_1_Sulf_1_,
+
+            // DHex(2) Hex(2) HexA.
+            UNIMOD_dHex_2_Hex_2_HexA_1_,
+
+            // DHex Hex HexNAc(2) Sulf.
+            UNIMOD_dHex_1_Hex_1_HexNAc_2_Sulf_1_,
+
+            // DHex Hex HexNAc NeuAc.
+            UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuAc_1_,
+
+            // Hex(2) HexNAc(2) Sulf.
+            UNIMOD_Hex_2_HexNAc_2_Sulf_1_,
+
+            // Hex(5).
+            UNIMOD_Hex_5_,
+
+            // HexNAc(4).
+            UNIMOD_HexNAc_4_,
+
+            // HexNAc NeuGc(2).
+            UNIMOD_HexNAc_1_NeuGc_2_,
+
+            // DHex Hex HexNAc NeuGc.
+            UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuGc_1_,
+
+            // DHex(2) Hex(2) HexNAc.
+            UNIMOD_dHex_2_Hex_2_HexNAc_1_,
+
+            // Hex(2) HexNAc NeuGc.
+            UNIMOD_Hex_2_HexNAc_1_NeuGc_1_,
+
+            // DHex Hex(3) HexNAc.
+            UNIMOD_dHex_1_Hex_3_HexNAc_1_,
+
+            // DHex Hex(2) HexA HexNAc.
+            UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_,
+
+            // Hex HexNAc(3) Sulf.
+            UNIMOD_Hex_1_HexNAc_3_Sulf_1_,
+
+            // Hex(4) HexNAc.
+            UNIMOD_Hex_4_HexNAc_1_,
+
+            // Hex HexNAc(2) NeuAc.
+            UNIMOD_Hex_1_HexNAc_2_NeuAc_1_,
+
+            // Hex HexNAc(2) NeuGc.
+            UNIMOD_Hex_1_HexNAc_2_NeuGc_1_,
+
+            // Hex(5) Phos.
+            UNIMOD_Hex_5_Phos_1_,
+
+            // DHex(2) Hex HexNAc Kdn.
+            UNIMOD_dHex_2_Hex_1_HexNAc_1_Kdn_1_,
+
+            // DHex Hex(3) HexNAc Sulf.
+            UNIMOD_dHex_1_Hex_3_HexNAc_1_Sulf_1_,
+
+            // DHex Hex HexNAc(3).
+            UNIMOD_dHex_1_Hex_1_HexNAc_3_,
+
+            // DHex Hex(2) HexA HexNAc Sulf.
+            UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_Sulf_1_,
+
+            // Hex(2) HexNAc(3).
+            UNIMOD_Hex_2_HexNAc_3_,
+
+            // Hex HexNAc(2) NeuAc Sulf.
+            UNIMOD_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_,
+
+            // DHex(2) Hex(4).
+            UNIMOD_dHex_2_Hex_4_,
+
+            // DHex(2) HexNAc(2) Kdn.
+            UNIMOD_dHex_2_HexNAc_2_Kdn_1_,
+
+            // DHex Hex(2) HexNAc(2) Sulf.
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_Sulf_1_,
+
+            // DHex HexNAc(4).
+            UNIMOD_dHex_1_HexNAc_4_,
+
+            // Hex HexNAc NeuAc NeuGc.
+            UNIMOD_Hex_1_HexNAc_1_NeuAc_1_NeuGc_1_,
+
+            // DHex Hex HexNAc(2) Kdn.
+            UNIMOD_dHex_1_Hex_1_HexNAc_2_Kdn_1_,
+
+            // Hex HexNAc NeuGc(2).
+            UNIMOD_Hex_1_HexNAc_1_NeuGc_2_,
+
+            // Ac Hex HexNAc NeuAc(2).
+            UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_1_,
+
+            // DHex(2) Hex(2) HexA HexNAc.
+            UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_1_,
+
+            // DHex Hex HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_1_HexNAc_3_Sulf_1_,
+
+            // Hex(2) HexA NeuAc Pent Sulf.
+            UNIMOD_Hex_2_HexA_1_NeuAc_1_Pent_1_Sulf_1_,
+
+            // DHex Hex HexNAc(2) NeuAc.
+            UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_,
+
+            // DHex Hex(3) HexA HexNAc.
+            UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_,
+
+            // Hex(2) HexNAc(3) Sulf.
+            UNIMOD_Hex_2_HexNAc_3_Sulf_1_,
+
+            // Hex(5) HexNAc.
+            UNIMOD_Hex_5_HexNAc_1_,
+
+            // HexNAc(5).
+            UNIMOD_HexNAc_5_,
+
+            // DHex Hex HexNAc(2) NeuGc.
+            UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuGc_1_,
+
+            // Ac(2) Hex HexNAc NeuAc(2).
+            UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_2_,
+
+            // Hex(2) HexNAc(2) NeuGc.
+            UNIMOD_Hex_2_HexNAc_2_NeuGc_1_,
+
+            // Hex(5) Phos(3).
+            UNIMOD_Hex_5_Phos_3_,
+
+            // Hex(6) Phos.
+            UNIMOD_Hex_6_Phos_1_,
+
+            // DHex Hex(2) HexA HexNAc(2).
+            UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_2_,
+
+            // DHex(2) Hex(3) HexNAc Sulf.
+            UNIMOD_dHex_2_Hex_3_HexNAc_1_Sulf_1_,
+
+            // Hex HexNAc(3) NeuAc.
+            UNIMOD_Hex_1_HexNAc_3_NeuAc_1_,
+
+            // DHex(2) Hex HexNAc(3).
+            UNIMOD_dHex_2_Hex_1_HexNAc_3_,
+
+            // Hex HexNAc(3) NeuGc.
+            UNIMOD_Hex_1_HexNAc_3_NeuGc_1_,
+
+            // DHex Hex HexNAc(2) NeuAc Sulf.
+            UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_,
+
+            // DHex Hex(3) HexA HexNAc Sulf.
+            UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_Sulf_1_,
+
+            // DHex Hex HexA HexNAc(3).
+            UNIMOD_dHex_1_Hex_1_HexA_1_HexNAc_3_,
+
+            // Hex(2) HexNAc(2) NeuAc Sulf.
+            UNIMOD_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_,
+
+            // DHex(2) Hex(2) HexNAc(2) Sulf.
+            UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_1_,
+
+            // DHex(2) Hex HexNAc(2) Kdn.
+            UNIMOD_dHex_2_Hex_1_HexNAc_2_Kdn_1_,
+
+            // DHex Hex HexNAc(4).
+            UNIMOD_dHex_1_Hex_1_HexNAc_4_,
+
+            // Hex(2) HexNAc(4).
+            UNIMOD_Hex_2_HexNAc_4_,
+
+            // Hex(2) HexNAc NeuGc(2).
+            UNIMOD_Hex_2_HexNAc_1_NeuGc_2_,
+
+            // DHex(2) Hex(4) HexNAc.
+            UNIMOD_dHex_2_Hex_4_HexNAc_1_,
+
+            // Hex HexNAc(2) NeuAc(2).
+            UNIMOD_Hex_1_HexNAc_2_NeuAc_2_,
+
+            // DHex(2) Hex HexNAc(2) NeuAc.
+            UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuAc_1_,
+
+            // DHex Hex(2) HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_2_HexNAc_3_Sulf_1_,
+
+            // DHex HexNAc(5).
+            UNIMOD_dHex_1_HexNAc_5_,
+
+            // DHex(2) Hex HexNAc(2) NeuGc.
+            UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuGc_1_,
+
+            // DHex(3) Hex(2) HexNAc(2).
+            UNIMOD_dHex_3_Hex_2_HexNAc_2_,
+
+            // Hex(3) HexNAc(3) Sulf.
+            UNIMOD_Hex_3_HexNAc_3_Sulf_1_,
+
+            // DHex(2) Hex(2) HexNAc(2) Sulf(2).
+            UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_2_,
+
+            // DHex Hex(2) HexNAc(2) NeuGc.
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_1_,
+
+            // DHex Hex HexNAc(3) NeuAc.
+            UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_,
+
+            // Hex(6) Phos(3).
+            UNIMOD_Hex_6_Phos_3_,
+
+            // DHex Hex(3) HexA HexNAc(2).
+            UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_,
+
+            // DHex Hex HexNAc(3) NeuGc.
+            UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuGc_1_,
+
+            // Hex HexNAc(2) NeuAc(2) Sulf.
+            UNIMOD_Hex_1_HexNAc_2_NeuAc_2_Sulf_1_,
+
+            // DHex(2) Hex(3) HexA HexNAc Sulf.
+            UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_1_Sulf_1_,
+
+            // Hex HexNAc NeuAc(3).
+            UNIMOD_Hex_1_HexNAc_1_NeuAc_3_,
+
+            // Hex(2) HexNAc(3) NeuGc.
+            UNIMOD_Hex_2_HexNAc_3_NeuGc_1_,
+
+            // DHex Hex(2) HexNAc(2) NeuAc Sulf.
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_,
+
+            // DHex(3) Hex HexNAc(2) Kdn.
+            UNIMOD_dHex_3_Hex_1_HexNAc_2_Kdn_1_,
+
+            // DHex(2) Hex(3) HexNAc(2) Sulf.
+            UNIMOD_dHex_2_Hex_3_HexNAc_2_Sulf_1_,
+
+            // DHex(2) Hex(2) HexNAc(2) Kdn.
+            UNIMOD_dHex_2_Hex_2_HexNAc_2_Kdn_1_,
+
+            // DHex(2) Hex(2) HexA HexNAc(2) Sulf.
+            UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_2_Sulf_1_,
+
+            // DHex Hex(2) HexNAc(4).
+            UNIMOD_dHex_1_Hex_2_HexNAc_4_,
+
+            // Hex HexNAc NeuGc(3).
+            UNIMOD_Hex_1_HexNAc_1_NeuGc_3_,
+
+            // DHex Hex HexNAc(3) NeuAc Sulf.
+            UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_Sulf_1_,
+
+            // DHex Hex(3) HexA HexNAc(2) Sulf.
+            UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_Sulf_1_,
+
+            // DHex Hex HexNAc(2) NeuAc(2).
+            UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_2_,
+
+            // DHex(3) HexNAc(3) Kdn.
+            UNIMOD_dHex_3_HexNAc_3_Kdn_1_,
+
+            // Hex(2) HexNAc(3) NeuAc Sulf.
+            UNIMOD_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_,
+
+            // DHex(2) Hex(2) HexNAc(3) Sulf.
+            UNIMOD_dHex_2_Hex_2_HexNAc_3_Sulf_1_,
+
+            // DHex(2) HexNAc(5).
+            UNIMOD_dHex_2_HexNAc_5_,
+
+            // Hex(2) HexNAc(2) NeuAc(2).
+            UNIMOD_Hex_2_HexNAc_2_NeuAc_2_,
+
+            // DHex(2) Hex(2) HexNAc(2) NeuAc.
+            UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_,
+
+            // DHex Hex(3) HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_3_HexNAc_3_Sulf_1_,
+
+            // DHex(2) Hex(2) HexNAc(2) NeuGc.
+            UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuGc_1_,
+
+            // Hex(2) HexNAc(5).
+            UNIMOD_Hex_2_HexNAc_5_,
+
+            // DHex Hex(3) HexNAc(2) NeuGc.
+            UNIMOD_dHex_1_Hex_3_HexNAc_2_NeuGc_1_,
+
+            // Hex HexNAc(3) NeuAc(2).
+            UNIMOD_Hex_1_HexNAc_3_NeuAc_2_,
+
+            // DHex Hex(2) HexNAc(3) NeuAc.
+            UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_,
+
+            // DHex(3) Hex(2) HexNAc(3).
+            UNIMOD_dHex_3_Hex_2_HexNAc_3_,
+
+            // Hex(7) Phos(3).
+            UNIMOD_Hex_7_Phos_3_,
+
+            // DHex Hex(4) HexA HexNAc(2).
+            UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_2_,
+
+            // Hex(3) HexNAc(3) NeuAc.
+            UNIMOD_Hex_3_HexNAc_3_NeuAc_1_,
+
+            // DHex Hex(3) HexA(2) HexNAc(2).
+            UNIMOD_dHex_1_Hex_3_HexA_2_HexNAc_2_,
+
+            // Hex(2) HexNAc(2) NeuAc(2) Sulf.
+            UNIMOD_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_,
+
+            // DHex(2) Hex(2) HexNAc(2) NeuAc Sulf.
+            UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_,
+
+            // Hex(3) HexNAc(3) NeuGc.
+            UNIMOD_Hex_3_HexNAc_3_NeuGc_1_,
+
+            // DHex(4) Hex HexNAc(2) Kdn.
+            UNIMOD_dHex_4_Hex_1_HexNAc_2_Kdn_1_,
+
+            // DHex(3) Hex(2) HexNAc(2) Kdn.
+            UNIMOD_dHex_3_Hex_2_HexNAc_2_Kdn_1_,
+
+            // DHex(3) Hex(2) HexA HexNAc(2) Sulf.
+            UNIMOD_dHex_3_Hex_2_HexA_1_HexNAc_2_Sulf_1_,
+
+            // Hex(2) HexNAc(4) NeuAc.
+            UNIMOD_Hex_2_HexNAc_4_NeuAc_1_,
+
+            // DHex(2) Hex(2) HexNAc(4).
+            UNIMOD_dHex_2_Hex_2_HexNAc_4_,
+
+            // DHex(2) Hex(3) HexA HexNAc(2) Sulf.
+            UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_2_Sulf_1_,
+
+            // DHex(4) HexNAc(3) Kdn.
+            UNIMOD_dHex_4_HexNAc_3_Kdn_1_,
+
+            // Hex(2) HexNAc NeuGc(3).
+            UNIMOD_Hex_2_HexNAc_1_NeuGc_3_,
+
+            // DHex(4) Hex HexNAc Kdn(2).
+            UNIMOD_dHex_4_Hex_1_HexNAc_1_Kdn_2_,
+
+            // DHex Hex(2) HexNAc(3) NeuAc Sulf.
+            UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_,
+
+            // DHex Hex(2) HexNAc(2) NeuAc(2).
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_,
+
+            // DHex(3) Hex HexNAc(3) Kdn.
+            UNIMOD_dHex_3_Hex_1_HexNAc_3_Kdn_1_,
+
+            // Hex(3) HexNAc(3) NeuAc Sulf.
+            UNIMOD_Hex_3_HexNAc_3_NeuAc_1_Sulf_1_,
+
+            // Hex(3) HexNAc(2) NeuAc(2).
+            UNIMOD_Hex_3_HexNAc_2_NeuAc_2_,
+
+            // Hex(3) HexNAc(3) NeuGc Sulf.
+            UNIMOD_Hex_3_HexNAc_3_NeuGc_1_Sulf_1_,
+
+            // DHex Hex(2) HexNAc(2) NeuGc(2).
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_2_,
+
+            // DHex(2) Hex(3) HexNAc(2) NeuGc.
+            UNIMOD_dHex_2_Hex_3_HexNAc_2_NeuGc_1_,
+
+            // DHex Hex(3) HexA HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_3_Sulf_1_,
+
+            // Hex(2) HexNAc(3) NeuAc(2).
+            UNIMOD_Hex_2_HexNAc_3_NeuAc_2_,
+
+            // DHex(2) Hex(2) HexNAc(3) NeuAc.
+            UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuAc_1_,
+
+            // DHex(4) Hex(2) HexNAc(3).
+            UNIMOD_dHex_4_Hex_2_HexNAc_3_,
+
+            // Hex(2) HexNAc(3) NeuAc NeuGc.
+            UNIMOD_Hex_2_HexNAc_3_NeuAc_1_NeuGc_1_,
+
+            // DHex(2) Hex(2) HexNAc(3) NeuGc.
+            UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuGc_1_,
+
+            // DHex(3) Hex(3) HexNAc(3).
+            UNIMOD_dHex_3_Hex_3_HexNAc_3_,
+
+            // Hex(8) Phos(3).
+            UNIMOD_Hex_8_Phos_3_,
+
+            // DHex Hex(2) HexNAc(2) NeuAc(2) Sulf.
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_,
+
+            // Hex(2) HexNAc(3) NeuGc(2).
+            UNIMOD_Hex_2_HexNAc_3_NeuGc_2_,
+
+            // DHex(4) Hex(2) HexNAc(2) Kdn.
+            UNIMOD_dHex_4_Hex_2_HexNAc_2_Kdn_1_,
+
+            // DHex Hex(2) HexNAc(4) NeuAc.
+            UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_1_,
+
+            // DHex(3) Hex(2) HexNAc(4).
+            UNIMOD_dHex_3_Hex_2_HexNAc_4_,
+
+            // Hex HexNAc NeuGc(4).
+            UNIMOD_Hex_1_HexNAc_1_NeuGc_4_,
+
+            // DHex(4) Hex HexNAc(3) Kdn.
+            UNIMOD_dHex_4_Hex_1_HexNAc_3_Kdn_1_,
+
+            // Hex(4) HexNAc(4) Sulf(2).
+            UNIMOD_Hex_4_HexNAc_4_Sulf_2_,
+
+            // DHex(3) Hex(2) HexNAc(3) Kdn.
+            UNIMOD_dHex_3_Hex_2_HexNAc_3_Kdn_1_,
+
+            // DHex(2) Hex(2) HexNAc(5).
+            UNIMOD_dHex_2_Hex_2_HexNAc_5_,
+
+            // DHex(2) Hex(3) HexA HexNAc(3) Sulf.
+            UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_3_Sulf_1_,
+
+            // DHex Hex(4) HexA HexNAc(3) Sulf.
+            UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_3_Sulf_1_,
+
+            // Hex(3) HexNAc(3) NeuAc(2).
+            UNIMOD_Hex_3_HexNAc_3_NeuAc_2_,
+
+            // DHex(2) Hex(3) HexNAc(3) NeuAc.
+            UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_1_,
+
+            // DHex(4) Hex(3) HexNAc(3).
+            UNIMOD_dHex_4_Hex_3_HexNAc_3_,
+
+            // DHex(2) Hex(3) HexNAc(3) NeuGc.
+            UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuGc_1_,
+
+            // Hex(9) Phos(3).
+            UNIMOD_Hex_9_Phos_3_,
+
+            // DHex(2) HexNAc(7).
+            UNIMOD_dHex_2_HexNAc_7_,
+
+            // Hex(2) HexNAc NeuGc(4).
+            UNIMOD_Hex_2_HexNAc_1_NeuGc_4_,
+
+            // Hex(3) HexNAc(3) NeuAc(2) Sulf.
+            UNIMOD_Hex_3_HexNAc_3_NeuAc_2_Sulf_1_,
+
+            // DHex(2) Hex(3) HexNAc(5).
+            UNIMOD_dHex_2_Hex_3_HexNAc_5_,
+
+            // DHex Hex(2) HexNAc(2) NeuGc(3).
+            UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_3_,
+
+            // DHex(2) Hex(4) HexA HexNAc(3) Sulf.
+            UNIMOD_dHex_2_Hex_4_HexA_1_HexNAc_3_Sulf_1_,
+
+            // Hex(2) HexNAc(3) NeuAc(3).
+            UNIMOD_Hex_2_HexNAc_3_NeuAc_3_,
+
+            // DHex Hex(3) HexNAc(3) NeuAc(2).
+            UNIMOD_dHex_1_Hex_3_HexNAc_3_NeuAc_2_,
+
+            // DHex(3) Hex(3) HexNAc(3) NeuAc.
+            UNIMOD_dHex_3_Hex_3_HexNAc_3_NeuAc_1_,
+
+            // Hex(2) HexNAc(3) NeuGc(3).
+            UNIMOD_Hex_2_HexNAc_3_NeuGc_3_,
+
+            // Hex(10) Phos(3).
+            UNIMOD_Hex_10_Phos_3_,
+
+            // DHex Hex(2) HexNAc(4) NeuAc(2).
+            UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_2_,
+
+            // Hex HexNAc NeuGc(5).
+            UNIMOD_Hex_1_HexNAc_1_NeuGc_5_,
+
+            // Hex(4) HexNAc(4) NeuAc Sulf(2).
+            UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_2_,
+
+            // Hex(4) HexNAc(4) NeuGc Sulf(2).
+            UNIMOD_Hex_4_HexNAc_4_NeuGc_1_Sulf_2_,
+
+            // DHex(2) Hex(3) HexNAc(3) NeuAc(2).
+            UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_2_,
+
+            // Hex(4) HexNAc(4) NeuAc Sulf(3).
+            UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_3_,
+
+            // DHex(2) Hex(2) HexNAc(2).
+            UNIMOD_dHex_2_Hex_2_HexNAc_2_,
+
+            // DHex Hex(3) HexNAc(2).
+            UNIMOD_dHex_1_Hex_3_HexNAc_2_,
+
+            // DHex Hex(2) HexNAc(3).
+            UNIMOD_dHex_1_Hex_2_HexNAc_3_,
+
+            // Hex(3) HexNAc(3).
+            UNIMOD_Hex_3_HexNAc_3_,
+
+            // DHex Hex(3) HexNAc(2) Sulf.
+            UNIMOD_dHex_1_Hex_3_HexNAc_2_Sulf_1_,
+
+            // DHex(2) Hex(3) HexNAc(2).
+            UNIMOD_dHex_2_Hex_3_HexNAc_2_,
+
+            // DHex Hex(4) HexNAc(2).
+            UNIMOD_dHex_1_Hex_4_HexNAc_2_,
+
+            // DHex(2) Hex(2) HexNAc(3).
+            UNIMOD_dHex_2_Hex_2_HexNAc_3_,
+
+            // DHex Hex(3) HexNAc(3).
+            UNIMOD_dHex_1_Hex_3_HexNAc_3_,
+
+            // Hex(4) HexNAc(3).
+            UNIMOD_Hex_4_HexNAc_3_,
+
+            // DHex(2) Hex(4) HexNAc(2).
+            UNIMOD_dHex_2_Hex_4_HexNAc_2_,
+
+            // DHex(2) Hex(3) HexNAc(3).
+            UNIMOD_dHex_2_Hex_3_HexNAc_3_,
+
+            // Hex(3) HexNAc(5).
+            UNIMOD_Hex_3_HexNAc_5_,
+
+            // Hex(4) HexNAc(3) NeuAc.
+            UNIMOD_Hex_4_HexNAc_3_NeuAc_1_,
+
+            // DHex(2) Hex(3) HexNAc(4).
+            UNIMOD_dHex_2_Hex_3_HexNAc_4_,
+
+            // DHex Hex(3) HexNAc(5).
+            UNIMOD_dHex_1_Hex_3_HexNAc_5_,
+
+            // Hex(3) HexNAc(6).
+            UNIMOD_Hex_3_HexNAc_6_,
+
+            // Hex(4) HexNAc(4) NeuAc.
+            UNIMOD_Hex_4_HexNAc_4_NeuAc_1_,
+
+            // DHex(2) Hex(4) HexNAc(4).
+            UNIMOD_dHex_2_Hex_4_HexNAc_4_,
+
+            // Hex(6) HexNAc(4).
+            UNIMOD_Hex_6_HexNAc_4_,
+
+            // Hex(5) HexNAc(5).
+            UNIMOD_Hex_5_HexNAc_5_,
+
+            // DHex Hex(3) HexNAc(6).
+            UNIMOD_dHex_1_Hex_3_HexNAc_6_,
+
+            // DHex Hex(4) HexNAc(4) NeuAc.
+            UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_,
+
+            // DHex(3) Hex(4) HexNAc(4).
+            UNIMOD_dHex_3_Hex_4_HexNAc_4_,
+
+            // DHex Hex(3) HexNAc(5) NeuAc.
+            UNIMOD_dHex_1_Hex_3_HexNAc_5_NeuAc_1_,
+
+            // DHex(2) Hex(4) HexNAc(5).
+            UNIMOD_dHex_2_Hex_4_HexNAc_5_,
+
+            // Ac Hex HexNAc NeuAc.
+            UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Ac_1_,
+
+            // 13C(2) 15N(2).
+            UNIMOD_Label_13C_2_15N_2_,
+
+            // Ammonium-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.
+            UNIMOD_Xlink_DSS_NH2,
+
+            // SUMOylation by Giardia lamblia.
+            UNIMOD_NQIGG,
+
+            // Carboxyethylpyrrole.
+            UNIMOD_CEP,
+
             PATO_pato_OBSOLETE,
 
-            // A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities.
+            // A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities
             PATO_quality,
 
             PATO_value_OBSOLETE,
@@ -10362,7 +11864,7 @@ namespace PSI_Interface.CV
             // An organismal quality inhering in a bearer by virtue of the bearer's ability to undergo sexual reproduction in order to differentiate the individuals or types involved.
             PATO_biological_sex,
 
-            // A physical quality inhering in a bearer by virtue of the bearer's disposition to being turned, bowed, or twisted without breaking.
+            // A physical quality inhering in a bearer by virtue of the bearer's resistance to pressure, being broken, or pierced
             PATO_hardness,
 
             // A quality inhering in a bearer by virtue of the bearer's possessing or displaying a distinctive feature in type or degree or effect or force.
@@ -10418,7 +11920,7 @@ namespace PSI_Interface.CV
             PATO_deviation_from_normal_,
 
             // The number of entities of this type that are part of the whole organism.
-            PATO_count,
+            PATO_amount,
 
             PATO_relative_quality_OBSOLETE,
 
@@ -11293,7 +12795,7 @@ namespace PSI_Interface.CV
             PATO_high_OBSOLETE,
 
             // An amount which is relatively high.
-            PATO_present_in_greater_numbers_in_organism,
+            PATO_increased_amount,
 
             PATO_low_OBSOLETE,
 
@@ -11684,7 +13186,7 @@ namespace PSI_Interface.CV
             // A structural quality inhering in a bearer by virtue of the bearer's consisting of blebbing of the nucleus and DNA fragmentation due to the cell undergoing a specific form of programmed cell death termed apoptosis.
             PATO_apoptotic,
 
-            // A structural quality inhering in a bearer whose structure deteriorates or is lost over time.
+            // A structural quality inhering in a bearer whose structure deteriorates or is lost over time due to an active pathological process.
             PATO_degenerate,
 
             // A structural quality inhering in a bearer by virtue of the bearer's exhibiting an alteration in size, shape or organization of its constituent cells.
@@ -12319,7 +13821,7 @@ namespace PSI_Interface.CV
 
             PATO_regular_shape_OBSOLETE,
 
-            PATO_irregular_shape_OBSOLETE,
+            PATO_obsolete_irregular_shape_OBSOLETE,
 
             // A structural quality inhering in a cytoplasm that contains fluid filled cavities.
             PATO_vacuolated,
@@ -12395,7 +13897,7 @@ namespace PSI_Interface.CV
             // A size quality inhering in a bearer by virtue of the bearer's being abnormally small.
             PATO_dwarf_like,
 
-            // A structural quality inhering in a bearer by virtue of the bearer's disposition to being permeated or pervaded by a liquid (as by osmosis or diffusion).
+            // A structural quality inhering in a bearer by virtue of the bearer's disposition to being permeated or pervaded by a gas or liquid (as by osmosis or diffusion).
             PATO_permeability,
 
             PATO_absolute_permeability_OBSOLETE,
@@ -12421,10 +13923,10 @@ namespace PSI_Interface.CV
 
             PATO_relative_porosity_value_OBSOLETE,
 
-            // A permeability quality inhering in a bearer by virtue of the bearer's being capable to be permeated or pervaded by a liquid (as by osmosis or diffusion).
+            // A permeability quality inhering in a bearer by virtue of the bearer's being capable to be permeated or pervaded by a gas or liquid (as by osmosis or diffusion).
             PATO_permeable,
 
-            // A permeability quality inhering in a bearer by virtue of the bearer's being incapable of being permeated or pervaded by a liquid (as by osmosis or diffusion).
+            // A permeability quality inhering in a bearer by virtue of the bearer's being incapable of being permeated or pervaded by a gas or liquid (as by osmosis or diffusion).
             PATO_impermeable,
 
             // A porosity quality inhering in a bearer by virtue of the bearer's being capable of admitting the passage of gas or liquid through pores or interstices.
@@ -13695,7 +15197,7 @@ namespace PSI_Interface.CV
             // A quality inhering in a bearer by virtue of the bearer's standing out or projecting beyond a surface or line.
             PATO_prominent,
 
-            // A size quality inhering in a an organ or tissue by virtue of the bearer's absence coupled with persistence of the organ/tissue primordium, which fails to develop completely.
+            // Absence of an organ, tissue or cell due to failure to develop from a primordium or precursor cell.
             PATO_aplastic,
 
             // A quality of a process which occurs near to or not long before the present.
@@ -15139,7 +16641,7 @@ namespace PSI_Interface.CV
             PATO_organismal_quality,
 
             // An amount which is relatively low.
-            PATO_present_in_fewer_numbers_in_organism,
+            PATO_decreased_amount,
 
             // A quality inhering in a bearer by virtue of its visibility.
             PATO_conspicuousness,
@@ -15292,7 +16794,7 @@ namespace PSI_Interface.CV
             PATO_lateral_and_rotional_curvature,
 
             // An amount which normal.
-            PATO_present_in_normal_numbers_in_organism,
+            PATO_normal_amount,
 
             // An occurrence which is relatively high.
             PATO_increased_occurrence,
@@ -15991,7 +17493,7 @@ namespace PSI_Interface.CV
 
             PATO_aplastic_hypoplastic,
 
-            // Failure of a tissue of organ to develop.
+            // Absence of a tissue or organ due to failure to develop.
             PATO_agenesis,
 
             // A structural quality inhering in a bearer by virtue of the bearer's underlying structure being capable of change.
@@ -16489,7 +17991,7 @@ namespace PSI_Interface.CV
             // A structural quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a leaf.
             PATO_leaf_like,
 
-            // A quality inhering in a bearer by virtue of the bearer being thin and lacking outgrowths
+            // A quality inhering in a bearer by virtue of the bearer being thin and lacking outgrowths.
             PATO_pin_like,
 
             // A structural quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a sepal,
@@ -16699,20 +18201,15 @@ namespace PSI_Interface.CV
             // An orientation quality inhering in a bearer by virtue of the bearer having a position that is directed posterodistally.
             PATO_posterodistal_orientation,
 
-            // An intensity which is borderline in it its effect or force as compared to baseline or normal.
-            PATO_borderline_intensity,
+            PATO_obsolete_borderline_intensity_OBSOLETE,
 
-            // An intensity which is characterized by being very severe.
-            PATO_profound_intensity,
+            PATO_obsolete_profound_intensity_OBSOLETE,
 
-            // An occurrence quality inhering in a bearer by virtue of the bearer's having a course that occurs occasionally.
-            PATO_episodic,
+            PATO_obsolete_episodic_OBSOLETE,
 
-            // An occurrence of a process during which time there is an inability to change the course, extent, or repetition of the process.
-            PATO_refractory,
+            PATO_obsolete_refractory_OBSOLETE,
 
-            // A quality in which the effect or outcome is not primary or the focus of the observation.
-            PATO_secondary,
+            PATO_obsolete_secondary_OBSOLETE,
 
             // A multipartite quality inhering in a bearer by virtue of the bearer being divided into two parts.
             PATO_bipartite,
@@ -16737,6 +18234,177 @@ namespace PSI_Interface.CV
 
             // A shape quality inhering in a bearer by virtue of the bearer's possessing a small, spike-like shape.
             PATO_spur_shaped,
+
+            // Pertaining to the ability or tendency of an organism or cell to maintain internal equilibrium by adjusting its physiological processes.
+            PATO_homeostatic,
+
+            // An intensity which is borderline in it its effect or force as compared to baseline or normal.
+            PATO_borderline_intensity,
+
+            // An intensity which is characterized by being very severe.
+            PATO_profound_intensity,
+
+            // An occurrence quality inhering in a bearer by virtue of the bearer's having a course that occurs occasionally.
+            PATO_episodic,
+
+            // An occurrence of a process during which time there is an inability to change the course, extent, or repetition of the process.
+            PATO_refractory,
+
+            // A quality in which the effect or outcome is not primary or the focus of the observation.
+            PATO_secondary,
+
+            // A 3-D shape that is half of a sphere.
+            PATO_hemispheroid,
+
+            // A variability quality inhering in the bearer by virtue of the bearer having a variable number or count of an entity.
+            PATO_variability_of_count,
+
+            // Having the shape of a pear; tapering near the top and bulging toward the base or bottom. From thefreedictionary.com
+            PATO_pear_shaped,
+
+            // A quality inhering in a bearer by virtue of the bearer's resembling the form of a paddle.
+            PATO_paddle_shaped,
+
+            // A shape that is almost an ellipse.
+            PATO_subelliptical,
+
+            // Shape quality inhering in a bearer expanding outward, or having parts expanding outward, from a center point.
+            PATO_radiating,
+
+            // A morphology quality inhering in a bearer by virtue of the bearer's being morphologically distinguishable from another entity.
+            PATO_differentiated_from,
+
+            // A 3-D shape inhering in a bearer by virtue of the bearer's having dentition characterized by high-crowned teeth and enamel which extends far past the gum line, which provides extra material for wear and tear.
+            PATO_hypsodont,
+
+            // A 3-D shape inhering in a bearer by virtue of the bearer's having dentition characterized by low-crowned teeth. Human teeth are brachydont.
+            PATO_brachydont,
+
+            // A 3-D shape inhering in a bearer by virtue of the bearer's having an entity in the form of a molar tooth.
+            PATO_molariform,
+
+            // A branched quality inhering in a bearer by virtue of the bearer's having many fine filaments or branches that give a feathery appearance: for example, resembling a feather.
+            PATO_plumose,
+
+            // A positional quality inhering in a bearer by virtue of the bearer possessing an uninterrupted or unbroken connection or spatial distribution relative to the position of another entity.
+            PATO_continuous_with,
+
+            // A structural quality inhering in a bearer by virtue of the bearer being fully formed compared to entities lacking parts.
+            PATO_complete_structure,
+
+            // A structural quality inhering in a bearer by virtue of the bearer's lacking parts or having a reduced form compared to fully formed entities.
+            PATO_incomplete_structure,
+
+            // A spheroid shape quality inhering in a bearer by virtue of the bearer's being nearly, but not perfectly, spherical.
+            PATO_subspherical,
+
+            // A size quality inhering in an entity or set of entities in which size increases or decreases along the extent of the entity or set.
+            PATO_tapered_size,
+
+            // A positional quality inhering in a bearer by virtue of the bearer's being enclosed on all sides by another entity.
+            PATO_surrounded_by,
+
+            // A quality inhering in a bearer by virtue of the bearer's being compressed from the side facing the lips to the side facing the tongue.
+            PATO_labiolingually_compressed,
+
+            // A quality inhering in a bearer by virtue of the bearer's being compressed from the side facing the midline of the jaw to the side opposite the midline.
+            PATO_mesiodistally_compressed,
+
+            // A curvature quality inhering in a bearer by virtue of the bearer's being curved towards the tongue.
+            PATO_curved_lingually,
+
+            // A shape quality inhering on a bearer by virtue of a bearer's shape lacking in pattern or uniformity; for example, it may have sides of different lengths, different curvatures, or unequal angles.
+            PATO_irregularly_shaped,
+
+            // Cuspidate quality inhering in a bearer by virtue of the bearer's possessing a single cusp.
+            PATO_unicuspidate,
+
+            // A diameter that remains constant throughout the extent of an entity.
+            PATO_uniform_diameter,
+
+            // An orientation quality inhering in a bearer by virtue of the bearer having a position that is in the parasagittal plane.
+            PATO_parasagittal_orientation,
+
+            // An orientation quality inhering in a bearer by virtue of the bearer having a position that is directed along the longitudinal or anterior-posterior axis.
+            PATO_longitudinal_orientation,
+
+            // A structural quality inhering in the bearer by virtue of the bearer consisting of a single, maximally connected structure.
+            PATO_maximally_connected,
+
+            // A structural quality inhering in the bearer by virtue of the bearer consisting of multiple structures lacking any physical connection to each other.
+            PATO_disconnected,
+
+            // Absence due to a degenerative process.
+            PATO_absence_due_to_degeneration,
+
+            // The ability of a process to produce its output.
+            PATO_process_efficacy,
+
+            // A decrease in the ability of a process to produce its output.
+            PATO_decreased_efficacy,
+
+            // A increase in the ability of a process to produce its output.
+            PATO_increased_efficacy,
+
+            // Slender and spirally coiled.
+            PATO_tendrilous,
+
+            // A quality inhering in a structure by virtue of it consisting of many of repeated, similar or identical subunits, arranged in some orderly array.
+            PATO_polymeric,
+
+            // A quality inhering in a bearer by virtue of the degree to which the bearers stands out or projects beyond a surface or line.
+            PATO_prominence,
+
+            // A quality inhering in a bearer by virtue of the extent to which the bearer is capable of being stretched or swollen.
+            PATO_distensibility,
+
+            // A quality inhering in air by virtue of the partial pressure exerted by the bearer's water vapour content.
+            PATO_humidity,
+
+            // An increase in humidity.
+            PATO_increased_humidity,
+
+            // An decrease in humidity.
+            PATO_decreased_humidity,
+
+            // A physical quality inhering in a bearer by virtue of the bearer's exhibiting the physical characteristics of an entity consisting of roughly equal proportions of positively and negatively charged particles, having neither a defined volume nor defined shape, having internal magnetic fields, and being electrically conductive.
+            PATO_quality_of_a_plasma,
+
+            // The degree to which the bearer is exposed to visible light.
+            PATO_degree_of_illumination,
+
+            // An increase in illumination.
+            PATO_increased_degree_of_illumination,
+
+            // An decrease in illumination.
+            PATO_decreased_degree_of_illumination,
+
+            // Having a shape or form that resembles a step of a stairway (e.g., a ledge or offset margin).
+            PATO_stepped,
+
+            // A physical quality inhering in an entity by virtue of the bearer's solid constituents being suspended in a liquid or gas, or the bearer's liquid constituents being suspended in a gas.
+            PATO_quality_of_a_colloidal_suspension,
+
+            // A physical quality inhering in an entity by virtue of the bearer's solid or liquid constituents being suspended in a gas.
+            PATO_quality_of_an_aerosol,
+
+            // A biological sex quality inhering in an individual based upon genotypic composition of sex chromosomes.
+            PATO_genotypic_sex,
+
+            // A biological sex quality inhering in an individual based upon genotypic composition that confers the capability for an organism to differentiate male gonads.
+            PATO_male_genotypic_sex,
+
+            // A biological sex quality inhering in an individual or a population based upon genotypic composition that confers the capability for an organism to differentiate female gonads.
+            PATO_female_genotypic_sex,
+
+            // A physical quality inhering in a bearer by virtue of the bearer's disposition to being fit to be used as a safe means of hydration.
+            PATO_potability,
+
+            // A physical quality inhering in a bearer by virtue of the bearer not being suitable for use as a safe means of hydration.
+            PATO_non_potable,
+
+            // A physical quality inhering in a bearer by virtue of the bearer being suitable for use as a safe means of hydration.
+            PATO_potable,
 
             // A unit of measurement is a standardized quantity of a physical quality.
             UO_unit,
@@ -17856,7 +19524,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_pulse_counting, new TermInfo(CVID.MS_pulse_counting, @"MS", @"MS:1000118", @"pulse counting", @"Definition to do.", false));
             TermData.Add(CVID.MS_time_digital_converter, new TermInfo(CVID.MS_time_digital_converter, @"MS", @"MS:1000119", @"time-digital converter", @"A device for converting a signal of sporadic pluses into a digital representation of their time indices.", false));
             TermData.Add(CVID.MS_transient_recorder, new TermInfo(CVID.MS_transient_recorder, @"MS", @"MS:1000120", @"transient recorder", @"A detector acquisition mode used for detecting transient signals.", false));
-            TermData.Add(CVID.MS_AB_SCIEX_instrument_model, new TermInfo(CVID.MS_AB_SCIEX_instrument_model, @"MS", @"MS:1000121", @"AB SCIEX instrument model", @"The brand of instruments from the joint venture between Applied Biosystems and MDS Analytical Technologies (formerly MDS SCIEX). Previously branded as \ Applied Biosystems|MDS SCIEX\ .", false));
+            TermData.Add(CVID.MS_SCIEX_instrument_model, new TermInfo(CVID.MS_SCIEX_instrument_model, @"MS", @"MS:1000121", @"SCIEX instrument model", @"The brand of instruments from the joint venture between Applied Biosystems and MDS Analytical Technologies (formerly MDS SCIEX). Previously branded as \ Applied Biosystems|MDS SCIEX\ .", false));
             TermData.Add(CVID.MS_Bruker_Daltonics_instrument_model, new TermInfo(CVID.MS_Bruker_Daltonics_instrument_model, @"MS", @"MS:1000122", @"Bruker Daltonics instrument model", @"Bruker Daltonics' instrument model.", false));
             TermData.Add(CVID.MS_IonSpec_instrument_model, new TermInfo(CVID.MS_IonSpec_instrument_model, @"MS", @"MS:1000123", @"IonSpec instrument model", @"IonSpec corporation instrument model.", false));
             TermData.Add(CVID.MS_Shimadzu_instrument_model, new TermInfo(CVID.MS_Shimadzu_instrument_model, @"MS", @"MS:1000124", @"Shimadzu instrument model", @"Shimadzu corporation instrument model.", false));
@@ -18285,7 +19953,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_sample_attribute, new TermInfo(CVID.MS_sample_attribute, @"MS", @"MS:1000548", @"sample attribute", @"Sample properties that are associated with a value.", false));
             TermData.Add(CVID.MS_selection_window_attribute, new TermInfo(CVID.MS_selection_window_attribute, @"MS", @"MS:1000549", @"selection window attribute", @"Selection window properties that are associated with a value.", false));
             TermData.Add(CVID.MS_time_unit_OBSOLETE, new TermInfo(CVID.MS_time_unit_OBSOLETE, @"MS", @"MS:1000550", @"time unit", @"OBSOLETE Time Unit.", true));
-            TermData.Add(CVID.MS_Analyst, new TermInfo(CVID.MS_Analyst, @"MS", @"MS:1000551", @"Analyst", @"AB SCIEX or Applied Biosystems|MDS SCIEX software for data acquisition.", false));
+            TermData.Add(CVID.MS_Analyst, new TermInfo(CVID.MS_Analyst, @"MS", @"MS:1000551", @"Analyst", @"SCIEX or Applied Biosystems|MDS SCIEX software for data acquisition.", false));
             TermData.Add(CVID.MS_maldi_spot_identifier_OBSOLETE, new TermInfo(CVID.MS_maldi_spot_identifier_OBSOLETE, @"MS", @"MS:1000552", @"maldi spot identifier", @"OBSOLETE Maldi Spot Identifier.", true));
             TermData.Add(CVID.MS_Trapper, new TermInfo(CVID.MS_Trapper, @"MS", @"MS:1000553", @"Trapper", @"A software program for converting Agilent MassHunter format to mzXML or mzML. Trapper was originally developed at the Institute for Systems Biology.", false));
             TermData.Add(CVID.MS_LCQ_Deca, new TermInfo(CVID.MS_LCQ_Deca, @"MS", @"MS:1000554", @"LCQ Deca", @"ThermoFinnigan LCQ Deca.", false));
@@ -18385,18 +20053,18 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_GC_IsoLink, new TermInfo(CVID.MS_GC_IsoLink, @"MS", @"MS:1000648", @"GC IsoLink", @"Thermo Scientific GC IsoLink Isotope Ratio MS.", false));
             TermData.Add(CVID.MS_Exactive, new TermInfo(CVID.MS_Exactive, @"MS", @"MS:1000649", @"Exactive", @"Thermo Scientific Exactive MS.", false));
             TermData.Add(CVID.MS_Proteome_Discoverer, new TermInfo(CVID.MS_Proteome_Discoverer, @"MS", @"MS:1000650", @"Proteome Discoverer", @"Thermo Scientific software for data analysis of peptides and proteins.", false));
-            TermData.Add(CVID.MS_3200_QTRAP, new TermInfo(CVID.MS_3200_QTRAP, @"MS", @"MS:1000651", @"3200 QTRAP", @"AB SCIEX or Applied Biosystems|MDS SCIEX QTRAP 3200.", false));
-            TermData.Add(CVID.MS_4800_Plus_MALDI_TOF_TOF, new TermInfo(CVID.MS_4800_Plus_MALDI_TOF_TOF, @"MS", @"MS:1000652", @"4800 Plus MALDI TOF/TOF", @"AB SCIEX or Applied Biosystems|MDS SCIEX 4800 Plus MALDI TOF-TOF Analyzer.", false));
-            TermData.Add(CVID.MS_API_3200, new TermInfo(CVID.MS_API_3200, @"MS", @"MS:1000653", @"API 3200", @"AB SCIEX or Applied Biosystems|MDS SCIEX API 3200 MS.", false));
-            TermData.Add(CVID.MS_API_5000, new TermInfo(CVID.MS_API_5000, @"MS", @"MS:1000654", @"API 5000", @"AB SCIEX or Applied Biosystems|MDS SCIEX API 5000 MS.", false));
-            TermData.Add(CVID.MS_QSTAR_Elite, new TermInfo(CVID.MS_QSTAR_Elite, @"MS", @"MS:1000655", @"QSTAR Elite", @"AB SCIEX or Applied Biosystems|MDS SCIEX QSTAR Elite.", false));
+            TermData.Add(CVID.MS_3200_QTRAP, new TermInfo(CVID.MS_3200_QTRAP, @"MS", @"MS:1000651", @"3200 QTRAP", @"SCIEX or Applied Biosystems|MDS SCIEX QTRAP 3200.", false));
+            TermData.Add(CVID.MS_4800_Plus_MALDI_TOF_TOF, new TermInfo(CVID.MS_4800_Plus_MALDI_TOF_TOF, @"MS", @"MS:1000652", @"4800 Plus MALDI TOF/TOF", @"SCIEX or Applied Biosystems|MDS SCIEX 4800 Plus MALDI TOF-TOF Analyzer.", false));
+            TermData.Add(CVID.MS_API_3200, new TermInfo(CVID.MS_API_3200, @"MS", @"MS:1000653", @"API 3200", @"SCIEX or Applied Biosystems|MDS SCIEX API 3200 MS.", false));
+            TermData.Add(CVID.MS_API_5000, new TermInfo(CVID.MS_API_5000, @"MS", @"MS:1000654", @"API 5000", @"SCIEX or Applied Biosystems|MDS SCIEX API 5000 MS.", false));
+            TermData.Add(CVID.MS_QSTAR_Elite, new TermInfo(CVID.MS_QSTAR_Elite, @"MS", @"MS:1000655", @"QSTAR Elite", @"SCIEX or Applied Biosystems|MDS SCIEX QSTAR Elite.", false));
             TermData.Add(CVID.MS_QSTAR_Pulsar, new TermInfo(CVID.MS_QSTAR_Pulsar, @"MS", @"MS:1000656", @"QSTAR Pulsar", @"Applied Biosystems|MDS SCIEX QSTAR Pulsar.", false));
             TermData.Add(CVID.MS_QSTAR_XL, new TermInfo(CVID.MS_QSTAR_XL, @"MS", @"MS:1000657", @"QSTAR XL", @"Applied Biosystems|MDS SCIEX QSTAR XL.", false));
             TermData.Add(CVID.MS_4800_Proteomics_Analyzer, new TermInfo(CVID.MS_4800_Proteomics_Analyzer, @"MS", @"MS:1000658", @"4800 Proteomics Analyzer", @"Applied Biosystems|MDS SCIEX 4800 Proteomics Analyzer.", false));
-            TermData.Add(CVID.MS_4000_Series_Explorer_Software, new TermInfo(CVID.MS_4000_Series_Explorer_Software, @"MS", @"MS:1000659", @"4000 Series Explorer Software", @"AB SCIEX or Applied Biosystems software for data acquisition and analysis.", false));
-            TermData.Add(CVID.MS_GPS_Explorer, new TermInfo(CVID.MS_GPS_Explorer, @"MS", @"MS:1000661", @"GPS Explorer", @"AB SCIEX or Applied Biosystems software for data acquisition and analysis.", false));
-            TermData.Add(CVID.MS_LightSight_Software, new TermInfo(CVID.MS_LightSight_Software, @"MS", @"MS:1000662", @"LightSight Software", @"AB SCIEX or Applied Biosystems|MDS SCIEX software metabolite identification.", false));
-            TermData.Add(CVID.MS_ProteinPilot_Software, new TermInfo(CVID.MS_ProteinPilot_Software, @"MS", @"MS:1000663", @"ProteinPilot Software", @"AB SCIEX or Applied Biosystems|MDS SCIEX software for protein ID and quant.", false));
+            TermData.Add(CVID.MS_4000_Series_Explorer_Software, new TermInfo(CVID.MS_4000_Series_Explorer_Software, @"MS", @"MS:1000659", @"4000 Series Explorer Software", @"SCIEX or Applied Biosystems software for data acquisition and analysis.", false));
+            TermData.Add(CVID.MS_GPS_Explorer, new TermInfo(CVID.MS_GPS_Explorer, @"MS", @"MS:1000661", @"GPS Explorer", @"SCIEX or Applied Biosystems software for data acquisition and analysis.", false));
+            TermData.Add(CVID.MS_LightSight_Software, new TermInfo(CVID.MS_LightSight_Software, @"MS", @"MS:1000662", @"LightSight Software", @"SCIEX or Applied Biosystems|MDS SCIEX software metabolite identification.", false));
+            TermData.Add(CVID.MS_ProteinPilot_Software, new TermInfo(CVID.MS_ProteinPilot_Software, @"MS", @"MS:1000663", @"ProteinPilot Software", @"SCIEX or Applied Biosystems|MDS SCIEX software for protein ID and quant.", false));
             TermData.Add(CVID.MS_TissueView_Software, new TermInfo(CVID.MS_TissueView_Software, @"MS", @"MS:1000664", @"TissueView Software", @"Applied Biosystems|MDS SCIEX software for tissue imaging.", false));
             TermData.Add(CVID.MS_MarkerView_Software, new TermInfo(CVID.MS_MarkerView_Software, @"MS", @"MS:1000665", @"MarkerView Software", @"Applied Biosystems|MDS SCIEX software for metabolomics and biomarker profiling.", false));
             TermData.Add(CVID.MS_MRMPilot_Software, new TermInfo(CVID.MS_MRMPilot_Software, @"MS", @"MS:1000666", @"MRMPilot Software", @"Applied Biosystems|MDS SCIEX software for MRM assay development.", false));
@@ -18405,7 +20073,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Pro_ICAT, new TermInfo(CVID.MS_Pro_ICAT, @"MS", @"MS:1000669", @"Pro ICAT", @"Applied Biosystems|MDS SCIEX software for protein ID and quant by ICAT.", false));
             TermData.Add(CVID.MS_Pro_Quant, new TermInfo(CVID.MS_Pro_Quant, @"MS", @"MS:1000670", @"Pro Quant", @"Applied Biosystems|MDS SCIEX software for protein ID and quant by iTRAQ.", false));
             TermData.Add(CVID.MS_Pro_BLAST, new TermInfo(CVID.MS_Pro_BLAST, @"MS", @"MS:1000671", @"Pro BLAST", @"Applied Biosystems|MDS SCIEX software for MS-BLAST identification.", false));
-            TermData.Add(CVID.MS_Cliquid, new TermInfo(CVID.MS_Cliquid, @"MS", @"MS:1000672", @"Cliquid", @"AB SCIEX Cliquid software for data analysis and quantitation.", false));
+            TermData.Add(CVID.MS_Cliquid, new TermInfo(CVID.MS_Cliquid, @"MS", @"MS:1000672", @"Cliquid", @"SCIEX Cliquid software for data analysis and quantitation.", false));
             TermData.Add(CVID.MS_MIDAS_Workflow_Designer, new TermInfo(CVID.MS_MIDAS_Workflow_Designer, @"MS", @"MS:1000673", @"MIDAS Workflow Designer", @"Applied Biosystems|MDS SCIEX software for MRM assay development.", false));
             TermData.Add(CVID.MS_MultiQuant, new TermInfo(CVID.MS_MultiQuant, @"MS", @"MS:1000674", @"MultiQuant", @"Applied Biosystems|MDS SCIEX software for MRM-based quantitation.", false));
             TermData.Add(CVID.MS_6220_Time_of_Flight_LC_MS, new TermInfo(CVID.MS_6220_Time_of_Flight_LC_MS, @"MS", @"MS:1000675", @"6220 Time-of-Flight LC/MS", @"The 6220 Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer. This time of flight mass spectrometer has a m/z range of 50-12000, mass accuracy of less than 2 ppm and resolution greater than 13,000 at m/z 2722. It has multiple ion sources and can be used with multimode ion sources.", false));
@@ -18423,7 +20091,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Spectrum_Mill_for_MassHunter_Workstation, new TermInfo(CVID.MS_Spectrum_Mill_for_MassHunter_Workstation, @"MS", @"MS:1000687", @"Spectrum Mill for MassHunter Workstation", @"Software for protein identification and characterization of complex protein digest mixtures.", false));
             TermData.Add(CVID.MS_6300_Series_Ion_Trap_Data_Analysis_Software, new TermInfo(CVID.MS_6300_Series_Ion_Trap_Data_Analysis_Software, @"MS", @"MS:1000688", @"6300 Series Ion Trap Data Analysis Software", @"Software for data analysis of 6300 series ion trap mass spectrometers.", false));
             TermData.Add(CVID.MS_Agilent_software, new TermInfo(CVID.MS_Agilent_software, @"MS", @"MS:1000689", @"Agilent software", @"Agilent software for data acquisition and analysis.", false));
-            TermData.Add(CVID.MS_AB_SCIEX_software, new TermInfo(CVID.MS_AB_SCIEX_software, @"MS", @"MS:1000690", @"AB SCIEX software", @"AB SCIEX or Applied Biosystems software for data acquisition and analysis.", false));
+            TermData.Add(CVID.MS_SCIEX_software, new TermInfo(CVID.MS_SCIEX_software, @"MS", @"MS:1000690", @"SCIEX software", @"SCIEX or Applied Biosystems software for data acquisition and analysis.", false));
             TermData.Add(CVID.MS_Applied_Biosystems_software, new TermInfo(CVID.MS_Applied_Biosystems_software, @"MS", @"MS:1000691", @"Applied Biosystems software", @"Applied Biosystems|MDS SCIEX software for data acquisition and analysis.", false));
             TermData.Add(CVID.MS_Bruker_software, new TermInfo(CVID.MS_Bruker_software, @"MS", @"MS:1000692", @"Bruker software", @"Bruker software for data acquisition and analysis.", false));
             TermData.Add(CVID.MS_Thermo_Finnigan_software, new TermInfo(CVID.MS_Thermo_Finnigan_software, @"MS", @"MS:1000693", @"Thermo Finnigan software", @"Thermo Finnigan software for data acquisition and analysis.", false));
@@ -18602,7 +20270,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_structural_formula, new TermInfo(CVID.MS_structural_formula, @"MS", @"MS:1000867", @"structural formula", @"A chemical formula showing the number of atoms of each element in a molecule, their spatial arrangement, and their linkage to each other.", false));
             TermData.Add(CVID.MS_SMILES_string, new TermInfo(CVID.MS_SMILES_string, @"MS", @"MS:1000868", @"SMILES string", @"The simplified molecular input line entry specification or SMILES is a specification for unambiguously describing the structure of a chemical compound using a short ASCII string.", false));
             TermData.Add(CVID.MS_collision_gas_pressure, new TermInfo(CVID.MS_collision_gas_pressure, @"MS", @"MS:1000869", @"collision gas pressure", @"The gas pressure of the collision gas used for collisional excitation.", false));
-            TermData.Add(CVID.MS_4000_QTRAP_OBSOLETE, new TermInfo(CVID.MS_4000_QTRAP_OBSOLETE, @"MS", @"MS:1000870", @"4000 QTRAP", @"OBSOLETE AB SCIEX or Applied Biosystems|MDS SCIEX QTRAP 4000.", true));
+            TermData.Add(CVID.MS_4000_QTRAP_OBSOLETE, new TermInfo(CVID.MS_4000_QTRAP_OBSOLETE, @"MS", @"MS:1000870", @"4000 QTRAP", @"OBSOLETE SCIEX or Applied Biosystems|MDS SCIEX QTRAP 4000.", true));
             TermData.Add(CVID.MS_SRM_software, new TermInfo(CVID.MS_SRM_software, @"MS", @"MS:1000871", @"SRM software", @"Software used to predict, select, or optimize transitions or analyze the results of selected reaction monitoring runs.", false));
             TermData.Add(CVID.MS_MaRiMba, new TermInfo(CVID.MS_MaRiMba, @"MS", @"MS:1000872", @"MaRiMba", @"Software used to predict transitions for selected reaction monitoring experiments based on observed spectrum libraries developed and distributed by the Institute for Systems Biology.", false));
             TermData.Add(CVID.MS_peptide_attribute_calculation_software, new TermInfo(CVID.MS_peptide_attribute_calculation_software, @"MS", @"MS:1000873", @"peptide attribute calculation software", @"Software used to predict or calculate numerical attributes of peptides.", false));
@@ -18664,7 +20332,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Shimadzu_Biotech_nativeID_format, new TermInfo(CVID.MS_Shimadzu_Biotech_nativeID_format, @"MS", @"MS:1000929", @"Shimadzu Biotech nativeID format", @"Native format defined by source=xsd:string start=xsd:nonNegativeInteger end=xsd:nonNegativeInteger.", false));
             TermData.Add(CVID.MS_Shimadzu_Biotech_database_entity, new TermInfo(CVID.MS_Shimadzu_Biotech_database_entity, @"MS", @"MS:1000930", @"Shimadzu Biotech database entity", @"Shimadzu Biotech format.", false));
             TermData.Add(CVID.MS_QTRAP_5500, new TermInfo(CVID.MS_QTRAP_5500, @"MS", @"MS:1000931", @"QTRAP 5500", @"Applied Biosystems|MDS SCIEX QTRAP 5500.", false));
-            TermData.Add(CVID.MS_TripleTOF_5600, new TermInfo(CVID.MS_TripleTOF_5600, @"MS", @"MS:1000932", @"TripleTOF 5600", @"AB SCIEX TripleTOF 5600, a quadrupole - quadrupole - time-of-flight mass spectrometer.", false));
+            TermData.Add(CVID.MS_TripleTOF_5600, new TermInfo(CVID.MS_TripleTOF_5600, @"MS", @"MS:1000932", @"TripleTOF 5600", @"SCIEX TripleTOF 5600, a quadrupole - quadrupole - time-of-flight mass spectrometer.", false));
             TermData.Add(CVID.MS_protein_modifications, new TermInfo(CVID.MS_protein_modifications, @"MS", @"MS:1000933", @"protein modifications", @"Encoding of modifications of the protein sequence from the specified accession, written in PEFF notation.", false));
             TermData.Add(CVID.MS_gene_name, new TermInfo(CVID.MS_gene_name, @"MS", @"MS:1000934", @"gene name", @"Name of the gene from which the protein is translated.", false));
             TermData.Add(CVID.MS_spectrum_interpretation, new TermInfo(CVID.MS_spectrum_interpretation, @"MS", @"MS:1001000", @"spectrum interpretation", @"Collection of terms from the PSI Proteome Informatics standards describing the interpretation of spectra.", false));
@@ -18883,7 +20551,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_SEQUEST_out_folder, new TermInfo(CVID.MS_SEQUEST_out_folder, @"MS", @"MS:1001242", @"SEQUEST out folder", @"Source file for this mzIdentML was a SEQUEST folder with its out files.", false));
             TermData.Add(CVID.MS_SEQUEST_summary, new TermInfo(CVID.MS_SEQUEST_summary, @"MS", @"MS:1001243", @"SEQUEST summary", @"Source file for this mzIdentML was a SEQUEST summary page (proteins).", false));
             TermData.Add(CVID.MS_PerSeptive_PKS_format, new TermInfo(CVID.MS_PerSeptive_PKS_format, @"MS", @"MS:1001245", @"PerSeptive PKS format", @"PerSeptive peak list file format.", false));
-            TermData.Add(CVID.MS_Sciex_API_III_format, new TermInfo(CVID.MS_Sciex_API_III_format, @"MS", @"MS:1001246", @"Sciex API III format", @"PE Sciex peak list file format.", false));
+            TermData.Add(CVID.MS_SCIEX_API_III_format, new TermInfo(CVID.MS_SCIEX_API_III_format, @"MS", @"MS:1001246", @"SCIEX API III format", @"PE SCIEX peak list file format.", false));
             TermData.Add(CVID.MS_Bruker_XML_format, new TermInfo(CVID.MS_Bruker_XML_format, @"MS", @"MS:1001247", @"Bruker XML format", @"Bruker data exchange XML format.", false));
             TermData.Add(CVID.MS_search_input_details, new TermInfo(CVID.MS_search_input_details, @"MS", @"MS:1001249", @"search input details", @"Details describing the search input.", false));
             TermData.Add(CVID.MS_local_FDR, new TermInfo(CVID.MS_local_FDR, @"MS", @"MS:1001250", @"local FDR", @"Result of quality estimation: the local FDR at the current position of a sorted list.", false));
@@ -19103,10 +20771,10 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_SpectraST, new TermInfo(CVID.MS_SpectraST, @"MS", @"MS:1001477", @"SpectraST", @"SpectraST was used to analyze the spectra.", false));
             TermData.Add(CVID.MS_Mascot_Parser, new TermInfo(CVID.MS_Mascot_Parser, @"MS", @"MS:1001478", @"Mascot Parser", @"Mascot Parser was used to analyze the spectra.", false));
             TermData.Add(CVID.MS_null_terminated_ASCII_string, new TermInfo(CVID.MS_null_terminated_ASCII_string, @"MS", @"MS:1001479", @"null-terminated ASCII string", @"Sequence of zero or more non-zero ASCII characters terminated by a single null (0) byte.", false));
-            TermData.Add(CVID.MS_AB_SCIEX_TOF_TOF_nativeID_format, new TermInfo(CVID.MS_AB_SCIEX_TOF_TOF_nativeID_format, @"MS", @"MS:1001480", @"AB SCIEX TOF/TOF nativeID format", @"Native format defined by jobRun=xsd:nonNegativeInteger spotLabel=xsd:string spectrum=xsd:nonNegativeInteger.", false));
-            TermData.Add(CVID.MS_AB_SCIEX_TOF_TOF_database, new TermInfo(CVID.MS_AB_SCIEX_TOF_TOF_database, @"MS", @"MS:1001481", @"AB SCIEX TOF/TOF database", @"Applied Biosystems/MDS Analytical Technologies TOF/TOF instrument database.", false));
-            TermData.Add(CVID.MS_TOF_TOF_5800, new TermInfo(CVID.MS_TOF_TOF_5800, @"MS", @"MS:1001482", @"TOF/TOF 5800", @"AB SCIEX or Applied Biosystems|MDS Analytical Technologies AB SCIEX TOF/TOF 5800 Analyzer.", false));
-            TermData.Add(CVID.MS_AB_SCIEX_TOF_TOF_Series_Explorer_Software, new TermInfo(CVID.MS_AB_SCIEX_TOF_TOF_Series_Explorer_Software, @"MS", @"MS:1001483", @"AB SCIEX TOF/TOF Series Explorer Software", @"AB SCIEX or Applied Biosystems software for TOF/TOF data acquisition and analysis.", false));
+            TermData.Add(CVID.MS_SCIEX_TOF_TOF_nativeID_format, new TermInfo(CVID.MS_SCIEX_TOF_TOF_nativeID_format, @"MS", @"MS:1001480", @"SCIEX TOF/TOF nativeID format", @"Native format defined by jobRun=xsd:nonNegativeInteger spotLabel=xsd:string spectrum=xsd:nonNegativeInteger.", false));
+            TermData.Add(CVID.MS_SCIEX_TOF_TOF_database, new TermInfo(CVID.MS_SCIEX_TOF_TOF_database, @"MS", @"MS:1001481", @"SCIEX TOF/TOF database", @"Applied Biosystems/MDS Analytical Technologies TOF/TOF instrument database.", false));
+            TermData.Add(CVID.MS_5800_TOF_TOF, new TermInfo(CVID.MS_5800_TOF_TOF, @"MS", @"MS:1001482", @"5800 TOF/TOF", @"SCIEX 5800 TOF-TOF Analyzer.", false));
+            TermData.Add(CVID.MS_SCIEX_TOF_TOF_Series_Explorer_Software, new TermInfo(CVID.MS_SCIEX_TOF_TOF_Series_Explorer_Software, @"MS", @"MS:1001483", @"SCIEX TOF/TOF Series Explorer Software", @"SCIEX or Applied Biosystems software for TOF/TOF data acquisition and analysis.", false));
             TermData.Add(CVID.MS_intensity_normalization, new TermInfo(CVID.MS_intensity_normalization, @"MS", @"MS:1001484", @"intensity normalization", @"Normalization of data point intensities.", false));
             TermData.Add(CVID.MS_m_z_calibration, new TermInfo(CVID.MS_m_z_calibration, @"MS", @"MS:1001485", @"m/z calibration", @"Calibration of data point m/z positions.", false));
             TermData.Add(CVID.MS_data_filtering, new TermInfo(CVID.MS_data_filtering, @"MS", @"MS:1001486", @"data filtering", @"Filtering out part of the data.", false));
@@ -19180,8 +20848,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Bruker_Daltonics_apex_series, new TermInfo(CVID.MS_Bruker_Daltonics_apex_series, @"MS", @"MS:1001556", @"Bruker Daltonics apex series", @"Bruker Daltonics' apex series.", false));
             TermData.Add(CVID.MS_Shimadzu_Corporation_software, new TermInfo(CVID.MS_Shimadzu_Corporation_software, @"MS", @"MS:1001557", @"Shimadzu Corporation software", @"Shimadzu Corporation software.", false));
             TermData.Add(CVID.MS_MALDI_Solutions, new TermInfo(CVID.MS_MALDI_Solutions, @"MS", @"MS:1001558", @"MALDI Solutions", @"Shimadzu Biotech software for data acquisition, processing, and analysis.", false));
-            TermData.Add(CVID.MS_AB_SCIEX_TOF_TOF_T2D_nativeID_format, new TermInfo(CVID.MS_AB_SCIEX_TOF_TOF_T2D_nativeID_format, @"MS", @"MS:1001559", @"AB SCIEX TOF/TOF T2D nativeID format", @"Native format defined by file=xsd:IDREF.", false));
-            TermData.Add(CVID.MS_AB_SCIEX_TOF_TOF_T2D_format, new TermInfo(CVID.MS_AB_SCIEX_TOF_TOF_T2D_format, @"MS", @"MS:1001560", @"AB SCIEX TOF/TOF T2D format", @"Applied Biosystems/MDS Analytical Technologies TOF/TOF instrument export format.", false));
+            TermData.Add(CVID.MS_SCIEX_TOF_TOF_T2D_nativeID_format, new TermInfo(CVID.MS_SCIEX_TOF_TOF_T2D_nativeID_format, @"MS", @"MS:1001559", @"SCIEX TOF/TOF T2D nativeID format", @"Native format defined by file=xsd:IDREF.", false));
+            TermData.Add(CVID.MS_SCIEX_TOF_TOF_T2D_format, new TermInfo(CVID.MS_SCIEX_TOF_TOF_T2D_format, @"MS", @"MS:1001560", @"SCIEX TOF/TOF T2D format", @"Applied Biosystems/MDS Analytical Technologies TOF/TOF instrument export format.", false));
             TermData.Add(CVID.MS_Scaffold, new TermInfo(CVID.MS_Scaffold, @"MS", @"MS:1001561", @"Scaffold", @"Scaffold analysis software.", false));
             TermData.Add(CVID.MS_Scaffold_nativeID_format, new TermInfo(CVID.MS_Scaffold_nativeID_format, @"MS", @"MS:1001562", @"Scaffold nativeID format", @"Scaffold native ID format.", false));
             TermData.Add(CVID.MS_SEQUEST_SQT_format, new TermInfo(CVID.MS_SEQUEST_SQT_format, @"MS", @"MS:1001563", @"SEQUEST SQT format", @"Source file for this mzIdentML was in SEQUEST SQT format.", false));
@@ -19457,7 +21125,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_LC_MS_label_free_quantitation_analysis, new TermInfo(CVID.MS_LC_MS_label_free_quantitation_analysis, @"MS", @"MS:1001834", @"LC-MS label-free quantitation analysis", @"LC-MS label-free workflow (RT m/z map).", false));
             TermData.Add(CVID.MS_SILAC_quantitation_analysis, new TermInfo(CVID.MS_SILAC_quantitation_analysis, @"MS", @"MS:1001835", @"SILAC quantitation analysis", @"SILAC workflow (heavy, light, and sometimes medium peak).", false));
             TermData.Add(CVID.MS_spectral_counting_quantitation_analysis, new TermInfo(CVID.MS_spectral_counting_quantitation_analysis, @"MS", @"MS:1001836", @"spectral counting quantitation analysis", @"Spectral counting workflow (number of identified MS2 spectra as approximation of peptide / protein quant).", false));
-            TermData.Add(CVID.MS_iTRAQ_quantitation_analysis, new TermInfo(CVID.MS_iTRAQ_quantitation_analysis, @"MS", @"MS:1001837", @"iTRAQ quantitation analysis", @"Quantification analysis using the AB SCIEX iTRAQ isobaric labelling workflow, wherein 2-8 reporter ions are measured in MS2 spectra near 114 m/z.", false));
+            TermData.Add(CVID.MS_iTRAQ_quantitation_analysis, new TermInfo(CVID.MS_iTRAQ_quantitation_analysis, @"MS", @"MS:1001837", @"iTRAQ quantitation analysis", @"Quantification analysis using the SCIEX iTRAQ isobaric labelling workflow, wherein 2-8 reporter ions are measured in MS2 spectra near 114 m/z.", false));
             TermData.Add(CVID.MS_SRM_quantitation_analysis, new TermInfo(CVID.MS_SRM_quantitation_analysis, @"MS", @"MS:1001838", @"SRM quantitation analysis", @"Selected Reaction Monitoring workflow (XIC quantitation of precursor / fragment mass pair).", false));
             TermData.Add(CVID.MS_metabolic_labeling_14N___15N_quantitation_analysis, new TermInfo(CVID.MS_metabolic_labeling_14N___15N_quantitation_analysis, @"MS", @"MS:1001839", @"metabolic labeling 14N / 15N quantitation analysis", @"Metabolic labeling workflow (heavy and light versions of peptides, depending on number of nitrogens).", false));
             TermData.Add(CVID.MS_LC_MS_feature_intensity, new TermInfo(CVID.MS_LC_MS_feature_intensity, @"MS", @"MS:1001840", @"LC-MS feature intensity", @"Maximum peak intensity of the LC-MS feature.", false));
@@ -19603,8 +21271,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_MaxQuant_Phospho__STY__Score_Diffs, new TermInfo(CVID.MS_MaxQuant_Phospho__STY__Score_Diffs, @"MS", @"MS:1001981", @"MaxQuant:Phospho (STY) Score Diffs", @"The Phospho (STY) Score Diffs from MaxQuant software.", false));
             TermData.Add(CVID.MS_MaxQuant_P_site_localization_probability, new TermInfo(CVID.MS_MaxQuant_P_site_localization_probability, @"MS", @"MS:1001982", @"MaxQuant:P-site localization probability", @"The P-site localization probability value from MaxQuant software.", false));
             TermData.Add(CVID.MS_MaxQuant_PTM_Delta_Score, new TermInfo(CVID.MS_MaxQuant_PTM_Delta_Score, @"MS", @"MS:1001983", @"MaxQuant:PTM Delta Score", @"The PTM Delta Score value from MaxQuant software (Difference between highest scoring site and second highest).", false));
-            TermData.Add(CVID.MS_Ascore, new TermInfo(CVID.MS_Ascore, @"MS", @"MS:1001984", @"Ascore", @"Ascore software.", false));
-            TermData.Add(CVID.MS_Ascore1, new TermInfo(CVID.MS_Ascore1, @"MS", @"MS:1001985", @"Ascore", @"A-score for PTM site location at the PSM-level.", false));
+            TermData.Add(CVID.MS_Ascore_software, new TermInfo(CVID.MS_Ascore_software, @"MS", @"MS:1001984", @"Ascore software", @"Ascore software.", false));
+            TermData.Add(CVID.MS_Ascore, new TermInfo(CVID.MS_Ascore, @"MS", @"MS:1001985", @"Ascore", @"A-score for PTM site location at the PSM-level.", false));
             TermData.Add(CVID.MS_H_Score, new TermInfo(CVID.MS_H_Score, @"MS", @"MS:1001986", @"H-Score", @"H-Score for peptide phosphorylation site location.", false));
             TermData.Add(CVID.MS_vacuum_drying_MALDI_sample_preparation, new TermInfo(CVID.MS_vacuum_drying_MALDI_sample_preparation, @"MS", @"MS:1001987", @"vacuum drying MALDI sample preparation", @"Vacuum-drying MALDI sample preparation crystallization method.", false));
             TermData.Add(CVID.MS_crushed_crystal_MALDI_sample_preparation, new TermInfo(CVID.MS_crushed_crystal_MALDI_sample_preparation, @"MS", @"MS:1001988", @"crushed crystal MALDI sample preparation", @"Crushed-crystal MALDI sample preparation method.", false));
@@ -19908,7 +21576,6 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_PeptideProphet, new TermInfo(CVID.MS_PeptideProphet, @"MS", @"MS:1002287", @"PeptideProphet", @"A program in the TPP that calculates PSM probabilities for MS2 proteomics data searched with any of the supported sequence or spectral library search engines via the pepXML format.", false));
             TermData.Add(CVID.MS_iProphet, new TermInfo(CVID.MS_iProphet, @"MS", @"MS:1002288", @"iProphet", @"A program in the TPP that calculates distinct peptide probabilities based on several lines of corroborating evidence including search results from multiple search engines via the pepXML format.", false));
             TermData.Add(CVID.MS_ProteinProphet, new TermInfo(CVID.MS_ProteinProphet, @"MS", @"MS:1002289", @"ProteinProphet", @"A program in the TPP that calculates protein-level probabilities based on input PSM or peptide-level probabilities from PeptideProphet or iProphet. The output is written in the protXML format.", false));
-            TermData.Add(CVID.MS_ASAPRatio_OBSOLETE, new TermInfo(CVID.MS_ASAPRatio_OBSOLETE, @"MS", @"MS:1002289_", @"ASAPRatio", @"OBSOLETE A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.", true));
             TermData.Add(CVID.MS_XPRESS, new TermInfo(CVID.MS_XPRESS, @"MS", @"MS:1002290", @"XPRESS", @"A program in the TPP that calculates PSM-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.", false));
             TermData.Add(CVID.MS_Libra, new TermInfo(CVID.MS_Libra, @"MS", @"MS:1002291", @"Libra", @"A program in the TPP that calculates PSM, peptide, and protein-level abundances based on N-channel isobaric label peptide data such as iTRAQ, TMT, etc.", false));
             TermData.Add(CVID.MS_PTMProphet, new TermInfo(CVID.MS_PTMProphet, @"MS", @"MS:1002292", @"PTMProphet", @"A program in the TPP that calculates PTM localization probabilities by re-analyzing the peaks that are available to distinguish between possible modification sites.", false));
@@ -20118,7 +21785,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_group_PSMs_by_sequence, new TermInfo(CVID.MS_group_PSMs_by_sequence, @"MS", @"MS:1002496", @"group PSMs by sequence", @"Group PSMs by distinct peptide sequence ignoring modifications.", false));
             TermData.Add(CVID.MS_group_PSMs_by_sequence_with_modifications, new TermInfo(CVID.MS_group_PSMs_by_sequence_with_modifications, @"MS", @"MS:1002497", @"group PSMs by sequence with modifications", @"Group PSMs by distinct peptide sequence with taking modifications into account.", false));
             TermData.Add(CVID.MS_group_PSMs_by_sequence_with_modifications_and_charge, new TermInfo(CVID.MS_group_PSMs_by_sequence_with_modifications_and_charge, @"MS", @"MS:1002498", @"group PSMs by sequence with modifications and charge", @"Group PSMs by distinct peptide sequence with taking modifications and charge into account.", false));
-            TermData.Add(CVID.MS_peptide_level_score, new TermInfo(CVID.MS_peptide_level_score, @"MS", @"MS:1002499", @"peptide level score", @"Peptide level score.", false));
+            TermData.Add(CVID.MS_peptide_level_score_OBSOLETE, new TermInfo(CVID.MS_peptide_level_score_OBSOLETE, @"MS", @"MS:1002499", @"peptide level score", @"OBSOLETE Peptide level score.", true));
             TermData.Add(CVID.MS_peptide_passes_threshold, new TermInfo(CVID.MS_peptide_passes_threshold, @"MS", @"MS:1002500", @"peptide passes threshold", @"A Boolean attribute to determine whether the peptide has passed the threshold indicated in the file.", false));
             TermData.Add(CVID.MS_no_PSM_threshold, new TermInfo(CVID.MS_no_PSM_threshold, @"MS", @"MS:1002501", @"no PSM threshold", @"Indicating that no PSM threshold was used.", false));
             TermData.Add(CVID.MS_no_peptide_level_threshold, new TermInfo(CVID.MS_no_peptide_level_threshold, @"MS", @"MS:1002502", @"no peptide-level threshold", @"Indicating that no peptide-level threshold was used.", false));
@@ -20129,7 +21796,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_modification_rescoring_false_localization_rate, new TermInfo(CVID.MS_modification_rescoring_false_localization_rate, @"MS", @"MS:1002507", @"modification rescoring:false localization rate", @"Mod position score: false localization rate.", false));
             TermData.Add(CVID.MS_cross_linking_attribute, new TermInfo(CVID.MS_cross_linking_attribute, @"MS", @"MS:1002508", @"cross-linking attribute", @"Cross-linking attribute.", false));
             TermData.Add(CVID.MS_cross_link_donor, new TermInfo(CVID.MS_cross_link_donor, @"MS", @"MS:1002509", @"cross-link donor", @"The Cross-linking donor, assigned according to the following rules: the export software SHOULD use the following rules to choose the cross-link donor as the: longer peptide, then higher peptide neutral mass, then alphabetical order.", false));
-            TermData.Add(CVID.MS_cross_link_receiver, new TermInfo(CVID.MS_cross_link_receiver, @"MS", @"MS:1002510", @"cross-link receiver", @"Cross-linking receiver, assigned according to the following rules: the export software SHOULD use the following rules to choose the cross-link donor as the: longer peptide, then higher peptide neutral mass, then alphabetical order.", false));
+            TermData.Add(CVID.MS_cross_link_acceptor, new TermInfo(CVID.MS_cross_link_acceptor, @"MS", @"MS:1002510", @"cross-link acceptor", @"Cross-linking acceptor, assigned according to the following rules: the export software SHOULD use the following rules to choose the cross-link donor as the: longer peptide, then higher peptide neutral mass, then alphabetical order.", false));
             TermData.Add(CVID.MS_cross_link_spectrum_identification_item, new TermInfo(CVID.MS_cross_link_spectrum_identification_item, @"MS", @"MS:1002511", @"cross-link spectrum identification item", @"Cross-linked spectrum identification item.", false));
             TermData.Add(CVID.MS_cross_linking_score, new TermInfo(CVID.MS_cross_linking_score, @"MS", @"MS:1002512", @"cross-linking score", @"Cross-linking scoring value.", false));
             TermData.Add(CVID.MS_molecules_per_cell_, new TermInfo(CVID.MS_molecules_per_cell_, @"MS", @"MS:1002513", @"molecules per cell ", @"The absolute abundance of protein in a cell.", false));
@@ -20152,7 +21819,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_baseline_array, new TermInfo(CVID.MS_baseline_array, @"MS", @"MS:1002530", @"baseline array", @"A data array of signal baseline values (the signal in the absence of analytes).", false));
             TermData.Add(CVID.MS_UIMF_format, new TermInfo(CVID.MS_UIMF_format, @"MS", @"MS:1002531", @"UIMF format", @"SQLite-based file format created at Pacific Northwest National Lab. It stores an intermediate analysis of ion-mobility mass spectrometry data.", false));
             TermData.Add(CVID.MS_UIMF_nativeID_format, new TermInfo(CVID.MS_UIMF_nativeID_format, @"MS", @"MS:1002532", @"UIMF nativeID format", @"Native format defined by frame=xsd:nonNegativeInteger scan=xsd:nonNegativeInteger frameType=xsd:nonNegativeInteger.", false));
-            TermData.Add(CVID.MS_TripleTOF_6600, new TermInfo(CVID.MS_TripleTOF_6600, @"MS", @"MS:1002533", @"TripleTOF 6600", @"AB SCIEX TripleTOF 6600, a quadrupole - quadrupole - time-of-flight mass spectrometer.", false));
+            TermData.Add(CVID.MS_TripleTOF_6600, new TermInfo(CVID.MS_TripleTOF_6600, @"MS", @"MS:1002533", @"TripleTOF 6600", @"SCIEX TripleTOF 6600, a quadrupole - quadrupole - time-of-flight mass spectrometer.", false));
             TermData.Add(CVID.MS_ProLuCID_xcorr, new TermInfo(CVID.MS_ProLuCID_xcorr, @"MS", @"MS:1002534", @"ProLuCID:xcorr", @"The ProLuCID result 'XCorr'.", false));
             TermData.Add(CVID.MS_ProLuCID_deltacn, new TermInfo(CVID.MS_ProLuCID_deltacn, @"MS", @"MS:1002535", @"ProLuCID:deltacn", @"The ProLuCID result 'DeltaCn'.", false));
             TermData.Add(CVID.MS_D_Score, new TermInfo(CVID.MS_D_Score, @"MS", @"MS:1002536", @"D-Score", @"D-Score for PTM site location at the PSM-level.", false));
@@ -20195,6 +21862,98 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_spectrum_identification_statistical_threshold, new TermInfo(CVID.MS_spectrum_identification_statistical_threshold, @"MS", @"MS:1002573", @"spectrum identification statistical threshold", @"Estimated statistical threshold used for spectrum identification.", false));
             TermData.Add(CVID.MS_ASAPRatio, new TermInfo(CVID.MS_ASAPRatio, @"MS", @"MS:1002574", @"ASAPRatio", @"A program in the TPP that calculates PSM, peptide, and protein-level abundances based on 2-channel isotope-labelled data such as ICAT, SILAC, etc.", false));
             TermData.Add(CVID.MS_Tide, new TermInfo(CVID.MS_Tide, @"MS", @"MS:1002575", @"Tide", @"Tide open-source sequence search program developed at the University of Washington.", false));
+            TermData.Add(CVID.MS_Andromeda_result_file, new TermInfo(CVID.MS_Andromeda_result_file, @"MS", @"MS:1002576", @"Andromeda result file", @"Andromeda result file output format.", false));
+            TermData.Add(CVID.MS_2000_QTRAP, new TermInfo(CVID.MS_2000_QTRAP, @"MS", @"MS:1002577", @"2000 QTRAP", @"SCIEX 2000 QTRAP.", false));
+            TermData.Add(CVID.MS_2500_QTRAP, new TermInfo(CVID.MS_2500_QTRAP, @"MS", @"MS:1002578", @"2500 QTRAP", @"SCIEX 2500 QTRAP.", false));
+            TermData.Add(CVID.MS_3500_QTRAP, new TermInfo(CVID.MS_3500_QTRAP, @"MS", @"MS:1002579", @"3500 QTRAP", @"SCIEX 3500 QTRAP.", false));
+            TermData.Add(CVID.MS_QTRAP_4500, new TermInfo(CVID.MS_QTRAP_4500, @"MS", @"MS:1002580", @"QTRAP 4500", @"SCIEX QTRAP 4500.", false));
+            TermData.Add(CVID.MS_QTRAP_6500, new TermInfo(CVID.MS_QTRAP_6500, @"MS", @"MS:1002581", @"QTRAP 6500", @"SCIEX QTRAP 6500.", false));
+            TermData.Add(CVID.MS_QTRAP_6500_, new TermInfo(CVID.MS_QTRAP_6500_, @"MS", @"MS:1002582", @"QTRAP 6500+", @"SCIEX QTRAP 6500+.", false));
+            TermData.Add(CVID.MS_TripleTOF_4600, new TermInfo(CVID.MS_TripleTOF_4600, @"MS", @"MS:1002583", @"TripleTOF 4600", @"SCIEX TripleTOF 4600 time-of-flight mass spectrometer.", false));
+            TermData.Add(CVID.MS_TripleTOF_5600_, new TermInfo(CVID.MS_TripleTOF_5600_, @"MS", @"MS:1002584", @"TripleTOF 5600+", @"SCIEX TripleTOF 5600+ time-of-flight mass spectrometer.", false));
+            TermData.Add(CVID.MS_API_100, new TermInfo(CVID.MS_API_100, @"MS", @"MS:1002585", @"API 100", @"Applied Biosystems/MDS SCIEX API 100 MS.", false));
+            TermData.Add(CVID.MS_API_100LC, new TermInfo(CVID.MS_API_100LC, @"MS", @"MS:1002586", @"API 100LC", @"Applied Biosystems/MDS SCIEX API 100LC MS.", false));
+            TermData.Add(CVID.MS_API_165, new TermInfo(CVID.MS_API_165, @"MS", @"MS:1002587", @"API 165", @"Applied Biosystems/MDS SCIEX API 165 MS.", false));
+            TermData.Add(CVID.MS_API_300, new TermInfo(CVID.MS_API_300, @"MS", @"MS:1002588", @"API 300", @"Applied Biosystems/MDS SCIEX API 300 MS.", false));
+            TermData.Add(CVID.MS_API_350, new TermInfo(CVID.MS_API_350, @"MS", @"MS:1002589", @"API 350", @"Applied Biosystems/MDS SCIEX API 350 MS.", false));
+            TermData.Add(CVID.MS_API_365, new TermInfo(CVID.MS_API_365, @"MS", @"MS:1002590", @"API 365", @"Applied Biosystems/MDS SCIEX API 365 MS.", false));
+            TermData.Add(CVID.MS_Triple_Quad_3500, new TermInfo(CVID.MS_Triple_Quad_3500, @"MS", @"MS:1002591", @"Triple Quad 3500", @"SCIEX Triple Quad 3500.", false));
+            TermData.Add(CVID.MS_Triple_Quad_4500, new TermInfo(CVID.MS_Triple_Quad_4500, @"MS", @"MS:1002592", @"Triple Quad 4500", @"SCIEX Triple Quad 4500.", false));
+            TermData.Add(CVID.MS_Triple_Quad_5500, new TermInfo(CVID.MS_Triple_Quad_5500, @"MS", @"MS:1002593", @"Triple Quad 5500", @"SCIEX Triple Quad 5500.", false));
+            TermData.Add(CVID.MS_Triple_Quad_6500, new TermInfo(CVID.MS_Triple_Quad_6500, @"MS", @"MS:1002594", @"Triple Quad 6500", @"SCIEX Triple Quad 6500.", false));
+            TermData.Add(CVID.MS_Triple_Quad_6500_, new TermInfo(CVID.MS_Triple_Quad_6500_, @"MS", @"MS:1002595", @"Triple Quad 6500+", @"SCIEX Triple Quad 6500+.", false));
+            TermData.Add(CVID.MS_ProLuCID, new TermInfo(CVID.MS_ProLuCID, @"MS", @"MS:1002596", @"ProLuCID", @"The SEQUEST-like sequence search engine ProLuCID, developed in the Yates Lab at the Scripps Research Institute.", false));
+            TermData.Add(CVID.MS_MS1_format, new TermInfo(CVID.MS_MS1_format, @"MS", @"MS:1002597", @"MS1 format", @"MS1 file format for MS1 spectral data.", false));
+            TermData.Add(CVID.MS_DTASelect, new TermInfo(CVID.MS_DTASelect, @"MS", @"MS:1002598", @"DTASelect", @"Analysis software designed to reassemble the SEQUEST peptide identifications and to highlight the most significant matches.", false));
+            TermData.Add(CVID.MS_splash_key, new TermInfo(CVID.MS_splash_key, @"MS", @"MS:1002599", @"splash key", @"The Splash, is an unique identifier for Spectra, as the InChI Key is an unique identifier for chemical compounds.", false));
+            TermData.Add(CVID.MS_PRIDE_XML, new TermInfo(CVID.MS_PRIDE_XML, @"MS", @"MS:1002600", @"PRIDE XML", @"Internal data and submission format of the PRIDE database.", false));
+            TermData.Add(CVID.MS_mzTab, new TermInfo(CVID.MS_mzTab, @"MS", @"MS:1002601", @"mzTab", @"Tabular result format for proteomics and metabolomics experiments.", false));
+            TermData.Add(CVID.MS_quantification_reagent, new TermInfo(CVID.MS_quantification_reagent, @"MS", @"MS:1002602", @"quantification reagent", @"Reagent used in labeled quantification methods.", false));
+            TermData.Add(CVID.MS_ICAT_reagent, new TermInfo(CVID.MS_ICAT_reagent, @"MS", @"MS:1002603", @"ICAT reagent", @"Isotope coded affinity tag reagent.", false));
+            TermData.Add(CVID.MS_ICAT_heavy_reagent, new TermInfo(CVID.MS_ICAT_heavy_reagent, @"MS", @"MS:1002604", @"ICAT heavy reagent", @"The name of the sample labelled with the heavy ICAT label.", false));
+            TermData.Add(CVID.MS_ICAT_light_reagent, new TermInfo(CVID.MS_ICAT_light_reagent, @"MS", @"MS:1002605", @"ICAT light reagent", @"The name of the sample labelled with the light ICAT label.", false));
+            TermData.Add(CVID.MS_ICPL_reagent, new TermInfo(CVID.MS_ICPL_reagent, @"MS", @"MS:1002606", @"ICPL reagent", @"Isotope coded protein labeling reagent.", false));
+            TermData.Add(CVID.MS_ICPL_reagent_0, new TermInfo(CVID.MS_ICPL_reagent_0, @"MS", @"MS:1002607", @"ICPL reagent 0", @"The name of the sample labelled with the ICPL reagent 0.", false));
+            TermData.Add(CVID.MS_ICPL_reagent_4, new TermInfo(CVID.MS_ICPL_reagent_4, @"MS", @"MS:1002608", @"ICPL reagent 4", @"The name of the sample labelled with the ICPL reagent 4.", false));
+            TermData.Add(CVID.MS_ICPL_reagent_6, new TermInfo(CVID.MS_ICPL_reagent_6, @"MS", @"MS:1002609", @"ICPL reagent 6", @"The name of the sample labelled with the ICPL reagent 6.", false));
+            TermData.Add(CVID.MS_ICPL_reagent_10, new TermInfo(CVID.MS_ICPL_reagent_10, @"MS", @"MS:1002610", @"ICPL reagent 10", @"The name of the sample labelled with the ICPL reagent 10.", false));
+            TermData.Add(CVID.MS_SILAC_reagent, new TermInfo(CVID.MS_SILAC_reagent, @"MS", @"MS:1002611", @"SILAC reagent", @"Stable isotope labeling with amino acids in cell culture reagent.", false));
+            TermData.Add(CVID.MS_SILAC_heavy_reagent, new TermInfo(CVID.MS_SILAC_heavy_reagent, @"MS", @"MS:1002612", @"SILAC heavy reagent", @"The name of the sample labelled with the heavy SILAC label.", false));
+            TermData.Add(CVID.MS_SILAC_medium_reagent, new TermInfo(CVID.MS_SILAC_medium_reagent, @"MS", @"MS:1002613", @"SILAC medium reagent", @"The name of the sample labelled with the medium SILAC label.", false));
+            TermData.Add(CVID.MS_SILAC_light_reagent, new TermInfo(CVID.MS_SILAC_light_reagent, @"MS", @"MS:1002614", @"SILAC light reagent", @"The name of the sample labelled with the light SILAC label.", false));
+            TermData.Add(CVID.MS_TMT_reagent, new TermInfo(CVID.MS_TMT_reagent, @"MS", @"MS:1002615", @"TMT reagent", @"Tandem mass tag reagent.", false));
+            TermData.Add(CVID.MS_TMT_reagent_126, new TermInfo(CVID.MS_TMT_reagent_126, @"MS", @"MS:1002616", @"TMT reagent 126", @"The name of the sample labelled with the TMT reagent 126.", false));
+            TermData.Add(CVID.MS_TMT_reagent_127, new TermInfo(CVID.MS_TMT_reagent_127, @"MS", @"MS:1002617", @"TMT reagent 127", @"The name of the sample labelled with the TMT reagent 127.", false));
+            TermData.Add(CVID.MS_TMT_reagent_128, new TermInfo(CVID.MS_TMT_reagent_128, @"MS", @"MS:1002618", @"TMT reagent 128", @"The name of the sample labelled with the TMT reagent 128.", false));
+            TermData.Add(CVID.MS_TMT_reagent_129, new TermInfo(CVID.MS_TMT_reagent_129, @"MS", @"MS:1002619", @"TMT reagent 129", @"The name of the sample labelled with the TMT reagent 129.", false));
+            TermData.Add(CVID.MS_TMT_reagent_130, new TermInfo(CVID.MS_TMT_reagent_130, @"MS", @"MS:1002620", @"TMT reagent 130", @"The name of the sample labelled with the TMT reagent 130.", false));
+            TermData.Add(CVID.MS_TMT_reagent_131, new TermInfo(CVID.MS_TMT_reagent_131, @"MS", @"MS:1002621", @"TMT reagent 131", @"The name of the sample labelled with the TMT reagent 131.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent, new TermInfo(CVID.MS_iTRAQ_reagent, @"MS", @"MS:1002622", @"iTRAQ reagent", @"Isobaric tag for relative and absolute quantitation reagent.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_113, new TermInfo(CVID.MS_iTRAQ_reagent_113, @"MS", @"MS:1002623", @"iTRAQ reagent 113", @"The name of the sample labelled with the iTRAQ reagent 113.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_114, new TermInfo(CVID.MS_iTRAQ_reagent_114, @"MS", @"MS:1002624", @"iTRAQ reagent 114", @"The name of the sample labelled with the iTRAQ reagent 114.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_115, new TermInfo(CVID.MS_iTRAQ_reagent_115, @"MS", @"MS:1002625", @"iTRAQ reagent 115", @"The name of the sample labelled with the iTRAQ reagent 115.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_116, new TermInfo(CVID.MS_iTRAQ_reagent_116, @"MS", @"MS:1002626", @"iTRAQ reagent 116", @"The name of the sample labelled with the iTRAQ reagent 116.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_117, new TermInfo(CVID.MS_iTRAQ_reagent_117, @"MS", @"MS:1002627", @"iTRAQ reagent 117", @"The name of the sample labelled with the iTRAQ reagent 117.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_118, new TermInfo(CVID.MS_iTRAQ_reagent_118, @"MS", @"MS:1002628", @"iTRAQ reagent 118", @"The name of the sample labelled with the iTRAQ reagent 118.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_119, new TermInfo(CVID.MS_iTRAQ_reagent_119, @"MS", @"MS:1002629", @"iTRAQ reagent 119", @"The name of the sample labelled with the iTRAQ reagent 119.", false));
+            TermData.Add(CVID.MS_iTRAQ_reagent_121, new TermInfo(CVID.MS_iTRAQ_reagent_121, @"MS", @"MS:1002630", @"iTRAQ reagent 121", @"The name of the sample labelled with the iTRAQ reagent 121.", false));
+            TermData.Add(CVID.MS_Electron_Transfer_Higher_Energy_Collision_Dissociation__EThcD_, new TermInfo(CVID.MS_Electron_Transfer_Higher_Energy_Collision_Dissociation__EThcD_, @"MS", @"MS:1002631", @"Electron-Transfer/Higher-Energy Collision Dissociation (EThcD)", @"A dissociation process combining electron-transfer and higher-energy collision dissociation (EThcD). It combines ETD (reaction time) followed by HCD (activation energy).", false));
+            TermData.Add(CVID.MS_jPOST_dataset_identifier, new TermInfo(CVID.MS_jPOST_dataset_identifier, @"MS", @"MS:1002632", @"jPOST dataset identifier", @"Dataset identifier issued by the jPOST repository. A dataset can refer to either a single sample as part of a study, or all samples that are part of the study corresponding to a publication.", false));
+            TermData.Add(CVID.MS_jPOST_dataset_URI, new TermInfo(CVID.MS_jPOST_dataset_URI, @"MS", @"MS:1002633", @"jPOST dataset URI", @"URI that allows the access to one dataset in the jPOST repository. A dataset can refer to either a single sample as part of a study, or all samples that are part of the study corresponding to a publication.", false));
+            TermData.Add(CVID.MS_Q_Exactive_Plus, new TermInfo(CVID.MS_Q_Exactive_Plus, @"MS", @"MS:1002634", @"Q Exactive Plus", @"Thermo Scientific Q Exactive Plus.", false));
+            TermData.Add(CVID.MS_proteogenomics_search, new TermInfo(CVID.MS_proteogenomics_search, @"MS", @"MS:1002635", @"proteogenomics search", @"Proteogenomics search performed.", false));
+            TermData.Add(CVID.MS_proteogenomics_attribute, new TermInfo(CVID.MS_proteogenomics_attribute, @"MS", @"MS:1002636", @"proteogenomics attribute", @"Proteogenomics attribute.", false));
+            TermData.Add(CVID.MS_chromosome_name, new TermInfo(CVID.MS_chromosome_name, @"MS", @"MS:1002637", @"chromosome name", @"The name or number of the chromosome to which a given peptide has been mapped.", false));
+            TermData.Add(CVID.MS_chromosome_strand, new TermInfo(CVID.MS_chromosome_strand, @"MS", @"MS:1002638", @"chromosome strand", @"The strand (+ or -) to which the peptide has been mapped.", false));
+            TermData.Add(CVID.MS_peptide_start_on_chromosome_OBSOLETE, new TermInfo(CVID.MS_peptide_start_on_chromosome_OBSOLETE, @"MS", @"MS:1002639", @"peptide start on chromosome", @"OBSOLETE The overall start position on the chromosome to which a peptide has been mapped i.e. the position of the first base of the first codon, using a zero-based counting system.", true));
+            TermData.Add(CVID.MS_peptide_end_on_chromosome, new TermInfo(CVID.MS_peptide_end_on_chromosome, @"MS", @"MS:1002640", @"peptide end on chromosome", @"The overall end position on the chromosome to which a peptide has been mapped i.e. the position of the third base of the last codon, using a zero-based counting system.", false));
+            TermData.Add(CVID.MS_peptide_exon_count, new TermInfo(CVID.MS_peptide_exon_count, @"MS", @"MS:1002641", @"peptide exon count", @"The number of exons to which the peptide has been mapped.", false));
+            TermData.Add(CVID.MS_peptide_exon_nucleotide_sizes, new TermInfo(CVID.MS_peptide_exon_nucleotide_sizes, @"MS", @"MS:1002642", @"peptide exon nucleotide sizes", @"A comma separated list of the number of DNA bases within each exon to which a peptide has been mapped. Assuming standard operation of a search engine, the peptide exon sizes should sum to exactly three times the peptide length.", false));
+            TermData.Add(CVID.MS_peptide_start_positions_on_chromosome, new TermInfo(CVID.MS_peptide_start_positions_on_chromosome, @"MS", @"MS:1002643", @"peptide start positions on chromosome", @"A comma separated list of start positions within exons to which the peptide has been mapped, relative to peptide-chromosome start, assuming a zero-based counting system. The first value MUST match the value in peptide start on chromosome.", false));
+            TermData.Add(CVID.MS_genome_reference_version, new TermInfo(CVID.MS_genome_reference_version, @"MS", @"MS:1002644", @"genome reference version", @"The reference genome and versioning string as used for mapping. All coordinates are within this frame of reference.", false));
+            TermData.Add(CVID.MS_MSDK, new TermInfo(CVID.MS_MSDK, @"MS", @"MS:1002645", @"MSDK", @"Mass Spectrometry Development Kit (MSDK) is a Java library of algorithms for processing of mass spectrometry data.", false));
+            TermData.Add(CVID.MS_native_spectrum_identifier_format__combined_spectra, new TermInfo(CVID.MS_native_spectrum_identifier_format__combined_spectra, @"MS", @"MS:1002646", @"native spectrum identifier format, combined spectra", @"Describes how the native spectrum identifiers that have been combined prior to searching or interpretation are formated.", false));
+            TermData.Add(CVID.MS_Thermo_nativeID_format__combined_spectra, new TermInfo(CVID.MS_Thermo_nativeID_format__combined_spectra, @"MS", @"MS:1002647", @"Thermo nativeID format, combined spectra", @"Thermo comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_Waters_nativeID_format__combined_spectra, new TermInfo(CVID.MS_Waters_nativeID_format__combined_spectra, @"MS", @"MS:1002648", @"Waters nativeID format, combined spectra", @"Waters comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_WIFF_nativeID_format__combined_spectra, new TermInfo(CVID.MS_WIFF_nativeID_format__combined_spectra, @"MS", @"MS:1002649", @"WIFF nativeID format, combined spectra", @"WIFF comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_Bruker_Agilent_YEP_nativeID_format__combined_spectra, new TermInfo(CVID.MS_Bruker_Agilent_YEP_nativeID_format__combined_spectra, @"MS", @"MS:1002650", @"Bruker/Agilent YEP nativeID format, combined spectra", @"Bruker/Agilent comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_Bruker_BAF_nativeID_format__combined_spectra, new TermInfo(CVID.MS_Bruker_BAF_nativeID_format__combined_spectra, @"MS", @"MS:1002651", @"Bruker BAF nativeID format, combined spectra", @"Bruker BAF comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_Bruker_FID_nativeID_format__combined_spectra, new TermInfo(CVID.MS_Bruker_FID_nativeID_format__combined_spectra, @"MS", @"MS:1002652", @"Bruker FID nativeID format, combined spectra", @"Bruker FID comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_multiple_peak_list_nativeID_format__combined_spectra, new TermInfo(CVID.MS_multiple_peak_list_nativeID_format__combined_spectra, @"MS", @"MS:1002653", @"multiple peak list nativeID format, combined spectra", @"Comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_single_peak_list_nativeID_format__combined_spectra, new TermInfo(CVID.MS_single_peak_list_nativeID_format__combined_spectra, @"MS", @"MS:1002654", @"single peak list nativeID format, combined spectra", @"Comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_scan_number_only_nativeID_format__combined_spectra, new TermInfo(CVID.MS_scan_number_only_nativeID_format__combined_spectra, @"MS", @"MS:1002655", @"scan number only nativeID format, combined spectra", @"Comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_spectrum_identifier_nativeID_format__combined_spectra, new TermInfo(CVID.MS_spectrum_identifier_nativeID_format__combined_spectra, @"MS", @"MS:1002656", @"spectrum identifier nativeID format, combined spectra", @"Comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_mzML_unique_identifier__combined_spectra, new TermInfo(CVID.MS_mzML_unique_identifier__combined_spectra, @"MS", @"MS:1002657", @"mzML unique identifier, combined spectra", @"Comma separated list of spectra that have been combined prior to searching or interpretation.", false));
+            TermData.Add(CVID.MS_identification_parameter, new TermInfo(CVID.MS_identification_parameter, @"MS", @"MS:1002658", @"identification parameter", @"Identification parameter for the search engine run.", false));
+            TermData.Add(CVID.MS_UniProtKB_text_sequence_format, new TermInfo(CVID.MS_UniProtKB_text_sequence_format, @"MS", @"MS:1002659", @"UniProtKB text sequence format", @"Text-based format used by UniProtKB for sequence entries.", false));
+            TermData.Add(CVID.MS_UniProtKB_XML_sequence_format, new TermInfo(CVID.MS_UniProtKB_XML_sequence_format, @"MS", @"MS:1002660", @"UniProtKB XML sequence format", @"XML-based format used by UniProtKB for sequence entries.", false));
+            TermData.Add(CVID.MS_Morpheus, new TermInfo(CVID.MS_Morpheus, @"MS", @"MS:1002661", @"Morpheus", @"Morpheus search engine.", false));
+            TermData.Add(CVID.MS_Morpheus_Morpheus_score, new TermInfo(CVID.MS_Morpheus_Morpheus_score, @"MS", @"MS:1002662", @"Morpheus:Morpheus score", @"Morpheus score for PSMs.", false));
+            TermData.Add(CVID.MS_Morpheus_summed_Morpheus_score, new TermInfo(CVID.MS_Morpheus_summed_Morpheus_score, @"MS", @"MS:1002663", @"Morpheus:summed Morpheus score", @"Summed Morpheus score for protein groups.", false));
+            TermData.Add(CVID.MS_protein_interaction_scores_derived_from_cross_linking, new TermInfo(CVID.MS_protein_interaction_scores_derived_from_cross_linking, @"MS", @"MS:1002664", @"protein interaction scores derived from cross-linking", @"Parent term for protein interaction scores derived from cross-linking.", false));
+            TermData.Add(CVID.MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking, new TermInfo(CVID.MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking, @"MS", @"MS:1002665", @"regular expression for protein interaction scores derived from cross-linking", @"(", false));
+            TermData.Add(CVID.MS_impact_II, new TermInfo(CVID.MS_impact_II, @"MS", @"MS:1002666", @"impact II", @"Bruker Daltonics' impact II.", false));
+            TermData.Add(CVID.MS_impact_HD, new TermInfo(CVID.MS_impact_HD, @"MS", @"MS:1002667", @"impact HD", @"Bruker Daltonics' impact HD.", false));
             TermData.Add(CVID.UNIMOD_unimod_root_node, new TermInfo(CVID.UNIMOD_unimod_root_node, @"UNIMOD", @"UNIMOD:0", @"unimod root node", @"The root node of the unimod modifications ontology.", false));
             TermData.Add(CVID.UNIMOD_Acetyl, new TermInfo(CVID.UNIMOD_Acetyl, @"UNIMOD", @"UNIMOD:1", @"Acetyl", @"Acetylation.", false));
             TermData.Add(CVID.UNIMOD_Amidated, new TermInfo(CVID.UNIMOD_Amidated, @"UNIMOD", @"UNIMOD:2", @"Amidated", @"Amidation.", false));
@@ -20240,7 +21999,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Tripalmitate, new TermInfo(CVID.UNIMOD_Tripalmitate, @"UNIMOD", @"UNIMOD:51", @"Tripalmitate", @"N-acyl diglyceride cysteine.", false));
             TermData.Add(CVID.UNIMOD_Guanidinyl, new TermInfo(CVID.UNIMOD_Guanidinyl, @"UNIMOD", @"UNIMOD:52", @"Guanidinyl", @"Guanidination.", false));
             TermData.Add(CVID.UNIMOD_HNE, new TermInfo(CVID.UNIMOD_HNE, @"UNIMOD", @"UNIMOD:53", @"HNE", @"4-hydroxynonenal (HNE).", false));
-            TermData.Add(CVID.UNIMOD_Glucuronyl, new TermInfo(CVID.UNIMOD_Glucuronyl, @"UNIMOD", @"UNIMOD:54", @"Glucuronyl", @"N-glucuronylation.", false));
+            TermData.Add(CVID.UNIMOD_Glucuronyl, new TermInfo(CVID.UNIMOD_Glucuronyl, @"UNIMOD", @"UNIMOD:54", @"Glucuronyl", @"Hexuronic acid.", false));
             TermData.Add(CVID.UNIMOD_Glutathione, new TermInfo(CVID.UNIMOD_Glutathione, @"UNIMOD", @"UNIMOD:55", @"Glutathione", @"Glutathione disulfide.", false));
             TermData.Add(CVID.UNIMOD_Acetyl_2H_3_, new TermInfo(CVID.UNIMOD_Acetyl_2H_3_, @"UNIMOD", @"UNIMOD:56", @"Acetyl:2H(3)", @"Acetate labeling reagent (N-term & K) (heavy form, +3amu).", false));
             TermData.Add(CVID.UNIMOD_Propionyl, new TermInfo(CVID.UNIMOD_Propionyl, @"UNIMOD", @"UNIMOD:58", @"Propionyl", @"Propionate labeling reagent light form (N-term & K).", false));
@@ -20272,12 +22031,12 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_OxArgBiotinRed, new TermInfo(CVID.UNIMOD_OxArgBiotinRed, @"UNIMOD", @"UNIMOD:117", @"OxArgBiotinRed", @"Oxidized arginine biotinylated with biotin-LC-hydrazide, reduced.", false));
             TermData.Add(CVID.UNIMOD_EDT_iodoacetyl_PEO_biotin, new TermInfo(CVID.UNIMOD_EDT_iodoacetyl_PEO_biotin, @"UNIMOD", @"UNIMOD:118", @"EDT-iodoacetyl-PEO-biotin", @"EDT-iodo-PEO-biotin.", false));
             TermData.Add(CVID.UNIMOD_IBTP, new TermInfo(CVID.UNIMOD_IBTP, @"UNIMOD", @"UNIMOD:119", @"IBTP", @"Thio Ether Formation - BTP Adduct.", false));
-            TermData.Add(CVID.UNIMOD_GlyGly, new TermInfo(CVID.UNIMOD_GlyGly, @"UNIMOD", @"UNIMOD:121", @"GlyGly", @"Ubiquitinylation residue.", false));
+            TermData.Add(CVID.UNIMOD_GG, new TermInfo(CVID.UNIMOD_GG, @"UNIMOD", @"UNIMOD:121", @"GG", @"Ubiquitinylation residue.", false));
             TermData.Add(CVID.UNIMOD_Formyl, new TermInfo(CVID.UNIMOD_Formyl, @"UNIMOD", @"UNIMOD:122", @"Formyl", @"Formylation.", false));
             TermData.Add(CVID.UNIMOD_ICAT_H, new TermInfo(CVID.UNIMOD_ICAT_H, @"UNIMOD", @"UNIMOD:123", @"ICAT-H", @"N-iodoacetyl, p-chlorobenzyl-12C6-glucamine.", false));
             TermData.Add(CVID.UNIMOD_ICAT_H_13C_6_, new TermInfo(CVID.UNIMOD_ICAT_H_13C_6_, @"UNIMOD", @"UNIMOD:124", @"ICAT-H:13C(6)", @"N-iodoacetyl, p-chlorobenzyl-13C6-glucamine.", false));
             TermData.Add(CVID.UNIMOD_Thioacyl, new TermInfo(CVID.UNIMOD_Thioacyl, @"UNIMOD", @"UNIMOD:126", @"Thioacyl", @"3-sulfanylpropanoyl.", false));
-            TermData.Add(CVID.UNIMOD_Fluoro, new TermInfo(CVID.UNIMOD_Fluoro, @"UNIMOD", @"UNIMOD:127", @"Fluoro", @"Fluorophenylalanine replacement of phenylalanine.", false));
+            TermData.Add(CVID.UNIMOD_Fluoro, new TermInfo(CVID.UNIMOD_Fluoro, @"UNIMOD", @"UNIMOD:127", @"Fluoro", @"Fluorination.", false));
             TermData.Add(CVID.UNIMOD_Fluorescein, new TermInfo(CVID.UNIMOD_Fluorescein, @"UNIMOD", @"UNIMOD:128", @"Fluorescein", @"5-Iodoacetamidofluorescein (Molecular Probe, Eugene, OR).", false));
             TermData.Add(CVID.UNIMOD_Iodo, new TermInfo(CVID.UNIMOD_Iodo, @"UNIMOD", @"UNIMOD:129", @"Iodo", @"Iodination.", false));
             TermData.Add(CVID.UNIMOD_Diiodo, new TermInfo(CVID.UNIMOD_Diiodo, @"UNIMOD", @"UNIMOD:130", @"Diiodo", @"Di-Iodination.", false));
@@ -20308,9 +22067,9 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_2_dHex_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_2_dHex_1_, @"UNIMOD", @"UNIMOD:158", @"Hex(2)HexNAc(2)dHex(1)", @"Hex2HexNAc2dHex1.", false));
             TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_2_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_2_, @"UNIMOD", @"UNIMOD:159", @"Hex(3)HexNAc(2)", @"Hex3HexNAc2.", false));
             TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_, @"UNIMOD", @"UNIMOD:160", @"Hex(1)HexNAc(1)NeuAc(2)", @"Hex1HexNAc1NeuAc2.", false));
-            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_2_P_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_2_P_1_, @"UNIMOD", @"UNIMOD:161", @"Hex(3)HexNAc(2)P(1)", @"Hex3HexNAc2P1.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_2_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_2_Phos_1_, @"UNIMOD", @"UNIMOD:161", @"Hex(3)HexNAc(2)Phos(1)", @"Hex(3) HexNAc(2) Phos.", false));
             TermData.Add(CVID.UNIMOD_Delta_S__1_Se_1_, new TermInfo(CVID.UNIMOD_Delta_S__1_Se_1_, @"UNIMOD", @"UNIMOD:162", @"Delta:S(-1)Se(1)", @"Selenium replaces sulfur.", false));
-            TermData.Add(CVID.UNIMOD_Delta_H_1_O__1_18O_1_, new TermInfo(CVID.UNIMOD_Delta_H_1_O__1_18O_1_, @"UNIMOD", @"UNIMOD:170", @"Delta:H(1)O(-1)18O(1)", @"Glycosylated asparagine 18O labeling.", false));
+            TermData.Add(CVID.UNIMOD_Delta_H_1_N__1_18O_1_, new TermInfo(CVID.UNIMOD_Delta_H_1_N__1_18O_1_, @"UNIMOD", @"UNIMOD:170", @"Delta:H(1)N(-1)18O(1)", @"Glycosylated asparagine 18O labeling.", false));
             TermData.Add(CVID.UNIMOD_NBS_13C_6_, new TermInfo(CVID.UNIMOD_NBS_13C_6_, @"UNIMOD", @"UNIMOD:171", @"NBS:13C(6)", @"Shimadzu NBS-13C.", false));
             TermData.Add(CVID.UNIMOD_NBS, new TermInfo(CVID.UNIMOD_NBS, @"UNIMOD", @"UNIMOD:172", @"NBS", @"Shimadzu NBS-12C.", false));
             TermData.Add(CVID.UNIMOD_BHT, new TermInfo(CVID.UNIMOD_BHT, @"UNIMOD", @"UNIMOD:176", @"BHT", @"Michael addition of BHT quinone methide to Cysteine and Lysine.", false));
@@ -20393,8 +22152,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_DTBP, new TermInfo(CVID.UNIMOD_DTBP, @"UNIMOD", @"UNIMOD:324", @"DTBP", @"Dimethyl 3,3\'-dithiobispropionimidate.", false));
             TermData.Add(CVID.UNIMOD_FP_Biotin, new TermInfo(CVID.UNIMOD_FP_Biotin, @"UNIMOD", @"UNIMOD:325", @"FP-Biotin", @"10-ethoxyphosphinyl-N-(biotinamidopentyl)decanamide.", false));
             TermData.Add(CVID.UNIMOD_Delta_H_4_C_2_O__1_S_1_, new TermInfo(CVID.UNIMOD_Delta_H_4_C_2_O__1_S_1_, @"UNIMOD", @"UNIMOD:327", @"Delta:H(4)C(2)O(-1)S(1)", @"S-Ethylcystine from Serine.", false));
-            TermData.Add(CVID.UNIMOD_Methyl_2H_3_13C_1_, new TermInfo(CVID.UNIMOD_Methyl_2H_3_13C_1_, @"UNIMOD", @"UNIMOD:329", @"Methyl:2H(3)13C(1)", @"Monomethylated arginine.", false));
-            TermData.Add(CVID.UNIMOD_Dimethyl_2H_6_13C_2_, new TermInfo(CVID.UNIMOD_Dimethyl_2H_6_13C_2_, @"UNIMOD", @"UNIMOD:330", @"Dimethyl:2H(6)13C(2)", @"Dimethylated arginine.", false));
+            TermData.Add(CVID.UNIMOD_Methyl_2H_3_13C_1_, new TermInfo(CVID.UNIMOD_Methyl_2H_3_13C_1_, @"UNIMOD", @"UNIMOD:329", @"Methyl:2H(3)13C(1)", @"Monomethylation.", false));
+            TermData.Add(CVID.UNIMOD_Dimethyl_2H_6_13C_2_, new TermInfo(CVID.UNIMOD_Dimethyl_2H_6_13C_2_, @"UNIMOD", @"UNIMOD:330", @"Dimethyl:2H(6)13C(2)", @"Dimethylation.", false));
             TermData.Add(CVID.UNIMOD_Thiophos_S_S_biotin, new TermInfo(CVID.UNIMOD_Thiophos_S_S_biotin, @"UNIMOD", @"UNIMOD:332", @"Thiophos-S-S-biotin", @"Thiophosphate labeled with biotin-HPDP.", false));
             TermData.Add(CVID.UNIMOD_Can_FP_biotin, new TermInfo(CVID.UNIMOD_Can_FP_biotin, @"UNIMOD", @"UNIMOD:333", @"Can-FP-biotin", @"6-N-biotinylaminohexyl isopropyl phosphate.", false));
             TermData.Add(CVID.UNIMOD_HNE_Delta_H_2_, new TermInfo(CVID.UNIMOD_HNE_Delta_H_2_, @"UNIMOD", @"UNIMOD:335", @"HNE+Delta:H(2)", @"Reduced 4-Hydroxynonenal.", false));
@@ -20450,7 +22209,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Didehydro, new TermInfo(CVID.UNIMOD_Didehydro, @"UNIMOD", @"UNIMOD:401", @"Didehydro", @"2-amino-3-oxo-butanoic_acid.", false));
             TermData.Add(CVID.UNIMOD_Cys__Oxoalanine, new TermInfo(CVID.UNIMOD_Cys__Oxoalanine, @"UNIMOD", @"UNIMOD:402", @"Cys->Oxoalanine", @"Oxoalanine.", false));
             TermData.Add(CVID.UNIMOD_Ser__LacticAcid, new TermInfo(CVID.UNIMOD_Ser__LacticAcid, @"UNIMOD", @"UNIMOD:403", @"Ser->LacticAcid", @"Lactic acid from N-term Ser.", false));
-            TermData.Add(CVID.UNIMOD_Phosphoadenosine, new TermInfo(CVID.UNIMOD_Phosphoadenosine, @"UNIMOD", @"UNIMOD:405", @"Phosphoadenosine", @"AMP binding site.", false));
+            TermData.Add(CVID.UNIMOD_Phosphoadenosine, new TermInfo(CVID.UNIMOD_Phosphoadenosine, @"UNIMOD", @"UNIMOD:405", @"Phosphoadenosine", @"AMP.", false));
             TermData.Add(CVID.UNIMOD_Hydroxycinnamyl, new TermInfo(CVID.UNIMOD_Hydroxycinnamyl, @"UNIMOD", @"UNIMOD:407", @"Hydroxycinnamyl", @"Hydroxycinnamyl.", false));
             TermData.Add(CVID.UNIMOD_Glycosyl, new TermInfo(CVID.UNIMOD_Glycosyl, @"UNIMOD", @"UNIMOD:408", @"Glycosyl", @"Glycosyl-L-hydroxyproline.", false));
             TermData.Add(CVID.UNIMOD_FMNH, new TermInfo(CVID.UNIMOD_FMNH, @"UNIMOD", @"UNIMOD:409", @"FMNH", @"Flavin mononucleotide.", false));
@@ -20535,7 +22294,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_iTRAQ4plex114, new TermInfo(CVID.UNIMOD_iTRAQ4plex114, @"UNIMOD", @"UNIMOD:532", @"iTRAQ4plex114", @"Accurate mass for 114.", false));
             TermData.Add(CVID.UNIMOD_iTRAQ4plex115, new TermInfo(CVID.UNIMOD_iTRAQ4plex115, @"UNIMOD", @"UNIMOD:533", @"iTRAQ4plex115", @"Accurate mass for 115.", false));
             TermData.Add(CVID.UNIMOD_Dibromo, new TermInfo(CVID.UNIMOD_Dibromo, @"UNIMOD", @"UNIMOD:534", @"Dibromo", @"Dibromo.", false));
-            TermData.Add(CVID.UNIMOD_LeuArgGlyGly, new TermInfo(CVID.UNIMOD_LeuArgGlyGly, @"UNIMOD", @"UNIMOD:535", @"LeuArgGlyGly", @"Ubiquitination.", false));
+            TermData.Add(CVID.UNIMOD_LRGG, new TermInfo(CVID.UNIMOD_LRGG, @"UNIMOD", @"UNIMOD:535", @"LRGG", @"Ubiquitination.", false));
             TermData.Add(CVID.UNIMOD_CLIP_TRAQ_3, new TermInfo(CVID.UNIMOD_CLIP_TRAQ_3, @"UNIMOD", @"UNIMOD:536", @"CLIP_TRAQ_3", @"CLIP_TRAQ_3.", false));
             TermData.Add(CVID.UNIMOD_CLIP_TRAQ_4, new TermInfo(CVID.UNIMOD_CLIP_TRAQ_4, @"UNIMOD", @"UNIMOD:537", @"CLIP_TRAQ_4", @"CLIP_TRAQ_4.", false));
             TermData.Add(CVID.UNIMOD_Biotin_Cayman_10141, new TermInfo(CVID.UNIMOD_Biotin_Cayman_10141, @"UNIMOD", @"UNIMOD:538", @"Biotin:Cayman-10141", @"Was 15dB-biotin.", false));
@@ -20725,8 +22484,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Carboxymethyl_13C_2_, new TermInfo(CVID.UNIMOD_Carboxymethyl_13C_2_, @"UNIMOD", @"UNIMOD:775", @"Carboxymethyl:13C(2)", @"Iodoacetic acid derivative w/ 13C label.", false));
             TermData.Add(CVID.UNIMOD_NEM_2H_5_, new TermInfo(CVID.UNIMOD_NEM_2H_5_, @"UNIMOD", @"UNIMOD:776", @"NEM:2H(5)", @"D5 N-ethylmaleimide on cysteines.", false));
             TermData.Add(CVID.UNIMOD_AEC_MAEC_2H_4_, new TermInfo(CVID.UNIMOD_AEC_MAEC_2H_4_, @"UNIMOD", @"UNIMOD:792", @"AEC-MAEC:2H(4)", @"Deuterium cysteamine modification to S or T.", false));
-            TermData.Add(CVID.UNIMOD_Hex1HexNAc1, new TermInfo(CVID.UNIMOD_Hex1HexNAc1, @"UNIMOD", @"UNIMOD:793", @"Hex1HexNAc1", @"Hex1HexNAc1.", false));
-            TermData.Add(CVID.UNIMOD_Label_13C_6__GlyGly, new TermInfo(CVID.UNIMOD_Label_13C_6__GlyGly, @"UNIMOD", @"UNIMOD:799", @"Label:13C(6)+GlyGly", @"13C6 labeled ubiquitinylation residue.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_, @"UNIMOD", @"UNIMOD:793", @"Hex(1)HexNAc(1)", @"Hex1HexNAc1.", false));
+            TermData.Add(CVID.UNIMOD_Label_13C_6__GG, new TermInfo(CVID.UNIMOD_Label_13C_6__GG, @"UNIMOD", @"UNIMOD:799", @"Label:13C(6)+GG", @"13C6 labeled ubiquitinylation residue.", false));
             TermData.Add(CVID.UNIMOD_Biotin_Thermo_21345, new TermInfo(CVID.UNIMOD_Biotin_Thermo_21345, @"UNIMOD", @"UNIMOD:800", @"Biotin:Thermo-21345", @"Was PentylamineBiotin.", false));
             TermData.Add(CVID.UNIMOD_Pentylamine, new TermInfo(CVID.UNIMOD_Pentylamine, @"UNIMOD", @"UNIMOD:801", @"Pentylamine", @"Labeling transglutaminase substrate on glutamine side chain.", false));
             TermData.Add(CVID.UNIMOD_Biotin_Thermo_21360, new TermInfo(CVID.UNIMOD_Biotin_Thermo_21360, @"UNIMOD", @"UNIMOD:811", @"Biotin:Thermo-21360", @"Was Biotin-PEO4-hydrazide.", false));
@@ -20744,13 +22503,12 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Arg2PG, new TermInfo(CVID.UNIMOD_Arg2PG, @"UNIMOD", @"UNIMOD:848", @"Arg2PG", @"Adduct of phenylglyoxal with Arg.", false));
             TermData.Add(CVID.UNIMOD_cGMP, new TermInfo(CVID.UNIMOD_cGMP, @"UNIMOD", @"UNIMOD:849", @"cGMP", @"S-guanylation.", false));
             TermData.Add(CVID.UNIMOD_cGMP_RMP_loss, new TermInfo(CVID.UNIMOD_cGMP_RMP_loss, @"UNIMOD", @"UNIMOD:851", @"cGMP+RMP-loss", @"S-guanylation-2.", false));
-            TermData.Add(CVID.UNIMOD_Label_2H_4__GlyGly, new TermInfo(CVID.UNIMOD_Label_2H_4__GlyGly, @"UNIMOD", @"UNIMOD:853", @"Label:2H(4)+GlyGly", @"Ubiquitination 2H4 lysine.", false));
-            TermData.Add(CVID.UNIMOD_Label_13C_8_15N_2_, new TermInfo(CVID.UNIMOD_Label_13C_8_15N_2_, @"UNIMOD", @"UNIMOD:854", @"Label:13C(8)15N(2)", @"13C(8) 15N(2) Silac label.", false));
+            TermData.Add(CVID.UNIMOD_Label_2H_4__GG, new TermInfo(CVID.UNIMOD_Label_2H_4__GG, @"UNIMOD", @"UNIMOD:853", @"Label:2H(4)+GG", @"Ubiquitination 2H4 lysine.", false));
             TermData.Add(CVID.UNIMOD_MG_H1, new TermInfo(CVID.UNIMOD_MG_H1, @"UNIMOD", @"UNIMOD:859", @"MG-H1", @"Methylglyoxal-derived hydroimidazolone.", false));
             TermData.Add(CVID.UNIMOD_G_H1, new TermInfo(CVID.UNIMOD_G_H1, @"UNIMOD", @"UNIMOD:860", @"G-H1", @"Glyoxal-derived hydroimiadazolone.", false));
             TermData.Add(CVID.UNIMOD_ZGB, new TermInfo(CVID.UNIMOD_ZGB, @"UNIMOD", @"UNIMOD:861", @"ZGB", @"NHS ester linked Green Fluorescent Bodipy Dye.", false));
             TermData.Add(CVID.UNIMOD_Label_13C_1_2H_3_, new TermInfo(CVID.UNIMOD_Label_13C_1_2H_3_, @"UNIMOD", @"UNIMOD:862", @"Label:13C(1)2H(3)", @"SILAC.", false));
-            TermData.Add(CVID.UNIMOD_Label_13C_6_15N_2__GlyGly, new TermInfo(CVID.UNIMOD_Label_13C_6_15N_2__GlyGly, @"UNIMOD", @"UNIMOD:864", @"Label:13C(6)15N(2)+GlyGly", @"13C(6) 15N(2) Lysine glygly.", false));
+            TermData.Add(CVID.UNIMOD_Label_13C_6_15N_2__GG, new TermInfo(CVID.UNIMOD_Label_13C_6_15N_2__GG, @"UNIMOD", @"UNIMOD:864", @"Label:13C(6)15N(2)+GG", @"13C(6) 15N(2) Lysine glygly.", false));
             TermData.Add(CVID.UNIMOD_ICPL_13C_6_2H_4_, new TermInfo(CVID.UNIMOD_ICPL_13C_6_2H_4_, @"UNIMOD", @"UNIMOD:866", @"ICPL:13C(6)2H(4)", @"Bruker Daltonics SERVA-ICPL(TM) quantification chemistry, +10 Da form.", false));
             TermData.Add(CVID.UNIMOD_QEQTGG, new TermInfo(CVID.UNIMOD_QEQTGG, @"UNIMOD", @"UNIMOD:876", @"QEQTGG", @"SUMOylation by SUMO-1.", false));
             TermData.Add(CVID.UNIMOD_QQQTGG, new TermInfo(CVID.UNIMOD_QQQTGG, @"UNIMOD", @"UNIMOD:877", @"QQQTGG", @"SUMOylation by SUMO-2/3.", false));
@@ -20776,23 +22534,23 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Phe__CamCys, new TermInfo(CVID.UNIMOD_Phe__CamCys, @"UNIMOD", @"UNIMOD:904", @"Phe->CamCys", @"Phe->Cys substitution and carbamidomethylation.", false));
             TermData.Add(CVID.UNIMOD_Leu__MetOx, new TermInfo(CVID.UNIMOD_Leu__MetOx, @"UNIMOD", @"UNIMOD:905", @"Leu->MetOx", @"Leu->Met substitution and sulfoxidation.", false));
             TermData.Add(CVID.UNIMOD_Lys__MetOx, new TermInfo(CVID.UNIMOD_Lys__MetOx, @"UNIMOD", @"UNIMOD:906", @"Lys->MetOx", @"Lys->Met substitution and sulfoxidation.", false));
-            TermData.Add(CVID.UNIMOD_Galactosyl, new TermInfo(CVID.UNIMOD_Galactosyl, @"UNIMOD", @"UNIMOD:907", @"Galactosyl", @"Galactosyl hydroxylysine.", false));
+            TermData.Add(CVID.UNIMOD_Galactosyl, new TermInfo(CVID.UNIMOD_Galactosyl, @"UNIMOD", @"UNIMOD:907", @"Galactosyl", @"Gluconoylation.", false));
             TermData.Add(CVID.UNIMOD_SMCC_maleimide, new TermInfo(CVID.UNIMOD_SMCC_maleimide, @"UNIMOD", @"UNIMOD:908", @"SMCC-maleimide", @"Modified SMCC maleimide with 3-(dimethylamino)-1-propylamine.", false));
             TermData.Add(CVID.UNIMOD_Bacillosamine, new TermInfo(CVID.UNIMOD_Bacillosamine, @"UNIMOD", @"UNIMOD:910", @"Bacillosamine", @"2,4-diacetamido-2,4,6-trideoxyglucopyranose.", false));
             TermData.Add(CVID.UNIMOD_MTSL, new TermInfo(CVID.UNIMOD_MTSL, @"UNIMOD", @"UNIMOD:911", @"MTSL", @"Cys modification by (1-oxyl-2,2,5,5-tetramethyl-3-pyrroline-3-methyl)methanesulfonate (MTSL).", false));
             TermData.Add(CVID.UNIMOD_HNE_BAHAH, new TermInfo(CVID.UNIMOD_HNE_BAHAH, @"UNIMOD", @"UNIMOD:912", @"HNE-BAHAH", @"4-hydroxy-2-nonenal and biotinamidohexanoic acid hydrazide, reduced.", false));
             TermData.Add(CVID.UNIMOD_Methylmalonylation, new TermInfo(CVID.UNIMOD_Methylmalonylation, @"UNIMOD", @"UNIMOD:914", @"Methylmalonylation", @"Methylmalonylation on Serine.", false));
             TermData.Add(CVID.UNIMOD_Ethoxyformyl, new TermInfo(CVID.UNIMOD_Ethoxyformyl, @"UNIMOD", @"UNIMOD:915", @"Ethoxyformyl", @"Ethoxyformylation.", false));
-            TermData.Add(CVID.UNIMOD_Label_13C_4_15N_2__GlyGly, new TermInfo(CVID.UNIMOD_Label_13C_4_15N_2__GlyGly, @"UNIMOD", @"UNIMOD:923", @"Label:13C(4)15N(2)+GlyGly", @"13C(4) 15N(2) Lysine glygly.", false));
+            TermData.Add(CVID.UNIMOD_Label_13C_4_15N_2__GG, new TermInfo(CVID.UNIMOD_Label_13C_4_15N_2__GG, @"UNIMOD", @"UNIMOD:923", @"Label:13C(4)15N(2)+GG", @"13C(4) 15N(2) Lysine glygly.", false));
             TermData.Add(CVID.UNIMOD_ethylamino, new TermInfo(CVID.UNIMOD_ethylamino, @"UNIMOD", @"UNIMOD:926", @"ethylamino", @"Ethyl amino.", false));
             TermData.Add(CVID.UNIMOD_MercaptoEthanol, new TermInfo(CVID.UNIMOD_MercaptoEthanol, @"UNIMOD", @"UNIMOD:928", @"MercaptoEthanol", @"2-OH-ethyl thio-Ser.", false));
-            TermData.Add(CVID.UNIMOD_EthylAmide, new TermInfo(CVID.UNIMOD_EthylAmide, @"UNIMOD", @"UNIMOD:931", @"EthylAmide", @"Solvolysis of amide group on Asn or Gln by ethanol.", false));
+            TermData.Add(CVID.UNIMOD_Ethyl_Deamidated, new TermInfo(CVID.UNIMOD_Ethyl_Deamidated, @"UNIMOD", @"UNIMOD:931", @"Ethyl+Deamidated", @"Deamidation followed by esterification with ethanol.", false));
             TermData.Add(CVID.UNIMOD_VFQQQTGG, new TermInfo(CVID.UNIMOD_VFQQQTGG, @"UNIMOD", @"UNIMOD:932", @"VFQQQTGG", @"SUMOylation by SUMO-2/3 (formic acid cleavage).", false));
             TermData.Add(CVID.UNIMOD_VIEVYQEQTGG, new TermInfo(CVID.UNIMOD_VIEVYQEQTGG, @"UNIMOD", @"UNIMOD:933", @"VIEVYQEQTGG", @"SUMOylation by SUMO-1 (formic acid cleavage).", false));
             TermData.Add(CVID.UNIMOD_AMTzHexNAc2, new TermInfo(CVID.UNIMOD_AMTzHexNAc2, @"UNIMOD", @"UNIMOD:934", @"AMTzHexNAc2", @"Photocleavable Biotin + GalNAz on O-GlcNAc.", false));
             TermData.Add(CVID.UNIMOD_Atto495Maleimide, new TermInfo(CVID.UNIMOD_Atto495Maleimide, @"UNIMOD", @"UNIMOD:935", @"Atto495Maleimide", @"High molecular absorption maleimide label for proteins.", false));
             TermData.Add(CVID.UNIMOD_Chlorination, new TermInfo(CVID.UNIMOD_Chlorination, @"UNIMOD", @"UNIMOD:936", @"Chlorination", @"Chlorination of tyrosine residues.", false));
-            TermData.Add(CVID.UNIMOD_dichlorination, new TermInfo(CVID.UNIMOD_dichlorination, @"UNIMOD", @"UNIMOD:937", @"dichlorination", @"Dichlorination of tyrosine residues.", false));
+            TermData.Add(CVID.UNIMOD_dichlorination, new TermInfo(CVID.UNIMOD_dichlorination, @"UNIMOD", @"UNIMOD:937", @"dichlorination", @"Dichlorination.", false));
             TermData.Add(CVID.UNIMOD_AROD, new TermInfo(CVID.UNIMOD_AROD, @"UNIMOD", @"UNIMOD:938", @"AROD", @"Cysteine modifier.", false));
             TermData.Add(CVID.UNIMOD_Cys__methylaminoAla, new TermInfo(CVID.UNIMOD_Cys__methylaminoAla, @"UNIMOD", @"UNIMOD:939", @"Cys->methylaminoAla", @"Carbamidomethylated Cys that undergoes beta-elimination and Michael addition of methylamine.", false));
             TermData.Add(CVID.UNIMOD_Cys__ethylaminoAla, new TermInfo(CVID.UNIMOD_Cys__ethylaminoAla, @"UNIMOD", @"UNIMOD:940", @"Cys->ethylaminoAla", @"Carbamidomethylated Cys that undergoes beta-elimination and Michael addition of ethylamine.", false));
@@ -20836,7 +22594,6 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Label_15N_2_, new TermInfo(CVID.UNIMOD_Label_15N_2_, @"UNIMOD", @"UNIMOD:995", @"Label:15N(2)", @"15N(2).", false));
             TermData.Add(CVID.UNIMOD_Label_15N_3_, new TermInfo(CVID.UNIMOD_Label_15N_3_, @"UNIMOD", @"UNIMOD:996", @"Label:15N(3)", @"15N(3).", false));
             TermData.Add(CVID.UNIMOD_sulfo_amino, new TermInfo(CVID.UNIMOD_sulfo_amino, @"UNIMOD", @"UNIMOD:997", @"sulfo+amino", @"Aminotyrosine with sulfation.", false));
-            TermData.Add(CVID.UNIMOD_BHAc, new TermInfo(CVID.UNIMOD_BHAc, @"UNIMOD", @"UNIMOD:998", @"BHAc", @"N-biotinyl-6-aminohexanoyl.", false));
             TermData.Add(CVID.UNIMOD_AHA_Alkyne, new TermInfo(CVID.UNIMOD_AHA_Alkyne, @"UNIMOD", @"UNIMOD:1000", @"AHA-Alkyne", @"Azidohomoalanine (AHA) bound to propargylglycine-NH2 (alkyne).", false));
             TermData.Add(CVID.UNIMOD_AHA_Alkyne_KDDDD, new TermInfo(CVID.UNIMOD_AHA_Alkyne_KDDDD, @"UNIMOD", @"UNIMOD:1001", @"AHA-Alkyne-KDDDD", @"Azidohomoalanine (AHA) bound to DDDDK-propargylglycine-NH2 (alkyne).", false));
             TermData.Add(CVID.UNIMOD_EGCG1, new TermInfo(CVID.UNIMOD_EGCG1, @"UNIMOD", @"UNIMOD:1002", @"EGCG1", @"(-)-epigallocatechin-3-gallate.", false));
@@ -20845,7 +22602,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Label_13C_6_15N_4__Dimethyl, new TermInfo(CVID.UNIMOD_Label_13C_6_15N_4__Dimethyl, @"UNIMOD", @"UNIMOD:1005", @"Label:13C(6)15N(4)+Dimethyl", @"Dimethylated Arg13C(6) 15N(4).", false));
             TermData.Add(CVID.UNIMOD_Label_13C_6_15N_4__Methyl_2H_3_13C_1_, new TermInfo(CVID.UNIMOD_Label_13C_6_15N_4__Methyl_2H_3_13C_1_, @"UNIMOD", @"UNIMOD:1006", @"Label:13C(6)15N(4)+Methyl:2H(3)13C(1)", @"2H(3) 13C(1) monomethylated Arg13C(6) 15N(4).", false));
             TermData.Add(CVID.UNIMOD_Label_13C_6_15N_4__Dimethyl_2H_6_13C_2_, new TermInfo(CVID.UNIMOD_Label_13C_6_15N_4__Dimethyl_2H_6_13C_2_, @"UNIMOD", @"UNIMOD:1007", @"Label:13C(6)15N(4)+Dimethyl:2H(6)13C(2)", @"2H(6) 13C(2) Dimethylated Arg13C(6) 15N(4).", false));
-            TermData.Add(CVID.UNIMOD_SecCarbamidomethyl, new TermInfo(CVID.UNIMOD_SecCarbamidomethyl, @"UNIMOD", @"UNIMOD:1008", @"SecCarbamidomethyl", @"Sec Iodoacetamide derivative.", false));
+            TermData.Add(CVID.UNIMOD_Cys__CamSec, new TermInfo(CVID.UNIMOD_Cys__CamSec, @"UNIMOD", @"UNIMOD:1008", @"Cys->CamSec", @"Sec Iodoacetamide derivative.", false));
             TermData.Add(CVID.UNIMOD_Thiazolidine, new TermInfo(CVID.UNIMOD_Thiazolidine, @"UNIMOD", @"UNIMOD:1009", @"Thiazolidine", @"Addition of Carbon to cysteine.", false));
             TermData.Add(CVID.UNIMOD_DEDGFLYMVYASQETFG, new TermInfo(CVID.UNIMOD_DEDGFLYMVYASQETFG, @"UNIMOD", @"UNIMOD:1010", @"DEDGFLYMVYASQETFG", @"Addition of DEDGFLYMVYASQETFG.", false));
             TermData.Add(CVID.UNIMOD_Biotin_Invitrogen_M1602, new TermInfo(CVID.UNIMOD_Biotin_Invitrogen_M1602, @"UNIMOD", @"UNIMOD:1012", @"Biotin:Invitrogen-M1602", @"Nalpha-(3-maleimidylpropionyl)biocytin.", false));
@@ -20854,7 +22611,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_DMPO, new TermInfo(CVID.UNIMOD_DMPO, @"UNIMOD", @"UNIMOD:1017", @"DMPO", @"DMPO spin-trap nitrone adduct.", false));
             TermData.Add(CVID.UNIMOD_ICDID, new TermInfo(CVID.UNIMOD_ICDID, @"UNIMOD", @"UNIMOD:1018", @"ICDID", @"Isotope-Coded Dimedone light form.", false));
             TermData.Add(CVID.UNIMOD_ICDID_2H_6_, new TermInfo(CVID.UNIMOD_ICDID_2H_6_, @"UNIMOD", @"UNIMOD:1019", @"ICDID:2H(6)", @"Isotope-Coded Dimedone heavy form.", false));
-            TermData.Add(CVID.UNIMOD_Xlink_DSS, new TermInfo(CVID.UNIMOD_Xlink_DSS, @"UNIMOD", @"UNIMOD:1020", @"Xlink:DSS", @"Monolink of DSS/BS3 crosslinker to Lys or N-terminus.", false));
+            TermData.Add(CVID.UNIMOD_Xlink_DSS, new TermInfo(CVID.UNIMOD_Xlink_DSS, @"UNIMOD", @"UNIMOD:1020", @"Xlink:DSS", @"Water-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.", false));
             TermData.Add(CVID.UNIMOD_Xlink_EGS, new TermInfo(CVID.UNIMOD_Xlink_EGS, @"UNIMOD", @"UNIMOD:1021", @"Xlink:EGS", @"Monolink of EGS crosslinker to Lys or N-terminus.", false));
             TermData.Add(CVID.UNIMOD_Xlink_DST, new TermInfo(CVID.UNIMOD_Xlink_DST, @"UNIMOD", @"UNIMOD:1022", @"Xlink:DST", @"Monolink of DST crosslinker to Lys or N-terminus.", false));
             TermData.Add(CVID.UNIMOD_Xlink_DTSSP, new TermInfo(CVID.UNIMOD_Xlink_DTSSP, @"UNIMOD", @"UNIMOD:1023", @"Xlink:DTSSP", @"Monolink of DSP/DTSSP crosslinker to Lys or N-terminus.", false));
@@ -20863,8 +22620,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Xlink_EGScleaved, new TermInfo(CVID.UNIMOD_Xlink_EGScleaved, @"UNIMOD", @"UNIMOD:1028", @"Xlink:EGScleaved", @"EGS crosslinker to Lys or N-terminus following hydroxylamine cleavage.", false));
             TermData.Add(CVID.UNIMOD_Biotin_Thermo_88310, new TermInfo(CVID.UNIMOD_Biotin_Thermo_88310, @"UNIMOD", @"UNIMOD:1031", @"Biotin:Thermo-88310", @"Desthiobiotin modification of lysine.", false));
             TermData.Add(CVID.UNIMOD_2_nitrobenzyl, new TermInfo(CVID.UNIMOD_2_nitrobenzyl, @"UNIMOD", @"UNIMOD:1032", @"2-nitrobenzyl", @"Tyrosine caged with 2-nitrobenzyl (ONB).", false));
-            TermData.Add(CVID.UNIMOD_SecNEM, new TermInfo(CVID.UNIMOD_SecNEM, @"UNIMOD", @"UNIMOD:1033", @"SecNEM", @"N-ethylmaleimide on selenocysteines.", false));
-            TermData.Add(CVID.UNIMOD_SecNEM_2H_5_, new TermInfo(CVID.UNIMOD_SecNEM_2H_5_, @"UNIMOD", @"UNIMOD:1034", @"SecNEM:2H(5)", @"D5 N-ethylmaleimide on selenocysteines.", false));
+            TermData.Add(CVID.UNIMOD_Cys__SecNEM, new TermInfo(CVID.UNIMOD_Cys__SecNEM, @"UNIMOD", @"UNIMOD:1033", @"Cys->SecNEM", @"N-ethylmaleimide on selenocysteines.", false));
+            TermData.Add(CVID.UNIMOD_Cys__SecNEM_2H_5_, new TermInfo(CVID.UNIMOD_Cys__SecNEM_2H_5_, @"UNIMOD", @"UNIMOD:1034", @"Cys->SecNEM:2H(5)", @"D5 N-ethylmaleimide on selenocysteines.", false));
             TermData.Add(CVID.UNIMOD_Thiadiazole, new TermInfo(CVID.UNIMOD_Thiadiazole, @"UNIMOD", @"UNIMOD:1035", @"Thiadiazole", @"Thiadiazolydation of Cys.", false));
             TermData.Add(CVID.UNIMOD_Withaferin, new TermInfo(CVID.UNIMOD_Withaferin, @"UNIMOD", @"UNIMOD:1036", @"Withaferin", @"Modification of cystein by withaferin.", false));
             TermData.Add(CVID.UNIMOD_Biotin_Thermo_88317, new TermInfo(CVID.UNIMOD_Biotin_Thermo_88317, @"UNIMOD", @"UNIMOD:1037", @"Biotin:Thermo-88317", @"Desthiobiotin fluorophosphonate.", false));
@@ -21103,7 +22860,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_BMP_piperidinol, new TermInfo(CVID.UNIMOD_BMP_piperidinol, @"UNIMOD", @"UNIMOD:1281", @"BMP-piperidinol", @"1-methyl-3-benzoyl-4-hydroxy-4-phenylpiperidine.", false));
             TermData.Add(CVID.UNIMOD_UgiJoullieProGly, new TermInfo(CVID.UNIMOD_UgiJoullieProGly, @"UNIMOD", @"UNIMOD:1282", @"UgiJoullieProGly", @"Side reaction of PG with Side chain of aspartic or glutamic acid.", false));
             TermData.Add(CVID.UNIMOD_UgiJoullieProGlyProGly, new TermInfo(CVID.UNIMOD_UgiJoullieProGlyProGly, @"UNIMOD", @"UNIMOD:1283", @"UgiJoullieProGlyProGly", @"Side reaction of PGPG with Side chain of aspartic or glutamic acid.", false));
-            TermData.Add(CVID.UNIMOD_IMEHex_2_NeuAc, new TermInfo(CVID.UNIMOD_IMEHex_2_NeuAc, @"UNIMOD", @"UNIMOD:1286", @"IMEHex(2)NeuAc", @"Glycosylation with IME linked Hex(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_IMEHex_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_IMEHex_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1286", @"IMEHex(2)NeuAc(1)", @"Glycosylation with IME linked Hex(2) NeuAc.", false));
             TermData.Add(CVID.UNIMOD_Arg_loss, new TermInfo(CVID.UNIMOD_Arg_loss, @"UNIMOD", @"UNIMOD:1287", @"Arg-loss", @"Loss of arginine due to transpeptidation.", false));
             TermData.Add(CVID.UNIMOD_Arg, new TermInfo(CVID.UNIMOD_Arg, @"UNIMOD", @"UNIMOD:1288", @"Arg", @"Addition of arginine due to transpeptidation.", false));
             TermData.Add(CVID.UNIMOD_Butyryl, new TermInfo(CVID.UNIMOD_Butyryl, @"UNIMOD", @"UNIMOD:1289", @"Butyryl", @"Butyryl.", false));
@@ -21123,14 +22880,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Propyl, new TermInfo(CVID.UNIMOD_Propyl, @"UNIMOD", @"UNIMOD:1305", @"Propyl", @"Propyl.", false));
             TermData.Add(CVID.UNIMOD_Propyl_2H_6_, new TermInfo(CVID.UNIMOD_Propyl_2H_6_, @"UNIMOD", @"UNIMOD:1306", @"Propyl:2H(6)", @"Propyl:2H(6).", false));
             TermData.Add(CVID.UNIMOD_Propiophenone, new TermInfo(CVID.UNIMOD_Propiophenone, @"UNIMOD", @"UNIMOD:1310", @"Propiophenone", @"Propiophenone.", false));
-            TermData.Add(CVID.UNIMOD_AhaEthynylUridine, new TermInfo(CVID.UNIMOD_AhaEthynylUridine, @"UNIMOD", @"UNIMOD:1311", @"AhaEthynylUridine", @"1,3 dipolar cycloaddition of ethynyluridine to azidohomoalanine.", false));
             TermData.Add(CVID.UNIMOD_Delta_H_6_C_3_O_1_, new TermInfo(CVID.UNIMOD_Delta_H_6_C_3_O_1_, @"UNIMOD", @"UNIMOD:1312", @"Delta:H(6)C(3)O(1)", @"Reduced acrolein addition +58.", false));
             TermData.Add(CVID.UNIMOD_Delta_H_8_C_6_O_1_, new TermInfo(CVID.UNIMOD_Delta_H_8_C_6_O_1_, @"UNIMOD", @"UNIMOD:1313", @"Delta:H(8)C(6)O(1)", @"Reduced acrolein addition +96.", false));
             TermData.Add(CVID.UNIMOD_biotinAcrolein298, new TermInfo(CVID.UNIMOD_biotinAcrolein298, @"UNIMOD", @"UNIMOD:1314", @"biotinAcrolein298", @"Biotin hydrazide labeled acrolein addition +298.", false));
             TermData.Add(CVID.UNIMOD_MM_diphenylpentanone, new TermInfo(CVID.UNIMOD_MM_diphenylpentanone, @"UNIMOD", @"UNIMOD:1315", @"MM-diphenylpentanone", @"3-methyl-5-(methylamino)-1,3-diphenylpentan-1-one.", false));
             TermData.Add(CVID.UNIMOD_EHD_diphenylpentanone, new TermInfo(CVID.UNIMOD_EHD_diphenylpentanone, @"UNIMOD", @"UNIMOD:1317", @"EHD-diphenylpentanone", @"2-ethyl-3-hydroxy-1,3-diphenylpentan-1-one.", false));
-            TermData.Add(CVID.UNIMOD_Bipyridine, new TermInfo(CVID.UNIMOD_Bipyridine, @"UNIMOD", @"UNIMOD:1318", @"Bipyridine", @"Cys modified with bipy ligand.", false));
-            TermData.Add(CVID.UNIMOD_VinylPMS, new TermInfo(CVID.UNIMOD_VinylPMS, @"UNIMOD", @"UNIMOD:1319", @"VinylPMS", @"Serine modified with p-vinylphenylmethylsulfonyl group.", false));
             TermData.Add(CVID.UNIMOD_Biotin_Thermo_21901_2H2O, new TermInfo(CVID.UNIMOD_Biotin_Thermo_21901_2H2O, @"UNIMOD", @"UNIMOD:1320", @"Biotin:Thermo-21901+2H2O", @"Maleimide-Biotin + 2Water.", false));
             TermData.Add(CVID.UNIMOD_DiLeu4plex115, new TermInfo(CVID.UNIMOD_DiLeu4plex115, @"UNIMOD", @"UNIMOD:1321", @"DiLeu4plex115", @"Accurate mass for DiLeu 115 isobaric tag.", false));
             TermData.Add(CVID.UNIMOD_DiLeu4plex, new TermInfo(CVID.UNIMOD_DiLeu4plex, @"UNIMOD", @"UNIMOD:1322", @"DiLeu4plex", @"Accurate mass for DiLeu 116 isobaric tag.", false));
@@ -21139,8 +22893,423 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_NEMsulfur, new TermInfo(CVID.UNIMOD_NEMsulfur, @"UNIMOD", @"UNIMOD:1326", @"NEMsulfur", @"N-ethylmaleimideSulfur.", false));
             TermData.Add(CVID.UNIMOD_SulfurDioxide, new TermInfo(CVID.UNIMOD_SulfurDioxide, @"UNIMOD", @"UNIMOD:1327", @"SulfurDioxide", @"SulfurDioxide.", false));
             TermData.Add(CVID.UNIMOD_NEMsulfurWater, new TermInfo(CVID.UNIMOD_NEMsulfurWater, @"UNIMOD", @"UNIMOD:1328", @"NEMsulfurWater", @"N-ethylmaleimideSulfurWater.", false));
+            TermData.Add(CVID.UNIMOD_bisANS_sulfonates, new TermInfo(CVID.UNIMOD_bisANS_sulfonates, @"UNIMOD", @"UNIMOD:1330", @"bisANS-sulfonates", @"BisANS with loss of both sulfonates.", false));
+            TermData.Add(CVID.UNIMOD_DNCB_hapten, new TermInfo(CVID.UNIMOD_DNCB_hapten, @"UNIMOD", @"UNIMOD:1331", @"DNCB_hapten", @"Chemical reaction with 2,4-dinitro-1-chloro benzene (DNCB).", false));
+            TermData.Add(CVID.UNIMOD_Biotin_Thermo_21911, new TermInfo(CVID.UNIMOD_Biotin_Thermo_21911, @"UNIMOD", @"UNIMOD:1340", @"Biotin:Thermo-21911", @"Biotin-PEG11-maleimide.", false));
+            TermData.Add(CVID.UNIMOD_iodoTMT, new TermInfo(CVID.UNIMOD_iodoTMT, @"UNIMOD", @"UNIMOD:1341", @"iodoTMT", @"Native iodoacetyl Tandem Mass TagÂ®.", false));
+            TermData.Add(CVID.UNIMOD_iodoTMT6plex, new TermInfo(CVID.UNIMOD_iodoTMT6plex, @"UNIMOD", @"UNIMOD:1342", @"iodoTMT6plex", @"Sixplex iodoacetyl Tandem Mass TagÂ®.", false));
+            TermData.Add(CVID.UNIMOD_Phosphogluconoylation, new TermInfo(CVID.UNIMOD_Phosphogluconoylation, @"UNIMOD", @"UNIMOD:1344", @"Phosphogluconoylation", @"Phosphogluconoylation.", false));
+            TermData.Add(CVID.UNIMOD_PS_Hapten, new TermInfo(CVID.UNIMOD_PS_Hapten, @"UNIMOD", @"UNIMOD:1345", @"PS_Hapten", @"Reaction with phenyl salicylate (PS).", false));
+            TermData.Add(CVID.UNIMOD_Cy3_maleimide, new TermInfo(CVID.UNIMOD_Cy3_maleimide, @"UNIMOD", @"UNIMOD:1348", @"Cy3-maleimide", @"Cy3 Maleimide mono-Reactive dye.", false));
+            TermData.Add(CVID.UNIMOD_benzylguanidine, new TermInfo(CVID.UNIMOD_benzylguanidine, @"UNIMOD", @"UNIMOD:1349", @"benzylguanidine", @"Modification of the lysine side chain from NH2 to guanidine with a H removed in favor of a benzyl group.", false));
+            TermData.Add(CVID.UNIMOD_CarboxymethylDMAP, new TermInfo(CVID.UNIMOD_CarboxymethylDMAP, @"UNIMOD", @"UNIMOD:1350", @"CarboxymethylDMAP", @"A fixed +1 charge tag attached to the N-terminus of peptides.", false));
+            TermData.Add(CVID.UNIMOD_azole, new TermInfo(CVID.UNIMOD_azole, @"UNIMOD", @"UNIMOD:1355", @"azole", @"Formation of five membered aromatic heterocycle.", false));
+            TermData.Add(CVID.UNIMOD_phosphoRibosyl, new TermInfo(CVID.UNIMOD_phosphoRibosyl, @"UNIMOD", @"UNIMOD:1356", @"phosphoRibosyl", @"Phosphate-ribosylation.", false));
+            TermData.Add(CVID.UNIMOD_NEM_2H_5__H2O, new TermInfo(CVID.UNIMOD_NEM_2H_5__H2O, @"UNIMOD", @"UNIMOD:1358", @"NEM:2H(5)+H2O", @"D5 N-ethylmaleimide+water on cysteines.", false));
+            TermData.Add(CVID.UNIMOD_Crotonyl, new TermInfo(CVID.UNIMOD_Crotonyl, @"UNIMOD", @"UNIMOD:1363", @"Crotonyl", @"Crotonylation.", false));
+            TermData.Add(CVID.UNIMOD_O_Et_N_diMePhospho, new TermInfo(CVID.UNIMOD_O_Et_N_diMePhospho, @"UNIMOD", @"UNIMOD:1364", @"O-Et-N-diMePhospho", @"O-ethyl, N-dimethyl phosphate.", false));
+            TermData.Add(CVID.UNIMOD_N_dimethylphosphate, new TermInfo(CVID.UNIMOD_N_dimethylphosphate, @"UNIMOD", @"UNIMOD:1365", @"N-dimethylphosphate", @"N-dimethylphosphate.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_, @"UNIMOD", @"UNIMOD:1367", @"dHex(1)Hex(1)", @"Hex1dHex1.", false));
+            TermData.Add(CVID.UNIMOD_Methyl_2H_3__Acetyl_2H_3_, new TermInfo(CVID.UNIMOD_Methyl_2H_3__Acetyl_2H_3_, @"UNIMOD", @"UNIMOD:1368", @"Methyl:2H(3)+Acetyl:2H(3)", @"3-fold methylated lysine labelled with Acetyl_heavy.", false));
+            TermData.Add(CVID.UNIMOD_Label_2H_3__Oxidation, new TermInfo(CVID.UNIMOD_Label_2H_3__Oxidation, @"UNIMOD", @"UNIMOD:1370", @"Label:2H(3)+Oxidation", @"Oxidised 2H(3) labelled Methionine.", false));
+            TermData.Add(CVID.UNIMOD_Trimethyl_2H_9_, new TermInfo(CVID.UNIMOD_Trimethyl_2H_9_, @"UNIMOD", @"UNIMOD:1371", @"Trimethyl:2H(9)", @"3-fold methylation with deuterated methyl groups.", false));
+            TermData.Add(CVID.UNIMOD_Acetyl_13C_2_, new TermInfo(CVID.UNIMOD_Acetyl_13C_2_, @"UNIMOD", @"UNIMOD:1372", @"Acetyl:13C(2)", @"Heavy acetylation.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_, @"UNIMOD", @"UNIMOD:1375", @"dHex(1)Hex(2)", @"Hex2dHex1.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_, @"UNIMOD", @"UNIMOD:1376", @"dHex(1)Hex(3)", @"Hex3dHex1.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_, @"UNIMOD", @"UNIMOD:1377", @"dHex(1)Hex(4)", @"Hex4dHex1.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_, @"UNIMOD", @"UNIMOD:1378", @"dHex(1)Hex(5)", @"Hex5dHex1.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_6_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_6_, @"UNIMOD", @"UNIMOD:1379", @"dHex(1)Hex(6)", @"Hex6dHex1.", false));
+            TermData.Add(CVID.UNIMOD_methylsulfonylethyl, new TermInfo(CVID.UNIMOD_methylsulfonylethyl, @"UNIMOD", @"UNIMOD:1380", @"methylsulfonylethyl", @"Reaction with methyl vinyl sulfone.", false));
+            TermData.Add(CVID.UNIMOD_ethylsulfonylethyl, new TermInfo(CVID.UNIMOD_ethylsulfonylethyl, @"UNIMOD", @"UNIMOD:1381", @"ethylsulfonylethyl", @"Reaction with ethyl vinyl sulfone.", false));
+            TermData.Add(CVID.UNIMOD_phenylsulfonylethyl, new TermInfo(CVID.UNIMOD_phenylsulfonylethyl, @"UNIMOD", @"UNIMOD:1382", @"phenylsulfonylethyl", @"Reaction with phenyl vinyl sulfone.", false));
+            TermData.Add(CVID.UNIMOD_PyridoxalPhosphateH2, new TermInfo(CVID.UNIMOD_PyridoxalPhosphateH2, @"UNIMOD", @"UNIMOD:1383", @"PyridoxalPhosphateH2", @"PLP bound to lysine reduced by sodium borohydride (NaBH4) to create amine linkage.", false));
+            TermData.Add(CVID.UNIMOD_Homocysteic_acid, new TermInfo(CVID.UNIMOD_Homocysteic_acid, @"UNIMOD", @"UNIMOD:1384", @"Homocysteic_acid", @"Methionine oxidation to homocysteic acid.", false));
+            TermData.Add(CVID.UNIMOD_Hydroxamic_acid, new TermInfo(CVID.UNIMOD_Hydroxamic_acid, @"UNIMOD", @"UNIMOD:1385", @"Hydroxamic_acid", @"Conversion of carboxylic acid to hydroxamic acid.", false));
+            TermData.Add(CVID.UNIMOD_3_phosphoglyceryl, new TermInfo(CVID.UNIMOD_3_phosphoglyceryl, @"UNIMOD", @"UNIMOD:1387", @"3-phosphoglyceryl", @"3-phosphoglyceryl.", false));
+            TermData.Add(CVID.UNIMOD_HN2_mustard, new TermInfo(CVID.UNIMOD_HN2_mustard, @"UNIMOD", @"UNIMOD:1388", @"HN2_mustard", @"Modification by hydroxylated mechloroethamine (HN-2).", false));
+            TermData.Add(CVID.UNIMOD_HN3_mustard, new TermInfo(CVID.UNIMOD_HN3_mustard, @"UNIMOD", @"UNIMOD:1389", @"HN3_mustard", @"Modification by hydroxylated tris-(2-chloroethyl)amine (HN-3).", false));
+            TermData.Add(CVID.UNIMOD_Oxidation_NEM, new TermInfo(CVID.UNIMOD_Oxidation_NEM, @"UNIMOD", @"UNIMOD:1390", @"Oxidation+NEM", @"N-ethylmaleimide on cysteine sulfenic acid.", false));
+            TermData.Add(CVID.UNIMOD_NHS_fluorescein, new TermInfo(CVID.UNIMOD_NHS_fluorescein, @"UNIMOD", @"UNIMOD:1391", @"NHS-fluorescein", @"Fluorescein-hexanoate-NHS hydrolysis.", false));
+            TermData.Add(CVID.UNIMOD_DiART6plex, new TermInfo(CVID.UNIMOD_DiART6plex, @"UNIMOD", @"UNIMOD:1392", @"DiART6plex", @"Representative mass and accurate mass for 114.", false));
+            TermData.Add(CVID.UNIMOD_DiART6plex115, new TermInfo(CVID.UNIMOD_DiART6plex115, @"UNIMOD", @"UNIMOD:1393", @"DiART6plex115", @"Accurate mass for DiART6plex 115.", false));
+            TermData.Add(CVID.UNIMOD_DiART6plex116_119, new TermInfo(CVID.UNIMOD_DiART6plex116_119, @"UNIMOD", @"UNIMOD:1394", @"DiART6plex116/119", @"Accurate mass for DiART6plex 116 and 119.", false));
+            TermData.Add(CVID.UNIMOD_DiART6plex117, new TermInfo(CVID.UNIMOD_DiART6plex117, @"UNIMOD", @"UNIMOD:1395", @"DiART6plex117", @"Accurate mass for DiART6plex 117.", false));
+            TermData.Add(CVID.UNIMOD_DiART6plex118, new TermInfo(CVID.UNIMOD_DiART6plex118, @"UNIMOD", @"UNIMOD:1396", @"DiART6plex118", @"Accurate mass for DiART6plex 118.", false));
+            TermData.Add(CVID.UNIMOD_Iodoacetanilide, new TermInfo(CVID.UNIMOD_Iodoacetanilide, @"UNIMOD", @"UNIMOD:1397", @"Iodoacetanilide", @"Iodoacetanilide derivative.", false));
+            TermData.Add(CVID.UNIMOD_Iodoacetanilide_13C_6_, new TermInfo(CVID.UNIMOD_Iodoacetanilide_13C_6_, @"UNIMOD", @"UNIMOD:1398", @"Iodoacetanilide:13C(6)", @"13C labelled iodoacetanilide derivative.", false));
+            TermData.Add(CVID.UNIMOD_Dap_DSP, new TermInfo(CVID.UNIMOD_Dap_DSP, @"UNIMOD", @"UNIMOD:1399", @"Dap-DSP", @"Diaminopimelic acid-DSP monolinked.", false));
+            TermData.Add(CVID.UNIMOD_MurNAc, new TermInfo(CVID.UNIMOD_MurNAc, @"UNIMOD", @"UNIMOD:1400", @"MurNAc", @"N-Acetylmuramic acid.", false));
+            TermData.Add(CVID.UNIMOD_Label_2H_7_15N_4_, new TermInfo(CVID.UNIMOD_Label_2H_7_15N_4_, @"UNIMOD", @"UNIMOD:1402", @"Label:2H(7)15N(4)", @"Label:2H(7)15N(4).", false));
+            TermData.Add(CVID.UNIMOD_Label_2H_6_15N_1_, new TermInfo(CVID.UNIMOD_Label_2H_6_15N_1_, @"UNIMOD", @"UNIMOD:1403", @"Label:2H(6)15N(1)", @"Label:2H(6)15N(1).", false));
+            TermData.Add(CVID.UNIMOD_EEEDVIEVYQEQTGG, new TermInfo(CVID.UNIMOD_EEEDVIEVYQEQTGG, @"UNIMOD", @"UNIMOD:1405", @"EEEDVIEVYQEQTGG", @"Sumoylation by SUMO-1 after Cyanogen bromide (CNBr) cleavage.", false));
+            TermData.Add(CVID.UNIMOD_EDEDTIDVFQQQTGG, new TermInfo(CVID.UNIMOD_EDEDTIDVFQQQTGG, @"UNIMOD", @"UNIMOD:1406", @"EDEDTIDVFQQQTGG", @"Sumoylation by SUMO-2/3 after Cyanogen bromide (CNBr) cleavage.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_2_, @"UNIMOD", @"UNIMOD:1408", @"Hex(5)HexNAc(4)NeuAc(2)", @"Hex(5) HexNAc(4) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1409", @"Hex(5)HexNAc(4)NeuAc(1)", @"Hex(5) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1410", @"dHex(1)Hex(5)HexNAc(4)NeuAc(1)", @"DHex Hex(5) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_2_, @"UNIMOD", @"UNIMOD:1411", @"dHex(1)Hex(5)HexNAc(4)NeuAc(2)", @"DHex Hex(5) HexNAc(4) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_s_GlcNAc, new TermInfo(CVID.UNIMOD_s_GlcNAc, @"UNIMOD", @"UNIMOD:1412", @"s-GlcNAc", @"O3S1HexNAc1.", false));
+            TermData.Add(CVID.UNIMOD_PhosphoHex_2_, new TermInfo(CVID.UNIMOD_PhosphoHex_2_, @"UNIMOD", @"UNIMOD:1413", @"PhosphoHex(2)", @"H1O3P1Hex2.", false));
+            TermData.Add(CVID.UNIMOD_Trimethyl_13C_3_2H_9_, new TermInfo(CVID.UNIMOD_Trimethyl_13C_3_2H_9_, @"UNIMOD", @"UNIMOD:1414", @"Trimethyl:13C(3)2H(9)", @"3-fold methylation with fully labelled methyl groups.", false));
+            TermData.Add(CVID.UNIMOD_15N_oxobutanoic, new TermInfo(CVID.UNIMOD_15N_oxobutanoic, @"UNIMOD", @"UNIMOD:1419", @"15N-oxobutanoic", @"Loss of ammonia (15N).", false));
+            TermData.Add(CVID.UNIMOD_spermine, new TermInfo(CVID.UNIMOD_spermine, @"UNIMOD", @"UNIMOD:1420", @"spermine", @"Spermine adduct.", false));
+            TermData.Add(CVID.UNIMOD_spermidine, new TermInfo(CVID.UNIMOD_spermidine, @"UNIMOD", @"UNIMOD:1421", @"spermidine", @"Spermidine adduct.", false));
+            TermData.Add(CVID.UNIMOD_Biotin_Thermo_21330, new TermInfo(CVID.UNIMOD_Biotin_Thermo_21330, @"UNIMOD", @"UNIMOD:1423", @"Biotin:Thermo-21330", @"Biotin_PEG4.", false));
+            TermData.Add(CVID.UNIMOD_Pentose, new TermInfo(CVID.UNIMOD_Pentose, @"UNIMOD", @"UNIMOD:1425", @"Pentose", @"Pentose.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_1_Pent_1_, @"UNIMOD", @"UNIMOD:1426", @"Hex(1)Pent(1)", @"Hex Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexA_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexA_1_, @"UNIMOD", @"UNIMOD:1427", @"Hex(1)HexA(1)", @"Hex HexA.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_Pent_2_, new TermInfo(CVID.UNIMOD_Hex_1_Pent_2_, @"UNIMOD", @"UNIMOD:1428", @"Hex(1)Pent(2)", @"Hex Pent(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_Phos_1_, @"UNIMOD", @"UNIMOD:1429", @"Hex(1)HexNAc(1)Phos(1)", @"Hex HexNAc Phos.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1430", @"Hex(1)HexNAc(1)Sulf(1)", @"Hex HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_1_NeuAc_1_, @"UNIMOD", @"UNIMOD:1431", @"Hex(1)NeuAc(1)", @"Hex NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_1_NeuGc_1_, @"UNIMOD", @"UNIMOD:1432", @"Hex(1)NeuGc(1)", @"Hex NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_3_, new TermInfo(CVID.UNIMOD_HexNAc_3_, @"UNIMOD", @"UNIMOD:1433", @"HexNAc(3)", @"HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_1_NeuAc_1_, new TermInfo(CVID.UNIMOD_HexNAc_1_NeuAc_1_, @"UNIMOD", @"UNIMOD:1434", @"HexNAc(1)NeuAc(1)", @"HexNAc NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_1_NeuGc_1_, new TermInfo(CVID.UNIMOD_HexNAc_1_NeuGc_1_, @"UNIMOD", @"UNIMOD:1435", @"HexNAc(1)NeuGc(1)", @"HexNAc NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_1_, @"UNIMOD", @"UNIMOD:1436", @"Hex(1)HexNAc(1)dHex(1)Me(1)", @"Hex HexNAc dHex Me.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_2_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_2_, @"UNIMOD", @"UNIMOD:1437", @"Hex(1)HexNAc(1)dHex(1)Me(2)", @"Hex HexNAc dHex Me(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_1_, @"UNIMOD", @"UNIMOD:1438", @"Hex(2)HexNAc(1)", @"Hex(2) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexA_1_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexA_1_HexNAc_1_, @"UNIMOD", @"UNIMOD:1439", @"Hex(1)HexA(1)HexNAc(1)", @"Hex HexA HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_1_Me_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_1_Me_1_, @"UNIMOD", @"UNIMOD:1440", @"Hex(2)HexNAc(1)Me(1)", @"Hex(2) HexNAc Me.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_3_Phos_1_, @"UNIMOD", @"UNIMOD:1441", @"Hex(3)Phos(1)", @"Hex(3) Phos.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_NeuAc_1_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_1_NeuAc_1_Pent_1_, @"UNIMOD", @"UNIMOD:1442", @"Hex(1)NeuAc(1)Pent(1)", @"Hex NeuAc Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1443", @"Hex(2)HexNAc(1)Sulf(1)", @"Hex(2) HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1444", @"Hex(2)NeuAc(1)", @"Hex(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_, @"UNIMOD", @"UNIMOD:1445", @"dHex(2)Hex(2)", @"Hex2 dHex2.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_, @"UNIMOD", @"UNIMOD:1446", @"dHex(1)Hex(2)HexA(1)", @"DHex Hex(2) HexA.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1447", @"Hex(1)HexNAc(2)Sulf(1)", @"Hex HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_, new TermInfo(CVID.UNIMOD_Hex_4_, @"UNIMOD", @"UNIMOD:1448", @"Hex(4)", @"Hex(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_Pent_1_, @"UNIMOD", @"UNIMOD:1449", @"dHex(1)Hex(2)HexNAc(2)Pent(1)", @"DHex Hex(2) HexNAc(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1450", @"Hex(2)HexNAc(2)NeuAc(1)", @"Hex(2) HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_2_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_2_Pent_1_, @"UNIMOD", @"UNIMOD:1451", @"Hex(3)HexNAc(2)Pent(1)", @"Hex(3) HexNAc(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_2_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_2_, @"UNIMOD", @"UNIMOD:1452", @"Hex(4)HexNAc(2)", @"Hex(4) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_1_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_1_Pent_1_, @"UNIMOD", @"UNIMOD:1453", @"dHex(1)Hex(4)HexNAc(1)Pent(1)", @"DHex Hex(4) HexNAc Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_Pent_1_, @"UNIMOD", @"UNIMOD:1454", @"dHex(1)Hex(3)HexNAc(2)Pent(1)", @"DHex Hex(3) HexNAc(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1455", @"Hex(3)HexNAc(2)NeuAc(1)", @"Hex(3) HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_2_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_2_Pent_1_, @"UNIMOD", @"UNIMOD:1456", @"Hex(4)HexNAc(2)Pent(1)", @"Hex(4) HexNAc(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1457", @"Hex(3)HexNAc(3)Pent(1)", @"Hex(3) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_2_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_2_Phos_1_, @"UNIMOD", @"UNIMOD:1458", @"Hex(5)HexNAc(2)Phos(1)", @"Hex(5) HexNAc(2) Phos.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_2_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_2_Pent_1_, @"UNIMOD", @"UNIMOD:1459", @"dHex(1)Hex(4)HexNAc(2)Pent(1)", @"DHex Hex(4) HexNAc(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_7_HexNAc_1_, @"UNIMOD", @"UNIMOD:1460", @"Hex(7)HexNAc(1)", @"Hex(7) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1461", @"Hex(4)HexNAc(2)NeuAc(1)", @"Hex(4) HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_2_, @"UNIMOD", @"UNIMOD:1462", @"dHex(1)Hex(5)HexNAc(2)", @"DHex Hex(5) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1463", @"dHex(1)Hex(3)HexNAc(3)Pent(1)", @"DHex Hex(3) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1464", @"Hex(3)HexNAc(4)Sulf(1)", @"Hex(3) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_2_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_2_, @"UNIMOD", @"UNIMOD:1465", @"Hex(6)HexNAc(2)", @"Hex(6) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1466", @"Hex(4)HexNAc(3)Pent(1)", @"Hex(4) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_, @"UNIMOD", @"UNIMOD:1467", @"dHex(1)Hex(4)HexNAc(3)", @"DHex Hex(4) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_3_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_3_, @"UNIMOD", @"UNIMOD:1468", @"Hex(5)HexNAc(3)", @"Hex(5) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1469", @"Hex(3)HexNAc(4)Pent(1)", @"Hex(3) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_2_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_2_Phos_1_, @"UNIMOD", @"UNIMOD:1470", @"Hex(6)HexNAc(2)Phos(1)", @"Hex(6) HexNAc(2) Phos.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1471", @"dHex(1)Hex(4)HexNAc(3)Sulf(1)", @"DHex Hex(4) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_2_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_2_Pent_1_, @"UNIMOD", @"UNIMOD:1472", @"dHex(1)Hex(5)HexNAc(2)Pent(1)", @"DHex Hex(5) HexNAc(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_8_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_8_HexNAc_1_, @"UNIMOD", @"UNIMOD:1473", @"Hex(8)HexNAc(1)", @"Hex(8) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_2_, @"UNIMOD", @"UNIMOD:1474", @"dHex(1)Hex(3)HexNAc(3)Pent(2)", @"DHex Hex(3) HexNAc(3) Pent(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1475", @"dHex(2)Hex(3)HexNAc(3)Pent(1)", @"DHex(2) Hex(3) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1476", @"dHex(1)Hex(3)HexNAc(4)Sulf(1)", @"DHex Hex(3) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_2_, @"UNIMOD", @"UNIMOD:1477", @"dHex(1)Hex(6)HexNAc(2)", @"DHex Hex(6) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1478", @"dHex(1)Hex(4)HexNAc(3)Pent(1)", @"DHex Hex(4) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1479", @"Hex(4)HexNAc(4)Sulf(1)", @"Hex(4) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_HexNAc_2_, new TermInfo(CVID.UNIMOD_Hex_7_HexNAc_2_, @"UNIMOD", @"UNIMOD:1480", @"Hex(7)HexNAc(2)", @"Hex(7) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_, @"UNIMOD", @"UNIMOD:1481", @"dHex(2)Hex(4)HexNAc(3)", @"DHex(2) Hex(4) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1482", @"Hex(5)HexNAc(3)Pent(1)", @"Hex(5) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1483", @"Hex(4)HexNAc(3)NeuGc(1)", @"Hex(4) HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_, @"UNIMOD", @"UNIMOD:1484", @"dHex(1)Hex(5)HexNAc(3)", @"DHex Hex(5) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1485", @"dHex(1)Hex(3)HexNAc(4)Pent(1)", @"DHex Hex(3) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_5_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_5_Sulf_1_, @"UNIMOD", @"UNIMOD:1486", @"Hex(3)HexNAc(5)Sulf(1)", @"Hex(3) HexNAc(5) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_3_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_3_, @"UNIMOD", @"UNIMOD:1487", @"Hex(6)HexNAc(3)", @"Hex(6) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1488", @"Hex(3)HexNAc(4)NeuAc(1)", @"Hex(3) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1489", @"Hex(4)HexNAc(4)Pent(1)", @"Hex(4) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_HexNAc_2_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_7_HexNAc_2_Phos_1_, @"UNIMOD", @"UNIMOD:1490", @"Hex(7)HexNAc(2)Phos(1)", @"Hex(7) HexNAc(2) Phos.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Me_2_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_Me_2_Pent_1_, @"UNIMOD", @"UNIMOD:1491", @"Hex(4)HexNAc(4)Me(2)Pent(1)", @"Hex(4) HexNAc(4) Me(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_3_, @"UNIMOD", @"UNIMOD:1492", @"dHex(1)Hex(3)HexNAc(3)Pent(3)", @"DHex Hex(3) HexNAc(3) Pent(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1493", @"dHex(1)Hex(5)HexNAc(3)Sulf(1)", @"DHex Hex(5) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_2_, @"UNIMOD", @"UNIMOD:1494", @"dHex(2)Hex(3)HexNAc(3)Pent(2)", @"DHex(2) Hex(3) HexNAc(3) Pent(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_3_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_3_Phos_1_, @"UNIMOD", @"UNIMOD:1495", @"Hex(6)HexNAc(3)Phos(1)", @"Hex(6) HexNAc(3) Phos.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_5_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_5_, @"UNIMOD", @"UNIMOD:1496", @"Hex(4)HexNAc(5)", @"Hex(4) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1497", @"dHex(3)Hex(3)HexNAc(3)Pent(1)", @"DHex(3) Hex(3) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1498", @"dHex(2)Hex(4)HexNAc(3)Pent(1)", @"DHex(2) Hex(4) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1499", @"dHex(1)Hex(4)HexNAc(4)Sulf(1)", @"DHex Hex(4) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_2_, @"UNIMOD", @"UNIMOD:1500", @"dHex(1)Hex(7)HexNAc(2)", @"DHex Hex(7) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1501", @"dHex(1)Hex(4)HexNAc(3)NeuAc(1)", @"DHex Hex(4) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_HexNAc_2_Phos_2_, new TermInfo(CVID.UNIMOD_Hex_7_HexNAc_2_Phos_2_, @"UNIMOD", @"UNIMOD:1502", @"Hex(7)HexNAc(2)Phos(2)", @"Hex(7) HexNAc(2) Phos(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1503", @"Hex(5)HexNAc(4)Sulf(1)", @"Hex(5) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_8_HexNAc_2_, new TermInfo(CVID.UNIMOD_Hex_8_HexNAc_2_, @"UNIMOD", @"UNIMOD:1504", @"Hex(8)HexNAc(2)", @"Hex(8) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_2_, @"UNIMOD", @"UNIMOD:1505", @"dHex(1)Hex(3)HexNAc(4)Pent(2)", @"DHex Hex(3) HexNAc(4) Pent(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1506", @"dHex(1)Hex(4)HexNAc(3)NeuGc(1)", @"DHex Hex(4) HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1507", @"dHex(2)Hex(3)HexNAc(4)Pent(1)", @"DHex(2) Hex(3) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_Sulf_1_, @"UNIMOD", @"UNIMOD:1508", @"dHex(1)Hex(3)HexNAc(5)Sulf(1)", @"DHex Hex(3) HexNAc(5) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_3_, @"UNIMOD", @"UNIMOD:1509", @"dHex(1)Hex(6)HexNAc(3)", @"DHex Hex(6) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1510", @"dHex(1)Hex(3)HexNAc(4)NeuAc(1)", @"DHex Hex(3) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_4_, @"UNIMOD", @"UNIMOD:1511", @"dHex(3)Hex(3)HexNAc(4)", @"DHex(3) Hex(3) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1512", @"dHex(1)Hex(4)HexNAc(4)Pent(1)", @"DHex Hex(4) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_5_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_5_Sulf_1_, @"UNIMOD", @"UNIMOD:1513", @"Hex(4)HexNAc(5)Sulf(1)", @"Hex(4) HexNAc(5) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_HexNAc_3_, new TermInfo(CVID.UNIMOD_Hex_7_HexNAc_3_, @"UNIMOD", @"UNIMOD:1514", @"Hex(7)HexNAc(3)", @"Hex(7) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1515", @"dHex(1)Hex(4)HexNAc(3)NeuAc(1)Sulf(1)", @"DHex Hex(4) HexNAc(3) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_4_Me_2_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_4_Me_2_Pent_1_, @"UNIMOD", @"UNIMOD:1516", @"Hex(5)HexNAc(4)Me(2)Pent(1)", @"Hex(5) HexNAc(4) Me(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_6_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_6_Sulf_1_, @"UNIMOD", @"UNIMOD:1517", @"Hex(3)HexNAc(6)Sulf(1)", @"Hex(3) HexNAc(6) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1518", @"dHex(1)Hex(6)HexNAc(3)Sulf(1)", @"DHex Hex(6) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_5_, @"UNIMOD", @"UNIMOD:1519", @"dHex(1)Hex(4)HexNAc(5)", @"DHex Hex(4) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1520", @"dHex(1)Hex(5)HexA(1)HexNAc(3)Sulf(1)", @"DHex Hex(5) HexA HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_HexNAc_3_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_7_HexNAc_3_Phos_1_, @"UNIMOD", @"UNIMOD:1521", @"Hex(7)HexNAc(3)Phos(1)", @"Hex(7) HexNAc(3) Phos.", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_4_Me_3_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_4_Me_3_, @"UNIMOD", @"UNIMOD:1522", @"Hex(6)HexNAc(4)Me(3)", @"Hex(6) HexNAc(4) Me(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1523", @"dHex(2)Hex(4)HexNAc(4)Sulf(1)", @"DHex(2) Hex(4) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_3_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_3_NeuAc_2_, @"UNIMOD", @"UNIMOD:1524", @"Hex(4)HexNAc(3)NeuAc(2)", @"Hex(4) HexNAc(3) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_3_, @"UNIMOD", @"UNIMOD:1525", @"dHex(1)Hex(3)HexNAc(4)Pent(3)", @"DHex Hex(3) HexNAc(4) Pent(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_5_HexNAc_3_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_5_HexNAc_3_Pent_1_, @"UNIMOD", @"UNIMOD:1526", @"dHex(2)Hex(5)HexNAc(3)Pent(1)", @"DHex(2) Hex(5) HexNAc(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1527", @"dHex(1)Hex(5)HexNAc(4)Sulf(1)", @"DHex Hex(5) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_2_, @"UNIMOD", @"UNIMOD:1528", @"dHex(2)Hex(3)HexNAc(4)Pent(2)", @"DHex(2) Hex(3) HexNAc(4) Pent(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1529", @"dHex(1)Hex(5)HexNAc(3)NeuAc(1)", @"DHex Hex(5) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_6_Sulf_2_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_6_Sulf_2_, @"UNIMOD", @"UNIMOD:1530", @"Hex(3)HexNAc(6)Sulf(2)", @"Hex(3) HexNAc(6) Sulf(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_9_HexNAc_2_, new TermInfo(CVID.UNIMOD_Hex_9_HexNAc_2_, @"UNIMOD", @"UNIMOD:1531", @"Hex(9)HexNAc(2)", @"Hex(9) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_6_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_6_, @"UNIMOD", @"UNIMOD:1532", @"Hex(4)HexNAc(6)", @"Hex(4) HexNAc(6).", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1533", @"dHex(3)Hex(3)HexNAc(4)Pent(1)", @"DHex(3) Hex(3) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1534", @"dHex(1)Hex(5)HexNAc(3)NeuGc(1)", @"DHex Hex(5) HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1535", @"dHex(2)Hex(4)HexNAc(4)Pent(1)", @"DHex(2) Hex(4) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_5_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_5_Sulf_1_, @"UNIMOD", @"UNIMOD:1536", @"dHex(1)Hex(4)HexNAc(5)Sulf(1)", @"DHex Hex(4) HexNAc(5) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_, @"UNIMOD", @"UNIMOD:1537", @"dHex(1)Hex(7)HexNAc(3)", @"DHex Hex(7) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Pent_1_, @"UNIMOD", @"UNIMOD:1538", @"dHex(1)Hex(5)HexNAc(4)Pent(1)", @"DHex Hex(5) HexNAc(4) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_2_, @"UNIMOD", @"UNIMOD:1539", @"dHex(1)Hex(5)HexA(1)HexNAc(3)Sulf(2)", @"DHex Hex(5) HexA HexNAc(3) Sulf(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_7_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_7_, @"UNIMOD", @"UNIMOD:1540", @"Hex(3)HexNAc(7)", @"Hex(3) HexNAc(7).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_5_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_5_HexNAc_4_, @"UNIMOD", @"UNIMOD:1541", @"dHex(2)Hex(5)HexNAc(4)", @"DHex(2) Hex(5) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1542", @"dHex(2)Hex(4)HexNAc(3)NeuAc(1)Sulf(1)", @"DHex(2) Hex(4) HexNAc(3) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_2_, @"UNIMOD", @"UNIMOD:1543", @"dHex(1)Hex(5)HexNAc(4)Sulf(2)", @"DHex Hex(5) HexNAc(4) Sulf(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Me_2_Pent_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Me_2_Pent_1_, @"UNIMOD", @"UNIMOD:1544", @"dHex(1)Hex(5)HexNAc(4)Me(2)Pent(1)", @"DHex Hex(5) HexNAc(4) Me(2) Pent.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_4_NeuGc_1_, @"UNIMOD", @"UNIMOD:1545", @"Hex(5)HexNAc(4)NeuGc(1)", @"Hex(5) HexNAc(4) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_6_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_6_Sulf_1_, @"UNIMOD", @"UNIMOD:1546", @"dHex(1)Hex(3)HexNAc(6)Sulf(1)", @"DHex Hex(3) HexNAc(6) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_4_, @"UNIMOD", @"UNIMOD:1547", @"dHex(1)Hex(6)HexNAc(4)", @"DHex Hex(6) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1548", @"dHex(1)Hex(5)HexNAc(3)NeuAc(1)Sulf(1)", @"DHex Hex(5) HexNAc(3) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_HexNAc_4_, new TermInfo(CVID.UNIMOD_Hex_7_HexNAc_4_, @"UNIMOD", @"UNIMOD:1549", @"Hex(7)HexNAc(4)", @"Hex(7) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1550", @"dHex(1)Hex(5)HexNAc(3)NeuGc(1)Sulf(1)", @"DHex Hex(5) HexNAc(3) NeuGc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_5_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_5_NeuAc_1_, @"UNIMOD", @"UNIMOD:1551", @"Hex(4)HexNAc(5)NeuAc(1)", @"Hex(4) HexNAc(5) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_4_Me_3_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_4_Me_3_Pent_1_, @"UNIMOD", @"UNIMOD:1552", @"Hex(6)HexNAc(4)Me(3)Pent(1)", @"Hex(6) HexNAc(4) Me(3) Pent.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1553", @"dHex(1)Hex(7)HexNAc(3)Sulf(1)", @"DHex Hex(7) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_Phos_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_Phos_1_, @"UNIMOD", @"UNIMOD:1554", @"dHex(1)Hex(7)HexNAc(3)Phos(1)", @"DHex Hex(7) HexNAc(3) Phos.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_5_, @"UNIMOD", @"UNIMOD:1555", @"dHex(1)Hex(5)HexNAc(5)", @"DHex Hex(5) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1556", @"dHex(1)Hex(4)HexNAc(4)NeuAc(1)Sulf(1)", @"DHex Hex(4) HexNAc(4) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_4_HexNAc_4_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_4_HexNAc_4_Sulf_1_, @"UNIMOD", @"UNIMOD:1557", @"dHex(3)Hex(4)HexNAc(4)Sulf(1)", @"DHex(3) Hex(4) HexNAc(4) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_7_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_7_Sulf_1_, @"UNIMOD", @"UNIMOD:1558", @"Hex(3)HexNAc(7)Sulf(1)", @"Hex(3) HexNAc(7) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_5_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_5_, @"UNIMOD", @"UNIMOD:1559", @"Hex(6)HexNAc(5)", @"Hex(6) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1560", @"Hex(5)HexNAc(4)NeuAc(1)Sulf(1)", @"Hex(5) HexNAc(4) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_6_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_6_NeuAc_1_, @"UNIMOD", @"UNIMOD:1561", @"Hex(3)HexNAc(6)NeuAc(1)", @"Hex(3) HexNAc(6) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_6_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_6_, @"UNIMOD", @"UNIMOD:1562", @"dHex(2)Hex(3)HexNAc(6)", @"DHex(2) Hex(3) HexNAc(6).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_1_, @"UNIMOD", @"UNIMOD:1563", @"Hex(1)HexNAc(1)NeuGc(1)", @"Hex HexNAc NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_1_, @"UNIMOD", @"UNIMOD:1564", @"dHex(1)Hex(2)HexNAc(1)", @"DHex Hex(2) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1565", @"HexNAc(3)Sulf(1)", @"HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_1_, @"UNIMOD", @"UNIMOD:1566", @"Hex(3)HexNAc(1)", @"Hex(3) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Kdn_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_Kdn_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1567", @"Hex(1)HexNAc(1)Kdn(1)Sulf(1)", @"Hex HexNAc Kdn Sulf.", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1568", @"HexNAc(2)NeuAc(1)", @"HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_1_Kdn_2_, new TermInfo(CVID.UNIMOD_HexNAc_1_Kdn_2_, @"UNIMOD", @"UNIMOD:1570", @"HexNAc(1)Kdn(2)", @"HexNAc Kdn(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_1_Me_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_1_Me_1_, @"UNIMOD", @"UNIMOD:1571", @"Hex(3)HexNAc(1)Me(1)", @"Hex(3) HexNAc Me.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexA_1_Pent_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexA_1_Pent_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1572", @"Hex(2)HexA(1)Pent(1)Sulf(1)", @"Hex(2) HexA Pent Sulf.", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1573", @"HexNAc(2)NeuGc(1)", @"HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_4_Phos_1_, @"UNIMOD", @"UNIMOD:1575", @"Hex(4)Phos(1)", @"Hex(4) Phos.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1577", @"Hex(1)HexNAc(1)NeuAc(1)Sulf(1)", @"Hex HexNAc NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexA_1_HexNAc_2_, new TermInfo(CVID.UNIMOD_Hex_1_HexA_1_HexNAc_2_, @"UNIMOD", @"UNIMOD:1578", @"Hex(1)HexA(1)HexNAc(2)", @"Hex HexA HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1579", @"dHex(1)Hex(2)HexNAc(1)Sulf(1)", @"DHex Hex(2) HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_HexNAc_3_, @"UNIMOD", @"UNIMOD:1580", @"dHex(1)HexNAc(3)", @"DHex HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_Kdn_1_, @"UNIMOD", @"UNIMOD:1581", @"dHex(1)Hex(1)HexNAc(1)Kdn(1)", @"DHex Hex HexNAc Kdn.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_3_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_3_, @"UNIMOD", @"UNIMOD:1582", @"Hex(1)HexNAc(3)", @"Hex HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_2_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_HexNAc_2_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1583", @"HexNAc(2)NeuAc(1)Sulf(1)", @"HexNAc(2) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_, @"UNIMOD", @"UNIMOD:1584", @"dHex(2)Hex(3)", @"DHex(2) Hex(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexA_1_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexA_1_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1585", @"Hex(2)HexA(1)HexNAc(1)Sulf(1)", @"Hex(2) HexA HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_, @"UNIMOD", @"UNIMOD:1586", @"dHex(2)Hex(2)HexA(1)", @"DHex(2) Hex(2) HexA.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1587", @"dHex(1)Hex(1)HexNAc(2)Sulf(1)", @"DHex Hex HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuAc_1_, @"UNIMOD", @"UNIMOD:1588", @"dHex(1)Hex(1)HexNAc(1)NeuAc(1)", @"DHex Hex HexNAc NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1589", @"Hex(2)HexNAc(2)Sulf(1)", @"Hex(2) HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_, new TermInfo(CVID.UNIMOD_Hex_5_, @"UNIMOD", @"UNIMOD:1590", @"Hex(5)", @"Hex(5).", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_4_, new TermInfo(CVID.UNIMOD_HexNAc_4_, @"UNIMOD", @"UNIMOD:1591", @"HexNAc(4)", @"HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_1_NeuGc_2_, new TermInfo(CVID.UNIMOD_HexNAc_1_NeuGc_2_, @"UNIMOD", @"UNIMOD:1592", @"HexNAc(1)NeuGc(2)", @"HexNAc NeuGc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuGc_1_, @"UNIMOD", @"UNIMOD:1593", @"dHex(1)Hex(1)HexNAc(1)NeuGc(1)", @"DHex Hex HexNAc NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_1_, @"UNIMOD", @"UNIMOD:1594", @"dHex(2)Hex(2)HexNAc(1)", @"DHex(2) Hex(2) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_1_, @"UNIMOD", @"UNIMOD:1595", @"Hex(2)HexNAc(1)NeuGc(1)", @"Hex(2) HexNAc NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_1_, @"UNIMOD", @"UNIMOD:1596", @"dHex(1)Hex(3)HexNAc(1)", @"DHex Hex(3) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_, @"UNIMOD", @"UNIMOD:1597", @"dHex(1)Hex(2)HexA(1)HexNAc(1)", @"DHex Hex(2) HexA HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1598", @"Hex(1)HexNAc(3)Sulf(1)", @"Hex HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_1_, @"UNIMOD", @"UNIMOD:1599", @"Hex(4)HexNAc(1)", @"Hex(4) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1600", @"Hex(1)HexNAc(2)NeuAc(1)", @"Hex HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1602", @"Hex(1)HexNAc(2)NeuGc(1)", @"Hex HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_5_Phos_1_, @"UNIMOD", @"UNIMOD:1604", @"Hex(5)Phos(1)", @"Hex(5) Phos.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_1_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_1_Kdn_1_, @"UNIMOD", @"UNIMOD:1606", @"dHex(2)Hex(1)HexNAc(1)Kdn(1)", @"DHex(2) Hex HexNAc Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1607", @"dHex(1)Hex(3)HexNAc(1)Sulf(1)", @"DHex Hex(3) HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_, @"UNIMOD", @"UNIMOD:1608", @"dHex(1)Hex(1)HexNAc(3)", @"DHex Hex HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1609", @"dHex(1)Hex(2)HexA(1)HexNAc(1)Sulf(1)", @"DHex Hex(2) HexA HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_, @"UNIMOD", @"UNIMOD:1610", @"Hex(2)HexNAc(3)", @"Hex(2) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1611", @"Hex(1)HexNAc(2)NeuAc(1)Sulf(1)", @"Hex HexNAc(2) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_, @"UNIMOD", @"UNIMOD:1612", @"dHex(2)Hex(4)", @"DHex(2) Hex(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_2_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1614", @"dHex(2)HexNAc(2)Kdn(1)", @"DHex(2) HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1615", @"dHex(1)Hex(2)HexNAc(2)Sulf(1)", @"DHex Hex(2) HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_1_HexNAc_4_, @"UNIMOD", @"UNIMOD:1616", @"dHex(1)HexNAc(4)", @"DHex HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_NeuGc_1_, @"UNIMOD", @"UNIMOD:1617", @"Hex(1)HexNAc(1)NeuAc(1)NeuGc(1)", @"Hex HexNAc NeuAc NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1618", @"dHex(1)Hex(1)HexNAc(2)Kdn(1)", @"DHex Hex HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_2_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_2_, @"UNIMOD", @"UNIMOD:1619", @"Hex(1)HexNAc(1)NeuGc(2)", @"Hex HexNAc NeuGc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_1_, @"UNIMOD", @"UNIMOD:1620", @"Hex(1)HexNAc(1)NeuAc(2)Ac(1)", @"Ac Hex HexNAc NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_1_, @"UNIMOD", @"UNIMOD:1621", @"dHex(2)Hex(2)HexA(1)HexNAc(1)", @"DHex(2) Hex(2) HexA HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1622", @"dHex(1)Hex(1)HexNAc(3)Sulf(1)", @"DHex Hex HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexA_1_NeuAc_1_Pent_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexA_1_NeuAc_1_Pent_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1623", @"Hex(2)HexA(1)NeuAc(1)Pent(1)Sulf(1)", @"Hex(2) HexA NeuAc Pent Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1624", @"dHex(1)Hex(1)HexNAc(2)NeuAc(1)", @"DHex Hex HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_, @"UNIMOD", @"UNIMOD:1625", @"dHex(1)Hex(3)HexA(1)HexNAc(1)", @"DHex Hex(3) HexA HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1626", @"Hex(2)HexNAc(3)Sulf(1)", @"Hex(2) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_1_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_1_, @"UNIMOD", @"UNIMOD:1627", @"Hex(5)HexNAc(1)", @"Hex(5) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_HexNAc_5_, new TermInfo(CVID.UNIMOD_HexNAc_5_, @"UNIMOD", @"UNIMOD:1628", @"HexNAc(5)", @"HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1629", @"dHex(1)Hex(1)HexNAc(2)NeuGc(1)", @"DHex Hex HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_2_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_2_, @"UNIMOD", @"UNIMOD:1630", @"Hex(1)HexNAc(1)NeuAc(2)Ac(2)", @"Ac(2) Hex HexNAc NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1631", @"Hex(2)HexNAc(2)NeuGc(1)", @"Hex(2) HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_Phos_3_, new TermInfo(CVID.UNIMOD_Hex_5_Phos_3_, @"UNIMOD", @"UNIMOD:1632", @"Hex(5)Phos(3)", @"Hex(5) Phos(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_6_Phos_1_, @"UNIMOD", @"UNIMOD:1633", @"Hex(6)Phos(1)", @"Hex(6) Phos.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_2_, @"UNIMOD", @"UNIMOD:1634", @"dHex(1)Hex(2)HexA(1)HexNAc(2)", @"DHex Hex(2) HexA HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1635", @"dHex(2)Hex(3)HexNAc(1)Sulf(1)", @"DHex(2) Hex(3) HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1636", @"Hex(1)HexNAc(3)NeuAc(1)", @"Hex HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_3_, @"UNIMOD", @"UNIMOD:1637", @"dHex(2)Hex(1)HexNAc(3)", @"DHex(2) Hex HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1638", @"Hex(1)HexNAc(3)NeuGc(1)", @"Hex HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1639", @"dHex(1)Hex(1)HexNAc(2)NeuAc(1)Sulf(1)", @"DHex Hex HexNAc(2) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1640", @"dHex(1)Hex(3)HexA(1)HexNAc(1)Sulf(1)", @"DHex Hex(3) HexA HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexA_1_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexA_1_HexNAc_3_, @"UNIMOD", @"UNIMOD:1641", @"dHex(1)Hex(1)HexA(1)HexNAc(3)", @"DHex Hex HexA HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1642", @"Hex(2)HexNAc(2)NeuAc(1)Sulf(1)", @"Hex(2) HexNAc(2) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1643", @"dHex(2)Hex(2)HexNAc(2)Sulf(1)", @"DHex(2) Hex(2) HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1644", @"dHex(2)Hex(1)HexNAc(2)Kdn(1)", @"DHex(2) Hex HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_4_, @"UNIMOD", @"UNIMOD:1645", @"dHex(1)Hex(1)HexNAc(4)", @"DHex Hex HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_4_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_4_, @"UNIMOD", @"UNIMOD:1646", @"Hex(2)HexNAc(4)", @"Hex(2) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_2_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_2_, @"UNIMOD", @"UNIMOD:1647", @"Hex(2)HexNAc(1)NeuGc(2)", @"Hex(2) HexNAc NeuGc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_1_, @"UNIMOD", @"UNIMOD:1648", @"dHex(2)Hex(4)HexNAc(1)", @"DHex(2) Hex(4) HexNAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_2_, @"UNIMOD", @"UNIMOD:1649", @"Hex(1)HexNAc(2)NeuAc(2)", @"Hex HexNAc(2) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1650", @"dHex(2)Hex(1)HexNAc(2)NeuAc(1)", @"DHex(2) Hex HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1651", @"dHex(1)Hex(2)HexNAc(3)Sulf(1)", @"DHex Hex(2) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_1_HexNAc_5_, @"UNIMOD", @"UNIMOD:1652", @"dHex(1)HexNAc(5)", @"DHex HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1653", @"dHex(2)Hex(1)HexNAc(2)NeuGc(1)", @"DHex(2) Hex HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_2_, @"UNIMOD", @"UNIMOD:1654", @"dHex(3)Hex(2)HexNAc(2)", @"DHex(3) Hex(2) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1655", @"Hex(3)HexNAc(3)Sulf(1)", @"Hex(3) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_2_, @"UNIMOD", @"UNIMOD:1656", @"dHex(2)Hex(2)HexNAc(2)Sulf(2)", @"DHex(2) Hex(2) HexNAc(2) Sulf(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1657", @"dHex(1)Hex(2)HexNAc(2)NeuGc(1)", @"DHex Hex(2) HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1658", @"dHex(1)Hex(1)HexNAc(3)NeuAc(1)", @"DHex Hex HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_Phos_3_, new TermInfo(CVID.UNIMOD_Hex_6_Phos_3_, @"UNIMOD", @"UNIMOD:1659", @"Hex(6)Phos(3)", @"Hex(6) Phos(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_, @"UNIMOD", @"UNIMOD:1660", @"dHex(1)Hex(3)HexA(1)HexNAc(2)", @"DHex Hex(3) HexA HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1661", @"dHex(1)Hex(1)HexNAc(3)NeuGc(1)", @"DHex Hex HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1662", @"Hex(1)HexNAc(2)NeuAc(2)Sulf(1)", @"Hex HexNAc(2) NeuAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1663", @"dHex(2)Hex(3)HexA(1)HexNAc(1)Sulf(1)", @"DHex(2) Hex(3) HexA HexNAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_3_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_3_, @"UNIMOD", @"UNIMOD:1664", @"Hex(1)HexNAc(1)NeuAc(3)", @"Hex HexNAc NeuAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1665", @"Hex(2)HexNAc(3)NeuGc(1)", @"Hex(2) HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1666", @"dHex(1)Hex(2)HexNAc(2)NeuAc(1)Sulf(1)", @"DHex Hex(2) HexNAc(2) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_1_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_1_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1667", @"dHex(3)Hex(1)HexNAc(2)Kdn(1)", @"DHex(3) Hex HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1668", @"dHex(2)Hex(3)HexNAc(2)Sulf(1)", @"DHex(2) Hex(3) HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1669", @"dHex(2)Hex(2)HexNAc(2)Kdn(1)", @"DHex(2) Hex(2) HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1670", @"dHex(2)Hex(2)HexA(1)HexNAc(2)Sulf(1)", @"DHex(2) Hex(2) HexA HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_, @"UNIMOD", @"UNIMOD:1671", @"dHex(1)Hex(2)HexNAc(4)", @"DHex Hex(2) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_3_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_3_, @"UNIMOD", @"UNIMOD:1672", @"Hex(1)HexNAc(1)NeuGc(3)", @"Hex HexNAc NeuGc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1673", @"dHex(1)Hex(1)HexNAc(3)NeuAc(1)Sulf(1)", @"DHex Hex HexNAc(3) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1674", @"dHex(1)Hex(3)HexA(1)HexNAc(2)Sulf(1)", @"DHex Hex(3) HexA HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_2_, @"UNIMOD", @"UNIMOD:1675", @"dHex(1)Hex(1)HexNAc(2)NeuAc(2)", @"DHex Hex HexNAc(2) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_HexNAc_3_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_3_HexNAc_3_Kdn_1_, @"UNIMOD", @"UNIMOD:1676", @"dHex(3)HexNAc(3)Kdn(1)", @"DHex(3) HexNAc(3) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1678", @"Hex(2)HexNAc(3)NeuAc(1)Sulf(1)", @"Hex(2) HexNAc(3) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1679", @"dHex(2)Hex(2)HexNAc(3)Sulf(1)", @"DHex(2) Hex(2) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_2_HexNAc_5_, @"UNIMOD", @"UNIMOD:1680", @"dHex(2)HexNAc(5)", @"DHex(2) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_2_, @"UNIMOD", @"UNIMOD:1681", @"Hex(2)HexNAc(2)NeuAc(2)", @"Hex(2) HexNAc(2) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_, @"UNIMOD", @"UNIMOD:1682", @"dHex(2)Hex(2)HexNAc(2)NeuAc(1)", @"DHex(2) Hex(2) HexNAc(2) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1683", @"dHex(1)Hex(3)HexNAc(3)Sulf(1)", @"DHex Hex(3) HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1684", @"dHex(2)Hex(2)HexNAc(2)NeuGc(1)", @"DHex(2) Hex(2) HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_5_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_5_, @"UNIMOD", @"UNIMOD:1685", @"Hex(2)HexNAc(5)", @"Hex(2) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1686", @"dHex(1)Hex(3)HexNAc(2)NeuGc(1)", @"DHex Hex(3) HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_3_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_3_NeuAc_2_, @"UNIMOD", @"UNIMOD:1687", @"Hex(1)HexNAc(3)NeuAc(2)", @"Hex HexNAc(3) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1688", @"dHex(1)Hex(2)HexNAc(3)NeuAc(1)", @"DHex Hex(2) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_3_, @"UNIMOD", @"UNIMOD:1689", @"dHex(3)Hex(2)HexNAc(3)", @"DHex(3) Hex(2) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_7_Phos_3_, new TermInfo(CVID.UNIMOD_Hex_7_Phos_3_, @"UNIMOD", @"UNIMOD:1690", @"Hex(7)Phos(3)", @"Hex(7) Phos(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_2_, @"UNIMOD", @"UNIMOD:1691", @"dHex(1)Hex(4)HexA(1)HexNAc(2)", @"DHex Hex(4) HexA HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1692", @"Hex(3)HexNAc(3)NeuAc(1)", @"Hex(3) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_2_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexA_2_HexNAc_2_, @"UNIMOD", @"UNIMOD:1693", @"dHex(1)Hex(3)HexA(2)HexNAc(2)", @"DHex Hex(3) HexA(2) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1694", @"Hex(2)HexNAc(2)NeuAc(2)Sulf(1)", @"Hex(2) HexNAc(2) NeuAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1695", @"dHex(2)Hex(2)HexNAc(2)NeuAc(1)Sulf(1)", @"DHex(2) Hex(2) HexNAc(2) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1696", @"Hex(3)HexNAc(3)NeuGc(1)", @"Hex(3) HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1697", @"dHex(4)Hex(1)HexNAc(2)Kdn(1)", @"DHex(4) Hex HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1698", @"dHex(3)Hex(2)HexNAc(2)Kdn(1)", @"DHex(3) Hex(2) HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_2_HexA_1_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_2_HexA_1_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1699", @"dHex(3)Hex(2)HexA(1)HexNAc(2)Sulf(1)", @"DHex(3) Hex(2) HexA HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1700", @"Hex(2)HexNAc(4)NeuAc(1)", @"Hex(2) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_4_, @"UNIMOD", @"UNIMOD:1701", @"dHex(2)Hex(2)HexNAc(4)", @"DHex(2) Hex(2) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1702", @"dHex(2)Hex(3)HexA(1)HexNAc(2)Sulf(1)", @"DHex(2) Hex(3) HexA HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_4_HexNAc_3_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_4_HexNAc_3_Kdn_1_, @"UNIMOD", @"UNIMOD:1703", @"dHex(4)HexNAc(3)Kdn(1)", @"DHex(4) HexNAc(3) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_3_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_3_, @"UNIMOD", @"UNIMOD:1705", @"Hex(2)HexNAc(1)NeuGc(3)", @"Hex(2) HexNAc NeuGc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_1_Kdn_2_, new TermInfo(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_1_Kdn_2_, @"UNIMOD", @"UNIMOD:1706", @"dHex(4)Hex(1)HexNAc(1)Kdn(2)", @"DHex(4) Hex HexNAc Kdn(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1707", @"dHex(1)Hex(2)HexNAc(3)NeuAc(1)Sulf(1)", @"DHex Hex(2) HexNAc(3) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_, @"UNIMOD", @"UNIMOD:1708", @"dHex(1)Hex(2)HexNAc(2)NeuAc(2)", @"DHex Hex(2) HexNAc(2) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_1_HexNAc_3_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_1_HexNAc_3_Kdn_1_, @"UNIMOD", @"UNIMOD:1709", @"dHex(3)Hex(1)HexNAc(3)Kdn(1)", @"DHex(3) Hex HexNAc(3) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1711", @"Hex(3)HexNAc(3)NeuAc(1)Sulf(1)", @"Hex(3) HexNAc(3) NeuAc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_2_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_2_NeuAc_2_, @"UNIMOD", @"UNIMOD:1712", @"Hex(3)HexNAc(2)NeuAc(2)", @"Hex(3) HexNAc(2) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuGc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_NeuGc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1713", @"Hex(3)HexNAc(3)NeuGc(1)Sulf(1)", @"Hex(3) HexNAc(3) NeuGc Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_2_, @"UNIMOD", @"UNIMOD:1714", @"dHex(1)Hex(2)HexNAc(2)NeuGc(2)", @"DHex Hex(2) HexNAc(2) NeuGc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_NeuGc_1_, @"UNIMOD", @"UNIMOD:1715", @"dHex(2)Hex(3)HexNAc(2)NeuGc(1)", @"DHex(2) Hex(3) HexNAc(2) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1716", @"dHex(1)Hex(3)HexA(1)HexNAc(3)Sulf(1)", @"DHex Hex(3) HexA HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_2_, @"UNIMOD", @"UNIMOD:1717", @"Hex(2)HexNAc(3)NeuAc(2)", @"Hex(2) HexNAc(3) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1718", @"dHex(2)Hex(2)HexNAc(3)NeuAc(1)", @"DHex(2) Hex(2) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_4_Hex_2_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_4_Hex_2_HexNAc_3_, @"UNIMOD", @"UNIMOD:1719", @"dHex(4)Hex(2)HexNAc(3)", @"DHex(4) Hex(2) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_1_NeuGc_1_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_1_NeuGc_1_, @"UNIMOD", @"UNIMOD:1720", @"Hex(2)HexNAc(3)NeuAc(1)NeuGc(1)", @"Hex(2) HexNAc(3) NeuAc NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1721", @"dHex(2)Hex(2)HexNAc(3)NeuGc(1)", @"DHex(2) Hex(2) HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_, @"UNIMOD", @"UNIMOD:1722", @"dHex(3)Hex(3)HexNAc(3)", @"DHex(3) Hex(3) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_8_Phos_3_, new TermInfo(CVID.UNIMOD_Hex_8_Phos_3_, @"UNIMOD", @"UNIMOD:1723", @"Hex(8)Phos(3)", @"Hex(8) Phos(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1724", @"dHex(1)Hex(2)HexNAc(2)NeuAc(2)Sulf(1)", @"DHex Hex(2) HexNAc(2) NeuAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_2_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_2_, @"UNIMOD", @"UNIMOD:1725", @"Hex(2)HexNAc(3)NeuGc(2)", @"Hex(2) HexNAc(3) NeuGc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_4_Hex_2_HexNAc_2_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_4_Hex_2_HexNAc_2_Kdn_1_, @"UNIMOD", @"UNIMOD:1726", @"dHex(4)Hex(2)HexNAc(2)Kdn(1)", @"DHex(4) Hex(2) HexNAc(2) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1727", @"dHex(1)Hex(2)HexNAc(4)NeuAc(1)", @"DHex Hex(2) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_4_, @"UNIMOD", @"UNIMOD:1728", @"dHex(3)Hex(2)HexNAc(4)", @"DHex(3) Hex(2) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_4_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_4_, @"UNIMOD", @"UNIMOD:1729", @"Hex(1)HexNAc(1)NeuGc(4)", @"Hex HexNAc NeuGc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_3_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_3_Kdn_1_, @"UNIMOD", @"UNIMOD:1730", @"dHex(4)Hex(1)HexNAc(3)Kdn(1)", @"DHex(4) Hex HexNAc(3) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Sulf_2_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_Sulf_2_, @"UNIMOD", @"UNIMOD:1732", @"Hex(4)HexNAc(4)Sulf(2)", @"Hex(4) HexNAc(4) Sulf(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_3_Kdn_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_3_Kdn_1_, @"UNIMOD", @"UNIMOD:1733", @"dHex(3)Hex(2)HexNAc(3)Kdn(1)", @"DHex(3) Hex(2) HexNAc(3) Kdn.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_5_, @"UNIMOD", @"UNIMOD:1735", @"dHex(2)Hex(2)HexNAc(5)", @"DHex(2) Hex(2) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1736", @"dHex(2)Hex(3)HexA(1)HexNAc(3)Sulf(1)", @"DHex(2) Hex(3) HexA HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1737", @"dHex(1)Hex(4)HexA(1)HexNAc(3)Sulf(1)", @"DHex Hex(4) HexA HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_2_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_2_, @"UNIMOD", @"UNIMOD:1738", @"Hex(3)HexNAc(3)NeuAc(2)", @"Hex(3) HexNAc(3) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1739", @"dHex(2)Hex(3)HexNAc(3)NeuAc(1)", @"DHex(2) Hex(3) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_4_Hex_3_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_4_Hex_3_HexNAc_3_, @"UNIMOD", @"UNIMOD:1740", @"dHex(4)Hex(3)HexNAc(3)", @"DHex(4) Hex(3) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuGc_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuGc_1_, @"UNIMOD", @"UNIMOD:1741", @"dHex(2)Hex(3)HexNAc(3)NeuGc(1)", @"DHex(2) Hex(3) HexNAc(3) NeuGc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_9_Phos_3_, new TermInfo(CVID.UNIMOD_Hex_9_Phos_3_, @"UNIMOD", @"UNIMOD:1742", @"Hex(9)Phos(3)", @"Hex(9) Phos(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_HexNAc_7_, new TermInfo(CVID.UNIMOD_dHex_2_HexNAc_7_, @"UNIMOD", @"UNIMOD:1743", @"dHex(2)HexNAc(7)", @"DHex(2) HexNAc(7).", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_4_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_4_, @"UNIMOD", @"UNIMOD:1744", @"Hex(2)HexNAc(1)NeuGc(4)", @"Hex(2) HexNAc NeuGc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1745", @"Hex(3)HexNAc(3)NeuAc(2)Sulf(1)", @"Hex(3) HexNAc(3) NeuAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_5_, @"UNIMOD", @"UNIMOD:1746", @"dHex(2)Hex(3)HexNAc(5)", @"DHex(2) Hex(3) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_3_, @"UNIMOD", @"UNIMOD:1747", @"dHex(1)Hex(2)HexNAc(2)NeuGc(3)", @"DHex Hex(2) HexNAc(2) NeuGc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexA_1_HexNAc_3_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexA_1_HexNAc_3_Sulf_1_, @"UNIMOD", @"UNIMOD:1748", @"dHex(2)Hex(4)HexA(1)HexNAc(3)Sulf(1)", @"DHex(2) Hex(4) HexA HexNAc(3) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_3_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_3_, @"UNIMOD", @"UNIMOD:1749", @"Hex(2)HexNAc(3)NeuAc(3)", @"Hex(2) HexNAc(3) NeuAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_NeuAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_NeuAc_2_, @"UNIMOD", @"UNIMOD:1750", @"dHex(1)Hex(3)HexNAc(3)NeuAc(2)", @"DHex Hex(3) HexNAc(3) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1751", @"dHex(3)Hex(3)HexNAc(3)NeuAc(1)", @"DHex(3) Hex(3) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_3_, new TermInfo(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_3_, @"UNIMOD", @"UNIMOD:1752", @"Hex(2)HexNAc(3)NeuGc(3)", @"Hex(2) HexNAc(3) NeuGc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_10_Phos_3_, new TermInfo(CVID.UNIMOD_Hex_10_Phos_3_, @"UNIMOD", @"UNIMOD:1753", @"Hex(10)Phos(3)", @"Hex(10) Phos(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_2_, @"UNIMOD", @"UNIMOD:1754", @"dHex(1)Hex(2)HexNAc(4)NeuAc(2)", @"DHex Hex(2) HexNAc(4) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_5_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_5_, @"UNIMOD", @"UNIMOD:1755", @"Hex(1)HexNAc(1)NeuGc(5)", @"Hex HexNAc NeuGc(5).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_2_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_2_, @"UNIMOD", @"UNIMOD:1756", @"Hex(4)HexNAc(4)NeuAc(1)Sulf(2)", @"Hex(4) HexNAc(4) NeuAc Sulf(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuGc_1_Sulf_2_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_NeuGc_1_Sulf_2_, @"UNIMOD", @"UNIMOD:1757", @"Hex(4)HexNAc(4)NeuGc(1)Sulf(2)", @"Hex(4) HexNAc(4) NeuGc Sulf(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_2_, @"UNIMOD", @"UNIMOD:1758", @"dHex(2)Hex(3)HexNAc(3)NeuAc(2)", @"DHex(2) Hex(3) HexNAc(3) NeuAc(2).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_3_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_3_, @"UNIMOD", @"UNIMOD:1759", @"Hex(4)HexNAc(4)NeuAc(1)Sulf(3)", @"Hex(4) HexNAc(4) NeuAc Sulf(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_, @"UNIMOD", @"UNIMOD:1760", @"dHex(2)Hex(2)HexNAc(2)", @"DHex(2) Hex(2) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_, @"UNIMOD", @"UNIMOD:1761", @"dHex(1)Hex(3)HexNAc(2)", @"DHex Hex(3) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_, @"UNIMOD", @"UNIMOD:1762", @"dHex(1)Hex(2)HexNAc(3)", @"DHex Hex(2) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_3_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_3_, @"UNIMOD", @"UNIMOD:1763", @"Hex(3)HexNAc(3)", @"Hex(3) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_Sulf_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_Sulf_1_, @"UNIMOD", @"UNIMOD:1764", @"dHex(1)Hex(3)HexNAc(2)Sulf(1)", @"DHex Hex(3) HexNAc(2) Sulf.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_, @"UNIMOD", @"UNIMOD:1765", @"dHex(2)Hex(3)HexNAc(2)", @"DHex(2) Hex(3) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_2_, @"UNIMOD", @"UNIMOD:1766", @"dHex(1)Hex(4)HexNAc(2)", @"DHex Hex(4) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_, @"UNIMOD", @"UNIMOD:1767", @"dHex(2)Hex(2)HexNAc(3)", @"DHex(2) Hex(2) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_, @"UNIMOD", @"UNIMOD:1768", @"dHex(1)Hex(3)HexNAc(3)", @"DHex Hex(3) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_3_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_3_, @"UNIMOD", @"UNIMOD:1769", @"Hex(4)HexNAc(3)", @"Hex(4) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_2_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_2_, @"UNIMOD", @"UNIMOD:1770", @"dHex(2)Hex(4)HexNAc(2)", @"DHex(2) Hex(4) HexNAc(2).", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_, @"UNIMOD", @"UNIMOD:1771", @"dHex(2)Hex(3)HexNAc(3)", @"DHex(2) Hex(3) HexNAc(3).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_5_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_5_, @"UNIMOD", @"UNIMOD:1772", @"Hex(3)HexNAc(5)", @"Hex(3) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_3_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_3_NeuAc_1_, @"UNIMOD", @"UNIMOD:1773", @"Hex(4)HexNAc(3)NeuAc(1)", @"Hex(4) HexNAc(3) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_, @"UNIMOD", @"UNIMOD:1774", @"dHex(2)Hex(3)HexNAc(4)", @"DHex(2) Hex(3) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_, @"UNIMOD", @"UNIMOD:1775", @"dHex(1)Hex(3)HexNAc(5)", @"DHex Hex(3) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_Hex_3_HexNAc_6_, new TermInfo(CVID.UNIMOD_Hex_3_HexNAc_6_, @"UNIMOD", @"UNIMOD:1776", @"Hex(3)HexNAc(6)", @"Hex(3) HexNAc(6).", false));
+            TermData.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1777", @"Hex(4)HexNAc(4)NeuAc(1)", @"Hex(4) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_, @"UNIMOD", @"UNIMOD:1778", @"dHex(2)Hex(4)HexNAc(4)", @"DHex(2) Hex(4) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_6_HexNAc_4_, new TermInfo(CVID.UNIMOD_Hex_6_HexNAc_4_, @"UNIMOD", @"UNIMOD:1779", @"Hex(6)HexNAc(4)", @"Hex(6) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_Hex_5_HexNAc_5_, new TermInfo(CVID.UNIMOD_Hex_5_HexNAc_5_, @"UNIMOD", @"UNIMOD:1780", @"Hex(5)HexNAc(5)", @"Hex(5) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_6_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_6_, @"UNIMOD", @"UNIMOD:1781", @"dHex(1)Hex(3)HexNAc(6)", @"DHex Hex(3) HexNAc(6).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_, @"UNIMOD", @"UNIMOD:1782", @"dHex(1)Hex(4)HexNAc(4)NeuAc(1)", @"DHex Hex(4) HexNAc(4) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_3_Hex_4_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_3_Hex_4_HexNAc_4_, @"UNIMOD", @"UNIMOD:1783", @"dHex(3)Hex(4)HexNAc(4)", @"DHex(3) Hex(4) HexNAc(4).", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_NeuAc_1_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_NeuAc_1_, @"UNIMOD", @"UNIMOD:1784", @"dHex(1)Hex(3)HexNAc(5)NeuAc(1)", @"DHex Hex(3) HexNAc(5) NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_5_, new TermInfo(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_5_, @"UNIMOD", @"UNIMOD:1785", @"dHex(2)Hex(4)HexNAc(5)", @"DHex(2) Hex(4) HexNAc(5).", false));
+            TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Ac_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Ac_1_, @"UNIMOD", @"UNIMOD:1786", @"Hex(1)HexNAc(1)NeuAc(1)Ac(1)", @"Ac Hex HexNAc NeuAc.", false));
+            TermData.Add(CVID.UNIMOD_Label_13C_2_15N_2_, new TermInfo(CVID.UNIMOD_Label_13C_2_15N_2_, @"UNIMOD", @"UNIMOD:1787", @"Label:13C(2)15N(2)", @"13C(2) 15N(2).", false));
+            TermData.Add(CVID.UNIMOD_Xlink_DSS_NH2, new TermInfo(CVID.UNIMOD_Xlink_DSS_NH2, @"UNIMOD", @"UNIMOD:1789", @"Xlink:DSS-NH2", @"Ammonium-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.", false));
+            TermData.Add(CVID.UNIMOD_NQIGG, new TermInfo(CVID.UNIMOD_NQIGG, @"UNIMOD", @"UNIMOD:1799", @"NQIGG", @"SUMOylation by Giardia lamblia.", false));
+            TermData.Add(CVID.UNIMOD_CEP, new TermInfo(CVID.UNIMOD_CEP, @"UNIMOD", @"UNIMOD:1800", @"CEP", @"Carboxyethylpyrrole.", false));
             TermData.Add(CVID.PATO_pato_OBSOLETE, new TermInfo(CVID.PATO_pato_OBSOLETE, @"PATO", @"PATO:0000000", @"pato", @"", true));
-            TermData.Add(CVID.PATO_quality, new TermInfo(CVID.PATO_quality, @"PATO", @"PATO:0000001", @"quality", @"A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities.", false));
+            TermData.Add(CVID.PATO_quality, new TermInfo(CVID.PATO_quality, @"PATO", @"PATO:0000001", @"quality", @"A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities", false));
             TermData.Add(CVID.PATO_value_OBSOLETE, new TermInfo(CVID.PATO_value_OBSOLETE, @"PATO", @"PATO:0000002", @"value", @"", true));
             TermData.Add(CVID.PATO_assay_OBSOLETE, new TermInfo(CVID.PATO_assay_OBSOLETE, @"PATO", @"PATO:0000003", @"assay", @"", true));
             TermData.Add(CVID.PATO_mobility, new TermInfo(CVID.PATO_mobility, @"PATO", @"PATO:0000004", @"mobility", @"A quality of inhering in a bearer by virtue of the bearer's disposition to move freely.", false));
@@ -21186,7 +23355,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_absolute_frequency_OBSOLETE, new TermInfo(CVID.PATO_absolute_frequency_OBSOLETE, @"PATO", @"PATO:0000045", @"absolute frequency", @"", true));
             TermData.Add(CVID.PATO_relative_frequency_OBSOLETE, new TermInfo(CVID.PATO_relative_frequency_OBSOLETE, @"PATO", @"PATO:0000046", @"relative frequency", @"", true));
             TermData.Add(CVID.PATO_biological_sex, new TermInfo(CVID.PATO_biological_sex, @"PATO", @"PATO:0000047", @"biological sex", @"An organismal quality inhering in a bearer by virtue of the bearer's ability to undergo sexual reproduction in order to differentiate the individuals or types involved.", false));
-            TermData.Add(CVID.PATO_hardness, new TermInfo(CVID.PATO_hardness, @"PATO", @"PATO:0000048", @"hardness", @"A physical quality inhering in a bearer by virtue of the bearer's disposition to being turned, bowed, or twisted without breaking.", false));
+            TermData.Add(CVID.PATO_hardness, new TermInfo(CVID.PATO_hardness, @"PATO", @"PATO:0000048", @"hardness", @"A physical quality inhering in a bearer by virtue of the bearer's resistance to pressure, being broken, or pierced", false));
             TermData.Add(CVID.PATO_intensity, new TermInfo(CVID.PATO_intensity, @"PATO", @"PATO:0000049", @"intensity", @"A quality inhering in a bearer by virtue of the bearer's possessing or displaying a distinctive feature in type or degree or effect or force.", false));
             TermData.Add(CVID.PATO_life_span, new TermInfo(CVID.PATO_life_span, @"PATO", @"PATO:0000050", @"life span", @"A time quality inhering in a bearer by virtue of the bearer's expected maximum age.", false));
             TermData.Add(CVID.PATO_morphology, new TermInfo(CVID.PATO_morphology, @"PATO", @"PATO:0000051", @"morphology", @"A quality of a single physical entity inhering in the bearer by virtue of the bearer's size or shape or structure.", false));
@@ -21207,7 +23376,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_relative_pilosity_OBSOLETE, new TermInfo(CVID.PATO_relative_pilosity_OBSOLETE, @"PATO", @"PATO:0000067", @"relative pilosity", @"", true));
             TermData.Add(CVID.PATO_qualitative, new TermInfo(CVID.PATO_qualitative, @"PATO", @"PATO:0000068", @"qualitative", @"", false));
             TermData.Add(CVID.PATO_deviation_from_normal_, new TermInfo(CVID.PATO_deviation_from_normal_, @"PATO", @"PATO:0000069", @"deviation(from_normal)", @"A quality inhering in a bearer by virtue of the whether the bearer differs from normal or average.", false));
-            TermData.Add(CVID.PATO_count, new TermInfo(CVID.PATO_count, @"PATO", @"PATO:0000070", @"count", @"The number of entities of this type that are part of the whole organism.", false));
+            TermData.Add(CVID.PATO_amount, new TermInfo(CVID.PATO_amount, @"PATO", @"PATO:0000070", @"amount", @"The number of entities of this type that are part of the whole organism.", false));
             TermData.Add(CVID.PATO_relative_quality_OBSOLETE, new TermInfo(CVID.PATO_relative_quality_OBSOLETE, @"PATO", @"PATO:0000073", @"relative_quality", @"", true));
             TermData.Add(CVID.PATO_shattering_OBSOLETE, new TermInfo(CVID.PATO_shattering_OBSOLETE, @"PATO", @"PATO:0000074", @"shattering", @"", true));
             TermData.Add(CVID.PATO_threshability_OBSOLETE, new TermInfo(CVID.PATO_threshability_OBSOLETE, @"PATO", @"PATO:0000075", @"threshability", @"", true));
@@ -21591,7 +23760,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_none_OBSOLETE, new TermInfo(CVID.PATO_none_OBSOLETE, @"PATO", @"PATO:0000466", @"none", @"", true));
             TermData.Add(CVID.PATO_present, new TermInfo(CVID.PATO_present, @"PATO", @"PATO:0000467", @"present", @"A quality inhering in a bearer by virtue of the bearer's existence.", false));
             TermData.Add(CVID.PATO_high_OBSOLETE, new TermInfo(CVID.PATO_high_OBSOLETE, @"PATO", @"PATO:0000469", @"high", @"", true));
-            TermData.Add(CVID.PATO_present_in_greater_numbers_in_organism, new TermInfo(CVID.PATO_present_in_greater_numbers_in_organism, @"PATO", @"PATO:0000470", @"present in greater numbers in organism", @"An amount which is relatively high.", false));
+            TermData.Add(CVID.PATO_increased_amount, new TermInfo(CVID.PATO_increased_amount, @"PATO", @"PATO:0000470", @"increased amount", @"An amount which is relatively high.", false));
             TermData.Add(CVID.PATO_low_OBSOLETE, new TermInfo(CVID.PATO_low_OBSOLETE, @"PATO", @"PATO:0000471", @"low", @"", true));
             TermData.Add(CVID.PATO_quality_value_OBSOLETE, new TermInfo(CVID.PATO_quality_value_OBSOLETE, @"PATO", @"PATO:0000472", @"quality value", @"", true));
             TermData.Add(CVID.PATO_relative_quality_value_OBSOLETE, new TermInfo(CVID.PATO_relative_quality_value_OBSOLETE, @"PATO", @"PATO:0000473", @"relative_quality value", @"", true));
@@ -21757,7 +23926,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_ventralized, new TermInfo(CVID.PATO_ventralized, @"PATO", @"PATO:0000636", @"ventralized", @"A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally ventral structures.", false));
             TermData.Add(CVID.PATO_structure_value_OBSOLETE, new TermInfo(CVID.PATO_structure_value_OBSOLETE, @"PATO", @"PATO:0000637", @"structure value", @"", true));
             TermData.Add(CVID.PATO_apoptotic, new TermInfo(CVID.PATO_apoptotic, @"PATO", @"PATO:0000638", @"apoptotic", @"A structural quality inhering in a bearer by virtue of the bearer's consisting of blebbing of the nucleus and DNA fragmentation due to the cell undergoing a specific form of programmed cell death termed apoptosis.", false));
-            TermData.Add(CVID.PATO_degenerate, new TermInfo(CVID.PATO_degenerate, @"PATO", @"PATO:0000639", @"degenerate", @"A structural quality inhering in a bearer whose structure deteriorates or is lost over time.", false));
+            TermData.Add(CVID.PATO_degenerate, new TermInfo(CVID.PATO_degenerate, @"PATO", @"PATO:0000639", @"degenerate", @"A structural quality inhering in a bearer whose structure deteriorates or is lost over time due to an active pathological process.", false));
             TermData.Add(CVID.PATO_dysplastic, new TermInfo(CVID.PATO_dysplastic, @"PATO", @"PATO:0000640", @"dysplastic", @"A structural quality inhering in a bearer by virtue of the bearer's exhibiting an alteration in size, shape or organization of its constituent cells.", false));
             TermData.Add(CVID.PATO_deposition_defective_OBSOLETE, new TermInfo(CVID.PATO_deposition_defective_OBSOLETE, @"PATO", @"PATO:0000641", @"deposition defective", @"", true));
             TermData.Add(CVID.PATO_fused_with, new TermInfo(CVID.PATO_fused_with, @"PATO", @"PATO:0000642", @"fused with", @"A structural quality inhering in a bearer by virtue of the bearer's being merged with another entity.", false));
@@ -22049,7 +24218,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_disorganized, new TermInfo(CVID.PATO_disorganized, @"PATO", @"PATO:0000937", @"disorganized", @"A structural quality inhering in a bearer by virtue of the bearer's lacking organisation.", false));
             TermData.Add(CVID.PATO_organized, new TermInfo(CVID.PATO_organized, @"PATO", @"PATO:0000938", @"organized", @"A structural quality inhering in a bearer by virtue of the bearer's exhibiting organisation.", false));
             TermData.Add(CVID.PATO_regular_shape_OBSOLETE, new TermInfo(CVID.PATO_regular_shape_OBSOLETE, @"PATO", @"PATO:0000939", @"regular shape", @"", true));
-            TermData.Add(CVID.PATO_irregular_shape_OBSOLETE, new TermInfo(CVID.PATO_irregular_shape_OBSOLETE, @"PATO", @"PATO:0000940", @"irregular shape", @"", true));
+            TermData.Add(CVID.PATO_obsolete_irregular_shape_OBSOLETE, new TermInfo(CVID.PATO_obsolete_irregular_shape_OBSOLETE, @"PATO", @"PATO:0000940", @"obsolete irregular shape", @"", true));
             TermData.Add(CVID.PATO_vacuolated, new TermInfo(CVID.PATO_vacuolated, @"PATO", @"PATO:0000941", @"vacuolated", @"A structural quality inhering in a cytoplasm that contains fluid filled cavities.", false));
             TermData.Add(CVID.PATO_sharpness, new TermInfo(CVID.PATO_sharpness, @"PATO", @"PATO:0000944", @"sharpness", @"A shape quality inhering in a bearer by virtue of the bearer's having a sharp or tapered end or point.", false));
             TermData.Add(CVID.PATO_epinastic, new TermInfo(CVID.PATO_epinastic, @"PATO", @"PATO:0000945", @"epinastic", @"A shape quality inhering in a bearer by virtue of the bearer's exhibiting a downward bending of its leaves or other plant parts.", false));
@@ -22077,7 +24246,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_undulate, new TermInfo(CVID.PATO_undulate, @"PATO", @"PATO:0000967", @"undulate", @"A shape quality inhering in a bearer by virtue of the bearer's having a sinuate margin and rippled surface.", false));
             TermData.Add(CVID.PATO_albino_value_OBSOLETE, new TermInfo(CVID.PATO_albino_value_OBSOLETE, @"PATO", @"PATO:0000968", @"albino value", @"", true));
             TermData.Add(CVID.PATO_dwarf_like, new TermInfo(CVID.PATO_dwarf_like, @"PATO", @"PATO:0000969", @"dwarf-like", @"A size quality inhering in a bearer by virtue of the bearer's being abnormally small.", false));
-            TermData.Add(CVID.PATO_permeability, new TermInfo(CVID.PATO_permeability, @"PATO", @"PATO:0000970", @"permeability", @"A structural quality inhering in a bearer by virtue of the bearer's disposition to being permeated or pervaded by a liquid (as by osmosis or diffusion).", false));
+            TermData.Add(CVID.PATO_permeability, new TermInfo(CVID.PATO_permeability, @"PATO", @"PATO:0000970", @"permeability", @"A structural quality inhering in a bearer by virtue of the bearer's disposition to being permeated or pervaded by a gas or liquid (as by osmosis or diffusion).", false));
             TermData.Add(CVID.PATO_absolute_permeability_OBSOLETE, new TermInfo(CVID.PATO_absolute_permeability_OBSOLETE, @"PATO", @"PATO:0000971", @"absolute permeability", @"", true));
             TermData.Add(CVID.PATO_relative_permeability_OBSOLETE, new TermInfo(CVID.PATO_relative_permeability_OBSOLETE, @"PATO", @"PATO:0000972", @"relative permeability", @"", true));
             TermData.Add(CVID.PATO_porosity, new TermInfo(CVID.PATO_porosity, @"PATO", @"PATO:0000973", @"porosity", @"A permeability quality inhering in a bearer by virtue of the bearer's disposition to admit the passage of gas or liquid through pores or interstices.", false));
@@ -22089,8 +24258,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_porosity_value_OBSOLETE, new TermInfo(CVID.PATO_porosity_value_OBSOLETE, @"PATO", @"PATO:0000979", @"porosity value", @"", true));
             TermData.Add(CVID.PATO_absolute_porosity_value_OBSOLETE, new TermInfo(CVID.PATO_absolute_porosity_value_OBSOLETE, @"PATO", @"PATO:0000980", @"absolute porosity value", @"", true));
             TermData.Add(CVID.PATO_relative_porosity_value_OBSOLETE, new TermInfo(CVID.PATO_relative_porosity_value_OBSOLETE, @"PATO", @"PATO:0000981", @"relative porosity value", @"", true));
-            TermData.Add(CVID.PATO_permeable, new TermInfo(CVID.PATO_permeable, @"PATO", @"PATO:0000982", @"permeable", @"A permeability quality inhering in a bearer by virtue of the bearer's being capable to be permeated or pervaded by a liquid (as by osmosis or diffusion).", false));
-            TermData.Add(CVID.PATO_impermeable, new TermInfo(CVID.PATO_impermeable, @"PATO", @"PATO:0000983", @"impermeable", @"A permeability quality inhering in a bearer by virtue of the bearer's being incapable of being permeated or pervaded by a liquid (as by osmosis or diffusion).", false));
+            TermData.Add(CVID.PATO_permeable, new TermInfo(CVID.PATO_permeable, @"PATO", @"PATO:0000982", @"permeable", @"A permeability quality inhering in a bearer by virtue of the bearer's being capable to be permeated or pervaded by a gas or liquid (as by osmosis or diffusion).", false));
+            TermData.Add(CVID.PATO_impermeable, new TermInfo(CVID.PATO_impermeable, @"PATO", @"PATO:0000983", @"impermeable", @"A permeability quality inhering in a bearer by virtue of the bearer's being incapable of being permeated or pervaded by a gas or liquid (as by osmosis or diffusion).", false));
             TermData.Add(CVID.PATO_porous, new TermInfo(CVID.PATO_porous, @"PATO", @"PATO:0000984", @"porous", @"A porosity quality inhering in a bearer by virtue of the bearer's being capable of admitting the passage of gas or liquid through pores or interstices.", false));
             TermData.Add(CVID.PATO_non_porous, new TermInfo(CVID.PATO_non_porous, @"PATO", @"PATO:0000985", @"non-porous", @"A porosity quality inhering in a bearer by virtue of the bearer's being incapable of admitting the passage of gas or liquid through pores or interstices.", false));
             TermData.Add(CVID.PATO_absolute_consistency_OBSOLETE, new TermInfo(CVID.PATO_absolute_consistency_OBSOLETE, @"PATO", @"PATO:0000986", @"absolute consistency", @"", true));
@@ -22575,7 +24744,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_spongy, new TermInfo(CVID.PATO_spongy, @"PATO", @"PATO:0001480", @"spongy", @"A structural quality inhering in a bearer by virtue of the bearer's resembling a sponge in elasticity, absorbency, or porousness.", false));
             TermData.Add(CVID.PATO_sloped, new TermInfo(CVID.PATO_sloped, @"PATO", @"PATO:0001481", @"sloped", @"A shape quality inhering in a bearer by virtue of the bearer's having an oblique or slanted direction.", false));
             TermData.Add(CVID.PATO_prominent, new TermInfo(CVID.PATO_prominent, @"PATO", @"PATO:0001482", @"prominent", @"A quality inhering in a bearer by virtue of the bearer's standing out or projecting beyond a surface or line.", false));
-            TermData.Add(CVID.PATO_aplastic, new TermInfo(CVID.PATO_aplastic, @"PATO", @"PATO:0001483", @"aplastic", @"A size quality inhering in a an organ or tissue by virtue of the bearer's absence coupled with persistence of the organ/tissue primordium, which fails to develop completely.", false));
+            TermData.Add(CVID.PATO_aplastic, new TermInfo(CVID.PATO_aplastic, @"PATO", @"PATO:0001483", @"aplastic", @"Absence of an organ, tissue or cell due to failure to develop from a primordium or precursor cell.", false));
             TermData.Add(CVID.PATO_recent, new TermInfo(CVID.PATO_recent, @"PATO", @"PATO:0001484", @"recent", @"A quality of a process which occurs near to or not long before the present.", false));
             TermData.Add(CVID.PATO_condensed, new TermInfo(CVID.PATO_condensed, @"PATO", @"PATO:0001485", @"condensed", @"A structural quality inhering in a bearer by virtue of the bearer's being thicker or more closely packed together; pressed tightly together.", false));
             TermData.Add(CVID.PATO_chronological_age, new TermInfo(CVID.PATO_chronological_age, @"PATO", @"PATO:0001486", @"chronological age", @"An age quality that exists by virtue of the time (years and months) that the bearer has existed.", false));
@@ -23059,7 +25228,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_multicellular, new TermInfo(CVID.PATO_multicellular, @"PATO", @"PATO:0001993", @"multicellular", @"A cellularity quality inhering in a bearer by virtue of the bearer's consisting of more than one cell.", false));
             TermData.Add(CVID.PATO_unicellular, new TermInfo(CVID.PATO_unicellular, @"PATO", @"PATO:0001994", @"unicellular", @"A cellularity quality inhering in a bearer by virtue of the bearer's consisting of exactly one cell.", false));
             TermData.Add(CVID.PATO_organismal_quality, new TermInfo(CVID.PATO_organismal_quality, @"PATO", @"PATO:0001995", @"organismal quality", @"A quality that inheres in an entire organism or part of an organism.", false));
-            TermData.Add(CVID.PATO_present_in_fewer_numbers_in_organism, new TermInfo(CVID.PATO_present_in_fewer_numbers_in_organism, @"PATO", @"PATO:0001997", @"present in fewer numbers in organism", @"An amount which is relatively low.", false));
+            TermData.Add(CVID.PATO_decreased_amount, new TermInfo(CVID.PATO_decreased_amount, @"PATO", @"PATO:0001997", @"decreased amount", @"An amount which is relatively low.", false));
             TermData.Add(CVID.PATO_conspicuousness, new TermInfo(CVID.PATO_conspicuousness, @"PATO", @"PATO:0001998", @"conspicuousness", @"A quality inhering in a bearer by virtue of its visibility.", false));
             TermData.Add(CVID.PATO_lacks_parts_or_has_fewer_parts_of_type, new TermInfo(CVID.PATO_lacks_parts_or_has_fewer_parts_of_type, @"PATO", @"PATO:0001999", @"lacks parts or has fewer parts of type", @"The bearer of this quality has_part < n of the indicated entity type, where n is the normal amount for a comparable organism. Note that the bearer of the quality is the whole, not the part. Formally: If a bearer entity e has fewer parts of type X at time t, then the number of instances x of X at t such that x part_of e is < n, where n is either the normal number for comparable entities, or n is stated explicitly. This case includes the limit case, where the bearer lacks all parts of the specified type.", false));
             TermData.Add(CVID.PATO_lacks_all_parts_of_type, new TermInfo(CVID.PATO_lacks_all_parts_of_type, @"PATO", @"PATO:0002000", @"lacks all parts of type", @"A quality of physical entities inhering in a bearer by virtue of the bearer's lacking a physical part as specified by the additional entity.", false));
@@ -23111,7 +25280,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_adaxial_to, new TermInfo(CVID.PATO_adaxial_to, @"PATO", @"PATO:0002047", @"adaxial to", @"A spatial quality inhering in a bearer by virtue of the bearer's being located on the side nearest to the axis of an organ or organism.", false));
             TermData.Add(CVID.PATO_mosaicism, new TermInfo(CVID.PATO_mosaicism, @"PATO", @"PATO:0002048", @"mosaicism", @"An organismal quality inhering in a bearer by virtue of the bearer's having two or more cell populations that differ in genetic makeup. This situation can affect any type of cell, including blood cells, gametes (egg and sperm cells), and skin.", false));
             TermData.Add(CVID.PATO_lateral_and_rotional_curvature, new TermInfo(CVID.PATO_lateral_and_rotional_curvature, @"PATO", @"PATO:0002049", @"lateral and rotional curvature", @"A curvature quality inhering in a bearer by virtue of the bearer's being curved around an axis and towards the side.", false));
-            TermData.Add(CVID.PATO_present_in_normal_numbers_in_organism, new TermInfo(CVID.PATO_present_in_normal_numbers_in_organism, @"PATO", @"PATO:0002050", @"present in normal numbers in organism", @"An amount which normal.", false));
+            TermData.Add(CVID.PATO_normal_amount, new TermInfo(CVID.PATO_normal_amount, @"PATO", @"PATO:0002050", @"normal amount", @"An amount which normal.", false));
             TermData.Add(CVID.PATO_increased_occurrence, new TermInfo(CVID.PATO_increased_occurrence, @"PATO", @"PATO:0002051", @"increased occurrence", @"An occurrence which is relatively high.", false));
             TermData.Add(CVID.PATO_decreased_occurrence, new TermInfo(CVID.PATO_decreased_occurrence, @"PATO", @"PATO:0002052", @"decreased occurrence", @"An occurrence which is relatively low.", false));
             TermData.Add(CVID.PATO_dorso_ventrally_flattened, new TermInfo(CVID.PATO_dorso_ventrally_flattened, @"PATO", @"PATO:0002053", @"dorso-ventrally flattened", @"A quality inhering in a bearer by virtue of the bearer's being flattened along dorso-ventral axis.", false));
@@ -23346,7 +25515,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_decreased_elasticity, new TermInfo(CVID.PATO_decreased_elasticity, @"PATO", @"PATO:0002288", @"decreased elasticity", @"An elasticity which is relatively low.", false));
             TermData.Add(CVID.PATO_setose, new TermInfo(CVID.PATO_setose, @"PATO", @"PATO:0002289", @"setose", @"A hairy quality inhering in a bearer by virtue of the bearer's being covered with setae.", false));
             TermData.Add(CVID.PATO_aplastic_hypoplastic, new TermInfo(CVID.PATO_aplastic_hypoplastic, @"PATO", @"PATO:0002290", @"aplastic/hypoplastic", @"", false));
-            TermData.Add(CVID.PATO_agenesis, new TermInfo(CVID.PATO_agenesis, @"PATO", @"PATO:0002291", @"agenesis", @"Failure of a tissue of organ to develop.", false));
+            TermData.Add(CVID.PATO_agenesis, new TermInfo(CVID.PATO_agenesis, @"PATO", @"PATO:0002291", @"agenesis", @"Absence of a tissue or organ due to failure to develop.", false));
             TermData.Add(CVID.PATO_transient, new TermInfo(CVID.PATO_transient, @"PATO", @"PATO:0002292", @"transient", @"A structural quality inhering in a bearer by virtue of the bearer's underlying structure being capable of change.", false));
             TermData.Add(CVID.PATO_permanent, new TermInfo(CVID.PATO_permanent, @"PATO", @"PATO:0002293", @"permanent", @"A structural quality inhering in a bearer by virtue of the bearer's underlying structure not changing over time.", false));
             TermData.Add(CVID.PATO_scrobiculate, new TermInfo(CVID.PATO_scrobiculate, @"PATO", @"PATO:0002294", @"scrobiculate", @"A texture that is uniformly covered in short, oblong, or trench-like depressions.", false));
@@ -23513,7 +25682,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_corymb_like, new TermInfo(CVID.PATO_corymb_like, @"PATO", @"PATO:0002455", @"corymb-like", @"A  quality inhering in a bearer by virtue of the bearer's architecture bearing resemblence to a corymb type of inflorescence.", false));
             TermData.Add(CVID.PATO_inflorescence_like, new TermInfo(CVID.PATO_inflorescence_like, @"PATO", @"PATO:0002456", @"inflorescence-like", @"A  quality inhering in a bearer by virtue of the bearer's similarity to the appearance of an inflorescence.", false));
             TermData.Add(CVID.PATO_leaf_like, new TermInfo(CVID.PATO_leaf_like, @"PATO", @"PATO:0002457", @"leaf-like", @"A structural quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a leaf.", false));
-            TermData.Add(CVID.PATO_pin_like, new TermInfo(CVID.PATO_pin_like, @"PATO", @"PATO:0002458", @"pin-like", @"A quality inhering in a bearer by virtue of the bearer being thin and lacking outgrowths", false));
+            TermData.Add(CVID.PATO_pin_like, new TermInfo(CVID.PATO_pin_like, @"PATO", @"PATO:0002458", @"pin-like", @"A quality inhering in a bearer by virtue of the bearer being thin and lacking outgrowths.", false));
             TermData.Add(CVID.PATO_sepal_like, new TermInfo(CVID.PATO_sepal_like, @"PATO", @"PATO:0002459", @"sepal-like", @"A structural quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a sepal,", false));
             TermData.Add(CVID.PATO_shriveled, new TermInfo(CVID.PATO_shriveled, @"PATO", @"PATO:0002460", @"shriveled", @"A structural quality inhering in a bearer by virtue of the bearer being smaller and contracted, expecially due to loss of moisture.", false));
             TermData.Add(CVID.PATO_wilty, new TermInfo(CVID.PATO_wilty, @"PATO", @"PATO:0002461", @"wilty", @"To bend or hang downwards due to loss of water", false));
@@ -23583,11 +25752,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_separating, new TermInfo(CVID.PATO_separating, @"PATO", @"PATO:0002525", @"separating", @"A structural quality inhering in a bearer by virtue of the bearer being in a position that produces a separation in, or acting to separate, another entity.", false));
             TermData.Add(CVID.PATO_anterodistal_orientation, new TermInfo(CVID.PATO_anterodistal_orientation, @"PATO", @"PATO:0002526", @"anterodistal orientation", @"An orientation quality inhering in a bearer by virtue of the bearer having a position that is directed anterodistally.", false));
             TermData.Add(CVID.PATO_posterodistal_orientation, new TermInfo(CVID.PATO_posterodistal_orientation, @"PATO", @"PATO:0002527", @"posterodistal orientation", @"An orientation quality inhering in a bearer by virtue of the bearer having a position that is directed posterodistally.", false));
-            TermData.Add(CVID.PATO_borderline_intensity, new TermInfo(CVID.PATO_borderline_intensity, @"PATO", @"PATO:0002528", @"borderline intensity", @"An intensity which is borderline in it its effect or force as compared to baseline or normal.", false));
-            TermData.Add(CVID.PATO_profound_intensity, new TermInfo(CVID.PATO_profound_intensity, @"PATO", @"PATO:0002529", @"profound intensity", @"An intensity which is characterized by being very severe.", false));
-            TermData.Add(CVID.PATO_episodic, new TermInfo(CVID.PATO_episodic, @"PATO", @"PATO:0002530", @"episodic", @"An occurrence quality inhering in a bearer by virtue of the bearer's having a course that occurs occasionally.", false));
-            TermData.Add(CVID.PATO_refractory, new TermInfo(CVID.PATO_refractory, @"PATO", @"PATO:0002531", @"refractory", @"An occurrence of a process during which time there is an inability to change the course, extent, or repetition of the process.", false));
-            TermData.Add(CVID.PATO_secondary, new TermInfo(CVID.PATO_secondary, @"PATO", @"PATO:0002532", @"secondary", @"A quality in which the effect or outcome is not primary or the focus of the observation.", false));
+            TermData.Add(CVID.PATO_obsolete_borderline_intensity_OBSOLETE, new TermInfo(CVID.PATO_obsolete_borderline_intensity_OBSOLETE, @"PATO", @"PATO:0002528", @"obsolete borderline intensity", @"", true));
+            TermData.Add(CVID.PATO_obsolete_profound_intensity_OBSOLETE, new TermInfo(CVID.PATO_obsolete_profound_intensity_OBSOLETE, @"PATO", @"PATO:0002529", @"obsolete profound intensity", @"", true));
+            TermData.Add(CVID.PATO_obsolete_episodic_OBSOLETE, new TermInfo(CVID.PATO_obsolete_episodic_OBSOLETE, @"PATO", @"PATO:0002530", @"obsolete episodic", @"", true));
+            TermData.Add(CVID.PATO_obsolete_refractory_OBSOLETE, new TermInfo(CVID.PATO_obsolete_refractory_OBSOLETE, @"PATO", @"PATO:0002531", @"obsolete refractory", @"", true));
+            TermData.Add(CVID.PATO_obsolete_secondary_OBSOLETE, new TermInfo(CVID.PATO_obsolete_secondary_OBSOLETE, @"PATO", @"PATO:0002532", @"obsolete secondary", @"", true));
             TermData.Add(CVID.PATO_bipartite, new TermInfo(CVID.PATO_bipartite, @"PATO", @"PATO:0002533", @"bipartite", @"A multipartite quality inhering in a bearer by virtue of the bearer being divided into two parts.", false));
             TermData.Add(CVID.PATO_plowshare_shaped, new TermInfo(CVID.PATO_plowshare_shaped, @"PATO", @"PATO:0002534", @"plowshare shaped", @"A shape quality inhering in a bearer by virtue of the bearer's being shaped like a plowshare.", false));
             TermData.Add(CVID.PATO_peg_like, new TermInfo(CVID.PATO_peg_like, @"PATO", @"PATO:0002535", @"peg-like", @"A shape quality inhering in a bearer by virtue of the bearer's having a short and stout cylindrical shape.", false));
@@ -23596,6 +25765,63 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_concavo_convex, new TermInfo(CVID.PATO_concavo_convex, @"PATO", @"PATO:0002538", @"concavo-convex", @"A shape quality that obtains by virtue of the bearer being concave on one side and convex on the other.", false));
             TermData.Add(CVID.PATO_ring_shaped, new TermInfo(CVID.PATO_ring_shaped, @"PATO", @"PATO:0002539", @"ring shaped", @"A shape quality inhering in a bearer by virtue of the bearer's having a shape like a ring (a circular shape enclosing a space).", false));
             TermData.Add(CVID.PATO_spur_shaped, new TermInfo(CVID.PATO_spur_shaped, @"PATO", @"PATO:0002540", @"spur shaped", @"A shape quality inhering in a bearer by virtue of the bearer's possessing a small, spike-like shape.", false));
+            TermData.Add(CVID.PATO_homeostatic, new TermInfo(CVID.PATO_homeostatic, @"PATO", @"PATO:0002541", @"homeostatic", @"Pertaining to the ability or tendency of an organism or cell to maintain internal equilibrium by adjusting its physiological processes.", false));
+            TermData.Add(CVID.PATO_borderline_intensity, new TermInfo(CVID.PATO_borderline_intensity, @"PATO", @"PATO:0002628", @"borderline intensity", @"An intensity which is borderline in it its effect or force as compared to baseline or normal.", false));
+            TermData.Add(CVID.PATO_profound_intensity, new TermInfo(CVID.PATO_profound_intensity, @"PATO", @"PATO:0002629", @"profound intensity", @"An intensity which is characterized by being very severe.", false));
+            TermData.Add(CVID.PATO_episodic, new TermInfo(CVID.PATO_episodic, @"PATO", @"PATO:0002630", @"episodic", @"An occurrence quality inhering in a bearer by virtue of the bearer's having a course that occurs occasionally.", false));
+            TermData.Add(CVID.PATO_refractory, new TermInfo(CVID.PATO_refractory, @"PATO", @"PATO:0002631", @"refractory", @"An occurrence of a process during which time there is an inability to change the course, extent, or repetition of the process.", false));
+            TermData.Add(CVID.PATO_secondary, new TermInfo(CVID.PATO_secondary, @"PATO", @"PATO:0002632", @"secondary", @"A quality in which the effect or outcome is not primary or the focus of the observation.", false));
+            TermData.Add(CVID.PATO_hemispheroid, new TermInfo(CVID.PATO_hemispheroid, @"PATO", @"PATO:0005000", @"hemispheroid", @"A 3-D shape that is half of a sphere.", false));
+            TermData.Add(CVID.PATO_variability_of_count, new TermInfo(CVID.PATO_variability_of_count, @"PATO", @"PATO:0005001", @"variability of count", @"A variability quality inhering in the bearer by virtue of the bearer having a variable number or count of an entity.", false));
+            TermData.Add(CVID.PATO_pear_shaped, new TermInfo(CVID.PATO_pear_shaped, @"PATO", @"PATO:0005002", @"pear shaped", @"Having the shape of a pear; tapering near the top and bulging toward the base or bottom. From thefreedictionary.com", false));
+            TermData.Add(CVID.PATO_paddle_shaped, new TermInfo(CVID.PATO_paddle_shaped, @"PATO", @"PATO:0005003", @"paddle shaped", @"A quality inhering in a bearer by virtue of the bearer's resembling the form of a paddle.", false));
+            TermData.Add(CVID.PATO_subelliptical, new TermInfo(CVID.PATO_subelliptical, @"PATO", @"PATO:0005004", @"subelliptical", @"A shape that is almost an ellipse.", false));
+            TermData.Add(CVID.PATO_radiating, new TermInfo(CVID.PATO_radiating, @"PATO", @"PATO:0005005", @"radiating", @"Shape quality inhering in a bearer expanding outward, or having parts expanding outward, from a center point.", false));
+            TermData.Add(CVID.PATO_differentiated_from, new TermInfo(CVID.PATO_differentiated_from, @"PATO", @"PATO:0005006", @"differentiated from", @"A morphology quality inhering in a bearer by virtue of the bearer's being morphologically distinguishable from another entity.", false));
+            TermData.Add(CVID.PATO_hypsodont, new TermInfo(CVID.PATO_hypsodont, @"PATO", @"PATO:0005007", @"hypsodont", @"A 3-D shape inhering in a bearer by virtue of the bearer's having dentition characterized by high-crowned teeth and enamel which extends far past the gum line, which provides extra material for wear and tear.", false));
+            TermData.Add(CVID.PATO_brachydont, new TermInfo(CVID.PATO_brachydont, @"PATO", @"PATO:0005008", @"brachydont", @"A 3-D shape inhering in a bearer by virtue of the bearer's having dentition characterized by low-crowned teeth. Human teeth are brachydont.", false));
+            TermData.Add(CVID.PATO_molariform, new TermInfo(CVID.PATO_molariform, @"PATO", @"PATO:0005009", @"molariform", @"A 3-D shape inhering in a bearer by virtue of the bearer's having an entity in the form of a molar tooth.", false));
+            TermData.Add(CVID.PATO_plumose, new TermInfo(CVID.PATO_plumose, @"PATO", @"PATO:0005010", @"plumose", @"A branched quality inhering in a bearer by virtue of the bearer's having many fine filaments or branches that give a feathery appearance: for example, resembling a feather.", false));
+            TermData.Add(CVID.PATO_continuous_with, new TermInfo(CVID.PATO_continuous_with, @"PATO", @"PATO:0005011", @"continuous with", @"A positional quality inhering in a bearer by virtue of the bearer possessing an uninterrupted or unbroken connection or spatial distribution relative to the position of another entity.", false));
+            TermData.Add(CVID.PATO_complete_structure, new TermInfo(CVID.PATO_complete_structure, @"PATO", @"PATO:0005012", @"complete structure", @"A structural quality inhering in a bearer by virtue of the bearer being fully formed compared to entities lacking parts.", false));
+            TermData.Add(CVID.PATO_incomplete_structure, new TermInfo(CVID.PATO_incomplete_structure, @"PATO", @"PATO:0005013", @"incomplete structure", @"A structural quality inhering in a bearer by virtue of the bearer's lacking parts or having a reduced form compared to fully formed entities.", false));
+            TermData.Add(CVID.PATO_subspherical, new TermInfo(CVID.PATO_subspherical, @"PATO", @"PATO:0005014", @"subspherical", @"A spheroid shape quality inhering in a bearer by virtue of the bearer's being nearly, but not perfectly, spherical.", false));
+            TermData.Add(CVID.PATO_tapered_size, new TermInfo(CVID.PATO_tapered_size, @"PATO", @"PATO:0005015", @"tapered size", @"A size quality inhering in an entity or set of entities in which size increases or decreases along the extent of the entity or set.", false));
+            TermData.Add(CVID.PATO_surrounded_by, new TermInfo(CVID.PATO_surrounded_by, @"PATO", @"PATO:0005016", @"surrounded by", @"A positional quality inhering in a bearer by virtue of the bearer's being enclosed on all sides by another entity.", false));
+            TermData.Add(CVID.PATO_labiolingually_compressed, new TermInfo(CVID.PATO_labiolingually_compressed, @"PATO", @"PATO:0005017", @"labiolingually compressed", @"A quality inhering in a bearer by virtue of the bearer's being compressed from the side facing the lips to the side facing the tongue.", false));
+            TermData.Add(CVID.PATO_mesiodistally_compressed, new TermInfo(CVID.PATO_mesiodistally_compressed, @"PATO", @"PATO:0005018", @"mesiodistally compressed", @"A quality inhering in a bearer by virtue of the bearer's being compressed from the side facing the midline of the jaw to the side opposite the midline.", false));
+            TermData.Add(CVID.PATO_curved_lingually, new TermInfo(CVID.PATO_curved_lingually, @"PATO", @"PATO:0005019", @"curved lingually", @"A curvature quality inhering in a bearer by virtue of the bearer's being curved towards the tongue.", false));
+            TermData.Add(CVID.PATO_irregularly_shaped, new TermInfo(CVID.PATO_irregularly_shaped, @"PATO", @"PATO:0005020", @"irregularly shaped", @"A shape quality inhering on a bearer by virtue of a bearer's shape lacking in pattern or uniformity; for example, it may have sides of different lengths, different curvatures, or unequal angles.", false));
+            TermData.Add(CVID.PATO_unicuspidate, new TermInfo(CVID.PATO_unicuspidate, @"PATO", @"PATO:0005021", @"unicuspidate", @"Cuspidate quality inhering in a bearer by virtue of the bearer's possessing a single cusp.", false));
+            TermData.Add(CVID.PATO_uniform_diameter, new TermInfo(CVID.PATO_uniform_diameter, @"PATO", @"PATO:0005022", @"uniform diameter", @"A diameter that remains constant throughout the extent of an entity.", false));
+            TermData.Add(CVID.PATO_parasagittal_orientation, new TermInfo(CVID.PATO_parasagittal_orientation, @"PATO", @"PATO:0005023", @"parasagittal orientation", @"An orientation quality inhering in a bearer by virtue of the bearer having a position that is in the parasagittal plane.", false));
+            TermData.Add(CVID.PATO_longitudinal_orientation, new TermInfo(CVID.PATO_longitudinal_orientation, @"PATO", @"PATO:0005024", @"longitudinal orientation", @"An orientation quality inhering in a bearer by virtue of the bearer having a position that is directed along the longitudinal or anterior-posterior axis.", false));
+            TermData.Add(CVID.PATO_maximally_connected, new TermInfo(CVID.PATO_maximally_connected, @"PATO", @"PATO:0010000", @"maximally connected", @"A structural quality inhering in the bearer by virtue of the bearer consisting of a single, maximally connected structure.", false));
+            TermData.Add(CVID.PATO_disconnected, new TermInfo(CVID.PATO_disconnected, @"PATO", @"PATO:0010001", @"disconnected", @"A structural quality inhering in the bearer by virtue of the bearer consisting of multiple structures lacking any physical connection to each other.", false));
+            TermData.Add(CVID.PATO_absence_due_to_degeneration, new TermInfo(CVID.PATO_absence_due_to_degeneration, @"PATO", @"PATO:0015001", @"absence due to degeneration", @"Absence due to a degenerative process.", false));
+            TermData.Add(CVID.PATO_process_efficacy, new TermInfo(CVID.PATO_process_efficacy, @"PATO", @"PATO:0015002", @"process efficacy", @"The ability of a process to produce its output.", false));
+            TermData.Add(CVID.PATO_decreased_efficacy, new TermInfo(CVID.PATO_decreased_efficacy, @"PATO", @"PATO:0015003", @"decreased efficacy", @"A decrease in the ability of a process to produce its output.", false));
+            TermData.Add(CVID.PATO_increased_efficacy, new TermInfo(CVID.PATO_increased_efficacy, @"PATO", @"PATO:0015004", @"increased efficacy", @"A increase in the ability of a process to produce its output.", false));
+            TermData.Add(CVID.PATO_tendrilous, new TermInfo(CVID.PATO_tendrilous, @"PATO", @"PATO:0015005", @"tendrilous", @"Slender and spirally coiled.", false));
+            TermData.Add(CVID.PATO_polymeric, new TermInfo(CVID.PATO_polymeric, @"PATO", @"PATO:0015006", @"polymeric", @"A quality inhering in a structure by virtue of it consisting of many of repeated, similar or identical subunits, arranged in some orderly array.", false));
+            TermData.Add(CVID.PATO_prominence, new TermInfo(CVID.PATO_prominence, @"PATO", @"PATO:0015007", @"prominence", @"A quality inhering in a bearer by virtue of the degree to which the bearers stands out or projects beyond a surface or line.", false));
+            TermData.Add(CVID.PATO_distensibility, new TermInfo(CVID.PATO_distensibility, @"PATO", @"PATO:0015008", @"distensibility", @"A quality inhering in a bearer by virtue of the extent to which the bearer is capable of being stretched or swollen.", false));
+            TermData.Add(CVID.PATO_humidity, new TermInfo(CVID.PATO_humidity, @"PATO", @"PATO:0015009", @"humidity", @"A quality inhering in air by virtue of the partial pressure exerted by the bearer's water vapour content.", false));
+            TermData.Add(CVID.PATO_increased_humidity, new TermInfo(CVID.PATO_increased_humidity, @"PATO", @"PATO:0015010", @"increased humidity", @"An increase in humidity.", false));
+            TermData.Add(CVID.PATO_decreased_humidity, new TermInfo(CVID.PATO_decreased_humidity, @"PATO", @"PATO:0015011", @"decreased humidity", @"An decrease in humidity.", false));
+            TermData.Add(CVID.PATO_quality_of_a_plasma, new TermInfo(CVID.PATO_quality_of_a_plasma, @"PATO", @"PATO:0015012", @"quality of a plasma", @"A physical quality inhering in a bearer by virtue of the bearer's exhibiting the physical characteristics of an entity consisting of roughly equal proportions of positively and negatively charged particles, having neither a defined volume nor defined shape, having internal magnetic fields, and being electrically conductive.", false));
+            TermData.Add(CVID.PATO_degree_of_illumination, new TermInfo(CVID.PATO_degree_of_illumination, @"PATO", @"PATO:0015013", @"degree of illumination", @"The degree to which the bearer is exposed to visible light.", false));
+            TermData.Add(CVID.PATO_increased_degree_of_illumination, new TermInfo(CVID.PATO_increased_degree_of_illumination, @"PATO", @"PATO:0015014", @"increased degree of illumination", @"An increase in illumination.", false));
+            TermData.Add(CVID.PATO_decreased_degree_of_illumination, new TermInfo(CVID.PATO_decreased_degree_of_illumination, @"PATO", @"PATO:0015015", @"decreased degree of illumination", @"An decrease in illumination.", false));
+            TermData.Add(CVID.PATO_stepped, new TermInfo(CVID.PATO_stepped, @"PATO", @"PATO:0015016", @"stepped", @"Having a shape or form that resembles a step of a stairway (e.g., a ledge or offset margin).", false));
+            TermData.Add(CVID.PATO_quality_of_a_colloidal_suspension, new TermInfo(CVID.PATO_quality_of_a_colloidal_suspension, @"PATO", @"PATO:0015017", @"quality of a colloidal suspension", @"A physical quality inhering in an entity by virtue of the bearer's solid constituents being suspended in a liquid or gas, or the bearer's liquid constituents being suspended in a gas.", false));
+            TermData.Add(CVID.PATO_quality_of_an_aerosol, new TermInfo(CVID.PATO_quality_of_an_aerosol, @"PATO", @"PATO:0015018", @"quality of an aerosol", @"A physical quality inhering in an entity by virtue of the bearer's solid or liquid constituents being suspended in a gas.", false));
+            TermData.Add(CVID.PATO_genotypic_sex, new TermInfo(CVID.PATO_genotypic_sex, @"PATO", @"PATO:0020000", @"genotypic sex", @"A biological sex quality inhering in an individual based upon genotypic composition of sex chromosomes.", false));
+            TermData.Add(CVID.PATO_male_genotypic_sex, new TermInfo(CVID.PATO_male_genotypic_sex, @"PATO", @"PATO:0020001", @"male genotypic sex", @"A biological sex quality inhering in an individual based upon genotypic composition that confers the capability for an organism to differentiate male gonads.", false));
+            TermData.Add(CVID.PATO_female_genotypic_sex, new TermInfo(CVID.PATO_female_genotypic_sex, @"PATO", @"PATO:0020002", @"female genotypic sex", @"A biological sex quality inhering in an individual or a population based upon genotypic composition that confers the capability for an organism to differentiate female gonads.", false));
+            TermData.Add(CVID.PATO_potability, new TermInfo(CVID.PATO_potability, @"PATO", @"PATO:0025000", @"potability", @"A physical quality inhering in a bearer by virtue of the bearer's disposition to being fit to be used as a safe means of hydration.", false));
+            TermData.Add(CVID.PATO_non_potable, new TermInfo(CVID.PATO_non_potable, @"PATO", @"PATO:0025001", @"non-potable", @"A physical quality inhering in a bearer by virtue of the bearer not being suitable for use as a safe means of hydration.", false));
+            TermData.Add(CVID.PATO_potable, new TermInfo(CVID.PATO_potable, @"PATO", @"PATO:0025002", @"potable", @"A physical quality inhering in a bearer by virtue of the bearer being suitable for use as a safe means of hydration.", false));
             TermData.Add(CVID.UO_unit, new TermInfo(CVID.UO_unit, @"UO", @"UO:0000000", @"unit", @"A unit of measurement is a standardized quantity of a physical quality.", false));
             TermData.Add(CVID.UO_length_unit, new TermInfo(CVID.UO_length_unit, @"UO", @"UO:0000001", @"length unit", @"A unit which is a standard measure of the distance between two points.", false));
             TermData.Add(CVID.UO_mass_unit, new TermInfo(CVID.UO_mass_unit, @"UO", @"UO:0000002", @"mass unit", @"A unit which is a standard measure of the amount of matter/energy of a physical object.", false));
@@ -24017,7 +26243,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_pulse_counting, new List<CVID> { CVID.MS_detector_acquisition_mode, });
             RelationsIsA.Add(CVID.MS_time_digital_converter, new List<CVID> { CVID.MS_detector_acquisition_mode, });
             RelationsIsA.Add(CVID.MS_transient_recorder, new List<CVID> { CVID.MS_detector_acquisition_mode, });
-            RelationsIsA.Add(CVID.MS_AB_SCIEX_instrument_model, new List<CVID> { CVID.MS_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SCIEX_instrument_model, new List<CVID> { CVID.MS_instrument_model, });
             RelationsIsA.Add(CVID.MS_Bruker_Daltonics_instrument_model, new List<CVID> { CVID.MS_instrument_model, });
             RelationsIsA.Add(CVID.MS_IonSpec_instrument_model, new List<CVID> { CVID.MS_Varian_instrument_model, });
             RelationsIsA.Add(CVID.MS_Shimadzu_instrument_model, new List<CVID> { CVID.MS_instrument_model, });
@@ -24034,15 +26260,15 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_post_source_decay, new List<CVID> { CVID.MS_dissociation_method, });
             RelationsIsA.Add(CVID.MS_surface_induced_dissociation, new List<CVID> { CVID.MS_dissociation_method, });
             RelationsIsA.Add(CVID.MS_normalized_collision_energy, new List<CVID> { CVID.MS_precursor_activation_attribute, });
-            RelationsIsA.Add(CVID.MS_4000_QTRAP, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_4000_QTRAP, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_4700_Proteomics_Analyzer, new List<CVID> { CVID.MS_Applied_Biosystems_instrument_model, });
             RelationsIsA.Add(CVID.MS_apex_IV, new List<CVID> { CVID.MS_Bruker_Daltonics_apex_series, });
             RelationsIsA.Add(CVID.MS_apex_Q, new List<CVID> { CVID.MS_Bruker_Daltonics_apex_series, });
-            RelationsIsA.Add(CVID.MS_API_150EX, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_API_150EX_Prep, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_API_2000, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_API_3000, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_API_4000, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_150EX, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_150EX_Prep, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_2000, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_3000, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_4000, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_autoflex_II, new List<CVID> { CVID.MS_Bruker_Daltonics_flex_series, });
             RelationsIsA.Add(CVID.MS_autoflex_TOF_TOF, new List<CVID> { CVID.MS_Bruker_Daltonics_flex_series, });
             RelationsIsA.Add(CVID.MS_Auto_Spec_Ultima_NT, new List<CVID> { CVID.MS_Waters_instrument_model, });
@@ -24080,16 +26306,16 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_OmniFlex, new List<CVID> { CVID.MS_Bruker_Daltonics_flex_series, });
             RelationsIsA.Add(CVID.MS_Platform_ICP, new List<CVID> { CVID.MS_Waters_instrument_model, });
             RelationsIsA.Add(CVID.MS_PolarisQ, new List<CVID> { CVID.MS_Thermo_Finnigan_instrument_model, });
-            RelationsIsA.Add(CVID.MS_proteomics_solution_1, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_Q_TRAP, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_proteomics_solution_1, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Q_TRAP, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_Q_Tof_micro, new List<CVID> { CVID.MS_Waters_instrument_model, });
             RelationsIsA.Add(CVID.MS_Q_Tof_ultima, new List<CVID> { CVID.MS_Waters_instrument_model, });
-            RelationsIsA.Add(CVID.MS_QSTAR, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QSTAR, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_quattro_micro, new List<CVID> { CVID.MS_Waters_instrument_model, });
             RelationsIsA.Add(CVID.MS_Quattro_UItima, new List<CVID> { CVID.MS_Waters_instrument_model, });
             RelationsIsA.Add(CVID.MS_Surveyor_MSQ, new List<CVID> { CVID.MS_Thermo_Finnigan_instrument_model, });
-            RelationsIsA.Add(CVID.MS_SymBiot_I, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_SymBiot_XVI, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SymBiot_I, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SymBiot_XVI, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_TEMPUS_TOF, new List<CVID> { CVID.MS_Thermo_Finnigan_instrument_model, });
             RelationsIsA.Add(CVID.MS_TRACE_DSQ, new List<CVID> { CVID.MS_Thermo_Finnigan_instrument_model, });
             RelationsIsA.Add(CVID.MS_TRITON, new List<CVID> { CVID.MS_Thermo_Finnigan_instrument_model, });
@@ -24267,7 +26493,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Conversion_to_mzData, new List<CVID> { CVID.MS_file_format_conversion, });
             RelationsIsA.Add(CVID.MS_sample_attribute, new List<CVID> { CVID.MS_object_attribute, });
             RelationsIsA.Add(CVID.MS_selection_window_attribute, new List<CVID> { CVID.MS_object_attribute, });
-            RelationsIsA.Add(CVID.MS_Analyst, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_Analyst, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_Trapper, new List<CVID> { CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_LCQ_Deca, new List<CVID> { CVID.MS_Thermo_Finnigan_instrument_model, });
             RelationsIsA.Add(CVID.MS_LTQ_Orbitrap_Discovery, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
@@ -24357,29 +26583,29 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_GC_IsoLink, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
             RelationsIsA.Add(CVID.MS_Exactive, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
             RelationsIsA.Add(CVID.MS_Proteome_Discoverer, new List<CVID> { CVID.MS_Thermo_Finnigan_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_3200_QTRAP, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_4800_Plus_MALDI_TOF_TOF, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_API_3200, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_API_5000, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_QSTAR_Elite, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_QSTAR_Pulsar, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_QSTAR_XL, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_3200_QTRAP, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_4800_Plus_MALDI_TOF_TOF, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_3200, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_5000, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QSTAR_Elite, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QSTAR_Pulsar, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QSTAR_XL, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_4800_Proteomics_Analyzer, new List<CVID> { CVID.MS_Applied_Biosystems_instrument_model, });
-            RelationsIsA.Add(CVID.MS_4000_Series_Explorer_Software, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_GPS_Explorer, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_LightSight_Software, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_ProteinPilot_Software, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_TissueView_Software, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_MarkerView_Software, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_MRMPilot_Software, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_BioAnalyst, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_Pro_ID, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_Pro_ICAT, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_Pro_Quant, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_Pro_BLAST, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_Cliquid, new List<CVID> { CVID.MS_AB_SCIEX_software, });
-            RelationsIsA.Add(CVID.MS_MIDAS_Workflow_Designer, new List<CVID> { CVID.MS_AB_SCIEX_software, });
-            RelationsIsA.Add(CVID.MS_MultiQuant, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_4000_Series_Explorer_Software, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_GPS_Explorer, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_LightSight_Software, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_ProteinPilot_Software, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_TissueView_Software, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_MarkerView_Software, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_MRMPilot_Software, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_BioAnalyst, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_Pro_ID, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_Pro_ICAT, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_Pro_Quant, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_Pro_BLAST, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_Cliquid, new List<CVID> { CVID.MS_SCIEX_software, });
+            RelationsIsA.Add(CVID.MS_MIDAS_Workflow_Designer, new List<CVID> { CVID.MS_SCIEX_software, });
+            RelationsIsA.Add(CVID.MS_MultiQuant, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_6220_Time_of_Flight_LC_MS, new List<CVID> { CVID.MS_Agilent_instrument_model, });
             RelationsIsA.Add(CVID.MS_6510_Quadrupole_Time_of_Flight_LC_MS, new List<CVID> { CVID.MS_Agilent_instrument_model, });
             RelationsIsA.Add(CVID.MS_6520_Quadrupole_Time_of_Flight_LC_MS, new List<CVID> { CVID.MS_Agilent_instrument_model, });
@@ -24395,7 +26621,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Spectrum_Mill_for_MassHunter_Workstation, new List<CVID> { CVID.MS_Agilent_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_6300_Series_Ion_Trap_Data_Analysis_Software, new List<CVID> { CVID.MS_Agilent_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_Agilent_software, new List<CVID> { CVID.MS_software, });
-            RelationsIsA.Add(CVID.MS_AB_SCIEX_software, new List<CVID> { CVID.MS_software, });
+            RelationsIsA.Add(CVID.MS_SCIEX_software, new List<CVID> { CVID.MS_software, });
             RelationsIsA.Add(CVID.MS_Applied_Biosystems_software, new List<CVID> { CVID.MS_software, });
             RelationsIsA.Add(CVID.MS_Bruker_software, new List<CVID> { CVID.MS_software, });
             RelationsIsA.Add(CVID.MS_Thermo_Finnigan_software, new List<CVID> { CVID.MS_software, });
@@ -24564,7 +26790,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_structural_formula, new List<CVID> { CVID.MS_chemical_compound_formula, });
             RelationsIsA.Add(CVID.MS_SMILES_string, new List<CVID> { CVID.MS_chemical_compound_formula, });
             RelationsIsA.Add(CVID.MS_collision_gas_pressure, new List<CVID> { CVID.MS_precursor_activation_attribute, });
-            RelationsIsA.Add(CVID.MS_4000_QTRAP_OBSOLETE, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_4000_QTRAP_OBSOLETE, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_SRM_software, new List<CVID> { CVID.MS_software, });
             RelationsIsA.Add(CVID.MS_MaRiMba, new List<CVID> { CVID.MS_SRM_software, });
             RelationsIsA.Add(CVID.MS_peptide_attribute_calculation_software, new List<CVID> { CVID.MS_software, });
@@ -24615,15 +26841,15 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_calibration_spectrum, new List<CVID> { CVID.MS_spectrum_type, });
             RelationsIsA.Add(CVID.MS_Shimadzu_Biotech_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
             RelationsIsA.Add(CVID.MS_Shimadzu_Biotech_database_entity, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
-            RelationsIsA.Add(CVID.MS_QTRAP_5500, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_TripleTOF_5600, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QTRAP_5500, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_TripleTOF_5600, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_protein_modifications, new List<CVID> { CVID.MS_protein_attribute, });
             RelationsIsA.Add(CVID.MS_gene_name, new List<CVID> { CVID.MS_protein_attribute, });
             RelationsIsA.Add(CVID.MS_SEQUEST_CleavesAt, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_SEQUEST_ViewCV, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_SEQUEST_OutputLines, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_SEQUEST_DescriptionLines, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
-            RelationsIsA.Add(CVID.MS_de_novo_search, new List<CVID> { CVID.MS_search_type, });
+            RelationsIsA.Add(CVID.MS_de_novo_search, new List<CVID> { CVID.MS_search_type, CVID.MS_special_processing, });
             RelationsIsA.Add(CVID.MS_search_database_details, new List<CVID> { CVID.MS_search_input_details, });
             RelationsIsA.Add(CVID.MS_database_source, new List<CVID> { CVID.MS_search_database_details, });
             RelationsIsA.Add(CVID.MS_database_name, new List<CVID> { CVID.MS_search_database_details, });
@@ -24644,7 +26870,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_SEQUEST_SequenceHeaderFilter, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_number_of_sequences_searched, new List<CVID> { CVID.MS_search_database_details, });
             RelationsIsA.Add(CVID.MS_number_of_peptide_seqs_compared_to_each_spectrum, new List<CVID> { CVID.MS_search_database_details, CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_spectral_library_search, new List<CVID> { CVID.MS_search_type, });
+            RelationsIsA.Add(CVID.MS_spectral_library_search, new List<CVID> { CVID.MS_search_type, CVID.MS_special_processing, });
             RelationsIsA.Add(CVID.MS_SEQUEST_SequencePartialFilter, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_date___time_search_performed_OBSOLETE, new List<CVID> { CVID.MS_search_statistics, });
             RelationsIsA.Add(CVID.MS_search_time_taken, new List<CVID> { CVID.MS_search_statistics, });
@@ -24829,7 +27055,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_SEQUEST_out_folder, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_SEQUEST_summary, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_PerSeptive_PKS_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
-            RelationsIsA.Add(CVID.MS_Sciex_API_III_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
+            RelationsIsA.Add(CVID.MS_SCIEX_API_III_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_Bruker_XML_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_local_FDR, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, CVID.MS_protein_identification_confidence_metric, });
             RelationsIsA.Add(CVID.MS_Trypsin, new List<CVID> { CVID.MS_cleavage_agent_name, });
@@ -25018,7 +27244,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PEFF_format, new List<CVID> { CVID.MS_database_file_formats, });
             RelationsIsA.Add(CVID.MS_Phenyx_XML_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_DTASelect_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
-            RelationsIsA.Add(CVID.MS_MS2_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
+            RelationsIsA.Add(CVID.MS_MS2_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_taxonomy__NCBI_TaxID, new List<CVID> { CVID.MS_molecule_taxonomy, });
             RelationsIsA.Add(CVID.MS_taxonomy__common_name, new List<CVID> { CVID.MS_molecule_taxonomy, });
             RelationsIsA.Add(CVID.MS_taxonomy__scientific_name, new List<CVID> { CVID.MS_molecule_taxonomy, });
@@ -25031,10 +27257,10 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_SpectraST, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Mascot_Parser, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_null_terminated_ASCII_string, new List<CVID> { CVID.MS_binary_data_type, });
-            RelationsIsA.Add(CVID.MS_AB_SCIEX_TOF_TOF_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
-            RelationsIsA.Add(CVID.MS_AB_SCIEX_TOF_TOF_database, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
-            RelationsIsA.Add(CVID.MS_TOF_TOF_5800, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_AB_SCIEX_TOF_TOF_Series_Explorer_Software, new List<CVID> { CVID.MS_AB_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_SCIEX_TOF_TOF_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
+            RelationsIsA.Add(CVID.MS_SCIEX_TOF_TOF_database, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
+            RelationsIsA.Add(CVID.MS_5800_TOF_TOF, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SCIEX_TOF_TOF_Series_Explorer_Software, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_intensity_normalization, new List<CVID> { CVID.MS_data_processing_action, });
             RelationsIsA.Add(CVID.MS_m_z_calibration, new List<CVID> { CVID.MS_data_processing_action, });
             RelationsIsA.Add(CVID.MS_data_filtering, new List<CVID> { CVID.MS_data_processing_action, });
@@ -25108,8 +27334,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Bruker_Daltonics_apex_series, new List<CVID> { CVID.MS_Bruker_Daltonics_instrument_model, });
             RelationsIsA.Add(CVID.MS_Shimadzu_Corporation_software, new List<CVID> { CVID.MS_software, });
             RelationsIsA.Add(CVID.MS_MALDI_Solutions, new List<CVID> { CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, CVID.MS_Shimadzu_Corporation_software, });
-            RelationsIsA.Add(CVID.MS_AB_SCIEX_TOF_TOF_T2D_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
-            RelationsIsA.Add(CVID.MS_AB_SCIEX_TOF_TOF_T2D_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
+            RelationsIsA.Add(CVID.MS_SCIEX_TOF_TOF_T2D_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
+            RelationsIsA.Add(CVID.MS_SCIEX_TOF_TOF_T2D_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_Scaffold, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Scaffold_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
             RelationsIsA.Add(CVID.MS_SEQUEST_SQT_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
@@ -25516,8 +27742,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_MaxQuant_Phospho__STY__Score_Diffs, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_spectrum_identification_result_details, CVID.MS_PSM_level_PTM_localization_score, });
             RelationsIsA.Add(CVID.MS_MaxQuant_P_site_localization_probability, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_spectrum_identification_result_details, CVID.MS_PSM_level_PTM_localization_score, });
             RelationsIsA.Add(CVID.MS_MaxQuant_PTM_Delta_Score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_Ascore, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_Ascore1, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_Ascore_software, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_Ascore, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
             RelationsIsA.Add(CVID.MS_H_Score, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
             RelationsIsA.Add(CVID.MS_vacuum_drying_MALDI_sample_preparation, new List<CVID> { CVID.MS_matrix_application_type, });
             RelationsIsA.Add(CVID.MS_crushed_crystal_MALDI_sample_preparation, new List<CVID> { CVID.MS_matrix_application_type, });
@@ -25817,7 +28043,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PeptideProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_iProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_ProteinProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
-            RelationsIsA.Add(CVID.MS_ASAPRatio_OBSOLETE, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_XPRESS, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_Libra, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_PTMProphet, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
@@ -25915,7 +28140,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_preprocessing_software, new List<CVID> { CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_PIA, new List<CVID> { CVID.MS_postprocessing_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_PIA_XML_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
-            RelationsIsA.Add(CVID.MS_PIA_workflow_parameter, new List<CVID> { CVID.MS_software_specific_input_parameter, });
+            RelationsIsA.Add(CVID.MS_PIA_workflow_parameter, new List<CVID> { CVID.MS_software_specific_input_parameter, CVID.MS_search_engine_specific_input_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_FDRScore_calculated, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_Combined_FDRScore_calculated, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_PSM_sets_created, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
@@ -25930,7 +28155,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_leading_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_non_leading_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_group_representative, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
-            RelationsIsA.Add(CVID.MS_count_of_identified_proteins, new List<CVID> { CVID.MS_protein_result_details, });
+            RelationsIsA.Add(CVID.MS_count_of_identified_proteins, new List<CVID> { CVID.MS_protein_result_details, CVID.MS_search_statistics, });
             RelationsIsA.Add(CVID.MS_protein_cluster_details, new List<CVID> { CVID.MS_protein_result_details, });
             RelationsIsA.Add(CVID.MS_count_of_identified_clusters, new List<CVID> { CVID.MS_protein_cluster_details, });
             RelationsIsA.Add(CVID.MS_cluster_identifier, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, });
@@ -26020,10 +28245,10 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_sample_pre_fractionation, new List<CVID> { CVID.MS_special_processing, });
             RelationsIsA.Add(CVID.MS_cross_linking_search, new List<CVID> { CVID.MS_special_processing, });
             RelationsIsA.Add(CVID.MS_no_special_processing, new List<CVID> { CVID.MS_special_processing, });
-            RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence, new List<CVID> { CVID.MS_PSM_level_result_details, });
-            RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence_with_modifications, new List<CVID> { CVID.MS_PSM_level_result_details, });
-            RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence_with_modifications_and_charge, new List<CVID> { CVID.MS_PSM_level_result_details, });
-            RelationsIsA.Add(CVID.MS_peptide_level_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_distinct_peptides, });
+            RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence, new List<CVID> { CVID.MS_identification_parameter, });
+            RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence_with_modifications, new List<CVID> { CVID.MS_identification_parameter, });
+            RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence_with_modifications_and_charge, new List<CVID> { CVID.MS_identification_parameter, });
+            RelationsIsA.Add(CVID.MS_peptide_level_score_OBSOLETE, new List<CVID> { CVID.MS_search_engine_specific_score_for_distinct_peptides, });
             RelationsIsA.Add(CVID.MS_peptide_passes_threshold, new List<CVID> { CVID.MS_peptide_result_details, });
             RelationsIsA.Add(CVID.MS_no_PSM_threshold, new List<CVID> { CVID.MS_PSM_level_result_details, });
             RelationsIsA.Add(CVID.MS_no_peptide_level_threshold, new List<CVID> { CVID.MS_peptide_result_details, });
@@ -26034,7 +28259,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_modification_rescoring_false_localization_rate, new List<CVID> { CVID.MS_modification_position_score, });
             RelationsIsA.Add(CVID.MS_cross_linking_attribute, new List<CVID> { CVID.MS_peptide_result_details, });
             RelationsIsA.Add(CVID.MS_cross_link_donor, new List<CVID> { CVID.MS_cross_linking_attribute, });
-            RelationsIsA.Add(CVID.MS_cross_link_receiver, new List<CVID> { CVID.MS_cross_linking_attribute, });
+            RelationsIsA.Add(CVID.MS_cross_link_acceptor, new List<CVID> { CVID.MS_cross_linking_attribute, });
             RelationsIsA.Add(CVID.MS_cross_link_spectrum_identification_item, new List<CVID> { CVID.MS_cross_linking_attribute, });
             RelationsIsA.Add(CVID.MS_cross_linking_score, new List<CVID> { CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_molecules_per_cell_, new List<CVID> { CVID.MS_quantification_datatype, });
@@ -26057,7 +28282,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_baseline_array, new List<CVID> { CVID.MS_binary_data_array, });
             RelationsIsA.Add(CVID.MS_UIMF_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_UIMF_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
-            RelationsIsA.Add(CVID.MS_TripleTOF_6600, new List<CVID> { CVID.MS_AB_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_TripleTOF_6600, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_ProLuCID_xcorr, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_ProLuCID_deltacn, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_D_Score, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
@@ -26100,6 +28325,96 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_spectrum_identification_statistical_threshold, new List<CVID> { CVID.MS_statistical_threshold, });
             RelationsIsA.Add(CVID.MS_ASAPRatio, new List<CVID> { CVID.MS_Trans_Proteomic_Pipeline_software, });
             RelationsIsA.Add(CVID.MS_Tide, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_Andromeda_result_file, new List<CVID> { CVID.MS_intermediate_analysis_format, });
+            RelationsIsA.Add(CVID.MS_2000_QTRAP, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_2500_QTRAP, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_3500_QTRAP, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QTRAP_4500, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QTRAP_6500, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_QTRAP_6500_, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_TripleTOF_4600, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_TripleTOF_5600_, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_100, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_100LC, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_165, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_300, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_350, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_API_365, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Triple_Quad_3500, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Triple_Quad_4500, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Triple_Quad_5500, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Triple_Quad_6500, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Triple_Quad_6500_, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_ProLuCID, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_MS1_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
+            RelationsIsA.Add(CVID.MS_DTASelect, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_splash_key, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_PRIDE_XML, new List<CVID> { CVID.MS_identification_file_format, CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_mzTab, new List<CVID> { CVID.MS_tab_delimited_text_format, });
+            RelationsIsA.Add(CVID.MS_quantification_reagent, new List<CVID> { CVID.MS_assay_label_attribute, CVID.MS_sample_attribute, });
+            RelationsIsA.Add(CVID.MS_ICAT_reagent, new List<CVID> { CVID.MS_quantification_reagent, });
+            RelationsIsA.Add(CVID.MS_ICAT_heavy_reagent, new List<CVID> { CVID.MS_ICAT_reagent, });
+            RelationsIsA.Add(CVID.MS_ICAT_light_reagent, new List<CVID> { CVID.MS_ICAT_reagent, });
+            RelationsIsA.Add(CVID.MS_ICPL_reagent, new List<CVID> { CVID.MS_quantification_reagent, });
+            RelationsIsA.Add(CVID.MS_ICPL_reagent_0, new List<CVID> { CVID.MS_ICPL_reagent, });
+            RelationsIsA.Add(CVID.MS_ICPL_reagent_4, new List<CVID> { CVID.MS_ICPL_reagent, });
+            RelationsIsA.Add(CVID.MS_ICPL_reagent_6, new List<CVID> { CVID.MS_ICPL_reagent, });
+            RelationsIsA.Add(CVID.MS_ICPL_reagent_10, new List<CVID> { CVID.MS_ICPL_reagent, });
+            RelationsIsA.Add(CVID.MS_SILAC_reagent, new List<CVID> { CVID.MS_quantification_reagent, });
+            RelationsIsA.Add(CVID.MS_SILAC_heavy_reagent, new List<CVID> { CVID.MS_SILAC_reagent, });
+            RelationsIsA.Add(CVID.MS_SILAC_medium_reagent, new List<CVID> { CVID.MS_SILAC_reagent, });
+            RelationsIsA.Add(CVID.MS_SILAC_light_reagent, new List<CVID> { CVID.MS_SILAC_reagent, });
+            RelationsIsA.Add(CVID.MS_TMT_reagent, new List<CVID> { CVID.MS_quantification_reagent, });
+            RelationsIsA.Add(CVID.MS_TMT_reagent_126, new List<CVID> { CVID.MS_TMT_reagent, });
+            RelationsIsA.Add(CVID.MS_TMT_reagent_127, new List<CVID> { CVID.MS_TMT_reagent, });
+            RelationsIsA.Add(CVID.MS_TMT_reagent_128, new List<CVID> { CVID.MS_TMT_reagent, });
+            RelationsIsA.Add(CVID.MS_TMT_reagent_129, new List<CVID> { CVID.MS_TMT_reagent, });
+            RelationsIsA.Add(CVID.MS_TMT_reagent_130, new List<CVID> { CVID.MS_TMT_reagent, });
+            RelationsIsA.Add(CVID.MS_TMT_reagent_131, new List<CVID> { CVID.MS_TMT_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent, new List<CVID> { CVID.MS_quantification_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_113, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_114, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_115, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_116, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_117, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_118, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_119, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_iTRAQ_reagent_121, new List<CVID> { CVID.MS_iTRAQ_reagent, });
+            RelationsIsA.Add(CVID.MS_Electron_Transfer_Higher_Energy_Collision_Dissociation__EThcD_, new List<CVID> { CVID.MS_dissociation_method, });
+            RelationsIsA.Add(CVID.MS_jPOST_dataset_identifier, new List<CVID> { CVID.MS_external_reference_identifier, });
+            RelationsIsA.Add(CVID.MS_jPOST_dataset_URI, new List<CVID> { CVID.MS_external_reference_identifier, });
+            RelationsIsA.Add(CVID.MS_Q_Exactive_Plus, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+            RelationsIsA.Add(CVID.MS_proteogenomics_search, new List<CVID> { CVID.MS_special_processing, });
+            RelationsIsA.Add(CVID.MS_proteogenomics_attribute, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_chromosome_name, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_chromosome_strand, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_peptide_start_on_chromosome_OBSOLETE, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_peptide_end_on_chromosome, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_peptide_exon_count, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_peptide_exon_nucleotide_sizes, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_peptide_start_positions_on_chromosome, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_genome_reference_version, new List<CVID> { CVID.MS_proteogenomics_attribute, });
+            RelationsIsA.Add(CVID.MS_MSDK, new List<CVID> { CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_Thermo_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_Waters_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_WIFF_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_Bruker_Agilent_YEP_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_Bruker_BAF_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_Bruker_FID_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_multiple_peak_list_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_single_peak_list_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_scan_number_only_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_spectrum_identifier_nativeID_format__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_mzML_unique_identifier__combined_spectra, new List<CVID> { CVID.MS_native_spectrum_identifier_format__combined_spectra, });
+            RelationsIsA.Add(CVID.MS_UniProtKB_text_sequence_format, new List<CVID> { CVID.MS_database_file_formats, });
+            RelationsIsA.Add(CVID.MS_UniProtKB_XML_sequence_format, new List<CVID> { CVID.MS_database_file_formats, });
+            RelationsIsA.Add(CVID.MS_Morpheus, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_Morpheus_Morpheus_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_Morpheus_summed_Morpheus_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, CVID.MS_search_engine_specific_score, CVID.MS_protein_ambiguity_group_result_details, });
+            RelationsIsA.Add(CVID.MS_protein_interaction_scores_derived_from_cross_linking, new List<CVID> { CVID.MS_cross_linking_attribute, });
+            RelationsIsA.Add(CVID.MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking, new List<CVID> { CVID.MS_regular_expression, });
+            RelationsIsA.Add(CVID.MS_impact_II, new List<CVID> { CVID.MS_Bruker_Daltonics_micrOTOF_series, });
+            RelationsIsA.Add(CVID.MS_impact_HD, new List<CVID> { CVID.MS_Bruker_Daltonics_micrOTOF_series, });
             RelationsIsA.Add(CVID.UNIMOD_Acetyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Amidated, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26176,7 +28491,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_OxArgBiotinRed, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_EDT_iodoacetyl_PEO_biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_IBTP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_GlyGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_GG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Formyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ICAT_H, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ICAT_H_13C_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26212,9 +28527,9 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_2_dHex_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_2_P_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_2_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_S__1_Se_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Delta_H_1_O__1_18O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Delta_H_1_N__1_18O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NBS_13C_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NBS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_BHT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26439,7 +28754,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_iTRAQ4plex114, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_iTRAQ4plex115, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Dibromo, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_LeuArgGlyGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_LRGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_CLIP_TRAQ_3, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_CLIP_TRAQ_4, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Cayman_10141, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26629,8 +28944,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Carboxymethyl_13C_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NEM_2H_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_AEC_MAEC_2H_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Hex1HexNAc1, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Label_13C_6__GlyGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_13C_6__GG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_21345, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Pentylamine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_21360, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26648,13 +28963,12 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Arg2PG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_cGMP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_cGMP_RMP_loss, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Label_2H_4__GlyGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Label_13C_8_15N_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_2H_4__GG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_MG_H1, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_G_H1, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ZGB, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_1_2H_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Label_13C_6_15N_2__GlyGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_13C_6_15N_2__GG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ICPL_13C_6_2H_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_QEQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_QQQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26687,10 +29001,10 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_HNE_BAHAH, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Methylmalonylation, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Ethoxyformyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Label_13C_4_15N_2__GlyGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_13C_4_15N_2__GG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ethylamino, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_MercaptoEthanol, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_EthylAmide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Ethyl_Deamidated, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_VFQQQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_VIEVYQEQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_AMTzHexNAc2, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26740,7 +29054,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Label_15N_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_15N_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_sulfo_amino, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_BHAc, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_AHA_Alkyne, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_AHA_Alkyne_KDDDD, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_EGCG1, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26749,7 +29062,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_6_15N_4__Dimethyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_6_15N_4__Methyl_2H_3_13C_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_6_15N_4__Dimethyl_2H_6_13C_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_SecCarbamidomethyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cys__CamSec, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Thiazolidine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_DEDGFLYMVYASQETFG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Invitrogen_M1602, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -26767,8 +29080,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Xlink_EGScleaved, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_88310, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_2_nitrobenzyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_SecNEM, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_SecNEM_2H_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cys__SecNEM, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cys__SecNEM_2H_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Thiadiazole, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Withaferin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_88317, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -27007,7 +29320,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_BMP_piperidinol, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_UgiJoullieProGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_UgiJoullieProGlyProGly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_IMEHex_2_NeuAc, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_IMEHex_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Arg_loss, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Arg, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Butyryl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -27027,14 +29340,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Propyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Propyl_2H_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Propiophenone, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_AhaEthynylUridine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_H_6_C_3_O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_H_8_C_6_O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_biotinAcrolein298, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_MM_diphenylpentanone, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_EHD_diphenylpentanone, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Bipyridine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_VinylPMS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_21901_2H2O, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_DiLeu4plex115, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_DiLeu4plex, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -27043,6 +29353,421 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_NEMsulfur, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_SulfurDioxide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NEMsulfurWater, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_bisANS_sulfonates, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DNCB_hapten, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_21911, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_iodoTMT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_iodoTMT6plex, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Phosphogluconoylation, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_PS_Hapten, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cy3_maleimide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_benzylguanidine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_CarboxymethylDMAP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_azole, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_phosphoRibosyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_NEM_2H_5__H2O, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Crotonyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_O_Et_N_diMePhospho, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_N_dimethylphosphate, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Methyl_2H_3__Acetyl_2H_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_2H_3__Oxidation, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Trimethyl_2H_9_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Acetyl_13C_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_methylsulfonylethyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_ethylsulfonylethyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_phenylsulfonylethyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_PyridoxalPhosphateH2, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Homocysteic_acid, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hydroxamic_acid, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_3_phosphoglyceryl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HN2_mustard, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HN3_mustard, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Oxidation_NEM, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_NHS_fluorescein, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DiART6plex, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DiART6plex115, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DiART6plex116_119, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DiART6plex117, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DiART6plex118, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Iodoacetanilide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Iodoacetanilide_13C_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Dap_DSP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_MurNAc, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_2H_7_15N_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_2H_6_15N_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_EEEDVIEVYQEQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_EDEDTIDVFQQQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_s_GlcNAc, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_PhosphoHex_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Trimethyl_13C_3_2H_9_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_15N_oxobutanoic, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_spermine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_spermidine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_21330, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Pentose, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexA_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_Pent_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_1_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_dHex_1_Me_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexA_1_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_1_Me_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuAc_1_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_1_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_2_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_2_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_8_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_5_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_HexNAc_2_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Me_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_Pent_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_3_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_HexNAc_2_Phos_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_8_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_5_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_4_Me_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_6_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_HexNAc_3_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_4_Me_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_3_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_5_HexNAc_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_Pent_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_6_Sulf_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_9_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_5_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexA_1_HexNAc_3_Sulf_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_7_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_5_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_3_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Sulf_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_4_Me_2_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_6_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_6_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_5_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_4_Me_3_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_3_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_5_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_4_HexNAc_4_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_7_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_4_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_6_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Kdn_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_1_Kdn_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_1_Me_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexA_1_Pent_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexA_1_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_2_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexA_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_1_NeuGc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_1_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexA_1_NeuAc_1_Pent_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_Phos_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexA_1_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexA_1_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_Phos_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_2_NeuAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_1_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexA_1_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_HexNAc_3_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_3_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_7_Phos_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_2_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_2_HexA_1_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_4_HexNAc_3_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_1_Kdn_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_1_HexNAc_3_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_2_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuGc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_4_Hex_2_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_8_Phos_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_4_Hex_2_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_4_Hex_1_HexNAc_3_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_Sulf_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_2_HexNAc_3_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexA_1_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_4_Hex_3_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_9_Phos_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_HexNAc_7_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_1_NeuGc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_NeuAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexA_1_HexNAc_3_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_10_Phos_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_4_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuGc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuGc_1_Sulf_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_Sulf_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_3_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_3_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_4_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_6_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_5_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_4_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_3_HexNAc_5_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Ac_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Label_13C_2_15N_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS_NH2, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_NQIGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_CEP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.PATO_mobility, new List<CVID> { CVID.PATO_physical_quality, });
             RelationsIsA.Add(CVID.PATO_speed, new List<CVID> { CVID.PATO_movement_quality, });
             RelationsIsA.Add(CVID.PATO_age, new List<CVID> { CVID.PATO_time, });
@@ -27074,7 +29799,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_pilosity, new List<CVID> { CVID.PATO_texture, });
             RelationsIsA.Add(CVID.PATO_qualitative, new List<CVID> { CVID.PATO_quality, });
             RelationsIsA.Add(CVID.PATO_deviation_from_normal_, new List<CVID> { CVID.PATO_qualitative, });
-            RelationsIsA.Add(CVID.PATO_count, new List<CVID> { CVID.PATO_qualitative, });
+            RelationsIsA.Add(CVID.PATO_amount, new List<CVID> { CVID.PATO_qualitative, });
             RelationsIsA.Add(CVID.PATO_response_to, new List<CVID> { CVID.PATO_physical_quality, });
             RelationsIsA.Add(CVID.PATO_rhythm_quality, new List<CVID> { CVID.PATO_temporal_distribution_quality, });
             RelationsIsA.Add(CVID.PATO_amplitude, new List<CVID> { CVID.PATO_physical_quality_of_a_process, });
@@ -27106,7 +29831,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_brood_size, new List<CVID> { CVID.PATO_brood_quality, });
             RelationsIsA.Add(CVID.PATO_female_fertility, new List<CVID> { CVID.PATO_fertility, });
             RelationsIsA.Add(CVID.PATO_male_fertility, new List<CVID> { CVID.PATO_fertility, });
-            RelationsIsA.Add(CVID.PATO_arrested, new List<CVID> { CVID.PATO_occurrence, CVID.PATO_decreased_occurrence, CVID.PATO_offset_quality, });
+            RelationsIsA.Add(CVID.PATO_arrested, new List<CVID> { CVID.PATO_decreased_occurrence, CVID.PATO_offset_quality, });
             RelationsIsA.Add(CVID.PATO_mobile, new List<CVID> { CVID.PATO_mobility, });
             RelationsIsA.Add(CVID.PATO_immobile, new List<CVID> { CVID.PATO_mobility, });
             RelationsIsA.Add(CVID.PATO_increased_speed, new List<CVID> { CVID.PATO_speed, CVID.PATO_increased_object_quality, });
@@ -27171,11 +29896,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_pubescent, new List<CVID> { CVID.PATO_maturity, });
             RelationsIsA.Add(CVID.PATO_abnormal, new List<CVID> { CVID.PATO_deviation_from_normal_, });
             RelationsIsA.Add(CVID.PATO_normal, new List<CVID> { CVID.PATO_deviation_from_normal_, });
-            RelationsIsA.Add(CVID.PATO_absent, new List<CVID> { CVID.PATO_count, });
+            RelationsIsA.Add(CVID.PATO_absent, new List<CVID> { CVID.PATO_amount, });
             RelationsIsA.Add(CVID.PATO_conspicuous, new List<CVID> { CVID.PATO_conspicuousness, });
             RelationsIsA.Add(CVID.PATO_inconspicuous, new List<CVID> { CVID.PATO_conspicuousness, });
-            RelationsIsA.Add(CVID.PATO_present, new List<CVID> { CVID.PATO_count, });
-            RelationsIsA.Add(CVID.PATO_present_in_greater_numbers_in_organism, new List<CVID> { CVID.PATO_present, CVID.PATO_increased_quality, });
+            RelationsIsA.Add(CVID.PATO_present, new List<CVID> { CVID.PATO_amount, });
+            RelationsIsA.Add(CVID.PATO_increased_amount, new List<CVID> { CVID.PATO_present, CVID.PATO_increased_quality, });
             RelationsIsA.Add(CVID.PATO_responsive_to, new List<CVID> { CVID.PATO_response_to, });
             RelationsIsA.Add(CVID.PATO_unresponsive_to, new List<CVID> { CVID.PATO_response_to, });
             RelationsIsA.Add(CVID.PATO_increased_duration, new List<CVID> { CVID.PATO_duration, CVID.PATO_increased_process_quality, });
@@ -27229,7 +29954,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_misrouted, new List<CVID> { CVID.PATO_position, });
             RelationsIsA.Add(CVID.PATO_posterioralized, new List<CVID> { CVID.PATO_malformed, });
             RelationsIsA.Add(CVID.PATO_prostrate, new List<CVID> { CVID.PATO_position, });
-            RelationsIsA.Add(CVID.PATO_symmetrical, new List<CVID> { CVID.PATO_symmetry, });
+            RelationsIsA.Add(CVID.PATO_symmetrical, new List<CVID> { CVID.PATO_regular_spatial_pattern, CVID.PATO_symmetry, });
             RelationsIsA.Add(CVID.PATO_uncrowded, new List<CVID> { CVID.PATO_spatial_pattern, });
             RelationsIsA.Add(CVID.PATO_unilateral, new List<CVID> { CVID.PATO_spatial_pattern, });
             RelationsIsA.Add(CVID.PATO_unlocalised, new List<CVID> { CVID.PATO_spatial_pattern, });
@@ -27240,7 +29965,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_fused_with, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_herniated, new List<CVID> { CVID.PATO_protruding, });
             RelationsIsA.Add(CVID.PATO_hyperplastic, new List<CVID> { CVID.PATO_increased_size, });
-            RelationsIsA.Add(CVID.PATO_hypoplastic, new List<CVID> { CVID.PATO_aplastic_hypoplastic, });
+            RelationsIsA.Add(CVID.PATO_hypoplastic, new List<CVID> { CVID.PATO_decreased_size, CVID.PATO_aplastic_hypoplastic, });
             RelationsIsA.Add(CVID.PATO_malformed, new List<CVID> { CVID.PATO_deformed, });
             RelationsIsA.Add(CVID.PATO_necrotic, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_obstructed, new List<CVID> { CVID.PATO_closed, });
@@ -27300,7 +30025,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_opacity, new List<CVID> { CVID.PATO_optical_quality, });
             RelationsIsA.Add(CVID.PATO_opaque, new List<CVID> { CVID.PATO_opacity, });
             RelationsIsA.Add(CVID.PATO_transparent, new List<CVID> { CVID.PATO_opacity, });
-            RelationsIsA.Add(CVID.PATO_symmetry, new List<CVID> { CVID.PATO_regular_spatial_pattern, });
+            RelationsIsA.Add(CVID.PATO_symmetry, new List<CVID> { CVID.PATO_spatial_pattern, });
             RelationsIsA.Add(CVID.PATO_undulate, new List<CVID> { CVID.PATO_shape, });
             RelationsIsA.Add(CVID.PATO_dwarf_like, new List<CVID> { CVID.PATO_decreased_size, });
             RelationsIsA.Add(CVID.PATO_permeability, new List<CVID> { CVID.PATO_structure, });
@@ -27594,7 +30319,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_curved_ventral, new List<CVID> { CVID.PATO_curved, });
             RelationsIsA.Add(CVID.PATO_proportionality_to, new List<CVID> { CVID.PATO_physical_quality, });
             RelationsIsA.Add(CVID.PATO_decreased_depth, new List<CVID> { CVID.PATO_decreased_size, CVID.PATO_depth, });
-            RelationsIsA.Add(CVID.PATO_duplicated, new List<CVID> { CVID.PATO_present_in_greater_numbers_in_organism, });
+            RelationsIsA.Add(CVID.PATO_duplicated, new List<CVID> { CVID.PATO_increased_amount, });
             RelationsIsA.Add(CVID.PATO_anteverted, new List<CVID> { CVID.PATO_oriented, });
             RelationsIsA.Add(CVID.PATO_increased_position, new List<CVID> { CVID.PATO_position, CVID.PATO_increased_object_quality, });
             RelationsIsA.Add(CVID.PATO_decreased_position, new List<CVID> { CVID.PATO_position, CVID.PATO_decreased_object_quality, });
@@ -27602,8 +30327,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_collapsed, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_spongy, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_sloped, new List<CVID> { CVID.PATO_shape, });
-            RelationsIsA.Add(CVID.PATO_prominent, new List<CVID> { CVID.PATO_protruding, });
-            RelationsIsA.Add(CVID.PATO_aplastic, new List<CVID> { CVID.PATO_absent, CVID.PATO_aplastic_hypoplastic, });
+            RelationsIsA.Add(CVID.PATO_prominent, new List<CVID> { CVID.PATO_protruding, CVID.PATO_prominence, });
+            RelationsIsA.Add(CVID.PATO_aplastic, new List<CVID> { CVID.PATO_aplastic_hypoplastic, CVID.PATO_agenesis, });
             RelationsIsA.Add(CVID.PATO_recent, new List<CVID> { CVID.PATO_onset_quality, });
             RelationsIsA.Add(CVID.PATO_condensed, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_chronological_age, new List<CVID> { CVID.PATO_age, });
@@ -27975,7 +30700,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_hydrophilic, new List<CVID> { CVID.PATO_hydrophilicity, });
             RelationsIsA.Add(CVID.PATO_miscibility, new List<CVID> { CVID.PATO_quality_of_a_liquid, });
             RelationsIsA.Add(CVID.PATO_scalloped, new List<CVID> { CVID.PATO_serration, });
-            RelationsIsA.Add(CVID.PATO_tripartite, new List<CVID> { CVID.PATO_concave_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_tripartite, new List<CVID> { CVID.PATO_branched, CVID.PATO_concave_3_D_shape, });
             RelationsIsA.Add(CVID.PATO_ovate, new List<CVID> { CVID.PATO_spheroid, });
             RelationsIsA.Add(CVID.PATO_decreased_odor, new List<CVID> { CVID.PATO_odorous, CVID.PATO_decreased_object_quality, });
             RelationsIsA.Add(CVID.PATO_increased_odor, new List<CVID> { CVID.PATO_odorous, CVID.PATO_increased_object_quality, });
@@ -28080,7 +30805,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_multicellular, new List<CVID> { CVID.PATO_cellularity, });
             RelationsIsA.Add(CVID.PATO_unicellular, new List<CVID> { CVID.PATO_cellularity, });
             RelationsIsA.Add(CVID.PATO_organismal_quality, new List<CVID> { CVID.PATO_physical_object_quality, });
-            RelationsIsA.Add(CVID.PATO_present_in_fewer_numbers_in_organism, new List<CVID> { CVID.PATO_present, CVID.PATO_decreased_quality, });
+            RelationsIsA.Add(CVID.PATO_decreased_amount, new List<CVID> { CVID.PATO_present, CVID.PATO_decreased_quality, });
             RelationsIsA.Add(CVID.PATO_conspicuousness, new List<CVID> { CVID.PATO_qualitative, });
             RelationsIsA.Add(CVID.PATO_lacks_parts_or_has_fewer_parts_of_type, new List<CVID> { CVID.PATO_altered_number_of, });
             RelationsIsA.Add(CVID.PATO_lacks_all_parts_of_type, new List<CVID> { CVID.PATO_lacks_parts_or_has_fewer_parts_of_type, });
@@ -28131,7 +30856,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_adaxial_to, new List<CVID> { CVID.PATO_position, });
             RelationsIsA.Add(CVID.PATO_mosaicism, new List<CVID> { CVID.PATO_organismal_quality, });
             RelationsIsA.Add(CVID.PATO_lateral_and_rotional_curvature, new List<CVID> { CVID.PATO_rotational_curvature, });
-            RelationsIsA.Add(CVID.PATO_present_in_normal_numbers_in_organism, new List<CVID> { CVID.PATO_present, });
+            RelationsIsA.Add(CVID.PATO_normal_amount, new List<CVID> { CVID.PATO_present, });
             RelationsIsA.Add(CVID.PATO_increased_occurrence, new List<CVID> { CVID.PATO_occurrence, CVID.PATO_increased_process_quality, });
             RelationsIsA.Add(CVID.PATO_decreased_occurrence, new List<CVID> { CVID.PATO_occurrence, CVID.PATO_decreased_process_quality, });
             RelationsIsA.Add(CVID.PATO_dorso_ventrally_flattened, new List<CVID> { CVID.PATO_flattened, });
@@ -28193,7 +30918,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_fibrinoid, new List<CVID> { CVID.PATO_composition, });
             RelationsIsA.Add(CVID.PATO_fibrinopurulent, new List<CVID> { CVID.PATO_composition, });
             RelationsIsA.Add(CVID.PATO_glandular, new List<CVID> { CVID.PATO_morphology, });
-            RelationsIsA.Add(CVID.PATO_multiple, new List<CVID> { CVID.PATO_present_in_greater_numbers_in_organism, });
+            RelationsIsA.Add(CVID.PATO_multiple, new List<CVID> { CVID.PATO_increased_amount, });
             RelationsIsA.Add(CVID.PATO_hydropic, new List<CVID> { CVID.PATO_composition, });
             RelationsIsA.Add(CVID.PATO_suppurative, new List<CVID> { CVID.PATO_composition, });
             RelationsIsA.Add(CVID.PATO_trabecular, new List<CVID> { CVID.PATO_irregular_spatial_pattern, });
@@ -28362,7 +31087,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_increased_elasticity, new List<CVID> { CVID.PATO_elastic, CVID.PATO_increased_object_quality, });
             RelationsIsA.Add(CVID.PATO_decreased_elasticity, new List<CVID> { CVID.PATO_elastic, CVID.PATO_decreased_object_quality, });
             RelationsIsA.Add(CVID.PATO_setose, new List<CVID> { CVID.PATO_hairy, });
-            RelationsIsA.Add(CVID.PATO_aplastic_hypoplastic, new List<CVID> { CVID.PATO_decreased_size, });
+            RelationsIsA.Add(CVID.PATO_aplastic_hypoplastic, new List<CVID> { CVID.PATO_physical_object_quality, });
             RelationsIsA.Add(CVID.PATO_agenesis, new List<CVID> { CVID.PATO_absent, });
             RelationsIsA.Add(CVID.PATO_transient, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_permanent, new List<CVID> { CVID.PATO_structure, });
@@ -28539,7 +31264,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_prism_shaped, new List<CVID> { CVID.PATO_shape, });
             RelationsIsA.Add(CVID.PATO_keyhole_shaped, new List<CVID> { CVID.PATO_shape, });
             RelationsIsA.Add(CVID.PATO_lathlike, new List<CVID> { CVID.PATO_shape, });
-            RelationsIsA.Add(CVID.PATO_distensible, new List<CVID> { CVID.PATO_structure, });
+            RelationsIsA.Add(CVID.PATO_distensible, new List<CVID> { CVID.PATO_distensibility, });
             RelationsIsA.Add(CVID.PATO_sutured_to, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_transformed_to, new List<CVID> { CVID.PATO_morphology, });
             RelationsIsA.Add(CVID.PATO_increased_velocity, new List<CVID> { CVID.PATO_velocity, CVID.PATO_increased_object_quality, });
@@ -28599,11 +31324,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_separating, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_anterodistal_orientation, new List<CVID> { CVID.PATO_orientation, });
             RelationsIsA.Add(CVID.PATO_posterodistal_orientation, new List<CVID> { CVID.PATO_orientation, });
-            RelationsIsA.Add(CVID.PATO_borderline_intensity, new List<CVID> { CVID.PATO_intensity, });
-            RelationsIsA.Add(CVID.PATO_profound_intensity, new List<CVID> { CVID.PATO_intensity, });
-            RelationsIsA.Add(CVID.PATO_episodic, new List<CVID> { CVID.PATO_occurrence, });
-            RelationsIsA.Add(CVID.PATO_refractory, new List<CVID> { CVID.PATO_occurrence, });
-            RelationsIsA.Add(CVID.PATO_secondary, new List<CVID> { CVID.PATO_qualitative, });
             RelationsIsA.Add(CVID.PATO_bipartite, new List<CVID> { CVID.PATO_multipartite, });
             RelationsIsA.Add(CVID.PATO_plowshare_shaped, new List<CVID> { CVID.PATO_shape, });
             RelationsIsA.Add(CVID.PATO_peg_like, new List<CVID> { CVID.PATO_shape, });
@@ -28612,6 +31332,63 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_concavo_convex, new List<CVID> { CVID.PATO_concavity, });
             RelationsIsA.Add(CVID.PATO_ring_shaped, new List<CVID> { CVID.PATO_shape, });
             RelationsIsA.Add(CVID.PATO_spur_shaped, new List<CVID> { CVID.PATO_shape, });
+            RelationsIsA.Add(CVID.PATO_homeostatic, new List<CVID> { CVID.PATO_organismal_quality, });
+            RelationsIsA.Add(CVID.PATO_borderline_intensity, new List<CVID> { CVID.PATO_intensity, });
+            RelationsIsA.Add(CVID.PATO_profound_intensity, new List<CVID> { CVID.PATO_intensity, });
+            RelationsIsA.Add(CVID.PATO_episodic, new List<CVID> { CVID.PATO_occurrence, });
+            RelationsIsA.Add(CVID.PATO_refractory, new List<CVID> { CVID.PATO_occurrence, });
+            RelationsIsA.Add(CVID.PATO_secondary, new List<CVID> { CVID.PATO_qualitative, });
+            RelationsIsA.Add(CVID.PATO_hemispheroid, new List<CVID> { CVID.PATO_convex_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_variability_of_count, new List<CVID> { CVID.PATO_variability, });
+            RelationsIsA.Add(CVID.PATO_pear_shaped, new List<CVID> { CVID.PATO_convex_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_paddle_shaped, new List<CVID> { CVID.PATO_shape, });
+            RelationsIsA.Add(CVID.PATO_subelliptical, new List<CVID> { CVID.PATO_superelliptic, });
+            RelationsIsA.Add(CVID.PATO_radiating, new List<CVID> { CVID.PATO_shape, });
+            RelationsIsA.Add(CVID.PATO_differentiated_from, new List<CVID> { CVID.PATO_morphology, });
+            RelationsIsA.Add(CVID.PATO_hypsodont, new List<CVID> { CVID.PATO_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_brachydont, new List<CVID> { CVID.PATO_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_molariform, new List<CVID> { CVID.PATO_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_plumose, new List<CVID> { CVID.PATO_branched, });
+            RelationsIsA.Add(CVID.PATO_continuous_with, new List<CVID> { CVID.PATO_position, });
+            RelationsIsA.Add(CVID.PATO_complete_structure, new List<CVID> { CVID.PATO_structure, });
+            RelationsIsA.Add(CVID.PATO_incomplete_structure, new List<CVID> { CVID.PATO_structure, });
+            RelationsIsA.Add(CVID.PATO_subspherical, new List<CVID> { CVID.PATO_spheroid, });
+            RelationsIsA.Add(CVID.PATO_tapered_size, new List<CVID> { CVID.PATO_size, });
+            RelationsIsA.Add(CVID.PATO_surrounded_by, new List<CVID> { CVID.PATO_position, });
+            RelationsIsA.Add(CVID.PATO_labiolingually_compressed, new List<CVID> { CVID.PATO_flattened, });
+            RelationsIsA.Add(CVID.PATO_mesiodistally_compressed, new List<CVID> { CVID.PATO_flattened, });
+            RelationsIsA.Add(CVID.PATO_curved_lingually, new List<CVID> { CVID.PATO_curved, });
+            RelationsIsA.Add(CVID.PATO_irregularly_shaped, new List<CVID> { CVID.PATO_shape, });
+            RelationsIsA.Add(CVID.PATO_unicuspidate, new List<CVID> { CVID.PATO_cuspidate, });
+            RelationsIsA.Add(CVID.PATO_uniform_diameter, new List<CVID> { CVID.PATO_diameter, });
+            RelationsIsA.Add(CVID.PATO_parasagittal_orientation, new List<CVID> { CVID.PATO_orientation, });
+            RelationsIsA.Add(CVID.PATO_longitudinal_orientation, new List<CVID> { CVID.PATO_orientation, });
+            RelationsIsA.Add(CVID.PATO_maximally_connected, new List<CVID> { CVID.PATO_structure, });
+            RelationsIsA.Add(CVID.PATO_disconnected, new List<CVID> { CVID.PATO_structure, });
+            RelationsIsA.Add(CVID.PATO_absence_due_to_degeneration, new List<CVID> { CVID.PATO_absent, CVID.PATO_degenerate, });
+            RelationsIsA.Add(CVID.PATO_process_efficacy, new List<CVID> { CVID.PATO_process_quality, });
+            RelationsIsA.Add(CVID.PATO_decreased_efficacy, new List<CVID> { CVID.PATO_decreased_process_quality, CVID.PATO_process_efficacy, });
+            RelationsIsA.Add(CVID.PATO_increased_efficacy, new List<CVID> { CVID.PATO_increased_process_quality, CVID.PATO_process_efficacy, });
+            RelationsIsA.Add(CVID.PATO_tendrilous, new List<CVID> { CVID.PATO_shape, });
+            RelationsIsA.Add(CVID.PATO_polymeric, new List<CVID> { CVID.PATO_structure, });
+            RelationsIsA.Add(CVID.PATO_prominence, new List<CVID> { CVID.PATO_occurrence, });
+            RelationsIsA.Add(CVID.PATO_distensibility, new List<CVID> { CVID.PATO_structure, });
+            RelationsIsA.Add(CVID.PATO_humidity, new List<CVID> { CVID.PATO_quality_of_a_gas, });
+            RelationsIsA.Add(CVID.PATO_increased_humidity, new List<CVID> { CVID.PATO_increased_object_quality, CVID.PATO_humidity, });
+            RelationsIsA.Add(CVID.PATO_decreased_humidity, new List<CVID> { CVID.PATO_decreased_object_quality, CVID.PATO_humidity, });
+            RelationsIsA.Add(CVID.PATO_quality_of_a_plasma, new List<CVID> { CVID.PATO_quality_of_a_gas, });
+            RelationsIsA.Add(CVID.PATO_degree_of_illumination, new List<CVID> { CVID.PATO_electromagnetic__EM__radiation_quality, });
+            RelationsIsA.Add(CVID.PATO_increased_degree_of_illumination, new List<CVID> { CVID.PATO_increased_object_quality, CVID.PATO_degree_of_illumination, });
+            RelationsIsA.Add(CVID.PATO_decreased_degree_of_illumination, new List<CVID> { CVID.PATO_decreased_object_quality, CVID.PATO_degree_of_illumination, });
+            RelationsIsA.Add(CVID.PATO_stepped, new List<CVID> { CVID.PATO_shape, });
+            RelationsIsA.Add(CVID.PATO_quality_of_a_colloidal_suspension, new List<CVID> { CVID.PATO_quality_of_a_substance, });
+            RelationsIsA.Add(CVID.PATO_quality_of_an_aerosol, new List<CVID> { CVID.PATO_quality_of_a_colloidal_suspension, });
+            RelationsIsA.Add(CVID.PATO_genotypic_sex, new List<CVID> { CVID.PATO_biological_sex, });
+            RelationsIsA.Add(CVID.PATO_male_genotypic_sex, new List<CVID> { CVID.PATO_genotypic_sex, });
+            RelationsIsA.Add(CVID.PATO_female_genotypic_sex, new List<CVID> { CVID.PATO_genotypic_sex, });
+            RelationsIsA.Add(CVID.PATO_potability, new List<CVID> { CVID.PATO_physical_quality, });
+            RelationsIsA.Add(CVID.PATO_non_potable, new List<CVID> { CVID.PATO_potability, });
+            RelationsIsA.Add(CVID.PATO_potable, new List<CVID> { CVID.PATO_potability, });
             RelationsIsA.Add(CVID.UO_length_unit, new List<CVID> { CVID.UO_unit, });
             RelationsIsA.Add(CVID.UO_mass_unit, new List<CVID> { CVID.UO_unit, });
             RelationsIsA.Add(CVID.UO_time_unit, new List<CVID> { CVID.UO_unit, });
