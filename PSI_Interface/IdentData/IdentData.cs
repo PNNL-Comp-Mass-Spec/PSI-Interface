@@ -46,7 +46,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public IdentDataList<CVInfo> CVList
         {
             get { return this._cvList; }
@@ -65,7 +65,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public IdentDataList<AnalysisSoftwareObj> AnalysisSoftwareList
         {
             get { return this._analysisSoftwareList; }
@@ -80,7 +80,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The Provider of the mzIdentML record in terms of the contact and software.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ProviderObj Provider
         {
             get { return this._provider; }
@@ -94,7 +94,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public IdentDataList<AbstractContactObj> AuditCollection
         {
             get { return this._auditCollection; }
@@ -108,7 +108,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public IdentDataList<SampleObj> AnalysisSampleCollection
         {
             get { return this._analysisSampleCollection; }
@@ -122,7 +122,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public SequenceCollectionObj SequenceCollection
         {
             get { return this._sequenceCollection; }
@@ -136,7 +136,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public AnalysisCollectionObj AnalysisCollection
         {
             get { return this._analysisCollection; }
@@ -150,7 +150,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public AnalysisProtocolCollectionObj AnalysisProtocolCollection
         {
             get { return this._analysisProtocolCollection; }
@@ -164,7 +164,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public DataCollectionObj DataCollection
         {
             get { return this._dataCollection; }
@@ -179,7 +179,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>Any bibliographic references associated with the file</remarks>
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<BibliographicReferenceObj> BibliographicReferences
         {
             get { return this._bibliographicReferences; }
@@ -312,7 +312,7 @@ namespace PSI_Interface.IdentData
         private string _peptideEvidenceRef;
         private PeptideEvidenceObj _peptideEvidence;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationItemRefObj> SpectrumIdentificationItems
         {
             get { return this._spectrumIdentificationItems; }
@@ -442,7 +442,7 @@ namespace PSI_Interface.IdentData
         private List<string> _index;
         private int _charge;
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<FragmentArrayObj> FragmentArrays
         {
             get { return this._fragmentArrays; }
@@ -457,7 +457,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The type of ion identified.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {
             get { return this._cvParam; }
@@ -770,7 +770,7 @@ namespace PSI_Interface.IdentData
     {
         private ParamBaseObj _item;
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public ParamBaseObj Item
         {
             get { return this._item; }
@@ -793,7 +793,7 @@ namespace PSI_Interface.IdentData
     {
         private IdentDataList<ParamBaseObj> _items;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<ParamBaseObj> Items
         {
             get { return this._items; }
@@ -868,7 +868,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<SpectrumIdentificationListObj> _spectrumIdentificationList;
         private ProteinDetectionListObj _proteinDetectionList;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationListObj> SpectrumIdentificationList
         {
             get { return this._spectrumIdentificationList; }
@@ -882,7 +882,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ProteinDetectionListObj ProteinDetectionList
         {
             get { return this._proteinDetectionList; }
@@ -930,7 +930,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public IdentDataList<MeasureObj> FragmentationTables
         {
             get { return this._fragmentationTables; }
@@ -944,7 +944,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationResultObj> SpectrumIdentificationResults
         {
             get { return this._spectrumIdentificationResults; }
@@ -958,8 +958,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___:Scores or output parameters associated with the SpectrumIdentificationList.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___:Scores or output parameters associated with the SpectrumIdentificationList.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -973,8 +973,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -1037,7 +1037,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 1, max unbounded
+        ///// <remarks>min 1, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -1196,7 +1196,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<PeptideHypothesisObj> PeptideHypotheses
         {
             get { return this._peptideHypotheses; }
@@ -1210,8 +1210,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___:Scores or parameters associated with this ProteinDetectionHypothesis e.g. p-value</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___:Scores or parameters associated with this ProteinDetectionHypothesis e.g. p-value</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -1225,8 +1225,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -1324,7 +1324,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<ProteinDetectionHypothesisObj> ProteinDetectionHypotheses
         {
             get { return this._proteinDetectionHypotheses; }
@@ -1338,8 +1338,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___:Scores or parameters associated with the ProteinAmbiguityGroup.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___:Scores or parameters associated with the ProteinAmbiguityGroup.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -1353,8 +1353,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -1400,7 +1400,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ProteinAmbiguityGroupObj> ProteinAmbiguityGroups
         {
             get { return this._proteinAmbiguityGroups; }
@@ -1414,8 +1414,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___:Scores or output parameters associated with the whole ProteinDetectionList</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___:Scores or output parameters associated with the whole ProteinDetectionList</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -1429,8 +1429,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -1491,7 +1491,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<PeptideEvidenceRefObj> PeptideEvidences
         {
             get { return this._peptideEvidences; }
@@ -1505,7 +1505,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public IdentDataList<IonTypeObj> Fragmentations
         {
             get { return this._fragmentations; }
@@ -1519,8 +1519,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___:Scores or attributes associated with the SpectrumIdentificationItem e.g. e-value, p-value, score.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___:Scores or attributes associated with the SpectrumIdentificationItem e.g. e-value, p-value, score.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParam; }
@@ -1534,8 +1534,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParam; }
@@ -1778,7 +1778,7 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationItemObj> SpectrumIdentificationItems
         {
             get { return this._spectrumIdentificationItems; }
@@ -1792,10 +1792,10 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___: Scores or parameters associated with the SpectrumIdentificationResult 
-        /// (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide 
-        /// sequences within the parent tolerance for this spectrum.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: Scores or parameters associated with the SpectrumIdentificationResult 
+        ///// (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide 
+        ///// sequences within the parent tolerance for this spectrum.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -1809,8 +1809,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -1883,10 +1883,10 @@ namespace PSI_Interface.IdentData
     {
         /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         string ExternalFormatDocumentation { get; set; }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         FileFormatInfo FileFormat { get; set; }
 
         /// <remarks>The location of the data file.</remarks>
@@ -1904,8 +1904,7 @@ namespace PSI_Interface.IdentData
         private CVParamObj _cvParam;
 
         /// <remarks>cvParam capturing file formats</remarks>
-        /// Optional Attribute
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {
             get { return this._cvParam; }
@@ -1954,14 +1953,14 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation
         {
             get { return this._externalFormatDocumentation; }
             set { this._externalFormatDocumentation = value; }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public FileFormatInfo FileFormat
         {
             get { return this._fileFormat; }
@@ -1984,7 +1983,7 @@ namespace PSI_Interface.IdentData
             set { this._location = value; }
         }
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public SpectrumIDFormatObj SpectrumIDFormat
         {
             get { return this._spectrumIDFormat; }
@@ -2008,7 +2007,7 @@ namespace PSI_Interface.IdentData
         private CVParamObj _cvParam;
 
         /// <remarks>CV term capturing the type of identifier used.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {
             get { return this._cvParam; }
@@ -2058,14 +2057,14 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation
         {
             get { return this._externalFormatDocumentation; }
             set { this._externalFormatDocumentation = value; }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public FileFormatInfo FileFormat
         {
             get { return this._fileFormat; }
@@ -2088,8 +2087,8 @@ namespace PSI_Interface.IdentData
             set { this._location = value; }
         }
 
-        /// <remarks>___ParamGroup___:Any additional parameters description the source file.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___:Any additional parameters description the source file.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -2103,8 +2102,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -2158,14 +2157,14 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation
         {
             get { return this._externalFormatDocumentation; }
             set { this._externalFormatDocumentation = value; }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public FileFormatInfo FileFormat
         {
             get { return this._fileFormat; }
@@ -2189,7 +2188,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The database name may be given as a cvParam if it maps exactly to one of the release databases listed in the CV, otherwise a userParam should be used.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public ParamObj DatabaseName
         {
             get { return this._databaseName; }
@@ -2203,7 +2202,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -2309,7 +2308,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The parameters and settings for the protein detection given as CV terms.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ParamListObj AnalysisParams
         {
             get { return this._analysisParams; }
@@ -2325,7 +2324,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>The threshold(s) applied to determine that a result is significant. 
         /// If multiple terms are used it is assumed that all conditions are satisfied by the passing results.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public ParamListObj Threshold
         {
             get { return this._threshold; }
@@ -2409,9 +2408,9 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// <remarks>The details specifying this translation table are captured as cvParams, e.g. translation table, translation 
-        /// start codons and translation table description (see specification document and mapping file)</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>The details specifying this translation table are captured as cvParams, e.g. translation table, translation 
+        ///// start codons and translation table description (see specification document and mapping file)</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -2460,7 +2459,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The specification of a single residue within the mass table.</remarks>
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ResidueObj> Residues
         {
             get { return this._residues; }
@@ -2474,7 +2473,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<AmbiguousResidueObj> AmbiguousResidues
         {
             get { return this._ambiguousResidues; }
@@ -2488,8 +2487,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___: Additional parameters or descriptors for the MassTable.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: Additional parameters or descriptors for the MassTable.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -2503,8 +2502,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -2566,8 +2565,8 @@ namespace PSI_Interface.IdentData
         //private IdentDataList<UserParamType> _userParams;
         private string _code;
 
-        /// <remarks>___ParamGroup___: Parameters for capturing e.g. "alternate single letter codes"</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: Parameters for capturing e.g. "alternate single letter codes"</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -2581,8 +2580,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -2643,7 +2642,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>Regular expression for specifying the enzyme cleavage site.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public string SiteRegexp
         {
             get { return this._siteRegexp; }
@@ -2651,7 +2650,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The name of the enzyme from a CV.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ParamListObj EnzymeName
         {
             get { return this._enzymeName; }
@@ -2775,7 +2774,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The type of search performed e.g. PMF, Tag searches, MS-MS</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public ParamObj SearchType
         {
             get { return this._searchType; }
@@ -2790,7 +2789,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The search parameters other than the modifications searched.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ParamListObj AdditionalSearchParams
         {
             get { return this._additionalSearchParams; }
@@ -2804,7 +2803,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1 : Original ModificationParamsType
+        /// <remarks>min 0, max 1</remarks>
+        // Original ModificationParamsType
         public IdentDataList<SearchModificationObj> ModificationParams
         {
             get { return this._modificationParams; }
@@ -2818,7 +2818,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public EnzymeListObj Enzymes
         {
             get { return this._enzymes; }
@@ -2832,7 +2832,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<MassTableObj> MassTables
         {
             get { return this._massTables; }
@@ -2846,7 +2846,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1 : Original ToleranceType
+        /// <remarks>min 0, max 1</remarks>
+        // Original ToleranceType
         public IdentDataList<CVParamObj> FragmentTolerances
         {
             get { return this._fragmentTolerances; }
@@ -2860,7 +2861,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1 : Original ToleranceType
+        /// <remarks>min 0, max 1</remarks>
+        // Original ToleranceType
         public IdentDataList<CVParamObj> ParentTolerances
         {
             get { return this._parentTolerances; }
@@ -2875,7 +2877,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The threshold(s) applied to determine that a result is significant. If multiple terms are used it is assumed that all conditions are satisfied by the passing results.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public ParamListObj Threshold
         {
             get { return this._threshold; }
@@ -2889,7 +2891,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1 : Original DatabaseFiltersType
+        /// <remarks>min 0, max 1</remarks>
+        // Original DatabaseFiltersType
         public IdentDataList<FilterInfo> DatabaseFilters
         {
             get { return this._databaseFilters; }
@@ -2903,7 +2906,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public DatabaseTranslationObj DatabaseTranslation
         {
             get { return this._databaseTranslation; }
@@ -2968,7 +2971,7 @@ namespace PSI_Interface.IdentData
     {
         //private IdentDataList<CVParamType> _cvParams;
 
-        /// min 1, max unbounded
+        ///// <remarks>min 1, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -2998,7 +3001,7 @@ namespace PSI_Interface.IdentData
         private float _massDelta;
         private string _residues;
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SpecificityRulesListObj> SpecificityRules
         {
             get { return this._specificityRules; }
@@ -3012,9 +3015,9 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>The modification is uniquely identified by references to external CVs such as UNIMOD, see 
-        /// specification document and mapping file for more details.</remarks>
-        /// min 1, max unbounded
+        ///// <remarks>The modification is uniquely identified by references to external CVs such as UNIMOD, see 
+        ///// specification document and mapping file for more details.</remarks>
+        ///// <remarks>min 1, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -3066,7 +3069,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<EnzymeObj> _enzymes;
         private bool _independent;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<EnzymeObj> Enzymes
         {
             get { return this._enzymes; }
@@ -3111,7 +3114,7 @@ namespace PSI_Interface.IdentData
         private ParamListObj _exclude;
 
         /// <remarks>The type of filter e.g. database taxonomy filter, pi filter, mw filter</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public ParamObj FilterType
         {
             get { return this._filterType; }
@@ -3126,7 +3129,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>All sequences fulfilling the specifed criteria are included.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ParamListObj Include
         {
             get { return this._include; }
@@ -3141,7 +3144,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>All sequences fulfilling the specifed criteria are excluded.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ParamListObj Exclude
         {
             get { return this._exclude; }
@@ -3165,7 +3168,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<TranslationTableObj> _translationTables;
         private List<int> _frames;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<TranslationTableObj> TranslationTables
         {
             get { return this._translationTables; }
@@ -3247,8 +3250,8 @@ namespace PSI_Interface.IdentData
         private ProteinDetectionListObj _proteinDetectionList;
         private string _proteinDetectionProtocolRef;
         private ProteinDetectionProtocolObj _proteinDetectionProtocol;
-
-        /// min 1, max unbounded
+        
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<InputSpectrumIdentificationsObj> InputSpectrumIdentifications
         {
             get { return this._inputSpectrumIdentifications; }
@@ -3408,7 +3411,7 @@ namespace PSI_Interface.IdentData
         private SpectrumIdentificationListObj _spectrumIdentificationList;
 
         /// <remarks>One of the spectra data sets used.</remarks>
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<InputSpectraRefObj> InputSpectra
         {
             get { return this._inputSpectra; }
@@ -3422,7 +3425,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SearchDatabaseRefObj> SearchDatabases
         {
             get { return this._searchDatabases; }
@@ -3666,8 +3669,8 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// <remarks>___ParamGroup___: Additional parameters or descriptors for the PeptideEvidence.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: Additional parameters or descriptors for the PeptideEvidence.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -3681,8 +3684,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -3929,14 +3932,14 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The amino acid sequence of the (poly)peptide. If a substitution modification has been found, the original sequence should be reported.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public string PeptideSequence
         {
             get { return this._peptideSequence; }
             set { this._peptideSequence = value; }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ModificationObj> Modifications
         {
             get { return this._modifications; }
@@ -3950,7 +3953,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SubstitutionModificationObj> SubstitutionModifications
         {
             get { return this._substitutionModifications; }
@@ -3964,8 +3967,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___: Additional descriptors of this peptide sequence</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: Additional descriptors of this peptide sequence</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -3979,8 +3982,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -4014,8 +4017,8 @@ namespace PSI_Interface.IdentData
         private double _avgMassDelta;
         private double _monoisotopicMassDelta;
 
-        /// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary.</remarks>
-        /// min 1, max unbounded
+        ///// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary.</remarks>
+        ///// <remarks>min 1, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -4213,7 +4216,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The actual sequence of amino acids or nucleic acid.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"
         public string Seq
         {
@@ -4221,8 +4224,8 @@ namespace PSI_Interface.IdentData
             set { this._seq = value; }
         }
 
-        /// <remarks>___ParamGroup___: Additional descriptors for the sequence, such as taxon, description line etc.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: Additional descriptors for the sequence, such as taxon, description line etc.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -4236,8 +4239,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -4356,7 +4359,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>Contact details for the Material. The association to ContactRole could specify, for example, the creator or provider of the Material.</remarks>
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ContactRoleObj> ContactRoles
         {
             get { return this._contactRoles; }
@@ -4370,7 +4373,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SubSampleObj> SubSamples
         {
             get { return this._subSamples; }
@@ -4384,8 +4387,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>___ParamGroup___: The characteristics of a Material.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: The characteristics of a Material.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -4399,8 +4402,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -4427,7 +4430,7 @@ namespace PSI_Interface.IdentData
         private string _contactRef;
         private AbstractContactObj _contact;
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public RoleObj Role
         {
             get { return this._role; }
@@ -4491,7 +4494,7 @@ namespace PSI_Interface.IdentData
         private CVParamObj _cvParam;
 
         /// <remarks>CV term for contact roles, such as software provider.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {
             get { return this._cvParam; }
@@ -4588,8 +4591,8 @@ namespace PSI_Interface.IdentData
             set { this._name = value; }
         }
 
-        /// <remarks>___ParamGroup___: Attributes of this contact such as address, email, telephone etc.</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___: Attributes of this contact such as address, email, telephone etc.</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<CVParamType> CVParams
         //{
         //    get { return this._cvParams; }
@@ -4603,8 +4606,8 @@ namespace PSI_Interface.IdentData
         //    }
         //}
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        ///// <remarks>___ParamGroup___</remarks>
+        ///// <remarks>min 0, max unbounded</remarks>
         //public IdentDataList<UserParamType> UserParams
         //{
         //    get { return this._userParams; }
@@ -4628,7 +4631,7 @@ namespace PSI_Interface.IdentData
     {
         private ParentOrganizationObj _parent;
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ParentOrganizationObj Parent
         {
             get { return this._parent; }
@@ -4712,7 +4715,7 @@ namespace PSI_Interface.IdentData
         private string _midInitials;
 
         /// <remarks>The organization a person belongs to.</remarks>
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<AffiliationObj> Affiliations
         {
             get { return this._affiliations; }
@@ -4789,7 +4792,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The Contact that provided the document instance.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ContactRoleObj ContactRole
         {
             get { return this._contactRole; }
@@ -4881,7 +4884,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The contact details of the organisation or person that produced the software</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ContactRoleObj ContactRole
         {
             get { return this._contactRole; }
@@ -4896,7 +4899,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>The name of the analysis software package, sourced from a CV if available.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public ParamObj SoftwareName
         {
             get { return this._softwareName; }
@@ -4911,7 +4914,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <remarks>Any customizations to the software, such as alternative scoring mechanisms implemented, should be documented here as free text.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public string Customizations
         {
             get { return this._customizations; }
@@ -4947,7 +4950,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<SearchDatabaseInfo> _searchDatabases;
         private IdentDataList<SpectraDataObj> _spectraDataList;
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SourceFileInfo> SourceFiles
         {
             get { return this._sourceFiles; }
@@ -4961,7 +4964,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SearchDatabaseInfo> SearchDatabases
         {
             get { return this._searchDatabases; }
@@ -4975,7 +4978,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounde
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectraDataObj> SpectraDataList
         {
             get { return this._spectraDataList; }
@@ -4999,7 +5002,7 @@ namespace PSI_Interface.IdentData
         private InputsObj _inputs;
         private AnalysisDataObj _analysisData;
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public InputsObj Inputs
         {
             get { return this._inputs; }
@@ -5013,7 +5016,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         public AnalysisDataObj AnalysisData
         {
             get { return this._analysisData; }
@@ -5037,7 +5040,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<SpectrumIdentificationProtocolObj> _spectrumIdentificationProtocols;
         private ProteinDetectionProtocolObj _proteinDetectionProtocol;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationProtocolObj> SpectrumIdentificationProtocols
         {
             get { return this._spectrumIdentificationProtocols; }
@@ -5051,7 +5054,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ProteinDetectionProtocolObj ProteinDetectionProtocol
         {
             get { return this._proteinDetectionProtocol; }
@@ -5076,7 +5079,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<SpectrumIdentificationObj> _spectrumIdentifications;
         private ProteinDetectionObj _proteinDetection;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationObj> SpectrumIdentifications
         {
             get { return this._spectrumIdentifications; }
@@ -5090,7 +5093,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         public ProteinDetectionObj ProteinDetection
         {
             get { return this._proteinDetection; }
@@ -5116,7 +5119,7 @@ namespace PSI_Interface.IdentData
         private IdentDataList<PeptideObj> _peptides;
         private IdentDataList<PeptideEvidenceObj> _peptideEvidences;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<DbSequenceObj> DBSequences
         {
             get { return this._dBSequences; }
@@ -5130,7 +5133,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<PeptideObj> Peptides
         {
             get { return this._peptides; }
@@ -5144,7 +5147,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<PeptideEvidenceObj> PeptideEvidences
         {
             get { return this._peptideEvidences; }
