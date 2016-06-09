@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using PSI_Interface.CV;
 using PSI_Interface.Utils;
 
@@ -140,12 +141,10 @@ namespace PSI_Interface.IdentData
                 {
                     foreach (var sir in sil.SpectrumIdentificationResults)
                     {
-                        foreach (var sii in sir.SpectrumIdentificationItems)
+                        var result = sir.SpectrumIdentificationItems.Where(item => item.Id == id).ToList();
+                        if (result.Count > 0)
                         {
-                            if (sii.Id == id)
-                            {
-                                return sii;
-                            }
+                            return result.First();
                         }
                     }
                 }
@@ -163,12 +162,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var dbs in this.SequenceCollection.DBSequences)
+                var result = this.SequenceCollection.DBSequences.AsParallel().Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (dbs.Id == id)
-                    {
-                        return dbs;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -184,12 +181,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var pep in this.SequenceCollection.Peptides)
+                var result = this.SequenceCollection.Peptides.AsParallel().Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (pep.Id == id)
-                    {
-                        return pep;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -205,12 +200,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var pepEv in this.SequenceCollection.PeptideEvidences)
+                var result = this.SequenceCollection.PeptideEvidences.AsParallel().Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (pepEv.Id == id)
-                    {
-                        return pepEv;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -228,12 +221,10 @@ namespace PSI_Interface.IdentData
             {
                 foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
                 {
-                    foreach (var m in sil.FragmentationTables)
+                    var result = sil.FragmentationTables.Where(item => item.Id == id).ToList();
+                    if (result.Count > 0)
                     {
-                        if (m.Id == id)
-                        {
-                            return m;
-                        }
+                        return result.First();
                     }
                 }
             }
@@ -252,12 +243,10 @@ namespace PSI_Interface.IdentData
             {
                 foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
                 {
-                    foreach (var mt in sip.MassTables)
+                    var result = sip.MassTables.Where(item => item.Id == id).ToList();
+                    if (result.Count > 0)
                     {
-                        if (mt.Id == id)
-                        {
-                            return mt;
-                        }
+                        return result.First();
                     }
                 }
             }
@@ -274,12 +263,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var s in this.AnalysisSampleCollection)
+                var result = this.AnalysisSampleCollection.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (s.Id == id)
-                    {
-                        return s;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -295,12 +282,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var s in this.AnalysisSoftwareList)
+                var result = this.AnalysisSoftwareList.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (s.Id == id)
-                    {
-                        return s;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -316,13 +301,16 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var ac in this.AuditCollection)
+                var result = this.AuditCollection.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    var o = ac as OrganizationObj;
-
-                    if (o != null && o.Id == id)
+                    foreach (var item in result)
                     {
-                        return o;
+                        var o = item as OrganizationObj;
+                        if (o != null)
+                        {
+                            return o;
+                        }
                     }
                 }
             }
@@ -339,12 +327,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var ac in this.AuditCollection)
+                var result = this.AuditCollection.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (ac.Id == id)
-                    {
-                        return ac;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -360,12 +346,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sd in this.DataCollection.Inputs.SearchDatabases)
+                var result = this.DataCollection.Inputs.SearchDatabases.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (sd.Id == id)
-                    {
-                        return sd;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -381,12 +365,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sd in this.DataCollection.Inputs.SpectraDataList)
+                var result = this.DataCollection.Inputs.SpectraDataList.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (sd.Id == id)
-                    {
-                        return sd;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -402,12 +384,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
+                var result = this.DataCollection.AnalysisData.SpectrumIdentificationList.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (sil.Id == id)
-                    {
-                        return sil;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -423,12 +403,10 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
+                var result = this.AnalysisProtocolCollection.SpectrumIdentificationProtocols.Where(item => item.Id == id).ToList();
+                if (result.Count > 0)
                 {
-                    if (sip.Id == id)
-                    {
-                        return sip;
-                    }
+                    return result.First();
                 }
             }
             catch // Ignore errors; must resolve reference later...
@@ -482,12 +460,10 @@ namespace PSI_Interface.IdentData
             {
                 foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
                 {
-                    foreach (var tt in sip.DatabaseTranslation.TranslationTables)
+                    var result = sip.DatabaseTranslation.TranslationTables.Where(item => item.Id == id).ToList();
+                    if (result.Count > 0)
                     {
-                        if (tt.Id == id)
-                        {
-                            return tt;
-                        }
+                        return result.First();
                     }
                 }
             }
