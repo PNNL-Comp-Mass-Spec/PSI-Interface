@@ -76,6 +76,10 @@ namespace CV_Generator
                     Name = "Unit Ontology";
                     _id = GetAvailableId("UO");
                     break;
+                case "uo.obo":
+                    Name = "Unit Ontology";
+                    _id = GetAvailableId("UO");
+                    break;
                 case "quality.obo": // Old PATO obo file
                     Name = "Quality Ontology";
                     _id = GetAvailableId("PATO");

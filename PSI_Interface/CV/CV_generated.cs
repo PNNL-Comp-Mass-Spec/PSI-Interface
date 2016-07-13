@@ -13,10 +13,10 @@ namespace PSI_Interface.CV
 
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "3.88.1"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:02:01 14:24"));
-            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "https://raw.githubusercontent.com/pato-ontology/pato/master/pato.obo", "releases/2016-05-22"));
-            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/unit.obo", "09:04:2014 13:37"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.0"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:07:01 11:23"));
+            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://www.berkeleybop.org/ontologies/pato/pato.obo", "releases/2016-05-22"));
+            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://www.berkeleybop.org/ontologies/uo/uo.obo", "releases/2016-05-13"));
         }
 
         public enum RelationsOtherTypes : int
@@ -688,7 +688,7 @@ namespace PSI_Interface.CV
             // The peak in a mass spectrum that has the greatest intensity. This term may be applied to the spectra of pure substances or mixtures.
             MS_base_peak,
 
-            // OBSOLETE. The total charge on an ion divided by the electron charge e. OBSOLETED 2009-10-27 since this was viewed as a duplication of 00041 charge state.
+            // OBSOLETE The total charge on an ion divided by the electron charge e. OBSOLETED 2009-10-27 since this was viewed as a duplication of 00041 charge state.
             MS_OBSOLETE_charge_number_OBSOLETE,
 
             // OBSOLETE A non-SI unit of mass (symbol Da) that is equal to the unified atomic mass unit: 1.660 538 86(28) x 10^-27 kg.
@@ -1063,7 +1063,7 @@ namespace PSI_Interface.CV
             // OBSOLETE A tandem mass spectrometry method in which product ion spectra are recorded in m/z analyzers separated in space. Specific m/z separation functions are designed such that in one section of the instrument ions are selected, dissociated in an intermediate region, and the product ions are then transmitted to another analyser for m/z separation and data acquisition.
             MS_MS_MS_in_Space_OBSOLETE,
 
-            // The loss of an uncharged species during a rearrangement process.
+            // The loss of an uncharged species during a rearrangement process. The value slot holds the molecular formula in Hill notation of the neutral loss molecule, see PMID: 21182243. This term must be used in conjunction with a child of the term MS:1002307 (fragmentation ion type).
             MS_neutral_loss,
 
             // OBSOLETE Serial product ions from dissociation of selected precursor ions where n refers to the number of stages of dissociation. The term granddaughter ion is deprecated.
@@ -2572,7 +2572,7 @@ namespace PSI_Interface.CV
             // Laser properties that are associated with a value.
             MS_laser_attribute,
 
-            // Type of laser used used for desorption purpose.
+            // Type of laser used for desorption purpose.
             MS_laser_type,
 
             // OBSOLETE The distance between two peaks of the emitted laser beam.
@@ -3050,7 +3050,7 @@ namespace PSI_Interface.CV
             MS_database_nr,
 
             // Protein level information.
-            MS_protein_result_details,
+            MS_protein_level_identification_attribute,
 
             // Sort order of SEQUEST search results by the correlation score.
             MS_SEQUEST_sort_by_XCorr,
@@ -3070,7 +3070,7 @@ namespace PSI_Interface.CV
             MS_NoEnzyme_OBSOLETE,
 
             // Identification confidence metric for a peptide.
-            MS_peptide_identification_confidence_metric,
+            MS_peptide_sequence_level_identification_statistic,
 
             // The percent coverage for the protein based upon the matched peptide sequences (can be calculated).
             MS_sequence_coverage,
@@ -3106,7 +3106,7 @@ namespace PSI_Interface.CV
             MS_database_UniProtKB_Swiss_Prot,
 
             // Peptide level information.
-            MS_peptide_result_details,
+            MS_peptide_sequence_level_identification_attribute,
 
             // Specify \ number\  as value of the CVParam.
             MS_SEQUEST_TopNumber,
@@ -3138,7 +3138,7 @@ namespace PSI_Interface.CV
             MS_scan_number_s__OBSOLETE,
 
             // Results specific for one protein as part of a protein ambiguity group (a result not valid for all the other proteins in the protein ambiguity group).
-            MS_single_protein_result_details,
+            MS_single_protein_identification_statistic,
 
             // The theoretical mass of the molecule (e.g. the peptide sequence and its modifications).
             MS_theoretical_mass,
@@ -3217,7 +3217,7 @@ namespace PSI_Interface.CV
             MS_database_IPI_human,
 
             // Search engine specific peptide spectrum match scores.
-            MS_search_engine_specific_score_for_PSMs,
+            MS_PSM_level_search_engine_specific_statistic,
 
             MS_SEQUEST_SelectDefault,
 
@@ -3414,7 +3414,7 @@ namespace PSI_Interface.CV
             MS_frag__y_ion,
 
             // Fragmentation information like ion types.
-            MS_fragmentation_information,
+            MS_product_ion_attribute,
 
             // Fragmentation information, type of product: b ion without water.
             MS_frag__b_ion___H2O,
@@ -3810,7 +3810,7 @@ namespace PSI_Interface.CV
             MS_peptide_unique_to_one_protein,
 
             // Estimation of the global false discovery rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
-            MS_distinct_peptide_level_global_FDR,
+            MS_peptide_sequence_level_global_FDR,
 
             // Fragmentation information, type of product: internal yb ion.
             MS_frag__internal_yb_ion,
@@ -5302,13 +5302,13 @@ namespace PSI_Interface.CV
             MS_protein_level_q_value,
 
             // Estimation of the p-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
-            MS_distinct_peptide_level_p_value,
+            MS_peptide_sequence_level_p_value,
 
             // Estimation of the p-value for proteins.
             MS_protein_level_p_value,
 
             // Estimation of the e-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
-            MS_distinct_peptide_level_e_value,
+            MS_peptide_sequence_level_e_value,
 
             // Estimation of the e-value for proteins.
             MS_protein_level_e_value,
@@ -5592,8 +5592,8 @@ namespace PSI_Interface.CV
             // OBSOLETE The ion drift time of an MS2 product ion.
             MS_product_ion_drift_time_OBSOLETE,
 
-            // A score that assign confidence to the localization of an amino acid modification on a peptide sequence at the PSM-level.
-            MS_PSM_level_PTM_localization_score,
+            // Statistic to convey the confidence of the localization of an amino acid modification on a peptide sequence at the PSM-level.
+            MS_PTM_localization_PSM_level_statistic,
 
             // phosphoRS score for PTM site location at the PSM-level.
             MS_phosphoRS_score,
@@ -5896,7 +5896,7 @@ namespace PSI_Interface.CV
             MS_metabolic_labelling__heavy_N__mainly_15N_,
 
             // Metabolic labelling: Description of labelling purity. Usually the purity of feeding material (e.g. 95%), or the inclusion rate derived from isotopic peak pattern shape.
-            MS_metabolic_labelling__labelling_purity,
+            MS_metabolic_labelling_purity,
 
             // Perform a t-test (two groups). Specify in string value, whether paired / unpaired, variance equal / different, one- / two-sided version is performed.
             MS_t_test,
@@ -6054,7 +6054,7 @@ namespace PSI_Interface.CV
             // FeatureList of spectral counts.
             MS_counts_reporting,
 
-            // x-Tracker generic tool for quantitative proteomics.
+            // X-Tracker generic tool for quantitative proteomics.
             MS_x_Tracker,
 
             // ProteoSuite software for the analysis of quantitative proteomics data.
@@ -6483,7 +6483,7 @@ namespace PSI_Interface.CV
             // Byonic posterior error probability.
             MS_Byonic_PEP,
 
-            // The log p-value of the PSM. This is the log of the probability that the PSM with such a score and delta would arise by chance in a search of this size (size of the protein database, as expanded by the modification rules). A log p-value of -3.0 should happen by chance on only one of a thousand spectra. Caveat: it is very hard to compute a p-value that works for all searches and all spectra, so read Byonic p-values with a certain amount of skepticism.
+            // The log p-value of the PSM. This is the log of the probability that the PSM with such a score and delta would arise by chance in a search of this size (the size of the protein database, as expanded by the modification rules). A log p-value of -3.0 should happen by chance on only one of a thousand spectra. Caveat: it is very hard to compute a p-value that works for all searches and all spectra, so read Byonic p-values with a certain amount of skepticism.
             MS_Byonic_Peptide_LogProb,
 
             // The log p-value of the protein.
@@ -6720,17 +6720,17 @@ namespace PSI_Interface.CV
             // Modular Application Toolkit for Chromatography Mass-Spectrometry is an application framework mainly for developers.
             MS_Maltcms,
 
-            // Peptide spectrum match level information.
-            MS_PSM_level_result_details,
+            // Attribute of a single peptide-spectrum match.
+            MS_PSM_level_attribute,
 
             // Protein group level information.
-            MS_protein_group_level_result_details,
+            MS_protein_group_level_identification_attribute,
 
             // Identification confidence metric for a peptide spectrum match.
-            MS_PSM_level_identification_confidence_metric,
+            MS_PSM_level_identification_statistic,
 
             // Identification confidence metric for a protein group.
-            MS_protein_group_level_identification_confidence_metric,
+            MS_protein_group_level_identification_statistic,
 
             // Positive value range less than or equal to 1.
             MS_value_greater_than_zero_but_less_than_or_equal_to_one,
@@ -6750,29 +6750,29 @@ namespace PSI_Interface.CV
             // Estimation of the q-value for peptide spectrum matches.
             MS_PSM_level_q_value,
 
-            // FDRScore for peptide spectrum matches.
+            // mzidLibrary FDRScore for peptide spectrum matches.
             MS_PSM_level_FDRScore,
 
-            // Combined FDRScore for peptide spectrum matches specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.
+            // mzidLibrary Combined FDRScore for peptide spectrum matches specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.
             MS_PSM_level_combined_FDRScore,
 
             // Probability that the reported peptide ion is truly responsible for some or all of the components of the specified mass spectrum.
             MS_PSM_level_probability,
 
             // Search engine specific distinct peptide score.
-            MS_search_engine_specific_score_for_distinct_peptides,
+            MS_search_engine_specific_peptide_sequence_level_identification_statistic,
 
             // Estimation of the local false discovery rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
-            MS_distinct_peptide_level_local_FDR,
+            MS_peptide_sequence_level_local_FDR,
 
-            // FDRScore for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
+            // mzidLibrary FDRScore for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
             MS_distinct_peptide_level_FDRScore,
 
             // Combined FDRScore for peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry) specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given peptide, used for integrating results from these distinct pools.
             MS_distinct_peptide_level_combined_FDRScore,
 
             // Probability that the reported distinct peptide sequence (irrespective of mass modifications) has been correctly identified via the referenced PSMs.
-            MS_distinct_peptide_level_probability,
+            MS_peptide_sequence_level_probability,
 
             // Search engine specific protein scores.
             MS_search_engine_specific_score_for_proteins,
@@ -6780,10 +6780,10 @@ namespace PSI_Interface.CV
             // Estimation of the local false discovery rate of proteins.
             MS_protein_level_local_FDR,
 
-            // FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.
+            // mzidLibrary FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.
             MS_FDRScore_for_proteins,
 
-            // Combined FDRScore for proteins.
+            // mzidLibrary Combined FDRScore for proteins.
             MS_combined_FDRScore_for_proteins,
 
             // Probability that a specific protein sequence has been correctly identified from the PSM and distinct peptide evidence, and based on the available protein sequences presented to the analysis software.
@@ -6807,10 +6807,10 @@ namespace PSI_Interface.CV
             // Estimation of the q-value for protein groups.
             MS_protein_group_level_q_value,
 
-            // FDRScore for protein groups.
+            // mzidLibrary FDRScore for protein groups.
             MS_protein_group_level_FDRScore,
 
-            // Combined FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.
+            // mzidLibrary Combined FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.
             MS_protein_group_level_combined_FDRScore,
 
             // Probability that at least one of the members of a group of protein sequences has been correctly identified from the PSM and distinct peptide evidence, and based on the available protein sequences presented to the analysis software.
@@ -6901,7 +6901,7 @@ namespace PSI_Interface.CV
             MS_count_of_identified_proteins,
 
             // Details describing a protein cluster.
-            MS_protein_cluster_details,
+            MS_protein_group_level_result_list_attribute,
 
             // The number of protein clusters that have been identified, which must match the number of clusters that pass the threshold in the file.
             MS_count_of_identified_clusters,
@@ -7050,14 +7050,14 @@ namespace PSI_Interface.CV
             // No variable modifications are included as a parameter for the search, and therefore they are not reported.
             MS_No_variable_modifications_searched,
 
-            // Neutral loss of water.
-            MS_H2O_neutral_loss,
+            // OBSOLETE Neutral loss of water.
+            MS_H2O_neutral_loss_OBSOLETE,
 
-            // Neutral loss of ammonia.
-            MS_NH3_neutral_loss,
+            // OBSOLETE Neutral loss of ammonia.
+            MS_NH3_neutral_loss_OBSOLETE,
 
-            // Neutral loss of phosphoric acid.
-            MS_H3PO4_neutral_loss,
+            // OBSOLETE Neutral loss of phosphoric acid.
+            MS_H3PO4_neutral_loss_OBSOLETE,
 
             // PeptideShaker is a software for the interpretation of proteomics identification results.
             MS_PeptideShaker,
@@ -7072,10 +7072,10 @@ namespace PSI_Interface.CV
             MS_protein_group_level_confidence,
 
             // Estimation of the global false negative rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
-            MS_distinct_peptide_level_global_FNR,
+            MS_peptide_sequence_level_global_FNR,
 
             // Estimation of the global confidence for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).
-            MS_distinct_peptide_level_global_confidence,
+            MS_peptide_sequence_level_global_confidence,
 
             // Estimation of the global false negative rate of peptide spectrum matches.
             MS_PSM_level_global_FNR,
@@ -7332,8 +7332,8 @@ namespace PSI_Interface.CV
             // A distributed normalized spectral abundance factor (dNSAF.
             MS_distributed_normalized_spectral_abundance_factor,
 
-            // A score that assign confidence to the localization of an amino acid modification on a peptide sequence at the peptide-level.
-            MS_peptide_level_PTM_localization_score,
+            // Statistic to convey the confidence of the localization of an amino acid modification on a peptide sequence.
+            MS_PTM_localization_distinct_peptide_level_statistic,
 
             // phosphoRS score for PTM site location at the peptide-level.
             MS_peptide_phosphoRS_score,
@@ -7677,17 +7677,131 @@ namespace PSI_Interface.CV
             // Summed Morpheus score for protein groups.
             MS_Morpheus_summed_Morpheus_score,
 
-            // Parent term for protein interaction scores derived from cross-linking.
-            MS_protein_interaction_scores_derived_from_cross_linking,
+            // Parent term for interaction scores derived from cross-linking.
+            MS_interaction_score_derived_from_cross_linking,
 
             // (
-            MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking,
+            MS_regular_expression_for_interaction_scores_derived_from_cross_linking,
 
             // Bruker Daltonics' impact II.
             MS_impact_II,
 
             // Bruker Daltonics' impact HD.
             MS_impact_HD,
+
+            // Standard reporter ion for iTRAQ 4Plex. The value slot holds the integer mass of the iTRAQ 4Plex reporter ion, e.g. 114.
+            MS_frag__iTRAQ_4plex_reporter_ion,
+
+            // Standard reporter ion for iTRAQ 8Plex. The value slot holds the integer mass of the iTRAQ 8Plex reporter ion, e.g. 113.
+            MS_frag__iTRAQ_8plex_reporter_ion,
+
+            // Standard reporter ion for TMT. The value slot holds the integer mass of the TMT reporter ion and can be suffixed with either N or C, indicating whether the mass difference is encoded at a Nitrogen or Carbon atom, e.g. 127N.
+            MS_frag__TMT_reporter_ion,
+
+            // Standard reporter ion for TMT with ETD fragmentation. The value slot holds the integer mass of the TMT ETD reporter ion and can be suffixed with either N or C, indicating whether the mass difference is encoded at a Nitrogen or Carbon atom, e.g. 127C.
+            MS_frag__TMT_ETD_reporter_ion,
+
+            // No statistical threshold for accepting or rejecting that a modification position.
+            MS_no_modification_threshold,
+
+            // Cross-Linking MS search engine.
+            MS_OpenXQuest,
+
+            // SCIEX X500R QTOF, a quadrupole - quadrupole - time-of-flight mass spectrometer.
+            MS_X500R_QTOF,
+
+            // This subsection describes terms which can describe details of cross-linking results.
+            MS_cross_linking_result_details,
+
+            // Estimation of the global false discovery rate of proteins-pairs in cross-linking experiments.
+            MS_protein_pair_level_global_FDR,
+
+            // Estimation of the global false discovery rate of residue-pairs in cross-linking experiments.
+            MS_residue_pair_level_global_FDR,
+
+            // A supplemental collision-induced dissociation process wherein the projectile ion has the translational energy higher than approximately 1000 eV.
+            MS_supplemental_higher_energy_beam_type_collision_induced_dissociation,
+
+            // The dissociation of an ion after supplemental collisional excitation.
+            MS_supplemental_collision_induced_dissociation,
+
+            // Energy for an ion experiencing supplemental collision with a stationary gas particle resulting in dissociation of the ion.
+            MS_supplemental_collision_energy,
+
+            // OpenXQuest's combined score for a cross-link spectrum match.
+            MS_OpenXQuest_combined_score,
+
+            // OpenXQuest's cross-correlation of cross-linked ions subscore.
+            MS_OpenXQuest_xcorr_xlink,
+
+            // OpenXQuest's cross-correlation of unlinked ions subscore.
+            MS_OpenXQuest_xcorr_common,
+
+            // OpenXQuest's match-odds subscore.
+            MS_OpenXQuest_match_odds,
+
+            // OpenXQuest's sum of matched peak intensity subscore.
+            MS_OpenXQuest_intsum,
+
+            // OpenXQuest's weighted percent of total ion current subscore.
+            MS_OpenXQuest_wTIC,
+
+            // Attribute of an item in the result of mass spectrometry proteomics data analysis.
+            MS_analysis_attribute,
+
+            // Statistic derived from a post-translational modification localization analysis.
+            MS_PTM_localization_attribute,
+
+            // Statistic for a single item derived from a post-translational modification localization analysis.
+            MS_PTM_localization_single_result_statistic,
+
+            // Statistic for all items derived from a post-translational modification localization analysis.
+            MS_PTM_localization_result_list_statistic,
+
+            // Global false localization rate for all localizations in a dataset.
+            MS_global_FLR,
+
+            // Local false localization rate for the bottom item in list of localizations sorted from most to least confident.
+            MS_local_FLR_at_threshold,
+
+            // Attribute of an identification item in the result of mass spectrometry proteomics data analysis.
+            MS_identification_attribute,
+
+            // Attribute of a single identification item (as opposed to a list) in the result of mass spectrometry proteomics data analysis.
+            MS_single_identification_result_attribute,
+
+            // Fragment ion corresponding to an isobaric label artifact.
+            MS_frag__isobaric_label_ion,
+
+            // Fragment ion is an isotopic peak other than that monoisotopic peak. This is used in conjuction with another ion type, such as frag: y ion.
+            MS_secondary_isotope_peak,
+
+            // An attribute of the protein cluster concept as used in mzIdentML.
+            MS_protein_cluster_identification_attribute,
+
+            // General property of an entire result list.
+            MS_result_list_attribute,
+
+            // General property of the list of all PSMs.
+            MS_PSM_level_result_list_attribute,
+
+            // Statistic pertaining to the full list of all PSMs.
+            MS_PSM_level_result_list_statistic,
+
+            // General property of all peptide sequences in the list.
+            MS_peptide_sequence_level_result_list_attribute,
+
+            // Statistic pertaining to all peptide sequences in the list.
+            MS_peptide_sequence_level_result_list_statistic,
+
+            // Attribute of an entire protein list.
+            MS_protein_level_result_list_attribute,
+
+            // A statistical metric of an entire protein list.
+            MS_protein_level_result_list_statistic,
+
+            // Attrbiute of an entire list of protein groups.
+            MS_protein_group_level_result_list_statistic,
 
             // The root node of the unimod modifications ontology.
             UNIMOD_unimod_root_node,
@@ -11749,7 +11863,22 @@ namespace PSI_Interface.CV
             UNIMOD_NQIGG,
 
             // Carboxyethylpyrrole.
-            UNIMOD_CEP,
+            UNIMOD_Carboxyethylpyrrole,
+
+            // Fluorescein-tyramine adduct by peroxidase activity.
+            UNIMOD_Fluorescein_tyramine,
+
+            // Transamidation of glycine ethyl ester to glutamine.
+            UNIMOD_GEE,
+
+            // Simulate peptide-RNA conjugates.
+            UNIMOD_RNPXL,
+
+            // Pyro-Glu from E + Methylation.
+            UNIMOD_Glu__pyro_Glu_Methyl,
+
+            // Pyro-Glu from E + Methylation Medium.
+            UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_,
 
             PATO_pato_OBSOLETE,
 
@@ -19614,7 +19743,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_average_mass_OBSOLETE, new TermInfo(CVID.MS_average_mass_OBSOLETE, @"MS", @"MS:1000208", @"average mass", @"OBSOLETE The mass of an ion or molecule calculated using the average mass of each element weighted for its natural isotopic abundance.", true));
             TermData.Add(CVID.MS_appearance_energy_OBSOLETE, new TermInfo(CVID.MS_appearance_energy_OBSOLETE, @"MS", @"MS:1000209", @"appearance energy", @"OBSOLETE The minimum energy that must be imparted to an atom or molecule to produce a specified ion. The term appearance potential is not recommended.", true));
             TermData.Add(CVID.MS_base_peak, new TermInfo(CVID.MS_base_peak, @"MS", @"MS:1000210", @"base peak", @"The peak in a mass spectrum that has the greatest intensity. This term may be applied to the spectra of pure substances or mixtures.", false));
-            TermData.Add(CVID.MS_OBSOLETE_charge_number_OBSOLETE, new TermInfo(CVID.MS_OBSOLETE_charge_number_OBSOLETE, @"MS", @"MS:1000211", @"OBSOLETE charge number", @"OBSOLETE. The total charge on an ion divided by the electron charge e. OBSOLETED 2009-10-27 since this was viewed as a duplication of 00041 charge state.", true));
+            TermData.Add(CVID.MS_OBSOLETE_charge_number_OBSOLETE, new TermInfo(CVID.MS_OBSOLETE_charge_number_OBSOLETE, @"MS", @"MS:1000211", @"OBSOLETE charge number", @"OBSOLETE The total charge on an ion divided by the electron charge e. OBSOLETED 2009-10-27 since this was viewed as a duplication of 00041 charge state.", true));
             TermData.Add(CVID.MS_dalton_OBSOLETE, new TermInfo(CVID.MS_dalton_OBSOLETE, @"MS", @"MS:1000212", @"dalton", @"OBSOLETE A non-SI unit of mass (symbol Da) that is equal to the unified atomic mass unit: 1.660 538 86(28) x 10^-27 kg.", true));
             TermData.Add(CVID.MS_electron_affinity_OBSOLETE, new TermInfo(CVID.MS_electron_affinity_OBSOLETE, @"MS", @"MS:1000213", @"electron affinity", @"OBSOLETE The electron affinity of M is the minimum energy required for the process M- ? M + e where M- and M are in their ground rotational, vibrational and electronic states and the electron has zero kinetic energy.", true));
             TermData.Add(CVID.MS_electron_energy_obsolete_OBSOLETE, new TermInfo(CVID.MS_electron_energy_obsolete_OBSOLETE, @"MS", @"MS:1000214", @"electron energy obsolete", @"OBSOLETE The potential difference through which electrons are accelerated before they are used to bring about electron ionization.", true));
@@ -19739,7 +19868,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Linked_Scan_at_Constant_B_1__E_E0___1_2___E_OBSOLETE, new TermInfo(CVID.MS_Linked_Scan_at_Constant_B_1__E_E0___1_2___E_OBSOLETE, @"MS", @"MS:1000333", @"Linked Scan at Constant B[1-(E/E0)]^1/2 / E", @"OBSOLETE A linked scan performed on a sector instrument that incorporates at least one electric sector plus one magnetic sector placed in either order. The accelerating voltage is fixed while scanning the magnetic field, B, and electric field, E, simultaneously, so as to maintain the quantity B", true));
             TermData.Add(CVID.MS_MS_MS_in_Time_OBSOLETE, new TermInfo(CVID.MS_MS_MS_in_Time_OBSOLETE, @"MS", @"MS:1000334", @"MS/MS in Time", @"OBSOLETE A tandem mass spectrometry method in which product ion spectra are recorded in a single m/z analyzer (such as a Paul Ion Trap or FTMS) in discreet steps over time. Ions in a specific m/z range are selected, dissociated, and the product ions analyzed sequentially in time.", true));
             TermData.Add(CVID.MS_MS_MS_in_Space_OBSOLETE, new TermInfo(CVID.MS_MS_MS_in_Space_OBSOLETE, @"MS", @"MS:1000335", @"MS/MS in Space", @"OBSOLETE A tandem mass spectrometry method in which product ion spectra are recorded in m/z analyzers separated in space. Specific m/z separation functions are designed such that in one section of the instrument ions are selected, dissociated in an intermediate region, and the product ions are then transmitted to another analyser for m/z separation and data acquisition.", true));
-            TermData.Add(CVID.MS_neutral_loss, new TermInfo(CVID.MS_neutral_loss, @"MS", @"MS:1000336", @"neutral loss", @"The loss of an uncharged species during a rearrangement process.", false));
+            TermData.Add(CVID.MS_neutral_loss, new TermInfo(CVID.MS_neutral_loss, @"MS", @"MS:1000336", @"neutral loss", @"The loss of an uncharged species during a rearrangement process. The value slot holds the molecular formula in Hill notation of the neutral loss molecule, see PMID: 21182243. This term must be used in conjunction with a child of the term MS:1002307 (fragmentation ion type).", false));
             TermData.Add(CVID.MS_nth_generation_product_ion_OBSOLETE, new TermInfo(CVID.MS_nth_generation_product_ion_OBSOLETE, @"MS", @"MS:1000337", @"nth generation product ion", @"OBSOLETE Serial product ions from dissociation of selected precursor ions where n refers to the number of stages of dissociation. The term granddaughter ion is deprecated.", true));
             TermData.Add(CVID.MS_nth_generation_product_ion_scan_OBSOLETE, new TermInfo(CVID.MS_nth_generation_product_ion_scan_OBSOLETE, @"MS", @"MS:1000338", @"nth generation product ion scan", @"OBSOLETE The specific scan functions or processes that record the appropriate generation of product ion or ions of any m/z selected precursor ions.", true));
             TermData.Add(CVID.MS_nth_generation_product_ion_spectrum_OBSOLETE, new TermInfo(CVID.MS_nth_generation_product_ion_spectrum_OBSOLETE, @"MS", @"MS:1000339", @"nth generation product ion spectrum", @"OBSOLETE The mass spectrum recorded from any mass spectrometer in which the appropriate scan function can be set to record the appropriate generation product ion or ions of m/z selected precursor ions.", true));
@@ -20242,7 +20371,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_precoated_MALDI_sample_plate, new TermInfo(CVID.MS_precoated_MALDI_sample_plate, @"MS", @"MS:1000839", @"precoated MALDI sample plate", @"Precoated MALDI sample plate.", false));
             TermData.Add(CVID.MS_laser, new TermInfo(CVID.MS_laser, @"MS", @"MS:1000840", @"laser", @"Device that emits light (electromagnetic radiation) through a process called stimulated emission. The term is an acronym for Light Amplification by Stimulated Emission of Radiation.", false));
             TermData.Add(CVID.MS_laser_attribute, new TermInfo(CVID.MS_laser_attribute, @"MS", @"MS:1000841", @"laser attribute", @"Laser properties that are associated with a value.", false));
-            TermData.Add(CVID.MS_laser_type, new TermInfo(CVID.MS_laser_type, @"MS", @"MS:1000842", @"laser type", @"Type of laser used used for desorption purpose.", false));
+            TermData.Add(CVID.MS_laser_type, new TermInfo(CVID.MS_laser_type, @"MS", @"MS:1000842", @"laser type", @"Type of laser used for desorption purpose.", false));
             TermData.Add(CVID.MS_wavelength_OBSOLETE, new TermInfo(CVID.MS_wavelength_OBSOLETE, @"MS", @"MS:1000843", @"wavelength", @"OBSOLETE The distance between two peaks of the emitted laser beam.", true));
             TermData.Add(CVID.MS_focus_diameter_x, new TermInfo(CVID.MS_focus_diameter_x, @"MS", @"MS:1000844", @"focus diameter x", @"Describes the diameter of the laser beam in x direction.", false));
             TermData.Add(CVID.MS_focus_diameter_y, new TermInfo(CVID.MS_focus_diameter_y, @"MS", @"MS:1000845", @"focus diameter y", @"Describes the diameter of the laser beam in y direction.", false));
@@ -20402,14 +20531,14 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_tag_search, new TermInfo(CVID.MS_tag_search, @"MS", @"MS:1001082", @"tag search", @"A sequence tag search.", false));
             TermData.Add(CVID.MS_ms_ms_search, new TermInfo(CVID.MS_ms_ms_search, @"MS", @"MS:1001083", @"ms-ms search", @"An MS2 search (with fragment ions).", false));
             TermData.Add(CVID.MS_database_nr, new TermInfo(CVID.MS_database_nr, @"MS", @"MS:1001084", @"database nr", @"Non-redundant GenBank sequence database.", false));
-            TermData.Add(CVID.MS_protein_result_details, new TermInfo(CVID.MS_protein_result_details, @"MS", @"MS:1001085", @"protein result details", @"Protein level information.", false));
+            TermData.Add(CVID.MS_protein_level_identification_attribute, new TermInfo(CVID.MS_protein_level_identification_attribute, @"MS", @"MS:1001085", @"protein-level identification attribute", @"Protein level information.", false));
             TermData.Add(CVID.MS_SEQUEST_sort_by_XCorr, new TermInfo(CVID.MS_SEQUEST_sort_by_XCorr, @"MS", @"MS:1001086", @"SEQUEST:sort by XCorr", @"Sort order of SEQUEST search results by the correlation score.", false));
             TermData.Add(CVID.MS_SEQUEST_ProcessCV, new TermInfo(CVID.MS_SEQUEST_ProcessCV, @"MS", @"MS:1001087", @"SEQUEST:ProcessCV", @"SEQUEST View / Process Input Parameters.", false));
             TermData.Add(CVID.MS_protein_description, new TermInfo(CVID.MS_protein_description, @"MS", @"MS:1001088", @"protein description", @"The protein description line from the sequence entry in the source database FASTA file.", false));
             TermData.Add(CVID.MS_molecule_taxonomy, new TermInfo(CVID.MS_molecule_taxonomy, @"MS", @"MS:1001089", @"molecule taxonomy", @"The taxonomy of the resultant molecule from the search.", false));
             TermData.Add(CVID.MS_taxonomy_nomenclature_OBSOLETE, new TermInfo(CVID.MS_taxonomy_nomenclature_OBSOLETE, @"MS", @"MS:1001090", @"taxonomy nomenclature", @"OBSOLETE: The system used to indicate taxonomy. There should be an enumerated list of options: latin name, NCBI TaxID, common name, Swiss-Prot species ID (ex. RABIT from the full protein ID ALBU_RABIT).", true));
             TermData.Add(CVID.MS_NoEnzyme_OBSOLETE, new TermInfo(CVID.MS_NoEnzyme_OBSOLETE, @"MS", @"MS:1001091", @"NoEnzyme", @"", true));
-            TermData.Add(CVID.MS_peptide_identification_confidence_metric, new TermInfo(CVID.MS_peptide_identification_confidence_metric, @"MS", @"MS:1001092", @"peptide identification confidence metric", @"Identification confidence metric for a peptide.", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_identification_statistic, new TermInfo(CVID.MS_peptide_sequence_level_identification_statistic, @"MS", @"MS:1001092", @"peptide sequence-level identification statistic", @"Identification confidence metric for a peptide.", false));
             TermData.Add(CVID.MS_sequence_coverage, new TermInfo(CVID.MS_sequence_coverage, @"MS", @"MS:1001093", @"sequence coverage", @"The percent coverage for the protein based upon the matched peptide sequences (can be calculated).", false));
             TermData.Add(CVID.MS_SEQUEST_sort_by_z, new TermInfo(CVID.MS_SEQUEST_sort_by_z, @"MS", @"MS:1001094", @"SEQUEST:sort by z", @"Sort order of SEQUEST search results given by the charge.", false));
             TermData.Add(CVID.MS_SEQUEST_ProcessAll, new TermInfo(CVID.MS_SEQUEST_ProcessAll, @"MS", @"MS:1001095", @"SEQUEST:ProcessAll", @"", false));
@@ -20422,7 +20551,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_SEQUEST_Chromatogram, new TermInfo(CVID.MS_SEQUEST_Chromatogram, @"MS", @"MS:1001102", @"SEQUEST:Chromatogram", @"", false));
             TermData.Add(CVID.MS_SEQUEST_InfoAndLog, new TermInfo(CVID.MS_SEQUEST_InfoAndLog, @"MS", @"MS:1001103", @"SEQUEST:InfoAndLog", @"", false));
             TermData.Add(CVID.MS_database_UniProtKB_Swiss_Prot, new TermInfo(CVID.MS_database_UniProtKB_Swiss_Prot, @"MS", @"MS:1001104", @"database UniProtKB/Swiss-Prot", @"The name of the UniProtKB/Swiss-Prot knowledgebase.", false));
-            TermData.Add(CVID.MS_peptide_result_details, new TermInfo(CVID.MS_peptide_result_details, @"MS", @"MS:1001105", @"peptide result details", @"Peptide level information.", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_identification_attribute, new TermInfo(CVID.MS_peptide_sequence_level_identification_attribute, @"MS", @"MS:1001105", @"peptide sequence-level identification attribute", @"Peptide level information.", false));
             TermData.Add(CVID.MS_SEQUEST_TopNumber, new TermInfo(CVID.MS_SEQUEST_TopNumber, @"MS", @"MS:1001106", @"SEQUEST:TopNumber", @"Specify \ number\  as value of the CVParam.", false));
             TermData.Add(CVID.MS_data_stored_in_database, new TermInfo(CVID.MS_data_stored_in_database, @"MS", @"MS:1001107", @"data stored in database", @"Source file for this mzIdentML was a data set in a database.", false));
             TermData.Add(CVID.MS_param__a_ion, new TermInfo(CVID.MS_param__a_ion, @"MS", @"MS:1001108", @"param: a ion", @"Parameter information, type of product: a ion with charge on the N-terminal side.", false));
@@ -20433,7 +20562,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_c_terminal_flanking_residue, new TermInfo(CVID.MS_c_terminal_flanking_residue, @"MS", @"MS:1001113", @"c-terminal flanking residue", @"The residue following the last amino acid in the peptide sequence as it occurs in the protein. Use 'C-term' to denote if the peptide ends at the C terminus of the protein.", false));
             TermData.Add(CVID.MS_retention_time_s__OBSOLETE, new TermInfo(CVID.MS_retention_time_s__OBSOLETE, @"MS", @"MS:1001114", @"retention time(s)", @"OBSOLETE Retention time of the spectrum from the source file.", true));
             TermData.Add(CVID.MS_scan_number_s__OBSOLETE, new TermInfo(CVID.MS_scan_number_s__OBSOLETE, @"MS", @"MS:1001115", @"scan number(s)", @"OBSOLETE: use spectrumID attribute of SpectrumIdentificationResult. Take from mzData.", true));
-            TermData.Add(CVID.MS_single_protein_result_details, new TermInfo(CVID.MS_single_protein_result_details, @"MS", @"MS:1001116", @"single protein result details", @"Results specific for one protein as part of a protein ambiguity group (a result not valid for all the other proteins in the protein ambiguity group).", false));
+            TermData.Add(CVID.MS_single_protein_identification_statistic, new TermInfo(CVID.MS_single_protein_identification_statistic, @"MS", @"MS:1001116", @"single protein identification statistic", @"Results specific for one protein as part of a protein ambiguity group (a result not valid for all the other proteins in the protein ambiguity group).", false));
             TermData.Add(CVID.MS_theoretical_mass, new TermInfo(CVID.MS_theoretical_mass, @"MS", @"MS:1001117", @"theoretical mass", @"The theoretical mass of the molecule (e.g. the peptide sequence and its modifications).", false));
             TermData.Add(CVID.MS_param__b_ion, new TermInfo(CVID.MS_param__b_ion, @"MS", @"MS:1001118", @"param: b ion", @"Parameter information, type of product: b ion with charge on the N-terminal side.", false));
             TermData.Add(CVID.MS_param__c_ion, new TermInfo(CVID.MS_param__c_ion, @"MS", @"MS:1001119", @"param: c ion", @"Parameter information, type of product: c ion with charge on the N-terminal side.", false));
@@ -20460,7 +20589,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_quantitation_software_version_OBSOLETE, new TermInfo(CVID.MS_quantitation_software_version_OBSOLETE, @"MS", @"MS:1001140", @"quantitation software version", @"OBSOLETE Quantitation software version.", true));
             TermData.Add(CVID.MS_intensity_of_precursor_ion, new TermInfo(CVID.MS_intensity_of_precursor_ion, @"MS", @"MS:1001141", @"intensity of precursor ion", @"The intensity of the precursor ion.", false));
             TermData.Add(CVID.MS_database_IPI_human, new TermInfo(CVID.MS_database_IPI_human, @"MS", @"MS:1001142", @"database IPI_human", @"International Protein Index database for Homo sapiens sequences.", false));
-            TermData.Add(CVID.MS_search_engine_specific_score_for_PSMs, new TermInfo(CVID.MS_search_engine_specific_score_for_PSMs, @"MS", @"MS:1001143", @"search engine specific score for PSMs", @"Search engine specific peptide spectrum match scores.", false));
+            TermData.Add(CVID.MS_PSM_level_search_engine_specific_statistic, new TermInfo(CVID.MS_PSM_level_search_engine_specific_statistic, @"MS", @"MS:1001143", @"PSM-level search engine specific statistic", @"Search engine specific peptide spectrum match scores.", false));
             TermData.Add(CVID.MS_SEQUEST_SelectDefault, new TermInfo(CVID.MS_SEQUEST_SelectDefault, @"MS", @"MS:1001144", @"SEQUEST:SelectDefault", @"", false));
             TermData.Add(CVID.MS_SEQUEST_SelectAdvancedCV, new TermInfo(CVID.MS_SEQUEST_SelectAdvancedCV, @"MS", @"MS:1001145", @"SEQUEST:SelectAdvancedCV", @"SEQUEST Select Advanced Input Parameters.", false));
             TermData.Add(CVID.MS_param__a_ion_NH3_DEPRECATED, new TermInfo(CVID.MS_param__a_ion_NH3_DEPRECATED, @"MS", @"MS:1001146", @"param: a ion-NH3 DEPRECATED", @"Ion a-NH3 parameter information, type of product: a ion with lost ammonia.", false));
@@ -20527,7 +20656,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_SEQUEST_PeptideNumber, new TermInfo(CVID.MS_SEQUEST_PeptideNumber, @"MS", @"MS:1001218", @"SEQUEST:PeptideNumber", @"The SEQUEST result '#' in out file (peptide).", false));
             TermData.Add(CVID.MS_SEQUEST_PeptideIdnumber, new TermInfo(CVID.MS_SEQUEST_PeptideIdnumber, @"MS", @"MS:1001219", @"SEQUEST:PeptideIdnumber", @"The SEQUEST result 'Id#' in out file (peptide).", false));
             TermData.Add(CVID.MS_frag__y_ion, new TermInfo(CVID.MS_frag__y_ion, @"MS", @"MS:1001220", @"frag: y ion", @"Fragmentation information, type of product: y ion.", false));
-            TermData.Add(CVID.MS_fragmentation_information, new TermInfo(CVID.MS_fragmentation_information, @"MS", @"MS:1001221", @"fragmentation information", @"Fragmentation information like ion types.", false));
+            TermData.Add(CVID.MS_product_ion_attribute, new TermInfo(CVID.MS_product_ion_attribute, @"MS", @"MS:1001221", @"product ion attribute", @"Fragmentation information like ion types.", false));
             TermData.Add(CVID.MS_frag__b_ion___H2O, new TermInfo(CVID.MS_frag__b_ion___H2O, @"MS", @"MS:1001222", @"frag: b ion - H2O", @"Fragmentation information, type of product: b ion without water.", false));
             TermData.Add(CVID.MS_frag__y_ion___H2O, new TermInfo(CVID.MS_frag__y_ion___H2O, @"MS", @"MS:1001223", @"frag: y ion - H2O", @"Fragmentation information, type of product: y ion without water.", false));
             TermData.Add(CVID.MS_frag__b_ion, new TermInfo(CVID.MS_frag__b_ion, @"MS", @"MS:1001224", @"frag: b ion", @"Fragmentation information, type of product: b ion.", false));
@@ -20659,7 +20788,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_alternate_mass, new TermInfo(CVID.MS_alternate_mass, @"MS", @"MS:1001361", @"alternate mass", @"List of masses a non-standard letter code is replaced with.", false));
             TermData.Add(CVID.MS_number_of_unmatched_peaks, new TermInfo(CVID.MS_number_of_unmatched_peaks, @"MS", @"MS:1001362", @"number of unmatched peaks", @"The number of unmatched peaks.", false));
             TermData.Add(CVID.MS_peptide_unique_to_one_protein, new TermInfo(CVID.MS_peptide_unique_to_one_protein, @"MS", @"MS:1001363", @"peptide unique to one protein", @"A peptide matching only one.", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_global_FDR, new TermInfo(CVID.MS_distinct_peptide_level_global_FDR, @"MS", @"MS:1001364", @"distinct peptide-level global FDR", @"Estimation of the global false discovery rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_global_FDR, new TermInfo(CVID.MS_peptide_sequence_level_global_FDR, @"MS", @"MS:1001364", @"peptide sequence-level global FDR", @"Estimation of the global false discovery rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_frag__internal_yb_ion, new TermInfo(CVID.MS_frag__internal_yb_ion, @"MS", @"MS:1001365", @"frag: internal yb ion", @"Fragmentation information, type of product: internal yb ion.", false));
             TermData.Add(CVID.MS_frag__internal_ya_ion, new TermInfo(CVID.MS_frag__internal_ya_ion, @"MS", @"MS:1001366", @"frag: internal ya ion", @"Fragmentation information, type of product: internal ya ion.", false));
             TermData.Add(CVID.MS_frag__z_1_ion, new TermInfo(CVID.MS_frag__z_1_ion, @"MS", @"MS:1001367", @"frag: z+1 ion", @"Fragmentation information, type of product: z+1 ion.", false));
@@ -21158,9 +21287,9 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Progenesis_normalization, new TermInfo(CVID.MS_Progenesis_normalization, @"MS", @"MS:1001867", @"Progenesis normalization", @"Normalization as performed by Progenesis LC-MS.", false));
             TermData.Add(CVID.MS_distinct_peptide_level_q_value, new TermInfo(CVID.MS_distinct_peptide_level_q_value, @"MS", @"MS:1001868", @"distinct peptide-level q-value", @"Estimation of the q-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs, possibly with different mass modifications, mapping to the same sequence have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_protein_level_q_value, new TermInfo(CVID.MS_protein_level_q_value, @"MS", @"MS:1001869", @"protein-level q-value", @"Estimation of the q-value for proteins.", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_p_value, new TermInfo(CVID.MS_distinct_peptide_level_p_value, @"MS", @"MS:1001870", @"distinct peptide-level p-value", @"Estimation of the p-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_p_value, new TermInfo(CVID.MS_peptide_sequence_level_p_value, @"MS", @"MS:1001870", @"peptide sequence-level p-value", @"Estimation of the p-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_protein_level_p_value, new TermInfo(CVID.MS_protein_level_p_value, @"MS", @"MS:1001871", @"protein-level p-value", @"Estimation of the p-value for proteins.", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_e_value, new TermInfo(CVID.MS_distinct_peptide_level_e_value, @"MS", @"MS:1001872", @"distinct peptide-level e-value", @"Estimation of the e-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_e_value, new TermInfo(CVID.MS_peptide_sequence_level_e_value, @"MS", @"MS:1001872", @"peptide sequence-level e-value", @"Estimation of the e-value for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_protein_level_e_value, new TermInfo(CVID.MS_protein_level_e_value, @"MS", @"MS:1001873", @"protein-level e-value", @"Estimation of the e-value for proteins.", false));
             TermData.Add(CVID.MS_FDRScore_OBSOLETE, new TermInfo(CVID.MS_FDRScore_OBSOLETE, @"MS", @"MS:1001874", @"FDRScore", @"OBSOLETE A smoothing of the distribution of q-values calculated for PSMs from individual search engines, such that ordering of result quality is maintained and all FDRScore values are guaranteed to have a value > 0.", true));
             TermData.Add(CVID.MS_modification_motif, new TermInfo(CVID.MS_modification_motif, @"MS", @"MS:1001875", @"modification motif", @"The regular expression describing the sequence motif for a modification.", false));
@@ -21255,7 +21384,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_ProteinScape_second_round_Phenyx, new TermInfo(CVID.MS_ProteinScape_second_round_Phenyx, @"MS", @"MS:1001965", @"ProteinScape:second round Phenyx", @"Flag indicating a second round search with Phenyx.", false));
             TermData.Add(CVID.MS_product_ion_mobility, new TermInfo(CVID.MS_product_ion_mobility, @"MS", @"MS:1001966", @"product ion mobility", @"The mobility of an MS2 product ion, as measured by ion mobility mass spectrometry.", false));
             TermData.Add(CVID.MS_product_ion_drift_time_OBSOLETE, new TermInfo(CVID.MS_product_ion_drift_time_OBSOLETE, @"MS", @"MS:1001967", @"product ion drift time", @"OBSOLETE The ion drift time of an MS2 product ion.", true));
-            TermData.Add(CVID.MS_PSM_level_PTM_localization_score, new TermInfo(CVID.MS_PSM_level_PTM_localization_score, @"MS", @"MS:1001968", @"PSM-level PTM localization score", @"A score that assign confidence to the localization of an amino acid modification on a peptide sequence at the PSM-level.", false));
+            TermData.Add(CVID.MS_PTM_localization_PSM_level_statistic, new TermInfo(CVID.MS_PTM_localization_PSM_level_statistic, @"MS", @"MS:1001968", @"PTM localization PSM-level statistic", @"Statistic to convey the confidence of the localization of an amino acid modification on a peptide sequence at the PSM-level.", false));
             TermData.Add(CVID.MS_phosphoRS_score, new TermInfo(CVID.MS_phosphoRS_score, @"MS", @"MS:1001969", @"phosphoRS score", @"phosphoRS score for PTM site location at the PSM-level.", false));
             TermData.Add(CVID.MS_phosphoRS_sequence_probability, new TermInfo(CVID.MS_phosphoRS_sequence_probability, @"MS", @"MS:1001970", @"phosphoRS sequence probability", @"Probability that the respective isoform is correct.", false));
             TermData.Add(CVID.MS_phosphoRS_site_probability, new TermInfo(CVID.MS_phosphoRS_site_probability, @"MS", @"MS:1001971", @"phosphoRS site probability", @"Estimate of the probability that the respective site is truly phosphorylated.", false));
@@ -21356,7 +21485,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_ratio_calculation_method, new TermInfo(CVID.MS_ratio_calculation_method, @"MS", @"MS:1002066", @"ratio calculation method", @"Method used to calculate the ratio.", false));
             TermData.Add(CVID.MS_protein_value__median_of_peptide_ratios, new TermInfo(CVID.MS_protein_value__median_of_peptide_ratios, @"MS", @"MS:1002067", @"protein value: median of peptide ratios", @"Protein quantification value calculated as median of peptide ratios.", false));
             TermData.Add(CVID.MS_metabolic_labelling__heavy_N__mainly_15N_, new TermInfo(CVID.MS_metabolic_labelling__heavy_N__mainly_15N_, @"MS", @"MS:1002068", @"metabolic labelling: heavy N (mainly 15N)", @"Metabolic labelling: heavy N (mainly 15N).", false));
-            TermData.Add(CVID.MS_metabolic_labelling__labelling_purity, new TermInfo(CVID.MS_metabolic_labelling__labelling_purity, @"MS", @"MS:1002069", @"metabolic labelling: labelling purity", @"Metabolic labelling: Description of labelling purity. Usually the purity of feeding material (e.g. 95%), or the inclusion rate derived from isotopic peak pattern shape.", false));
+            TermData.Add(CVID.MS_metabolic_labelling_purity, new TermInfo(CVID.MS_metabolic_labelling_purity, @"MS", @"MS:1002069", @"metabolic labelling purity", @"Metabolic labelling: Description of labelling purity. Usually the purity of feeding material (e.g. 95%), or the inclusion rate derived from isotopic peak pattern shape.", false));
             TermData.Add(CVID.MS_t_test, new TermInfo(CVID.MS_t_test, @"MS", @"MS:1002070", @"t-test", @"Perform a t-test (two groups). Specify in string value, whether paired / unpaired, variance equal / different, one- / two-sided version is performed.", false));
             TermData.Add(CVID.MS_ANOVA_test, new TermInfo(CVID.MS_ANOVA_test, @"MS", @"MS:1002071", @"ANOVA-test", @"Perform an ANOVA-test (more than two groups). Specify in string value, which version is performed.", false));
             TermData.Add(CVID.MS_p_value, new TermInfo(CVID.MS_p_value, @"MS", @"MS:1002072", @"p-value", @"P-value as result of one of the processing steps described. Specify in the description, which processing step it was.", false));
@@ -21409,7 +21538,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_experiment_name, new TermInfo(CVID.MS_experiment_name, @"MS", @"MS:1002120", @"experiment name", @"The name for identifying an experiment.", false));
             TermData.Add(CVID.MS_spectral_count_feature, new TermInfo(CVID.MS_spectral_count_feature, @"MS", @"MS:1002121", @"spectral count feature", @"Dummy decribing a spectral count feature.", false));
             TermData.Add(CVID.MS_counts_reporting, new TermInfo(CVID.MS_counts_reporting, @"MS", @"MS:1002122", @"counts reporting", @"FeatureList of spectral counts.", false));
-            TermData.Add(CVID.MS_x_Tracker, new TermInfo(CVID.MS_x_Tracker, @"MS", @"MS:1002123", @"x-Tracker", @"x-Tracker generic tool for quantitative proteomics.", false));
+            TermData.Add(CVID.MS_x_Tracker, new TermInfo(CVID.MS_x_Tracker, @"MS", @"MS:1002123", @"x-Tracker", @"X-Tracker generic tool for quantitative proteomics.", false));
             TermData.Add(CVID.MS_ProteoSuite, new TermInfo(CVID.MS_ProteoSuite, @"MS", @"MS:1002124", @"ProteoSuite", @"ProteoSuite software for the analysis of quantitative proteomics data.", false));
             TermData.Add(CVID.MS_combined_FDRScore_OBSOLETE, new TermInfo(CVID.MS_combined_FDRScore_OBSOLETE, @"MS", @"MS:1002125", @"combined FDRScore", @"OBSOLETE FDRScore values specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.", true));
             TermData.Add(CVID.MS_database_UniProtKB, new TermInfo(CVID.MS_database_UniProtKB, @"MS", @"MS:1002126", @"database UniProtKB", @"The name of the UniProtKB knowledgebase.", false));
@@ -21552,7 +21681,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Byonic_Delta_Score, new TermInfo(CVID.MS_Byonic_Delta_Score, @"MS", @"MS:1002263", @"Byonic:Delta Score", @"The drop in Byonic score from the top-scoring peptide to the next peptide with distinct sequence. In this computation, the same peptide with different modifications is not considered distinct.", false));
             TermData.Add(CVID.MS_Byonic_DeltaMod_Score, new TermInfo(CVID.MS_Byonic_DeltaMod_Score, @"MS", @"MS:1002264", @"Byonic:DeltaMod Score", @"The drop in Byonic score from the top-scoring peptide to the next peptide different in any way, including placement of modifications. DeltaMod gives an indication of whether modifications are confidently localized; DeltaMod over 10.0 means that there is high likelihood that all modification placements are correct.", false));
             TermData.Add(CVID.MS_Byonic_PEP, new TermInfo(CVID.MS_Byonic_PEP, @"MS", @"MS:1002265", @"Byonic:PEP", @"Byonic posterior error probability.", false));
-            TermData.Add(CVID.MS_Byonic_Peptide_LogProb, new TermInfo(CVID.MS_Byonic_Peptide_LogProb, @"MS", @"MS:1002266", @"Byonic:Peptide LogProb", @"The log p-value of the PSM. This is the log of the probability that the PSM with such a score and delta would arise by chance in a search of this size (size of the protein database, as expanded by the modification rules). A log p-value of -3.0 should happen by chance on only one of a thousand spectra. Caveat: it is very hard to compute a p-value that works for all searches and all spectra, so read Byonic p-values with a certain amount of skepticism.", false));
+            TermData.Add(CVID.MS_Byonic_Peptide_LogProb, new TermInfo(CVID.MS_Byonic_Peptide_LogProb, @"MS", @"MS:1002266", @"Byonic:Peptide LogProb", @"The log p-value of the PSM. This is the log of the probability that the PSM with such a score and delta would arise by chance in a search of this size (the size of the protein database, as expanded by the modification rules). A log p-value of -3.0 should happen by chance on only one of a thousand spectra. Caveat: it is very hard to compute a p-value that works for all searches and all spectra, so read Byonic p-values with a certain amount of skepticism.", false));
             TermData.Add(CVID.MS_Byonic_Protein_LogProb, new TermInfo(CVID.MS_Byonic_Protein_LogProb, @"MS", @"MS:1002267", @"Byonic:Protein LogProb", @"The log p-value of the protein.", false));
             TermData.Add(CVID.MS_Byonic_Best_LogProb, new TermInfo(CVID.MS_Byonic_Best_LogProb, @"MS", @"MS:1002268", @"Byonic:Best LogProb", @"Best (most negative) log p-value of an individual PSM.", false));
             TermData.Add(CVID.MS_Byonic_Best_Score, new TermInfo(CVID.MS_Byonic_Best_Score, @"MS", @"MS:1002269", @"Byonic:Best Score", @"Best (largest) Byonic score of a PSM.", false));
@@ -21631,28 +21760,28 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_MZmine, new TermInfo(CVID.MS_MZmine, @"MS", @"MS:1002342", @"MZmine", @"A framework for differential analysis of mass spectrometry data.", false));
             TermData.Add(CVID.MS_ion_stability_type_OBSOLETE, new TermInfo(CVID.MS_ion_stability_type_OBSOLETE, @"MS", @"MS:1002343", @"ion stability type", @"OBSOLETE Stability type of the ion.", true));
             TermData.Add(CVID.MS_Maltcms, new TermInfo(CVID.MS_Maltcms, @"MS", @"MS:1002344", @"Maltcms", @"Modular Application Toolkit for Chromatography Mass-Spectrometry is an application framework mainly for developers.", false));
-            TermData.Add(CVID.MS_PSM_level_result_details, new TermInfo(CVID.MS_PSM_level_result_details, @"MS", @"MS:1002345", @"PSM-level result details", @"Peptide spectrum match level information.", false));
-            TermData.Add(CVID.MS_protein_group_level_result_details, new TermInfo(CVID.MS_protein_group_level_result_details, @"MS", @"MS:1002346", @"protein group-level result details", @"Protein group level information.", false));
-            TermData.Add(CVID.MS_PSM_level_identification_confidence_metric, new TermInfo(CVID.MS_PSM_level_identification_confidence_metric, @"MS", @"MS:1002347", @"PSM-level identification confidence metric", @"Identification confidence metric for a peptide spectrum match.", false));
-            TermData.Add(CVID.MS_protein_group_level_identification_confidence_metric, new TermInfo(CVID.MS_protein_group_level_identification_confidence_metric, @"MS", @"MS:1002348", @"protein group-level identification confidence metric", @"Identification confidence metric for a protein group.", false));
+            TermData.Add(CVID.MS_PSM_level_attribute, new TermInfo(CVID.MS_PSM_level_attribute, @"MS", @"MS:1002345", @"PSM-level attribute", @"Attribute of a single peptide-spectrum match.", false));
+            TermData.Add(CVID.MS_protein_group_level_identification_attribute, new TermInfo(CVID.MS_protein_group_level_identification_attribute, @"MS", @"MS:1002346", @"protein group-level identification attribute", @"Protein group level information.", false));
+            TermData.Add(CVID.MS_PSM_level_identification_statistic, new TermInfo(CVID.MS_PSM_level_identification_statistic, @"MS", @"MS:1002347", @"PSM-level identification statistic", @"Identification confidence metric for a peptide spectrum match.", false));
+            TermData.Add(CVID.MS_protein_group_level_identification_statistic, new TermInfo(CVID.MS_protein_group_level_identification_statistic, @"MS", @"MS:1002348", @"protein group-level identification statistic", @"Identification confidence metric for a protein group.", false));
             TermData.Add(CVID.MS_value_greater_than_zero_but_less_than_or_equal_to_one, new TermInfo(CVID.MS_value_greater_than_zero_but_less_than_or_equal_to_one, @"MS", @"MS:1002349", @"value greater than zero but less than or equal to one", @"Positive value range less than or equal to 1.", false));
             TermData.Add(CVID.MS_PSM_level_global_FDR, new TermInfo(CVID.MS_PSM_level_global_FDR, @"MS", @"MS:1002350", @"PSM-level global FDR", @"Estimation of the global false discovery rate of peptide spectrum matches.", false));
             TermData.Add(CVID.MS_PSM_level_local_FDR, new TermInfo(CVID.MS_PSM_level_local_FDR, @"MS", @"MS:1002351", @"PSM-level local FDR", @"Estimation of the local false discovery rate of peptide spectrum matches.", false));
             TermData.Add(CVID.MS_PSM_level_p_value, new TermInfo(CVID.MS_PSM_level_p_value, @"MS", @"MS:1002352", @"PSM-level p-value", @"Estimation of the p-value for peptide spectrum matches.", false));
             TermData.Add(CVID.MS_PSM_level_e_value, new TermInfo(CVID.MS_PSM_level_e_value, @"MS", @"MS:1002353", @"PSM-level e-value", @"Estimation of the e-value for peptide spectrum matches.", false));
             TermData.Add(CVID.MS_PSM_level_q_value, new TermInfo(CVID.MS_PSM_level_q_value, @"MS", @"MS:1002354", @"PSM-level q-value", @"Estimation of the q-value for peptide spectrum matches.", false));
-            TermData.Add(CVID.MS_PSM_level_FDRScore, new TermInfo(CVID.MS_PSM_level_FDRScore, @"MS", @"MS:1002355", @"PSM-level FDRScore", @"FDRScore for peptide spectrum matches.", false));
-            TermData.Add(CVID.MS_PSM_level_combined_FDRScore, new TermInfo(CVID.MS_PSM_level_combined_FDRScore, @"MS", @"MS:1002356", @"PSM-level combined FDRScore", @"Combined FDRScore for peptide spectrum matches specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.", false));
+            TermData.Add(CVID.MS_PSM_level_FDRScore, new TermInfo(CVID.MS_PSM_level_FDRScore, @"MS", @"MS:1002355", @"PSM-level FDRScore", @"mzidLibrary FDRScore for peptide spectrum matches.", false));
+            TermData.Add(CVID.MS_PSM_level_combined_FDRScore, new TermInfo(CVID.MS_PSM_level_combined_FDRScore, @"MS", @"MS:1002356", @"PSM-level combined FDRScore", @"mzidLibrary Combined FDRScore for peptide spectrum matches specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.", false));
             TermData.Add(CVID.MS_PSM_level_probability, new TermInfo(CVID.MS_PSM_level_probability, @"MS", @"MS:1002357", @"PSM-level probability", @"Probability that the reported peptide ion is truly responsible for some or all of the components of the specified mass spectrum.", false));
-            TermData.Add(CVID.MS_search_engine_specific_score_for_distinct_peptides, new TermInfo(CVID.MS_search_engine_specific_score_for_distinct_peptides, @"MS", @"MS:1002358", @"search engine specific score for distinct peptides", @"Search engine specific distinct peptide score.", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_local_FDR, new TermInfo(CVID.MS_distinct_peptide_level_local_FDR, @"MS", @"MS:1002359", @"distinct peptide-level local FDR", @"Estimation of the local false discovery rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_FDRScore, new TermInfo(CVID.MS_distinct_peptide_level_FDRScore, @"MS", @"MS:1002360", @"distinct peptide-level FDRScore", @"FDRScore for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, new TermInfo(CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, @"MS", @"MS:1002358", @"search engine specific peptide sequence-level identification statistic", @"Search engine specific distinct peptide score.", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_local_FDR, new TermInfo(CVID.MS_peptide_sequence_level_local_FDR, @"MS", @"MS:1002359", @"peptide sequence-level local FDR", @"Estimation of the local false discovery rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_distinct_peptide_level_FDRScore, new TermInfo(CVID.MS_distinct_peptide_level_FDRScore, @"MS", @"MS:1002360", @"distinct peptide-level FDRScore", @"mzidLibrary FDRScore for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_distinct_peptide_level_combined_FDRScore, new TermInfo(CVID.MS_distinct_peptide_level_combined_FDRScore, @"MS", @"MS:1002361", @"distinct peptide-level combined FDRScore", @"Combined FDRScore for peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry) specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given peptide, used for integrating results from these distinct pools.", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_probability, new TermInfo(CVID.MS_distinct_peptide_level_probability, @"MS", @"MS:1002362", @"distinct peptide-level probability", @"Probability that the reported distinct peptide sequence (irrespective of mass modifications) has been correctly identified via the referenced PSMs.", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_probability, new TermInfo(CVID.MS_peptide_sequence_level_probability, @"MS", @"MS:1002362", @"peptide sequence-level probability", @"Probability that the reported distinct peptide sequence (irrespective of mass modifications) has been correctly identified via the referenced PSMs.", false));
             TermData.Add(CVID.MS_search_engine_specific_score_for_proteins, new TermInfo(CVID.MS_search_engine_specific_score_for_proteins, @"MS", @"MS:1002363", @"search engine specific score for proteins", @"Search engine specific protein scores.", false));
             TermData.Add(CVID.MS_protein_level_local_FDR, new TermInfo(CVID.MS_protein_level_local_FDR, @"MS", @"MS:1002364", @"protein-level local FDR", @"Estimation of the local false discovery rate of proteins.", false));
-            TermData.Add(CVID.MS_FDRScore_for_proteins, new TermInfo(CVID.MS_FDRScore_for_proteins, @"MS", @"MS:1002365", @"FDRScore for proteins", @"FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.", false));
-            TermData.Add(CVID.MS_combined_FDRScore_for_proteins, new TermInfo(CVID.MS_combined_FDRScore_for_proteins, @"MS", @"MS:1002366", @"combined FDRScore for proteins", @"Combined FDRScore for proteins.", false));
+            TermData.Add(CVID.MS_FDRScore_for_proteins, new TermInfo(CVID.MS_FDRScore_for_proteins, @"MS", @"MS:1002365", @"FDRScore for proteins", @"mzidLibrary FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.", false));
+            TermData.Add(CVID.MS_combined_FDRScore_for_proteins, new TermInfo(CVID.MS_combined_FDRScore_for_proteins, @"MS", @"MS:1002366", @"combined FDRScore for proteins", @"mzidLibrary Combined FDRScore for proteins.", false));
             TermData.Add(CVID.MS_probability_for_proteins, new TermInfo(CVID.MS_probability_for_proteins, @"MS", @"MS:1002367", @"probability for proteins", @"Probability that a specific protein sequence has been correctly identified from the PSM and distinct peptide evidence, and based on the available protein sequences presented to the analysis software.", false));
             TermData.Add(CVID.MS_search_engine_specific_score_for_protein_groups, new TermInfo(CVID.MS_search_engine_specific_score_for_protein_groups, @"MS", @"MS:1002368", @"search engine specific score for protein groups", @"Search engine specific protein group scores.", false));
             TermData.Add(CVID.MS_protein_group_level_global_FDR, new TermInfo(CVID.MS_protein_group_level_global_FDR, @"MS", @"MS:1002369", @"protein group-level global FDR", @"Estimation of the global false discovery rate of protein groups.", false));
@@ -21660,8 +21789,8 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_protein_group_level_p_value, new TermInfo(CVID.MS_protein_group_level_p_value, @"MS", @"MS:1002371", @"protein group-level p-value", @"Estimation of the p-value for protein groups.", false));
             TermData.Add(CVID.MS_protein_group_level_e_value, new TermInfo(CVID.MS_protein_group_level_e_value, @"MS", @"MS:1002372", @"protein group-level e-value", @"Estimation of the e-value for protein groups.", false));
             TermData.Add(CVID.MS_protein_group_level_q_value, new TermInfo(CVID.MS_protein_group_level_q_value, @"MS", @"MS:1002373", @"protein group-level q-value", @"Estimation of the q-value for protein groups.", false));
-            TermData.Add(CVID.MS_protein_group_level_FDRScore, new TermInfo(CVID.MS_protein_group_level_FDRScore, @"MS", @"MS:1002374", @"protein group-level FDRScore", @"FDRScore for protein groups.", false));
-            TermData.Add(CVID.MS_protein_group_level_combined_FDRScore, new TermInfo(CVID.MS_protein_group_level_combined_FDRScore, @"MS", @"MS:1002375", @"protein group-level combined FDRScore", @"Combined FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.", false));
+            TermData.Add(CVID.MS_protein_group_level_FDRScore, new TermInfo(CVID.MS_protein_group_level_FDRScore, @"MS", @"MS:1002374", @"protein group-level FDRScore", @"mzidLibrary FDRScore for protein groups.", false));
+            TermData.Add(CVID.MS_protein_group_level_combined_FDRScore, new TermInfo(CVID.MS_protein_group_level_combined_FDRScore, @"MS", @"MS:1002375", @"protein group-level combined FDRScore", @"mzidLibrary Combined FDRScore for proteins specifically obtained for distinct combinations of single, pairs or triplets of search engines making a given PSM, used for integrating results from these distinct pools.", false));
             TermData.Add(CVID.MS_protein_group_level_probability, new TermInfo(CVID.MS_protein_group_level_probability, @"MS", @"MS:1002376", @"protein group-level probability", @"Probability that at least one of the members of a group of protein sequences has been correctly identified from the PSM and distinct peptide evidence, and based on the available protein sequences presented to the analysis software.", false));
             TermData.Add(CVID.MS_ProteomeDiscoverer_Relaxed_Score_Threshold, new TermInfo(CVID.MS_ProteomeDiscoverer_Relaxed_Score_Threshold, @"MS", @"MS:1002377", @"ProteomeDiscoverer:Relaxed Score Threshold", @"Specifies the threshold value for relaxed scoring.", false));
             TermData.Add(CVID.MS_ProteomeDiscoverer_Strict_Score_Threshold, new TermInfo(CVID.MS_ProteomeDiscoverer_Strict_Score_Threshold, @"MS", @"MS:1002378", @"ProteomeDiscoverer:Strict Score Threshold", @"Specifies the threshold value for strict scoring.", false));
@@ -21691,7 +21820,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_non_leading_protein, new TermInfo(CVID.MS_non_leading_protein, @"MS", @"MS:1002402", @"non-leading protein", @"Zero to many proteins within each group should be annotated as non-leading to indicate that other proteins have stronger evidence.", false));
             TermData.Add(CVID.MS_group_representative, new TermInfo(CVID.MS_group_representative, @"MS", @"MS:1002403", @"group representative", @"An arbitrary and optional flag applied to exactly one protein per group to indicate it can serve as the representative of the group, amongst leading proteins, in effect serving as a tiebreaker for approaches that require exactly one group representative.", false));
             TermData.Add(CVID.MS_count_of_identified_proteins, new TermInfo(CVID.MS_count_of_identified_proteins, @"MS", @"MS:1002404", @"count of identified proteins", @"The number of proteins that have been identified, which must match the number of groups that pass the threshold in the file.", false));
-            TermData.Add(CVID.MS_protein_cluster_details, new TermInfo(CVID.MS_protein_cluster_details, @"MS", @"MS:1002405", @"protein cluster details", @"Details describing a protein cluster.", false));
+            TermData.Add(CVID.MS_protein_group_level_result_list_attribute, new TermInfo(CVID.MS_protein_group_level_result_list_attribute, @"MS", @"MS:1002405", @"protein group-level result list attribute", @"Details describing a protein cluster.", false));
             TermData.Add(CVID.MS_count_of_identified_clusters, new TermInfo(CVID.MS_count_of_identified_clusters, @"MS", @"MS:1002406", @"count of identified clusters", @"The number of protein clusters that have been identified, which must match the number of clusters that pass the threshold in the file.", false));
             TermData.Add(CVID.MS_cluster_identifier, new TermInfo(CVID.MS_cluster_identifier, @"MS", @"MS:1002407", @"cluster identifier", @"An identifier applied to protein groups to indicate that they are linked by shared peptides.", false));
             TermData.Add(CVID.MS_number_of_distinct_protein_sequences, new TermInfo(CVID.MS_number_of_distinct_protein_sequences, @"MS", @"MS:1002408", @"number of distinct protein sequences", @"The number of protein clusters that have been identified, which must match the number of clusters that pass the threshold in the file.", false));
@@ -21741,15 +21870,15 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Maui, new TermInfo(CVID.MS_Maui, @"MS", @"MS:1002452", @"Maui", @"The Maltcms Graphical User Interface.", false));
             TermData.Add(CVID.MS_No_fixed_modifications_searched, new TermInfo(CVID.MS_No_fixed_modifications_searched, @"MS", @"MS:1002453", @"No fixed modifications searched", @"No fixed modifications are included as a parameter for the search, and therefore they are not reported.", false));
             TermData.Add(CVID.MS_No_variable_modifications_searched, new TermInfo(CVID.MS_No_variable_modifications_searched, @"MS", @"MS:1002454", @"No variable modifications searched", @"No variable modifications are included as a parameter for the search, and therefore they are not reported.", false));
-            TermData.Add(CVID.MS_H2O_neutral_loss, new TermInfo(CVID.MS_H2O_neutral_loss, @"MS", @"MS:1002455", @"H2O neutral loss", @"Neutral loss of water.", false));
-            TermData.Add(CVID.MS_NH3_neutral_loss, new TermInfo(CVID.MS_NH3_neutral_loss, @"MS", @"MS:1002456", @"NH3 neutral loss", @"Neutral loss of ammonia.", false));
-            TermData.Add(CVID.MS_H3PO4_neutral_loss, new TermInfo(CVID.MS_H3PO4_neutral_loss, @"MS", @"MS:1002457", @"H3PO4 neutral loss", @"Neutral loss of phosphoric acid.", false));
+            TermData.Add(CVID.MS_H2O_neutral_loss_OBSOLETE, new TermInfo(CVID.MS_H2O_neutral_loss_OBSOLETE, @"MS", @"MS:1002455", @"H2O neutral loss", @"OBSOLETE Neutral loss of water.", true));
+            TermData.Add(CVID.MS_NH3_neutral_loss_OBSOLETE, new TermInfo(CVID.MS_NH3_neutral_loss_OBSOLETE, @"MS", @"MS:1002456", @"NH3 neutral loss", @"OBSOLETE Neutral loss of ammonia.", true));
+            TermData.Add(CVID.MS_H3PO4_neutral_loss_OBSOLETE, new TermInfo(CVID.MS_H3PO4_neutral_loss_OBSOLETE, @"MS", @"MS:1002457", @"H3PO4 neutral loss", @"OBSOLETE Neutral loss of phosphoric acid.", true));
             TermData.Add(CVID.MS_PeptideShaker, new TermInfo(CVID.MS_PeptideShaker, @"MS", @"MS:1002458", @"PeptideShaker", @"PeptideShaker is a software for the interpretation of proteomics identification results.", false));
             TermData.Add(CVID.MS_MS_Amanda_csv_format, new TermInfo(CVID.MS_MS_Amanda_csv_format, @"MS", @"MS:1002459", @"MS Amanda csv format", @"MS Amanda csv output format.", false));
             TermData.Add(CVID.MS_protein_group_level_global_FNR, new TermInfo(CVID.MS_protein_group_level_global_FNR, @"MS", @"MS:1002460", @"protein group-level global FNR", @"Estimation of the global false negative rate of protein groups.", false));
             TermData.Add(CVID.MS_protein_group_level_confidence, new TermInfo(CVID.MS_protein_group_level_confidence, @"MS", @"MS:1002461", @"protein group-level confidence", @"Estimation of the global confidence of protein groups.", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_global_FNR, new TermInfo(CVID.MS_distinct_peptide_level_global_FNR, @"MS", @"MS:1002462", @"distinct peptide-level global FNR", @"Estimation of the global false negative rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
-            TermData.Add(CVID.MS_distinct_peptide_level_global_confidence, new TermInfo(CVID.MS_distinct_peptide_level_global_confidence, @"MS", @"MS:1002463", @"distinct peptide-level global confidence", @"Estimation of the global confidence for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_global_FNR, new TermInfo(CVID.MS_peptide_sequence_level_global_FNR, @"MS", @"MS:1002462", @"peptide sequence-level global FNR", @"Estimation of the global false negative rate for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_global_confidence, new TermInfo(CVID.MS_peptide_sequence_level_global_confidence, @"MS", @"MS:1002463", @"peptide sequence-level global confidence", @"Estimation of the global confidence for distinct peptides once redundant identifications of the same peptide have been removed (id est multiple PSMs have been collapsed to one entry).", false));
             TermData.Add(CVID.MS_PSM_level_global_FNR, new TermInfo(CVID.MS_PSM_level_global_FNR, @"MS", @"MS:1002464", @"PSM-level global FNR", @"Estimation of the global false negative rate of peptide spectrum matches.", false));
             TermData.Add(CVID.MS_PSM_level_global_confidence, new TermInfo(CVID.MS_PSM_level_global_confidence, @"MS", @"MS:1002465", @"PSM-level global confidence", @"Estimation of the global confidence of peptide spectrum matches.", false));
             TermData.Add(CVID.MS_PeptideShaker_PSM_score, new TermInfo(CVID.MS_PeptideShaker_PSM_score, @"MS", @"MS:1002466", @"PeptideShaker PSM score", @"The probability based PeptideShaker PSM score.", false));
@@ -21835,7 +21964,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Skyline_mzQuantML_converter_, new TermInfo(CVID.MS_Skyline_mzQuantML_converter_, @"MS", @"MS:1002546", @"Skyline mzQuantML converter ", @"A software package to convert Skyline report to mzQuantML.", false));
             TermData.Add(CVID.MS_normalized_spectral_abundance_factor, new TermInfo(CVID.MS_normalized_spectral_abundance_factor, @"MS", @"MS:1002547", @"normalized spectral abundance factor", @"A normalized spectral abundance factor (NSAF).", false));
             TermData.Add(CVID.MS_distributed_normalized_spectral_abundance_factor, new TermInfo(CVID.MS_distributed_normalized_spectral_abundance_factor, @"MS", @"MS:1002548", @"distributed normalized spectral abundance factor", @"A distributed normalized spectral abundance factor (dNSAF.", false));
-            TermData.Add(CVID.MS_peptide_level_PTM_localization_score, new TermInfo(CVID.MS_peptide_level_PTM_localization_score, @"MS", @"MS:1002549", @"peptide-level PTM localization score", @"A score that assign confidence to the localization of an amino acid modification on a peptide sequence at the peptide-level.", false));
+            TermData.Add(CVID.MS_PTM_localization_distinct_peptide_level_statistic, new TermInfo(CVID.MS_PTM_localization_distinct_peptide_level_statistic, @"MS", @"MS:1002549", @"PTM localization distinct peptide-level statistic", @"Statistic to convey the confidence of the localization of an amino acid modification on a peptide sequence.", false));
             TermData.Add(CVID.MS_peptide_phosphoRS_score, new TermInfo(CVID.MS_peptide_phosphoRS_score, @"MS", @"MS:1002550", @"peptide:phosphoRS score", @"phosphoRS score for PTM site location at the peptide-level.", false));
             TermData.Add(CVID.MS_peptide_Ascore, new TermInfo(CVID.MS_peptide_Ascore, @"MS", @"MS:1002551", @"peptide:Ascore", @"A-score for PTM site location at the peptide-level.", false));
             TermData.Add(CVID.MS_peptide_H_Score, new TermInfo(CVID.MS_peptide_H_Score, @"MS", @"MS:1002552", @"peptide:H-Score", @"H-Score for peptide phosphorylation site location at the peptide-level.", false));
@@ -21846,7 +21975,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_D_Score_threshold, new TermInfo(CVID.MS_D_Score_threshold, @"MS", @"MS:1002557", @"D-Score threshold", @"Threshold for D-score PTM site location score.", false));
             TermData.Add(CVID.MS_MD_Score_threshold, new TermInfo(CVID.MS_MD_Score_threshold, @"MS", @"MS:1002558", @"MD-Score threshold", @"Threshold for MD-score PTM site location score.", false));
             TermData.Add(CVID.MS_H_Score_threshold, new TermInfo(CVID.MS_H_Score_threshold, @"MS", @"MS:1002559", @"H-Score threshold", @"Threshold for H-score PTM site location score.", false));
-            TermData.Add(CVID.MS_DeBunker_score_threshold, new TermInfo(CVID.MS_DeBunker_score_threshold, @"MS", @"MS:10025560", @"DeBunker:score threshold", @"Threshold for DeBunker PTM site location score.", false));
+            TermData.Add(CVID.MS_DeBunker_score_threshold, new TermInfo(CVID.MS_DeBunker_score_threshold, @"MS", @"MS:1002560", @"DeBunker:score threshold", @"Threshold for DeBunker PTM site location score.", false));
             TermData.Add(CVID.MS_Mascot_PTM_site_assignment_confidence_threshold, new TermInfo(CVID.MS_Mascot_PTM_site_assignment_confidence_threshold, @"MS", @"MS:1002561", @"Mascot:PTM site assignment confidence threshold", @"Threshold for Mascot PTM site assignment confidence.", false));
             TermData.Add(CVID.MS_MSQuant_PTM_score_threshold, new TermInfo(CVID.MS_MSQuant_PTM_score_threshold, @"MS", @"MS:1002562", @"MSQuant:PTM-score threshold", @"Threshold for MSQuant:PTM-score.", false));
             TermData.Add(CVID.MS_MaxQuant_PTM_Score_threshold, new TermInfo(CVID.MS_MaxQuant_PTM_Score_threshold, @"MS", @"MS:1002563", @"MaxQuant:PTM Score threshold", @"Threshold for MaxQuant:PTM Score.", false));
@@ -21950,10 +22079,48 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Morpheus, new TermInfo(CVID.MS_Morpheus, @"MS", @"MS:1002661", @"Morpheus", @"Morpheus search engine.", false));
             TermData.Add(CVID.MS_Morpheus_Morpheus_score, new TermInfo(CVID.MS_Morpheus_Morpheus_score, @"MS", @"MS:1002662", @"Morpheus:Morpheus score", @"Morpheus score for PSMs.", false));
             TermData.Add(CVID.MS_Morpheus_summed_Morpheus_score, new TermInfo(CVID.MS_Morpheus_summed_Morpheus_score, @"MS", @"MS:1002663", @"Morpheus:summed Morpheus score", @"Summed Morpheus score for protein groups.", false));
-            TermData.Add(CVID.MS_protein_interaction_scores_derived_from_cross_linking, new TermInfo(CVID.MS_protein_interaction_scores_derived_from_cross_linking, @"MS", @"MS:1002664", @"protein interaction scores derived from cross-linking", @"Parent term for protein interaction scores derived from cross-linking.", false));
-            TermData.Add(CVID.MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking, new TermInfo(CVID.MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking, @"MS", @"MS:1002665", @"regular expression for protein interaction scores derived from cross-linking", @"(", false));
+            TermData.Add(CVID.MS_interaction_score_derived_from_cross_linking, new TermInfo(CVID.MS_interaction_score_derived_from_cross_linking, @"MS", @"MS:1002664", @"interaction score derived from cross-linking", @"Parent term for interaction scores derived from cross-linking.", false));
+            TermData.Add(CVID.MS_regular_expression_for_interaction_scores_derived_from_cross_linking, new TermInfo(CVID.MS_regular_expression_for_interaction_scores_derived_from_cross_linking, @"MS", @"MS:1002665", @"regular expression for interaction scores derived from cross-linking", @"(", false));
             TermData.Add(CVID.MS_impact_II, new TermInfo(CVID.MS_impact_II, @"MS", @"MS:1002666", @"impact II", @"Bruker Daltonics' impact II.", false));
             TermData.Add(CVID.MS_impact_HD, new TermInfo(CVID.MS_impact_HD, @"MS", @"MS:1002667", @"impact HD", @"Bruker Daltonics' impact HD.", false));
+            TermData.Add(CVID.MS_frag__iTRAQ_4plex_reporter_ion, new TermInfo(CVID.MS_frag__iTRAQ_4plex_reporter_ion, @"MS", @"MS:1002668", @"frag: iTRAQ 4plex reporter ion", @"Standard reporter ion for iTRAQ 4Plex. The value slot holds the integer mass of the iTRAQ 4Plex reporter ion, e.g. 114.", false));
+            TermData.Add(CVID.MS_frag__iTRAQ_8plex_reporter_ion, new TermInfo(CVID.MS_frag__iTRAQ_8plex_reporter_ion, @"MS", @"MS:1002669", @"frag: iTRAQ 8plex reporter ion", @"Standard reporter ion for iTRAQ 8Plex. The value slot holds the integer mass of the iTRAQ 8Plex reporter ion, e.g. 113.", false));
+            TermData.Add(CVID.MS_frag__TMT_reporter_ion, new TermInfo(CVID.MS_frag__TMT_reporter_ion, @"MS", @"MS:1002670", @"frag: TMT reporter ion", @"Standard reporter ion for TMT. The value slot holds the integer mass of the TMT reporter ion and can be suffixed with either N or C, indicating whether the mass difference is encoded at a Nitrogen or Carbon atom, e.g. 127N.", false));
+            TermData.Add(CVID.MS_frag__TMT_ETD_reporter_ion, new TermInfo(CVID.MS_frag__TMT_ETD_reporter_ion, @"MS", @"MS:1002671", @"frag: TMT ETD reporter ion", @"Standard reporter ion for TMT with ETD fragmentation. The value slot holds the integer mass of the TMT ETD reporter ion and can be suffixed with either N or C, indicating whether the mass difference is encoded at a Nitrogen or Carbon atom, e.g. 127C.", false));
+            TermData.Add(CVID.MS_no_modification_threshold, new TermInfo(CVID.MS_no_modification_threshold, @"MS", @"MS:1002672", @"no modification threshold", @"No statistical threshold for accepting or rejecting that a modification position.", false));
+            TermData.Add(CVID.MS_OpenXQuest, new TermInfo(CVID.MS_OpenXQuest, @"MS", @"MS:1002673", @"OpenXQuest", @"Cross-Linking MS search engine.", false));
+            TermData.Add(CVID.MS_X500R_QTOF, new TermInfo(CVID.MS_X500R_QTOF, @"MS", @"MS:1002674", @"X500R QTOF", @"SCIEX X500R QTOF, a quadrupole - quadrupole - time-of-flight mass spectrometer.", false));
+            TermData.Add(CVID.MS_cross_linking_result_details, new TermInfo(CVID.MS_cross_linking_result_details, @"MS", @"MS:1002675", @"cross-linking result details", @"This subsection describes terms which can describe details of cross-linking results.", false));
+            TermData.Add(CVID.MS_protein_pair_level_global_FDR, new TermInfo(CVID.MS_protein_pair_level_global_FDR, @"MS", @"MS:1002676", @"protein-pair-level global FDR", @"Estimation of the global false discovery rate of proteins-pairs in cross-linking experiments.", false));
+            TermData.Add(CVID.MS_residue_pair_level_global_FDR, new TermInfo(CVID.MS_residue_pair_level_global_FDR, @"MS", @"MS:1002677", @"residue-pair-level global FDR", @"Estimation of the global false discovery rate of residue-pairs in cross-linking experiments.", false));
+            TermData.Add(CVID.MS_supplemental_higher_energy_beam_type_collision_induced_dissociation, new TermInfo(CVID.MS_supplemental_higher_energy_beam_type_collision_induced_dissociation, @"MS", @"MS:1002678", @"supplemental higher energy beam-type collision-induced dissociation", @"A supplemental collision-induced dissociation process wherein the projectile ion has the translational energy higher than approximately 1000 eV.", false));
+            TermData.Add(CVID.MS_supplemental_collision_induced_dissociation, new TermInfo(CVID.MS_supplemental_collision_induced_dissociation, @"MS", @"MS:1002679", @"supplemental collision-induced dissociation", @"The dissociation of an ion after supplemental collisional excitation.", false));
+            TermData.Add(CVID.MS_supplemental_collision_energy, new TermInfo(CVID.MS_supplemental_collision_energy, @"MS", @"MS:1002680", @"supplemental collision energy", @"Energy for an ion experiencing supplemental collision with a stationary gas particle resulting in dissociation of the ion.", false));
+            TermData.Add(CVID.MS_OpenXQuest_combined_score, new TermInfo(CVID.MS_OpenXQuest_combined_score, @"MS", @"MS:1002681", @"OpenXQuest:combined score", @"OpenXQuest's combined score for a cross-link spectrum match.", false));
+            TermData.Add(CVID.MS_OpenXQuest_xcorr_xlink, new TermInfo(CVID.MS_OpenXQuest_xcorr_xlink, @"MS", @"MS:1002682", @"OpenXQuest:xcorr xlink", @"OpenXQuest's cross-correlation of cross-linked ions subscore.", false));
+            TermData.Add(CVID.MS_OpenXQuest_xcorr_common, new TermInfo(CVID.MS_OpenXQuest_xcorr_common, @"MS", @"MS:1002683", @"OpenXQuest:xcorr common", @"OpenXQuest's cross-correlation of unlinked ions subscore.", false));
+            TermData.Add(CVID.MS_OpenXQuest_match_odds, new TermInfo(CVID.MS_OpenXQuest_match_odds, @"MS", @"MS:1002684", @"OpenXQuest:match-odds", @"OpenXQuest's match-odds subscore.", false));
+            TermData.Add(CVID.MS_OpenXQuest_intsum, new TermInfo(CVID.MS_OpenXQuest_intsum, @"MS", @"MS:1002685", @"OpenXQuest:intsum", @"OpenXQuest's sum of matched peak intensity subscore.", false));
+            TermData.Add(CVID.MS_OpenXQuest_wTIC, new TermInfo(CVID.MS_OpenXQuest_wTIC, @"MS", @"MS:1002686", @"OpenXQuest:wTIC", @"OpenXQuest's weighted percent of total ion current subscore.", false));
+            TermData.Add(CVID.MS_analysis_attribute, new TermInfo(CVID.MS_analysis_attribute, @"MS", @"MS:1002687", @"analysis attribute", @"Attribute of an item in the result of mass spectrometry proteomics data analysis.", false));
+            TermData.Add(CVID.MS_PTM_localization_attribute, new TermInfo(CVID.MS_PTM_localization_attribute, @"MS", @"MS:1002688", @"PTM localization attribute", @"Statistic derived from a post-translational modification localization analysis.", false));
+            TermData.Add(CVID.MS_PTM_localization_single_result_statistic, new TermInfo(CVID.MS_PTM_localization_single_result_statistic, @"MS", @"MS:1002689", @"PTM localization single result statistic", @"Statistic for a single item derived from a post-translational modification localization analysis.", false));
+            TermData.Add(CVID.MS_PTM_localization_result_list_statistic, new TermInfo(CVID.MS_PTM_localization_result_list_statistic, @"MS", @"MS:1002690", @"PTM localization result list statistic", @"Statistic for all items derived from a post-translational modification localization analysis.", false));
+            TermData.Add(CVID.MS_global_FLR, new TermInfo(CVID.MS_global_FLR, @"MS", @"MS:1002691", @"global FLR", @"Global false localization rate for all localizations in a dataset.", false));
+            TermData.Add(CVID.MS_local_FLR_at_threshold, new TermInfo(CVID.MS_local_FLR_at_threshold, @"MS", @"MS:1002692", @"local FLR at threshold", @"Local false localization rate for the bottom item in list of localizations sorted from most to least confident.", false));
+            TermData.Add(CVID.MS_identification_attribute, new TermInfo(CVID.MS_identification_attribute, @"MS", @"MS:1002693", @"identification attribute", @"Attribute of an identification item in the result of mass spectrometry proteomics data analysis.", false));
+            TermData.Add(CVID.MS_single_identification_result_attribute, new TermInfo(CVID.MS_single_identification_result_attribute, @"MS", @"MS:1002694", @"single identification result attribute", @"Attribute of a single identification item (as opposed to a list) in the result of mass spectrometry proteomics data analysis.", false));
+            TermData.Add(CVID.MS_frag__isobaric_label_ion, new TermInfo(CVID.MS_frag__isobaric_label_ion, @"MS", @"MS:1002695", @"frag: isobaric label ion", @"Fragment ion corresponding to an isobaric label artifact.", false));
+            TermData.Add(CVID.MS_secondary_isotope_peak, new TermInfo(CVID.MS_secondary_isotope_peak, @"MS", @"MS:1002697", @"secondary isotope peak", @"Fragment ion is an isotopic peak other than that monoisotopic peak. This is used in conjuction with another ion type, such as frag: y ion.", false));
+            TermData.Add(CVID.MS_protein_cluster_identification_attribute, new TermInfo(CVID.MS_protein_cluster_identification_attribute, @"MS", @"MS:1002698", @"protein cluster identification attribute", @"An attribute of the protein cluster concept as used in mzIdentML.", false));
+            TermData.Add(CVID.MS_result_list_attribute, new TermInfo(CVID.MS_result_list_attribute, @"MS", @"MS:1002699", @"result list attribute", @"General property of an entire result list.", false));
+            TermData.Add(CVID.MS_PSM_level_result_list_attribute, new TermInfo(CVID.MS_PSM_level_result_list_attribute, @"MS", @"MS:1002700", @"PSM-level result list attribute", @"General property of the list of all PSMs.", false));
+            TermData.Add(CVID.MS_PSM_level_result_list_statistic, new TermInfo(CVID.MS_PSM_level_result_list_statistic, @"MS", @"MS:1002701", @"PSM-level result list statistic", @"Statistic pertaining to the full list of all PSMs.", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_result_list_attribute, new TermInfo(CVID.MS_peptide_sequence_level_result_list_attribute, @"MS", @"MS:1002702", @"peptide sequence-level result list attribute", @"General property of all peptide sequences in the list.", false));
+            TermData.Add(CVID.MS_peptide_sequence_level_result_list_statistic, new TermInfo(CVID.MS_peptide_sequence_level_result_list_statistic, @"MS", @"MS:1002703", @"peptide sequence-level result list statistic", @"Statistic pertaining to all peptide sequences in the list.", false));
+            TermData.Add(CVID.MS_protein_level_result_list_attribute, new TermInfo(CVID.MS_protein_level_result_list_attribute, @"MS", @"MS:1002704", @"protein-level result list attribute", @"Attribute of an entire protein list.", false));
+            TermData.Add(CVID.MS_protein_level_result_list_statistic, new TermInfo(CVID.MS_protein_level_result_list_statistic, @"MS", @"MS:1002705", @"protein-level result list statistic", @"A statistical metric of an entire protein list.", false));
+            TermData.Add(CVID.MS_protein_group_level_result_list_statistic, new TermInfo(CVID.MS_protein_group_level_result_list_statistic, @"MS", @"MS:1002706", @"protein group-level result list statistic", @"Attrbiute of an entire list of protein groups.", false));
             TermData.Add(CVID.UNIMOD_unimod_root_node, new TermInfo(CVID.UNIMOD_unimod_root_node, @"UNIMOD", @"UNIMOD:0", @"unimod root node", @"The root node of the unimod modifications ontology.", false));
             TermData.Add(CVID.UNIMOD_Acetyl, new TermInfo(CVID.UNIMOD_Acetyl, @"UNIMOD", @"UNIMOD:1", @"Acetyl", @"Acetylation.", false));
             TermData.Add(CVID.UNIMOD_Amidated, new TermInfo(CVID.UNIMOD_Amidated, @"UNIMOD", @"UNIMOD:2", @"Amidated", @"Amidation.", false));
@@ -23307,7 +23474,12 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Label_13C_2_15N_2_, new TermInfo(CVID.UNIMOD_Label_13C_2_15N_2_, @"UNIMOD", @"UNIMOD:1787", @"Label:13C(2)15N(2)", @"13C(2) 15N(2).", false));
             TermData.Add(CVID.UNIMOD_Xlink_DSS_NH2, new TermInfo(CVID.UNIMOD_Xlink_DSS_NH2, @"UNIMOD", @"UNIMOD:1789", @"Xlink:DSS-NH2", @"Ammonium-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.", false));
             TermData.Add(CVID.UNIMOD_NQIGG, new TermInfo(CVID.UNIMOD_NQIGG, @"UNIMOD", @"UNIMOD:1799", @"NQIGG", @"SUMOylation by Giardia lamblia.", false));
-            TermData.Add(CVID.UNIMOD_CEP, new TermInfo(CVID.UNIMOD_CEP, @"UNIMOD", @"UNIMOD:1800", @"CEP", @"Carboxyethylpyrrole.", false));
+            TermData.Add(CVID.UNIMOD_Carboxyethylpyrrole, new TermInfo(CVID.UNIMOD_Carboxyethylpyrrole, @"UNIMOD", @"UNIMOD:1800", @"Carboxyethylpyrrole", @"Carboxyethylpyrrole.", false));
+            TermData.Add(CVID.UNIMOD_Fluorescein_tyramine, new TermInfo(CVID.UNIMOD_Fluorescein_tyramine, @"UNIMOD", @"UNIMOD:1801", @"Fluorescein-tyramine", @"Fluorescein-tyramine adduct by peroxidase activity.", false));
+            TermData.Add(CVID.UNIMOD_GEE, new TermInfo(CVID.UNIMOD_GEE, @"UNIMOD", @"UNIMOD:1824", @"GEE", @"Transamidation of glycine ethyl ester to glutamine.", false));
+            TermData.Add(CVID.UNIMOD_RNPXL, new TermInfo(CVID.UNIMOD_RNPXL, @"UNIMOD", @"UNIMOD:1825", @"RNPXL", @"Simulate peptide-RNA conjugates.", false));
+            TermData.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl, new TermInfo(CVID.UNIMOD_Glu__pyro_Glu_Methyl, @"UNIMOD", @"UNIMOD:1826", @"Glu->pyro-Glu+Methyl", @"Pyro-Glu from E + Methylation.", false));
+            TermData.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_, new TermInfo(CVID.UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_, @"UNIMOD", @"UNIMOD:1827", @"Glu->pyro-Glu+Methyl:2H(2)13C(1)", @"Pyro-Glu from E + Methylation Medium.", false));
             TermData.Add(CVID.PATO_pato_OBSOLETE, new TermInfo(CVID.PATO_pato_OBSOLETE, @"PATO", @"PATO:0000000", @"pato", @"", true));
             TermData.Add(CVID.PATO_quality, new TermInfo(CVID.PATO_quality, @"PATO", @"PATO:0000001", @"quality", @"A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities", false));
             TermData.Add(CVID.PATO_value_OBSOLETE, new TermInfo(CVID.PATO_value_OBSOLETE, @"PATO", @"PATO:0000002", @"value", @"", true));
@@ -26168,7 +26340,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_resolution_measurement_method, new List<CVID> { CVID.MS_measurement_method, });
             RelationsIsA.Add(CVID.MS_accuracy, new List<CVID> { CVID.MS_mass_analyzer_attribute, });
             RelationsIsA.Add(CVID.MS_scan_rate, new List<CVID> { CVID.MS_scan_attribute, });
-            RelationsIsA.Add(CVID.MS_scan_start_time, new List<CVID> { CVID.MS_scan_attribute, CVID.MS_peptide_result_details, CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_scan_start_time, new List<CVID> { CVID.MS_scan_attribute, CVID.MS_PSM_level_attribute, });
             RelationsIsA.Add(CVID.MS_reflectron_state, new List<CVID> { CVID.MS_mass_analyzer_attribute, });
             RelationsIsA.Add(CVID.MS_TOF_Total_Path_Length, new List<CVID> { CVID.MS_mass_analyzer_attribute, });
             RelationsIsA.Add(CVID.MS_final_MS_exponent, new List<CVID> { CVID.MS_mass_analyzer_attribute, });
@@ -26819,8 +26991,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_minimum_information_standard, new List<CVID> { CVID.MS_standard, });
             RelationsIsA.Add(CVID.MS_retention_time_normalization_standard, new List<CVID> { CVID.MS_standard, });
             RelationsIsA.Add(CVID.MS_H_PINS_retention_time_normalization_standard, new List<CVID> { CVID.MS_retention_time_normalization_standard, });
-            RelationsIsA.Add(CVID.MS_product_ion_series_ordinal, new List<CVID> { CVID.MS_fragmentation_information, });
-            RelationsIsA.Add(CVID.MS_product_ion_m_z_delta, new List<CVID> { CVID.MS_fragmentation_information, });
+            RelationsIsA.Add(CVID.MS_product_ion_series_ordinal, new List<CVID> { CVID.MS_product_ion_attribute, });
+            RelationsIsA.Add(CVID.MS_product_ion_m_z_delta, new List<CVID> { CVID.MS_product_ion_attribute, });
             RelationsIsA.Add(CVID.MS_percent_of_base_peak_times_100, new List<CVID> { CVID.MS_intensity_unit, });
             RelationsIsA.Add(CVID.MS_peak_intensity_rank, new List<CVID> { CVID.MS_ion_selection_attribute, });
             RelationsIsA.Add(CVID.MS_peak_targeting_suitability_rank, new List<CVID> { CVID.MS_ion_selection_attribute, });
@@ -26836,7 +27008,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Skyline, new List<CVID> { CVID.MS_SRM_software, CVID.MS_quantitation_software_name, });
             RelationsIsA.Add(CVID.MS_TIQAM, new List<CVID> { CVID.MS_SRM_software, });
             RelationsIsA.Add(CVID.MS_ATAQS, new List<CVID> { CVID.MS_SRM_software, });
-            RelationsIsA.Add(CVID.MS_product_interpretation_rank, new List<CVID> { CVID.MS_fragmentation_information, });
+            RelationsIsA.Add(CVID.MS_product_interpretation_rank, new List<CVID> { CVID.MS_product_ion_attribute, });
             RelationsIsA.Add(CVID.MS_ion_injection_time, new List<CVID> { CVID.MS_scan_attribute, });
             RelationsIsA.Add(CVID.MS_calibration_spectrum, new List<CVID> { CVID.MS_spectrum_type, });
             RelationsIsA.Add(CVID.MS_Shimadzu_Biotech_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
@@ -26909,48 +27081,48 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_tag_search, new List<CVID> { CVID.MS_search_type, });
             RelationsIsA.Add(CVID.MS_ms_ms_search, new List<CVID> { CVID.MS_search_type, });
             RelationsIsA.Add(CVID.MS_database_nr, new List<CVID> { CVID.MS_database_name, });
-            RelationsIsA.Add(CVID.MS_protein_result_details, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_protein_level_identification_attribute, new List<CVID> { CVID.MS_single_identification_result_attribute, });
             RelationsIsA.Add(CVID.MS_SEQUEST_sort_by_XCorr, new List<CVID> { CVID.MS_SEQUEST_sortCV, });
             RelationsIsA.Add(CVID.MS_SEQUEST_ProcessCV, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
-            RelationsIsA.Add(CVID.MS_protein_description, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_database_sequence_details, });
-            RelationsIsA.Add(CVID.MS_molecule_taxonomy, new List<CVID> { CVID.MS_protein_result_details, CVID.MS_database_sequence_details, CVID.MS_Sequence_database_filters, });
+            RelationsIsA.Add(CVID.MS_protein_description, new List<CVID> { CVID.MS_protein_level_identification_attribute, CVID.MS_database_sequence_details, });
+            RelationsIsA.Add(CVID.MS_molecule_taxonomy, new List<CVID> { CVID.MS_protein_level_identification_attribute, CVID.MS_database_sequence_details, CVID.MS_Sequence_database_filters, });
             RelationsIsA.Add(CVID.MS_taxonomy_nomenclature_OBSOLETE, new List<CVID> { CVID.MS_molecule_taxonomy, });
             RelationsIsA.Add(CVID.MS_NoEnzyme_OBSOLETE, new List<CVID> { CVID.MS_cleavage_agent_name, });
-            RelationsIsA.Add(CVID.MS_peptide_identification_confidence_metric, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_sequence_coverage, new List<CVID> { CVID.MS_single_protein_result_details, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_identification_statistic, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_sequence_coverage, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_SEQUEST_sort_by_z, new List<CVID> { CVID.MS_SEQUEST_sortCV, });
             RelationsIsA.Add(CVID.MS_SEQUEST_ProcessAll, new List<CVID> { CVID.MS_SEQUEST_ProcessCV, });
             RelationsIsA.Add(CVID.MS_SEQUEST_TopPercentMostIntense, new List<CVID> { CVID.MS_SEQUEST_ProcessCV, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_sequences, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_confident_distinct_peptide_sequences, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_confident_peptide_qualification, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_confident_peptide_sequence_number, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_protein_group_or_subset_relationship, new List<CVID> { CVID.MS_protein_result_details, });
+            RelationsIsA.Add(CVID.MS_distinct_peptide_sequences, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_confident_distinct_peptide_sequences, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_confident_peptide_qualification, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_confident_peptide_sequence_number, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_protein_group_or_subset_relationship, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_SEQUEST_Chromatogram, new List<CVID> { CVID.MS_SEQUEST_ViewCV, });
             RelationsIsA.Add(CVID.MS_SEQUEST_InfoAndLog, new List<CVID> { CVID.MS_SEQUEST_ViewCV, });
             RelationsIsA.Add(CVID.MS_database_UniProtKB_Swiss_Prot, new List<CVID> { CVID.MS_database_UniProtKB, });
-            RelationsIsA.Add(CVID.MS_peptide_result_details, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_identification_attribute, new List<CVID> { CVID.MS_single_identification_result_attribute, });
             RelationsIsA.Add(CVID.MS_SEQUEST_TopNumber, new List<CVID> { CVID.MS_SEQUEST_ProcessCV, });
             RelationsIsA.Add(CVID.MS_data_stored_in_database, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_param__a_ion, new List<CVID> { CVID.MS_ion_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_SEQUEST_CullTo, new List<CVID> { CVID.MS_SEQUEST_ProcessCV, });
             RelationsIsA.Add(CVID.MS_SEQUEST_modeCV, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_SEQUEST_Full, new List<CVID> { CVID.MS_SEQUEST_modeCV, });
-            RelationsIsA.Add(CVID.MS_n_terminal_flanking_residue, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_c_terminal_flanking_residue, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_retention_time_s__OBSOLETE, new List<CVID> { CVID.MS_peptide_result_details, CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_single_protein_result_details, new List<CVID> { CVID.MS_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_theoretical_mass, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_n_terminal_flanking_residue, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_c_terminal_flanking_residue, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_retention_time_s__OBSOLETE, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_single_protein_identification_statistic, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_theoretical_mass, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_param__b_ion, new List<CVID> { CVID.MS_ion_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_param__c_ion, new List<CVID> { CVID.MS_ion_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_SEQUEST_FormatAndLinks, new List<CVID> { CVID.MS_SEQUEST_modeCV, });
-            RelationsIsA.Add(CVID.MS_number_of_matched_peaks, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_ions_series_considered, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_number_of_peaks_used, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_number_of_peaks_submitted, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_manual_validation, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, CVID.MS_protein_identification_confidence_metric, });
+            RelationsIsA.Add(CVID.MS_number_of_matched_peaks, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_ions_series_considered, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_number_of_peaks_used, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_number_of_peaks_submitted, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_manual_validation, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, CVID.MS_single_protein_identification_statistic, });
             RelationsIsA.Add(CVID.MS_SEQUEST_Fast, new List<CVID> { CVID.MS_SEQUEST_modeCV, });
-            RelationsIsA.Add(CVID.MS_peptide_sharing_details, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_peptide_sharing_details, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_SEQUEST_selectCV, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_peptide_raw_area_OBSOLETE, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_error_on_peptide_area, new List<CVID> { CVID.MS_quantification_datatype, });
@@ -26965,38 +27137,38 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_quantitation_software_version_OBSOLETE, new List<CVID> { CVID.MS_quantification_information, });
             RelationsIsA.Add(CVID.MS_intensity_of_precursor_ion, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_database_IPI_human, new List<CVID> { CVID.MS_database_name, });
-            RelationsIsA.Add(CVID.MS_search_engine_specific_score_for_PSMs, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_PSM_level_search_engine_specific_statistic, new List<CVID> { CVID.MS_PSM_level_identification_statistic, });
             RelationsIsA.Add(CVID.MS_SEQUEST_SelectDefault, new List<CVID> { CVID.MS_SEQUEST_selectCV, });
             RelationsIsA.Add(CVID.MS_SEQUEST_SelectAdvancedCV, new List<CVID> { CVID.MS_SEQUEST_selectCV, });
             RelationsIsA.Add(CVID.MS_param__a_ion_NH3_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
-            RelationsIsA.Add(CVID.MS_protein_ambiguity_group_result_details, new List<CVID> { CVID.MS_protein_result_details, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_protein_ambiguity_group_result_details, new List<CVID> { CVID.MS_protein_level_identification_attribute, CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_param__a_ion_H2O_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_param__b_ion_NH3_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_param__b_ion_H2O_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_param__y_ion_NH3_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_param__y_ion_H2O_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
-            RelationsIsA.Add(CVID.MS_search_engine_specific_score, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_probability, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_xcorr, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_deltacn, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_sp, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_Uniq, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_search_engine_specific_score, new List<CVID> { CVID.MS_single_identification_result_attribute, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_probability, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_xcorr, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_deltacn, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_sp, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_Uniq, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_SEQUEST_expectation_value, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_sf, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_matched_ions, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_total_ions, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_sf, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_matched_ions, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_total_ions, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_SEQUEST_consensus_score, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Paragon_unused_protscore, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Paragon_total_protscore, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Paragon_score, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Paragon_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Paragon_expression_error_factor, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Paragon_expression_change_p_value, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_protein_level_p_value, });
-            RelationsIsA.Add(CVID.MS_Paragon_contrib, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Mascot_score, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Mascot_expectation_value, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Mascot_matched_ions, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Mascot_total_ions, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Paragon_unused_protscore, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_Paragon_total_protscore, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_Paragon_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Paragon_confidence, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Paragon_expression_error_factor, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Paragon_expression_change_p_value, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Paragon_contrib, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Mascot_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Mascot_expectation_value, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Mascot_matched_ions, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Mascot_total_ions, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_peptide_shared_in_multiple_proteins, new List<CVID> { CVID.MS_peptide_sharing_details, });
             RelationsIsA.Add(CVID.MS______KR______P_, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS_number_of_molecular_hypothesis_considered, new List<CVID> { CVID.MS_search_statistics, });
@@ -27005,14 +27177,14 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_search_statistics, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_modification_specificity_peptide_N_term, new List<CVID> { CVID.MS_modification_specificity_rule, });
             RelationsIsA.Add(CVID.MS_modification_specificity_peptide_C_term, new List<CVID> { CVID.MS_modification_specificity_rule, });
-            RelationsIsA.Add(CVID.MS_p_value_OBSOLETE, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, CVID.MS_protein_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_Expect_value, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, CVID.MS_protein_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_confidence_score, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, CVID.MS_protein_identification_confidence_metric, });
+            RelationsIsA.Add(CVID.MS_p_value_OBSOLETE, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, CVID.MS_protein_identification_confidence_metric, });
+            RelationsIsA.Add(CVID.MS_Expect_value, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, CVID.MS_single_protein_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_confidence_score, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, CVID.MS_single_protein_identification_statistic, });
             RelationsIsA.Add(CVID.MS_quality_estimation_with_decoy_database, new List<CVID> { CVID.MS_quality_estimation_method_details, });
             RelationsIsA.Add(CVID.MS_decoy_DB_type_reverse, new List<CVID> { CVID.MS_decoy_DB_details, });
             RelationsIsA.Add(CVID.MS_decoy_DB_type_randomized, new List<CVID> { CVID.MS_decoy_DB_details, });
             RelationsIsA.Add(CVID.MS_DB_composition_target_decoy, new List<CVID> { CVID.MS_decoy_DB_details, });
-            RelationsIsA.Add(CVID.MS_protein_identification_confidence_metric, new List<CVID> { CVID.MS_single_protein_result_details, });
+            RelationsIsA.Add(CVID.MS_protein_identification_confidence_metric, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
             RelationsIsA.Add(CVID.MS_Mascot_DAT_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_SEQUEST_out_file_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_DB_MW_filter_maximum, new List<CVID> { CVID.MS_Sequence_database_filters, });
@@ -27025,19 +27197,19 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_mass_type_settings, new List<CVID> { CVID.MS_search_input_details, });
             RelationsIsA.Add(CVID.MS_parent_mass_type_mono, new List<CVID> { CVID.MS_mass_type_settings, });
             RelationsIsA.Add(CVID.MS_parent_mass_type_average, new List<CVID> { CVID.MS_mass_type_settings, });
-            RelationsIsA.Add(CVID.MS_protein_level_global_FDR, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideSp, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideRankSp, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideNumber, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideIdnumber, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_protein_level_global_FDR, new List<CVID> { CVID.MS_protein_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideSp, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideRankSp, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideNumber, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_PeptideIdnumber, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_frag__y_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
-            RelationsIsA.Add(CVID.MS_fragmentation_information, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_product_ion_attribute, new List<CVID> { CVID.MS_single_identification_result_attribute, });
             RelationsIsA.Add(CVID.MS_frag__b_ion___H2O, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__y_ion___H2O, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__b_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
-            RelationsIsA.Add(CVID.MS_product_ion_m_z, new List<CVID> { CVID.MS_fragmentation_information, });
-            RelationsIsA.Add(CVID.MS_product_ion_intensity, new List<CVID> { CVID.MS_fragmentation_information, });
-            RelationsIsA.Add(CVID.MS_product_ion_m_z_error, new List<CVID> { CVID.MS_fragmentation_information, });
+            RelationsIsA.Add(CVID.MS_product_ion_m_z, new List<CVID> { CVID.MS_product_ion_attribute, });
+            RelationsIsA.Add(CVID.MS_product_ion_intensity, new List<CVID> { CVID.MS_product_ion_attribute, });
+            RelationsIsA.Add(CVID.MS_product_ion_m_z_error, new List<CVID> { CVID.MS_product_ion_attribute, });
             RelationsIsA.Add(CVID.MS_frag__x_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__a_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__z_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
@@ -27050,14 +27222,14 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_frag__v_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__w_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__immonium_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
-            RelationsIsA.Add(CVID.MS_non_identified_ion, new List<CVID> { CVID.MS_fragmentation_information, });
-            RelationsIsA.Add(CVID.MS_co_eluting_ion, new List<CVID> { CVID.MS_fragmentation_information, });
+            RelationsIsA.Add(CVID.MS_non_identified_ion, new List<CVID> { CVID.MS_product_ion_attribute, });
+            RelationsIsA.Add(CVID.MS_co_eluting_ion, new List<CVID> { CVID.MS_product_ion_attribute, });
             RelationsIsA.Add(CVID.MS_SEQUEST_out_folder, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_SEQUEST_summary, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_PerSeptive_PKS_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_SCIEX_API_III_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_Bruker_XML_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
-            RelationsIsA.Add(CVID.MS_local_FDR, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, CVID.MS_protein_identification_confidence_metric, });
+            RelationsIsA.Add(CVID.MS_local_FDR, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, CVID.MS_single_protein_identification_statistic, });
             RelationsIsA.Add(CVID.MS_Trypsin, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_DB_source_EBI, new List<CVID> { CVID.MS_database_source, });
             RelationsIsA.Add(CVID.MS_DB_source_NCBI, new List<CVID> { CVID.MS_database_source, });
@@ -27090,7 +27262,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_database_IPI_chicken, new List<CVID> { CVID.MS_database_name, });
             RelationsIsA.Add(CVID.MS_database_IPI_cow, new List<CVID> { CVID.MS_database_name, });
             RelationsIsA.Add(CVID.MS_database_IPI_arabidopsis, new List<CVID> { CVID.MS_database_name, });
-            RelationsIsA.Add(CVID.MS_protein_rank, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, });
+            RelationsIsA.Add(CVID.MS_protein_rank, new List<CVID> { CVID.MS_protein_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_search_engine_specific_input_parameter, new List<CVID> { CVID.MS_search_engine_input_parameter, });
             RelationsIsA.Add(CVID.MS_Arg_C, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_Asp_N, new List<CVID> { CVID.MS_cleavage_agent_name, });
@@ -27115,10 +27287,10 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Mascot_UseUnigeneClustering, new List<CVID> { CVID.MS_Mascot_input_parameter, });
             RelationsIsA.Add(CVID.MS_Mascot_IncludeErrorTolerantMatches, new List<CVID> { CVID.MS_Mascot_input_parameter, });
             RelationsIsA.Add(CVID.MS_Mascot_ShowDecoyMatches, new List<CVID> { CVID.MS_Mascot_input_parameter, });
-            RelationsIsA.Add(CVID.MS_OMSSA_evalue, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_distinct_peptide_level_e_value, });
-            RelationsIsA.Add(CVID.MS_OMSSA_pvalue, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_distinct_peptide_level_p_value, });
-            RelationsIsA.Add(CVID.MS_X__Tandem_expect, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_distinct_peptide_level_e_value, });
-            RelationsIsA.Add(CVID.MS_X__Tandem_hyperscore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_OMSSA_evalue, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_OMSSA_pvalue, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_X__Tandem_expect, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_X__Tandem_hyperscore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS______FYWL______P_, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS_____M_, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS______D_______D__, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
@@ -27141,25 +27313,25 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_clustal_aln, new List<CVID> { CVID.MS_database_file_formats, });
             RelationsIsA.Add(CVID.MS_embl_em, new List<CVID> { CVID.MS_database_file_formats, });
             RelationsIsA.Add(CVID.MS_NBRF_PIR, new List<CVID> { CVID.MS_database_file_formats, });
-            RelationsIsA.Add(CVID.MS_peptide_descriptions, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_peptide_descriptions, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_spectrum_descriptions, new List<CVID> { CVID.MS_search_input_details, });
             RelationsIsA.Add(CVID.MS_spectrum_quality_descriptions, new List<CVID> { CVID.MS_spectrum_descriptions, });
             RelationsIsA.Add(CVID.MS_msmsEval_quality, new List<CVID> { CVID.MS_spectrum_quality_descriptions, });
             RelationsIsA.Add(CVID.MS_alternate_single_letter_codes, new List<CVID> { CVID.MS_ambiguous_residues, });
             RelationsIsA.Add(CVID.MS_alternate_mass, new List<CVID> { CVID.MS_ambiguous_residues, });
-            RelationsIsA.Add(CVID.MS_number_of_unmatched_peaks, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_number_of_unmatched_peaks, new List<CVID> { CVID.MS_PSM_level_attribute, });
             RelationsIsA.Add(CVID.MS_peptide_unique_to_one_protein, new List<CVID> { CVID.MS_peptide_sharing_details, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_global_FDR, new List<CVID> { CVID.MS_peptide_result_details, CVID.MS_peptide_level_statistical_threshold, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_global_FDR, new List<CVID> { CVID.MS_peptide_sequence_level_result_list_statistic, });
             RelationsIsA.Add(CVID.MS_frag__internal_yb_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__internal_ya_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__z_1_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_frag__z_2_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_text_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
-            RelationsIsA.Add(CVID.MS_Mascot_homology_threshold, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_Mascot_identity_threshold, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_Sequences, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_TIC, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_Sum, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Mascot_homology_threshold, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Mascot_identity_threshold, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_Sequences, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_TIC, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_Sum, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_Phenyx_Instrument_Type, new List<CVID> { CVID.MS_Phenyx_input_parameter, });
             RelationsIsA.Add(CVID.MS_Phenyx_Scoring_Model, new List<CVID> { CVID.MS_Phenyx_input_parameter, });
             RelationsIsA.Add(CVID.MS_Phenyx_Default_Parent_Charge, new List<CVID> { CVID.MS_Phenyx_input_parameter, });
@@ -27173,17 +27345,17 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Phenyx_MaxPepPvalue, new List<CVID> { CVID.MS_Phenyx_input_parameter, });
             RelationsIsA.Add(CVID.MS_Phenyx_AC_Score, new List<CVID> { CVID.MS_Phenyx_input_parameter, });
             RelationsIsA.Add(CVID.MS_Phenyx_Conflict_Resolution, new List<CVID> { CVID.MS_Phenyx_input_parameter, });
-            RelationsIsA.Add(CVID.MS_Phenyx_AC, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_ID, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_Score, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_Peptides1, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_Peptides2, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_Auto, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_User, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_Pepzscore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_PepPvalue, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_distinct_peptide_level_p_value, });
-            RelationsIsA.Add(CVID.MS_Phenyx_NumberOfMC, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Phenyx_Modif, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Phenyx_AC, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Phenyx_ID, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Phenyx_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Phenyx_Peptides1, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Phenyx_Peptides2, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Phenyx_Auto, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Phenyx_User, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Phenyx_Pepzscore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Phenyx_PepPvalue, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_Phenyx_NumberOfMC, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Phenyx_Modif, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_OMSSA_csv_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_OMSSA_xml_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_X__Tandem_xml_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
@@ -27198,10 +27370,10 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_MGF_scans_OBSOLETE, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_MGF_raw_scans_OBSOLETE, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_spectrum_title_OBSOLETE, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_SpectraST_dot, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SpectraST_dot_bias, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SpectraST_discriminant_score_F, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SpectraST_delta, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_SpectraST_dot, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SpectraST_dot_bias, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SpectraST_discriminant_score_F, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SpectraST_delta, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_pepXML_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_protXML_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_translation_table_description, new List<CVID> { CVID.MS_search_database_details, });
@@ -27268,23 +27440,23 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Mascot_Distiller, new List<CVID> { CVID.MS_quantitation_software_name, CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Mascot_Integra, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Percolator, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_percolator_Q_value, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_distinct_peptide_level_q_value, });
-            RelationsIsA.Add(CVID.MS_percolator_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_percolator_PEP, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_percolator_Q_value, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_percolator_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_percolator_PEP, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_no_threshold, new List<CVID> { CVID.MS_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_ProteinScape_SearchResultId, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinScape_SearchEventId, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinScape_ProfoundProbability, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Profound_z_value, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Profound_Cluster, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Profound_ClusterRank, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_MSFit_Mowse_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Sonar_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinScape_PFFSolverExp, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinScape_PFFSolverScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinScape_IntensityCoverage, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinScape_SequestMetaScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinExtractor_Score, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_ProteinScape_SearchResultId, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinScape_SearchEventId, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinScape_ProfoundProbability, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Profound_z_value, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Profound_Cluster, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Profound_ClusterRank, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MSFit_Mowse_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Sonar_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinScape_PFFSolverExp, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinScape_PFFSolverScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinScape_IntensityCoverage, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinScape_SequestMetaScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinExtractor_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_Agilent_MassHunter_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
             RelationsIsA.Add(CVID.MS_Agilent_MassHunter_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_TSQ_Vantage, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
@@ -27343,19 +27515,19 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_IdentityE_XML_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_ProteinLynx_XML_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_SpectrumMill_directories, new List<CVID> { CVID.MS_intermediate_analysis_format, });
-            RelationsIsA.Add(CVID.MS_Scaffold_Peptide_Probability, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_IdentityE_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinLynx_Log_Likelihood, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinLynx_Ladder_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SpectrumMill_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SpectrumMill_SPI, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Scaffold_Peptide_Probability, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_IdentityE_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinLynx_Log_Likelihood, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinLynx_Ladder_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SpectrumMill_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SpectrumMill_SPI, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_report_only_spectra_assigned_to_identified_proteins, new List<CVID> { CVID.MS_quality_estimation_method_details, });
             RelationsIsA.Add(CVID.MS_Scaffold__Minimum_Peptide_Count, new List<CVID> { CVID.MS_Scaffold_input_parameter, });
             RelationsIsA.Add(CVID.MS_Scaffold__Minimum_Protein_Probability, new List<CVID> { CVID.MS_Scaffold_input_parameter, });
             RelationsIsA.Add(CVID.MS_Scaffold__Minimum_Peptide_Probability, new List<CVID> { CVID.MS_Scaffold_input_parameter, });
             RelationsIsA.Add(CVID.MS_minimum_number_of_enzymatic_termini, new List<CVID> { CVID.MS_common_search_engine_input_parameter, });
-            RelationsIsA.Add(CVID.MS_Scaffold_Protein_Probability, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SpectrumMill_Discriminant_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Scaffold_Protein_Probability, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_SpectrumMill_Discriminant_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_FAIMS_compensation_voltage, new List<CVID> { CVID.MS_scan_attribute, });
             RelationsIsA.Add(CVID.MS_XCMS, new List<CVID> { CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_MaxQuant, new List<CVID> { CVID.MS_quantitation_software_name, CVID.MS_analysis_software, });
@@ -27364,8 +27536,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_DirecTag, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_TagRecon, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Pepitome, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_MyriMatch_MVH, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_MyriMatch_mzFidelity, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_MyriMatch_MVH, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MyriMatch_mzFidelity, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_anchor_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_family_member_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_group_member_with_undefined_relationship_OR_ortholog_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
@@ -27641,12 +27813,12 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Progenesis_manual_alignment, new List<CVID> { CVID.MS_quantification_data_processing, });
             RelationsIsA.Add(CVID.MS_Progenesis_normalization, new List<CVID> { CVID.MS_quantification_data_processing, });
             RelationsIsA.Add(CVID.MS_distinct_peptide_level_q_value, new List<CVID> { CVID.MS_peptide_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_protein_level_q_value, new List<CVID> { CVID.MS_protein_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_p_value, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_protein_level_p_value, new List<CVID> { CVID.MS_protein_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_e_value, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_protein_level_e_value, new List<CVID> { CVID.MS_protein_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_FDRScore_OBSOLETE, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_protein_level_q_value, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_p_value, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_level_p_value, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_e_value, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_level_e_value, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_FDRScore_OBSOLETE, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_modification_motif, new List<CVID> { CVID.MS_modification_specificity_rule, });
             RelationsIsA.Add(CVID.MS_modification_probability, new List<CVID> { CVID.MS_modification_specificity_rule, });
             RelationsIsA.Add(CVID.MS_ChromaTOF_HRT_software, new List<CVID> { CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, CVID.MS_LECO_software, });
@@ -27658,9 +27830,9 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_signal_to_noise_ratio, new List<CVID> { CVID.MS_transition_validation_attribute, });
             RelationsIsA.Add(CVID.MS_command_line_parameters, new List<CVID> { CVID.MS_data_processing_parameter, });
             RelationsIsA.Add(CVID.MS_SQID, new List<CVID> { CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_SQID_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SQID_deltaScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SQID_protein_score, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_SQID_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SQID_deltaScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SQID_protein_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_Progenesis_protein_normalised_abundance, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_Progenesis_peptide_normalised_abundance, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_Progenesis_protein_raw_abundance, new List<CVID> { CVID.MS_quantification_datatype, });
@@ -27711,9 +27883,9 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PEAKS_Online, new List<CVID> { CVID.MS_quantitation_software_name, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_PEAKS_Node, new List<CVID> { CVID.MS_quantitation_software_name, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_BSI_software, new List<CVID> { CVID.MS_software, });
-            RelationsIsA.Add(CVID.MS_PEAKS_peptideScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_PEAKS_proteinScore, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ZCore_probScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_PEAKS_peptideScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_PEAKS_proteinScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_ZCore_probScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_no_cleavage, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_unspecific_cleavage, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS______ALIV_____P_, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
@@ -27724,27 +27896,27 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_ProteinExtractor_Weighting, new List<CVID> { CVID.MS_ProteinExtractor_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteinScape_second_round_Mascot, new List<CVID> { CVID.MS_ProteinScape_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteinScape_second_round_Phenyx, new List<CVID> { CVID.MS_ProteinScape_input_parameter, });
-            RelationsIsA.Add(CVID.MS_product_ion_mobility, new List<CVID> { CVID.MS_fragmentation_information, });
+            RelationsIsA.Add(CVID.MS_product_ion_mobility, new List<CVID> { CVID.MS_product_ion_attribute, });
             RelationsIsA.Add(CVID.MS_product_ion_drift_time_OBSOLETE, new List<CVID> { CVID.MS_SRM_transition_attribute, });
-            RelationsIsA.Add(CVID.MS_PSM_level_PTM_localization_score, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_phosphoRS_score, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_phosphoRS_sequence_probability, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_phosphoRS_site_probability, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_PTM_localization_PSM_level_statistic, new List<CVID> { CVID.MS_PTM_localization_single_result_statistic, });
+            RelationsIsA.Add(CVID.MS_phosphoRS_score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_phosphoRS_sequence_probability, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_phosphoRS_site_probability, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
             RelationsIsA.Add(CVID.MS_PTM_scoring_algorithm_version, new List<CVID> { CVID.MS_peptide_modification_details, });
             RelationsIsA.Add(CVID.MS_DeBunker, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_DeBunker_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_DeBunker_score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_delta_m_z, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_delta_M, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_MSQuant, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_MSQuant_PTM_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_MaxQuant_PTM_Score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_MaxQuant_Phospho__STY__Probabilities, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_spectrum_identification_result_details, CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_MaxQuant_Phospho__STY__Score_Diffs, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_spectrum_identification_result_details, CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_MaxQuant_P_site_localization_probability, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_spectrum_identification_result_details, CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_MaxQuant_PTM_Delta_Score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_MSQuant_PTM_score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_MaxQuant_PTM_Score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_MaxQuant_Phospho__STY__Probabilities, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_MaxQuant_Phospho__STY__Score_Diffs, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_MaxQuant_P_site_localization_probability, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_MaxQuant_PTM_Delta_Score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
             RelationsIsA.Add(CVID.MS_Ascore_software, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_Ascore, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_H_Score, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_Ascore, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_H_Score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
             RelationsIsA.Add(CVID.MS_vacuum_drying_MALDI_sample_preparation, new List<CVID> { CVID.MS_matrix_application_type, });
             RelationsIsA.Add(CVID.MS_crushed_crystal_MALDI_sample_preparation, new List<CVID> { CVID.MS_matrix_application_type, });
             RelationsIsA.Add(CVID.MS_fast_evaporation_MALDI_sample_preparation, new List<CVID> { CVID.MS_matrix_application_type, });
@@ -27769,7 +27941,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_isobaric_label_quantitation_analysis, new List<CVID> { CVID.MS_quantitation_analysis_summary, });
             RelationsIsA.Add(CVID.MS_TMT_quantitation_analysis, new List<CVID> { CVID.MS_quantitation_analysis_summary, CVID.MS_isobaric_label_quantitation_analysis, });
             RelationsIsA.Add(CVID.MS_desorption_electrospray_ionization, new List<CVID> { CVID.MS_atmospheric_pressure_ionization, });
-            RelationsIsA.Add(CVID.MS_Mascot_PTM_site_assignment_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_spectrum_identification_result_details, CVID.MS_PSM_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_Mascot_PTM_site_assignment_confidence, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
             RelationsIsA.Add(CVID.MS_collision_energy_ramp_start, new List<CVID> { CVID.MS_collision_energy, });
             RelationsIsA.Add(CVID.MS_collision_energy_ramp_end, new List<CVID> { CVID.MS_collision_energy, });
             RelationsIsA.Add(CVID.MS_spectral_count_peptide_level_quantitation, new List<CVID> { CVID.MS_spectral_counting_quantitation_analysis, });
@@ -27801,19 +27973,19 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_source_temperature, new List<CVID> { CVID.MS_source_attribute, });
             RelationsIsA.Add(CVID.MS_modulation_time, new List<CVID> { CVID.MS_run_attribute, });
             RelationsIsA.Add(CVID.MS_ProteinProspector, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_ProteinProspector_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProteinProspector_expectation_value, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_ProteinProspector_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProteinProspector_expectation_value, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_native_source_path, new List<CVID> { CVID.MS_spectrum_generation_information, });
             RelationsIsA.Add(CVID.MS_MS_GF, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_MS_GF_, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_MS_GF_RawScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_MS_GF_DeNovoScore, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_MS_GF_Energy, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_MS_GF_SpecEValue, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_PSM_level_e_value, });
-            RelationsIsA.Add(CVID.MS_MS_GF_EValue, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_PSM_level_e_value, });
-            RelationsIsA.Add(CVID.MS_MS_GF_QValue, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_PSM_level_q_value, });
-            RelationsIsA.Add(CVID.MS_MS_GF_PepQValue, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_distinct_peptide_level_q_value, });
-            RelationsIsA.Add(CVID.MS_MS_GF_PEP, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_MS_GF_RawScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MS_GF_DeNovoScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_MS_GF_Energy, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MS_GF_SpecEValue, new List<CVID> { CVID.MS_PSM_level_e_value, CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MS_GF_EValue, new List<CVID> { CVID.MS_PSM_level_e_value, CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MS_GF_QValue, new List<CVID> { CVID.MS_PSM_level_q_value, CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MS_GF_PepQValue, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MS_GF_PEP, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_modification_specificity_protein_N_term, new List<CVID> { CVID.MS_modification_specificity_rule, });
             RelationsIsA.Add(CVID.MS_modification_specificity_protein_C_term, new List<CVID> { CVID.MS_modification_specificity_rule, });
             RelationsIsA.Add(CVID.MS_Microsoft_Excel, new List<CVID> { CVID.MS_quantitation_software_name, });
@@ -27825,7 +27997,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_ratio_calculation_method, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_protein_value__median_of_peptide_ratios, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_metabolic_labelling__heavy_N__mainly_15N_, new List<CVID> { CVID.MS_modification_parameters, });
-            RelationsIsA.Add(CVID.MS_metabolic_labelling__labelling_purity, new List<CVID> { CVID.MS_modification_parameters, });
+            RelationsIsA.Add(CVID.MS_metabolic_labelling_purity, new List<CVID> { CVID.MS_modification_parameters, });
             RelationsIsA.Add(CVID.MS_t_test, new List<CVID> { CVID.MS_quantification_data_processing, });
             RelationsIsA.Add(CVID.MS_ANOVA_test, new List<CVID> { CVID.MS_quantification_data_processing, });
             RelationsIsA.Add(CVID.MS_p_value, new List<CVID> { CVID.MS_quantification_datatype, });
@@ -27878,7 +28050,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_counts_reporting, new List<CVID> { CVID.MS_feature_list_attribute, });
             RelationsIsA.Add(CVID.MS_x_Tracker, new List<CVID> { CVID.MS_quantitation_software_name, });
             RelationsIsA.Add(CVID.MS_ProteoSuite, new List<CVID> { CVID.MS_quantitation_software_name, });
-            RelationsIsA.Add(CVID.MS_combined_FDRScore_OBSOLETE, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_combined_FDRScore_OBSOLETE, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_database_UniProtKB, new List<CVID> { CVID.MS_database_name, });
             RelationsIsA.Add(CVID.MS_identification_file_attribute, new List<CVID> { CVID.MS_quantification_object_attribute, });
             RelationsIsA.Add(CVID.MS_method_file_format, new List<CVID> { CVID.MS_file_format, });
@@ -27970,11 +28142,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PAnalyzer_indistinguishable_protein, new List<CVID> { CVID.MS_protein_inference_confidence_category, });
             RelationsIsA.Add(CVID.MS_PAnalyzer_non_conclusive_protein, new List<CVID> { CVID.MS_protein_inference_confidence_category, });
             RelationsIsA.Add(CVID.MS_PAnalyzer_ambiguous_group_member, new List<CVID> { CVID.MS_protein_inference_confidence_category, });
-            RelationsIsA.Add(CVID.MS_decoy_peptide, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_decoy_peptide, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_percent_collision_energy_ramp_start, new List<CVID> { CVID.MS_normalized_collision_energy, });
             RelationsIsA.Add(CVID.MS_percent_collision_energy_ramp_end, new List<CVID> { CVID.MS_normalized_collision_energy, });
             RelationsIsA.Add(CVID.MS_MRMaid, new List<CVID> { CVID.MS_SRM_software, });
-            RelationsIsA.Add(CVID.MS_MRMaid_peptide_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_MRMaid_peptide_score, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_SRM_transition_attribute, new List<CVID> { CVID.MS_ion_selection_attribute, });
             RelationsIsA.Add(CVID.MS_precursor_ion_detection_probability, new List<CVID> { CVID.MS_SRM_transition_attribute, });
             RelationsIsA.Add(CVID.MS_product_ion_detection_probability, new List<CVID> { CVID.MS_SRM_transition_attribute, });
@@ -27988,8 +28160,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_Default_FDR_calculator, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_SEQUEST_Low_resolution_spectra_contained, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_selected_precursor_m_z, new List<CVID> { CVID.MS_ion_selection_attribute, });
-            RelationsIsA.Add(CVID.MS_ProteoGrouper_PDH_score, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_ProteoGrouper_PAG_score, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, });
+            RelationsIsA.Add(CVID.MS_ProteoGrouper_PDH_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_ProteoGrouper_PAG_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, });
             RelationsIsA.Add(CVID.MS_mzidLib, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_mzidLib_Omssa2Mzid, new List<CVID> { CVID.MS_mzidLib, });
             RelationsIsA.Add(CVID.MS_mzidLib_Tandem2Mzid, new List<CVID> { CVID.MS_mzidLib, });
@@ -28001,28 +28173,28 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_mzidLib_Mzidentml2Csv, new List<CVID> { CVID.MS_mzidLib, });
             RelationsIsA.Add(CVID.MS_mzidLib_CombineSearchEngines, new List<CVID> { CVID.MS_mzidLib, });
             RelationsIsA.Add(CVID.MS_mzidLib_InsertMetaDataFromFasta, new List<CVID> { CVID.MS_mzidLib, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_spscore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_sprank, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_SEQUEST_deltacnstar, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_spscore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_sprank, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_SEQUEST_deltacnstar, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_Comet, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_Comet_xcorr, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Comet_deltacn, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Comet_deltacnstar, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Comet_spscore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Comet_sprank, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Comet_xcorr, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Comet_deltacn, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Comet_deltacnstar, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Comet_spscore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Comet_sprank, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_Comet_expectation_value, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Comet_matched_ions, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Comet_total_ions, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Comet_matched_ions, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Comet_total_ions, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_PSM_FDR_threshold, new List<CVID> { CVID.MS_PSM_level_statistical_threshold, });
             RelationsIsA.Add(CVID.MS_Byonic, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_Byonic_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic_Delta_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic_DeltaMod_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic_PEP, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic_Peptide_LogProb, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic_Protein_LogProb, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic_Best_LogProb, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic_Best_Score, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Byonic_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Byonic_Delta_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Byonic_DeltaMod_Score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Byonic_PEP, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Byonic_Peptide_LogProb, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Byonic_Protein_LogProb, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Byonic_Best_LogProb, new List<CVID> { CVID.MS_single_protein_identification_statistic, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Byonic_Best_Score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_chromatography_separation, new List<CVID> { CVID.MS_run_attribute, });
             RelationsIsA.Add(CVID.MS_liquid_chromatography_separation, new List<CVID> { CVID.MS_chromatography_separation, });
             RelationsIsA.Add(CVID.MS_gas_chromatography_separation, new List<CVID> { CVID.MS_chromatography_separation, });
@@ -28059,11 +28231,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Bruker_Container_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
             RelationsIsA.Add(CVID.MS_value_between_0_and_1_inclusive, new List<CVID> { CVID.MS_domain_range, });
             RelationsIsA.Add(CVID.MS_value_greater_than_zero, new List<CVID> { CVID.MS_domain_range, });
-            RelationsIsA.Add(CVID.MS_fragmentation_ion_type, new List<CVID> { CVID.MS_fragmentation_information, });
+            RelationsIsA.Add(CVID.MS_fragmentation_ion_type, new List<CVID> { CVID.MS_product_ion_attribute, });
             RelationsIsA.Add(CVID.MS_fluorescence_detector, new List<CVID> { CVID.MS_detector_type, });
-            RelationsIsA.Add(CVID.MS_Byonic__Peptide_AbsLogProb, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic__Protein_AbsLogProb, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_Byonic__Peptide_AbsLogProb2D, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Byonic__Peptide_AbsLogProb, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Byonic__Protein_AbsLogProb, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_Byonic__Peptide_AbsLogProb2D, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_MS_Numpress_linear_prediction_compression, new List<CVID> { CVID.MS_binary_data_compression_type, });
             RelationsIsA.Add(CVID.MS_MS_Numpress_positive_integer_compression, new List<CVID> { CVID.MS_binary_data_compression_type, });
             RelationsIsA.Add(CVID.MS_MS_Numpress_short_logged_float_compression, new List<CVID> { CVID.MS_binary_data_compression_type, });
@@ -28071,7 +28243,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_Amanda_high_confidence_threshold, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_Amanda_middle_confidence_threshold, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_automatic_workload, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
-            RelationsIsA.Add(CVID.MS_Amanda_AmandaScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Amanda_AmandaScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_max_differential_modifications, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_max_equal_modifications, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_min_peptide_length, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
@@ -28090,44 +28262,44 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PRIDE_Converter2, new List<CVID> { CVID.MS_conversion_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_Amanda, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Andromeda, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_Andromeda_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_Andromeda_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_site_global_FDR, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_ProteomeXchange_project_tag, new List<CVID> { CVID.MS_external_reference_identifier, });
-            RelationsIsA.Add(CVID.MS_second_pass_peptide_identification, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_second_pass_peptide_identification, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_MZmine, new List<CVID> { CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_Maltcms, new List<CVID> { CVID.MS_analysis_software, CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_PSM_level_result_details, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_result_details, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_PSM_level_identification_confidence_metric, new List<CVID> { CVID.MS_PSM_level_result_details, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_identification_confidence_metric, new List<CVID> { CVID.MS_protein_group_level_result_details, });
+            RelationsIsA.Add(CVID.MS_PSM_level_attribute, new List<CVID> { CVID.MS_single_identification_result_attribute, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_identification_attribute, new List<CVID> { CVID.MS_single_identification_result_attribute, });
+            RelationsIsA.Add(CVID.MS_PSM_level_identification_statistic, new List<CVID> { CVID.MS_PSM_level_attribute, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_identification_statistic, new List<CVID> { CVID.MS_protein_group_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_value_greater_than_zero_but_less_than_or_equal_to_one, new List<CVID> { CVID.MS_domain_range, });
-            RelationsIsA.Add(CVID.MS_PSM_level_global_FDR, new List<CVID> { CVID.MS_PSM_level_result_details, CVID.MS_PSM_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_PSM_level_local_FDR, new List<CVID> { CVID.MS_PSM_level_result_details, CVID.MS_PSM_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_PSM_level_p_value, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_PSM_level_e_value, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_PSM_level_q_value, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_PSM_level_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_PSM_level_combined_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_PSM_level_probability, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_search_engine_specific_score_for_distinct_peptides, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_local_FDR, new List<CVID> { CVID.MS_peptide_result_details, CVID.MS_peptide_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_distinct_peptides, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_combined_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_distinct_peptides, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_probability, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_search_engine_specific_score_for_proteins, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_protein_level_local_FDR, new List<CVID> { CVID.MS_single_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_FDRScore_for_proteins, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_combined_FDRScore_for_proteins, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_probability_for_proteins, new List<CVID> { CVID.MS_protein_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_search_engine_specific_score_for_protein_groups, new List<CVID> { CVID.MS_protein_group_level_result_details, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_global_FDR, new List<CVID> { CVID.MS_protein_group_level_result_details, CVID.MS_protein_group_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_local_FDR, new List<CVID> { CVID.MS_protein_group_level_result_details, CVID.MS_protein_group_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_p_value, new List<CVID> { CVID.MS_protein_group_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_e_value, new List<CVID> { CVID.MS_protein_group_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_q_value, new List<CVID> { CVID.MS_protein_group_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_combined_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_probability, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_PSM_level_global_FDR, new List<CVID> { CVID.MS_PSM_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_PSM_level_local_FDR, new List<CVID> { CVID.MS_PSM_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_PSM_level_p_value, new List<CVID> { CVID.MS_PSM_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_PSM_level_e_value, new List<CVID> { CVID.MS_PSM_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_PSM_level_q_value, new List<CVID> { CVID.MS_PSM_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_PSM_level_FDRScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_PSM_level_combined_FDRScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_PSM_level_probability, new List<CVID> { CVID.MS_PSM_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_local_FDR, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_distinct_peptide_level_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_distinct_peptide_level_combined_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_probability, new List<CVID> { CVID.MS_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_search_engine_specific_score_for_proteins, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_level_local_FDR, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_FDRScore_for_proteins, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_combined_FDRScore_for_proteins, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_probability_for_proteins, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_search_engine_specific_score_for_protein_groups, new List<CVID> { CVID.MS_protein_group_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_global_FDR, new List<CVID> { CVID.MS_protein_group_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_local_FDR, new List<CVID> { CVID.MS_protein_group_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_p_value, new List<CVID> { CVID.MS_protein_group_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_e_value, new List<CVID> { CVID.MS_protein_group_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_q_value, new List<CVID> { CVID.MS_protein_group_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_combined_FDRScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_probability, new List<CVID> { CVID.MS_protein_group_level_identification_statistic, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_Relaxed_Score_Threshold, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_Strict_Score_Threshold, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_Peptide_Without_Protein_Cut_Off_Score, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
@@ -28145,7 +28317,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PIA_Combined_FDRScore_calculated, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_PSM_sets_created, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_used_top_identifications_for_FDR, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
-            RelationsIsA.Add(CVID.MS_PIA_protein_score, new List<CVID> { CVID.MS_single_protein_result_details, });
+            RelationsIsA.Add(CVID.MS_PIA_protein_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_PIA_protein_inference, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_protein_inference_filter, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_protein_inference_scoring, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
@@ -28155,18 +28327,18 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_leading_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_non_leading_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_group_representative, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
-            RelationsIsA.Add(CVID.MS_count_of_identified_proteins, new List<CVID> { CVID.MS_protein_result_details, CVID.MS_search_statistics, });
-            RelationsIsA.Add(CVID.MS_protein_cluster_details, new List<CVID> { CVID.MS_protein_result_details, });
-            RelationsIsA.Add(CVID.MS_count_of_identified_clusters, new List<CVID> { CVID.MS_protein_cluster_details, });
-            RelationsIsA.Add(CVID.MS_cluster_identifier, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, });
-            RelationsIsA.Add(CVID.MS_number_of_distinct_protein_sequences, new List<CVID> { CVID.MS_protein_cluster_details, });
+            RelationsIsA.Add(CVID.MS_count_of_identified_proteins, new List<CVID> { CVID.MS_protein_level_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_result_list_attribute, new List<CVID> { CVID.MS_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_count_of_identified_clusters, new List<CVID> { CVID.MS_protein_group_level_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_cluster_identifier, new List<CVID> { CVID.MS_protein_cluster_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_number_of_distinct_protein_sequences, new List<CVID> { CVID.MS_protein_group_level_result_list_attribute, });
             RelationsIsA.Add(CVID.MS_marginally_distinguished_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_Anubis, new List<CVID> { CVID.MS_SRM_software, CVID.MS_quantitation_software_name, });
             RelationsIsA.Add(CVID.MS_TraML_format, new List<CVID> { CVID.MS_method_file_format, });
             RelationsIsA.Add(CVID.MS_total_XIC_area, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_product_background, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_postprocessing_software, new List<CVID> { CVID.MS_data_processing_software, });
-            RelationsIsA.Add(CVID.MS_protein_group_passes_threshold, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, });
+            RelationsIsA.Add(CVID.MS_protein_group_passes_threshold, new List<CVID> { CVID.MS_protein_group_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_Orbitrap_Fusion, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
             RelationsIsA.Add(CVID.MS_Orbitrap_Fusion_ETD, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
             RelationsIsA.Add(CVID.MS_TSQ_Quantiva, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
@@ -28198,34 +28370,34 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_6460_Triple_Quadrupole_LC_MS, new List<CVID> { CVID.MS_Agilent_instrument_model, });
             RelationsIsA.Add(CVID.MS_6490_Triple_Quadrupole_LC_MS, new List<CVID> { CVID.MS_Agilent_instrument_model, });
             RelationsIsA.Add(CVID.MS_Paragon_special_factor, new List<CVID> { CVID.MS_Paragon_input_parameter, });
-            RelationsIsA.Add(CVID.MS_PEAKS_inChorusPeptideScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_PEAKS_inChorusProteinScore, new List<CVID> { CVID.MS_single_protein_result_details, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_PEAKS_inChorusPeptideScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_PEAKS_inChorusProteinScore, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_param__b_ion_H3PO4_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_param__y_ion_H3PO4_DEPRECATED, new List<CVID> { CVID.MS_ions_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_Maui, new List<CVID> { CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_No_fixed_modifications_searched, new List<CVID> { CVID.MS_common_search_engine_input_parameter, });
             RelationsIsA.Add(CVID.MS_No_variable_modifications_searched, new List<CVID> { CVID.MS_common_search_engine_input_parameter, });
-            RelationsIsA.Add(CVID.MS_H2O_neutral_loss, new List<CVID> { CVID.MS_neutral_loss, CVID.MS_ion_series_considered_in_search, });
-            RelationsIsA.Add(CVID.MS_NH3_neutral_loss, new List<CVID> { CVID.MS_neutral_loss, CVID.MS_ion_series_considered_in_search, });
-            RelationsIsA.Add(CVID.MS_H3PO4_neutral_loss, new List<CVID> { CVID.MS_neutral_loss, CVID.MS_ion_series_considered_in_search, });
+            RelationsIsA.Add(CVID.MS_H2O_neutral_loss_OBSOLETE, new List<CVID> { CVID.MS_neutral_loss, CVID.MS_ion_series_considered_in_search, });
+            RelationsIsA.Add(CVID.MS_NH3_neutral_loss_OBSOLETE, new List<CVID> { CVID.MS_neutral_loss, CVID.MS_ion_series_considered_in_search, });
+            RelationsIsA.Add(CVID.MS_H3PO4_neutral_loss_OBSOLETE, new List<CVID> { CVID.MS_neutral_loss, CVID.MS_ion_series_considered_in_search, });
             RelationsIsA.Add(CVID.MS_PeptideShaker, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_MS_Amanda_csv_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_global_FNR, new List<CVID> { CVID.MS_protein_group_level_result_details, CVID.MS_protein_group_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_protein_group_level_confidence, new List<CVID> { CVID.MS_protein_group_level_result_details, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_global_FNR, new List<CVID> { CVID.MS_peptide_result_details, CVID.MS_peptide_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_distinct_peptide_level_global_confidence, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_PSM_level_global_FNR, new List<CVID> { CVID.MS_PSM_level_result_details, CVID.MS_PSM_level_statistical_threshold, });
-            RelationsIsA.Add(CVID.MS_PSM_level_global_confidence, new List<CVID> { CVID.MS_PSM_level_result_details, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_PSMs, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_distinct_peptides, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_group_score, new List<CVID> { CVID.MS_search_engine_specific_score, CVID.MS_search_engine_specific_score_for_protein_groups, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_group_confidence, new List<CVID> { CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_global_FNR, new List<CVID> { CVID.MS_protein_group_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_confidence, new List<CVID> { CVID.MS_protein_group_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_global_FNR, new List<CVID> { CVID.MS_peptide_sequence_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_global_confidence, new List<CVID> { CVID.MS_peptide_sequence_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_PSM_level_global_FNR, new List<CVID> { CVID.MS_PSM_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_PSM_level_global_confidence, new List<CVID> { CVID.MS_PSM_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_confidence, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_score, new List<CVID> { CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_confidence, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_group_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_group_confidence, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_trap_type_collision_induced_dissociation, new List<CVID> { CVID.MS_collision_induced_dissociation, });
             RelationsIsA.Add(CVID.MS_ion_series_considered_in_search, new List<CVID> { CVID.MS_search_input_details, });
-            RelationsIsA.Add(CVID.MS_ProteoAnnotator_non_canonical_gene_model_score, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, });
-            RelationsIsA.Add(CVID.MS_ProteoAnnotator_count_alternative_peptides, new List<CVID> { CVID.MS_protein_ambiguity_group_result_details, });
+            RelationsIsA.Add(CVID.MS_ProteoAnnotator_non_canonical_gene_model_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_ProteoAnnotator_count_alternative_peptides, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, });
             RelationsIsA.Add(CVID.MS_ion_mobility_drift_time, new List<CVID> { CVID.MS_ion_selection_attribute, });
             RelationsIsA.Add(CVID.MS_mean_drift_time_array, new List<CVID> { CVID.MS_binary_data_array, });
             RelationsIsA.Add(CVID.MS_mean_charge_array, new List<CVID> { CVID.MS_binary_data_array, });
@@ -28248,20 +28420,20 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence, new List<CVID> { CVID.MS_identification_parameter, });
             RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence_with_modifications, new List<CVID> { CVID.MS_identification_parameter, });
             RelationsIsA.Add(CVID.MS_group_PSMs_by_sequence_with_modifications_and_charge, new List<CVID> { CVID.MS_identification_parameter, });
-            RelationsIsA.Add(CVID.MS_peptide_level_score_OBSOLETE, new List<CVID> { CVID.MS_search_engine_specific_score_for_distinct_peptides, });
-            RelationsIsA.Add(CVID.MS_peptide_passes_threshold, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_no_PSM_threshold, new List<CVID> { CVID.MS_PSM_level_result_details, });
-            RelationsIsA.Add(CVID.MS_no_peptide_level_threshold, new List<CVID> { CVID.MS_peptide_result_details, });
-            RelationsIsA.Add(CVID.MS_PSM_is_used_for_peptide_level_scoring, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_peptide_level_score_OBSOLETE, new List<CVID> { CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_passes_threshold, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_no_PSM_threshold, new List<CVID> { CVID.MS_PSM_level_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_no_peptide_level_threshold, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_PSM_is_used_for_peptide_level_scoring, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_modification_index, new List<CVID> { CVID.MS_modification_parameters, });
             RelationsIsA.Add(CVID.MS_regular_expression_for_modification_localization_scoring, new List<CVID> { CVID.MS_regular_expression, });
             RelationsIsA.Add(CVID.MS_modification_position_score, new List<CVID> { CVID.MS_modification_parameters, });
             RelationsIsA.Add(CVID.MS_modification_rescoring_false_localization_rate, new List<CVID> { CVID.MS_modification_position_score, });
-            RelationsIsA.Add(CVID.MS_cross_linking_attribute, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_cross_linking_attribute, new List<CVID> { CVID.MS_single_identification_result_attribute, });
             RelationsIsA.Add(CVID.MS_cross_link_donor, new List<CVID> { CVID.MS_cross_linking_attribute, });
             RelationsIsA.Add(CVID.MS_cross_link_acceptor, new List<CVID> { CVID.MS_cross_linking_attribute, });
             RelationsIsA.Add(CVID.MS_cross_link_spectrum_identification_item, new List<CVID> { CVID.MS_cross_linking_attribute, });
-            RelationsIsA.Add(CVID.MS_cross_linking_score, new List<CVID> { CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_cross_linking_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_molecules_per_cell_, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_absolute_quantitation_analysis, new List<CVID> { CVID.MS_quantitation_analysis_summary, });
             RelationsIsA.Add(CVID.MS_internal_peptide_reference_used, new List<CVID> { CVID.MS_quantitation_software_comment_or_customizations, });
@@ -28269,7 +28441,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_internal_reference_abundance, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_Progenesis_protein_group_normalised_abundance, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_Progenesis_protein_group_raw_abundance, new List<CVID> { CVID.MS_quantification_datatype, });
-            RelationsIsA.Add(CVID.MS_peptide_group_ID, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_peptide_group_ID, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_mass_spectrometry_imaging, new List<CVID> { CVID.MS_run_attribute, });
             RelationsIsA.Add(CVID.MS_ProteomeDiscoverer_1__Static_Terminal_Modification, new List<CVID> { CVID.MS_ProteomeDiscoverer_input_parameter, });
             RelationsIsA.Add(CVID.MS_Q_Exactive_HF, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
@@ -28283,27 +28455,27 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_UIMF_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_UIMF_nativeID_format, new List<CVID> { CVID.MS_native_spectrum_identifier_format, });
             RelationsIsA.Add(CVID.MS_TripleTOF_6600, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
-            RelationsIsA.Add(CVID.MS_ProLuCID_xcorr, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_ProLuCID_deltacn, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
-            RelationsIsA.Add(CVID.MS_D_Score, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_MD_Score, new List<CVID> { CVID.MS_PSM_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_ProLuCID_xcorr, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_ProLuCID_deltacn, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_D_Score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
+            RelationsIsA.Add(CVID.MS_MD_Score, new List<CVID> { CVID.MS_PTM_localization_PSM_level_statistic, });
             RelationsIsA.Add(CVID.MS_PTM_localization_confidence_metric, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_PeptideShaker_PTM_confidence_type, new List<CVID> { CVID.MS_PTM_localization_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_confidence_type, new List<CVID> { CVID.MS_PSM_level_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_confidence_type, new List<CVID> { CVID.MS_peptide_identification_confidence_metric, });
-            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_confidence_type, new List<CVID> { CVID.MS_protein_identification_confidence_metric, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_PSM_confidence_type, new List<CVID> { CVID.MS_PSM_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_peptide_confidence_type, new List<CVID> { CVID.MS_search_engine_specific_peptide_sequence_level_identification_statistic, });
+            RelationsIsA.Add(CVID.MS_PeptideShaker_protein_confidence_type, new List<CVID> { CVID.MS_single_protein_identification_statistic, });
             RelationsIsA.Add(CVID.MS_xiFDR, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_xi, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_xi_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_xi_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_Skyline_mzQuantML_converter_, new List<CVID> { CVID.MS_quantitation_software_name, CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_normalized_spectral_abundance_factor, new List<CVID> { CVID.MS_quantification_datatype, });
             RelationsIsA.Add(CVID.MS_distributed_normalized_spectral_abundance_factor, new List<CVID> { CVID.MS_quantification_datatype, });
-            RelationsIsA.Add(CVID.MS_peptide_level_PTM_localization_score, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_peptide_phosphoRS_score, new List<CVID> { CVID.MS_peptide_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_peptide_Ascore, new List<CVID> { CVID.MS_peptide_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_peptide_H_Score, new List<CVID> { CVID.MS_peptide_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_peptide_D_Score, new List<CVID> { CVID.MS_peptide_level_PTM_localization_score, });
-            RelationsIsA.Add(CVID.MS_peptide_MD_Score, new List<CVID> { CVID.MS_peptide_level_PTM_localization_score, });
+            RelationsIsA.Add(CVID.MS_PTM_localization_distinct_peptide_level_statistic, new List<CVID> { CVID.MS_PTM_localization_single_result_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_phosphoRS_score, new List<CVID> { CVID.MS_PTM_localization_distinct_peptide_level_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_Ascore, new List<CVID> { CVID.MS_PTM_localization_distinct_peptide_level_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_H_Score, new List<CVID> { CVID.MS_PTM_localization_distinct_peptide_level_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_D_Score, new List<CVID> { CVID.MS_PTM_localization_distinct_peptide_level_statistic, });
+            RelationsIsA.Add(CVID.MS_peptide_MD_Score, new List<CVID> { CVID.MS_PTM_localization_distinct_peptide_level_statistic, });
             RelationsIsA.Add(CVID.MS_PTM_localization_score_threshold, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
             RelationsIsA.Add(CVID.MS_Ascore_threshold, new List<CVID> { CVID.MS_PTM_localization_score_threshold, });
             RelationsIsA.Add(CVID.MS_D_Score_threshold, new List<CVID> { CVID.MS_PTM_localization_score_threshold, });
@@ -28385,7 +28557,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_jPOST_dataset_URI, new List<CVID> { CVID.MS_external_reference_identifier, });
             RelationsIsA.Add(CVID.MS_Q_Exactive_Plus, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
             RelationsIsA.Add(CVID.MS_proteogenomics_search, new List<CVID> { CVID.MS_special_processing, });
-            RelationsIsA.Add(CVID.MS_proteogenomics_attribute, new List<CVID> { CVID.MS_peptide_result_details, });
+            RelationsIsA.Add(CVID.MS_proteogenomics_attribute, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_chromosome_name, new List<CVID> { CVID.MS_proteogenomics_attribute, });
             RelationsIsA.Add(CVID.MS_chromosome_strand, new List<CVID> { CVID.MS_proteogenomics_attribute, });
             RelationsIsA.Add(CVID.MS_peptide_start_on_chromosome_OBSOLETE, new List<CVID> { CVID.MS_proteogenomics_attribute, });
@@ -28409,12 +28581,49 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_UniProtKB_text_sequence_format, new List<CVID> { CVID.MS_database_file_formats, });
             RelationsIsA.Add(CVID.MS_UniProtKB_XML_sequence_format, new List<CVID> { CVID.MS_database_file_formats, });
             RelationsIsA.Add(CVID.MS_Morpheus, new List<CVID> { CVID.MS_analysis_software, });
-            RelationsIsA.Add(CVID.MS_Morpheus_Morpheus_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_PSMs, CVID.MS_search_engine_specific_score, CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_Morpheus_summed_Morpheus_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, CVID.MS_search_engine_specific_score, CVID.MS_protein_ambiguity_group_result_details, });
-            RelationsIsA.Add(CVID.MS_protein_interaction_scores_derived_from_cross_linking, new List<CVID> { CVID.MS_cross_linking_attribute, });
-            RelationsIsA.Add(CVID.MS_regular_expression_for_protein_interaction_scores_derived_from_cross_linking, new List<CVID> { CVID.MS_regular_expression, });
+            RelationsIsA.Add(CVID.MS_Morpheus_Morpheus_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_Morpheus_summed_Morpheus_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_protein_groups, });
+            RelationsIsA.Add(CVID.MS_interaction_score_derived_from_cross_linking, new List<CVID> { CVID.MS_cross_linking_result_details, });
+            RelationsIsA.Add(CVID.MS_regular_expression_for_interaction_scores_derived_from_cross_linking, new List<CVID> { CVID.MS_regular_expression, });
             RelationsIsA.Add(CVID.MS_impact_II, new List<CVID> { CVID.MS_Bruker_Daltonics_micrOTOF_series, });
             RelationsIsA.Add(CVID.MS_impact_HD, new List<CVID> { CVID.MS_Bruker_Daltonics_micrOTOF_series, });
+            RelationsIsA.Add(CVID.MS_frag__iTRAQ_4plex_reporter_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
+            RelationsIsA.Add(CVID.MS_frag__iTRAQ_8plex_reporter_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
+            RelationsIsA.Add(CVID.MS_frag__TMT_reporter_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
+            RelationsIsA.Add(CVID.MS_frag__TMT_ETD_reporter_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
+            RelationsIsA.Add(CVID.MS_no_modification_threshold, new List<CVID> { CVID.MS_PTM_localization_score_threshold, });
+            RelationsIsA.Add(CVID.MS_OpenXQuest, new List<CVID> { CVID.MS_TOPP_software, });
+            RelationsIsA.Add(CVID.MS_X500R_QTOF, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_protein_pair_level_global_FDR, new List<CVID> { CVID.MS_interaction_score_derived_from_cross_linking, });
+            RelationsIsA.Add(CVID.MS_residue_pair_level_global_FDR, new List<CVID> { CVID.MS_interaction_score_derived_from_cross_linking, });
+            RelationsIsA.Add(CVID.MS_supplemental_higher_energy_beam_type_collision_induced_dissociation, new List<CVID> { CVID.MS_beam_type_collision_induced_dissociation, });
+            RelationsIsA.Add(CVID.MS_supplemental_collision_induced_dissociation, new List<CVID> { CVID.MS_dissociation_method, });
+            RelationsIsA.Add(CVID.MS_supplemental_collision_energy, new List<CVID> { CVID.MS_precursor_activation_attribute, });
+            RelationsIsA.Add(CVID.MS_OpenXQuest_combined_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_OpenXQuest_xcorr_xlink, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_OpenXQuest_xcorr_common, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_OpenXQuest_match_odds, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_OpenXQuest_intsum, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_OpenXQuest_wTIC, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
+            RelationsIsA.Add(CVID.MS_analysis_attribute, new List<CVID> { CVID.MS_spectrum_identification_result_details, });
+            RelationsIsA.Add(CVID.MS_PTM_localization_attribute, new List<CVID> { CVID.MS_analysis_attribute, });
+            RelationsIsA.Add(CVID.MS_PTM_localization_single_result_statistic, new List<CVID> { CVID.MS_PTM_localization_attribute, });
+            RelationsIsA.Add(CVID.MS_PTM_localization_result_list_statistic, new List<CVID> { CVID.MS_PTM_localization_attribute, });
+            RelationsIsA.Add(CVID.MS_global_FLR, new List<CVID> { CVID.MS_PTM_localization_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_local_FLR_at_threshold, new List<CVID> { CVID.MS_PTM_localization_result_list_statistic, });
+            RelationsIsA.Add(CVID.MS_identification_attribute, new List<CVID> { CVID.MS_analysis_attribute, });
+            RelationsIsA.Add(CVID.MS_single_identification_result_attribute, new List<CVID> { CVID.MS_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_frag__isobaric_label_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
+            RelationsIsA.Add(CVID.MS_secondary_isotope_peak, new List<CVID> { CVID.MS_fragmentation_ion_type, });
+            RelationsIsA.Add(CVID.MS_protein_cluster_identification_attribute, new List<CVID> { CVID.MS_single_identification_result_attribute, });
+            RelationsIsA.Add(CVID.MS_result_list_attribute, new List<CVID> { CVID.MS_identification_attribute, });
+            RelationsIsA.Add(CVID.MS_PSM_level_result_list_attribute, new List<CVID> { CVID.MS_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_PSM_level_result_list_statistic, new List<CVID> { CVID.MS_PSM_level_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_result_list_attribute, new List<CVID> { CVID.MS_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_peptide_sequence_level_result_list_statistic, new List<CVID> { CVID.MS_peptide_sequence_level_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_protein_level_result_list_attribute, new List<CVID> { CVID.MS_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_protein_level_result_list_statistic, new List<CVID> { CVID.MS_protein_level_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_protein_group_level_result_list_statistic, new List<CVID> { CVID.MS_protein_group_level_result_list_attribute, });
             RelationsIsA.Add(CVID.UNIMOD_Acetyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Amidated, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -29767,7 +29976,12 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_2_15N_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS_NH2, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NQIGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_CEP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Carboxyethylpyrrole, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Fluorescein_tyramine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_GEE, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_RNPXL, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.PATO_mobility, new List<CVID> { CVID.PATO_physical_quality, });
             RelationsIsA.Add(CVID.PATO_speed, new List<CVID> { CVID.PATO_movement_quality, });
             RelationsIsA.Add(CVID.PATO_age, new List<CVID> { CVID.PATO_time, });
