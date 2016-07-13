@@ -61,6 +61,7 @@
     <Compile Include="IdentData\mzIdentML\MzIdentMLWriter.cs" />
     <Compile Include="IdentData\mzIdentML\mzIdentML_Extra.cs" />
     <Compile Include="IdentData\mzIdentML_IdentData.cs" />
+    <Compile Include="IdentData\SimpleMZIdentMLReader.cs" />
     <Compile Include="MSData\Base64Conversion.cs" />
     <Compile Include="MSData\MSDataInternalTypeAbstract.cs" />
     <Compile Include="MSData\MSDataList.cs" />
