@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PSI_Interface.CV
 {
+    /// <summary>
+    /// Class containing a large amount of information about the needed controlled vocabularies
+    /// </summary>
     public static partial class CV
     {
         public static readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();
@@ -18,6 +21,9 @@ namespace PSI_Interface.CV
         public static readonly List<CVInfo> CVInfoList = new List<CVInfo>();
         public static readonly Dictionary<string, Dictionary<string, CVID>> TermAccessionLookup = new Dictionary<string, Dictionary<string, CVID>>();
 
+        /// <summary>
+        /// Primary identifying information about a particular CV
+        /// </summary>
         public class CVInfo
         {
             public string Id { get; private set; }
@@ -34,6 +40,9 @@ namespace PSI_Interface.CV
             }
         }
 
+        /// <summary>
+        /// Information about a particular CV Term
+        /// </summary>
         public class TermInfo
         {
             public CVID Cvid { get; private set; }
@@ -54,6 +63,9 @@ namespace PSI_Interface.CV
             }
         }
 
+        /// <summary>
+        /// Constructor: Populates the relationship dictionaries
+        /// </summary>
         static CV()
         {
             PopulateCVInfoList();
