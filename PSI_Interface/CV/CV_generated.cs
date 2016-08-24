@@ -13,7 +13,7 @@ namespace PSI_Interface.CV
 
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.0"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.1"));
             CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:07:01 11:23"));
             CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://www.berkeleybop.org/ontologies/pato/pato.obo", "releases/2016-05-22"));
             CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://www.berkeleybop.org/ontologies/uo/uo.obo", "releases/2016-05-13"));
@@ -27021,7 +27021,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_SEQUEST_ViewCV, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_SEQUEST_OutputLines, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_SEQUEST_DescriptionLines, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
-            RelationsIsA.Add(CVID.MS_de_novo_search, new List<CVID> { CVID.MS_search_type, CVID.MS_special_processing, });
+            RelationsIsA.Add(CVID.MS_de_novo_search, new List<CVID> { CVID.MS_search_type, });
             RelationsIsA.Add(CVID.MS_search_database_details, new List<CVID> { CVID.MS_search_input_details, });
             RelationsIsA.Add(CVID.MS_database_source, new List<CVID> { CVID.MS_search_database_details, });
             RelationsIsA.Add(CVID.MS_database_name, new List<CVID> { CVID.MS_search_database_details, });
@@ -27042,7 +27042,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_SEQUEST_SequenceHeaderFilter, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_number_of_sequences_searched, new List<CVID> { CVID.MS_search_database_details, });
             RelationsIsA.Add(CVID.MS_number_of_peptide_seqs_compared_to_each_spectrum, new List<CVID> { CVID.MS_search_database_details, CVID.MS_spectrum_identification_result_details, });
-            RelationsIsA.Add(CVID.MS_spectral_library_search, new List<CVID> { CVID.MS_search_type, CVID.MS_special_processing, });
+            RelationsIsA.Add(CVID.MS_spectral_library_search, new List<CVID> { CVID.MS_search_type, });
             RelationsIsA.Add(CVID.MS_SEQUEST_SequencePartialFilter, new List<CVID> { CVID.MS_SEQUEST_input_parameter, });
             RelationsIsA.Add(CVID.MS_date___time_search_performed_OBSOLETE, new List<CVID> { CVID.MS_search_statistics, });
             RelationsIsA.Add(CVID.MS_search_time_taken, new List<CVID> { CVID.MS_search_statistics, });

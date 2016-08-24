@@ -1,5 +1,4 @@
 ﻿using System;
-using zlib;
 
 namespace PSI_Interface.MSData
 {
