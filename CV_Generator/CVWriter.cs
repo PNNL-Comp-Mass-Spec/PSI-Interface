@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -36,17 +37,20 @@ namespace CV_Generator
         {
             using (StreamWriter file = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
+                file.NewLine = "\n";
                 file.WriteLine(Header());
                 file.WriteLine(UsingAndNamespace());
                 // Write main class open...
                 file.WriteLine(ClassOpen());
                 file.WriteLine(CVInfoList("        "));
+                file.WriteLine();
                 PopulateTermDict();
-                //file.WriteLine(TermInfoType("        "));
-                //file.WriteLine(RelationsTypes("        "));
                 file.WriteLine(GenerateRelationOtherTypesEnum("        "));
+                file.WriteLine();
                 file.WriteLine(GenerateCVEnum("        "));
+                file.WriteLine();
                 file.WriteLine(GenerateTermInfoObject("        "));
+                file.WriteLine();
                 file.WriteLine(RelationsIsAEnum("        "));
                 // Write main class close...
                 file.WriteLine(ClassClose());
@@ -65,84 +69,46 @@ namespace CV_Generator
         {
             return "// Using statements:\n" +
                 "using System.Collections.Generic;\n" +
+                "// ReSharper disable InconsistentNaming\n" +
                 "\n" +
-                "namespace PSI_Interface.CV\n{\n";
+                "namespace PSI_Interface.CV\n{";
         }
 
         private string ClassOpen()
         {
             return "    public static partial class CV\n" +
-                   "    {\n";
+                   "    {";
         }
 
         private string ClassClose()
         {
-            return "    }\n";
+            return "    }";
         }
 
         private string NamespaceClose()
         {
-            return "}\n";
+            return "}";
         }
 
         private string CVInfoList(string indent)
         {
-            string values = indent + "public static void PopulateCVInfoList()\n" +
+            string values = indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>\n" +
+                            indent + "public static void PopulateCVInfoList()\n" +
                             indent + "{\n";
             foreach (var cv in _allObo)
             {
                 values += indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));\n";
             }
-            values += indent + "}\n";
+            values += indent + "}";
             return values;
-        }
-
-        private string TermInfoType(string indent)
-        {
-            return indent + "public class TermInfo\n" +
-                   indent + "{\n" +
-                   indent + "    public CVID Cvid { get; private set; }\n" +
-                   indent + "    public string Id { get; private set; }\n" +
-                   indent + "    public string Name { get; private set; }\n" +
-                   indent + "    public string Definition { get; private set; }\n" +
-                   indent + "    public bool isObsolete { get; private set; }\n" +
-                   indent + "    \n" +
-                   indent + "    public TermInfo(CVID pCVID, string pId, string pName, string pDef, bool pIsObs)\n" +
-                   indent + "    {\n" +
-                   indent + "        Cvid = pCVID;\n" +
-                   indent + "        Id = pId;\n" +
-                   indent + "        Name = pName;\n" +
-                   indent + "        Definition = pDef;\n" +
-                   indent + "        IsObsolete = pIsObs;\n" +
-                   indent + "    }\n" +
-                   indent + "}\n";
-        }
-
-        private string RelationsTypes(string indent)
-        {
-            return
-                indent + "public static readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();\n" +
-                indent + "public static readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();\n" +
-                indent + "public static readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();\n" +
-                indent + "public static readonly Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<" + RelationsOtherTypesEnumName + ", List<CVID>>>();\n" +
-                indent + "public static readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();\n";
         }
 
         private const string RelationsOtherTypesEnumName = "RelationsOtherTypes";
 
-        //public enum RelationsOtherTypes : int
-        //{
-        //    has_units,
-        //    Unknown,
-        //    has_order,
-        //    has_domain,
-        //    has_regexp,
-        //
-        //}
-
         private string GenerateRelationOtherTypesEnum(string indent)
         {
-            string enumData = indent + "public enum " + RelationsOtherTypesEnumName + " : int\n" + indent + "{\n";
+            string enumData = indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>\n";
+            enumData += indent + "public enum " + RelationsOtherTypesEnumName + " : int\n" + indent + "{\n";
             var dict = new Dictionary<string, int>();
             dict.Add("Unknown", 0);
             foreach (var obo in _allObo)
@@ -162,7 +128,7 @@ namespace CV_Generator
             {
                 enumData += indent + "    " + key + ",\n";
             }
-            return enumData + indent + "}\n";
+            return enumData + indent + "}";
         }
 
         private Dictionary<string, OBO_File.OBO_Term> _cvEnumData = new Dictionary<string, OBO_File.OBO_Term>();
@@ -228,16 +194,23 @@ namespace CV_Generator
                 PopulateCVEnumData();
             }
 
-            string enumData = indent + "public enum CVID : int\n" + indent + "{\n";
+            string enumData = indent + "/// <summary>\n" + indent +
+                              "/// A full enumeration of the Controlled Vocabularies PSI-MS, UNIMOD, and the vocabularies they depend on\n" +
+                              indent + "/// </summary>\n" + 
+                              indent + "public enum CVID : int\n" + indent + "{\n";
             foreach (var term in _cvEnumData.Values)
             {
                 if (!string.IsNullOrWhiteSpace(term.Def))
                 {
-                    enumData += indent + "    // " + term.DefShort + "\n";
+                    enumData += indent + "    /// <summary>" + term.DefShort + "</summary>\n";
+                }
+                else
+                {
+                    enumData += indent + "    /// <summary>Description not provided</summary>\n";
                 }
                 enumData += indent + "    " + term.EnumName + ",\n\n";
             }
-            return enumData + indent + "}\n";
+            return enumData + indent + "}";
         }
 
         private string GenerateTermInfoObject(string indent)
@@ -247,7 +220,8 @@ namespace CV_Generator
                 PopulateCVEnumData();
             }
 
-            string dictData = indent + "private static void PopulateTermData()\n" + indent + "{\n";
+            string dictData = indent + "/// <summary>Populate the CV Term data objects</summary>\n" +
+                              indent + "private static void PopulateTermData()\n" + indent + "{\n";
             /*foreach (var term in _cvEnumData.Values)
             {
                 dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
@@ -267,7 +241,7 @@ namespace CV_Generator
                     //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
                 }
             }
-            return dictData + indent + "}\n\n";
+            return dictData + indent + "}";
         }
 
         private readonly Dictionary<string, OBO_File.OBO_Term> _bigTermDict = new Dictionary<string, OBO_File.OBO_Term>();
@@ -315,7 +289,8 @@ namespace CV_Generator
                 }
             }
 
-            string fillData = indent + "private static void FillRelationsIsA()\n" + indent + "{\n";
+            string fillData = indent + "/// <summary>Populate the relationships between CV terms</summary>\n" +
+                              indent + "private static void FillRelationsIsA()\n" + indent + "{\n";
             foreach (var item in items)
             {
                 //RelationsIsA.Add("name", new List<string> { "ref", "ref2", });
@@ -326,7 +301,7 @@ namespace CV_Generator
                 }
                 fillData += "});\n";
             }
-            return fillData + indent + "}\n";
+            return fillData + indent + "}";
         }
     }
 }
