@@ -168,59 +168,131 @@ namespace PSI_Interface.IdentData
         private readonly Dictionary<string, PeptideEvidence> m_evidences = new Dictionary<string, PeptideEvidence>();
         private readonly Dictionary<string, SpectrumIdItem> m_specItems = new Dictionary<string, SpectrumIdItem>();
 
+        /// <summary>
+        /// Information about a single search result
+        /// </summary>
         public class SpectrumIdItem
         {
             #region Spectrum ID Public Properties
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
             public SpectrumIdItem()
             {
                 PepEvidence = new List<PeptideEvidence>();
                 AllParamsDict = new Dictionary<string, string>();
             }
 
+            /// <summary>
+            /// Unique identifier for this search result
+            /// </summary>
             public string SpecItemId { get; set; }
 
+            /// <summary>
+            /// If the result passes the threshold provided to the search tool; if no threshold was provided, this is always true.
+            /// </summary>
             public bool PassThreshold { get; set; }
 
+            /// <summary>
+            /// Rank of this result. Only used if there are multiple peptide results for a single spectrum
+            /// </summary>
+            /// <remarks>Used in numerical order, with 1 being the best result</remarks>
             public int Rank { get; set; }
 
+            /// <summary>
+            /// The peptide associated with this search result
+            /// </summary>
             public PeptideRef Peptide { get; set; }
 
+            /// <summary>
+            /// Calculated, or Theoretical, m/z
+            /// </summary>
             public double CalMz { get; set; }
 
+            /// <summary>
+            /// Experimental m/z
+            /// </summary>
             public double ExperimentalMz { get; set; }
 
+            /// <summary>
+            /// Charge state of the peptide for this result
+            /// </summary>
             public int Charge { get; set; }
 
+            /// <summary>
+            /// List of Peptide evidences associated with this result
+            /// </summary>
+            /// <remarks>
+            /// There may be multiple peptide evidences associated with a single result. This means
+            /// that there are multiple occurences of the specified peptide in the protein database
+            /// that was used by the search, in the same protein or in multiple proteins.
+            /// </remarks>
             public List<PeptideEvidence> PepEvidence { get; private set; }
 
+            /// <summary>
+            /// Dictionary of all CVParams provided with this search result
+            /// </summary>
             public Dictionary<string, string> AllParamsDict { get; private set; }
 
+            /// <summary>
+            /// Count of Peptide evidences associated with this result
+            /// </summary>
             public int PepEvCount { get; set; }
 
+            /// <summary>
+            /// Raw score from MS-GF+
+            /// </summary>
             public int RawScore { get; set; }
 
+            /// <summary>
+            /// DeNovo score from MS-GF+
+            /// </summary>
             public int DeNovoScore { get; set; }
 
+            /// <summary>
+            /// SpecEValue score from MS-GF+
+            /// </summary>
             public double SpecEv { get; set; }
 
+            /// <summary>
+            /// EValue score from MS-GF+
+            /// </summary>
             public double EValue { get; set; }
 
+            /// <summary>
+            /// QValue score from MS-GF+
+            /// </summary>
             public double QValue { get; set; }
 
+            /// <summary>
+            /// PepQValue score from MS-GF+
+            /// </summary>
             public double PepQValue { get; set; }
 
+            /// <summary>
+            /// Isotope Error
+            /// </summary>
             public int IsoError { get; set; }
 
+            /// <summary>
+            /// If the mzid results are from searching a DTA file
+            /// </summary>
             public bool IsDtaSpectrum { get; set; }
 
+            /// <summary>
+            /// Scan number, as specified in the mzid using a CVParam (if available)
+            /// </summary>
             public int ScanNumCVParam
             {
-                get { return _scanNum; }
+                get { return scanNum; }
             }
 
-            private int _scanNum = -1;
+            private int scanNum = -1;
 
+            /// <summary>
+            /// Spectrum scan number
+            /// </summary>
             public int ScanNum
             {
                 get
@@ -231,91 +303,172 @@ namespace PSI_Interface.IdentData
                     {
                         return num;
                     }
-                    return _scanNum;
+                    return scanNum;
                 }
-                set { _scanNum = value; }
+                set { scanNum = value; }
             }
 
+            /// <summary>
+            /// Spectrum native id (if mzid contains this information)
+            /// </summary>
             public string NativeId { get; set; }
             #endregion
 
         }
 
-        private bool _isFromDTA = false;
+        private bool isFromDTA = false;
 
+        /// <summary>
+        /// Protein information
+        /// </summary>
         public class DatabaseSequence
         {
+            /// <summary>
+            /// Accession code
+            /// </summary>
             public string Accession { get; set; }
 
+            /// <summary>
+            /// Length of protein
+            /// </summary>
             public int Length { get; set; }
 
+            /// <summary>
+            /// Protein description
+            /// </summary>
             public string ProteinDescription { get; set; }
         }
 
+        /// <summary>
+        /// Modification information
+        /// </summary>
         public class Modification
         {
+            /// <summary>
+            /// Monoisotopic mass of the modification
+            /// </summary>
             public double Mass { get; set; }
 
+            /// <summary>
+            /// Modification name
+            /// </summary>
             public string Tag { get; set; }
         }
 
+        /// <summary>
+        /// Peptide information, including modifications
+        /// </summary>
         public class PeptideRef
         {
-            private readonly Dictionary<int, Modification> m_mods;
+            private readonly Dictionary<int, Modification> mods;
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
             public PeptideRef()
             {
-                m_mods = new Dictionary<int, Modification>();
+                mods = new Dictionary<int, Modification>();
             }
 
+            /// <summary>
+            /// Peptide sequence
+            /// </summary>
             public string Sequence { get; set; }
 
+            /// <summary>
+            /// Add the specified modification to the peptide at the specified location
+            /// </summary>
+            /// <param name="location">location of the modification in the peptide</param>
+            /// <param name="mod">modification</param>
             public void ModsAdd(int location, Modification mod)
             {
-                m_mods.Add(location, mod);
+                mods.Add(location, mod);
             }
 
+            /// <summary>
+            /// The dictionary of modifications affecting this peptide
+            /// </summary>
             public Dictionary<int, Modification> Mods
             {
-                get { return m_mods; }
+                get { return mods; }
             }
         }
 
+        /// <summary>
+        /// Peptide result information
+        /// </summary>
         public class PeptideEvidence
         {
+            /// <summary>
+            /// If the result is a decoy
+            /// </summary>
             public bool IsDecoy { get; set; }
 
+            /// <summary>
+            /// Peptide suffix / post flanking residue
+            /// </summary>
+            /// <remarks>Is "-" for C-term</remarks>
             public string Post { get; set; }
 
+            /// <summary>
+            /// Peptide prefix / previous flanking residue
+            /// </summary>
+            /// <remarks>Is "-" for N-term</remarks>
             public string Pre { get; set; }
 
+            /// <summary>
+            /// Index of the last amino acid in peptide in the protein sequence (using 1-based indexing on the protein sequence)
+            /// </summary>
             public int End { get; set; }
 
+            /// <summary>
+            /// Index of the first amino acid in peptide in the protein sequence (using 1-based indexing on the protein sequence)
+            /// </summary>
             public int Start { get; set; }
 
+            /// <summary>
+            /// Peptide and modification information
+            /// </summary>
             public PeptideRef PeptideRef { get; set; }
 
+            /// <summary>
+            /// Protein information
+            /// </summary>
             public DatabaseSequence DbSeq { get; set; }
         }
 
+        /// <summary>
+        /// Container class for holding the mzIdentML data
+        /// </summary>
         public class SimpleMZIdentMLData
         {
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="path">path to the mzid file</param>
             public SimpleMZIdentMLData(string path)
             {
                 DatasetFile = path;
             }
 
+            /// <summary>
+            /// List of identifications contained in <see cref="DatasetFile"/>
+            /// </summary>
             public readonly List<SpectrumIdItem> Identifications = new List<SpectrumIdItem>();
+
+            /// <summary>
+            /// Path to the mzid file
+            /// </summary>
             public string DatasetFile { get; private set; }
         }
 
 
         /// <summary>
-        /// Entry point for MZIdentMLReader, overriden from PHRPReaderBase
-        /// Read the MZIdentML file, map the data to MSGF+ data, compute the NETs, and return the LCMS DataSet
+        /// Entry point for SimpleMZIdentMLReader
+        /// Read the MZIdentML file, map the data to easy-to-use objects, and return the collection of objects
         /// </summary>
         /// <param name="path">Path to *.mzid/mzIdentML file</param>
-        /// <returns>LCMSDataSet</returns>
+        /// <returns><see cref="SimpleMZIdentMLData"/></returns>
         /// <remarks>
         /// XML Reader parses an MZIdentML file, storing data as follows:
         ///   PeptideRef holds Peptide data, such as sequence, number, and type of modifications
@@ -325,12 +478,6 @@ namespace PSI_Interface.IdentData
         /// experimental mz, charge state, MSGF raw score, Denovo score, MSGF SpecEValue, MSGF EValue,
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
-        ///
-        /// After the XML Reader, it then goes through each Spectrum ID item and maps the appropriate values
-        /// to the appropriate variables as a MSGF+ result. If the result passes the filter for MSGF+, it
-        /// then adds the data for if there are modifications and adds the result to a running list of results.
-        /// When all the results are tabulated, it passes them through to the AnalysisHelper class to calculate
-        /// both the observed and the predicted NETs and then returns an LCMSDataSet of the results with the MZIdent tool
         /// </remarks>
         public SimpleMZIdentMLData Read(string path)
         {
@@ -638,7 +785,7 @@ namespace PSI_Interface.IdentData
                     var location = reader.GetAttribute("location");
                     if (location != null && location.ToLower().EndsWith("_dta.txt"))
                     {
-                        _isFromDTA = true;
+                        isFromDTA = true;
                     }
                     reader.Skip(); // "SpectrumIdentificationList" must have child nodes
                 }
@@ -780,7 +927,7 @@ namespace PSI_Interface.IdentData
             reader.MoveToContent(); // Move to the "SpectrumIdentificationItem" element
             var specItem = new SpectrumIdItem
             {
-                IsDtaSpectrum = _isFromDTA,
+                IsDtaSpectrum = isFromDTA,
                 PepEvCount = 0,
                 SpecItemId = reader.GetAttribute("id"),
                 PassThreshold = Convert.ToBoolean(reader.GetAttribute("passThreshold")),
