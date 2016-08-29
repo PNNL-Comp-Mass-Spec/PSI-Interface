@@ -945,6 +945,10 @@ namespace PSI_Interface.IdentData
             {
                 specItem.PepEvidence.Add(m_evidences[reader.GetAttribute("peptideEvidence_ref")]);
                 reader.Read();
+                if (reader.NodeType == XmlNodeType.EndElement)
+                {
+                    reader.ReadEndElement();
+                }
             }
 
             // Parse all of the cvParam/userParam fields
@@ -980,6 +984,10 @@ namespace PSI_Interface.IdentData
                         break;
                 }
                 reader.Read();
+                if (reader.NodeType == XmlNodeType.EndElement)
+                {
+                    reader.ReadEndElement();
+                }
             }
             specItem.PepEvCount = specItem.PepEvidence.Count;
 
