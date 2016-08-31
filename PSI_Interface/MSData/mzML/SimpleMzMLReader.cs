@@ -7,7 +7,10 @@ using System.Xml;
 
 namespace PSI_Interface.MSData.mzML
 {
-    public sealed class MzMLReader_RandomAccess: IDisposable
+    /// <summary>
+    /// mzML Reader that supports reading a reduced amount of information from the file, as well as supporting reading in a random access manner
+    /// </summary>
+    public sealed class SimpleMzMLReader: IDisposable
     {
         #region Private Members
         private string _filePath;
@@ -15,7 +18,7 @@ namespace PSI_Interface.MSData.mzML
         private StreamReader _fileReader = null;
         private XmlReader _xmlReaderForYield = null;
         private bool _reduceMemoryUsage = false;
-        private long _artificialScanNum = 0;
+        private long _artificialScanNum = 1;
         private long _numSpectra = -1;
         private IndexList _spectrumOffsets = new IndexList() {IndexType = IndexList.IndexListType.Spectrum};
         private IndexList _chromatogramOffsets = new IndexList() { IndexType = IndexList.IndexListType.Chromatogram };
@@ -28,7 +31,7 @@ namespace PSI_Interface.MSData.mzML
         private bool _allRead = false;
         private XmlReaderSettings _xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
         private Encoding _encoding = null;
-        //private readonly List<Spectrum> _spectra = new List<Spectrum>();
+        private readonly List<SimpleSpectrum> _spectra = new List<SimpleSpectrum>();
         #endregion
 
         #region Internal Objects
@@ -144,7 +147,7 @@ namespace PSI_Interface.MSData.mzML
 
         private class IndexList
         {
-            private long _artificialScanNum = 0;
+            private long _artificialScanNum = 1;
             public class IndexItem // A struct would be faster, but it can also be a pain since it is a value type
             {
                 public string Ref;
@@ -161,7 +164,7 @@ namespace PSI_Interface.MSData.mzML
 
             public void Clear()
             {
-                _artificialScanNum = 0;
+                _artificialScanNum = 1;
                 _offsets.Clear();
                 OffsetsMapInt.Clear();
                 OffsetsMapNative.Clear();
@@ -190,7 +193,13 @@ namespace PSI_Interface.MSData.mzML
 
             public void AddOffset(string idRef, long offset)
             {
-                var item = new IndexItem(idRef, offset, _artificialScanNum++);
+                var scanNum = _artificialScanNum++;
+                long num;
+                if (NativeIdConversion.TryGetScanNumberLong(idRef, out num))
+                {
+                    scanNum = num;
+                }
+                var item = new IndexItem(idRef, offset, scanNum);
                 AddMapForOffset(item);
                 _offsets.Add(item);
             }
@@ -230,6 +239,117 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
+        public static class NativeIdConversion
+        {
+            private static Dictionary<string, string> ParseNativeId(string nativeId)
+            {
+                var tokens = nativeId.Split(new char[] {'\t', ' ', '\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
+                var map = new Dictionary<string, string>();
+                foreach (var token in tokens)
+                {
+                    var equals = token.IndexOf('=');
+                    var name = token.Substring(0, equals);
+                    var value = token.Substring(equals + 1);
+                    map.Add(name, value);
+                }
+                return map;
+            }
+
+            public static bool TryGetScanNumberLong(string nativeId, out long num)
+            {
+                return long.TryParse(GetScanNumber(nativeId), out num);
+            }
+
+            public static bool TryGetScanNumberInt(string nativeId, out int num)
+            {
+                return int.TryParse(GetScanNumber(nativeId), out num);
+            }
+
+            // Code is ported from MSData.cpp in ProteoWizard
+            public static string GetScanNumber(string nativeId)
+            {
+                // TODO: Add interpreter for Waters' S0F1, S1F1, S0F2,... format
+                //switch (nativeIdFormat)
+                //{
+                //    case MS_spectrum_identifier_nativeID_format: // mzData
+                //        return value(id, "spectrum");
+                //
+                //    case MS_multiple_peak_list_nativeID_format: // MGF
+                //        return value(id, "index");
+                //
+                //    case MS_Agilent_MassHunter_nativeID_format:
+                //        return value(id, "scanId");
+                //
+                //    case MS_Thermo_nativeID_format:
+                //        // conversion from Thermo nativeIDs assumes default controller information
+                //        if (id.find("controllerType=0 controllerNumber=1") != 0)
+                //            return "";
+                //
+                //        // fall through to get scan
+                //
+                //    case MS_Bruker_Agilent_YEP_nativeID_format:
+                //    case MS_Bruker_BAF_nativeID_format:
+                //    case MS_scan_number_only_nativeID_format:
+                //        return value(id, "scan");
+                //
+                //    default:
+                //        if (bal::starts_with(id, "scan=")) return value(id, "scan");
+                //        else if (bal::starts_with(id, "index=")) return value(id, "index");
+                //        return "";
+                //}
+                if (nativeId.Contains("="))
+                {
+                    var map = ParseNativeId(nativeId);
+                    if (map.ContainsKey("spectrum"))
+                    {
+                        return map["spectrum"];
+                    }
+                    if (map.ContainsKey("index"))
+                    {
+                        return map["index"];
+                    }
+                    if (map.ContainsKey("scanId"))
+                    {
+                        return map["scanId"];
+                    }
+                    if (map.ContainsKey("scan"))
+                    {
+                        return map["scan"];
+                    }
+                }
+
+                // No equals sign, don't have parser breakdown
+                // Or key data not found in breakdown of nativeId
+                return nativeId;
+            }
+
+            //public static string GetNativeId(string scanNumber)
+            //{
+            //    switch (nativeIdFormat)
+            //    {
+            //        case MS_Thermo_nativeID_format:
+            //            return "controllerType=0 controllerNumber=1 scan=" + scanNumber;
+            //
+            //        case MS_spectrum_identifier_nativeID_format:
+            //            return "spectrum=" + scanNumber;
+            //
+            //        case MS_multiple_peak_list_nativeID_format:
+            //            return "index=" + scanNumber;
+            //
+            //        case MS_Agilent_MassHunter_nativeID_format:
+            //            return "scanId=" + scanNumber;
+            //
+            //        case MS_Bruker_Agilent_YEP_nativeID_format:
+            //        case MS_Bruker_BAF_nativeID_format:
+            //        case MS_scan_number_only_nativeID_format:
+            //            return "scan=" + scanNumber;
+            //
+            //        default:
+            //            return "";
+            //    }
+            //}
+        }
+
         private readonly Dictionary<string, List<Param>> _referenceableParamGroups = new Dictionary<string, List<Param>>();
 
         private class SelectedIon
@@ -252,7 +372,7 @@ namespace PSI_Interface.MSData.mzML
             public double IsolationWindowTargetMz;
             public double IsolationWindowLowerOffset;
             public double IsolationWindowUpperOffset;
-            //public ActivationMethod Activation;
+            public string ActivationMethod;
 
             public Precursor()
             {
@@ -260,7 +380,7 @@ namespace PSI_Interface.MSData.mzML
                 IsolationWindowTargetMz = 0.0;
                 IsolationWindowLowerOffset = 0.0;
                 IsolationWindowUpperOffset = 0.0;
-                //Activation = ActivationMethod.Unknown;
+                ActivationMethod = "Unknown";
             }
         }
 
@@ -311,7 +431,39 @@ namespace PSI_Interface.MSData.mzML
         }
         #endregion
 
-        public int NumSpectra { get { return (int)_numSpectra; } }
+        public class SimpleSpectrum
+        {
+            public int ScanNumber { get; private set; }
+            public string NativeId { get; set; }
+            public double ElutionTime { get; set; }
+            public int MsLevel { get; set; }
+            public double[] Mzs { get; private set; }
+            public double[] Intensities { get; private set; }
+            public double TotalIonCurrent { get; set; }
+            public bool Centroided { get; set; }
+
+            public SimpleSpectrum(double[] mzs, double[] intensities, int scanNum)
+            {
+                ScanNumber = scanNum;
+                Mzs = mzs;
+                Intensities = intensities;
+            }
+        }
+
+        public class SimpleProductSpectrum : SimpleSpectrum
+        {
+            public string ActivationMethod { get; set; }
+            public double MonoisotopicMz { get; set; }
+            public int Charge { get; set; }
+            public double IsolationWindowTargetMz { get; set; }
+            public double IsolationWindowLowerOffset { get; set; }
+            public double IsolationWindowUpperOffset { get; set; }
+
+            public SimpleProductSpectrum(double[] mzs, double[] intensities, int scanNum)
+                : base(mzs, intensities, scanNum)
+            {
+            }
+        }
 
         #region Constructor
         /// <summary>
@@ -320,7 +472,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="filePath">Path to mzML file</param>
         /// <param name="randomAccess">If mzML reader should be configured for random access</param>
         /// <param name="tryReducingMemoryUsage">If mzML reader should try to avoid reading all spectra into memory. This will reduce memory usage for a non-random access MzMLReader, as long as ReadMassSpectrum(int) isn't used.</param>
-        public MzMLReader_RandomAccess(string filePath, bool randomAccess = false, bool tryReducingMemoryUsage = true)
+        public SimpleMzMLReader(string filePath, bool randomAccess = false, bool tryReducingMemoryUsage = true)
         {
             _filePath = filePath;
             _instrument = Instrument.Unknown;
@@ -329,6 +481,15 @@ namespace PSI_Interface.MSData.mzML
             _reduceMemoryUsage = tryReducingMemoryUsage;
             _unzippedFilePath = _filePath;
 
+            ConfigureFileHandles();
+        }
+
+        private void ConfigureFileHandles()
+        {
+            if (_file != null)
+            {
+                _file.Close();
+            }
             // Set a very large read buffer, it does decrease the read times for uncompressed files.
             _file = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 65536);
             /*****************************************************************************************************************************************************
@@ -338,17 +499,22 @@ namespace PSI_Interface.MSData.mzML
             if (_filePath.EndsWith(".mzML.gz"))
             {
                 _isGzipped = true;
-                _file = new GZipStream(_file, CompressionMode.Decompress);
-                if (_randomAccess)
+                var file = new GZipStream(_file, CompressionMode.Decompress);
+                if (!_randomAccess)
+                {
+                    _file = file;
+                }
+                else
                 {
                     // Unzip the file to the temp path
                     _unzippedFilePath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(_filePath));
                     using (_file)
+                    using (file)
                     using (
                         var tempFile = new FileStream(_unzippedFilePath, FileMode.Create, FileAccess.ReadWrite,
                             FileShare.None, 65536))
                     {
-                        _file.CopyTo(tempFile/*, 65536*/);
+                        file.CopyTo(tempFile/*, 65536*/);
                     }
                     _file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 65536);
                 }
@@ -367,13 +533,36 @@ namespace PSI_Interface.MSData.mzML
         }
         #endregion
 
-        #region Public interface functions for reading
+        #region Public interface functions
+
+        public int NumSpectra
+        {
+            get
+            {
+                if (!_haveMetaData)
+                {
+                    var tempBool = _reduceMemoryUsage; // Set a flag to avoid reading the entire file before returning.
+                    ReadMzMl(); // Read the index and metadata so that the offsets get populated
+                    // The number of spectra is an attribute in the spectrumList tag
+                    _reduceMemoryUsage = tempBool;
+                }
+                return (int)_numSpectra;
+            }
+        }
+
+        public bool TryMakeRandomAccessCapable()
+        {
+            _randomAccess = true;
+            ConfigureFileHandles(); // Reopen the files
+            return true;
+        }
+
         /// <summary>
         /// Returns all mass spectra.
         /// Uses "yield return" to allow processing one spectra at a time if called from a foreach loop statement.
         /// </summary>
         /// <returns></returns>
-        /*public IEnumerable<Spectrum> ReadAllSpectra()
+        public IEnumerable<SimpleSpectrum> ReadAllSpectra()
         {
             if (!_randomAccess)
             {
@@ -393,24 +582,25 @@ namespace PSI_Interface.MSData.mzML
                     yield return spec;
                 }
             }
-        }*/
+        }
 
         /// <summary>
         /// Returns a single spectrum from the file
         /// </summary>
         /// <param name="index"></param>
+        /// <param name="includePeaks"></param>
         /// <returns></returns>
         /// <remarks>If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the spectrum.
         /// If random access mode is off, this will cause the memory usage reducing mode to shut of, and all spectra will be read into memory.</remarks>
-        /*public Spectrum ReadMassSpectrum(int index)
+        public SimpleSpectrum ReadMassSpectrum(int index, bool includePeaks = true)
         {
             // Proper functionality when not random access
             if (!_randomAccess)
             {
-                return ReadMassSpectrumNonRandom(index);
+                return ReadMassSpectrumNonRandom(index, includePeaks);
             }
-            return ReadMassSpectrumRandom(index);
-        }*/
+            return ReadMassSpectrumRandom(index, includePeaks);
+        }
         #endregion
 
         #region Interface Helper Functions: Non-Random Access
@@ -419,12 +609,15 @@ namespace PSI_Interface.MSData.mzML
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <returns></returns>
-        /*private IEnumerable<Spectrum> ReadAllSpectraNonRandom()
+        private IEnumerable<SimpleSpectrum> ReadAllSpectraNonRandom()
         {
             if (_reduceMemoryUsage)
             {
-                _artificialScanNum = 0;
-                ReadMzMl();
+                _artificialScanNum = 1;
+                if (!_haveMetaData)
+                {
+                    ReadMzMl();
+                }
 
                 while (_xmlReaderForYield.ReadState == ReadState.Interactive)
                 {
@@ -438,7 +631,7 @@ namespace PSI_Interface.MSData.mzML
                     {
                         // Schema requirements: zero to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                        yield return ReadSpectrum(_xmlReaderForYield.ReadSubtree());
+                        yield return ReadSpectrum(_xmlReaderForYield.ReadSubtree(), true);
                         // "spectrum" might not have any child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         _xmlReaderForYield.Read();
@@ -460,23 +653,24 @@ namespace PSI_Interface.MSData.mzML
                     yield return spec;
                 }
             }
-        }*/
+        }
 
         /// <summary>
         /// Read a single mass spectrum and return it.
         /// Causes all spectra in the file to be loaded into memory
         /// </summary>
         /// <param name="index"></param>
-        /*private Spectrum ReadMassSpectrumNonRandom(long index)
+        /// <param name="includePeaks"></param>
+        private SimpleSpectrum ReadMassSpectrumNonRandom(long index, bool includePeaks = true)
         {
             if (!_allRead)
             {
-                _artificialScanNum = 0;
+                _artificialScanNum = 1;
                 _reduceMemoryUsage = false; // They called this on a non-random access reader, now they suffer the consequences.
                 ReadMzMl();
             }
             return _spectra[(int)index];
-        }*/
+        }
         #endregion
 
         #region Interface Helper Functions: Random Access
@@ -485,7 +679,7 @@ namespace PSI_Interface.MSData.mzML
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <returns></returns>
-        /*private IEnumerable<Spectrum> ReadAllSpectraRandom()
+        private IEnumerable<SimpleSpectrum> ReadAllSpectraRandom()
         {
             if (!_haveIndex || !_haveMetaData)
             {
@@ -493,15 +687,16 @@ namespace PSI_Interface.MSData.mzML
             }
             foreach (var specIndex in _spectrumOffsets.Offsets)
             {
-                yield return ReadMassSpectrumRandom(specIndex.IdNum);
+                yield return ReadMassSpectrumRandom(specIndex.IdNum, true);
             }
-        }*/
+        }
 
         /// <summary>
         /// Read a single mass spectrum and return it.
         /// </summary>
         /// <param name="index"></param>
-        /*private Spectrum ReadMassSpectrumRandom(long index)
+        /// <param name="includePeaks"></param>
+        private SimpleSpectrum ReadMassSpectrumRandom(long index, bool includePeaks = true)
         {
             if (!_haveIndex || !_haveMetaData)
             {
@@ -519,9 +714,9 @@ namespace PSI_Interface.MSData.mzML
             using (var reader = XmlReader.Create(_fileReader, _xSettings))
             {
                 reader.MoveToContent();
-                return ReadSpectrum(reader.ReadSubtree());
+                return ReadSpectrum(reader.ReadSubtree(), includePeaks);
             }
-        }*/
+        }
         #endregion
 
         #region Cleanup functions
@@ -534,8 +729,14 @@ namespace PSI_Interface.MSData.mzML
             {
                 _xmlReaderForYield.Close();
             }
-            _fileReader.Close();
-            _file.Close();
+            if (_fileReader != null)
+            {
+                _fileReader.Close();
+            }
+            if (_file != null)
+            {
+                _file.Close();
+            }
         }
 
         public void Cleanup()
@@ -552,7 +753,7 @@ namespace PSI_Interface.MSData.mzML
             Cleanup();
         }
 
-        ~MzMLReader_RandomAccess()
+        ~SimpleMzMLReader()
         {
             Close();
             Cleanup();
@@ -563,7 +764,7 @@ namespace PSI_Interface.MSData.mzML
         /// </summary>
         public void ClearDataCache()
         {
-            //_spectra.Clear();
+            _spectra.Clear();
             _allRead = false;
         }
         #endregion
@@ -942,7 +1143,7 @@ namespace PSI_Interface.MSData.mzML
         /// <summary>
         /// Read and parse a .mzML file
         /// Files are commonly larger than 100 MB, so use a streaming reader instead of a DOM reader
-        /// Vary conditional, depending on configuration
+        /// Very conditional, depending on configuration
         /// </summary>
         private void ReadMzMl()
         {
@@ -1214,65 +1415,65 @@ namespace PSI_Interface.MSData.mzML
                             case "cvParam":
                                 // Schema requirements: zero to many instances of this element
                                 /* MUST supply a *child* term of MS:1000767 (native spectrum identifier format) only once
-                             *   e.g.: MS:1000768 (Thermo nativeID format)
-                             *   e.g.: MS:1000769 (Waters nativeID format)
-                             *   e.g.: MS:1000770 (WIFF nativeID format)
-                             *   e.g.: MS:1000771 (Bruker/Agilent YEP nativeID format)
-                             *   e.g.: MS:1000772 (Bruker BAF nativeID format)
-                             *   e.g.: MS:1000773 (Bruker FID nativeID format)
-                             *   e.g.: MS:1000774 (multiple peak list nativeID format)
-                             *   e.g.: MS:1000775 (single peak list nativeID format)
-                             *   e.g.: MS:1000776 (scan number only nativeID format)
-                             *   e.g.: MS:1000777 (spectrum identifier nativeID format)
-                             *   e.g.: MS:1000823 "Bruker U2 nativeID format"
-                             *   e.g.: MS:1000824 "no nativeID format"
-                             *   e.g.: MS:1000929 "Shimadzu Biotech nativeID format"
-                             *   e.g.: MS:1001480 "AB SCIEX TOF/TOF nativeID format"
-                             *   e.g.: MS:1001508 "Agilent MassHunter nativeID format"
-                             *   e.g.: MS:1001526 "spectrum from database integer nativeID format"
-                             *   e.g.: MS:1001528 "Mascot query number"
-                             *   e.g.: MS:1001531 "spectrum from ProteinScape database nativeID format"
-                             *   e.g.: MS:1001532 "spectrum from database string nativeID format"
-                             *   e.g.: MS:1001559 "AB SCIEX TOF/TOF T2D nativeID format"
-                             *   e.g.: MS:1001562 "Scaffold nativeID format"
-                             *   e.g.: MS:1002303 "Bruker Container nativeID format"
-                             *   et al.
-                             * MUST supply a *child* term of MS:1000561 (data file checksum type) one or more times
-                             *   e.g.: MS:1000568 (MD5)
-                             *   e.g.: MS:1000569 (SHA-1)
-                             * MUST supply a *child* term of MS:1000560 (mass spectrometer file format) only once
-                             *   e.g.: MS:1000526 (Waters raw file)             1.0.0: (MassLynx raw format)
-                             *   e.g.: MS:1000562 (ABI WIFF file)               1.0.0: (wiff file)
-                             *   e.g.: MS:1000563 (Thermo RAW file)             1.0.0: (Xcalibur RAW file)
-                             *   e.g.: MS:1000564 (PSI mzData file)             1.0.0: (mzData file)
-                             *   e.g.: MS:1000565 (Micromass PKL file)          1.0.0: (pkl file)
-                             *   e.g.: MS:1000566 (ISB mzXML file)              1.0.0: (mzXML file)
-                             *   e.g.: MS:1000567 (Bruker/Agilent YEP file)     1.0.0: (yep file)
-                             *   e.g.: MS:1000584 (mzML file)
-                             *   e.g.: MS:1000613 (DTA file)                    1.0.0: (dta file)
-                             *   e.g.: MS:1000614 (ProteinLynx Global Server mass spectrum XML file)
-                             *   e.g.: MS:1000740 "parameter file"
-                             *   e.g.: MS:1000742 "Bioworks SRF format"
-                             *   e.g.: MS:1000815 "Bruker BAF format"
-                             *   e.g.: MS:1000816 "Bruker U2 format"
-                             *   e.g.: MS:1000825 "Bruker FID format"
-                             *   e.g.: MS:1000930 "Shimadzu Biotech database entity"
-                             *   e.g.: MS:1001062 "Mascot MGF format"
-                             *   e.g.: MS:1001245 "PerSeptive PKS format"
-                             *   e.g.: MS:1001246 "Sciex API III format"
-                             *   e.g.: MS:1001247 "Bruker XML format"
-                             *   e.g.: MS:1001369 "text format"
-                             *   e.g.: MS:1001463 "Phenyx XML format"
-                             *   e.g.: MS:1001481 "AB SCIEX TOF/TOF database"
-                             *   e.g.: MS:1001509 "Agilent MassHunter format"
-                             *   e.g.: MS:1001527 "Proteinscape spectra"
-                             *   e.g.: MS:1001560 "AB SCIEX TOF/TOF T2D format"
-                             *   e.g.: MS:1001881 "mz5 format"
-                             *   e.g.: MS:1002302 "Bruker Container format"
-                             *   e.g.: MS:1002385 "SCiLS Lab format"
-                             *   e.g.: MS:1002441 "Andi-MS format"
-                             *   et al.
-                             */
+                                 *   e.g.: MS:1000768 (Thermo nativeID format)
+                                 *   e.g.: MS:1000769 (Waters nativeID format)
+                                 *   e.g.: MS:1000770 (WIFF nativeID format)
+                                 *   e.g.: MS:1000771 (Bruker/Agilent YEP nativeID format)
+                                 *   e.g.: MS:1000772 (Bruker BAF nativeID format)
+                                 *   e.g.: MS:1000773 (Bruker FID nativeID format)
+                                 *   e.g.: MS:1000774 (multiple peak list nativeID format)
+                                 *   e.g.: MS:1000775 (single peak list nativeID format)
+                                 *   e.g.: MS:1000776 (scan number only nativeID format)
+                                 *   e.g.: MS:1000777 (spectrum identifier nativeID format)
+                                 *   e.g.: MS:1000823 "Bruker U2 nativeID format"
+                                 *   e.g.: MS:1000824 "no nativeID format"
+                                 *   e.g.: MS:1000929 "Shimadzu Biotech nativeID format"
+                                 *   e.g.: MS:1001480 "AB SCIEX TOF/TOF nativeID format"
+                                 *   e.g.: MS:1001508 "Agilent MassHunter nativeID format"
+                                 *   e.g.: MS:1001526 "spectrum from database integer nativeID format"
+                                 *   e.g.: MS:1001528 "Mascot query number"
+                                 *   e.g.: MS:1001531 "spectrum from ProteinScape database nativeID format"
+                                 *   e.g.: MS:1001532 "spectrum from database string nativeID format"
+                                 *   e.g.: MS:1001559 "AB SCIEX TOF/TOF T2D nativeID format"
+                                 *   e.g.: MS:1001562 "Scaffold nativeID format"
+                                 *   e.g.: MS:1002303 "Bruker Container nativeID format"
+                                 *   et al.
+                                 * MUST supply a *child* term of MS:1000561 (data file checksum type) one or more times
+                                 *   e.g.: MS:1000568 (MD5)
+                                 *   e.g.: MS:1000569 (SHA-1)
+                                 * MUST supply a *child* term of MS:1000560 (mass spectrometer file format) only once
+                                 *   e.g.: MS:1000526 (Waters raw file)             1.0.0: (MassLynx raw format)
+                                 *   e.g.: MS:1000562 (ABI WIFF file)               1.0.0: (wiff file)
+                                 *   e.g.: MS:1000563 (Thermo RAW file)             1.0.0: (Xcalibur RAW file)
+                                 *   e.g.: MS:1000564 (PSI mzData file)             1.0.0: (mzData file)
+                                 *   e.g.: MS:1000565 (Micromass PKL file)          1.0.0: (pkl file)
+                                 *   e.g.: MS:1000566 (ISB mzXML file)              1.0.0: (mzXML file)
+                                 *   e.g.: MS:1000567 (Bruker/Agilent YEP file)     1.0.0: (yep file)
+                                 *   e.g.: MS:1000584 (mzML file)
+                                 *   e.g.: MS:1000613 (DTA file)                    1.0.0: (dta file)
+                                 *   e.g.: MS:1000614 (ProteinLynx Global Server mass spectrum XML file)
+                                 *   e.g.: MS:1000740 "parameter file"
+                                 *   e.g.: MS:1000742 "Bioworks SRF format"
+                                 *   e.g.: MS:1000815 "Bruker BAF format"
+                                 *   e.g.: MS:1000816 "Bruker U2 format"
+                                 *   e.g.: MS:1000825 "Bruker FID format"
+                                 *   e.g.: MS:1000930 "Shimadzu Biotech database entity"
+                                 *   e.g.: MS:1001062 "Mascot MGF format"
+                                 *   e.g.: MS:1001245 "PerSeptive PKS format"
+                                 *   e.g.: MS:1001246 "Sciex API III format"
+                                 *   e.g.: MS:1001247 "Bruker XML format"
+                                 *   e.g.: MS:1001369 "text format"
+                                 *   e.g.: MS:1001463 "Phenyx XML format"
+                                 *   e.g.: MS:1001481 "AB SCIEX TOF/TOF database"
+                                 *   e.g.: MS:1001509 "Agilent MassHunter format"
+                                 *   e.g.: MS:1001527 "Proteinscape spectra"
+                                 *   e.g.: MS:1001560 "AB SCIEX TOF/TOF T2D format"
+                                 *   e.g.: MS:1001881 "mz5 format"
+                                 *   e.g.: MS:1002302 "Bruker Container format"
+                                 *   e.g.: MS:1002385 "SCiLS Lab format"
+                                 *   e.g.: MS:1002441 "Andi-MS format"
+                                 *   et al.
+                                 */
                                 switch (innerReader.GetAttribute("accession"))
                                 {
 
@@ -1375,6 +1576,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="reader">XmlReader that is only valid for the scope of the single "referenceableParamGroupList" element</param>
         private void ReadReferenceableParamGroupList(XmlReader reader)
         {
+            _referenceableParamGroups.Clear(); // In case of second read of file, clear out existing.
             reader.MoveToContent();
             int count = Convert.ToInt32(reader.GetAttribute("count"));
             reader.ReadStartElement("referenceableParamGroupList"); // Throws exception if we are not at the "referenceableParamGroupList" tag.
@@ -1572,8 +1774,7 @@ namespace PSI_Interface.MSData.mzML
                 {
                     // Schema requirements: zero to many instances of this element
                     // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-//                    _spectra.Add(ReadSpectrum(reader.ReadSubtree()));
-                   ReadSpectrum(reader.ReadSubtree());
+                    _spectra.Add(ReadSpectrum(reader.ReadSubtree(), true));
                     // "spectrum" might not have any child nodes
                     // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                     reader.Read();
@@ -1593,8 +1794,8 @@ namespace PSI_Interface.MSData.mzML
         /// Called by ReadSpectrumList (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single spectrum element</param>
-        //private Spectrum ReadSpectrum(XmlReader reader)
-        private void ReadSpectrum(XmlReader reader)
+        /// <param name="includePeaks">Whether to read binary data arrays</param>
+        private SimpleSpectrum ReadSpectrum(XmlReader reader, bool includePeaks = true)
         {
             reader.MoveToContent();
             string index = reader.GetAttribute("index");
@@ -1606,30 +1807,31 @@ namespace PSI_Interface.MSData.mzML
             {
                 nativeId = reader.GetAttribute("nativeID"); // Native ID in mzML_1.0.0
             }
-            //int scanNum = Convert.ToInt32(spectrumId.Substring(spectrumId.LastIndexOf("scan=") + 5));
-            // TODO: Get rid of this hack, use something with nativeID. May involve special checks for mzML version
-            int scanNum = (int)(_artificialScanNum++);
+
+            int scanNum = -1;
             // If a random access reader, there is already a scan number stored, based on the order of the index. Use it instead.
             if (_randomAccess)
             {
                 scanNum = (int) (_spectrumOffsets.NativeToIdMap[nativeId]);
             }
-            // This won't work; removed until a good parser for most forms of NativeID is available.
-            /*// Find last non-digit
-            int pos = 0;
-            for (int i = 0; i < nativeId.Length; i++)
+            else
             {
-                if (!char.IsDigit(nativeId[i]))
+                scanNum = (int)(_artificialScanNum++);
+                // Interpret the NativeID (if the format has an interpreter) and use it instead of the artificial number.
+                // TODO: Better handling than the artificial ID for other nativeIDs (ones currently not supported)
+                int num = 0;
+                if (NativeIdConversion.TryGetScanNumberInt(nativeId, out num))
                 {
-                    pos = i;
+                    scanNum = num;
                 }
             }
-            scanNum = Int32.Parse(nativeId.Substring(pos + 1));*/
+
             int defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
             reader.ReadStartElement("spectrum"); // Throws exception if we are not at the "spectrum" tag.
             bool is_ms_ms = false;
             int msLevel = 0;
             bool centroided = false;
+            double tic = 0;
             List<Precursor> precursors = new List<Precursor>();
             List<ScanData> scans = new List<ScanData>();
             List<BinaryDataArray> bdas = new List<BinaryDataArray>();
@@ -1699,7 +1901,7 @@ namespace PSI_Interface.MSData.mzML
                                 break;
                             case "MS:1000128":
                                 // name="profile spectrum"
-                                is_ms_ms = false;
+                                centroided = false;
                                 break;
                             case "MS:1000511":
                                 // name="ms level"
@@ -1712,6 +1914,10 @@ namespace PSI_Interface.MSData.mzML
                             case "MS:1000580":
                                 // name="MSn spectrum"
                                 is_ms_ms = true;
+                                break;
+                            case "MS:1000285":
+                                // name="total ion current"
+                                tic = Convert.ToDouble(reader.GetAttribute("value"));
                                 break;
                         }
                         reader.Read(); // Consume the cvParam element (no child nodes)
@@ -1741,8 +1947,15 @@ namespace PSI_Interface.MSData.mzML
                         break;
                     case "binaryDataArrayList":
                         // Schema requirements: zero to one instances of this element
-                        bdas.AddRange(ReadBinaryDataArrayList(reader.ReadSubtree(), defaultArraySize));
-                        reader.ReadEndElement(); // "binaryDataArrayList" must have child nodes
+                        if (includePeaks)
+                        {
+                            bdas.AddRange(ReadBinaryDataArrayList(reader.ReadSubtree(), defaultArraySize));
+                            reader.ReadEndElement(); // "binaryDataArrayList" must have child nodes
+                        }
+                        else
+                        {
+                            reader.Skip();
+                        }
                         break;
                     default:
                         reader.Skip();
@@ -1751,10 +1964,10 @@ namespace PSI_Interface.MSData.mzML
             }
             reader.Close();
             // Process the spectrum data
+            ScanData scan = new ScanData();
+            SimpleSpectrum spectrum;
             BinaryDataArray mzs = new BinaryDataArray();
             BinaryDataArray intensities = new BinaryDataArray();
-            ScanData scan = new ScanData();/*
-            Spectrum spectrum;
             foreach (var bda in bdas)
             {
                 if (bda.ArrayType == ArrayType.m_z_array)
@@ -1766,7 +1979,8 @@ namespace PSI_Interface.MSData.mzML
                     intensities = bda;
                 }
             }
-            if (!centroided)
+            
+            /*if (!centroided && includePeaks)
             {
                 // Centroid spectrum
                 // ProteoWizard
@@ -1775,7 +1989,7 @@ namespace PSI_Interface.MSData.mzML
                 centroider.GetCentroidedData(out centroidedMzs, out centroidedIntensities);
                 mzs.Data = centroidedMzs;
                 intensities.Data = centroidedIntensities;
-            }
+            }*/
             if (scans.Count == 1)
             {
                 scan = scans[0];
@@ -1809,25 +2023,29 @@ namespace PSI_Interface.MSData.mzML
                     ion = precursor.Ions[0];
                 }
 
-                var pspectrum = new ProductSpectrum(mzs.Data, intensities.Data, scanNum);
-                pspectrum.ActivationMethod = precursor.Activation;
+                var pspectrum = new SimpleProductSpectrum(mzs.Data, intensities.Data, scanNum);
+                pspectrum.ActivationMethod = precursor.ActivationMethod;
                 // Select mz value to use based on presence of a Thermo-specific user param.
                 // The user param has a slightly higher precision, if that matters.
                 double mz = scan.MonoisotopicMz == 0.0 ? ion.SelectedIonMz : scan.MonoisotopicMz;
-                pspectrum.IsolationWindow = new IsolationWindow(precursor.IsolationWindowTargetMz, precursor.IsolationWindowLowerOffset, precursor.IsolationWindowUpperOffset, mz, ion.Charge);
-                //pspectrum.IsolationWindow.OldCharge = ion.OldCharge;
-                //pspectrum.IsolationWindow.SelectedIonMz = ion.SelectedIonMz;
+                pspectrum.MonoisotopicMz = mz;
+                pspectrum.Charge = ion.Charge;
+                pspectrum.IsolationWindowTargetMz = precursor.IsolationWindowTargetMz;
+                pspectrum.IsolationWindowLowerOffset = precursor.IsolationWindowLowerOffset;
+                pspectrum.IsolationWindowUpperOffset = precursor.IsolationWindowUpperOffset;
                 spectrum = pspectrum;
             }
             else
             {
-                spectrum = new Spectrum(mzs.Data, intensities.Data, scanNum);
+                spectrum = new SimpleSpectrum(mzs.Data, intensities.Data, scanNum);
             }
             spectrum.MsLevel = msLevel;
             spectrum.ElutionTime = scan.StartTime;
             spectrum.NativeId = nativeId;
+            spectrum.TotalIonCurrent = tic;
+            spectrum.Centroided = centroided;
             
-            return spectrum;*/
+            return spectrum;
         }
         #endregion
 
@@ -2222,6 +2440,7 @@ namespace PSI_Interface.MSData.mzML
                         break;
                     case "activation":
                         // Schema requirements: one instance of this element
+                        //var activationMethods = new List<ActivationMethod>();
                         innerReader = reader.ReadSubtree();
                         innerReader.MoveToContent();
                         innerReader.ReadStartElement("activation"); // Throws exception if we are not at the "activation" tag.
@@ -2279,33 +2498,34 @@ namespace PSI_Interface.MSData.mzML
                                      *   e.g.: MS:1002000 "LIFT"
                                      *   e.g.: MS:1002472 "trap-type collision-induced dissociation"
                                      */
-                                    switch (innerReader.GetAttribute("accession"))
+                                    /*switch (innerReader.GetAttribute("accession"))
                                     {
                                         case "MS:1000133":
                                             // name="collision-induced dissociation"
-                                            //precursor.Activation = ActivationMethod.CID;
+                                            activationMethods.Add(ActivationMethod.CID);
                                             break;
                                         case "MS:1000598":
                                             // name="electron transfer dissociation"
-                                            //precursor.Activation = ActivationMethod.ETD;
+                                            activationMethods.Add(ActivationMethod.ETD);
                                             break;
                                         case "MS:1000422":
                                             // name="beam-type collision-induced dissociation", "high-energy collision-induced dissociation"
-                                            //precursor.Activation = ActivationMethod.HCD;
+                                            activationMethods.Add(ActivationMethod.HCD);
                                             break;
                                         case "MS:1000250":
                                             // name="electron capture dissociation"
-                                            //precursor.Activation = ActivationMethod.ECD;
+                                            activationMethods.Add(ActivationMethod.ECD);
                                             break;
                                         case "MS:1000599":
                                             // name="pulsed q dissociation"
-                                            //precursor.Activation = ActivationMethod.PQD;
+                                            activationMethods.Add(ActivationMethod.PQD);
                                             break;
                                         case "MS:1000045":
                                             // name="collision energy"
                                             //energy = Convert.ToDouble(innerReader.GetAttribute("value"));
                                             break;
-                                    }
+                                    }*/
+                                    precursor.ActivationMethod = innerReader.GetAttribute("name");
                                     innerReader.Read(); // Consume the cvParam element (no child nodes)
                                     break;
                                 case "userParam":
@@ -2319,6 +2539,15 @@ namespace PSI_Interface.MSData.mzML
                         }
                         innerReader.Close();
                         reader.Read(); // "selectedIon" might not have child nodes
+
+                        /*if (activationMethods.Count > 1 && activationMethods.Contains(ActivationMethod.ETD))
+                        {
+                            precursor.Activation = ActivationMethod.ETD;
+                        }
+                        else if (activationMethods.Count > 0)
+                        {
+                            precursor.Activation = activationMethods[0];
+                        }*/
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         break;
                     default:
@@ -2513,24 +2742,24 @@ namespace PSI_Interface.MSData.mzML
                         foreach (Param param in paramList)
                         {
                             /*
-                         * MUST supply a *child* term of MS:1000572 (binary data compression type) only once
-                         *   e.g.: MS:1000574 (zlib compression)
-                         *   e.g.: MS:1000576 (no compression)
-                         * MUST supply a *child* term of MS:1000513 (binary data array) only once
-                         *   e.g.: MS:1000514 (m/z array)
-                         *   e.g.: MS:1000515 (intensity array)
-                         *   e.g.: MS:1000516 (charge array)
-                         *   e.g.: MS:1000517 (signal to noise array)
-                         *   e.g.: MS:1000595 (time array)
-                         *   e.g.: MS:1000617 (wavelength array)
-                         *   e.g.: MS:1000786 (non-standard data array)
-                         *   e.g.: MS:1000820 (flow rate array)
-                         *   e.g.: MS:1000821 (pressure array)
-                         *   e.g.: MS:1000822 (temperature array)
-                         * MUST supply a *child* term of MS:1000518 (binary data type) only once
-                         *   e.g.: MS:1000521 (32-bit float)
-                         *   e.g.: MS:1000523 (64-bit float)
-                         */
+                             * MUST supply a *child* term of MS:1000572 (binary data compression type) only once
+                             *   e.g.: MS:1000574 (zlib compression)
+                             *   e.g.: MS:1000576 (no compression)
+                             * MUST supply a *child* term of MS:1000513 (binary data array) only once
+                             *   e.g.: MS:1000514 (m/z array)
+                             *   e.g.: MS:1000515 (intensity array)
+                             *   e.g.: MS:1000516 (charge array)
+                             *   e.g.: MS:1000517 (signal to noise array)
+                             *   e.g.: MS:1000595 (time array)
+                             *   e.g.: MS:1000617 (wavelength array)
+                             *   e.g.: MS:1000786 (non-standard data array)
+                             *   e.g.: MS:1000820 (flow rate array)
+                             *   e.g.: MS:1000821 (pressure array)
+                             *   e.g.: MS:1000822 (temperature array)
+                             * MUST supply a *child* term of MS:1000518 (binary data type) only once
+                             *   e.g.: MS:1000521 (32-bit float)
+                             *   e.g.: MS:1000523 (64-bit float)
+                             */
                             switch (param.Accession)
                             {
                                     // MUST supply a *child* term of MS:1000572 (binary data compression type) only once

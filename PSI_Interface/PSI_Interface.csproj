@@ -68,7 +68,7 @@
     <Compile Include="MSData\mzML\mzML1_1_0.cs" />
     <Compile Include="MSData\mzML\mzML1_1_1_idx.cs" />
     <Compile Include="MSData\mzML\MzMLReader.cs" />
-    <Compile Include="MSData\mzML\MzMLReader_randomAccess.cs" />
+    <Compile Include="MSData\mzML\SimpleMzMLReader.cs" />
     <Compile Include="MSData\mzML\MzMLSchemaType.cs" />
     <Compile Include="MSData\mzML\MzMLWriter.cs" />
     <Compile Include="MSData\mzML\mzML_Extra.cs" />
