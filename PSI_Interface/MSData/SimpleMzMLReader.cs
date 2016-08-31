@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Text;
 using System.Xml;
 
-namespace PSI_Interface.MSData.mzML
+namespace PSI_Interface.MSData
 {
     /// <summary>
     /// mzML Reader that supports reading a reduced amount of information from the file, as well as supporting reading in a random access manner
@@ -239,117 +239,6 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        public static class NativeIdConversion
-        {
-            private static Dictionary<string, string> ParseNativeId(string nativeId)
-            {
-                var tokens = nativeId.Split(new char[] {'\t', ' ', '\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
-                var map = new Dictionary<string, string>();
-                foreach (var token in tokens)
-                {
-                    var equals = token.IndexOf('=');
-                    var name = token.Substring(0, equals);
-                    var value = token.Substring(equals + 1);
-                    map.Add(name, value);
-                }
-                return map;
-            }
-
-            public static bool TryGetScanNumberLong(string nativeId, out long num)
-            {
-                return long.TryParse(GetScanNumber(nativeId), out num);
-            }
-
-            public static bool TryGetScanNumberInt(string nativeId, out int num)
-            {
-                return int.TryParse(GetScanNumber(nativeId), out num);
-            }
-
-            // Code is ported from MSData.cpp in ProteoWizard
-            public static string GetScanNumber(string nativeId)
-            {
-                // TODO: Add interpreter for Waters' S0F1, S1F1, S0F2,... format
-                //switch (nativeIdFormat)
-                //{
-                //    case MS_spectrum_identifier_nativeID_format: // mzData
-                //        return value(id, "spectrum");
-                //
-                //    case MS_multiple_peak_list_nativeID_format: // MGF
-                //        return value(id, "index");
-                //
-                //    case MS_Agilent_MassHunter_nativeID_format:
-                //        return value(id, "scanId");
-                //
-                //    case MS_Thermo_nativeID_format:
-                //        // conversion from Thermo nativeIDs assumes default controller information
-                //        if (id.find("controllerType=0 controllerNumber=1") != 0)
-                //            return "";
-                //
-                //        // fall through to get scan
-                //
-                //    case MS_Bruker_Agilent_YEP_nativeID_format:
-                //    case MS_Bruker_BAF_nativeID_format:
-                //    case MS_scan_number_only_nativeID_format:
-                //        return value(id, "scan");
-                //
-                //    default:
-                //        if (bal::starts_with(id, "scan=")) return value(id, "scan");
-                //        else if (bal::starts_with(id, "index=")) return value(id, "index");
-                //        return "";
-                //}
-                if (nativeId.Contains("="))
-                {
-                    var map = ParseNativeId(nativeId);
-                    if (map.ContainsKey("spectrum"))
-                    {
-                        return map["spectrum"];
-                    }
-                    if (map.ContainsKey("index"))
-                    {
-                        return map["index"];
-                    }
-                    if (map.ContainsKey("scanId"))
-                    {
-                        return map["scanId"];
-                    }
-                    if (map.ContainsKey("scan"))
-                    {
-                        return map["scan"];
-                    }
-                }
-
-                // No equals sign, don't have parser breakdown
-                // Or key data not found in breakdown of nativeId
-                return nativeId;
-            }
-
-            //public static string GetNativeId(string scanNumber)
-            //{
-            //    switch (nativeIdFormat)
-            //    {
-            //        case MS_Thermo_nativeID_format:
-            //            return "controllerType=0 controllerNumber=1 scan=" + scanNumber;
-            //
-            //        case MS_spectrum_identifier_nativeID_format:
-            //            return "spectrum=" + scanNumber;
-            //
-            //        case MS_multiple_peak_list_nativeID_format:
-            //            return "index=" + scanNumber;
-            //
-            //        case MS_Agilent_MassHunter_nativeID_format:
-            //            return "scanId=" + scanNumber;
-            //
-            //        case MS_Bruker_Agilent_YEP_nativeID_format:
-            //        case MS_Bruker_BAF_nativeID_format:
-            //        case MS_scan_number_only_nativeID_format:
-            //            return "scan=" + scanNumber;
-            //
-            //        default:
-            //            return "";
-            //    }
-            //}
-        }
-
         private readonly Dictionary<string, List<Param>> _referenceableParamGroups = new Dictionary<string, List<Param>>();
 
         private class SelectedIon
@@ -431,17 +320,57 @@ namespace PSI_Interface.MSData.mzML
         }
         #endregion
 
+        /// <summary>
+        /// Spectrum: Data used for a spectrum
+        /// </summary>
         public class SimpleSpectrum
         {
+            /// <summary>
+            /// Spectrum scan number
+            /// </summary>
             public int ScanNumber { get; private set; }
+
+            /// <summary>
+            /// Spectrum native id
+            /// </summary>
             public string NativeId { get; set; }
+
+            /// <summary>
+            /// Elution time (scan start time)
+            /// </summary>
             public double ElutionTime { get; set; }
+
+            /// <summary>
+            /// MS level
+            /// </summary>
             public int MsLevel { get; set; }
+
+            /// <summary>
+            /// Array of m/z values
+            /// </summary>
             public double[] Mzs { get; private set; }
+
+            /// <summary>
+            /// Array of intensity values
+            /// </summary>
             public double[] Intensities { get; private set; }
+
+            /// <summary>
+            /// Total Ion Current
+            /// </summary>
             public double TotalIonCurrent { get; set; }
+
+            /// <summary>
+            /// If the m/z and intensity data is centroided/peak picked
+            /// </summary>
             public bool Centroided { get; set; }
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="mzs">array of mzs</param>
+            /// <param name="intensities">array of intensities</param>
+            /// <param name="scanNum">spectrum scan number</param>
             public SimpleSpectrum(double[] mzs, double[] intensities, int scanNum)
             {
                 ScanNumber = scanNum;
@@ -450,15 +379,47 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
+        /// <summary>
+        /// Product spectrum: all the information of a spectrum, but with extra data for product spectra
+        /// </summary>
         public class SimpleProductSpectrum : SimpleSpectrum
         {
+            /// <summary>
+            /// Dissociation activation method
+            /// </summary>
             public string ActivationMethod { get; set; }
+
+            /// <summary>
+            /// Monoisotopic m/z
+            /// </summary>
             public double MonoisotopicMz { get; set; }
+
+            /// <summary>
+            /// Charge
+            /// </summary>
             public int Charge { get; set; }
+
+            /// <summary>
+            /// Isolation Windows Target Mz
+            /// </summary>
             public double IsolationWindowTargetMz { get; set; }
+
+            /// <summary>
+            /// Isolation Window Lower Offset
+            /// </summary>
             public double IsolationWindowLowerOffset { get; set; }
+
+            /// <summary>
+            /// Isolation Window Upper Offset
+            /// </summary>
             public double IsolationWindowUpperOffset { get; set; }
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="mzs">array of mzs</param>
+            /// <param name="intensities">array of intensities</param>
+            /// <param name="scanNum">spectrum scan number</param>
             public SimpleProductSpectrum(double[] mzs, double[] intensities, int scanNum)
                 : base(mzs, intensities, scanNum)
             {
@@ -535,6 +496,9 @@ namespace PSI_Interface.MSData.mzML
 
         #region Public interface functions
 
+        /// <summary>
+        /// The number of spectra in the file
+        /// </summary>
         public int NumSpectra
         {
             get
@@ -550,6 +514,10 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
+        /// <summary>
+        /// Tries to convert the reader to random access mode
+        /// </summary>
+        /// <returns></returns>
         public bool TryMakeRandomAccessCapable()
         {
             _randomAccess = true;
@@ -561,6 +529,7 @@ namespace PSI_Interface.MSData.mzML
         /// Returns all mass spectra.
         /// Uses "yield return" to allow processing one spectra at a time if called from a foreach loop statement.
         /// </summary>
+        /// <param name="includePeaks">true to include peak data</param>
         /// <returns></returns>
         public IEnumerable<SimpleSpectrum> ReadAllSpectra(bool includePeaks = true)
         {
@@ -587,8 +556,8 @@ namespace PSI_Interface.MSData.mzML
         /// <summary>
         /// Returns a single spectrum from the file
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="includePeaks"></param>
+        /// <param name="index">index of spectrum</param>
+        /// <param name="includePeaks">true to include peak data</param>
         /// <returns></returns>
         /// <remarks>If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the spectrum.
         /// If random access mode is off, this will cause the memory usage reducing mode to shut of, and all spectra will be read into memory.</remarks>
@@ -608,6 +577,7 @@ namespace PSI_Interface.MSData.mzML
         /// Read all mass spectra in the file, not using random access
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
+        /// <param name="includePeaks">true to include peak data</param>
         /// <returns></returns>
         private IEnumerable<SimpleSpectrum> ReadAllSpectraNonRandom(bool includePeaks = true)
         {
@@ -659,8 +629,8 @@ namespace PSI_Interface.MSData.mzML
         /// Read a single mass spectrum and return it.
         /// Causes all spectra in the file to be loaded into memory
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="includePeaks"></param>
+        /// <param name="index">index of spectrum</param>
+        /// <param name="includePeaks">true to include peak data</param>
         private SimpleSpectrum ReadMassSpectrumNonRandom(long index, bool includePeaks = true)
         {
             if (!_allRead)
@@ -678,6 +648,7 @@ namespace PSI_Interface.MSData.mzML
         /// Read all mass spectra in the file, using random access
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
+        /// <param name="includePeaks">true to include peak data</param>
         /// <returns></returns>
         private IEnumerable<SimpleSpectrum> ReadAllSpectraRandom(bool includePeaks = true)
         {
@@ -694,8 +665,8 @@ namespace PSI_Interface.MSData.mzML
         /// <summary>
         /// Read a single mass spectrum and return it.
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="includePeaks"></param>
+        /// <param name="index">index of spectrum</param>
+        /// <param name="includePeaks">true to include peak data</param>
         private SimpleSpectrum ReadMassSpectrumRandom(long index, bool includePeaks = true)
         {
             if (!_haveIndex || !_haveMetaData)
@@ -721,7 +692,7 @@ namespace PSI_Interface.MSData.mzML
 
         #region Cleanup functions
         /// <summary>
-        /// Close out the file handle and delete any temp files
+        /// Close out the file handles
         /// </summary>
         public void Close()
         {
@@ -739,6 +710,9 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
+        /// <summary>
+        /// Delete any temp files
+        /// </summary>
         public void Cleanup()
         {
             if (_randomAccess && _isGzipped)
@@ -747,12 +721,18 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
+        /// <summary>
+        /// Close the file handles and cleanup any temp files
+        /// </summary>
         public void Dispose()
         {
             Close();
             Cleanup();
         }
 
+        /// <summary>
+        /// Close the file handles and cleanup any temp files
+        /// </summary>
         ~SimpleMzMLReader()
         {
             Close();
@@ -1843,13 +1823,13 @@ namespace PSI_Interface.MSData.mzML
                     reader.Read();
                     continue;
                 }
-                //////////////////////////////////////////////////////////////////////////////////////
-                /// 
-                /// MS1 Spectra: only need Spectrum data: scanNum, MSLevel, ElutionTime, mzArray, IntensityArray
-                /// 
-                /// MS2 Spectra: use ProductSpectrum; adds ActivationMethod and IsolationWindow
-                /// 
-                //////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////
+                // 
+                // MS1 Spectra: only need Spectrum data: scanNum, MSLevel, ElutionTime, mzArray, IntensityArray
+                // 
+                // MS2 Spectra: use ProductSpectrum; adds ActivationMethod and IsolationWindow
+                // 
+                /////////////////////////////////////////////////////////////////////////////////////
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":

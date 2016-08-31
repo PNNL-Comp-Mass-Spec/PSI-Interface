@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace CV_Generator
 {
@@ -109,14 +110,16 @@ namespace CV_Generator
         {
             string enumData = indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>\n";
             enumData += indent + "public enum " + RelationsOtherTypesEnumName + " : int\n" + indent + "{\n";
-            var dict = new Dictionary<string, int>();
-            dict.Add("Unknown", 0);
+            var dict = new Dictionary<string, OBO_File.OBO_Typedef>();
+            var unknownDef = new OBO_File.OBO_Typedef();
+            unknownDef.Def = "Unknown term relationship";
+            dict.Add("Unknown", unknownDef);
             foreach (var obo in _allObo)
             {
                 foreach (var typedef in obo.Typedefs.Values)
                 {
                     // Remove all duplicates, and automatically create new items....
-                    dict[typedef.Id] = 0;
+                    dict[typedef.Id] = typedef;
                 }
             }
             // part_of sets are separate.
@@ -124,9 +127,21 @@ namespace CV_Generator
             {
                 dict.Remove("part_of");
             }
-            foreach (var key in dict.Keys)
+            foreach (var item in dict)
             {
-                enumData += indent + "    " + key + ",\n";
+                if (!string.IsNullOrWhiteSpace(item.Value.Def))
+                {
+                    enumData += indent + "    /// " + EscapeXmlEntities("summary", item.Value.DefShort) + "\n";
+                }
+                else
+                {
+                    enumData += indent + "    /// <summary>Description not provided</summary>\n";
+                }
+                if (!string.IsNullOrWhiteSpace(item.Value.Comment))
+                {
+                    enumData += indent + "    /// " + EscapeXmlEntities("remarks", item.Value.Comment) + "\n";
+                }
+                enumData += indent + "    " + item.Key + ",\n\n";
             }
             return enumData + indent + "}";
         }
@@ -202,7 +217,7 @@ namespace CV_Generator
             {
                 if (!string.IsNullOrWhiteSpace(term.Def))
                 {
-                    enumData += indent + "    /// <summary>" + term.DefShort + "</summary>\n";
+                    enumData += indent + "    /// " + EscapeXmlEntities("summary", term.DefShort) + "\n";
                 }
                 else
                 {
@@ -211,6 +226,11 @@ namespace CV_Generator
                 enumData += indent + "    " + term.EnumName + ",\n\n";
             }
             return enumData + indent + "}";
+        }
+
+        private string EscapeXmlEntities(string tagName, string toEscape)
+        {
+            return new XElement(tagName, toEscape).ToString(SaveOptions.DisableFormatting);
         }
 
         private string GenerateTermInfoObject(string indent)

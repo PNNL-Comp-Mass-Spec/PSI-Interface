@@ -2,8 +2,19 @@
 
 namespace PSI_Interface.MSData
 {
+    /// <summary>
+    /// Collection of functions to convert between Base64 and arrays of doubles or bytes
+    /// </summary>
     public static class Base64Conversion
     {
+        /// <summary>
+        /// Decode a base-64 string to an array of doubles
+        /// </summary>
+        /// <param name="encoded">base-64 string</param>
+        /// <param name="bytesPerValue">number of bytes per value, generally 4 (float) or 8 (double)</param>
+        /// <param name="expectedLength">expected number of doubles in the array</param>
+        /// <param name="isCompressed">Whether the base64 data is compressed</param>
+        /// <returns>decoded base-64 data</returns>
         public static double[] DecodeString(string encoded, int bytesPerValue, int expectedLength, bool isCompressed)
         {
             if (bytesPerValue % 4 != 0)
@@ -14,11 +25,26 @@ namespace PSI_Interface.MSData
             return DecodeBytes(Convert.FromBase64String(encoded), bytesPerValue, expectedLength, isCompressed);
         }
 
+        /// <summary>
+        /// Encode an array of doubles as a base-64 string
+        /// </summary>
+        /// <param name="data">the array to encode as base-64</param>
+        /// <param name="bytesPerValue">number of bytes per value, generally 4 (float) or 8 (double)</param>
+        /// <param name="compress">if the data should be compressed</param>
+        /// <returns>base-64 encoded data</returns>
         public static string EncodeString(double[] data, int bytesPerValue, bool compress)
         {
             return Convert.ToBase64String(EncodeBytes(data, bytesPerValue, compress));
         }
 
+        /// <summary>
+        /// Converts an array of bytes, possibly compressed, to an array of doubles
+        /// </summary>
+        /// <param name="bytes">the array of bytes to convert to an array of doubles</param>
+        /// <param name="bytesPerValue">number of bytes per value, generally 4 (float) or 8 (double)</param>
+        /// <param name="expectedLength">expected number of doubles in the array</param>
+        /// <param name="isCompressed">Whether the byte array data is compressed</param>
+        /// <returns>decoded byte data</returns>
         public static double[] DecodeBytes(byte[] bytes, int bytesPerValue, int expectedLength, bool isCompressed)
         {
             if (isCompressed)
@@ -54,6 +80,13 @@ namespace PSI_Interface.MSData
             return data;
         }
 
+        /// <summary>
+        /// Converts an array of bytes (possibly compressed) to an array of doubles
+        /// </summary>
+        /// <param name="data">the array to convert to an array of bytes (possibly compressed)</param>
+        /// <param name="bytesPerValue">number of bytes per value, generally 4 (float) or 8 (double)</param>
+        /// <param name="compress">if the data should be compressed</param>
+        /// <returns>byte encoded data</returns>
         public static byte[] EncodeBytes(double[] data, int bytesPerValue, bool compress)
         {
             //if (bytesPerValue % 4 != 0)

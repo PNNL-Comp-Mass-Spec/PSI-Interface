@@ -424,7 +424,19 @@ namespace CV_Generator
             public string EnumName;
             public string DefShort
             {
-                get { return Def.Substring(0, Def.IndexOf("[")).Trim(); }
+                get
+                {
+                    if (string.IsNullOrWhiteSpace(Def))
+                    {
+                        return string.Empty;
+                    }
+                    var pos = Def.IndexOf("[");
+                    if (pos >= 0)
+                    {
+                        return Def.Substring(0, pos).Trim();
+                    }
+                    return Def.Trim();
+                }
             }
 
             // Required

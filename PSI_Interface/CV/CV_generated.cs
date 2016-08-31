@@ -22,33 +22,96 @@ namespace PSI_Interface.CV
         /// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>
         public enum RelationsOtherTypes : int
         {
+            /// <summary>Unknown term relationship</summary>
             Unknown,
+
+            /// <summary>Description not provided</summary>
             has_regexp,
+
+            /// <summary>Description not provided</summary>
             has_units,
+
+            /// <summary>Description not provided</summary>
             has_order,
+
+            /// <summary>Description not provided</summary>
             has_domain,
+
+            /// <summary>Description not provided</summary>
             correlates_with,
+
+            /// <summary>"q1 decreased_in_magnitude_relative_to q2 if and only if magnitude(q1) &lt; magnitude(q2). Here, magnitude(q) is a function that maps a quality to a unit-invariant scale."</summary>
+            /// <remarks>This relation is used to determine the 'directionality' of relative qualities such as 'decreased strength', relative to the parent type, 'strength'.</remarks>
             decreased_in_magnitude_relative_to,
+
+            /// <summary>"q1 different_in_magnitude_relative_to q2 if and only if magnitude(q1) NOT =~ magnitude(q2). Here, magnitude(q) is a function that maps a quality to a unit-invariant scale."</summary>
             different_in_magnitude_relative_to,
+
+            /// <summary>"q1 directly_associated_with q2 iff q1 is dependent on q2, and the magnitude of q1 increases if the magnitude of q2 is increased, or the magnitude of q1 decreases if the magnitude of q2 is decreased. The relationship is not necessarily linear."</summary>
+            /// <remarks>Example: 'Lewy bodies increased number related to dystrophic neurite increased number' (from annotation of PMID:8740227 in http://ccdb.ucsd.edu/1.0/NDPO.owl#ndpo_404). Here the increase in the number of lewy bodies is directly_associated_with the increase in the number of dystrophic neurites.\nAssociation is weaker than correlation or proportionality. These relations may be later added to PATO.</remarks>
             directly_associated_with,
+
+            /// <summary>"s3 has_cross_section s3 if and only if : there exists some 2d plane that intersects the bearer of s3, and the impression of s3 upon that plane has shape quality s2."</summary>
+            /// <remarks>Example: a spherical object has the quality of being spherical, and the spherical quality has_cross_section round.</remarks>
             has_cross_section,
+
+            /// <summary>Description not provided</summary>
             has_dividend_entity,
+
+            /// <summary>Description not provided</summary>
             has_dividend_quality,
+
+            /// <summary>Description not provided</summary>
             has_divisor_entity,
+
+            /// <summary>Description not provided</summary>
             has_divisor_quality,
+
+            /// <summary>"Q1 has_part Q2 if and only if: every instance of Q1 is a quality_of an entity that has_quality some Q2."</summary>
+            /// <remarks>We use the has_part relation to relate complex qualities to more primitive ones. A complex quality is a collection of qualities. The complex quality cannot exist without the sub-qualities. For example, the quality 'swollen' necessarily comes with the qualities of 'protruding' and 'increased size'.</remarks>
             has_part,
+
+            /// <summary>Description not provided</summary>
             has_ratio_quality,
+
+            /// <summary>Description not provided</summary>
             has_relative_magnitude,
+
+            /// <summary>"q1 increased_in_magnitude_relative_to q2 if and only if magnitude(q1) &gt; magnitude(q2). Here, magnitude(q) is a function that maps a quality to a unit-invariant scale."</summary>
+            /// <remarks>This relation is used to determine the 'directionality' of relative qualities such as 'increased strength', relative to the parent type, 'strength'.</remarks>
             increased_in_magnitude_relative_to,
+
+            /// <summary>"q1 inversely_associated_with q2 iff q1 is dependent on q2, and the magnitude of q1 decreases if the magnitude of q2 is increased, or the magnitude of q1 increases if the magnitude of q2 is decreased. The relationship is not necessarily linear."</summary>
+            /// <remarks>Association is weaker than correlation or proportionality. These relations may be later added to PATO.</remarks>
             inversely_associated_with,
+
+            /// <summary>Description not provided</summary>
             is_magnitude_of,
+
+            /// <summary>Description not provided</summary>
             is_measurement_of,
+
+            /// <summary>Description not provided</summary>
             is_unit_of,
+
+            /// <summary>Description not provided</summary>
             realized_by,
+
+            /// <summary>"q1 reciprocal_of q2 if and only if : q1 and q2 are relational qualities and a phenotype e q1 e2 mutually implies a phenotype e2 q2 e."</summary>
+            /// <remarks>There are frequently two ways to state the same thing: we can say 'spermatocyte lacks asters' or 'asters absent from spermatocyte'. In this case the quality is 'lacking all parts of type' - it is a (relational) quality of the spermatocyte, and it is with respect to instances of 'aster'. One of the popular requirements of PATO is that it continue to support 'absent', so we need to relate statements which use this quality to the 'lacking all parts of type' quality.</remarks>
             reciprocal_of,
+
+            /// <summary>"q1 similar_in_magnitude_relative_to q2 if and only if magnitude(q1) =~ magnitude(q2). Here, magnitude(q) is a function that maps a quality to a unit-invariant scale."</summary>
             similar_in_magnitude_relative_to,
+
+            /// <summary>Description not provided</summary>
+            /// <remarks>PATO divides qualities between normal (monadic, singly-occurring) qualities and relational qualities. Relational qualities stand in the 'towards' relation with respect to some additional entity. For example, The sensitivity of an eye towards red light. In some cases we want to represent a quality such as 'protruding' in both monadic and relational branches. We use this relation to link them.</remarks>
             singly_occurring_form_of,
+
+            /// <summary>Description not provided</summary>
+            /// <remarks>Relation binding a relational quality or disposition to the relevant type of entity.</remarks>
             towards,
+
         }
 
         /// <summary>
@@ -758,7 +821,7 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE The height or area of a peak in a mass spectrum.</summary>
             MS_peak_intensity_OBSOLETE,
 
-            /// <summary>OBSOLETE The proton affinity of a species M is defined as the negative of the enthalpy change for the reaction M + H+ -></summary>
+            /// <summary>OBSOLETE The proton affinity of a species M is defined as the negative of the enthalpy change for the reaction M + H+ -&gt;</summary>
             MS_proton_affinity_OBSOLETE,
 
             /// <summary>OBSOLETE In a mass spectrum, the observed mass divided by the difference between two masses that can be separated. The method by which delta m was obtained and the mass at which the measurement was made should be reported.</summary>
@@ -1091,7 +1154,7 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE A mass spectrum recorded from any spectrometer in which the appropriate m/z separation scan function is set to record the product ion or ions of selected precursor ions.</summary>
             MS_product_ion_spectrum_OBSOLETE,
 
-            /// <summary>OBSOLETE A charged product of a series of consecutive reactions that includes product ions, 1st generation product ions, 2nd generation product ions, etc. Given the sequential fragmentation scheme: M1+ -> M2+ -> M3+ -> M4+ -> M5+. M4+ is the precursor ion of M5+, a 1st generation product ion of M3+, a 2nd generation product ion of M2+ and a 3rd generation product ion of M1+.</summary>
+            /// <summary>OBSOLETE A charged product of a series of consecutive reactions that includes product ions, 1st generation product ions, 2nd generation product ions, etc. Given the sequential fragmentation scheme: M1+ -&gt; M2+ -&gt; M3+ -&gt; M4+ -&gt; M5+. M4+ is the precursor ion of M5+, a 1st generation product ion of M3+, a 2nd generation product ion of M2+ and a 3rd generation product ion of M1+.</summary>
             MS_progeny_ion_OBSOLETE,
 
             /// <summary>Detector comprising several ion collection elements, arranged in a line or grid where each element is an individual detector.</summary>
@@ -1796,7 +1859,7 @@ namespace PSI_Interface.CV
             /// <summary>Mass spectrum created by a single-stage MS experiment or the first stage of a multi-stage experiment.</summary>
             MS_MS1_spectrum,
 
-            /// <summary>MSn refers to multi-stage MS2 experiments designed to record product ion spectra where n is the number of product ion stages (progeny ions). For ion traps, sequential MS/MS experiments can be undertaken where n > 2 whereas for a simple triple quadrupole system n=2. Use the term ms level (MS:1000511) for specifying n.</summary>
+            /// <summary>MSn refers to multi-stage MS2 experiments designed to record product ion spectra where n is the number of product ion stages (progeny ions). For ion traps, sequential MS/MS experiments can be undertaken where n &gt; 2 whereas for a simple triple quadrupole system n=2. Use the term ms level (MS:1000511) for specifying n.</summary>
             MS_MSn_spectrum,
 
             /// <summary>Spectrum generated from MSn experiment with three or more stages of m/z separation and in which a particular multi-step reaction path is monitored.</summary>
@@ -4553,7 +4616,7 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE Polarity mode (positive or negative).</summary>
             MS_ProteomeDiscoverer_Polarity_Mode_OBSOLETE,
 
-            /// <summary>Determines which precursor mass to use for a given MSn scan. This option applies only to higher-order MSn scans (n >= 3).</summary>
+            /// <summary>Determines which precursor mass to use for a given MSn scan. This option applies only to higher-order MSn scans (n &gt;= 3).</summary>
             MS_ProteomeDiscoverer_Spectrum_Selector_Precursor_Selection,
 
             /// <summary>Signal-to-Noise ratio below which peaks are removed.</summary>
@@ -4838,7 +4901,7 @@ namespace PSI_Interface.CV
             /// <summary>Standard high confidence XCorr parameter for charge = 3.</summary>
             MS_ProteomeDiscoverer_SEQUEST_Std_High_Confidence_XCorr_Charge3,
 
-            /// <summary>Standard high confidence XCorr parameter for charge >= 4.</summary>
+            /// <summary>Standard high confidence XCorr parameter for charge &gt;= 4.</summary>
             MS_ProteomeDiscoverer_SEQUEST_Std_High_Confidence_XCorr_Charge4,
 
             /// <summary>Standard medium confidence XCorr parameter for charge = 1.</summary>
@@ -4850,7 +4913,7 @@ namespace PSI_Interface.CV
             /// <summary>Standard medium confidence XCorr parameter for charge = 3.</summary>
             MS_ProteomeDiscoverer_SEQUEST_Std_Medium_Confidence_XCorr_Charge3,
 
-            /// <summary>Standard medium confidence XCorr parameter for charge >= 4.</summary>
+            /// <summary>Standard medium confidence XCorr parameter for charge &gt;= 4.</summary>
             MS_ProteomeDiscoverer_SEQUEST_Std_Medium_Confidence_XCorr_Charge4,
 
             /// <summary>FT high confidence XCorr parameter for charge = 1.</summary>
@@ -4862,7 +4925,7 @@ namespace PSI_Interface.CV
             /// <summary>FT high confidence XCorr parameter for charge = 3.</summary>
             MS_ProteomeDiscoverer_SEQUEST_FT_High_Confidence_XCorr_Charge3,
 
-            /// <summary>FT high confidence XCorr parameter for charge >= 4.</summary>
+            /// <summary>FT high confidence XCorr parameter for charge &gt;= 4.</summary>
             MS_ProteomeDiscoverer_SEQUEST_FT_High_Confidence_XCorr_Charge4,
 
             /// <summary>FT medium confidence XCorr parameter for charge = 1.</summary>
@@ -4874,7 +4937,7 @@ namespace PSI_Interface.CV
             /// <summary>FT medium confidence XCorr parameter for charge = 3.</summary>
             MS_ProteomeDiscoverer_SEQUEST_FT_Medium_Confidence_XCorr_Charge3,
 
-            /// <summary>FT medium confidence XCorr parameter for charge >= 4.</summary>
+            /// <summary>FT medium confidence XCorr parameter for charge &gt;= 4.</summary>
             MS_ProteomeDiscoverer_SEQUEST_FT_Medium_Confidence_XCorr_Charge4,
 
             /// <summary>OBSOLETE ProteomeDiscoverer's 1st dynamic post-translational modification (PTM) input parameter.</summary>
@@ -5195,7 +5258,7 @@ namespace PSI_Interface.CV
             /// <summary>The mass trace of the features of this feature list specifies rectangles. Each mass trace has the syntax (RT_start,MZ_start,RT_end,MZ_end), i.e. opposite corners are given.</summary>
             MS_mass_trace_reporting__rectangles,
 
-            /// <summary>The mass trace of the features of this feature list specifies polygons. Each mass trace has the syntax (RT_1, MZ_1, RT_2, MZ_2, ... , RT_i, MZ_i, ... , RT_n, MZ_n), where the line (RT_n, MZ_n)->(RT_1, MZ_1) is implicit.</summary>
+            /// <summary>The mass trace of the features of this feature list specifies polygons. Each mass trace has the syntax (RT_1, MZ_1, RT_2, MZ_2, ... , RT_i, MZ_i, ... , RT_n, MZ_n), where the line (RT_n, MZ_n)-&gt;(RT_1, MZ_1) is implicit.</summary>
             MS_mass_trace_reporting__polygons,
 
             /// <summary>Attribute describing a feature.</summary>
@@ -5336,7 +5399,7 @@ namespace PSI_Interface.CV
             /// <summary>Estimation of the e-value for proteins.</summary>
             MS_protein_level_e_value,
 
-            /// <summary>OBSOLETE A smoothing of the distribution of q-values calculated for PSMs from individual search engines, such that ordering of result quality is maintained and all FDRScore values are guaranteed to have a value > 0.</summary>
+            /// <summary>OBSOLETE A smoothing of the distribution of q-values calculated for PSMs from individual search engines, such that ordering of result quality is maintained and all FDRScore values are guaranteed to have a value &gt; 0.</summary>
             MS_FDRScore_OBSOLETE,
 
             /// <summary>The regular expression describing the sequence motif for a modification.</summary>
@@ -5690,7 +5753,7 @@ namespace PSI_Interface.CV
             /// <summary>Spin coating MALDI sample preparation method.</summary>
             MS_spin_coating_MALDI_sample_preparation,
 
-            /// <summary>Quick & dirty (Q&D) sample preparation separating matrix handling from sample handling.</summary>
+            /// <summary>Quick &amp; dirty (Q&amp;D) sample preparation separating matrix handling from sample handling.</summary>
             MS_quick_and_dirty_MALDI_sample_preparation,
 
             /// <summary>Top-hat morphological filter based on the basic morphological operations 'erosion' and 'dilatation'.</summary>
@@ -7967,34 +8030,34 @@ namespace PSI_Interface.CV
             /// <summary>Glutathione disulfide.</summary>
             UNIMOD_Glutathione,
 
-            /// <summary>Acetate labeling reagent (N-term & K) (heavy form, +3amu).</summary>
+            /// <summary>Acetate labeling reagent (N-term &amp; K) (heavy form, +3amu).</summary>
             UNIMOD_Acetyl_2H_3_,
 
-            /// <summary>Propionate labeling reagent light form (N-term & K).</summary>
+            /// <summary>Propionate labeling reagent light form (N-term &amp; K).</summary>
             UNIMOD_Propionyl,
 
-            /// <summary>Propionate labeling reagent heavy form (+3amu), N-term & K.</summary>
+            /// <summary>Propionate labeling reagent heavy form (+3amu), N-term &amp; K.</summary>
             UNIMOD_Propionyl_13C_3_,
 
-            /// <summary>Quaternary amine labeling reagent light form (N-term & K).</summary>
+            /// <summary>Quaternary amine labeling reagent light form (N-term &amp; K).</summary>
             UNIMOD_GIST_Quat,
 
-            /// <summary>Quaternary amine labeling reagent heavy (+3amu) form, N-term & K.</summary>
+            /// <summary>Quaternary amine labeling reagent heavy (+3amu) form, N-term &amp; K.</summary>
             UNIMOD_GIST_Quat_2H_3_,
 
-            /// <summary>Quaternary amine labeling reagent heavy form (+6amu), N-term & K.</summary>
+            /// <summary>Quaternary amine labeling reagent heavy form (+6amu), N-term &amp; K.</summary>
             UNIMOD_GIST_Quat_2H_6_,
 
-            /// <summary>Quaternary amine labeling reagent heavy form (+9amu), N-term & K.</summary>
+            /// <summary>Quaternary amine labeling reagent heavy form (+9amu), N-term &amp; K.</summary>
             UNIMOD_GIST_Quat_2H_9_,
 
-            /// <summary>Succinic anhydride labeling reagent light form (N-term & K).</summary>
+            /// <summary>Succinic anhydride labeling reagent light form (N-term &amp; K).</summary>
             UNIMOD_Succinyl,
 
-            /// <summary>Succinic anhydride labeling reagent, heavy form (+4amu, 4H2), N-term & K.</summary>
+            /// <summary>Succinic anhydride labeling reagent, heavy form (+4amu, 4H2), N-term &amp; K.</summary>
             UNIMOD_Succinyl_2H_4_,
 
-            /// <summary>Succinic anhydride labeling reagent, heavy form (+4amu, 4C13), N-term & K.</summary>
+            /// <summary>Succinic anhydride labeling reagent, heavy form (+4amu, 4C13), N-term &amp; K.</summary>
             UNIMOD_Succinyl_13C_4_,
 
             /// <summary>Iminobiotinylation.</summary>
@@ -8093,7 +8156,7 @@ namespace PSI_Interface.CV
             /// <summary>(cis,cis-delta 5, delta 8)-tetradecadienoyl.</summary>
             UNIMOD_Myristoyl_Delta_H__4_,
 
-            /// <summary>Labeling reagent light form (N-term & K).</summary>
+            /// <summary>Labeling reagent light form (N-term &amp; K).</summary>
             UNIMOD_Benzoyl,
 
             /// <summary>N-linked glycan core.</summary>
@@ -8249,7 +8312,7 @@ namespace PSI_Interface.CV
             /// <summary>ADP Ribose addition.</summary>
             UNIMOD_ADP_Ribosyl,
 
-            /// <summary>Representative mass and accurate mass for 116 & 117.</summary>
+            /// <summary>Representative mass and accurate mass for 116 &amp; 117.</summary>
             UNIMOD_iTRAQ4plex,
 
             /// <summary>Light IDBEST tag for quantitation.</summary>
@@ -8453,10 +8516,10 @@ namespace PSI_Interface.CV
             /// <summary>Cysteine oxidation to cysteic acid.</summary>
             UNIMOD_Trioxidation,
 
-            /// <summary>His->Asn substitution.</summary>
+            /// <summary>His-&gt;Asn substitution.</summary>
             UNIMOD_His__Asn,
 
-            /// <summary>His->Asp substitution.</summary>
+            /// <summary>His-&gt;Asp substitution.</summary>
             UNIMOD_His__Asp,
 
             /// <summary>Tryptophan oxidation to hydroxykynurenin.</summary>
@@ -8861,412 +8924,412 @@ namespace PSI_Interface.CV
             /// <summary>Was PGA1-biotin.</summary>
             UNIMOD_Biotin_Cayman_10013,
 
-            /// <summary>Ala->Ser substitution.</summary>
+            /// <summary>Ala-&gt;Ser substitution.</summary>
             UNIMOD_Ala__Ser,
 
-            /// <summary>Ala->Thr substitution.</summary>
+            /// <summary>Ala-&gt;Thr substitution.</summary>
             UNIMOD_Ala__Thr,
 
-            /// <summary>Ala->Asp substitution.</summary>
+            /// <summary>Ala-&gt;Asp substitution.</summary>
             UNIMOD_Ala__Asp,
 
-            /// <summary>Ala->Pro substitution.</summary>
+            /// <summary>Ala-&gt;Pro substitution.</summary>
             UNIMOD_Ala__Pro,
 
-            /// <summary>Ala->Gly substitution.</summary>
+            /// <summary>Ala-&gt;Gly substitution.</summary>
             UNIMOD_Ala__Gly,
 
-            /// <summary>Ala->Glu substitution.</summary>
+            /// <summary>Ala-&gt;Glu substitution.</summary>
             UNIMOD_Ala__Glu,
 
-            /// <summary>Ala->Val substitution.</summary>
+            /// <summary>Ala-&gt;Val substitution.</summary>
             UNIMOD_Ala__Val,
 
-            /// <summary>Cys->Phe substitution.</summary>
+            /// <summary>Cys-&gt;Phe substitution.</summary>
             UNIMOD_Cys__Phe,
 
-            /// <summary>Cys->Ser substitution.</summary>
+            /// <summary>Cys-&gt;Ser substitution.</summary>
             UNIMOD_Cys__Ser,
 
-            /// <summary>Cys->Trp substitution.</summary>
+            /// <summary>Cys-&gt;Trp substitution.</summary>
             UNIMOD_Cys__Trp,
 
-            /// <summary>Cys->Tyr substitution.</summary>
+            /// <summary>Cys-&gt;Tyr substitution.</summary>
             UNIMOD_Cys__Tyr,
 
-            /// <summary>Cys->Arg substitution.</summary>
+            /// <summary>Cys-&gt;Arg substitution.</summary>
             UNIMOD_Cys__Arg,
 
-            /// <summary>Cys->Gly substitution.</summary>
+            /// <summary>Cys-&gt;Gly substitution.</summary>
             UNIMOD_Cys__Gly,
 
-            /// <summary>Asp->Ala substitution.</summary>
+            /// <summary>Asp-&gt;Ala substitution.</summary>
             UNIMOD_Asp__Ala,
 
-            /// <summary>Asp->His substitution.</summary>
+            /// <summary>Asp-&gt;His substitution.</summary>
             UNIMOD_Asp__His,
 
-            /// <summary>Asp->Asn substitution.</summary>
+            /// <summary>Asp-&gt;Asn substitution.</summary>
             UNIMOD_Asp__Asn,
 
-            /// <summary>Asp->Gly substitution.</summary>
+            /// <summary>Asp-&gt;Gly substitution.</summary>
             UNIMOD_Asp__Gly,
 
-            /// <summary>Asp->Tyr substitution.</summary>
+            /// <summary>Asp-&gt;Tyr substitution.</summary>
             UNIMOD_Asp__Tyr,
 
-            /// <summary>Asp->Glu substitution.</summary>
+            /// <summary>Asp-&gt;Glu substitution.</summary>
             UNIMOD_Asp__Glu,
 
-            /// <summary>Asp->Val substitution.</summary>
+            /// <summary>Asp-&gt;Val substitution.</summary>
             UNIMOD_Asp__Val,
 
-            /// <summary>Glu->Ala substitution.</summary>
+            /// <summary>Glu-&gt;Ala substitution.</summary>
             UNIMOD_Glu__Ala,
 
-            /// <summary>Glu->Gln substitution.</summary>
+            /// <summary>Glu-&gt;Gln substitution.</summary>
             UNIMOD_Glu__Gln,
 
-            /// <summary>Glu->Asp substitution.</summary>
+            /// <summary>Glu-&gt;Asp substitution.</summary>
             UNIMOD_Glu__Asp,
 
-            /// <summary>Glu->Lys substitution.</summary>
+            /// <summary>Glu-&gt;Lys substitution.</summary>
             UNIMOD_Glu__Lys,
 
-            /// <summary>Glu->Gly substitution.</summary>
+            /// <summary>Glu-&gt;Gly substitution.</summary>
             UNIMOD_Glu__Gly,
 
-            /// <summary>Glu->Val substitution.</summary>
+            /// <summary>Glu-&gt;Val substitution.</summary>
             UNIMOD_Glu__Val,
 
-            /// <summary>Phe->Ser substitution.</summary>
+            /// <summary>Phe-&gt;Ser substitution.</summary>
             UNIMOD_Phe__Ser,
 
-            /// <summary>Phe->Cys substitution.</summary>
+            /// <summary>Phe-&gt;Cys substitution.</summary>
             UNIMOD_Phe__Cys,
 
-            /// <summary>Phe->Leu/Ile substitution.</summary>
+            /// <summary>Phe-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Phe__Xle,
 
-            /// <summary>Phe->Tyr substitution.</summary>
+            /// <summary>Phe-&gt;Tyr substitution.</summary>
             UNIMOD_Phe__Tyr,
 
-            /// <summary>Phe->Val substitution.</summary>
+            /// <summary>Phe-&gt;Val substitution.</summary>
             UNIMOD_Phe__Val,
 
-            /// <summary>Gly->Ala substitution.</summary>
+            /// <summary>Gly-&gt;Ala substitution.</summary>
             UNIMOD_Gly__Ala,
 
-            /// <summary>Gly->Ser substitution.</summary>
+            /// <summary>Gly-&gt;Ser substitution.</summary>
             UNIMOD_Gly__Ser,
 
-            /// <summary>Gly->Trp substitution.</summary>
+            /// <summary>Gly-&gt;Trp substitution.</summary>
             UNIMOD_Gly__Trp,
 
-            /// <summary>Gly->Glu substitution.</summary>
+            /// <summary>Gly-&gt;Glu substitution.</summary>
             UNIMOD_Gly__Glu,
 
-            /// <summary>Gly->Val substitution.</summary>
+            /// <summary>Gly-&gt;Val substitution.</summary>
             UNIMOD_Gly__Val,
 
-            /// <summary>Gly->Asp substitution.</summary>
+            /// <summary>Gly-&gt;Asp substitution.</summary>
             UNIMOD_Gly__Asp,
 
-            /// <summary>Gly->Cys substitution.</summary>
+            /// <summary>Gly-&gt;Cys substitution.</summary>
             UNIMOD_Gly__Cys,
 
-            /// <summary>Gly->Arg substitution.</summary>
+            /// <summary>Gly-&gt;Arg substitution.</summary>
             UNIMOD_Gly__Arg,
 
-            /// <summary>His->Pro substitution.</summary>
+            /// <summary>His-&gt;Pro substitution.</summary>
             UNIMOD_His__Pro,
 
-            /// <summary>His->Tyr substitution.</summary>
+            /// <summary>His-&gt;Tyr substitution.</summary>
             UNIMOD_His__Tyr,
 
-            /// <summary>His->Gln substitution.</summary>
+            /// <summary>His-&gt;Gln substitution.</summary>
             UNIMOD_His__Gln,
 
-            /// <summary>His->Arg substitution.</summary>
+            /// <summary>His-&gt;Arg substitution.</summary>
             UNIMOD_His__Arg,
 
-            /// <summary>His->Leu/Ile substitution.</summary>
+            /// <summary>His-&gt;Leu/Ile substitution.</summary>
             UNIMOD_His__Xle,
 
-            /// <summary>Leu/Ile->Thr substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Thr substitution.</summary>
             UNIMOD_Xle__Thr,
 
-            /// <summary>Leu/Ile->Asn substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Asn substitution.</summary>
             UNIMOD_Xle__Asn,
 
-            /// <summary>Leu/Ile->Lys substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Lys substitution.</summary>
             UNIMOD_Xle__Lys,
 
-            /// <summary>Lys->Thr substitution.</summary>
+            /// <summary>Lys-&gt;Thr substitution.</summary>
             UNIMOD_Lys__Thr,
 
-            /// <summary>Lys->Asn substitution.</summary>
+            /// <summary>Lys-&gt;Asn substitution.</summary>
             UNIMOD_Lys__Asn,
 
-            /// <summary>Lys->Glu substitution.</summary>
+            /// <summary>Lys-&gt;Glu substitution.</summary>
             UNIMOD_Lys__Glu,
 
-            /// <summary>Lys->Gln substitution.</summary>
+            /// <summary>Lys-&gt;Gln substitution.</summary>
             UNIMOD_Lys__Gln,
 
-            /// <summary>Lys->Met substitution.</summary>
+            /// <summary>Lys-&gt;Met substitution.</summary>
             UNIMOD_Lys__Met,
 
-            /// <summary>Lys->Arg substitution.</summary>
+            /// <summary>Lys-&gt;Arg substitution.</summary>
             UNIMOD_Lys__Arg,
 
-            /// <summary>Lys->Leu/Ile substitution.</summary>
+            /// <summary>Lys-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Lys__Xle,
 
-            /// <summary>Leu/Ile->Ser substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Ser substitution.</summary>
             UNIMOD_Xle__Ser,
 
-            /// <summary>Leu/Ile->Phe substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Phe substitution.</summary>
             UNIMOD_Xle__Phe,
 
-            /// <summary>Leu/Ile->Trp substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Trp substitution.</summary>
             UNIMOD_Xle__Trp,
 
-            /// <summary>Leu/Ile->Pro substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Pro substitution.</summary>
             UNIMOD_Xle__Pro,
 
-            /// <summary>Leu/Ile->Val substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Val substitution.</summary>
             UNIMOD_Xle__Val,
 
-            /// <summary>Leu/Ile->His substitution.</summary>
+            /// <summary>Leu/Ile-&gt;His substitution.</summary>
             UNIMOD_Xle__His,
 
-            /// <summary>Leu/Ile->Gln substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Gln substitution.</summary>
             UNIMOD_Xle__Gln,
 
-            /// <summary>Leu/Ile->Met substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Met substitution.</summary>
             UNIMOD_Xle__Met,
 
-            /// <summary>Leu/Ile->Arg substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Arg substitution.</summary>
             UNIMOD_Xle__Arg,
 
-            /// <summary>Met->Thr substitution.</summary>
+            /// <summary>Met-&gt;Thr substitution.</summary>
             UNIMOD_Met__Thr,
 
-            /// <summary>Met->Arg substitution.</summary>
+            /// <summary>Met-&gt;Arg substitution.</summary>
             UNIMOD_Met__Arg,
 
-            /// <summary>Met->Lys substitution.</summary>
+            /// <summary>Met-&gt;Lys substitution.</summary>
             UNIMOD_Met__Lys,
 
-            /// <summary>Met->Leu/Ile substitution.</summary>
+            /// <summary>Met-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Met__Xle,
 
-            /// <summary>Met->Val substitution.</summary>
+            /// <summary>Met-&gt;Val substitution.</summary>
             UNIMOD_Met__Val,
 
-            /// <summary>Asn->Ser substitution.</summary>
+            /// <summary>Asn-&gt;Ser substitution.</summary>
             UNIMOD_Asn__Ser,
 
-            /// <summary>Asn->Thr substitution.</summary>
+            /// <summary>Asn-&gt;Thr substitution.</summary>
             UNIMOD_Asn__Thr,
 
-            /// <summary>Asn->Lys substitution.</summary>
+            /// <summary>Asn-&gt;Lys substitution.</summary>
             UNIMOD_Asn__Lys,
 
-            /// <summary>Asn->Tyr substitution.</summary>
+            /// <summary>Asn-&gt;Tyr substitution.</summary>
             UNIMOD_Asn__Tyr,
 
-            /// <summary>Asn->His substitution.</summary>
+            /// <summary>Asn-&gt;His substitution.</summary>
             UNIMOD_Asn__His,
 
-            /// <summary>Asn->Asp substitution.</summary>
+            /// <summary>Asn-&gt;Asp substitution.</summary>
             UNIMOD_Asn__Asp,
 
-            /// <summary>Asn->Leu/Ile substitution.</summary>
+            /// <summary>Asn-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Asn__Xle,
 
-            /// <summary>Pro->Ser substitution.</summary>
+            /// <summary>Pro-&gt;Ser substitution.</summary>
             UNIMOD_Pro__Ser,
 
-            /// <summary>Pro->Ala substitution.</summary>
+            /// <summary>Pro-&gt;Ala substitution.</summary>
             UNIMOD_Pro__Ala,
 
-            /// <summary>Pro->His substitution.</summary>
+            /// <summary>Pro-&gt;His substitution.</summary>
             UNIMOD_Pro__His,
 
-            /// <summary>Pro->Gln substitution.</summary>
+            /// <summary>Pro-&gt;Gln substitution.</summary>
             UNIMOD_Pro__Gln,
 
-            /// <summary>Pro->Thr substitution.</summary>
+            /// <summary>Pro-&gt;Thr substitution.</summary>
             UNIMOD_Pro__Thr,
 
-            /// <summary>Pro->Arg substitution.</summary>
+            /// <summary>Pro-&gt;Arg substitution.</summary>
             UNIMOD_Pro__Arg,
 
-            /// <summary>Pro->Leu/Ile substitution.</summary>
+            /// <summary>Pro-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Pro__Xle,
 
-            /// <summary>Gln->Pro substitution.</summary>
+            /// <summary>Gln-&gt;Pro substitution.</summary>
             UNIMOD_Gln__Pro,
 
-            /// <summary>Gln->Lys substitution.</summary>
+            /// <summary>Gln-&gt;Lys substitution.</summary>
             UNIMOD_Gln__Lys,
 
-            /// <summary>Gln->Glu substitution.</summary>
+            /// <summary>Gln-&gt;Glu substitution.</summary>
             UNIMOD_Gln__Glu,
 
-            /// <summary>Gln->His substitution.</summary>
+            /// <summary>Gln-&gt;His substitution.</summary>
             UNIMOD_Gln__His,
 
-            /// <summary>Gln->Arg substitution.</summary>
+            /// <summary>Gln-&gt;Arg substitution.</summary>
             UNIMOD_Gln__Arg,
 
-            /// <summary>Gln->Leu/Ile substitution.</summary>
+            /// <summary>Gln-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Gln__Xle,
 
-            /// <summary>Arg->Ser substitution.</summary>
+            /// <summary>Arg-&gt;Ser substitution.</summary>
             UNIMOD_Arg__Ser,
 
-            /// <summary>Arg->Trp substitution.</summary>
+            /// <summary>Arg-&gt;Trp substitution.</summary>
             UNIMOD_Arg__Trp,
 
-            /// <summary>Arg->Thr substitution.</summary>
+            /// <summary>Arg-&gt;Thr substitution.</summary>
             UNIMOD_Arg__Thr,
 
-            /// <summary>Arg->Pro substitution.</summary>
+            /// <summary>Arg-&gt;Pro substitution.</summary>
             UNIMOD_Arg__Pro,
 
-            /// <summary>Arg->Lys substitution.</summary>
+            /// <summary>Arg-&gt;Lys substitution.</summary>
             UNIMOD_Arg__Lys,
 
-            /// <summary>Arg->His substitution.</summary>
+            /// <summary>Arg-&gt;His substitution.</summary>
             UNIMOD_Arg__His,
 
-            /// <summary>Arg->Gln substitution.</summary>
+            /// <summary>Arg-&gt;Gln substitution.</summary>
             UNIMOD_Arg__Gln,
 
-            /// <summary>Arg->Met substitution.</summary>
+            /// <summary>Arg-&gt;Met substitution.</summary>
             UNIMOD_Arg__Met,
 
-            /// <summary>Arg->Cys substitution.</summary>
+            /// <summary>Arg-&gt;Cys substitution.</summary>
             UNIMOD_Arg__Cys,
 
-            /// <summary>Arg->Leu/Ile substitution.</summary>
+            /// <summary>Arg-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Arg__Xle,
 
-            /// <summary>Arg->Gly substitution.</summary>
+            /// <summary>Arg-&gt;Gly substitution.</summary>
             UNIMOD_Arg__Gly,
 
-            /// <summary>Ser->Phe substitution.</summary>
+            /// <summary>Ser-&gt;Phe substitution.</summary>
             UNIMOD_Ser__Phe,
 
-            /// <summary>Ser->Ala substitution.</summary>
+            /// <summary>Ser-&gt;Ala substitution.</summary>
             UNIMOD_Ser__Ala,
 
-            /// <summary>Ser->Trp substitution.</summary>
+            /// <summary>Ser-&gt;Trp substitution.</summary>
             UNIMOD_Ser__Trp,
 
-            /// <summary>Ser->Thr substitution.</summary>
+            /// <summary>Ser-&gt;Thr substitution.</summary>
             UNIMOD_Ser__Thr,
 
-            /// <summary>Ser->Asn substitution.</summary>
+            /// <summary>Ser-&gt;Asn substitution.</summary>
             UNIMOD_Ser__Asn,
 
-            /// <summary>Ser->Pro substitution.</summary>
+            /// <summary>Ser-&gt;Pro substitution.</summary>
             UNIMOD_Ser__Pro,
 
-            /// <summary>Ser->Tyr substitution.</summary>
+            /// <summary>Ser-&gt;Tyr substitution.</summary>
             UNIMOD_Ser__Tyr,
 
-            /// <summary>Ser->Cys substitution.</summary>
+            /// <summary>Ser-&gt;Cys substitution.</summary>
             UNIMOD_Ser__Cys,
 
-            /// <summary>Ser->Arg substitution.</summary>
+            /// <summary>Ser-&gt;Arg substitution.</summary>
             UNIMOD_Ser__Arg,
 
-            /// <summary>Ser->Leu/Ile substitution.</summary>
+            /// <summary>Ser-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Ser__Xle,
 
-            /// <summary>Ser->Gly substitution.</summary>
+            /// <summary>Ser-&gt;Gly substitution.</summary>
             UNIMOD_Ser__Gly,
 
-            /// <summary>Thr->Ser substitution.</summary>
+            /// <summary>Thr-&gt;Ser substitution.</summary>
             UNIMOD_Thr__Ser,
 
-            /// <summary>Thr->Ala substitution.</summary>
+            /// <summary>Thr-&gt;Ala substitution.</summary>
             UNIMOD_Thr__Ala,
 
-            /// <summary>Thr->Asn substitution.</summary>
+            /// <summary>Thr-&gt;Asn substitution.</summary>
             UNIMOD_Thr__Asn,
 
-            /// <summary>Thr->Lys substitution.</summary>
+            /// <summary>Thr-&gt;Lys substitution.</summary>
             UNIMOD_Thr__Lys,
 
-            /// <summary>Thr->Pro substitution.</summary>
+            /// <summary>Thr-&gt;Pro substitution.</summary>
             UNIMOD_Thr__Pro,
 
-            /// <summary>Thr->Met substitution.</summary>
+            /// <summary>Thr-&gt;Met substitution.</summary>
             UNIMOD_Thr__Met,
 
-            /// <summary>Thr->Leu/Ile substitution.</summary>
+            /// <summary>Thr-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Thr__Xle,
 
-            /// <summary>Thr->Arg substitution.</summary>
+            /// <summary>Thr-&gt;Arg substitution.</summary>
             UNIMOD_Thr__Arg,
 
-            /// <summary>Val->Phe substitution.</summary>
+            /// <summary>Val-&gt;Phe substitution.</summary>
             UNIMOD_Val__Phe,
 
-            /// <summary>Val->Ala substitution.</summary>
+            /// <summary>Val-&gt;Ala substitution.</summary>
             UNIMOD_Val__Ala,
 
-            /// <summary>Val->Glu substitution.</summary>
+            /// <summary>Val-&gt;Glu substitution.</summary>
             UNIMOD_Val__Glu,
 
-            /// <summary>Val->Met substitution.</summary>
+            /// <summary>Val-&gt;Met substitution.</summary>
             UNIMOD_Val__Met,
 
-            /// <summary>Val->Asp substitution.</summary>
+            /// <summary>Val-&gt;Asp substitution.</summary>
             UNIMOD_Val__Asp,
 
-            /// <summary>Val->Leu/Ile substitution.</summary>
+            /// <summary>Val-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Val__Xle,
 
-            /// <summary>Val->Gly substitution.</summary>
+            /// <summary>Val-&gt;Gly substitution.</summary>
             UNIMOD_Val__Gly,
 
-            /// <summary>Trp->Ser substitution.</summary>
+            /// <summary>Trp-&gt;Ser substitution.</summary>
             UNIMOD_Trp__Ser,
 
-            /// <summary>Trp->Cys substitution.</summary>
+            /// <summary>Trp-&gt;Cys substitution.</summary>
             UNIMOD_Trp__Cys,
 
-            /// <summary>Trp->Arg substitution.</summary>
+            /// <summary>Trp-&gt;Arg substitution.</summary>
             UNIMOD_Trp__Arg,
 
-            /// <summary>Trp->Gly substitution.</summary>
+            /// <summary>Trp-&gt;Gly substitution.</summary>
             UNIMOD_Trp__Gly,
 
-            /// <summary>Trp->Leu/Ile substitution.</summary>
+            /// <summary>Trp-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Trp__Xle,
 
-            /// <summary>Tyr->Phe substitution.</summary>
+            /// <summary>Tyr-&gt;Phe substitution.</summary>
             UNIMOD_Tyr__Phe,
 
-            /// <summary>Tyr->Ser substitution.</summary>
+            /// <summary>Tyr-&gt;Ser substitution.</summary>
             UNIMOD_Tyr__Ser,
 
-            /// <summary>Tyr->Asn substitution.</summary>
+            /// <summary>Tyr-&gt;Asn substitution.</summary>
             UNIMOD_Tyr__Asn,
 
-            /// <summary>Tyr->His substitution.</summary>
+            /// <summary>Tyr-&gt;His substitution.</summary>
             UNIMOD_Tyr__His,
 
-            /// <summary>Tyr->Asp substitution.</summary>
+            /// <summary>Tyr-&gt;Asp substitution.</summary>
             UNIMOD_Tyr__Asp,
 
-            /// <summary>Tyr->Cys substitution.</summary>
+            /// <summary>Tyr-&gt;Cys substitution.</summary>
             UNIMOD_Tyr__Cys,
 
             /// <summary>Mass Defect Tag on lysine e-amino.</summary>
@@ -9320,10 +9383,10 @@ namespace PSI_Interface.CV
             /// <summary>O-Isopropylmethylphosphonylation.</summary>
             UNIMOD_O_Isopropylmethylphosphonate,
 
-            /// <summary>Representative mass and accurate mass for 113, 114, 116 & 117.</summary>
+            /// <summary>Representative mass and accurate mass for 113, 114, 116 &amp; 117.</summary>
             UNIMOD_iTRAQ8plex,
 
-            /// <summary>Accurate mass for 115, 118, 119 & 121.</summary>
+            /// <summary>Accurate mass for 115, 118, 119 &amp; 121.</summary>
             UNIMOD_iTRAQ8plex_13C_6_15N_2_,
 
             /// <summary>Carboxyl modification with ethanolamine.</summary>
@@ -9554,16 +9617,16 @@ namespace PSI_Interface.CV
             /// <summary>Reaction with dimethylarsinous (AsIII) acid.</summary>
             UNIMOD_DimethylArsino,
 
-            /// <summary>Lys->Cys substitution and carbamidomethylation.</summary>
+            /// <summary>Lys-&gt;Cys substitution and carbamidomethylation.</summary>
             UNIMOD_Lys__CamCys,
 
-            /// <summary>Phe->Cys substitution and carbamidomethylation.</summary>
+            /// <summary>Phe-&gt;Cys substitution and carbamidomethylation.</summary>
             UNIMOD_Phe__CamCys,
 
-            /// <summary>Leu->Met substitution and sulfoxidation.</summary>
+            /// <summary>Leu-&gt;Met substitution and sulfoxidation.</summary>
             UNIMOD_Leu__MetOx,
 
-            /// <summary>Lys->Met substitution and sulfoxidation.</summary>
+            /// <summary>Lys-&gt;Met substitution and sulfoxidation.</summary>
             UNIMOD_Lys__MetOx,
 
             /// <summary>Gluconoylation.</summary>
@@ -9854,616 +9917,616 @@ namespace PSI_Interface.CV
             /// <summary>Acetylhypusine.</summary>
             UNIMOD_Acetylhypusine,
 
-            /// <summary>Ala->Cys substitution.</summary>
+            /// <summary>Ala-&gt;Cys substitution.</summary>
             UNIMOD_Ala__Cys,
 
-            /// <summary>Ala->Phe substitution.</summary>
+            /// <summary>Ala-&gt;Phe substitution.</summary>
             UNIMOD_Ala__Phe,
 
-            /// <summary>Ala->His substitution.</summary>
+            /// <summary>Ala-&gt;His substitution.</summary>
             UNIMOD_Ala__His,
 
-            /// <summary>Ala->Leu/Ile substitution.</summary>
+            /// <summary>Ala-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Ala__Xle,
 
-            /// <summary>Ala->Lys substitution.</summary>
+            /// <summary>Ala-&gt;Lys substitution.</summary>
             UNIMOD_Ala__Lys,
 
-            /// <summary>Ala->Met substitution.</summary>
+            /// <summary>Ala-&gt;Met substitution.</summary>
             UNIMOD_Ala__Met,
 
-            /// <summary>Ala->Asn substitution.</summary>
+            /// <summary>Ala-&gt;Asn substitution.</summary>
             UNIMOD_Ala__Asn,
 
-            /// <summary>Ala->Gln substitution.</summary>
+            /// <summary>Ala-&gt;Gln substitution.</summary>
             UNIMOD_Ala__Gln,
 
-            /// <summary>Ala->Arg substitution.</summary>
+            /// <summary>Ala-&gt;Arg substitution.</summary>
             UNIMOD_Ala__Arg,
 
-            /// <summary>Ala->Trp substitution.</summary>
+            /// <summary>Ala-&gt;Trp substitution.</summary>
             UNIMOD_Ala__Trp,
 
-            /// <summary>Ala->Tyr substitution.</summary>
+            /// <summary>Ala-&gt;Tyr substitution.</summary>
             UNIMOD_Ala__Tyr,
 
-            /// <summary>Cys->Ala substitution.</summary>
+            /// <summary>Cys-&gt;Ala substitution.</summary>
             UNIMOD_Cys__Ala,
 
-            /// <summary>Cys->Asp substitution.</summary>
+            /// <summary>Cys-&gt;Asp substitution.</summary>
             UNIMOD_Cys__Asp,
 
-            /// <summary>Cys->Glu substitution.</summary>
+            /// <summary>Cys-&gt;Glu substitution.</summary>
             UNIMOD_Cys__Glu,
 
-            /// <summary>Cys->His substitution.</summary>
+            /// <summary>Cys-&gt;His substitution.</summary>
             UNIMOD_Cys__His,
 
-            /// <summary>Cys->Leu/Ile substitution.</summary>
+            /// <summary>Cys-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Cys__Xle,
 
-            /// <summary>Cys->Lys substitution.</summary>
+            /// <summary>Cys-&gt;Lys substitution.</summary>
             UNIMOD_Cys__Lys,
 
-            /// <summary>Cys->Met substitution.</summary>
+            /// <summary>Cys-&gt;Met substitution.</summary>
             UNIMOD_Cys__Met,
 
-            /// <summary>Cys->Asn substitution.</summary>
+            /// <summary>Cys-&gt;Asn substitution.</summary>
             UNIMOD_Cys__Asn,
 
-            /// <summary>Cys->Pro substitution.</summary>
+            /// <summary>Cys-&gt;Pro substitution.</summary>
             UNIMOD_Cys__Pro,
 
-            /// <summary>Cys->Gln substitution.</summary>
+            /// <summary>Cys-&gt;Gln substitution.</summary>
             UNIMOD_Cys__Gln,
 
-            /// <summary>Cys->Thr substitution.</summary>
+            /// <summary>Cys-&gt;Thr substitution.</summary>
             UNIMOD_Cys__Thr,
 
-            /// <summary>Cys->Val substitution.</summary>
+            /// <summary>Cys-&gt;Val substitution.</summary>
             UNIMOD_Cys__Val,
 
-            /// <summary>Asp->Cys substitution.</summary>
+            /// <summary>Asp-&gt;Cys substitution.</summary>
             UNIMOD_Asp__Cys,
 
-            /// <summary>Asp->Phe substitution.</summary>
+            /// <summary>Asp-&gt;Phe substitution.</summary>
             UNIMOD_Asp__Phe,
 
-            /// <summary>Asp->Leu/Ile substitution.</summary>
+            /// <summary>Asp-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Asp__Xle,
 
-            /// <summary>Asp->Lys substitution.</summary>
+            /// <summary>Asp-&gt;Lys substitution.</summary>
             UNIMOD_Asp__Lys,
 
-            /// <summary>Asp->Met substitution.</summary>
+            /// <summary>Asp-&gt;Met substitution.</summary>
             UNIMOD_Asp__Met,
 
-            /// <summary>Asp->Pro substitution.</summary>
+            /// <summary>Asp-&gt;Pro substitution.</summary>
             UNIMOD_Asp__Pro,
 
-            /// <summary>Asp->Gln substitution.</summary>
+            /// <summary>Asp-&gt;Gln substitution.</summary>
             UNIMOD_Asp__Gln,
 
-            /// <summary>Asp->Arg substitution.</summary>
+            /// <summary>Asp-&gt;Arg substitution.</summary>
             UNIMOD_Asp__Arg,
 
-            /// <summary>Asp->Ser substitution.</summary>
+            /// <summary>Asp-&gt;Ser substitution.</summary>
             UNIMOD_Asp__Ser,
 
-            /// <summary>Asp->Thr substitution.</summary>
+            /// <summary>Asp-&gt;Thr substitution.</summary>
             UNIMOD_Asp__Thr,
 
-            /// <summary>Asp->Trp substitution.</summary>
+            /// <summary>Asp-&gt;Trp substitution.</summary>
             UNIMOD_Asp__Trp,
 
-            /// <summary>Glu->Cys substitution.</summary>
+            /// <summary>Glu-&gt;Cys substitution.</summary>
             UNIMOD_Glu__Cys,
 
-            /// <summary>Glu->Phe substitution.</summary>
+            /// <summary>Glu-&gt;Phe substitution.</summary>
             UNIMOD_Glu__Phe,
 
-            /// <summary>Glu->His substitution.</summary>
+            /// <summary>Glu-&gt;His substitution.</summary>
             UNIMOD_Glu__His,
 
-            /// <summary>Glu->Leu/Ile substitution.</summary>
+            /// <summary>Glu-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Glu__Xle,
 
-            /// <summary>Glu->Met substitution.</summary>
+            /// <summary>Glu-&gt;Met substitution.</summary>
             UNIMOD_Glu__Met,
 
-            /// <summary>Glu->Asn substitution.</summary>
+            /// <summary>Glu-&gt;Asn substitution.</summary>
             UNIMOD_Glu__Asn,
 
-            /// <summary>Glu->Pro substitution.</summary>
+            /// <summary>Glu-&gt;Pro substitution.</summary>
             UNIMOD_Glu__Pro,
 
-            /// <summary>Glu->Arg substitution.</summary>
+            /// <summary>Glu-&gt;Arg substitution.</summary>
             UNIMOD_Glu__Arg,
 
-            /// <summary>Glu->Ser substitution.</summary>
+            /// <summary>Glu-&gt;Ser substitution.</summary>
             UNIMOD_Glu__Ser,
 
-            /// <summary>Glu->Thr substitution.</summary>
+            /// <summary>Glu-&gt;Thr substitution.</summary>
             UNIMOD_Glu__Thr,
 
-            /// <summary>Glu->Trp substitution.</summary>
+            /// <summary>Glu-&gt;Trp substitution.</summary>
             UNIMOD_Glu__Trp,
 
-            /// <summary>Glu->Tyr substitution.</summary>
+            /// <summary>Glu-&gt;Tyr substitution.</summary>
             UNIMOD_Glu__Tyr,
 
-            /// <summary>Phe->Ala substitution.</summary>
+            /// <summary>Phe-&gt;Ala substitution.</summary>
             UNIMOD_Phe__Ala,
 
-            /// <summary>Phe->Asp substitution.</summary>
+            /// <summary>Phe-&gt;Asp substitution.</summary>
             UNIMOD_Phe__Asp,
 
-            /// <summary>Phe->Glu substitution.</summary>
+            /// <summary>Phe-&gt;Glu substitution.</summary>
             UNIMOD_Phe__Glu,
 
-            /// <summary>Phe->Gly substitution.</summary>
+            /// <summary>Phe-&gt;Gly substitution.</summary>
             UNIMOD_Phe__Gly,
 
-            /// <summary>Phe->His substitution.</summary>
+            /// <summary>Phe-&gt;His substitution.</summary>
             UNIMOD_Phe__His,
 
-            /// <summary>Phe->Lys substitution.</summary>
+            /// <summary>Phe-&gt;Lys substitution.</summary>
             UNIMOD_Phe__Lys,
 
-            /// <summary>Phe->Met substitution.</summary>
+            /// <summary>Phe-&gt;Met substitution.</summary>
             UNIMOD_Phe__Met,
 
-            /// <summary>Phe->Asn substitution.</summary>
+            /// <summary>Phe-&gt;Asn substitution.</summary>
             UNIMOD_Phe__Asn,
 
-            /// <summary>Phe->Pro substitution.</summary>
+            /// <summary>Phe-&gt;Pro substitution.</summary>
             UNIMOD_Phe__Pro,
 
-            /// <summary>Phe->Gln substitution.</summary>
+            /// <summary>Phe-&gt;Gln substitution.</summary>
             UNIMOD_Phe__Gln,
 
-            /// <summary>Phe->Arg substitution.</summary>
+            /// <summary>Phe-&gt;Arg substitution.</summary>
             UNIMOD_Phe__Arg,
 
-            /// <summary>Phe->Thr substitution.</summary>
+            /// <summary>Phe-&gt;Thr substitution.</summary>
             UNIMOD_Phe__Thr,
 
-            /// <summary>Phe->Trp substitution.</summary>
+            /// <summary>Phe-&gt;Trp substitution.</summary>
             UNIMOD_Phe__Trp,
 
-            /// <summary>Gly->Phe substitution.</summary>
+            /// <summary>Gly-&gt;Phe substitution.</summary>
             UNIMOD_Gly__Phe,
 
-            /// <summary>Gly->His substitution.</summary>
+            /// <summary>Gly-&gt;His substitution.</summary>
             UNIMOD_Gly__His,
 
-            /// <summary>Gly->Leu/Ile substitution.</summary>
+            /// <summary>Gly-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Gly__Xle,
 
-            /// <summary>Gly->Lys substitution.</summary>
+            /// <summary>Gly-&gt;Lys substitution.</summary>
             UNIMOD_Gly__Lys,
 
-            /// <summary>Gly->Met substitution.</summary>
+            /// <summary>Gly-&gt;Met substitution.</summary>
             UNIMOD_Gly__Met,
 
-            /// <summary>Gly->Asn substitution.</summary>
+            /// <summary>Gly-&gt;Asn substitution.</summary>
             UNIMOD_Gly__Asn,
 
-            /// <summary>Gly->Pro substitution.</summary>
+            /// <summary>Gly-&gt;Pro substitution.</summary>
             UNIMOD_Gly__Pro,
 
-            /// <summary>Gly->Gln substitution.</summary>
+            /// <summary>Gly-&gt;Gln substitution.</summary>
             UNIMOD_Gly__Gln,
 
-            /// <summary>Gly->Thr substitution.</summary>
+            /// <summary>Gly-&gt;Thr substitution.</summary>
             UNIMOD_Gly__Thr,
 
-            /// <summary>Gly->Tyr substitution.</summary>
+            /// <summary>Gly-&gt;Tyr substitution.</summary>
             UNIMOD_Gly__Tyr,
 
-            /// <summary>His->Ala substitution.</summary>
+            /// <summary>His-&gt;Ala substitution.</summary>
             UNIMOD_His__Ala,
 
-            /// <summary>His->Cys substitution.</summary>
+            /// <summary>His-&gt;Cys substitution.</summary>
             UNIMOD_His__Cys,
 
-            /// <summary>His->Glu substitution.</summary>
+            /// <summary>His-&gt;Glu substitution.</summary>
             UNIMOD_His__Glu,
 
-            /// <summary>His->Phe substitution.</summary>
+            /// <summary>His-&gt;Phe substitution.</summary>
             UNIMOD_His__Phe,
 
-            /// <summary>His->Gly substitution.</summary>
+            /// <summary>His-&gt;Gly substitution.</summary>
             UNIMOD_His__Gly,
 
-            /// <summary>His->Lys substitution.</summary>
+            /// <summary>His-&gt;Lys substitution.</summary>
             UNIMOD_His__Lys,
 
-            /// <summary>His->Met substitution.</summary>
+            /// <summary>His-&gt;Met substitution.</summary>
             UNIMOD_His__Met,
 
-            /// <summary>His->Ser substitution.</summary>
+            /// <summary>His-&gt;Ser substitution.</summary>
             UNIMOD_His__Ser,
 
-            /// <summary>His->Thr substitution.</summary>
+            /// <summary>His-&gt;Thr substitution.</summary>
             UNIMOD_His__Thr,
 
-            /// <summary>His->Val substitution.</summary>
+            /// <summary>His-&gt;Val substitution.</summary>
             UNIMOD_His__Val,
 
-            /// <summary>His->Trp substitution.</summary>
+            /// <summary>His-&gt;Trp substitution.</summary>
             UNIMOD_His__Trp,
 
-            /// <summary>Leu/Ile->Ala substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Ala substitution.</summary>
             UNIMOD_Xle__Ala,
 
-            /// <summary>Leu/Ile->Cys substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Cys substitution.</summary>
             UNIMOD_Xle__Cys,
 
-            /// <summary>Leu/Ile->Asp substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Asp substitution.</summary>
             UNIMOD_Xle__Asp,
 
-            /// <summary>Leu/Ile->Glu substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Glu substitution.</summary>
             UNIMOD_Xle__Glu,
 
-            /// <summary>Leu/Ile->Gly substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Gly substitution.</summary>
             UNIMOD_Xle__Gly,
 
-            /// <summary>Leu/Ile->Tyr substitution.</summary>
+            /// <summary>Leu/Ile-&gt;Tyr substitution.</summary>
             UNIMOD_Xle__Tyr,
 
-            /// <summary>Lys->Ala substitution.</summary>
+            /// <summary>Lys-&gt;Ala substitution.</summary>
             UNIMOD_Lys__Ala,
 
-            /// <summary>Lys->Cys substitution.</summary>
+            /// <summary>Lys-&gt;Cys substitution.</summary>
             UNIMOD_Lys__Cys,
 
-            /// <summary>Lys->Asp substitution.</summary>
+            /// <summary>Lys-&gt;Asp substitution.</summary>
             UNIMOD_Lys__Asp,
 
-            /// <summary>Lys->Phe substitution.</summary>
+            /// <summary>Lys-&gt;Phe substitution.</summary>
             UNIMOD_Lys__Phe,
 
-            /// <summary>Lys->Gly substitution.</summary>
+            /// <summary>Lys-&gt;Gly substitution.</summary>
             UNIMOD_Lys__Gly,
 
-            /// <summary>Lys->His substitution.</summary>
+            /// <summary>Lys-&gt;His substitution.</summary>
             UNIMOD_Lys__His,
 
-            /// <summary>Lys->Pro substitution.</summary>
+            /// <summary>Lys-&gt;Pro substitution.</summary>
             UNIMOD_Lys__Pro,
 
-            /// <summary>Lys->Ser substitution.</summary>
+            /// <summary>Lys-&gt;Ser substitution.</summary>
             UNIMOD_Lys__Ser,
 
-            /// <summary>Lys->Val substitution.</summary>
+            /// <summary>Lys-&gt;Val substitution.</summary>
             UNIMOD_Lys__Val,
 
-            /// <summary>Lys->Trp substitution.</summary>
+            /// <summary>Lys-&gt;Trp substitution.</summary>
             UNIMOD_Lys__Trp,
 
-            /// <summary>Lys->Tyr substitution.</summary>
+            /// <summary>Lys-&gt;Tyr substitution.</summary>
             UNIMOD_Lys__Tyr,
 
-            /// <summary>Met->Ala substitution.</summary>
+            /// <summary>Met-&gt;Ala substitution.</summary>
             UNIMOD_Met__Ala,
 
-            /// <summary>Met->Cys substitution.</summary>
+            /// <summary>Met-&gt;Cys substitution.</summary>
             UNIMOD_Met__Cys,
 
-            /// <summary>Met->Asp substitution.</summary>
+            /// <summary>Met-&gt;Asp substitution.</summary>
             UNIMOD_Met__Asp,
 
-            /// <summary>Met->Glu substitution.</summary>
+            /// <summary>Met-&gt;Glu substitution.</summary>
             UNIMOD_Met__Glu,
 
-            /// <summary>Met->Phe substitution.</summary>
+            /// <summary>Met-&gt;Phe substitution.</summary>
             UNIMOD_Met__Phe,
 
-            /// <summary>Met->Gly substitution.</summary>
+            /// <summary>Met-&gt;Gly substitution.</summary>
             UNIMOD_Met__Gly,
 
-            /// <summary>Met->His substitution.</summary>
+            /// <summary>Met-&gt;His substitution.</summary>
             UNIMOD_Met__His,
 
-            /// <summary>Met->Asn substitution.</summary>
+            /// <summary>Met-&gt;Asn substitution.</summary>
             UNIMOD_Met__Asn,
 
-            /// <summary>Met->Pro substitution.</summary>
+            /// <summary>Met-&gt;Pro substitution.</summary>
             UNIMOD_Met__Pro,
 
-            /// <summary>Met->Gln substitution.</summary>
+            /// <summary>Met-&gt;Gln substitution.</summary>
             UNIMOD_Met__Gln,
 
-            /// <summary>Met->Ser substitution.</summary>
+            /// <summary>Met-&gt;Ser substitution.</summary>
             UNIMOD_Met__Ser,
 
-            /// <summary>Met->Trp substitution.</summary>
+            /// <summary>Met-&gt;Trp substitution.</summary>
             UNIMOD_Met__Trp,
 
-            /// <summary>Met->Tyr substitution.</summary>
+            /// <summary>Met-&gt;Tyr substitution.</summary>
             UNIMOD_Met__Tyr,
 
-            /// <summary>Asn->Ala substitution.</summary>
+            /// <summary>Asn-&gt;Ala substitution.</summary>
             UNIMOD_Asn__Ala,
 
-            /// <summary>Asn->Cys substitution.</summary>
+            /// <summary>Asn-&gt;Cys substitution.</summary>
             UNIMOD_Asn__Cys,
 
-            /// <summary>Asn->Glu substitution.</summary>
+            /// <summary>Asn-&gt;Glu substitution.</summary>
             UNIMOD_Asn__Glu,
 
-            /// <summary>Asn->Phe substitution.</summary>
+            /// <summary>Asn-&gt;Phe substitution.</summary>
             UNIMOD_Asn__Phe,
 
-            /// <summary>Asn->Gly substitution.</summary>
+            /// <summary>Asn-&gt;Gly substitution.</summary>
             UNIMOD_Asn__Gly,
 
-            /// <summary>Asn->Met substitution.</summary>
+            /// <summary>Asn-&gt;Met substitution.</summary>
             UNIMOD_Asn__Met,
 
-            /// <summary>Asn->Pro substitution.</summary>
+            /// <summary>Asn-&gt;Pro substitution.</summary>
             UNIMOD_Asn__Pro,
 
-            /// <summary>Asn->Gln substitution.</summary>
+            /// <summary>Asn-&gt;Gln substitution.</summary>
             UNIMOD_Asn__Gln,
 
-            /// <summary>Asn->Arg substitution.</summary>
+            /// <summary>Asn-&gt;Arg substitution.</summary>
             UNIMOD_Asn__Arg,
 
-            /// <summary>Asn->Val substitution.</summary>
+            /// <summary>Asn-&gt;Val substitution.</summary>
             UNIMOD_Asn__Val,
 
-            /// <summary>Asn->Trp substitution.</summary>
+            /// <summary>Asn-&gt;Trp substitution.</summary>
             UNIMOD_Asn__Trp,
 
-            /// <summary>Pro->Cys substitution.</summary>
+            /// <summary>Pro-&gt;Cys substitution.</summary>
             UNIMOD_Pro__Cys,
 
-            /// <summary>Pro->Asp substitution.</summary>
+            /// <summary>Pro-&gt;Asp substitution.</summary>
             UNIMOD_Pro__Asp,
 
-            /// <summary>Pro->Glu substitution.</summary>
+            /// <summary>Pro-&gt;Glu substitution.</summary>
             UNIMOD_Pro__Glu,
 
-            /// <summary>Pro->Phe substitution.</summary>
+            /// <summary>Pro-&gt;Phe substitution.</summary>
             UNIMOD_Pro__Phe,
 
-            /// <summary>Pro->Gly substitution.</summary>
+            /// <summary>Pro-&gt;Gly substitution.</summary>
             UNIMOD_Pro__Gly,
 
-            /// <summary>Pro->Lys substitution.</summary>
+            /// <summary>Pro-&gt;Lys substitution.</summary>
             UNIMOD_Pro__Lys,
 
-            /// <summary>Pro->Met substitution.</summary>
+            /// <summary>Pro-&gt;Met substitution.</summary>
             UNIMOD_Pro__Met,
 
-            /// <summary>Pro->Asn substitution.</summary>
+            /// <summary>Pro-&gt;Asn substitution.</summary>
             UNIMOD_Pro__Asn,
 
-            /// <summary>Pro->Val substitution.</summary>
+            /// <summary>Pro-&gt;Val substitution.</summary>
             UNIMOD_Pro__Val,
 
-            /// <summary>Pro->Trp substitution.</summary>
+            /// <summary>Pro-&gt;Trp substitution.</summary>
             UNIMOD_Pro__Trp,
 
-            /// <summary>Pro->Tyr substitution.</summary>
+            /// <summary>Pro-&gt;Tyr substitution.</summary>
             UNIMOD_Pro__Tyr,
 
-            /// <summary>Gln->Ala substitution.</summary>
+            /// <summary>Gln-&gt;Ala substitution.</summary>
             UNIMOD_Gln__Ala,
 
-            /// <summary>Gln->Cys substitution.</summary>
+            /// <summary>Gln-&gt;Cys substitution.</summary>
             UNIMOD_Gln__Cys,
 
-            /// <summary>Gln->Asp substitution.</summary>
+            /// <summary>Gln-&gt;Asp substitution.</summary>
             UNIMOD_Gln__Asp,
 
-            /// <summary>Gln->Phe substitution.</summary>
+            /// <summary>Gln-&gt;Phe substitution.</summary>
             UNIMOD_Gln__Phe,
 
-            /// <summary>Gln->Gly substitution.</summary>
+            /// <summary>Gln-&gt;Gly substitution.</summary>
             UNIMOD_Gln__Gly,
 
-            /// <summary>Gln->Met substitution.</summary>
+            /// <summary>Gln-&gt;Met substitution.</summary>
             UNIMOD_Gln__Met,
 
-            /// <summary>Gln->Asn substitution.</summary>
+            /// <summary>Gln-&gt;Asn substitution.</summary>
             UNIMOD_Gln__Asn,
 
-            /// <summary>Gln->Ser substitution.</summary>
+            /// <summary>Gln-&gt;Ser substitution.</summary>
             UNIMOD_Gln__Ser,
 
-            /// <summary>Gln->Thr substitution.</summary>
+            /// <summary>Gln-&gt;Thr substitution.</summary>
             UNIMOD_Gln__Thr,
 
-            /// <summary>Gln->Val substitution.</summary>
+            /// <summary>Gln-&gt;Val substitution.</summary>
             UNIMOD_Gln__Val,
 
-            /// <summary>Gln->Trp substitution.</summary>
+            /// <summary>Gln-&gt;Trp substitution.</summary>
             UNIMOD_Gln__Trp,
 
-            /// <summary>Gln->Tyr substitution.</summary>
+            /// <summary>Gln-&gt;Tyr substitution.</summary>
             UNIMOD_Gln__Tyr,
 
-            /// <summary>Arg->Ala substitution.</summary>
+            /// <summary>Arg-&gt;Ala substitution.</summary>
             UNIMOD_Arg__Ala,
 
-            /// <summary>Arg->Asp substitution.</summary>
+            /// <summary>Arg-&gt;Asp substitution.</summary>
             UNIMOD_Arg__Asp,
 
-            /// <summary>Arg->Glu substitution.</summary>
+            /// <summary>Arg-&gt;Glu substitution.</summary>
             UNIMOD_Arg__Glu,
 
-            /// <summary>Arg->Asn substitution.</summary>
+            /// <summary>Arg-&gt;Asn substitution.</summary>
             UNIMOD_Arg__Asn,
 
-            /// <summary>Arg->Val substitution.</summary>
+            /// <summary>Arg-&gt;Val substitution.</summary>
             UNIMOD_Arg__Val,
 
-            /// <summary>Arg->Tyr substitution.</summary>
+            /// <summary>Arg-&gt;Tyr substitution.</summary>
             UNIMOD_Arg__Tyr,
 
-            /// <summary>Arg->Phe substitution.</summary>
+            /// <summary>Arg-&gt;Phe substitution.</summary>
             UNIMOD_Arg__Phe,
 
-            /// <summary>Ser->Asp substitution.</summary>
+            /// <summary>Ser-&gt;Asp substitution.</summary>
             UNIMOD_Ser__Asp,
 
-            /// <summary>Ser->Glu substitution.</summary>
+            /// <summary>Ser-&gt;Glu substitution.</summary>
             UNIMOD_Ser__Glu,
 
-            /// <summary>Ser->His substitution.</summary>
+            /// <summary>Ser-&gt;His substitution.</summary>
             UNIMOD_Ser__His,
 
-            /// <summary>Ser->Lys substitution.</summary>
+            /// <summary>Ser-&gt;Lys substitution.</summary>
             UNIMOD_Ser__Lys,
 
-            /// <summary>Ser->Met substitution.</summary>
+            /// <summary>Ser-&gt;Met substitution.</summary>
             UNIMOD_Ser__Met,
 
-            /// <summary>Ser->Gln substitution.</summary>
+            /// <summary>Ser-&gt;Gln substitution.</summary>
             UNIMOD_Ser__Gln,
 
-            /// <summary>Ser->Val substitution.</summary>
+            /// <summary>Ser-&gt;Val substitution.</summary>
             UNIMOD_Ser__Val,
 
-            /// <summary>Thr->Cys substitution.</summary>
+            /// <summary>Thr-&gt;Cys substitution.</summary>
             UNIMOD_Thr__Cys,
 
-            /// <summary>Thr->Asp substitution.</summary>
+            /// <summary>Thr-&gt;Asp substitution.</summary>
             UNIMOD_Thr__Asp,
 
-            /// <summary>Thr->Glu substitution.</summary>
+            /// <summary>Thr-&gt;Glu substitution.</summary>
             UNIMOD_Thr__Glu,
 
-            /// <summary>Thr->Phe substitution.</summary>
+            /// <summary>Thr-&gt;Phe substitution.</summary>
             UNIMOD_Thr__Phe,
 
-            /// <summary>Thr->Gly substitution.</summary>
+            /// <summary>Thr-&gt;Gly substitution.</summary>
             UNIMOD_Thr__Gly,
 
-            /// <summary>Thr->His substitution.</summary>
+            /// <summary>Thr-&gt;His substitution.</summary>
             UNIMOD_Thr__His,
 
-            /// <summary>Thr->Gln substitution.</summary>
+            /// <summary>Thr-&gt;Gln substitution.</summary>
             UNIMOD_Thr__Gln,
 
-            /// <summary>Thr->Val substitution.</summary>
+            /// <summary>Thr-&gt;Val substitution.</summary>
             UNIMOD_Thr__Val,
 
-            /// <summary>Thr->Trp substitution.</summary>
+            /// <summary>Thr-&gt;Trp substitution.</summary>
             UNIMOD_Thr__Trp,
 
-            /// <summary>Thr->Tyr substitution.</summary>
+            /// <summary>Thr-&gt;Tyr substitution.</summary>
             UNIMOD_Thr__Tyr,
 
-            /// <summary>Val->Cys substitution.</summary>
+            /// <summary>Val-&gt;Cys substitution.</summary>
             UNIMOD_Val__Cys,
 
-            /// <summary>Val->His substitution.</summary>
+            /// <summary>Val-&gt;His substitution.</summary>
             UNIMOD_Val__His,
 
-            /// <summary>Val->Lys substitution.</summary>
+            /// <summary>Val-&gt;Lys substitution.</summary>
             UNIMOD_Val__Lys,
 
-            /// <summary>Val->Asn substitution.</summary>
+            /// <summary>Val-&gt;Asn substitution.</summary>
             UNIMOD_Val__Asn,
 
-            /// <summary>Val->Pro substitution.</summary>
+            /// <summary>Val-&gt;Pro substitution.</summary>
             UNIMOD_Val__Pro,
 
-            /// <summary>Val->Gln substitution.</summary>
+            /// <summary>Val-&gt;Gln substitution.</summary>
             UNIMOD_Val__Gln,
 
-            /// <summary>Val->Arg substitution.</summary>
+            /// <summary>Val-&gt;Arg substitution.</summary>
             UNIMOD_Val__Arg,
 
-            /// <summary>Val->Ser substitution.</summary>
+            /// <summary>Val-&gt;Ser substitution.</summary>
             UNIMOD_Val__Ser,
 
-            /// <summary>Val->Thr substitution.</summary>
+            /// <summary>Val-&gt;Thr substitution.</summary>
             UNIMOD_Val__Thr,
 
-            /// <summary>Val->Trp substitution.</summary>
+            /// <summary>Val-&gt;Trp substitution.</summary>
             UNIMOD_Val__Trp,
 
-            /// <summary>Val->Tyr substitution.</summary>
+            /// <summary>Val-&gt;Tyr substitution.</summary>
             UNIMOD_Val__Tyr,
 
-            /// <summary>Trp->Ala substitution.</summary>
+            /// <summary>Trp-&gt;Ala substitution.</summary>
             UNIMOD_Trp__Ala,
 
-            /// <summary>Trp->Asp substitution.</summary>
+            /// <summary>Trp-&gt;Asp substitution.</summary>
             UNIMOD_Trp__Asp,
 
-            /// <summary>Trp->Glu substitution.</summary>
+            /// <summary>Trp-&gt;Glu substitution.</summary>
             UNIMOD_Trp__Glu,
 
-            /// <summary>Trp->Phe substitution.</summary>
+            /// <summary>Trp-&gt;Phe substitution.</summary>
             UNIMOD_Trp__Phe,
 
-            /// <summary>Trp->His substitution.</summary>
+            /// <summary>Trp-&gt;His substitution.</summary>
             UNIMOD_Trp__His,
 
-            /// <summary>Trp->Lys substitution.</summary>
+            /// <summary>Trp-&gt;Lys substitution.</summary>
             UNIMOD_Trp__Lys,
 
-            /// <summary>Trp->Met substitution.</summary>
+            /// <summary>Trp-&gt;Met substitution.</summary>
             UNIMOD_Trp__Met,
 
-            /// <summary>Trp->Asn substitution.</summary>
+            /// <summary>Trp-&gt;Asn substitution.</summary>
             UNIMOD_Trp__Asn,
 
-            /// <summary>Trp->Pro substitution.</summary>
+            /// <summary>Trp-&gt;Pro substitution.</summary>
             UNIMOD_Trp__Pro,
 
-            /// <summary>Trp->Gln substitution.</summary>
+            /// <summary>Trp-&gt;Gln substitution.</summary>
             UNIMOD_Trp__Gln,
 
-            /// <summary>Trp->Thr substitution.</summary>
+            /// <summary>Trp-&gt;Thr substitution.</summary>
             UNIMOD_Trp__Thr,
 
-            /// <summary>Trp->Val substitution.</summary>
+            /// <summary>Trp-&gt;Val substitution.</summary>
             UNIMOD_Trp__Val,
 
-            /// <summary>Trp->Tyr substitution.</summary>
+            /// <summary>Trp-&gt;Tyr substitution.</summary>
             UNIMOD_Trp__Tyr,
 
-            /// <summary>Tyr->Ala substitution.</summary>
+            /// <summary>Tyr-&gt;Ala substitution.</summary>
             UNIMOD_Tyr__Ala,
 
-            /// <summary>Tyr->Glu substitution.</summary>
+            /// <summary>Tyr-&gt;Glu substitution.</summary>
             UNIMOD_Tyr__Glu,
 
-            /// <summary>Tyr->Gly substitution.</summary>
+            /// <summary>Tyr-&gt;Gly substitution.</summary>
             UNIMOD_Tyr__Gly,
 
-            /// <summary>Tyr->Lys substitution.</summary>
+            /// <summary>Tyr-&gt;Lys substitution.</summary>
             UNIMOD_Tyr__Lys,
 
-            /// <summary>Tyr->Met substitution.</summary>
+            /// <summary>Tyr-&gt;Met substitution.</summary>
             UNIMOD_Tyr__Met,
 
-            /// <summary>Tyr->Pro substitution.</summary>
+            /// <summary>Tyr-&gt;Pro substitution.</summary>
             UNIMOD_Tyr__Pro,
 
-            /// <summary>Tyr->Gln substitution.</summary>
+            /// <summary>Tyr-&gt;Gln substitution.</summary>
             UNIMOD_Tyr__Gln,
 
-            /// <summary>Tyr->Arg substitution.</summary>
+            /// <summary>Tyr-&gt;Arg substitution.</summary>
             UNIMOD_Tyr__Arg,
 
-            /// <summary>Tyr->Thr substitution.</summary>
+            /// <summary>Tyr-&gt;Thr substitution.</summary>
             UNIMOD_Tyr__Thr,
 
-            /// <summary>Tyr->Val substitution.</summary>
+            /// <summary>Tyr-&gt;Val substitution.</summary>
             UNIMOD_Tyr__Val,
 
-            /// <summary>Tyr->Trp substitution.</summary>
+            /// <summary>Tyr-&gt;Trp substitution.</summary>
             UNIMOD_Tyr__Trp,
 
-            /// <summary>Tyr->Leu/Ile substitution.</summary>
+            /// <summary>Tyr-&gt;Leu/Ile substitution.</summary>
             UNIMOD_Tyr__Xle,
 
             /// <summary>Azidohomoalanine coupled to reductively cleaved tag.</summary>
@@ -17669,16 +17732,16 @@ namespace PSI_Interface.CV
             /// <summary>A quality inhering in a bearer by virtue of its visibility.</summary>
             PATO_conspicuousness,
 
-            /// <summary>The bearer of this quality has_part < n of the indicated entity type, where n is the normal amount for a comparable organism. Note that the bearer of the quality is the whole, not the part. Formally: If a bearer entity e has fewer parts of type X at time t, then the number of instances x of X at t such that x part_of e is < n, where n is either the normal number for comparable entities, or n is stated explicitly. This case includes the limit case, where the bearer lacks all parts of the specified type.</summary>
+            /// <summary>The bearer of this quality has_part &lt; n of the indicated entity type, where n is the normal amount for a comparable organism. Note that the bearer of the quality is the whole, not the part. Formally: If a bearer entity e has fewer parts of type X at time t, then the number of instances x of X at t such that x part_of e is &lt; n, where n is either the normal number for comparable entities, or n is stated explicitly. This case includes the limit case, where the bearer lacks all parts of the specified type.</summary>
             PATO_lacks_parts_or_has_fewer_parts_of_type,
 
             /// <summary>A quality of physical entities inhering in a bearer by virtue of the bearer's lacking a physical part as specified by the additional entity.</summary>
             PATO_lacks_all_parts_of_type,
 
-            /// <summary>The bearer of this quality has_part < n AND has_part > 0 of the indicated entity type, where n is the normal amount for a comparable organism. Note that the bearer of the quality is the whole, not the part. Formally: If a bearer entity e has fewer parts of type X at time t, then the number of instances x of X at t such that x part_of e is < n, where n is either the normal number for comparable entities, or n is stated explicitly.</summary>
+            /// <summary>The bearer of this quality has_part &lt; n AND has_part &gt; 0 of the indicated entity type, where n is the normal amount for a comparable organism. Note that the bearer of the quality is the whole, not the part. Formally: If a bearer entity e has fewer parts of type X at time t, then the number of instances x of X at t such that x part_of e is &lt; n, where n is either the normal number for comparable entities, or n is stated explicitly.</summary>
             PATO_has_fewer_parts_of_type,
 
-            /// <summary>The bearer of this quality has_part > n of the indicated entity type, where n is the normal amount for a comparable organism. Note that the bearer of the quality is the whole, not the part.</summary>
+            /// <summary>The bearer of this quality has_part &gt; n of the indicated entity type, where n is the normal amount for a comparable organism. Note that the bearer of the quality is the whole, not the part.</summary>
             PATO_has_extra_parts_of_type,
 
             /// <summary>A quality that inheres in an entire population or part of a population.</summary>

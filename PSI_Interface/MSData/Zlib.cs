@@ -4,8 +4,17 @@ using System.IO.Compression;
 
 namespace PSI_Interface.MSData
 {
+    /// <summary>
+    /// Class for dealing with zlib compressed data
+    /// </summary>
     public static class Zlib
     {
+        /// <summary>
+        /// Decompress zlib-compressed bytes
+        /// </summary>
+        /// <param name="compressedBytes"></param>
+        /// <param name="expectedBytes"></param>
+        /// <returns></returns>
         public static byte[] DecompressZLib(byte[] compressedBytes, int expectedBytes)
         {
             var msCompressed = new MemoryStream(compressedBytes);
@@ -41,6 +50,12 @@ namespace PSI_Interface.MSData
             return newBytes;
         }
 
+        /// <summary>
+        /// Compress bytes using zlib compression
+        /// </summary>
+        /// <param name="decompressedBytes"></param>
+        /// <param name="compressedBytes"></param>
+        /// <returns></returns>
         public static byte[] CompressZLib(byte[] decompressedBytes, out int compressedBytes)
         {
             var msDecompressed = new MemoryStream(decompressedBytes);

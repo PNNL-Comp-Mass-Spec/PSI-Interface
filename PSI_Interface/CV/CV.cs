@@ -12,13 +12,44 @@ namespace PSI_Interface.CV
     /// </summary>
     public static partial class CV
     {
+        /// <summary>
+        /// CV term is-a relationships
+        /// </summary>
         public static readonly Dictionary<CVID, List<CVID>> RelationsIsA = new Dictionary<CVID, List<CVID>>();
+
+        /// <summary>
+        /// CV term children relationships
+        /// </summary>
         public static readonly Dictionary<CVID, List<CVID>> RelationsChildren = new Dictionary<CVID, List<CVID>>();
+        
+        /// <summary>
+        /// CV term part-of relationships
+        /// </summary>
         public static readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();
+
+        /// <summary>
+        /// CV term exact synonym relations
+        /// </summary>
         public static readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();
+
+        /// <summary>
+        /// CV term other relations
+        /// </summary>
         public static readonly Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>>();
+
+        /// <summary>
+        /// CV term extra data
+        /// </summary>
         public static readonly Dictionary<CVID, TermInfo> TermData = new Dictionary<CVID, TermInfo>();
+
+        /// <summary>
+        /// CV descriptive information
+        /// </summary>
         public static readonly List<CVInfo> CVInfoList = new List<CVInfo>();
+
+        /// <summary>
+        /// Mapping from CV to CV term accession to CV term enum
+        /// </summary>
         public static readonly Dictionary<string, Dictionary<string, CVID>> TermAccessionLookup = new Dictionary<string, Dictionary<string, CVID>>();
 
         /// <summary>
@@ -26,11 +57,33 @@ namespace PSI_Interface.CV
         /// </summary>
         public class CVInfo
         {
+            /// <summary>
+            /// CV identifier
+            /// </summary>
             public string Id { get; private set; }
+
+            /// <summary>
+            /// CV name
+            /// </summary>
             public string Name { get; private set; }
+
+            /// <summary>
+            /// CV URI
+            /// </summary>
             public string URI { get; private set; }
+
+            /// <summary>
+            /// CV Version
+            /// </summary>
             public string Version { get; private set; }
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="pId">CV Identifier</param>
+            /// <param name="pName">CV Name</param>
+            /// <param name="pURI">CV URI</param>
+            /// <param name="pVersion">CV Version</param>
             public CVInfo(string pId, string pName, string pURI, string pVersion)
             {
                 Id = pId;
@@ -45,13 +98,45 @@ namespace PSI_Interface.CV
         /// </summary>
         public class TermInfo
         {
+            /// <summary>
+            /// Term enum identifier
+            /// </summary>
             public CVID Cvid { get; private set; }
+
+            /// <summary>
+            /// Term parent CV
+            /// </summary>
             public string CVRef { get; private set; }
+
+            /// <summary>
+            /// Term identifier
+            /// </summary>
             public string Id { get; private set; }
+
+            /// <summary>
+            /// Term name
+            /// </summary>
             public string Name { get; private set; }
+
+            /// <summary>
+            /// Term definition
+            /// </summary>
             public string Definition { get; private set; }
+
+            /// <summary>
+            /// If the term is marked obsolete
+            /// </summary>
             public bool IsObsolete { get; private set; }
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="pCVID">Term enum identifier</param>
+            /// <param name="pCVRef">term parent CV</param>
+            /// <param name="pId">term identifier</param>
+            /// <param name="pName">term name</param>
+            /// <param name="pDef">term definition</param>
+            /// <param name="pIsObs">if the term is marked obsolete</param>
             public TermInfo(CVID pCVID, string pCVRef, string pId, string pName, string pDef, bool pIsObs)
             {
                 Cvid = pCVID;
