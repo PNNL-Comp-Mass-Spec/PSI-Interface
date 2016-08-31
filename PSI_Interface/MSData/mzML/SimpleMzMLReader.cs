@@ -562,13 +562,13 @@ namespace PSI_Interface.MSData.mzML
         /// Uses "yield return" to allow processing one spectra at a time if called from a foreach loop statement.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<SimpleSpectrum> ReadAllSpectra()
+        public IEnumerable<SimpleSpectrum> ReadAllSpectra(bool includePeaks = true)
         {
             if (!_randomAccess)
             {
                 // Apparently the only way to effectively cascade yield return?
                 // If it works properly, it should be basically invisible
-                foreach (var spec in ReadAllSpectraNonRandom())
+                foreach (var spec in ReadAllSpectraNonRandom(includePeaks))
                 {
                     yield return spec;
                 }
@@ -577,7 +577,7 @@ namespace PSI_Interface.MSData.mzML
             {
                 // Apparently the only way to effectively cascade yield return?
                 // If it works properly, it should be basically invisible
-                foreach (var spec in ReadAllSpectraRandom())
+                foreach (var spec in ReadAllSpectraRandom(includePeaks))
                 {
                     yield return spec;
                 }
@@ -609,7 +609,7 @@ namespace PSI_Interface.MSData.mzML
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<SimpleSpectrum> ReadAllSpectraNonRandom()
+        private IEnumerable<SimpleSpectrum> ReadAllSpectraNonRandom(bool includePeaks = true)
         {
             if (_reduceMemoryUsage)
             {
@@ -631,7 +631,7 @@ namespace PSI_Interface.MSData.mzML
                     {
                         // Schema requirements: zero to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                        yield return ReadSpectrum(_xmlReaderForYield.ReadSubtree(), true);
+                        yield return ReadSpectrum(_xmlReaderForYield.ReadSubtree(), includePeaks);
                         // "spectrum" might not have any child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         _xmlReaderForYield.Read();
@@ -679,7 +679,7 @@ namespace PSI_Interface.MSData.mzML
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<SimpleSpectrum> ReadAllSpectraRandom()
+        private IEnumerable<SimpleSpectrum> ReadAllSpectraRandom(bool includePeaks = true)
         {
             if (!_haveIndex || !_haveMetaData)
             {
@@ -687,7 +687,7 @@ namespace PSI_Interface.MSData.mzML
             }
             foreach (var specIndex in _spectrumOffsets.Offsets)
             {
-                yield return ReadMassSpectrumRandom(specIndex.IdNum, true);
+                yield return ReadMassSpectrumRandom(specIndex.IdNum, includePeaks);
             }
         }
 
