@@ -386,8 +386,13 @@ namespace PSI_Interface.IdentData
             }
 
             /// <summary>
-            /// The dictionary of modifications affecting this peptide
+            /// The dictionary of modifications affecting this peptide - key (location of modification) should be considered as being 1-based (see remarks)
             /// </summary>
+            /// <remarks>Key is location of the modification within the peptide - position in peptide sequence,
+            /// counted from the N-terminus residue, starting at position 1. Specific modifications to the N-terminus
+            /// should be given the location 0. Modification to the C-terminus should be given as peptide length + 1.
+            /// If the modification location is unknown e.g. for PMF data, this attribute should be omitted.
+            /// (See mzIdentML specification, version 1.1.0)</remarks>
             public Dictionary<int, Modification> Mods
             {
                 get { return mods; }
