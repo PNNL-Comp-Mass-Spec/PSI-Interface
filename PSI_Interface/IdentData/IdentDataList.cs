@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PSI_Interface.IdentData
 {
@@ -13,9 +9,12 @@ namespace PSI_Interface.IdentData
     /// <typeparam name="T"></typeparam>
     public class IdentDataList<T> : List<T> where T : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create a new list
+        /// </summary>
         public IdentDataList()
         {
-            this._identData = new IdentDataObj(false);
+            this._identData = null;
         }
 
         //public event EventHandler OnAdd;
@@ -25,19 +24,30 @@ namespace PSI_Interface.IdentData
         // But, I can do it with an array, but it is potentially more expensive (from conversion to array)
         // The only reason to to allow those using the interface to use a list, without using a special function to set the list...
         // Not sure if it is worth the cost.
+        /// <summary>
+        /// Attempt at converting from an array to an IdentDataList
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public static implicit operator IdentDataList<T>(T[] items)
         {
             return new IdentDataList<T>(items);
         }
 
-        public IdentDataList(IEnumerable<T> items)
+        /// <summary>
+        /// Create a new list and populate it with the provided items.
+        /// </summary>
+        /// <param name="items"></param>
+        public IdentDataList(IEnumerable<T> items) : base(items)
         {
-            this._identData = new IdentDataObj(false);
-            this.AddRange(items);
+            this._identData = null;
         }
 
         private IdentDataObj _identData;
 
+        /// <summary>
+        /// IdentData object that all items in the list should be tied to.
+        /// </summary>
         public IdentDataObj IdentData
         {
             get { return _identData; }
@@ -49,8 +59,18 @@ namespace PSI_Interface.IdentData
                     foreach (T item in this)
                     {
                         item.IdentData = this._identData;
+                        //item.CascadeProperties();
                     }
                 }
+            }
+        }
+
+        internal void CascadeProperties()
+        {
+            foreach (T item in this)
+            {
+                item.IdentData = this._identData;
+                item.CascadeProperties();
             }
         }
 

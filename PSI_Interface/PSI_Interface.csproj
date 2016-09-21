@@ -47,6 +47,7 @@
     <Compile Include="CV\CV.cs" />
     <Compile Include="CV\CVTranslator.cs" />
     <Compile Include="CV\CV_generated.cs" />
+    <Compile Include="IdentData\IdentDataCreator.cs" />
     <Compile Include="IdentData\IdentDataInternalTypeAbstract.cs" />
     <Compile Include="IdentData\IdentData.cs" />
     <Compile Include="IdentData\IdentDataList.cs" />

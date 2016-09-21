@@ -46,6 +46,7 @@
     <Compile Include="CVTests\CVTests.cs" />
     <Compile Include="IdentDataTests\IdentDataReadTests.cs" />
     <Compile Include="IdentDataTests\IdentDataWriteTests.cs" />
+    <Compile Include="IdentDataTests\MsPathfinderMzidCreation.cs" />
     <Compile Include="IdentDataTests\SimpleMZIdentMLReaderTests.cs" />
     <Compile Include="MSDataTests\MSDataReadTests.cs" />
     <Compile Include="MSDataTests\MSDataWriteTests.cs" />
