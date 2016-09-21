@@ -2,6 +2,9 @@
 
 namespace PSI_Interface.IdentData
 {
+    /// <summary>
+    /// Base abstraction for all IdentData types to tie them to the root object
+    /// </summary>
     public abstract class IdentDataInternalTypeAbstract
     {
         internal IdentDataInternalTypeAbstract()

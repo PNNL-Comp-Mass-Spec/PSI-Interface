@@ -1,247 +1,19 @@
 ﻿using System.Collections.Generic;
-using PSI_Interface.CV;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData
 {
-    /// <summary>
-    /// MzIdentML MzIdentMLType
-    /// </summary>
-    /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, 
-    /// protocols and search results (spectrum identifications or protein detection results).</remarks>
-    public partial class IdentDataObj : IIdentifiableType
-    {
-        public IdentDataObj(MzIdentMLType mzid)
-        {
-            this._id = mzid.id;
-            this._name = mzid.name;
-            this._version = mzid.version;
-            this._creationDate = mzid.creationDate;
-            this.CreationDateSpecified = mzid.creationDateSpecified;
-
-            this.CvTranslator = new CVTranslator();
-            this._cvList = null;
-            this._analysisSoftwareList = null;
-            this._provider = null;
-            this._auditCollection = null;
-            this._analysisSampleCollection = null;
-            this._sequenceCollection = null;
-            this._analysisCollection = null;
-            this._analysisProtocolCollection = null;
-            this._dataCollection = null;
-            this._bibliographicReferences = null;
-
-            // Referenced by anything using CV/User params
-            if (mzid.cvList != null && mzid.cvList.Count > 0)
-            {
-                this.CVList = new IdentDataList<CVInfo>();
-                foreach (var cv in mzid.cvList)
-                {
-                    this.CVList.Add(new CVInfo(cv, this));
-                }
-                this.CvTranslator = new CVTranslator(this._cvList);
-            }
-            // Referenced by nothing
-            if (mzid.BibliographicReference != null && mzid.BibliographicReference.Count > 0)
-            {
-                this.BibliographicReferences = new IdentDataList<BibliographicReferenceObj>();
-                foreach (var br in mzid.BibliographicReference)
-                {
-                    this.BibliographicReferences.Add(new BibliographicReferenceObj(br, this));
-                }
-            }
-            // Referenced by anything using organization, person, contactRoleInfo - SampleInfo, ProviderInfo, AnalysisSoftwareInfo
-            if (mzid.AuditCollection != null && mzid.AuditCollection.Count > 0)
-            {
-                this.AuditCollection = new IdentDataList<AbstractContactObj>();
-                foreach (var ac in mzid.AuditCollection)
-                {
-                    if (ac is PersonType)
-                    {
-                        this.AuditCollection.Add(new PersonObj(ac as PersonType, this));
-                    }
-                    else if (ac is OrganizationType)
-                    {
-                        this.AuditCollection.Add(new OrganizationObj(ac as OrganizationType, this));
-                    }
-                }
-            }
-            // Referenced by anything using SampleInfo: SubSample, SpectrumIdentificationItem
-            if (mzid.AnalysisSampleCollection != null && mzid.AnalysisSampleCollection.Count > 0)
-            {
-                this.AnalysisSampleCollection = new IdentDataList<SampleObj>();
-                foreach (var asc in mzid.AnalysisSampleCollection)
-                {
-                    this.AnalysisSampleCollection.Add(new SampleObj(asc, this));
-                }
-            }
-            // Referenced by ProviderInfo, ProteinDetectionProtocol, SpectrumIdentificationProtocol, references AbstractContactInfo through ContactRoleInfo
-            if (mzid.AnalysisSoftwareList != null && mzid.AnalysisSoftwareList.Count > 0)
-            {
-                this.AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>();
-                foreach (var asl in mzid.AnalysisSoftwareList)
-                {
-                    this.AnalysisSoftwareList.Add(new AnalysisSoftwareObj(asl, this));
-                }
-            }
-            // Referenced by nothing, references AnalysisSoftwareInfo
-            if (mzid.Provider != null)
-            {
-                this._provider = new ProviderObj(mzid.Provider, this);
-            }
-            // Referenced by SpectrumIdentification, ProteinDetection, SpectrumIdentificationItem, PeptideEvidence, references AnalysisSoftwareInfo
-            if (mzid.AnalysisProtocolCollection != null)
-            {
-                this._analysisProtocolCollection = new AnalysisProtocolCollectionObj(mzid.AnalysisProtocolCollection, this);
-            }
-            // InputsInfo referenced by DBSequence, SpectrumIdentification.SearchDatabaseRefInfo, SpectrumIdentificationResult, SpectrumIdentification.InputSpectraRef
-            if (mzid.DataCollection != null)
-            {
-                //this._dataCollection = new DataCollection(mzid.DataCollection, this);
-                this._dataCollection = new DataCollectionObj();
-                this._dataCollection.Inputs = new InputsObj(mzid.DataCollection.Inputs, this);
-            }
-            // Referenced by SpectrumIdentificationItem, ProteinDetectionHypothesis, PeptideHypothesis
-            // References InputsInfo.DBSequence, AnalysisProtocolCollection.SoftwareIdentificationProtocol.DatabaseTranslation.TranslationTable
-            if (mzid.SequenceCollection != null)
-            {
-                this._sequenceCollection = new SequenceCollectionObj(mzid.SequenceCollection, this);
-            }
-            // AnalysisData referenced by SpectrumIdentification, InputSpectrumIdentifications, ProteinDetection, references Peptides, PeptideEvidence, SampleInfo, MassTable, 
-            if (mzid.DataCollection != null)
-            {
-                this._dataCollection.AnalysisData = new AnalysisDataObj(mzid.DataCollection.AnalysisData, this);
-            }
-            // References SpectrumIdentificationProtocol, SpectrumIdentificationList, SpectraData, SeqrchDatabaseInfo, ProteinDetectionList, ProteinDetectionProtocol
-            if (mzid.AnalysisCollection != null)
-            {
-                this._analysisCollection = new AnalysisCollectionObj(mzid.AnalysisCollection, this);
-            }
-        }
-
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
-        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
-        /// Required Attribute
-        /// string
-        //public string Id
-
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
-        //public string Name
-
-        /// min 1, max 1
-        //public IdentDataList<CVInfo> CVList
-
-        /// min 0, max 1
-        //public IdentDataList<AnalysisSoftwareInfo> AnalysisSoftwareList
-
-        /// <remarks>The Provider of the mzIdentML record in terms of the contact and software.</remarks>
-        /// min 0, max 1
-        //public ProviderInfo Provider
-
-        /// min 0, max 1
-        //public IdentDataList<AbstractContactInfo> AuditCollection
-
-        /// min 0, max 1
-        //public IdentDataList<SampleInfo> AnalysisSampleCollection
-
-        /// min 0, max 1
-        //public SequenceCollection SequenceCollection
-
-        /// min 1, max 1
-        //public AnalysisCollection AnalysisCollection
-
-        /// min 1, max 1
-        //public AnalysisProtocolCollection AnalysisProtocolCollection
-
-        /// min 1, max 1
-        //public DataCollection DataCollection
-
-        /// <remarks>Any bibliographic references associated with the file</remarks>
-        /// min 0, max unbounded
-        //public IdentDataList<BibliographicReference> BibliographicReferences
-
-        /// <remarks>The date on which the file was produced.</remarks>
-        /// Optional Attribute
-        /// dataTime
-        //public System.DateTime CreationDate
-
-        /// Attribute Existence
-        //public bool CreationDateSpecified
-
-        /// <remarks>The version of the schema this instance document refers to, in the format x.y.z. 
-        /// Changes to z should not affect prevent instance documents from validating.</remarks>
-        /// Required Attribute
-        /// string, regex: "(1\.1\.\d+)"
-        //public string Version
-    }
-
-    /// <summary>
-    /// MzIdentML cvType : Container CVListType
-    /// </summary>
-    /// <remarks>A source controlled vocabulary from which cvParams will be obtained.</remarks>
-    /// 
-    /// <remarks>CVListType: The list of controlled vocabularies used in the file.</remarks>
-    /// <remarks>CVListType: child element cv of type cvType, min 1, max unbounded</remarks>
-    public partial class CVInfo : IdentDataInternalTypeAbstract
-    {
-        public CVInfo(cvType cv, IdentDataObj idata)
-            : base(idata)
-        {
-            this.FullName = cv.fullName;
-            this.Version = cv.version;
-            this.URI = cv.uri;
-            this.Id = cv.id;
-        }
-
-        /// <remarks>The full name of the CV.</remarks>
-        /// Required Attribute
-        /// string
-        //public string FullName
-
-        /// <remarks>The version of the CV.</remarks>
-        /// Optional Attribute
-        /// string
-        //public string Version
-
-        /// <remarks>The URI of the source CV.</remarks>
-        /// Required Attribute
-        /// anyURI
-        //public string URI
-
-        /// <remarks>The unique identifier of this cv within the document to be referenced by cvParam elements.</remarks>
-        /// Required Attribute
-        /// string
-        //public string Id
-    }
-
-    /// <summary>
-    /// MzIdentML SpectrumIdentificationItemRefType
-    /// </summary>
-    /// <remarks>Reference(s) to the SpectrumIdentificationItem element(s) that support the given PeptideEvidence element. 
-    /// Using these references it is possible to indicate which spectra were actually accepted as evidence for this 
-    /// peptide identification in the given protein.</remarks>
-    public partial class SpectrumIdentificationItemRefObj : IdentDataInternalTypeAbstract
-    {
-        public SpectrumIdentificationItemRefObj(SpectrumIdentificationItemRefType siir, IdentDataObj idata)
-            : base(idata)
-        {
-            this.SpectrumIdentificationItemRef = siir.spectrumIdentificationItem_ref;
-        }
-
-        /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
-        /// Required Attribute
-        /// string
-        //public string SpectrumIdentificationItemRef
-    }
-
     /// <summary>
     /// MzIdentML PeptideHypothesisType
     /// </summary>
     /// <remarks>Peptide evidence on which this ProteinHypothesis is based by reference to a PeptideEvidence element.</remarks>
     public partial class PeptideHypothesisObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="ph"></param>
+        /// <param name="idata"></param>
         public PeptideHypothesisObj(PeptideHypothesisType ph, IdentDataObj idata)
             : base(idata)
         {
@@ -259,13 +31,13 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<SpectrumIdentificationItemRefInfo> SpectrumIdentificationItemRef
 
         /// <remarks>A reference to the PeptideEvidence element on which this hypothesis is based.</remarks>
         /// Required Attribute
         /// string
-        //public string PeptideEvidenceRef
+        //public string PeptideEvidenceRef*/
     }
 
     /// <summary>
@@ -274,6 +46,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>An array of values for a given type of measure and for a particular ion type, in parallel to the index of ions identified.</remarks>
     public partial class FragmentArrayObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="fa"></param>
+        /// <param name="idata"></param>
         public FragmentArrayObj(FragmentArrayType fa, IdentDataObj idata)
             : base(idata)
         {
@@ -286,7 +63,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>The values of this particular measure, corresponding to the index defined in ion type</remarks>
+        /*/// <remarks>The values of this particular measure, corresponding to the index defined in ion type</remarks>
         /// Required Attribute
         /// listOfFloats: string, space-separated floats
         //public List<float> Values
@@ -294,7 +71,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the Measure defined in the FragmentationTable</remarks>
         /// Required Attribute
         /// string
-        //public string MeasureRef
+        //public string MeasureRef*/
     }
 
     /// <summary>
@@ -307,6 +84,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>FragmentationType: child element IonType, of type IonTypeType, min 1, max unbounded</remarks>
     public partial class IonTypeObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="it"></param>
+        /// <param name="idata"></param>
         public IonTypeObj(IonTypeType it, IdentDataObj idata)
             : base(idata)
         {
@@ -326,7 +108,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /*/// min 0, max unbounded
         //public IdentDataList<FragmentArray> FragmentArray
 
         /// <remarks>The type of ion identified.</remarks>
@@ -341,276 +123,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The charge of the identified fragmentation ions.</remarks>
         /// Required Attribute
         /// integer
-        //public int Charge
-    }
-
-    /// <summary>
-    /// MzIdentML CVParamType; Container types: ToleranceType
-    /// </summary>
-    /// <remarks>A single entry from an ontology or a controlled vocabulary.</remarks>
-    /// <remarks>ToleranceType: The tolerance of the search given as a plus and minus value with units.</remarks>
-    /// <remarks>ToleranceType: child element cvParam of type CVParamType, min 1, max unbounded "CV terms capturing the tolerance plus and minus values."</remarks>
-    public partial class CVParamObj : ParamBaseObj
-    {
-        //public CVParam(CVParamType cvp, IdentData idata)
-        //    : base(cvp, idata)
-        public CVParamObj(CVParamType cvp, IdentDataObj idata)
-            : base(idata)
-        {
-            this.CVRef = cvp.cvRef;
-            //this._name = cvp.name;
-            //this._accession = cvp.accession;
-            this.Accession = cvp.accession;
-            this._value = cvp.value;
-
-            this.UnitCvRef = cvp.unitCvRef;
-            //this._unitAccession = cvp.unitAccession;
-            this.UnitAccession = cvp.unitAccession;
-            //this._unitName = cvp.unitName;
-
-            //this._cvid = CV.CV.CVID.CVID_Unknown;
-        }
-
-        //public CV.CV.CVID Cvid
-
-        /// <remarks>A reference to the cv element from which this term originates.</remarks>
-        /// Required Attribute
-        /// string
-        //public string CVRef
-
-        /// <remarks>The accession or ID number of this CV term in the source CV.</remarks>
-        /// Required Attribute
-        /// string
-        //public string Accession
-
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
-        //public override string Name
-
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
-        //public override string Value
-    }
-
-    /// <summary>
-    /// MzIdentML AbstractParamType; Used instead of: ParamType, ParamGroup, ParamListType
-    /// </summary>
-    /// <remarks>Abstract entity allowing either cvParam or userParam to be referenced in other schemas.</remarks>
-    /// <remarks>PramGroup: A choice of either a cvParam or userParam.</remarks>
-    /// <remarks>ParamType: Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
-    /// <remarks>ParamListType: Helper type to allow multiple cvParams or userParams to be given for an element.</remarks>
-    public abstract partial class ParamBaseObj : IdentDataInternalTypeAbstract
-    {
-        /*public ParamBase(AbstractParamType ap, IdentData idata)
-            : base(idata)
-        {
-            this._unitsSet = false;
-            this.UnitCvRef = ap.unitCvRef;
-            //this._unitAccession = ap.unitAccession;
-            this.UnitAccession = ap.unitAccession;
-            //this._unitName = ap.unitName;
-
-            //this._unitCvid = CV.CV.CVID.CVID_Unknown;
-        }*/
-
-        public ParamBaseObj(IdentDataObj idata)
-            : base(idata)
-        {
-            this._unitsSet = false;
-            //this.UnitCvRef = ap.unitCvRef;
-            //this._unitAccession = ap.unitAccession;
-            //this.UnitAccession = ap.unitAccession;
-            //this._unitName = ap.unitName;
-
-            //this._unitCvid = CV.CV.CVID.CVID_Unknown;
-        }
-
-        // Name and value are abstract properties, because name will be handled differently in CVParams, and value can also have restrictions based on the CVParam.
-
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
-        //public abstract string Name
-
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
-        //public abstract string Value
-
-        //public CV.CV.CVID UnitCvid
-
-        /// <remarks>An accession number identifying the unit within the OBO foundry Unit CV.</remarks>
-        /// Optional Attribute
-        /// string
-        //public string UnitAccession
-
-        /// <remarks>The name of the unit.</remarks>
-        /// Optional Attribute
-        /// string
-        //public string UnitName
-
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this file.</remarks>
-        /// Optional Attribute
-        /// string
-        //public string UnitCvRef
-    }
-
-    /// <summary>
-    /// MzIdentML UserParamType
-    /// </summary>
-    /// <remarks>A single user-defined parameter.</remarks>
-    public partial class UserParamObj : ParamBaseObj
-    {
-        //public UserParam(UserParamType up, IdentData idata)
-        //    : base(up, idata)
-        public UserParamObj(UserParamType up, IdentDataObj idata)
-            : base(idata)
-        {
-            this._name = up.name;
-            this._value = up.value;
-            this._type = up.type;
-
-            this.UnitCvRef = up.unitCvRef;
-            //this._unitAccession = up.unitAccession;
-            this.UnitAccession = up.unitAccession;
-            //this._unitName = up.unitName;
-        }
-
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
-        //public override string Name
-
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
-        //public override string Value
-
-        /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>
-        /// Optional Attribute
-        /// string
-        //public string Type
-    }
-
-    public partial class CVParamGroupObj : IdentDataInternalTypeAbstract
-    {
-        public CVParamGroupObj(ICVParamGroup cvpg, IdentDataObj idata)
-            : base(idata)
-        {
-            this._cvParams = null;
-
-            if (cvpg.cvParam != null && cvpg.cvParam.Count > 0)
-            {
-                this.CVParams = new IdentDataList<CVParamObj>();
-                foreach (var cvp in cvpg.cvParam)
-                {
-                    this.CVParams.Add(new CVParamObj(cvp, this.IdentData));
-                }
-            }
-        }
-
-        //public IdentDataList<CVParam> CVParams
-    }
-
-    public partial class ParamGroupObj : CVParamGroupObj
-    {
-        public ParamGroupObj(IParamGroup pg, IdentDataObj idata)
-            : base(pg, idata)
-        {
-            this._userParams = null;
-
-            if (pg.userParam != null && pg.userParam.Count > 0)
-            {
-                this.UserParams = new IdentDataList<UserParamObj>();
-                foreach (var up in pg.userParam)
-                {
-                    this.UserParams.Add(new UserParamObj(up, this.IdentData));
-                }
-            }
-        }
-
-        //public IdentDataList<UserParam> UserParams
-    }
-
-    /// <summary>
-    /// MzIdentML ParamType
-    /// </summary>
-    /// <remarks>Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
-    public partial class ParamObj : IdentDataInternalTypeAbstract
-    {
-        public ParamObj(ParamType p, IdentDataObj idata)
-            : base(idata)
-        {
-            this._item = null;
-
-            if (p.Item != null)
-            {
-                if (p.Item is CVParamType)
-                {
-                    this._item = new CVParamObj(p.Item as CVParamType, this.IdentData);
-                }
-                else if (p.Item is UserParamType)
-                {
-                    this._item = new UserParamObj(p.Item as UserParamType, this.IdentData);
-                }
-            }
-        }
-
-        /// min 1, max 1
-        //public ParamBase Item
-    }
-
-    /// <summary>
-    /// MzIdentML ParamListType
-    /// </summary>
-    /// <remarks>Helper type to allow multiple cvParams or userParams to be given for an element.</remarks>
-    public partial class ParamListObj : IdentDataInternalTypeAbstract
-    {
-        public ParamListObj(ParamListType pl, IdentDataObj idata)
-            : base(idata)
-        {
-            this._items = null;
-
-            if (pl != null && pl.Items.Count > 0)
-            {
-                this.Items = new IdentDataList<ParamBaseObj>();
-                foreach (var p in pl.Items)
-                {
-                    if (p is CVParamType)
-                    {
-                        this.Items.Add(new CVParamObj(p as CVParamType, this.IdentData));
-                    }
-                    else if (p is UserParamType)
-                    {
-                        this.Items.Add(new UserParamObj(p as UserParamType, this.IdentData));
-                    }
-                }
-            }
-        }
-
-        /// min 1, max unbounded
-        //public IdentDataList<ParamBase> Items
-    }
-
-    /// <summary>
-    /// MzIdentML PeptideEvidenceRefType
-    /// </summary>
-    /// <remarks>Reference to the PeptideEvidence element identified. If a specific sequence can be assigned to multiple 
-    /// proteins and or positions in a protein all possible PeptideEvidence elements should be referenced here.</remarks>
-    public partial class PeptideEvidenceRefObj : IdentDataInternalTypeAbstract
-    {
-        public PeptideEvidenceRefObj(PeptideEvidenceRefType per, IdentDataObj idata)
-            : base(idata)
-        {
-            this.PeptideEvidenceRef = per.peptideEvidence_ref;
-        }
-
-        /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
-        /// Required Attribute
-        /// string
-        //public string PeptideEvidenceRef
+        //public int Charge*/
     }
 
     /// <summary>
@@ -619,6 +132,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>Data sets generated by the analyses, including peptide and protein lists.</remarks>
     public partial class AnalysisDataObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="ad"></param>
+        /// <param name="idata"></param>
         public AnalysisDataObj(AnalysisDataType ad, IdentDataObj idata)
             : base(idata)
         {
@@ -639,11 +157,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<SpectrumIdentificationList> SpectrumIdentificationList
 
         /// min 0, max 1
-        //public ProteinDetectionList ProteinDetectionList
+        //public ProteinDetectionList ProteinDetectionList*/
     }
 
     /// <summary>
@@ -652,6 +170,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>Represents the set of all search results from SpectrumIdentification.</remarks>
     public partial class SpectrumIdentificationListObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sil"></param>
+        /// <param name="idata"></param>
         public SpectrumIdentificationListObj(SpectrumIdentificationListType sil, IdentDataObj idata)
             : base(sil, idata)
         {
@@ -681,7 +204,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -712,7 +235,7 @@ namespace PSI_Interface.IdentData
         //public long NumSequencesSearched
 
         /// Attribute Existence
-        //public bool NumSequencesSearchedSpecified
+        //public bool NumSequencesSearchedSpecified*/
     }
 
     /// <summary>
@@ -724,6 +247,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>FragmentationTableType: child element Measure of type MeasureType, min 1, max unbounded</remarks>
     public partial class MeasureObj : CVParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="idata"></param>
         public MeasureObj(MeasureType m, IdentDataObj idata)
             : base(m, idata)
         {
@@ -731,7 +259,7 @@ namespace PSI_Interface.IdentData
             this._name = m.name;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -743,15 +271,15 @@ namespace PSI_Interface.IdentData
         //public string Name
 
         /// min 1, max unbounded
-        //public IdentDataList<CVParamType> CVParams
+        //public IdentDataList<CVParamType> CVParams*/
     }
 
-    /// <summary>
+    /*/// <summary>
     /// MzIdentML IdentifiableType
     /// </summary>
     /// <remarks>Other classes in the model can be specified as sub-classes, inheriting from Identifiable. 
     /// Identifiable gives classes a unique identifier within the scope and a name that need not be unique.</remarks>
-    /*public partial interface IIdentifiableType
+    public partial interface IIdentifiableType
     {
         public IIdentifiableType()
         {
@@ -777,6 +305,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>Represents bibliographic references.</remarks>
     public partial class BibliographicReferenceObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="br"></param>
+        /// <param name="idata"></param>
         public BibliographicReferenceObj(BibliographicReferenceType br, IdentDataObj idata)
             : base(idata)
         {
@@ -795,7 +328,7 @@ namespace PSI_Interface.IdentData
             this.DOI = br.doi;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -857,7 +390,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The DOI of the referenced publication.</remarks>
         /// Optional Attribute
         /// string
-        //public string DOI
+        //public string DOI*/
     }
 
     /// <summary>
@@ -866,6 +399,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>A single result of the ProteinDetection analysis (i.e. a protein).</remarks>
     public partial class ProteinDetectionHypothesisObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="pdh"></param>
+        /// <param name="idata"></param>
         public ProteinDetectionHypothesisObj(ProteinDetectionHypothesisType pdh, IdentDataObj idata)
             : base(pdh, idata)
         {
@@ -886,7 +424,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -918,7 +456,7 @@ namespace PSI_Interface.IdentData
         /// threshold or been validated as correct. If no such threshold has been set, value of true should be given for all results.</remarks>
         /// Required Attribute
         /// boolean
-        //public bool PassThreshold
+        //public bool PassThreshold*/
     }
 
     /// <summary>
@@ -927,6 +465,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>A set of logically related results from a protein detection, for example to represent conflicting assignments of peptides to proteins.</remarks>
     public partial class ProteinAmbiguityGroupObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="pag"></param>
+        /// <param name="idata"></param>
         public ProteinAmbiguityGroupObj(ProteinAmbiguityGroupType pag, IdentDataObj idata)
             : base(pag, idata)
         {
@@ -945,7 +488,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -965,7 +508,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
-        //public IdentDataList<UserParamType> UserParams
+        //public IdentDataList<UserParamType> UserParams*/
     }
 
     /// <summary>
@@ -974,6 +517,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The protein list resulting from a protein detection process.</remarks>
     public partial class ProteinDetectionListObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="pdl"></param>
+        /// <param name="idata"></param>
         public ProteinDetectionListObj(ProteinDetectionListType pdl, IdentDataObj idata)
             : base(pdl, idata)
         {
@@ -992,7 +540,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1012,7 +560,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
-        //public IdentDataList<UserParamType> UserParams
+        //public IdentDataList<UserParamType> UserParams*/
     }
 
     /// <summary>
@@ -1023,6 +571,11 @@ namespace PSI_Interface.IdentData
     /// mappings of the corresponding Peptide sequence within protein sequences.</remarks>
     public partial class SpectrumIdentificationItemObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sii"></param>
+        /// <param name="idata"></param>
         public SpectrumIdentificationItemObj(SpectrumIdentificationItemType sii, IdentDataObj idata)
             : base(sii, idata)
         {
@@ -1061,7 +614,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1139,7 +692,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference should be provided to link the SpectrumIdentificationItem to a Sample 
         /// if more than one sample has been described in the AnalysisSampleCollection.</remarks>
         /// Optional Attribute
-        //public string SampleRef
+        //public string SampleRef*/
     }
 
     /// <summary>
@@ -1150,6 +703,11 @@ namespace PSI_Interface.IdentData
     /// SpectrumIdentificationItems corresponding to possible different peptide IDs.</remarks>
     public partial class SpectrumIdentificationResultObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sir"></param>
+        /// <param name="idata"></param>
         public SpectrumIdentificationResultObj(SpectrumIdentificationResultType sir, IdentDataObj idata)
             : base(sir, idata)
         {
@@ -1170,7 +728,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1203,14 +761,14 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to a spectra data set (e.g. a spectra file).</remarks>
         /// Required Attribute
         /// string
-        //public string SpectraDataRef
+        //public string SpectraDataRef*/
     }
 
-    /// <summary>
+    /*/// <summary>
     /// MzIdentML ExternalDataType
     /// </summary>
     /// <remarks>Data external to the XML instance document. The location of the data file is given in the location attribute.</remarks>
-    /*public partial interface IExternalDataType : IIdentifiableType
+    public partial interface IExternalDataType : IIdentifiableType
     {
         public IExternalDataType()
         {
@@ -1239,6 +797,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The format of the ExternalData file, for example "tiff" for image files.</remarks>
     public partial class FileFormatInfo : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="ff"></param>
+        /// <param name="idata"></param>
         public FileFormatInfo(FileFormatType ff, IdentDataObj idata)
             : base(idata)
         {
@@ -1250,10 +813,10 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>cvParam capturing file formats</remarks>
+        /*/// <remarks>cvParam capturing file formats</remarks>
         /// Optional Attribute
         /// min 1, max 1
-        //public CVParam CVParam
+        //public CVParam CVParam*/
     }
 
     /// <summary>
@@ -1262,6 +825,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>A data set containing spectra data (consisting of one or more spectra).</remarks>
     public partial class SpectraDataObj : IdentDataInternalTypeAbstract, IExternalDataType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sd"></param>
+        /// <param name="idata"></param>
         public SpectraDataObj(SpectraDataType sd, IdentDataObj idata)
             : base(idata)
         {
@@ -1283,7 +851,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1308,7 +876,7 @@ namespace PSI_Interface.IdentData
         //public string Location
 
         /// min 1, max 1
-        //public SpectrumIDFormat SpectrumIDFormat
+        //public SpectrumIDFormat SpectrumIDFormat*/
     }
 
     /// <summary>
@@ -1317,6 +885,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The format of the spectrum identifier within the source file</remarks>
     public partial class SpectrumIDFormatObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sidf"></param>
+        /// <param name="idata"></param>
         public SpectrumIDFormatObj(SpectrumIDFormatType sidf, IdentDataObj idata)
             : base(idata)
         {
@@ -1328,9 +901,9 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>CV term capturing the type of identifier used.</remarks>
+        /*/// <remarks>CV term capturing the type of identifier used.</remarks>
         /// min 1, max 1
-        //public CVParam CVParam
+        //public CVParam CVParam*/
     }
 
     /// <summary>
@@ -1339,6 +912,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>A file from which this mzIdentML instance was created.</remarks>
     public partial class SourceFileInfo : ParamGroupObj, IExternalDataType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sf"></param>
+        /// <param name="idata"></param>
         public SourceFileInfo(SourceFileType sf, IdentDataObj idata)
             : base(sf, idata)
         {
@@ -1355,7 +933,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1385,7 +963,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
-        //public IdentDataList<UserParamType> UserParams
+        //public IdentDataList<UserParamType> UserParams*/
     }
 
     /// <summary>
@@ -1394,6 +972,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>A database for searching mass spectra. Examples include a set of amino acid sequence entries, or annotated spectra libraries.</remarks>
     public partial class SearchDatabaseInfo : CVParamGroupObj, IExternalDataType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sd"></param>
+        /// <param name="idata"></param>
         public SearchDatabaseInfo(SearchDatabaseType sd, IdentDataObj idata)
             : base(sd, idata)
         {
@@ -1422,7 +1005,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1481,7 +1064,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks></remarks>
         /// Attribute Existence
-        //public bool NumResiduesSpecified
+        //public bool NumResiduesSpecified*/
     }
 
     /// <summary>
@@ -1490,6 +1073,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The parameters and settings of a ProteinDetection process.</remarks>
     public partial class ProteinDetectionProtocolObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="pdp"></param>
+        /// <param name="idata"></param>
         public ProteinDetectionProtocolObj(ProteinDetectionProtocolType pdp, IdentDataObj idata)
             : base(idata)
         {
@@ -1510,7 +1098,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1533,7 +1121,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The protein detection software used, given as a reference to the SoftwareCollection section.</remarks>
         /// Required Attribute
         /// string
-        //public string AnalysisSoftwareRef
+        //public string AnalysisSoftwareRef*/
     }
 
     /// <summary>
@@ -1542,6 +1130,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The table used to translate codons into nucleic acids e.g. by reference to the NCBI translation table.</remarks>
     public partial class TranslationTableObj : CVParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="tt"></param>
+        /// <param name="idata"></param>
         public TranslationTableObj(TranslationTableType tt, IdentDataObj idata)
             : base(tt, idata)
         {
@@ -1549,7 +1142,7 @@ namespace PSI_Interface.IdentData
             this._name = tt.name;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1563,7 +1156,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The details specifying this translation table are captured as cvParams, e.g. translation table, translation 
         /// start codons and translation table description (see specification document and mapping file)</remarks>
         /// min 0, max unbounded
-        //public IdentDataList<CVParamType> CVParams
+        //public IdentDataList<CVParamType> CVParams*/
     }
 
     /// <summary>
@@ -1572,6 +1165,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The masses of residues used in the search.</remarks>
     public partial class MassTableObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="mt"></param>
+        /// <param name="idata"></param>
         public MassTableObj(MassTableType mt, IdentDataObj idata)
             : base(mt, idata)
         {
@@ -1604,7 +1202,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1633,7 +1231,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The MS spectrum that the MassTable refers to e.g. "1" for MS1 "2" for MS2 or "1 2" for MS1 or MS2.</remarks>
         /// Required Attribute
         /// integer(s), space separated
-        //public List<string> MsLevel
+        //public List<string> MsLevel*/
     }
 
     /// <summary>
@@ -1641,6 +1239,11 @@ namespace PSI_Interface.IdentData
     /// </summary>
     public partial class ResidueObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="idata"></param>
         public ResidueObj(ResidueType r, IdentDataObj idata)
             : base(idata)
         {
@@ -1648,7 +1251,7 @@ namespace PSI_Interface.IdentData
             this._mass = r.mass;
         }
 
-        /// <remarks>The single letter code for the residue.</remarks>
+        /*/// <remarks>The single letter code for the residue.</remarks>
         /// Required Attribute
         /// chars, string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
         //public string Code
@@ -1656,7 +1259,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The residue mass in Daltons (not including any fixed modifications).</remarks>
         /// Required Attribute
         /// float
-        //public float Mass
+        //public float Mass*/
     }
 
     /// <summary>
@@ -1666,13 +1269,18 @@ namespace PSI_Interface.IdentData
     /// for example giving the different masses that will be used in the search.</remarks>
     public partial class AmbiguousResidueObj : ParamGroupObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="ar"></param>
+        /// <param name="idata"></param>
         public AmbiguousResidueObj(AmbiguousResidueType ar, IdentDataObj idata)
             : base(ar, idata)
         {
             this._code = ar.code;
         }
 
-        /// <remarks>___ParamGroup___: Parameters for capturing e.g. "alternate single letter codes"</remarks>
+        /*/// <remarks>___ParamGroup___: Parameters for capturing e.g. "alternate single letter codes"</remarks>
         /// min 0, max unbounded
         //public IdentDataList<CVParamType> CVParams
 
@@ -1683,7 +1291,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The single letter code of the ambiguous residue e.g. X.</remarks>
         /// Required Attribute
         /// chars, string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
-        //public string Code
+        //public string Code*/
     }
 
     /// <summary>
@@ -1693,6 +1301,11 @@ namespace PSI_Interface.IdentData
     /// or a CV term if a "standard" enzyme cleavage has been performed.</remarks>
     public partial class EnzymeObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="idata"></param>
         public EnzymeObj(EnzymeType e, IdentDataObj idata)
             : base(idata)
         {
@@ -1716,7 +1329,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1769,7 +1382,7 @@ namespace PSI_Interface.IdentData
         //public int MinDistance
 
         /// Attribute Existence
-        //public bool MinDistanceSpecified
+        //public bool MinDistanceSpecified*/
     }
 
     /// <summary>
@@ -1778,6 +1391,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The parameters and settings of a SpectrumIdentification analysis.</remarks>
     public partial class SpectrumIdentificationProtocolObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sip"></param>
+        /// <param name="idata"></param>
         public SpectrumIdentificationProtocolObj(SpectrumIdentificationProtocolType sip, IdentDataObj idata)
             : base(idata)
         {
@@ -1858,7 +1476,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1905,7 +1523,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The search algorithm used, given as a reference to the SoftwareCollection section.</remarks>
         /// Required Attribute
         /// string
-        //public string AnalysisSoftwareRef
+        //public string AnalysisSoftwareRef*/
     }
 
     /// <summary>
@@ -1916,13 +1534,18 @@ namespace PSI_Interface.IdentData
     /// fixed or variable status should be provided by the attribute fixedMod.</remarks>
     public partial class SpecificityRulesListObj : CVParamGroupObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sr"></param>
+        /// <param name="idata"></param>
         public SpecificityRulesListObj(SpecificityRulesType sr, IdentDataObj idata)
             : base(sr, idata)
         {
         }
 
-        /// min 1, max unbounded
-        //public IdentDataList<CVParamType> CVParams
+        /*/// min 1, max unbounded
+        //public IdentDataList<CVParamType> CVParams*/
     }
 
     /// <summary>
@@ -1934,6 +1557,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>ModificationParamsType: child element SearchModification, of type SearchModificationType, min 1, max unbounded</remarks>
     public partial class SearchModificationObj : CVParamGroupObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sm"></param>
+        /// <param name="idata"></param>
         public SearchModificationObj(SearchModificationType sm, IdentDataObj idata)
             : base(sm, idata)
         {
@@ -1953,7 +1581,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /*/// min 0, max unbounded
         //public IdentDataList<SpecificityRulesList> SpecificityRules
 
         /// <remarks>The modification is uniquely identified by references to external CVs such as UNIMOD, see 
@@ -1975,7 +1603,7 @@ namespace PSI_Interface.IdentData
         /// on any residue, the . character should be used to specify any, otherwise the list of amino acids should be provided.</remarks>
         /// Required Attribute
         /// listOfCharsOrAny: string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."
-        //public string Residues
+        //public string Residues*/
     }
 
     /// <summary>
@@ -1984,6 +1612,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The list of enzymes used in experiment</remarks>
     public partial class EnzymeListObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="el"></param>
+        /// <param name="idata"></param>
         public EnzymeListObj(EnzymesType el, IdentDataObj idata)
             : base(idata)
         {
@@ -2002,7 +1635,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<Enzyme> Enzymes
 
         /// <remarks>If there are multiple enzymes specified, this attribute is set to true if cleavage with different enzymes is performed independently.</remarks>
@@ -2011,7 +1644,7 @@ namespace PSI_Interface.IdentData
         //public bool Independent
 
         /// Attribute Existence
-        //public bool IndependentSpecified
+        //public bool IndependentSpecified*/
     }
 
     /// <summary>
@@ -2023,6 +1656,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>DatabaseFiltersType: child element Filter, of type FilterType, min 1, max unbounded</remarks>
     public partial class FilterInfo : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="f"></param>
+        /// <param name="idata"></param>
         public FilterInfo(FilterType f, IdentDataObj idata)
             : base(idata)
         {
@@ -2044,7 +1682,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>The type of filter e.g. database taxonomy filter, pi filter, mw filter</remarks>
+        /*/// <remarks>The type of filter e.g. database taxonomy filter, pi filter, mw filter</remarks>
         /// min 1, max 1
         //public Param FilterType
 
@@ -2054,7 +1692,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>All sequences fulfilling the specifed criteria are excluded.</remarks>
         /// min 0, max 1
-        //public ParamList Exclude
+        //public ParamList Exclude*/
     }
 
     /// <summary>
@@ -2063,6 +1701,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>A specification of how a nucleic acid sequence database was translated for searching.</remarks>
     public partial class DatabaseTranslationObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="idata"></param>
         public DatabaseTranslationObj(DatabaseTranslationType dt, IdentDataObj idata)
             : base(idata)
         {
@@ -2083,13 +1726,13 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<TranslationTable> TranslationTable
 
         /// <remarks>The frames in which the nucleic acid sequence has been translated as a space separated IdentDataList</remarks>
         /// Optional Attribute
         /// listOfAllowedFrames: space-separated string, valid values -3, -2, -1, 1, 2, 3
-        //public List<int> Frames
+        //public List<int> Frames*/
     }
 
     /// <summary>
@@ -2099,7 +1742,12 @@ namespace PSI_Interface.IdentData
     /// ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both) as output.</remarks>
     public abstract partial class ProtocolApplicationObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
-        public ProtocolApplicationObj(ProtocolApplicationType pa, IdentDataObj idata)
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="pa"></param>
+        /// <param name="idata"></param>
+        protected ProtocolApplicationObj(ProtocolApplicationType pa, IdentDataObj idata)
             : base(idata)
         {
             this._id = pa.id;
@@ -2108,7 +1756,7 @@ namespace PSI_Interface.IdentData
             this.ActivityDateSpecified = pa.activityDateSpecified;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2125,7 +1773,7 @@ namespace PSI_Interface.IdentData
         //public System.DateTime ActivityDate
 
         /// Attribute Existence
-        //public bool ActivityDateSpecified
+        //public bool ActivityDateSpecified*/
     }
 
     /// <summary>
@@ -2134,6 +1782,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>An Analysis which assembles a set of peptides (e.g. from a spectra search analysis) to proteins.</remarks>
     public partial class ProteinDetectionObj : ProtocolApplicationObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="pd"></param>
+        /// <param name="idata"></param>
         public ProteinDetectionObj(ProteinDetectionType pd, IdentDataObj idata)
             : base(pd, idata)
         {
@@ -2152,7 +1805,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<InputSpectrumIdentifications> InputSpectrumIdentifications
 
         /// <remarks>A reference to the ProteinDetectionList in the DataCollection section.</remarks>
@@ -2163,7 +1816,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the detection protocol used for this ProteinDetection.</remarks>
         /// Required Attribute
         /// string
-        //public string ProteinDetectionProtocolRef
+        //public string ProteinDetectionProtocolRef*/
     }
 
     /// <summary>
@@ -2172,16 +1825,21 @@ namespace PSI_Interface.IdentData
     /// <remarks>The lists of spectrum identifications that are input to the protein detection process.</remarks>
     public partial class InputSpectrumIdentificationsObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="isi"></param>
+        /// <param name="idata"></param>
         public InputSpectrumIdentificationsObj(InputSpectrumIdentificationsType isi, IdentDataObj idata)
             : base(idata)
         {
             this.SpectrumIdentificationListRef = isi.spectrumIdentificationList_ref;
         }
 
-        /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
+        /*/// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
         /// Required Attribute
         /// string
-        //public string SpectrumIdentificationListRef
+        //public string SpectrumIdentificationListRef*/
     }
 
     /// <summary>
@@ -2191,6 +1849,11 @@ namespace PSI_Interface.IdentData
     /// the input spectra, the output results and the protocol that is run.</remarks>
     public partial class SpectrumIdentificationObj : ProtocolApplicationObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="si"></param>
+        /// <param name="idata"></param>
         public SpectrumIdentificationObj(SpectrumIdentificationType si, IdentDataObj idata)
             : base(si, idata)
         {
@@ -2218,7 +1881,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>One of the spectra data sets used.</remarks>
+        /*/// <remarks>One of the spectra data sets used.</remarks>
         /// min 1, max unbounded
         //public IdentDataList<InputSpectraRef> InputSpectra
 
@@ -2233,43 +1896,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</remarks>
         /// Required Attribute
         /// string
-        //public string SpectrumIdentificationListRef
-    }
-
-    /// <summary>
-    /// MzIdentML InputSpectraType
-    /// </summary>
-    /// <remarks>The attribute referencing an identifier within the SpectraData section.</remarks>
-    public partial class InputSpectraRefObj : IdentDataInternalTypeAbstract
-    {
-        public InputSpectraRefObj(InputSpectraType isr, IdentDataObj idata)
-            : base(idata)
-        {
-            this.SpectraDataRef = isr.spectraData_ref;
-        }
-
-        /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
-        /// Optional Attribute
-        /// string
-        //public string SpectraDataRef
-    }
-
-    /// <summary>
-    /// MzIdentML SearchDatabaseRefType
-    /// </summary>
-    /// <remarks>One of the search databases used.</remarks>
-    public partial class SearchDatabaseRefObj : IdentDataInternalTypeAbstract
-    {
-        public SearchDatabaseRefObj(SearchDatabaseRefType sdr, IdentDataObj idata)
-            : base(idata)
-        {
-            this.SearchDatabaseRef = sdr.searchDatabase_ref;
-        }
-
-        /// <remarks>A reference to the database searched.</remarks>
-        /// Optional Attribute
-        /// string
-        //public string SearchDatabaseRef
+        //public string SpectrumIdentificationListRef*/
     }
 
     /// <summary>
@@ -2279,6 +1906,11 @@ namespace PSI_Interface.IdentData
     /// There must only be one PeptideEvidence item per Peptide-to-DBSequence-position.</remarks>
     public partial class PeptideEvidenceObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="pe"></param>
+        /// <param name="idata"></param>
         public PeptideEvidenceObj(PeptideEvidenceType pe, IdentDataObj idata)
             : base(pe, idata)
         {
@@ -2298,7 +1930,7 @@ namespace PSI_Interface.IdentData
             this._name = pe.name;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2361,7 +1993,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>A reference to the protein sequence in which the specified peptide has been linked.</remarks>
         /// Required Attribute
         /// string
-        //public string DBSequenceRef
+        //public string DBSequenceRef*/
     }
 
     /// <summary>
@@ -2370,6 +2002,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>One (poly)peptide (a sequence with modifications). The combination of Peptide sequence and modifications must be unique in the file.</remarks>
     public partial class PeptideObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="idata"></param>
         public PeptideObj(PeptideType p, IdentDataObj idata)
             : base(p, idata)
         {
@@ -2381,7 +2018,7 @@ namespace PSI_Interface.IdentData
             this._substitutionModifications = null;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2408,7 +2045,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
-        //public IdentDataList<UserParamType> UserParams
+        //public IdentDataList<UserParamType> UserParams*/
     }
 
     /// <summary>
@@ -2424,6 +2061,11 @@ namespace PSI_Interface.IdentData
     /// on particular product ions), this can additionally be encoded within the FragmentationArray.</remarks>
     public partial class ModificationObj : CVParamGroupObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="idata"></param>
         public ModificationObj(ModificationType m, IdentDataObj idata)
             : base(m, idata)
         {
@@ -2442,7 +2084,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary.</remarks>
+        /*/// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary.</remarks>
         /// min 1, max unbounded
         //public IdentDataList<CVParamType> CVParams
 
@@ -2478,7 +2120,7 @@ namespace PSI_Interface.IdentData
         //public double MonoisotopicMassDelta
 
         /// Attribute Existence
-        //public bool MonoisotopicMassDeltaSpecified
+        //public bool MonoisotopicMassDeltaSpecified*/
     }
 
     /// <summary>
@@ -2487,6 +2129,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>A modification where one residue is substituted by another (amino acid change).</remarks>
     public partial class SubstitutionModificationObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sm"></param>
+        /// <param name="idata"></param>
         public SubstitutionModificationObj(SubstitutionModificationType sm, IdentDataObj idata)
             : base(idata)
         {
@@ -2500,7 +2147,7 @@ namespace PSI_Interface.IdentData
             this.MonoisotopicMassDeltaSpecified = sm.monoisotopicMassDeltaSpecified;
         }
 
-        /// <remarks>The original residue before replacement.</remarks>
+        /*/// <remarks>The original residue before replacement.</remarks>
         /// Required Attribute
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
         //public string OriginalResidue
@@ -2536,7 +2183,7 @@ namespace PSI_Interface.IdentData
         //public double MonoisotopicMassDelta
 
         /// Attribute Existence
-        //public bool MonoisotopicMassDeltaSpecified
+        //public bool MonoisotopicMassDeltaSpecified*/
     }
 
     /// <summary>
@@ -2547,6 +2194,11 @@ namespace PSI_Interface.IdentData
     /// the seq attribute rather than a translated sequence.</remarks>
     public partial class DbSequenceObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="dbs"></param>
+        /// <param name="idata"></param>
         public DbSequenceObj(DBSequenceType dbs, IdentDataObj idata)
             : base(dbs, idata)
         {
@@ -2559,7 +2211,7 @@ namespace PSI_Interface.IdentData
             this._accession = dbs.accession;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2598,7 +2250,7 @@ namespace PSI_Interface.IdentData
         //public int Length
 
         /// Attribute Existence
-        //public bool LengthSpecified
+        //public bool LengthSpecified*/
     }
 
     /// <summary>
@@ -2614,6 +2266,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>AnalysisSampleCollectionType: child element Sample of type SampleType, min 1, max unbounded</remarks>
     public partial class SampleObj : ParamGroupObj, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="idata"></param>
         public SampleObj(SampleType s, IdentDataObj idata)
             : base(s, idata)
         {
@@ -2641,7 +2298,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2665,7 +2322,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
-        //public IdentDataList<UserParamType> UserParams
+        //public IdentDataList<UserParamType> UserParams*/
     }
 
     /// <summary>
@@ -2676,6 +2333,11 @@ namespace PSI_Interface.IdentData
     /// allow the use of a Contact in a certain manner. Examples might include a provider, or a data analyst.</remarks>
     public partial class ContactRoleObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="cr"></param>
+        /// <param name="idata"></param>
         public ContactRoleObj(ContactRoleType cr, IdentDataObj idata)
             : base(idata)
         {
@@ -2689,13 +2351,13 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max 1
+        /*/// min 1, max 1
         //public RoleInfo Role
 
         /// <remarks>When a ContactRole is used, it specifies which Contact the role is associated with.</remarks>
         /// Required Attribute
         /// string
-        //public string ContactRef
+        //public string ContactRef*/
     }
 
     /// <summary>
@@ -2704,6 +2366,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The roles (lab equipment sales, contractor, etc.) the Contact fills.</remarks>
     public partial class RoleObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="idata"></param>
         public RoleObj(RoleType r, IdentDataObj idata)
             : base(idata)
         {
@@ -2715,9 +2382,9 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>CV term for contact roles, such as software provider.</remarks>
+        /*/// <remarks>CV term for contact roles, such as software provider.</remarks>
         /// min 1, max 1
-        //public CVParam CVParam
+        //public CVParam CVParam*/
     }
 
     /// <summary>
@@ -2726,16 +2393,21 @@ namespace PSI_Interface.IdentData
     /// <remarks>References to the individual component samples within a mixed parent sample.</remarks>
     public partial class SubSampleObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="ss"></param>
+        /// <param name="idata"></param>
         public SubSampleObj(SubSampleType ss, IdentDataObj idata)
             : base(idata)
         {
             this.SampleRef = ss.sample_ref;
         }
 
-        /// <remarks>A reference to the child sample.</remarks>
+        /*/// <remarks>A reference to the child sample.</remarks>
         /// Required  Attribute
         /// string
-        //public string SampleRef
+        //public string SampleRef*/
     }
 
     /// <summary>
@@ -2746,14 +2418,19 @@ namespace PSI_Interface.IdentData
     /// <remarks>AuditCollectionType: min 1, max unbounded, for PersonType XOR OrganizationType</remarks>
     public abstract partial class AbstractContactObj : ParamGroupObj, IIdentifiableType
     {
-        public AbstractContactObj(AbstractContactType ac, IdentDataObj idata)
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="ac"></param>
+        /// <param name="idata"></param>
+        protected AbstractContactObj(AbstractContactType ac, IdentDataObj idata)
             : base(ac, idata)
         {
             this._id = ac.id;
             this._name = ac.name;
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2770,7 +2447,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>___ParamGroup___</remarks>
         /// min 0, max unbounded
-        //public IdentDataList<UserParamType> UserParams
+        //public IdentDataList<UserParamType> UserParams*/
     }
 
     /// <summary>
@@ -2780,6 +2457,11 @@ namespace PSI_Interface.IdentData
     /// Any additional information such as the address, email etc. should be supplied either as CV parameters or as user parameters.</remarks>
     public partial class OrganizationObj : AbstractContactObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="idata"></param>
         public OrganizationObj(OrganizationType o, IdentDataObj idata)
             : base(o, idata)
         {
@@ -2791,23 +2473,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max 1
-        //public ParentOrganization Parent
-    }
-
-    /// <summary>
-    /// Base class for identical ParentOrganization and AffiliationInfo
-    /// </summary>
-    public partial class OrganizationRefObj : IdentDataInternalTypeAbstract
-    {
-        public OrganizationRefObj(IdentDataObj idata)
-            : base(idata)
-        { }
-
-        /// <remarks>A reference to the organization this contact belongs to.</remarks>
-        /// Required Attribute
-        /// string
-        //public string OrganizationRef
+        /*/// min 0, max 1
+        //public ParentOrganization Parent*/
     }
 
     /// <summary>
@@ -2816,16 +2483,21 @@ namespace PSI_Interface.IdentData
     /// <remarks>The containing organization (the university or business which a lab belongs to, etc.)</remarks>
     public partial class ParentOrganizationObj : OrganizationRefObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="po"></param>
+        /// <param name="idata"></param>
         public ParentOrganizationObj(ParentOrganizationType po, IdentDataObj idata)
             : base(idata)
         {
             this.OrganizationRef = po.organization_ref;
         }
 
-        /// <remarks>A reference to the organization this contact belongs to.</remarks>
+        /*/// <remarks>A reference to the organization this contact belongs to.</remarks>
         /// Required Attribute
         /// string
-        //public string OrganizationRef
+        //public string OrganizationRef*/
     }
 
     /// <summary>
@@ -2835,6 +2507,11 @@ namespace PSI_Interface.IdentData
     /// contact email etc. should be supplied using CV parameters or user parameters.</remarks>
     public partial class PersonObj : AbstractContactObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="idata"></param>
         public PersonObj(PersonType p, IdentDataObj idata)
             : base(p, idata)
         {
@@ -2854,7 +2531,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>The organization a person belongs to.</remarks>
+        /*/// <remarks>The organization a person belongs to.</remarks>
         /// min 0, max unbounded
         //public IdentDataList<AffiliationInfo> Affiliation
 
@@ -2868,7 +2545,7 @@ namespace PSI_Interface.IdentData
 
         /// <remarks>The Person's middle initial.</remarks>
         /// Optional Attribute
-        //public string MidInitials
+        //public string MidInitials*/
     }
 
     /// <summary>
@@ -2876,16 +2553,21 @@ namespace PSI_Interface.IdentData
     /// </summary>
     public partial class AffiliationObj : OrganizationRefObj
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="idata"></param>
         public AffiliationObj(AffiliationType a, IdentDataObj idata)
             : base(idata)
         {
             this.OrganizationRef = a.organization_ref;
         }
 
-        /// <remarks>>A reference to the organization this contact belongs to.</remarks>
+        /*/// <remarks>>A reference to the organization this contact belongs to.</remarks>
         /// Required Attribute
         /// string
-        //public string OrganizationRef
+        //public string OrganizationRef*/
     }
 
     /// <summary>
@@ -2894,6 +2576,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The provider of the document in terms of the Contact and the software the produced the document instance.</remarks>
     public partial class ProviderObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="idata"></param>
         public ProviderObj(ProviderType p, IdentDataObj idata)
             : base(idata)
         {
@@ -2911,7 +2598,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2929,7 +2616,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>The Software that produced the document instance.</remarks>
         /// Optional Attribute
         /// string
-        //public string AnalysisSoftwareRef
+        //public string AnalysisSoftwareRef*/
     }
 
     /// <summary>
@@ -2941,6 +2628,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>AnalysisSoftwareListType: child element AnalysisSoftware of type AnalysisSoftwareType, min 1, max unbounded</remarks>
     public partial class AnalysisSoftwareObj : IdentDataInternalTypeAbstract, IIdentifiableType
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="asi"></param>
+        /// <param name="idata"></param>
         public AnalysisSoftwareObj(AnalysisSoftwareType asi, IdentDataObj idata)
             : base(idata)
         {
@@ -2963,7 +2655,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -2994,7 +2686,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>URI of the analysis software e.g. manufacturer's website</remarks>
         /// Optional Attribute
         /// anyURI
-        //public string URI
+        //public string URI*/
     }
 
     /// <summary>
@@ -3003,6 +2695,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The inputs to the analyses including the databases searched, the spectral data and the source file converted to mzIdentML.</remarks>
     public partial class InputsObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="idata"></param>
         public InputsObj(InputsType i, IdentDataObj idata)
             : base(idata)
         {
@@ -3036,14 +2733,14 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 0, max unbounded
+        /*/// min 0, max unbounded
         //public IdentDataList<SourceFileInfo> SourceFile
 
         /// min 0, max unbounded
         //public IdentDataList<SearchDatabaseInfo> SearchDatabase
 
         /// min 1, max unbounde
-        //public IdentDataList<SpectraData> SpectraData
+        //public IdentDataList<SpectraData> SpectraData*/
     }
 
     /// <summary>
@@ -3052,6 +2749,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The collection of input and output data sets of the analyses.</remarks>
     public partial class DataCollectionObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="idata"></param>
         public DataCollectionObj(DataCollectionType dc, IdentDataObj idata)
             : base(idata)
         {
@@ -3070,11 +2772,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max 1
+        /*/// min 1, max 1
         //public InputsInfo Inputs
 
         /// min 1, max 1
-        //public AnalysisData AnalysisData
+        //public AnalysisData AnalysisData*/
     }
 
     /// <summary>
@@ -3083,6 +2785,11 @@ namespace PSI_Interface.IdentData
     /// <remarks>The collection of protocols which include the parameters and settings of the performed analyses.</remarks>
     public partial class AnalysisProtocolCollectionObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="apc"></param>
+        /// <param name="idata"></param>
         public AnalysisProtocolCollectionObj(AnalysisProtocolCollectionType apc, IdentDataObj idata)
             : base(idata)
         {
@@ -3105,11 +2812,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<SpectrumIdentificationProtocol> SpectrumIdentificationProtocol
 
         /// min 0, max 1
-        //public ProteinDetectionProtocol ProteinDetectionProtocol
+        //public ProteinDetectionProtocol ProteinDetectionProtocol*/
     }
 
     /// <summary>
@@ -3119,6 +2826,11 @@ namespace PSI_Interface.IdentData
     /// Analyses are for example: SpectrumIdentification (resulting in peptides) or ProteinDetection (assemble proteins from peptides).</remarks>
     public partial class AnalysisCollectionObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="ac"></param>
+        /// <param name="idata"></param>
         public AnalysisCollectionObj(AnalysisCollectionType ac, IdentDataObj idata)
             : base(idata)
         {
@@ -3141,11 +2853,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<SpectrumIdentification> SpectrumIdentification
 
         /// min 0, max 1
-        //public ProteinDetection ProteinDetection
+        //public ProteinDetection ProteinDetection*/
     }
 
     /// <summary>
@@ -3155,6 +2867,11 @@ namespace PSI_Interface.IdentData
     /// each other (PeptideEvidence) to be referenced elsewhere in the results.</remarks>
     public partial class SequenceCollectionObj : IdentDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Create an object using the contents of the corresponding MzIdentML object
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="idata"></param>
         public SequenceCollectionObj(SequenceCollectionType sc, IdentDataObj idata)
             : base(idata)
         {
@@ -3190,13 +2907,13 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// min 1, max unbounded
+        /*/// min 1, max unbounded
         //public IdentDataList<DBSequence> DBSequences
 
         /// min 0, max unbounded
         //public IdentDataList<Peptide> Peptides
 
         /// min 0, max unbounded
-        //public IdentDataList<PeptideEvidence> PeptideEvidences
+        //public IdentDataList<PeptideEvidence> PeptideEvidences*/
     }
 }

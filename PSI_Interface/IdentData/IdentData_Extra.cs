@@ -2,823 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using PSI_Interface.CV;
 using PSI_Interface.Utils;
 
 namespace PSI_Interface.IdentData
 {
-    /// <summary>
-    /// MzIdentML MzIdentMLType
-    /// </summary>
-    /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, 
-    /// protocols and search results (spectrum identifications or protein detection results).</remarks>
-    public partial class IdentDataObj : IIdentifiableType, IEquatable<IdentDataObj>
-    {
-        /// <summary>
-        /// Constructor - basic initialization
-        /// </summary>
-        /// <param name="createTranslator">If the default CV list should be used for the file</param>
-        public IdentDataObj(bool createTranslator = true)
-        {
-            this._id = null;
-            this._name = null;
-            this._version = "1.1.0";
-            this._creationDate = System.DateTime.Now;
-            this.CreationDateSpecified = false;
-
-            //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
-            this.CvTranslator = null;
-            this.CVList = new IdentDataList<CVInfo>();
-            if (createTranslator)
-            {
-                //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
-                this.DefaultCV(); // Create a generic translator by default; must be re-mapped when reading a file
-            }
-            this.AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>();
-            this._provider = null;
-            this.AuditCollection = new IdentDataList<AbstractContactObj>();
-            this.AnalysisSampleCollection = new IdentDataList<SampleObj>();
-            this._sequenceCollection = null;
-            this._analysisCollection = null;
-            this._analysisProtocolCollection = null;
-            this._dataCollection = null;
-            this.BibliographicReferences = new IdentDataList<BibliographicReferenceObj>();
-        }
-
-        /// <summary>
-        /// Set the default CV lists for CV term reference and mapping
-        /// </summary>
-        public void DefaultCV()
-        {
-            this.CVList = new IdentDataList<CVInfo>();
-            foreach (var cv in CV.CV.CVInfoList)
-            {
-                if (cv.Id.ToLower() == "pato")
-                {
-                    continue;
-                }
-                var newcv = new CVInfo();
-                newcv.FullName = cv.Name;
-                newcv.Id = cv.Id;
-                newcv.URI = cv.URI;
-                newcv.Version = cv.Version;
-                this.CVList.Add(newcv);
-            }
-            this.CvTranslator = new CVTranslator(this.CVList);
-        }
-
-        /*
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
-        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
-        /// Required Attribute
-        /// string
-        public string Id
-
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
-        public string Name
-
-        /// min 1, max 1
-        public IdentDataList<CVInfo> CVList
-
-        /// min 0, max 1
-        public IdentDataList<AnalysisSoftwareInfo> AnalysisSoftwareList
-
-        /// <remarks>The Provider of the mzIdentML record in terms of the contact and software.</remarks>
-        /// min 0, max 1
-        public ProviderInfo Provider
-
-        /// min 0, max 1
-        public IdentDataList<AbstractContactInfo> AuditCollection
-
-        /// min 0, max 1
-        public IdentDataList<SampleInfo> AnalysisSampleCollection
-
-        /// min 0, max 1
-        public SequenceCollection SequenceCollection
-
-        /// min 1, max 1
-        public AnalysisCollection AnalysisCollection
-
-        /// min 1, max 1
-        public AnalysisProtocolCollection AnalysisProtocolCollection
-
-        /// min 1, max 1
-        public DataCollection DataCollection
-
-        /// <remarks>Any bibliographic references associated with the file</remarks>
-        /// min 0, max unbounded
-        public IdentDataList<BibliographicReference> BibliographicReferences
-
-        /// <remarks>The date on which the file was produced.</remarks>
-        /// Optional Attribute
-        /// dataTime
-        public System.DateTime CreationDate
-
-        /// Attribute Existence
-        public bool CreationDateSpecified
-
-        /// <remarks>The version of the schema this instance document refers to, in the format x.y.z. 
-        /// Changes to z should not affect prevent instance documents from validating.</remarks>
-        /// Required Attribute
-        /// string, regex: "(1\.1\.\d+)"
-        public string Version
-        */
-
-        /// <summary>
-        /// Cascade the identData reference throughout the entire set of objects.
-        /// </summary>
-        internal void CascadeProperties()
-        {
-            if (this.Provider != null)
-            {
-                this.Provider.CascadeProperties();
-            }
-            if (this.SequenceCollection != null)
-            {
-                this.SequenceCollection.CascadeProperties();
-            }
-            if (this.AnalysisCollection != null)
-            {
-                this.AnalysisCollection.CascadeProperties();
-            }
-            if (this.AnalysisProtocolCollection != null)
-            {
-                this.AnalysisProtocolCollection.CascadeProperties();
-            }
-            if (this.DataCollection != null)
-            {
-                this.DataCollection.CascadeProperties();
-            }
-            if (this.CVList != null)
-            {
-                this.CVList.CascadeProperties();
-            }
-            if (this.AnalysisSoftwareList != null)
-            {
-                this.AnalysisSoftwareList.CascadeProperties();
-            }
-            if (this.AuditCollection != null)
-            {
-                this.AuditCollection.CascadeProperties();
-            }
-            if (this.AnalysisSampleCollection != null)
-            {
-                this.AnalysisSampleCollection.CascadeProperties();
-            }
-            if (this.BibliographicReferences != null)
-            {
-                this.BibliographicReferences.CascadeProperties();
-            }
-        }
-
-        /// <summary>
-        /// Rebuild some of the internal lists using object references
-        /// </summary>
-        public void RebuildLists()
-        {
-            // TODO: Not Implementing for now
-            //_auditCollection.Clear();
-            //_analysisSoftwareList.Clear();
-            //_analysisSampleCollection.Clear();
-            AnalysisProtocolCollection.RebuildSIPList();
-            SequenceCollection.RebuildLists();
-            DataCollection.RebuildLists();
-        }
-
-        /// <summary>
-        /// Find the <see cref="SpectrumIdentificationItemObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal SpectrumIdentificationItemObj FindSpectrumIdentificationItem(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
-                {
-                    foreach (var sir in sil.SpectrumIdentificationResults)
-                    {
-                        var result = sir.SpectrumIdentificationItems.Where(item => item.Id == id).ToList();
-                        if (result.Count > 0)
-                        {
-                            return result.First();
-                        }
-                    }
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="DbSequenceObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal DbSequenceObj FindDbSequence(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.SequenceCollection.DBSequences.AsParallel().Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="PeptideObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal PeptideObj FindPeptide(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.SequenceCollection.Peptides.AsParallel().Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="PeptideEvidenceObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal PeptideEvidenceObj FindPeptideEvidence(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.SequenceCollection.PeptideEvidences.AsParallel().Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="MeasureObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal MeasureObj FindMeasure(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                foreach (var sil in this.DataCollection.AnalysisData.SpectrumIdentificationList)
-                {
-                    var result = sil.FragmentationTables.Where(item => item.Id == id).ToList();
-                    if (result.Count > 0)
-                    {
-                        return result.First();
-                    }
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="MassTableObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal MassTableObj FindMassTable(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
-                {
-                    var result = sip.MassTables.Where(item => item.Id == id).ToList();
-                    if (result.Count > 0)
-                    {
-                        return result.First();
-                    }
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="SampleObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal SampleObj FindSample(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.AnalysisSampleCollection.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="AnalysisSoftwareObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal AnalysisSoftwareObj FindAnalysisSoftware(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.AnalysisSoftwareList.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="OrganizationObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal OrganizationObj FindOrganization(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.AuditCollection.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    foreach (var item in result)
-                    {
-                        var o = item as OrganizationObj;
-                        if (o != null)
-                        {
-                            return o;
-                        }
-                    }
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="AbstractContactObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal AbstractContactObj FindContact(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.AuditCollection.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="SearchDatabaseInfo"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal SearchDatabaseInfo FindSearchDatabase(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.DataCollection.Inputs.SearchDatabases.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="SpectraDataObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal SpectraDataObj FindSpectraData(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.DataCollection.Inputs.SpectraDataList.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="SpectrumIdentificationListObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal SpectrumIdentificationListObj FindSpectrumIdentificationList(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.DataCollection.AnalysisData.SpectrumIdentificationList.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="SpectrumIdentificationProtocolObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal SpectrumIdentificationProtocolObj FindSpectrumIdentificationProtocol(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                var result = this.AnalysisProtocolCollection.SpectrumIdentificationProtocols.Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="ProteinDetectionProtocolObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal ProteinDetectionProtocolObj FindProteinDetectionProtocol(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                if (this.AnalysisProtocolCollection.ProteinDetectionProtocol.Id == id)
-                {
-                    return this.AnalysisProtocolCollection.ProteinDetectionProtocol;
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="ProteinDetectionListObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal ProteinDetectionListObj FindProteinDetectionList(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                if (this.DataCollection.AnalysisData.ProteinDetectionList.Id == id)
-                {
-                    return this.DataCollection.AnalysisData.ProteinDetectionList;
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        /// <summary>
-        /// Find the <see cref="TranslationTableObj"/> that matches id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        protected internal TranslationTableObj FindTranslationTable(string id)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return null;
-            }
-            try
-            {
-                foreach (var sip in this.AnalysisProtocolCollection.SpectrumIdentificationProtocols)
-                {
-                    var result = sip.DatabaseTranslation.TranslationTables.Where(item => item.Id == id).ToList();
-                    if (result.Count > 0)
-                    {
-                        return result.First();
-                    }
-                }
-            }
-            catch // Ignore errors; must resolve reference later...
-            { }
-            return null;
-        }
-
-        public override bool Equals(object other)
-        {
-            var o = other as IdentDataObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(IdentDataObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (this.Name == other.Name && this.Version == other.Version && Equals(this.CVList, other.CVList) &&
-                Equals(this.AnalysisSoftwareList, other.AnalysisSoftwareList) && Equals(this.Provider, other.Provider) &&
-                Equals(this.AuditCollection, other.AuditCollection) &&
-                Equals(this.AnalysisSampleCollection, other.AnalysisSampleCollection) &&
-                Equals(this.SequenceCollection, other.SequenceCollection) &&
-                Equals(this.AnalysisCollection, other.AnalysisCollection) &&
-                Equals(this.AnalysisProtocolCollection, other.AnalysisProtocolCollection) &&
-                Equals(this.DataCollection, other.DataCollection) &&
-                Equals(this.BibliographicReferences, other.BibliographicReferences))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (CVList != null ? CVList.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AnalysisSoftwareList != null ? AnalysisSoftwareList.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Provider != null ? Provider.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AuditCollection != null ? AuditCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AnalysisSampleCollection != null ? AnalysisSampleCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SequenceCollection != null ? SequenceCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AnalysisCollection != null ? AnalysisCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AnalysisProtocolCollection != null ? AnalysisProtocolCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DataCollection != null ? DataCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (BibliographicReferences != null ? BibliographicReferences.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ CreationDate.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Id != null ? Id.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML cvType : Container CVListType
-    /// </summary>
-    /// <remarks>A source controlled vocabulary from which cvParams will be obtained.</remarks>
-    /// 
-    /// <remarks>CVListType: The list of controlled vocabularies used in the file.</remarks>
-    /// <remarks>CVListType: child element cv of type cvType, min 1, max unbounded</remarks>
-    public partial class CVInfo : IdentDataInternalTypeAbstract, IEquatable<CVInfo>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public CVInfo()
-        {
-            this.FullName = null;
-            this.Version = null;
-            this.URI = null;
-            this.Id = null;
-        }
-
-        /*
-        /// <remarks>The full name of the CV.</remarks>
-        /// Required Attribute
-        /// string
-        public string FullName
-
-        /// <remarks>The version of the CV.</remarks>
-        /// Optional Attribute
-        /// string
-        public string Version
-
-        /// <remarks>The URI of the source CV.</remarks>
-        /// Required Attribute
-        /// anyURI
-        public string URI
-
-        /// <remarks>The unique identifier of this cv within the document to be referenced by cvParam elements.</remarks>
-        /// Required Attribute
-        /// string
-        public string Id
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as CVInfo;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(CVInfo other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (this.FullName == other.FullName && this.Version == other.Version && this.URI == other.URI)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (FullName != null ? FullName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (URI != null ? URI.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML SpectrumIdentificationItemRefType
-    /// </summary>
-    /// <remarks>Reference(s) to the SpectrumIdentificationItem element(s) that support the given PeptideEvidence element. 
-    /// Using these references it is possible to indicate which spectra were actually accepted as evidence for this 
-    /// peptide identification in the given protein.</remarks>
-    public partial class SpectrumIdentificationItemRefObj : IdentDataInternalTypeAbstract, IEquatable<SpectrumIdentificationItemRefObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public SpectrumIdentificationItemRefObj()
-        {
-            this._spectrumIdentificationItemRef = null;
-
-            this._spectrumIdentificationItem = null;
-        }
-
-        /*
-        /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
-        /// Required Attribute
-        /// string
-        public string SpectrumIdentificationItemRef
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as SpectrumIdentificationItemRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(SpectrumIdentificationItemRefObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.SpectrumIdentificationItem, other.SpectrumIdentificationItem))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (SpectrumIdentificationItem != null ? SpectrumIdentificationItem.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
     /// <summary>
     /// MzIdentML PeptideHypothesisType
     /// </summary>
@@ -846,6 +33,11 @@ namespace PSI_Interface.IdentData
         public string PeptideEvidenceRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as PeptideHypothesisObj;
@@ -856,6 +48,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(PeptideHypothesisObj other)
         {
             if (ReferenceEquals(this, other))
@@ -875,6 +72,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -915,6 +116,11 @@ namespace PSI_Interface.IdentData
         public string MeasureRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as FragmentArrayObj;
@@ -925,6 +131,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(FragmentArrayObj other)
         {
             if (ReferenceEquals(this, other))
@@ -943,6 +154,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -995,6 +210,11 @@ namespace PSI_Interface.IdentData
         public int Charge
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as IonTypeObj;
@@ -1005,6 +225,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(IonTypeObj other)
         {
             if (ReferenceEquals(this, other))
@@ -1024,6 +249,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -1032,548 +261,6 @@ namespace PSI_Interface.IdentData
                 hashCode = (hashCode * 397) ^ (FragmentArrays != null ? FragmentArrays.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Index != null ? Index.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (CVParam != null ? CVParam.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML CVParamType; Container types: ToleranceType
-    /// </summary>
-    /// <remarks>A single entry from an ontology or a controlled vocabulary.</remarks>
-    /// <remarks>ToleranceType: The tolerance of the search given as a plus and minus value with units.</remarks>
-    /// <remarks>ToleranceType: child element cvParam of type CVParamType, min 1, max unbounded "CV terms capturing the tolerance plus and minus values."</remarks>
-    public partial class CVParamObj : ParamBaseObj, IEquatable<CVParamObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="cvid"></param>
-        /// <param name="value"></param>
-        public CVParamObj(CV.CV.CVID cvid = CV.CV.CVID.CVID_Unknown, string value = null)
-        {
-            this._cvRef = null;
-            //this._name = null;
-            //this._accession = null;
-            this._value = value;
-
-            this._cvid = cvid;
-        }
-
-        /*
-        public CV.CV.CVID Cvid
-
-        /// <remarks>A reference to the cv element from which this term originates.</remarks>
-        /// Required Attribute
-        /// string
-        public string CVRef
-
-        /// <remarks>The accession or ID number of this CV term in the source CV.</remarks>
-        /// Required Attribute
-        /// string
-        public string Accession
-
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
-        public override string Name
-
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
-        public override string Value
-        */
-
-        public T ValueAs<T>() where T : IConvertible
-        {
-            return (T) Convert.ChangeType(Value, typeof (T));
-        }
-
-        public override bool Equals(object other)
-        {
-            var o = other as CVParamObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(CVParamObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (this.Cvid == other.Cvid && this.Value == other.Value &&
-                this.UnitCvid == other.UnitCvid)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ Cvid.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Value != null ? Value.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ UnitCvid.GetHashCode();
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML AbstractParamType; Used instead of: ParamType, ParamGroup, ParamListType
-    /// </summary>
-    /// <remarks>Abstract entity allowing either cvParam or userParam to be referenced in other schemas.</remarks>
-    /// <remarks>PramGroup: A choice of either a cvParam or userParam.</remarks>
-    /// <remarks>ParamType: Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
-    /// <remarks>ParamListType: Helper type to allow multiple cvParams or userParams to be given for an element.</remarks>
-    public abstract partial class ParamBaseObj : IdentDataInternalTypeAbstract, IEquatable<ParamBaseObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        protected ParamBaseObj()
-        {
-            //this._unitAccession = null;
-            //this._unitName = null;
-            this._unitCvRef = null;
-            this._unitsSet = false;
-
-            this._unitCvid = CV.CV.CVID.CVID_Unknown;
-        }
-
-        /*
-        // Name and value are abstract properties, because name will be handled differently in CVParams, and value can also have restrictions based on the CVParam.
-
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
-        public abstract string Name
-
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
-        public abstract string Value
-
-        public CV.CV.CVID UnitCvid
-
-        /// <remarks>An accession number identifying the unit within the OBO foundry Unit CV.</remarks>
-        /// Optional Attribute
-        /// string
-        public string UnitAccession
-
-        /// <remarks>The name of the unit.</remarks>
-        /// Optional Attribute
-        /// string
-        public string UnitName
-
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this file.</remarks>
-        /// Optional Attribute
-        /// string
-        public string UnitCvRef
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as ParamBaseObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(ParamBaseObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (this.Name == other.Name && this.UnitCvid == other.UnitCvid)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ UnitCvid.GetHashCode();
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML UserParamType
-    /// </summary>
-    /// <remarks>A single user-defined parameter.</remarks>
-    public partial class UserParamObj : ParamBaseObj, IEquatable<UserParamObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public UserParamObj()
-        {
-            this._name = null;
-            this._value = null;
-            this._type = null;
-        }
-
-        /*
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
-        public override string Name
-
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
-        public override string Value
-
-        /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>
-        /// Optional Attribute
-        /// string
-        public string Type
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as UserParamObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(UserParamObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (this.Name == other.Name && this.Value == other.Value && this.Type == other.Type &&
-                this.UnitCvid == other.UnitCvid)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Value != null ? Value.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Type != null ? Type.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ UnitCvid.GetHashCode();
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Object for containing multiple CVParamObjs
-    /// </summary>
-    public partial class CVParamGroupObj : IdentDataInternalTypeAbstract, IEquatable<CVParamGroupObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public CVParamGroupObj()
-        {
-            this.CVParams = new IdentDataList<CVParamObj>();
-        }
-
-        //public IdentDataList<CVParam> CVParams
-
-        public override bool Equals(object other)
-        {
-            var o = other as CVParamGroupObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(CVParamGroupObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.CVParams, other.CVParams))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (CVParams != null ? CVParams.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Object for containing multiple CVParamObjs and UserParamObjs
-    /// </summary>
-    public partial class ParamGroupObj : CVParamGroupObj, IEquatable<ParamGroupObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public ParamGroupObj()
-        {
-            this.UserParams = new IdentDataList<UserParamObj>();
-        }
-
-        //public IdentDataList<UserParam> UserParams
-
-        public override bool Equals(object other)
-        {
-            var o = other as ParamGroupObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(ParamGroupObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML ParamType
-    /// </summary>
-    /// <remarks>Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
-    public partial class ParamObj : IdentDataInternalTypeAbstract, IEquatable<ParamObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public ParamObj()
-        {
-            this._item = null;
-        }
-
-        /*/// min 1, max 1
-        public ParamBase Item
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as ParamObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(ParamObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.Item, other.Item))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (Item != null ? Item.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML ParamListType
-    /// </summary>
-    /// <remarks>Helper type to allow multiple cvParams or userParams to be given for an element.</remarks>
-    public partial class ParamListObj : IdentDataInternalTypeAbstract, IEquatable<ParamListObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public ParamListObj()
-        {
-            this.Items = new IdentDataList<ParamBaseObj>();
-        }
-
-        /*/// min 1, max unbounded
-        public IdentDataList<ParamBase> Items
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as ParamListObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(ParamListObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.Items, other.Items))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (Items != null ? Items.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML PeptideEvidenceRefType
-    /// </summary>
-    /// <remarks>Reference to the PeptideEvidence element identified. If a specific sequence can be assigned to multiple 
-    /// proteins and or positions in a protein all possible PeptideEvidence elements should be referenced here.</remarks>
-    public partial class PeptideEvidenceRefObj : IdentDataInternalTypeAbstract, IEquatable<PeptideEvidenceRefObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public PeptideEvidenceRefObj(PeptideEvidenceObj pepEv = null)
-        {
-            this._peptideEvidenceRef = null;
-
-            this._peptideEvidence = pepEv;
-        }
-
-        /*
-        /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
-        /// Required Attribute
-        /// string
-        public string PeptideEvidenceRef
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as PeptideEvidenceRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(PeptideEvidenceRefObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.PeptideEvidence, other.PeptideEvidence))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (PeptideEvidence != null ? PeptideEvidence.GetHashCode() : 0);
                 return hashCode;
             }
         }
@@ -1612,6 +299,11 @@ namespace PSI_Interface.IdentData
             //_spectrumIdentificationList.Clear();
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as AnalysisDataObj;
@@ -1622,6 +314,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(AnalysisDataObj other)
         {
             if (ReferenceEquals(this, other))
@@ -1641,6 +338,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -1720,6 +421,11 @@ namespace PSI_Interface.IdentData
                 a.BestSpecEVal().CompareTo(b.BestSpecEVal()));
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SpectrumIdentificationListObj;
@@ -1730,6 +436,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SpectrumIdentificationListObj other)
         {
             if (ReferenceEquals(this, other))
@@ -1751,6 +462,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -1800,6 +515,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<CVParamType> CVParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as MeasureObj;
@@ -1810,6 +530,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(MeasureObj other)
         {
             if (ReferenceEquals(this, other))
@@ -1828,6 +553,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -1956,6 +685,11 @@ namespace PSI_Interface.IdentData
         public string DOI
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as BibliographicReferenceObj;
@@ -1966,6 +700,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(BibliographicReferenceObj other)
         {
             if (ReferenceEquals(this, other))
@@ -1986,6 +725,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2060,6 +803,11 @@ namespace PSI_Interface.IdentData
         public bool PassThreshold
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ProteinDetectionHypothesisObj;
@@ -2070,6 +818,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ProteinDetectionHypothesisObj other)
         {
             if (ReferenceEquals(this, other))
@@ -2090,6 +843,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2146,6 +903,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<UserParamType> UserParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ProteinAmbiguityGroupObj;
@@ -2156,6 +918,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ProteinAmbiguityGroupObj other)
         {
             if (ReferenceEquals(this, other))
@@ -2175,6 +942,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2229,6 +1000,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<UserParamType> UserParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ProteinDetectionListObj;
@@ -2239,6 +1015,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ProteinDetectionListObj other)
         {
             if (ReferenceEquals(this, other))
@@ -2258,6 +1039,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2405,6 +1190,11 @@ namespace PSI_Interface.IdentData
             return this.CVParams.GetCvParam(CV.CV.CVID.MS_MS_GF_SpecEValue, "1").ValueAs<double>();
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SpectrumIdentificationItemObj;
@@ -2415,6 +1205,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SpectrumIdentificationItemObj other)
         {
             if (ReferenceEquals(this, other))
@@ -2441,6 +1236,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2568,6 +1367,11 @@ namespace PSI_Interface.IdentData
             this.SpectrumIdentificationItems.RemoveAll(item => item.GetSpecEValue() > best);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SpectrumIdentificationResultObj;
@@ -2578,6 +1382,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SpectrumIdentificationResultObj other)
         {
             if (ReferenceEquals(this, other))
@@ -2599,6 +1408,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2662,6 +1475,11 @@ namespace PSI_Interface.IdentData
         public CVParam CVParam
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as FileFormatInfo;
@@ -2672,6 +1490,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(FileFormatInfo other)
         {
             if (ReferenceEquals(this, other))
@@ -2690,6 +1513,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2749,6 +1576,11 @@ namespace PSI_Interface.IdentData
         public SpectrumIDFormat SpectrumIDFormat
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SpectraDataObj;
@@ -2759,6 +1591,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SpectraDataObj other)
         {
             if (ReferenceEquals(this, other))
@@ -2779,6 +1616,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2813,6 +1654,11 @@ namespace PSI_Interface.IdentData
         public CVParam CVParam
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SpectrumIDFormatObj;
@@ -2823,6 +1669,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SpectrumIDFormatObj other)
         {
             if (ReferenceEquals(this, other))
@@ -2841,6 +1692,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -2904,6 +1759,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<UserParamType> UserParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SourceFileInfo;
@@ -2914,6 +1774,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SourceFileInfo other)
         {
             if (ReferenceEquals(this, other))
@@ -2934,6 +1799,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3039,6 +1908,11 @@ namespace PSI_Interface.IdentData
         public bool NumResiduesSpecified
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SearchDatabaseInfo;
@@ -3049,6 +1923,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SearchDatabaseInfo other)
         {
             if (ReferenceEquals(this, other))
@@ -3072,6 +1951,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3137,6 +2020,11 @@ namespace PSI_Interface.IdentData
         public string AnalysisSoftwareRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ProteinDetectionProtocolObj;
@@ -3147,6 +2035,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ProteinDetectionProtocolObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3166,6 +2059,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3212,6 +2109,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<CVParamType> CVParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as TranslationTableObj;
@@ -3222,6 +2124,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(TranslationTableObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3240,6 +2147,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3303,6 +2214,11 @@ namespace PSI_Interface.IdentData
         public List<string> MsLevel
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as MassTableObj;
@@ -3313,6 +2229,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(MassTableObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3334,6 +2255,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3375,6 +2300,11 @@ namespace PSI_Interface.IdentData
         public float Mass
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ResidueObj;
@@ -3385,6 +2315,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ResidueObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3403,6 +2338,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3444,6 +2383,11 @@ namespace PSI_Interface.IdentData
         public string Code
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as AmbiguousResidueObj;
@@ -3454,6 +2398,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(AmbiguousResidueObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3473,6 +2422,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3569,6 +2522,11 @@ namespace PSI_Interface.IdentData
         public bool MinDistanceSpecified
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as EnzymeObj;
@@ -3579,6 +2537,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(EnzymeObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3600,6 +2563,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3696,6 +2663,11 @@ namespace PSI_Interface.IdentData
         public string AnalysisSoftwareRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SpectrumIdentificationProtocolObj;
@@ -3706,6 +2678,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SpectrumIdentificationProtocolObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3731,6 +2708,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3820,6 +2801,11 @@ namespace PSI_Interface.IdentData
         public string Residues
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SearchModificationObj;
@@ -3830,6 +2816,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SearchModificationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3850,6 +2841,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3894,6 +2889,11 @@ namespace PSI_Interface.IdentData
         public bool IndependentSpecified
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as EnzymeListObj;
@@ -3904,6 +2904,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(EnzymeListObj other)
         {
             if (ReferenceEquals(this, other))
@@ -3922,6 +2927,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -3966,6 +2975,11 @@ namespace PSI_Interface.IdentData
         public ParamList Exclude
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as FilterInfo;
@@ -3976,6 +2990,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(FilterInfo other)
         {
             if (ReferenceEquals(this, other))
@@ -3995,6 +3014,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4032,6 +3055,11 @@ namespace PSI_Interface.IdentData
         public List<int> Frames
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as DatabaseTranslationObj;
@@ -4042,6 +3070,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(DatabaseTranslationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4061,6 +3094,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4111,6 +3148,11 @@ namespace PSI_Interface.IdentData
         public bool ActivityDateSpecified
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ProtocolApplicationObj;
@@ -4121,6 +3163,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ProtocolApplicationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4139,6 +3186,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4183,6 +3234,11 @@ namespace PSI_Interface.IdentData
         public string ProteinDetectionProtocolRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ProteinDetectionObj;
@@ -4193,6 +3249,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ProteinDetectionObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4213,6 +3274,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4249,6 +3314,11 @@ namespace PSI_Interface.IdentData
         public string SpectrumIdentificationListRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as InputSpectrumIdentificationsObj;
@@ -4259,6 +3329,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(InputSpectrumIdentificationsObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4277,6 +3352,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4327,6 +3406,11 @@ namespace PSI_Interface.IdentData
         public string SpectrumIdentificationListRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SpectrumIdentificationObj;
@@ -4337,6 +3421,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SpectrumIdentificationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4357,6 +3446,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4365,128 +3458,6 @@ namespace PSI_Interface.IdentData
                 hashCode = (hashCode * 397) ^ (InputSpectra != null ? InputSpectra.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (SpectrumIdentificationList != null ? SpectrumIdentificationList.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (SpectrumIdentificationProtocol != null ? SpectrumIdentificationProtocol.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML InputSpectraType
-    /// </summary>
-    /// <remarks>The attribute referencing an identifier within the SpectraData section.</remarks>
-    public partial class InputSpectraRefObj : IdentDataInternalTypeAbstract, IEquatable<InputSpectraRefObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public InputSpectraRefObj()
-        {
-            this._spectraDataRef = null;
-
-            this._spectraData = null;
-        }
-
-        /*
-        /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
-        /// Optional Attribute
-        /// string
-        public string SpectraDataRef
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as InputSpectraRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(InputSpectraRefObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.SpectraData, other.SpectraData))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (SpectraData != null ? SpectraData.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// MzIdentML SearchDatabaseRefType
-    /// </summary>
-    /// <remarks>One of the search databases used.</remarks>
-    public partial class SearchDatabaseRefObj : IdentDataInternalTypeAbstract, IEquatable<SearchDatabaseRefObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public SearchDatabaseRefObj()
-        {
-            this._searchDatabaseRef = null;
-
-            this._searchDatabase = null;
-        }
-
-        /*
-        /// <remarks>A reference to the database searched.</remarks>
-        /// Optional Attribute
-        /// string
-        public string SearchDatabaseRef
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as SearchDatabaseRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(SearchDatabaseRefObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.SearchDatabase, other.SearchDatabase))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (SearchDatabase != null ? SearchDatabase.GetHashCode() : 0);
                 return hashCode;
             }
         }
@@ -4622,6 +3593,11 @@ namespace PSI_Interface.IdentData
         public string DBSequenceRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as PeptideEvidenceObj;
@@ -4632,6 +3608,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(PeptideEvidenceObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4653,6 +3634,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4734,6 +3719,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<UserParamType> UserParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as PeptideObj;
@@ -4744,6 +3734,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(PeptideObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4765,6 +3760,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -4897,6 +3896,11 @@ namespace PSI_Interface.IdentData
         public bool MonoisotopicMassDeltaSpecified
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ModificationObj;
@@ -4907,6 +3911,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ModificationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -4927,6 +3936,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5002,6 +4015,11 @@ namespace PSI_Interface.IdentData
         public bool MonoisotopicMassDeltaSpecified
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SubstitutionModificationObj;
@@ -5012,6 +4030,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SubstitutionModificationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5032,6 +4055,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5133,6 +4160,11 @@ namespace PSI_Interface.IdentData
         public bool LengthSpecified
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public new bool Equals(object other)
         {
             var o = other as DbSequenceObj;
@@ -5143,6 +4175,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(DbSequenceObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5163,6 +4200,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5232,6 +4273,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<UserParamType> UserParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public new bool Equals(object other)
         {
             var o = other as SampleObj;
@@ -5242,6 +4288,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SampleObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5262,6 +4313,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5305,6 +4360,11 @@ namespace PSI_Interface.IdentData
         public string ContactRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ContactRoleObj;
@@ -5315,6 +4375,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ContactRoleObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5333,6 +4398,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5364,6 +4433,11 @@ namespace PSI_Interface.IdentData
         public CVParam CVParam
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as RoleObj;
@@ -5374,6 +4448,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(RoleObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5392,6 +4471,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5425,6 +4508,11 @@ namespace PSI_Interface.IdentData
         public string SampleRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SubSampleObj;
@@ -5435,6 +4523,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SubSampleObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5453,6 +4546,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5501,6 +4598,11 @@ namespace PSI_Interface.IdentData
         public IdentDataList<UserParamType> UserParams
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as AbstractContactObj;
@@ -5511,6 +4613,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(AbstractContactObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5530,6 +4637,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5562,6 +4673,11 @@ namespace PSI_Interface.IdentData
         public ParentOrganization Parent
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as OrganizationObj;
@@ -5572,6 +4688,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(OrganizationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5591,6 +4712,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5599,66 +4724,6 @@ namespace PSI_Interface.IdentData
                 hashCode = (hashCode * 397) ^ (Parent != null ? Parent.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Base class for identical ParentOrganization and AffiliationInfo
-    /// </summary>
-    public partial class OrganizationRefObj : IdentDataInternalTypeAbstract, IEquatable<OrganizationRefObj>
-    {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public OrganizationRefObj()
-        {
-            this._organizationRef = null;
-
-            this._organization = null;
-        }
-
-        /*
-        /// <remarks>A reference to the organization this contact belongs to.</remarks>
-        /// Required Attribute
-        /// string
-        public string OrganizationRef
-        */
-
-        public override bool Equals(object other)
-        {
-            var o = other as OrganizationRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
-        }
-
-        public bool Equals(OrganizationRefObj other)
-        {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
-
-            if (Equals(this.Organization, other.Organization))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (Organization != null ? Organization.GetHashCode() : 0);
                 return hashCode;
             }
         }
@@ -5721,6 +4786,11 @@ namespace PSI_Interface.IdentData
         public string MidInitials
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as PersonObj;
@@ -5731,6 +4801,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(PersonObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5751,6 +4826,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5827,6 +4906,11 @@ namespace PSI_Interface.IdentData
         public string AnalysisSoftwareRef
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ProviderObj;
@@ -5837,6 +4921,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(ProviderObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5856,6 +4945,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -5927,6 +5020,11 @@ namespace PSI_Interface.IdentData
         public string URI
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as AnalysisSoftwareObj;
@@ -5937,6 +5035,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(AnalysisSoftwareObj other)
         {
             if (ReferenceEquals(this, other))
@@ -5957,6 +5060,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -6076,6 +5183,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as InputsObj;
@@ -6086,6 +5198,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(InputsObj other)
         {
             if (ReferenceEquals(this, other))
@@ -6105,6 +5222,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -6146,6 +5267,11 @@ namespace PSI_Interface.IdentData
             AnalysisData.RebuildLists();
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as DataCollectionObj;
@@ -6156,6 +5282,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(DataCollectionObj other)
         {
             if (ReferenceEquals(this, other))
@@ -6174,6 +5305,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -6228,6 +5363,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as AnalysisProtocolCollectionObj;
@@ -6238,6 +5378,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(AnalysisProtocolCollectionObj other)
         {
             if (ReferenceEquals(this, other))
@@ -6257,6 +5402,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -6292,6 +5441,11 @@ namespace PSI_Interface.IdentData
         public ProteinDetection ProteinDetection
         */
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as AnalysisCollectionObj;
@@ -6302,6 +5456,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(AnalysisCollectionObj other)
         {
             if (ReferenceEquals(this, other))
@@ -6321,6 +5480,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -6452,6 +5615,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as SequenceCollectionObj;
@@ -6462,6 +5630,11 @@ namespace PSI_Interface.IdentData
             return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(SequenceCollectionObj other)
         {
             if (ReferenceEquals(this, other))
@@ -6481,6 +5654,10 @@ namespace PSI_Interface.IdentData
             return false;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked

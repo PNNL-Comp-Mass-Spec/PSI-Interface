@@ -65,8 +65,7 @@ namespace Interface_Tests.IdentDataTests
 
             var identData = creator.GetIdentData();
 
-            var writer = new MzIdentMLWriter(output);
-            writer.Write(new MzIdentMLType(identData));
+            MzIdentMlReaderWriter.Write(new MzIdentMLType(identData), output);
         }
 
         private class MsPathfinderResult

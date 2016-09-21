@@ -48,8 +48,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", @"MzIdentML\output\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
         public void MzIdentMLWriteTest(string inPath, string outPath, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
         {
-            var reader = new MzIdentMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
-            MzIdentMLType identData = reader.Read();
+            MzIdentMLType identData = MzIdentMlReaderWriter.Read(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
             int specResults = 0;
             int specItems = 0;
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
@@ -67,8 +66,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
             Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptide.Count, "Peptide Matches");
             Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequence.Count, "DB Sequences");
 
-            var writer = new MzIdentMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outPath));
-            writer.Write(identData);
+            MzIdentMlReaderWriter.Write(identData, Path.Combine(TestPath.ExtTestDataDirectory, outPath));
         }
 
         /*

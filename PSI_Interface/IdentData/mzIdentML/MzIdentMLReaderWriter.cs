@@ -1,0 +1,81 @@
+﻿using System.IO;
+using System.IO.Compression;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+
+namespace PSI_Interface.IdentData.mzIdentML
+{
+    /// <summary>
+    /// Class for reading an MzIdentML file into MzIdentMLType group objects
+    /// </summary>
+    public static class MzIdentMlReaderWriter
+    {
+        /// <summary>
+        /// Read the mzid file into MzIdentMLType objects
+        /// </summary>
+        /// <returns></returns>
+        public static MzIdentMLType Read(string filePath, int bufferSize = 65536)
+        {
+            var xRoot = new XmlRootAttribute()
+            {
+                ElementName = "MzIdentML",
+                Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1",
+                IsNullable = false,
+            };
+            var serializer = new XmlSerializer(typeof(MzIdentMLType), xRoot);
+            using (var reader = CreateReader(filePath, bufferSize))
+            {
+                return (MzIdentMLType)serializer.Deserialize(reader);
+            }
+        }
+
+        private static Stream CreateReader(string filePath, int bufferSize)
+        {
+            Stream reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize);
+            if (filePath.EndsWith(".gz"))
+            {
+                reader = new GZipStream(reader, CompressionMode.Decompress);
+            }
+            return reader;
+        }
+        /// <summary>
+        /// Write the provided data to the file
+        /// </summary>
+        /// <param name="identData"></param>
+        /// <param name="filePath">Path to file to be written, with extension of .mzid[.gz]</param>
+        /// <param name="bufferSize">File stream buffer size</param>
+        public static void Write(MzIdentMLType identData, string filePath, int bufferSize = 65536)
+        {
+            CreateWriter(filePath, bufferSize);
+            var xRoot = new XmlRootAttribute()
+            {
+                ElementName = "MzIdentML",
+                Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1",
+                IsNullable = false,
+            };
+            var serializer = new XmlSerializer(typeof(MzIdentMLType), xRoot);
+            using (var writer = CreateWriter(filePath, bufferSize))
+            {
+                serializer.Serialize(writer, identData);
+            }
+        }
+
+        private static XmlWriter CreateWriter(string filePath, int bufferSize)
+        {
+            Stream writer = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize);
+            if (filePath.EndsWith(".gz"))
+            {
+                writer = new GZipStream(writer, CompressionMode.Compress);
+            }
+            var xSettings = new XmlWriterSettings()
+            {
+                CloseOutput = true,
+                NewLineChars = "\n",
+                Indent = true,
+                Encoding = Encoding.UTF8,
+            };
+            return XmlWriter.Create(new StreamWriter(writer, Encoding.UTF8, bufferSize), xSettings);
+        }
+    }
+}

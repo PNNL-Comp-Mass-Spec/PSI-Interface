@@ -50,9 +50,8 @@ namespace Interface_Tests.IdentDataTests
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", @"MzIdentML\output\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
         public void MzIdentMLWriteTest(string inPath, string outPath, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
         {
-            var reader = new MzIdentMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
-            //MzIdentMLType identData = reader.Read();
-            IdentDataObj identData = new IdentDataObj(reader.Read());
+            //MzIdentMLType identData = MzIdentMLReader.Read(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
+            IdentDataObj identData = new IdentDataObj(MzIdentMlReaderWriter.Read(Path.Combine(TestPath.ExtTestDataDirectory, inPath)));
             int specResults = 0;
             int specItems = 0;
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
@@ -70,24 +69,9 @@ namespace Interface_Tests.IdentDataTests
             Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptides.Count, "Peptide Matches");
             Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequences.Count, "DB Sequences");
 
-            var writer = new MzIdentMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outPath));
-            //writer.Write(identData);
+            //MzIdentMLWriter.Write(identData, Path.Combine(TestPath.ExtTestDataDirectory, outPath));
             identData.DefaultCV();
-            writer.Write(new MzIdentMLType(identData));;
+            MzIdentMlReaderWriter.Write(new MzIdentMLType(identData), Path.Combine(TestPath.ExtTestDataDirectory, outPath)); ;
         }
-
-        /*
-        [Test]
-        [TestCase(@"mzML\VA139IMSMS.mzML", 3145)]
-        [TestCase(@"mzML\VA139IMSMS_compressed.mzML", 3145)]
-        [TestCase(@"mzML\VA139IMSMS.mzML.gz", 3145)]
-        [TestCase(@"mzML\sample1-A_BB2_01_922.mzML", 43574)]
-        public void MzMLIndexedTest(string path, int expectedSpectra)
-        {
-            var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            mzMLType mzMLData = reader.Read();
-            Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count.ToString(), "Stored Count");
-            Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Length, "Array length");
-        }*/
     }
 }

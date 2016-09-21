@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PSI_Interface.IdentData.mzIdentML
 {
+    /// <summary>
+    /// Interface for an object that contains a list of CVParams
+    /// </summary>
     public interface ICVParamGroup
     {
+        /// <summary>
+        /// List of CVParams
+        /// </summary>
         List<CVParamType> cvParam { get; set; }
     }
 
+    /// <summary>
+    /// Interface for an object that contains a list of userParams
+    /// </summary>
     public interface IParamGroup : ICVParamGroup
     {
+        /// <summary>
+        /// List of UserParams
+        /// </summary>
         List<UserParamType> userParam { get; set; }
     }
 

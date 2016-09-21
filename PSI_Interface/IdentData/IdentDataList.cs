@@ -74,6 +74,10 @@ namespace PSI_Interface.IdentData
             }
         }
 
+        /// <summary>
+        /// Add an item to the list, setting the IdentData property of the added object
+        /// </summary>
+        /// <param name="item"></param>
         public new void Add(T item)
         {
             //if (null != OnAdd)
@@ -84,6 +88,10 @@ namespace PSI_Interface.IdentData
             base.Add(item);
         }
 
+        /// <summary>
+        /// Add a range of items to the list, setting the IdentData property of each added object
+        /// </summary>
+        /// <param name="items"></param>
         public new void AddRange(IEnumerable<T> items)
         {
             foreach (var item in items)
@@ -93,6 +101,11 @@ namespace PSI_Interface.IdentData
             }
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             var o = obj as IdentDataList<T>;
@@ -103,6 +116,11 @@ namespace PSI_Interface.IdentData
             return this.Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(IdentDataList<T> other)
         {
             if (this.Count == 0 && (other == null || other.Count == 0))
@@ -138,6 +156,10 @@ namespace PSI_Interface.IdentData
             return true;
         }
 
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -161,6 +183,13 @@ namespace PSI_Interface.IdentData
     /// </summary>
     public static class IdentDataListExtensions
     {
+        /// <summary>
+        /// Get the CVParam that matches the specified CV term, defaulting to the value provided if not found.
+        /// </summary>
+        /// <param name="cvParamList"></param>
+        /// <param name="cvid"></param>
+        /// <param name="valueIfNotFound"></param>
+        /// <returns></returns>
         public static CVParamObj GetCvParam(this IdentDataList<CVParamObj> cvParamList, CV.CV.CVID cvid, string valueIfNotFound)
         {
             var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);
@@ -179,6 +208,13 @@ namespace PSI_Interface.IdentData
             return defaultCvParam;
         }
 
+        /// <summary>
+        /// Get the CVParam that matches the specified CV term, defaulting to the value provided if not found.
+        /// </summary>
+        /// <param name="paramList"></param>
+        /// <param name="cvid"></param>
+        /// <param name="valueIfNotFound"></param>
+        /// <returns></returns>
         public static CVParamObj GetCvParam(this IdentDataList<ParamBaseObj> paramList, CV.CV.CVID cvid, string valueIfNotFound)
         {
             var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);
