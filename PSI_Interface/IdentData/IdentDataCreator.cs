@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PSI_Interface.IdentData.IdentDataObjs;
 
 namespace PSI_Interface.IdentData
 {
@@ -167,12 +168,18 @@ namespace PSI_Interface.IdentData
             //identData.SequenceCollection.Peptides.AddRange(peptideList);
             identData.SequenceCollection.Peptides.AddRange(peptideListFinal);
 
+            var pepEvDeDup = new Dictionary<string, PeptideEvidenceObj>();
             foreach (var pepEv in pepEvList)
             {
                 pepEv.Id = "PepEv_" + pepEv.DBSequence.Id.Remove(0, 5) + "_" + pepEv.Peptide.Id.Remove(0, 4) + "_" +
                            pepEv.Start;
+                if (!pepEvDeDup.ContainsKey(pepEv.Id))
+                {
+                    pepEvDeDup.Add(pepEv.Id, pepEv);
+                }
             }
-            identData.SequenceCollection.PeptideEvidences.AddRange(pepEvList);
+            //identData.SequenceCollection.PeptideEvidences.AddRange(pepEvList);
+            identData.SequenceCollection.PeptideEvidences.AddRange(pepEvDeDup.Values);
 
             specList.NumSequencesSearched = identData.SequenceCollection.DBSequences.Count;
 

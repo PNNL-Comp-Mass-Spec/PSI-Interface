@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using PSI_Interface.CV;
 using PSI_Interface.IdentData;
+using PSI_Interface.IdentData.IdentDataObjs;
 using PSI_Interface.IdentData.mzIdentML;
-using PSI_Interface.MSData;
 
 namespace Interface_Tests.IdentDataTests
 {

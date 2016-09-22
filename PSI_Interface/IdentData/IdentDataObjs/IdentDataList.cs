@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PSI_Interface.IdentData
+namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
     /// This is a subclass of List, specifically because there needs to be a connection from the IdentData class to all other objects it contains

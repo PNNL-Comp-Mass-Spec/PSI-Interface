@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace PSI_Interface.IdentData
+namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
     /// Base abstraction for all IdentData types to tie them to the root object

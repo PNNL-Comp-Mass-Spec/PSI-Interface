@@ -56,7 +56,7 @@ namespace PSI_Interface.CV
         /// Create a translator between a mzid file and the internal values
         /// </summary>
         /// <param name="fileCvInfo"></param>
-        public CVTranslator(IEnumerable<PSI_Interface.IdentData.CVInfo> fileCvInfo)
+        public CVTranslator(IEnumerable<IdentData.IdentDataObjs.CVInfo> fileCvInfo)
         {
             foreach (var cv in CV.CVInfoList)
             {
