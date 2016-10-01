@@ -1783,9 +1783,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <param name="sm"></param>
         public SearchModificationType(SearchModificationObj sm)
         {
-            this.fixedMod = false;
-            this.massDelta = 0;
-            this.residues = null;
+            this.fixedMod = sm.FixedMod;
+            this.massDelta = sm.MassDelta;
+            this.residues = sm.Residues;
 
             this.cvParam = null;
             ParamGroupFunctions.CopyCVParamGroup(this, sm);
