@@ -45,22 +45,27 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         ///     Create a modification with the specified values
         /// </summary>
-        /// <param name="location">
-        ///     location of the modification, using '0' for N-term and length+1 for C-term, and otherwise
-        ///     1-based indexing
-        /// </param>
-        /// <param name="monoMassDelta">monoisotopic mass delta</param>
         /// <param name="unimodCv">CV term for the modification, if available; otherwise, use CVID.MS_unknown_modification</param>
         /// <param name="modificationName">
         ///     Name of the modification, if a CV term for the modification is not available or unknown.
         ///     If this matches an Unimod modification name, the Unimod CV term will be used.
         /// </param>
+        /// <param name="location">
+        ///     location of the modification, using '0' for N-term and length+1 for C-term, and otherwise
+        ///     1-based indexing
+        /// </param>
+        /// <param name="monoMassDelta">monoisotopic mass delta</param>
         /// <returns></returns>
-        public ModificationObj(int location, double monoMassDelta,
-            CV.CV.CVID unimodCv = CV.CV.CVID.MS_unknown_modification, string modificationName = "") : this()
+        public ModificationObj(CV.CV.CVID unimodCv, string modificationName = "", int location = int.MinValue, double monoMassDelta = double.NaN) : this()
         {
-            MonoisotopicMassDelta = monoMassDelta;
-            Location = location;
+            if (!monoMassDelta.Equals(double.NaN))
+            {
+                MonoisotopicMassDelta = monoMassDelta;
+            }
+            if (location != int.MinValue)
+            {
+                Location = location;
+            }
 
             if ((unimodCv != CV.CV.CVID.CVID_Unknown) && (unimodCv != CV.CV.CVID.MS_unknown_modification))
             {

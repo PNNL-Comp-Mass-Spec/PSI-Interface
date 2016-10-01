@@ -39,7 +39,7 @@ namespace Interface_Tests.IdentDataTests
                 var pep = new PeptideObj(result.Sequence);
                 foreach (var mod in result.Modifications)
                 {
-                    var modObj = new ModificationObj(mod.Item2, 16, CV.CVID.MS_unknown_modification, mod.Item1);
+                    var modObj = new ModificationObj(CV.CVID.MS_unknown_modification, mod.Item1, mod.Item2);
                     pep.Modifications.Add(modObj);
                 }
                 spec.Peptide = pep;
