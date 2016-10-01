@@ -425,17 +425,17 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        /// 
+        /// Create a spectrum identification item for the mzid; scores, peptide, and peptideEvidences must be added. Calculated m/z can also be added.
         /// </summary>
         /// <param name="spectraSource">source object for the spectrum, returned from <see cref="AddSpectraData"/></param>
         /// <param name="nativeId">native id of the spectrum</param>
         /// <param name="retentionTimeMinutes">retention time in minutes of the spectrum</param>
         /// <param name="expMz">experimental m/z of the peptide</param>
-        /// <param name="calcMz">Calculated m/z of the peptide</param>
         /// <param name="charge">Charge of the peptide</param>
         /// <param name="rank">rank of result for a spectrum; may be the same as another result for the same spectrum if they score equally</param>
+        /// <param name="calcMz">(optional) Calculated m/z of the peptide; default double.NaN (not added)</param>
         /// <returns>Object: Must populate PeptideEvidences and Peptide, as well as add score information to CVParams and UserParams</returns>
-        public SpectrumIdentificationItemObj AddSpectrumIdentification(SpectraDataObj spectraSource, string nativeId, double retentionTimeMinutes, double expMz, double calcMz, int charge, int rank = 1)
+        public SpectrumIdentificationItemObj AddSpectrumIdentification(SpectraDataObj spectraSource, string nativeId, double retentionTimeMinutes, double expMz, int charge, int rank = 1, double calcMz = double.NaN)
         {
             SpectrumIdentificationResultObj specResult;
             if (!identificationResults.TryGetValue(nativeId, out specResult))
@@ -465,12 +465,15 @@ namespace PSI_Interface.IdentData
                 PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>(),
                 ChargeState = charge,
                 ExperimentalMassToCharge = expMz,
-                CalculatedMassToCharge = calcMz,
                 Rank = rank,
                 PassThreshold = true,
                 CVParams = new IdentDataList<CVParamObj>(),
                 UserParams = new IdentDataList<UserParamObj>(),
             };
+            if (!calcMz.Equals(double.NaN))
+            {
+                specIdent.CalculatedMassToCharge = calcMz;
+            }
 
             specResult.SpectrumIdentificationItems.Add(specIdent);
 

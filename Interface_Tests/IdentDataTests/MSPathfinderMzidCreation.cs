@@ -34,8 +34,8 @@ namespace Interface_Tests.IdentDataTests
             foreach (var result in ReadMsPathfinderResults(input))
             {
                 var native = "controllerType=0 controllerNumber=1 scan=" + result.Scan;
-                var spec = creator.AddSpectrumIdentification(specData, native, result.Scan, result.MostAbundantIsotopeMz, result.MostAbundantIsotopeMz,
-                    result.Charge);
+                var spec = creator.AddSpectrumIdentification(specData, native, result.Scan, result.MostAbundantIsotopeMz,
+                    result.Charge, 1, result.MostAbundantIsotopeMz);
                 var pep = new PeptideObj(result.Sequence);
                 foreach (var mod in result.Modifications)
                 {
