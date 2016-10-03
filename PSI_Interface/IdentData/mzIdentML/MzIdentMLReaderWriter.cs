@@ -63,7 +63,7 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         private static XmlWriter CreateWriter(string filePath, int bufferSize)
         {
-            Stream writer = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize);
+            Stream writer = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read, bufferSize);
             if (filePath.EndsWith(".gz"))
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
