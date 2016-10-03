@@ -1661,7 +1661,7 @@ namespace PSI_Interface.IdentData.mzIdentML
                     this.ModificationParams.Add(new SearchModificationType(mp));
                 }
             }
-            if (sip.Enzymes != null)
+            if (sip.Enzymes != null && sip.Enzymes.Enzymes.Count > 0)
             {
                 this.Enzymes = new EnzymesType(sip.Enzymes);
             }

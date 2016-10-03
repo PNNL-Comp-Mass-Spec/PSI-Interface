@@ -68,14 +68,15 @@ namespace PSI_Interface.IdentData.mzIdentML
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
             }
+            var utf8EncodingNoMark = new UTF8Encoding(false); // DO NOT ADD THE BYTE ORDER MARK!!!
             var xSettings = new XmlWriterSettings()
             {
                 CloseOutput = true,
                 NewLineChars = "\n",
                 Indent = true,
-                Encoding = Encoding.UTF8,
+                Encoding = utf8EncodingNoMark,
             };
-            return XmlWriter.Create(new StreamWriter(writer, Encoding.UTF8, bufferSize), xSettings);
+            return XmlWriter.Create(new StreamWriter(writer, utf8EncodingNoMark, bufferSize), xSettings);
         }
     }
 }

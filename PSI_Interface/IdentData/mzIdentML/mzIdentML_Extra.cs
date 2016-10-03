@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace PSI_Interface.IdentData.mzIdentML
 {
@@ -28,6 +29,12 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.creationDateSpecified = false;
             this.version = null;
         }
+
+        /// <summary>
+        /// Set the schema location for the root object
+        /// </summary>
+        [XmlAttribute("schemaLocation", Namespace = "http://www.w3.org/2001/XMLSchema-instance")]
+        public string xsiSchemaLocation = "http://psidev.info/psi/pi/mzIdentML/1.1 http://www.psidev.info/files/mzIdentML1.1.0.xsd";
 
         /*/// min 1, max 1
         //public IdentDataList<CVInfo> CVList

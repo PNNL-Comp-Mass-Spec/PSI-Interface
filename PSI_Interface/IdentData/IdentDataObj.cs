@@ -154,8 +154,8 @@ namespace PSI_Interface.IdentData
             Id = null;
             Name = null;
             Version = "1.1.0";
-            CreationDate = DateTime.Now;
             CreationDateSpecified = false;
+            CreationDate = DateTime.Now;
 
             //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
             CvTranslator = null;
