@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -167,6 +168,7 @@ namespace PSI_Interface.IdentData
         private readonly Dictionary<string, PeptideRef> m_peptides = new Dictionary<string, PeptideRef>();
         private readonly Dictionary<string, PeptideEvidence> m_evidences = new Dictionary<string, PeptideEvidence>();
         private readonly Dictionary<string, SpectrumIdItem> m_specItems = new Dictionary<string, SpectrumIdItem>();
+        private string spectrumFile = string.Empty;
 
         /// <summary>
         /// Information about a single search result
@@ -437,6 +439,36 @@ namespace PSI_Interface.IdentData
             public PeptideRef PeptideRef { get; set; }
 
             /// <summary>
+            /// Peptide sequence with ends and numeric mods; uses the first peptide evidence to get pre and post residues.
+            /// For the sequence without mods, use <see cref="PeptideRef.Sequence"/>
+            /// </summary>
+            public string SequenceWithNumericMods
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(sequenceWithNumericMods))
+                    {
+                        var sequenceText = PeptideRef.Sequence;
+                        // Insert the mods from the last occurring to the first.
+                        foreach (var mod in PeptideRef.Mods.OrderByDescending(x => x.Key))
+                        {
+                            var sign = "+";
+                            if (mod.Value.Mass < 0)
+                            {
+                                sign = "-";
+                            }
+                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + mod.Value.Mass + sequenceText.Substring(mod.Key);
+                        }
+                        sequenceText = Pre + "." + sequenceText + "." + Post;
+                        sequenceWithNumericMods = sequenceText;
+                    }
+                    return sequenceWithNumericMods;
+                }
+            }
+
+            private string sequenceWithNumericMods = string.Empty;
+
+            /// <summary>
             /// Protein information
             /// </summary>
             public DatabaseSequence DbSeq { get; set; }
@@ -465,6 +497,11 @@ namespace PSI_Interface.IdentData
             /// Path to the mzid file
             /// </summary>
             public string DatasetFile { get; private set; }
+
+            /// <summary>
+            /// Name of the spectrum file used for the search
+            /// </summary>
+            public string SpectrumFile { get; internal set; }
         }
 
 
@@ -501,6 +538,7 @@ namespace PSI_Interface.IdentData
             ReadMzIdentMl(reader);
 
             var results = new SimpleMZIdentMLData(path);
+            results.SpectrumFile = spectrumFile;
             results.Identifications.AddRange(m_specItems.Values);
             return results;
         }
@@ -788,6 +826,7 @@ namespace PSI_Interface.IdentData
                     // id attribute: required
                     // SpectrumIDFormat child element: required
                     var location = reader.GetAttribute("location");
+                    spectrumFile = Path.GetFileName(location);
                     if (location != null && location.ToLower().EndsWith("_dta.txt"))
                     {
                         isFromDTA = true;
