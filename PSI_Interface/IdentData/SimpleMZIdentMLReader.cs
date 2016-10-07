@@ -457,7 +457,8 @@ namespace PSI_Interface.IdentData
                             {
                                 sign = "-";
                             }
-                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + mod.Value.Mass + sequenceText.Substring(mod.Key);
+                            // Using "0.0##" to use 3 decimal places, but drop trailing zeros - "F3" would keep trailing zeros.
+                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + string.Format("{0:0.0##}", mod.Value.Mass) + sequenceText.Substring(mod.Key);
                         }
                         sequenceText = Pre + "." + sequenceText + "." + Post;
                         sequenceWithNumericMods = sequenceText;
