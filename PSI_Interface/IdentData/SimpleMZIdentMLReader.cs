@@ -399,6 +399,38 @@ namespace PSI_Interface.IdentData
             {
                 get { return mods; }
             }
+
+            /// <summary>
+            /// Peptide sequence with numeric mods but without a prefix or suffix residue
+            /// For the sequence without mods, use <see cref="PeptideRef.Sequence"/>
+            /// </summary>
+            public string SequenceWithNumericMods {
+                get {
+
+
+                    if (string.IsNullOrEmpty(sequenceWithNumericMods))
+                    {
+                        var sequenceText = string.Copy(Sequence);
+                        // Insert the mods from the last occurring to the first.
+                        foreach (var mod in Mods.OrderByDescending(x => x.Key))
+                        {
+                            var sign = "+";
+                            if (mod.Value.Mass < 0)
+                            {
+                                sign = "-";
+                            }
+                            // Using "0.0##" to use 3 decimal places, but drop trailing zeros - "F3" would keep trailing zeros.
+                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + string.Format("{0:0.0##}", mod.Value.Mass) + sequenceText.Substring(mod.Key);
+                        }
+                        sequenceWithNumericMods = sequenceText;
+                    }
+                    return sequenceWithNumericMods;
+
+
+                }
+            }
+
+            private string sequenceWithNumericMods;
         }
 
         /// <summary>
