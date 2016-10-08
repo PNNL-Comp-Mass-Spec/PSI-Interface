@@ -557,7 +557,7 @@ namespace PSI_Interface.IdentData
         public SimpleMZIdentMLData Read(string path)
         {
             // Set a large buffer size. Doesn't affect gzip reading speed, but speeds up non-gzipped
-            Stream file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 65536);
+            Stream file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
 
             if (path.EndsWith(".mzid.gz"))
             {
