@@ -169,6 +169,9 @@ namespace PSI_Interface.IdentData
         private readonly Dictionary<string, PeptideEvidence> m_evidences = new Dictionary<string, PeptideEvidence>();
         private readonly Dictionary<string, SpectrumIdItem> m_specItems = new Dictionary<string, SpectrumIdItem>();
         private string spectrumFile = string.Empty;
+        private string softwareCvAccession = string.Empty;
+        private string softwareName = string.Empty;
+        private string softwareVersion = string.Empty;
 
         /// <summary>
         /// Information about a single search result
@@ -402,12 +405,12 @@ namespace PSI_Interface.IdentData
 
             /// <summary>
             /// Peptide sequence with numeric mods but without a prefix or suffix residue
-            /// For the sequence without mods, use <see cref="PeptideRef.Sequence"/>
+            /// For the sequence without mods, use <see cref="Sequence"/>
             /// </summary>
-            public string SequenceWithNumericMods {
-                get {
-
-
+            public string SequenceWithNumericMods
+            {
+                get
+                {
                     if (string.IsNullOrEmpty(sequenceWithNumericMods))
                     {
                         var sequenceText = string.Copy(Sequence);
@@ -420,13 +423,12 @@ namespace PSI_Interface.IdentData
                                 sign = "-";
                             }
                             // Using "0.0##" to use 3 decimal places, but drop trailing zeros - "F3" would keep trailing zeros.
-                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + string.Format("{0:0.0##}", mod.Value.Mass) + sequenceText.Substring(mod.Key);
+                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + string.Format("{0:0.0##}", mod.Value.Mass) +
+                                           sequenceText.Substring(mod.Key);
                         }
                         sequenceWithNumericMods = sequenceText;
                     }
                     return sequenceWithNumericMods;
-
-
                 }
             }
 
@@ -471,7 +473,7 @@ namespace PSI_Interface.IdentData
             public PeptideRef PeptideRef { get; set; }
 
             /// <summary>
-            /// Peptide sequence with ends and numeric mods; uses the first peptide evidence to get pre and post residues.
+            /// Peptide sequence with numeric mods and prefix/suffix residues
             /// For the sequence without mods, use <see cref="PeptideRef.Sequence"/>
             /// </summary>
             public string SequenceWithNumericMods
@@ -480,18 +482,7 @@ namespace PSI_Interface.IdentData
                 {
                     if (string.IsNullOrEmpty(sequenceWithNumericMods))
                     {
-                        var sequenceText = PeptideRef.Sequence;
-                        // Insert the mods from the last occurring to the first.
-                        foreach (var mod in PeptideRef.Mods.OrderByDescending(x => x.Key))
-                        {
-                            var sign = "+";
-                            if (mod.Value.Mass < 0)
-                            {
-                                sign = "-";
-                            }
-                            // Using "0.0##" to use 3 decimal places, but drop trailing zeros - "F3" would keep trailing zeros.
-                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + string.Format("{0:0.0##}", mod.Value.Mass) + sequenceText.Substring(mod.Key);
-                        }
+                        var sequenceText = PeptideRef.SequenceWithNumericMods;
                         sequenceText = Pre + "." + sequenceText + "." + Post;
                         sequenceWithNumericMods = sequenceText;
                     }
@@ -535,6 +526,21 @@ namespace PSI_Interface.IdentData
             /// Name of the spectrum file used for the search
             /// </summary>
             public string SpectrumFile { get; internal set; }
+
+            /// <summary>
+            /// Get the name of the analysis software
+            /// </summary>
+            public string AnalysisSoftware { get; internal set; }
+
+            /// <summary>
+            /// Get the Controlled Vocabulary accession of the analysis software, if available
+            /// </summary>
+            public string AnalysisSoftwareCvAccession { get; internal set; }
+
+            /// <summary>
+            /// Get the version of the analysis software, if provided
+            /// </summary>
+            public string AnalysisSoftwareVersion { get; internal set; }
         }
 
 
@@ -572,6 +578,9 @@ namespace PSI_Interface.IdentData
 
             var results = new SimpleMZIdentMLData(path);
             results.SpectrumFile = spectrumFile;
+            results.AnalysisSoftware = softwareName;
+            results.AnalysisSoftwareVersion = softwareVersion;
+            results.AnalysisSoftwareCvAccession = softwareCvAccession;
             results.Identifications.AddRange(m_specItems.Values);
             return results;
         }
@@ -610,7 +619,8 @@ namespace PSI_Interface.IdentData
                             break;
                         case "AnalysisSoftwareList":
                             // Schema requirements: zero to one instances of this element
-                            reader.Skip();
+                            ReadAnalysisSoftwareList(reader.ReadSubtree());
+                            reader.ReadEndElement(); // "AnalysisSoftwareList", if it exists, must have child nodes
                             break;
                         case "Provider":
                             // Schema requirements: zero to one instances of this element
@@ -655,6 +665,106 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Handle the child nodes of the AnalysisSoftwareList element
+        /// Called by ReadMzIdentML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single AnalysisSoftwareList element</param>
+        private void ReadAnalysisSoftwareList(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("AnalysisSoftwareList"); // Throws exception if we are not at the "SequenceCollection" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "AnalysisSoftware":
+                        // Schema requirements: one to many instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        ReadAnalysisSoftware(reader.ReadSubtree());
+                        // "AnalysisSoftware" must have 1 child node
+                        // Consume the EndElement
+                        reader.ReadEndElement();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Close();
+        }
+
+        /// <summary>
+        /// Handle the child nodes of the AnalysisSoftware element
+        /// Called by ReadAnalysisSoftwareList (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the AnalysisSoftware element</param>
+        private void ReadAnalysisSoftware(XmlReader reader)
+        {
+            reader.MoveToContent();
+            var version = reader.GetAttribute("version");
+            if (!string.IsNullOrWhiteSpace(version) && string.IsNullOrWhiteSpace(softwareVersion))
+            {
+                softwareVersion = version;
+            }
+            reader.ReadStartElement("AnalysisSoftware"); // Throws exception if we are not at the "AnalysisSoftware" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "SoftwareName":
+                        // Schema requirements: one to many instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        var innerReader = reader.ReadSubtree();
+                        innerReader.MoveToContent();
+                        innerReader.ReadStartElement("SoftwareName");
+                        while (innerReader.ReadState == ReadState.Interactive)
+                        {
+                            if (innerReader.NodeType != XmlNodeType.Element)
+                            {
+                                innerReader.Read();
+                                continue;
+                            }
+                            if (innerReader.Name.Equals("cvParam") || innerReader.Name.Equals("userParam"))
+                            {
+                                var name = innerReader.GetAttribute("name");
+                                if (!string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(softwareName))
+                                {
+                                    softwareName = name;
+                                }
+                                var accession = reader.GetAttribute("accession");
+                                if (!string.IsNullOrWhiteSpace(accession) && string.IsNullOrWhiteSpace(softwareCvAccession))
+                                {
+                                    softwareCvAccession = accession;
+                                }
+                            }
+                            innerReader.Read();
+                        }
+                        innerReader.Close();
+                        // "SoftwareName" must have 1 child node
+                        // Consume the EndElement
+                        reader.ReadEndElement();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Close();
         }
 
         /// <summary>
