@@ -13,9 +13,9 @@ namespace PSI_Interface.CV
         /// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.1"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:07:01 11:23"));
-            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://www.berkeleybop.org/ontologies/pato/pato.obo", "releases/2016-05-22"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.2"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:09:23 13:49"));
+            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://www.berkeleybop.org/ontologies/pato/pato.obo", "releases/2016-09-15"));
             CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://www.berkeleybop.org/ontologies/uo/uo.obo", "releases/2016-05-13"));
         }
 
@@ -7805,8 +7805,8 @@ namespace PSI_Interface.CV
             /// <summary>Estimation of the global false discovery rate of residue-pairs in cross-linking experiments.</summary>
             MS_residue_pair_level_global_FDR,
 
-            /// <summary>A supplemental collision-induced dissociation process wherein the projectile ion has the translational energy higher than approximately 1000 eV.</summary>
-            MS_supplemental_higher_energy_beam_type_collision_induced_dissociation,
+            /// <summary>A supplemental collision-induced dissociation process that occurs in a beam-type collision cell in addition to another primary type of dissociation.</summary>
+            MS_supplemental_beam_type_collision_induced_dissociation,
 
             /// <summary>The dissociation of an ion after supplemental collisional excitation.</summary>
             MS_supplemental_collision_induced_dissociation,
@@ -7888,6 +7888,27 @@ namespace PSI_Interface.CV
 
             /// <summary>Attrbiute of an entire list of protein groups.</summary>
             MS_protein_group_level_result_list_statistic,
+
+            /// <summary>LECO bench-top GC time-of-flight mass spectrometer.</summary>
+            MS_Pegasus_BT,
+
+            /// <summary>PNNL top-down/bottom-up analysis software for identifying peptides and proteoforms in fragmentation mass spectra.</summary>
+            MS_MSPathFinder,
+
+            /// <summary>MSPathFinder spectral E-value.</summary>
+            MS_MSPathFinder_SpecEValue,
+
+            /// <summary>MSPathFinder E-value.</summary>
+            MS_MSPathFinder_EValue,
+
+            /// <summary>MSPathFinder Q-value.</summary>
+            MS_MSPathFinder_QValue,
+
+            /// <summary>MSPathFinder peptide-level Q-value.</summary>
+            MS_MSPathFinder_PepQValue,
+
+            /// <summary>MSPathFinder raw score.</summary>
+            MS_MSPathFinder_RawScore,
 
             /// <summary>The root node of the unimod modifications ontology.</summary>
             UNIMOD_unimod_root_node,
@@ -11965,6 +11986,45 @@ namespace PSI_Interface.CV
 
             /// <summary>Pyro-Glu from E + Methylation Medium.</summary>
             UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_,
+
+            /// <summary>LeumethylArgGlyGly.</summary>
+            UNIMOD_LRGG_methyl,
+
+            /// <summary>LeudimethylArgGlyGly.</summary>
+            UNIMOD_LRGG_dimethyl,
+
+            /// <summary>Biotin-Phenol.</summary>
+            UNIMOD_Biotin_tyramide,
+
+            /// <summary>Tris adduct causes 104 Da addition at asparagine-succinimide intermediate.</summary>
+            UNIMOD_Tris,
+
+            /// <summary>Iodoacetamide derivative of stilbene (reaction product with thiol).</summary>
+            UNIMOD_IASD,
+
+            /// <summary>NP-40 synthetic polymer terminus.</summary>
+            UNIMOD_NP40,
+
+            /// <summary>Tween 20 synthetic polymer terminus.</summary>
+            UNIMOD_Tween20,
+
+            /// <summary>Tween 80 synthetic polymer terminus.</summary>
+            UNIMOD_Tween80,
+
+            /// <summary>Triton synthetic polymer terminus.</summary>
+            UNIMOD_Triton,
+
+            /// <summary>Brij 35 synthetic polymer terminus.</summary>
+            UNIMOD_Brij35,
+
+            /// <summary>Brij 58 synthetic polymer terminus.</summary>
+            UNIMOD_Brij58,
+
+            /// <summary>Î’-Funaltrexamine.</summary>
+            UNIMOD_beta_FNA,
+
+            /// <summary>Fucosylated biantennary + 2 alphaGal.</summary>
+            UNIMOD_dHex_1_Hex_7_HexNAc_4_,
 
             /// <summary>Description not provided</summary>
             PATO_pato_OBSOLETE,
@@ -19034,7 +19094,7 @@ namespace PSI_Interface.CV
             /// <summary>An angular shape quality inhering in a bearer by virtue of the bearer's having two angles in its length giving the bearer the form of the letter W.</summary>
             PATO_w_shaped,
 
-            /// <summary>A surface feature shape quality inhering in a bearer by virtue of the degree of the bearer's  highly topographical with ridges, pits, rugosity or other surface structures.</summary>
+            /// <summary>A surface feature shape quality inhering in a bearer by virtue of the degree of the bearer's highly topographical with ridges, pits, rugosity or other surface structures.</summary>
             PATO_ornamentation,
 
             /// <summary>A surface feature shape in which the bearer's surface is highly topographical with ridges, pits, rugosity or other surface structures.</summary>
@@ -19076,13 +19136,13 @@ namespace PSI_Interface.CV
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer bring gradually worn away.</summary>
             PATO_eroding,
 
-            /// <summary>A  quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a carpel.</summary>
+            /// <summary>A quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a carpel.</summary>
             PATO_carpel_like,
 
-            /// <summary>A  quality inhering in a bearer by virtue of the bearer's architecture bearing resemblence to a corymb type of inflorescence.</summary>
+            /// <summary>A quality inhering in a bearer by virtue of the bearer's architecture bearing resemblence to a corymb type of inflorescence.</summary>
             PATO_corymb_like,
 
-            /// <summary>A  quality inhering in a bearer by virtue of the bearer's similarity to the appearance of an inflorescence.</summary>
+            /// <summary>A quality inhering in a bearer by virtue of the bearer's similarity to the appearance of an inflorescence.</summary>
             PATO_inflorescence_like,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a leaf.</summary>
@@ -19489,6 +19549,21 @@ namespace PSI_Interface.CV
 
             /// <summary>A physical quality inhering in an entity by virtue of the bearer's solid or liquid constituents being suspended in a gas.</summary>
             PATO_quality_of_an_aerosol,
+
+            /// <summary>A concave 3-D shape quality inhering in a bearer by virtue of the bearer's being shaped in the form of the letter C.</summary>
+            PATO_C_shaped,
+
+            /// <summary>A concave 3-D shape quality inhering in a bearer by virtue of the bearer's being shaped in the form of the letter J.</summary>
+            PATO_J_shaped,
+
+            /// <summary>The propensity of a material to undergo combustion. Combustion encompasses smouldering and flaming combustion. Combustibility is usually applied to solids.</summary>
+            PATO_combustibility,
+
+            /// <summary>An increase in combustibility.</summary>
+            PATO_increased_combustibility,
+
+            /// <summary>An decrease in combustibility.</summary>
+            PATO_decreased_combustibility,
 
             /// <summary>A biological sex quality inhering in an individual based upon genotypic composition of sex chromosomes.</summary>
             PATO_genotypic_sex,
@@ -23068,7 +23143,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_cross_linking_result_details, new TermInfo(CVID.MS_cross_linking_result_details, @"MS", @"MS:1002675", @"cross-linking result details", @"This subsection describes terms which can describe details of cross-linking results.", false));
             TermData.Add(CVID.MS_protein_pair_level_global_FDR, new TermInfo(CVID.MS_protein_pair_level_global_FDR, @"MS", @"MS:1002676", @"protein-pair-level global FDR", @"Estimation of the global false discovery rate of proteins-pairs in cross-linking experiments.", false));
             TermData.Add(CVID.MS_residue_pair_level_global_FDR, new TermInfo(CVID.MS_residue_pair_level_global_FDR, @"MS", @"MS:1002677", @"residue-pair-level global FDR", @"Estimation of the global false discovery rate of residue-pairs in cross-linking experiments.", false));
-            TermData.Add(CVID.MS_supplemental_higher_energy_beam_type_collision_induced_dissociation, new TermInfo(CVID.MS_supplemental_higher_energy_beam_type_collision_induced_dissociation, @"MS", @"MS:1002678", @"supplemental higher energy beam-type collision-induced dissociation", @"A supplemental collision-induced dissociation process wherein the projectile ion has the translational energy higher than approximately 1000 eV.", false));
+            TermData.Add(CVID.MS_supplemental_beam_type_collision_induced_dissociation, new TermInfo(CVID.MS_supplemental_beam_type_collision_induced_dissociation, @"MS", @"MS:1002678", @"supplemental beam-type collision-induced dissociation", @"A supplemental collision-induced dissociation process that occurs in a beam-type collision cell in addition to another primary type of dissociation.", false));
             TermData.Add(CVID.MS_supplemental_collision_induced_dissociation, new TermInfo(CVID.MS_supplemental_collision_induced_dissociation, @"MS", @"MS:1002679", @"supplemental collision-induced dissociation", @"The dissociation of an ion after supplemental collisional excitation.", false));
             TermData.Add(CVID.MS_supplemental_collision_energy, new TermInfo(CVID.MS_supplemental_collision_energy, @"MS", @"MS:1002680", @"supplemental collision energy", @"Energy for an ion experiencing supplemental collision with a stationary gas particle resulting in dissociation of the ion.", false));
             TermData.Add(CVID.MS_OpenXQuest_combined_score, new TermInfo(CVID.MS_OpenXQuest_combined_score, @"MS", @"MS:1002681", @"OpenXQuest:combined score", @"OpenXQuest's combined score for a cross-link spectrum match.", false));
@@ -23096,6 +23171,13 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_protein_level_result_list_attribute, new TermInfo(CVID.MS_protein_level_result_list_attribute, @"MS", @"MS:1002704", @"protein-level result list attribute", @"Attribute of an entire protein list.", false));
             TermData.Add(CVID.MS_protein_level_result_list_statistic, new TermInfo(CVID.MS_protein_level_result_list_statistic, @"MS", @"MS:1002705", @"protein-level result list statistic", @"A statistical metric of an entire protein list.", false));
             TermData.Add(CVID.MS_protein_group_level_result_list_statistic, new TermInfo(CVID.MS_protein_group_level_result_list_statistic, @"MS", @"MS:1002706", @"protein group-level result list statistic", @"Attrbiute of an entire list of protein groups.", false));
+            TermData.Add(CVID.MS_Pegasus_BT, new TermInfo(CVID.MS_Pegasus_BT, @"MS", @"MS:1002719", @"Pegasus BT", @"LECO bench-top GC time-of-flight mass spectrometer.", false));
+            TermData.Add(CVID.MS_MSPathFinder, new TermInfo(CVID.MS_MSPathFinder, @"MS", @"MS:1002720", @"MSPathFinder", @"PNNL top-down/bottom-up analysis software for identifying peptides and proteoforms in fragmentation mass spectra.", false));
+            TermData.Add(CVID.MS_MSPathFinder_SpecEValue, new TermInfo(CVID.MS_MSPathFinder_SpecEValue, @"MS", @"MS:1002721", @"MSPathFinder:SpecEValue", @"MSPathFinder spectral E-value.", false));
+            TermData.Add(CVID.MS_MSPathFinder_EValue, new TermInfo(CVID.MS_MSPathFinder_EValue, @"MS", @"MS:1002722", @"MSPathFinder:EValue", @"MSPathFinder E-value.", false));
+            TermData.Add(CVID.MS_MSPathFinder_QValue, new TermInfo(CVID.MS_MSPathFinder_QValue, @"MS", @"MS:1002723", @"MSPathFinder:QValue", @"MSPathFinder Q-value.", false));
+            TermData.Add(CVID.MS_MSPathFinder_PepQValue, new TermInfo(CVID.MS_MSPathFinder_PepQValue, @"MS", @"MS:1002724", @"MSPathFinder:PepQValue", @"MSPathFinder peptide-level Q-value.", false));
+            TermData.Add(CVID.MS_MSPathFinder_RawScore, new TermInfo(CVID.MS_MSPathFinder_RawScore, @"MS", @"MS:1002725", @"MSPathFinder:RawScore", @"MSPathFinder raw score.", false));
             TermData.Add(CVID.UNIMOD_unimod_root_node, new TermInfo(CVID.UNIMOD_unimod_root_node, @"UNIMOD", @"UNIMOD:0", @"unimod root node", @"The root node of the unimod modifications ontology.", false));
             TermData.Add(CVID.UNIMOD_Acetyl, new TermInfo(CVID.UNIMOD_Acetyl, @"UNIMOD", @"UNIMOD:1", @"Acetyl", @"Acetylation.", false));
             TermData.Add(CVID.UNIMOD_Amidated, new TermInfo(CVID.UNIMOD_Amidated, @"UNIMOD", @"UNIMOD:2", @"Amidated", @"Amidation.", false));
@@ -24455,6 +24537,19 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_RNPXL, new TermInfo(CVID.UNIMOD_RNPXL, @"UNIMOD", @"UNIMOD:1825", @"RNPXL", @"Simulate peptide-RNA conjugates.", false));
             TermData.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl, new TermInfo(CVID.UNIMOD_Glu__pyro_Glu_Methyl, @"UNIMOD", @"UNIMOD:1826", @"Glu->pyro-Glu+Methyl", @"Pyro-Glu from E + Methylation.", false));
             TermData.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_, new TermInfo(CVID.UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_, @"UNIMOD", @"UNIMOD:1827", @"Glu->pyro-Glu+Methyl:2H(2)13C(1)", @"Pyro-Glu from E + Methylation Medium.", false));
+            TermData.Add(CVID.UNIMOD_LRGG_methyl, new TermInfo(CVID.UNIMOD_LRGG_methyl, @"UNIMOD", @"UNIMOD:1828", @"LRGG+methyl", @"LeumethylArgGlyGly.", false));
+            TermData.Add(CVID.UNIMOD_LRGG_dimethyl, new TermInfo(CVID.UNIMOD_LRGG_dimethyl, @"UNIMOD", @"UNIMOD:1829", @"LRGG+dimethyl", @"LeudimethylArgGlyGly.", false));
+            TermData.Add(CVID.UNIMOD_Biotin_tyramide, new TermInfo(CVID.UNIMOD_Biotin_tyramide, @"UNIMOD", @"UNIMOD:1830", @"Biotin-tyramide", @"Biotin-Phenol.", false));
+            TermData.Add(CVID.UNIMOD_Tris, new TermInfo(CVID.UNIMOD_Tris, @"UNIMOD", @"UNIMOD:1831", @"Tris", @"Tris adduct causes 104 Da addition at asparagine-succinimide intermediate.", false));
+            TermData.Add(CVID.UNIMOD_IASD, new TermInfo(CVID.UNIMOD_IASD, @"UNIMOD", @"UNIMOD:1832", @"IASD", @"Iodoacetamide derivative of stilbene (reaction product with thiol).", false));
+            TermData.Add(CVID.UNIMOD_NP40, new TermInfo(CVID.UNIMOD_NP40, @"UNIMOD", @"UNIMOD:1833", @"NP40", @"NP-40 synthetic polymer terminus.", false));
+            TermData.Add(CVID.UNIMOD_Tween20, new TermInfo(CVID.UNIMOD_Tween20, @"UNIMOD", @"UNIMOD:1834", @"Tween20", @"Tween 20 synthetic polymer terminus.", false));
+            TermData.Add(CVID.UNIMOD_Tween80, new TermInfo(CVID.UNIMOD_Tween80, @"UNIMOD", @"UNIMOD:1835", @"Tween80", @"Tween 80 synthetic polymer terminus.", false));
+            TermData.Add(CVID.UNIMOD_Triton, new TermInfo(CVID.UNIMOD_Triton, @"UNIMOD", @"UNIMOD:1836", @"Triton", @"Triton synthetic polymer terminus.", false));
+            TermData.Add(CVID.UNIMOD_Brij35, new TermInfo(CVID.UNIMOD_Brij35, @"UNIMOD", @"UNIMOD:1837", @"Brij35", @"Brij 35 synthetic polymer terminus.", false));
+            TermData.Add(CVID.UNIMOD_Brij58, new TermInfo(CVID.UNIMOD_Brij58, @"UNIMOD", @"UNIMOD:1838", @"Brij58", @"Brij 58 synthetic polymer terminus.", false));
+            TermData.Add(CVID.UNIMOD_beta_FNA, new TermInfo(CVID.UNIMOD_beta_FNA, @"UNIMOD", @"UNIMOD:1839", @"beta FNA", @"Î’-Funaltrexamine.", false));
+            TermData.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_4_, new TermInfo(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_4_, @"UNIMOD", @"UNIMOD:1840", @"dHex(1)Hex(7)HexNAc(4)", @"Fucosylated biantennary + 2 alphaGal.", false));
             TermData.Add(CVID.PATO_pato_OBSOLETE, new TermInfo(CVID.PATO_pato_OBSOLETE, @"PATO", @"PATO:0000000", @"pato", @"", true));
             TermData.Add(CVID.PATO_quality, new TermInfo(CVID.PATO_quality, @"PATO", @"PATO:0000001", @"quality", @"A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities", false));
             TermData.Add(CVID.PATO_value_OBSOLETE, new TermInfo(CVID.PATO_value_OBSOLETE, @"PATO", @"PATO:0000002", @"value", @"", true));
@@ -26811,7 +26906,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_interlocked_with, new TermInfo(CVID.PATO_interlocked_with, @"PATO", @"PATO:0002437", @"interlocked with", @"A structural quality inhering in a bearer by virtue of the bearer's being locked together or interconnected to another entity.", false));
             TermData.Add(CVID.PATO_subdermal, new TermInfo(CVID.PATO_subdermal, @"PATO", @"PATO:0002438", @"subdermal", @"A structural quality inhering in a bearer by virtue of the bearer's being located or placed beneath the skin.", false));
             TermData.Add(CVID.PATO_w_shaped, new TermInfo(CVID.PATO_w_shaped, @"PATO", @"PATO:0002439", @"w-shaped", @"An angular shape quality inhering in a bearer by virtue of the bearer's having two angles in its length giving the bearer the form of the letter W.", false));
-            TermData.Add(CVID.PATO_ornamentation, new TermInfo(CVID.PATO_ornamentation, @"PATO", @"PATO:0002440", @"ornamentation", @"A surface feature shape quality inhering in a bearer by virtue of the degree of the bearer's  highly topographical with ridges, pits, rugosity or other surface structures.", false));
+            TermData.Add(CVID.PATO_ornamentation, new TermInfo(CVID.PATO_ornamentation, @"PATO", @"PATO:0002440", @"ornamentation", @"A surface feature shape quality inhering in a bearer by virtue of the degree of the bearer's highly topographical with ridges, pits, rugosity or other surface structures.", false));
             TermData.Add(CVID.PATO_ornamented, new TermInfo(CVID.PATO_ornamented, @"PATO", @"PATO:0002441", @"ornamented", @"A surface feature shape in which the bearer's surface is highly topographical with ridges, pits, rugosity or other surface structures.", false));
             TermData.Add(CVID.PATO_unornamented, new TermInfo(CVID.PATO_unornamented, @"PATO", @"PATO:0002442", @"unornamented", @"A surface feature shape in which the bearer's surface is lacking ridges, pits, rugosity or other surface structures.", false));
             TermData.Add(CVID.PATO_level_with, new TermInfo(CVID.PATO_level_with, @"PATO", @"PATO:0002443", @"level with", @"A positional quality inhering in a bearer by virtue of the bearer's being located at the same level as another entity.", false));
@@ -26825,9 +26920,9 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_sexually_dimorphic, new TermInfo(CVID.PATO_sexually_dimorphic, @"PATO", @"PATO:0002451", @"sexually dimorphic", @"A quality inhering in a bearer by virtue of the bearer's exhibiting a phenotypic difference between males and females of the same species.", false));
             TermData.Add(CVID.PATO_decondensed, new TermInfo(CVID.PATO_decondensed, @"PATO", @"PATO:0002452", @"decondensed", @"A structural quality inhering in a bearer by virtue of the bearer being thinner or more losely packed.", false));
             TermData.Add(CVID.PATO_eroding, new TermInfo(CVID.PATO_eroding, @"PATO", @"PATO:0002453", @"eroding", @"A structural quality inhering in a bearer by virtue of the bearer bring gradually worn away.", false));
-            TermData.Add(CVID.PATO_carpel_like, new TermInfo(CVID.PATO_carpel_like, @"PATO", @"PATO:0002454", @"carpel-like", @"A  quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a carpel.", false));
-            TermData.Add(CVID.PATO_corymb_like, new TermInfo(CVID.PATO_corymb_like, @"PATO", @"PATO:0002455", @"corymb-like", @"A  quality inhering in a bearer by virtue of the bearer's architecture bearing resemblence to a corymb type of inflorescence.", false));
-            TermData.Add(CVID.PATO_inflorescence_like, new TermInfo(CVID.PATO_inflorescence_like, @"PATO", @"PATO:0002456", @"inflorescence-like", @"A  quality inhering in a bearer by virtue of the bearer's similarity to the appearance of an inflorescence.", false));
+            TermData.Add(CVID.PATO_carpel_like, new TermInfo(CVID.PATO_carpel_like, @"PATO", @"PATO:0002454", @"carpel-like", @"A quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a carpel.", false));
+            TermData.Add(CVID.PATO_corymb_like, new TermInfo(CVID.PATO_corymb_like, @"PATO", @"PATO:0002455", @"corymb-like", @"A quality inhering in a bearer by virtue of the bearer's architecture bearing resemblence to a corymb type of inflorescence.", false));
+            TermData.Add(CVID.PATO_inflorescence_like, new TermInfo(CVID.PATO_inflorescence_like, @"PATO", @"PATO:0002456", @"inflorescence-like", @"A quality inhering in a bearer by virtue of the bearer's similarity to the appearance of an inflorescence.", false));
             TermData.Add(CVID.PATO_leaf_like, new TermInfo(CVID.PATO_leaf_like, @"PATO", @"PATO:0002457", @"leaf-like", @"A structural quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a leaf.", false));
             TermData.Add(CVID.PATO_pin_like, new TermInfo(CVID.PATO_pin_like, @"PATO", @"PATO:0002458", @"pin-like", @"A quality inhering in a bearer by virtue of the bearer being thin and lacking outgrowths.", false));
             TermData.Add(CVID.PATO_sepal_like, new TermInfo(CVID.PATO_sepal_like, @"PATO", @"PATO:0002459", @"sepal-like", @"A structural quality inhering in a bearer by virtue of the bearer's similarity to the appearance of a sepal,", false));
@@ -26963,6 +27058,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_stepped, new TermInfo(CVID.PATO_stepped, @"PATO", @"PATO:0015016", @"stepped", @"Having a shape or form that resembles a step of a stairway (e.g., a ledge or offset margin).", false));
             TermData.Add(CVID.PATO_quality_of_a_colloidal_suspension, new TermInfo(CVID.PATO_quality_of_a_colloidal_suspension, @"PATO", @"PATO:0015017", @"quality of a colloidal suspension", @"A physical quality inhering in an entity by virtue of the bearer's solid constituents being suspended in a liquid or gas, or the bearer's liquid constituents being suspended in a gas.", false));
             TermData.Add(CVID.PATO_quality_of_an_aerosol, new TermInfo(CVID.PATO_quality_of_an_aerosol, @"PATO", @"PATO:0015018", @"quality of an aerosol", @"A physical quality inhering in an entity by virtue of the bearer's solid or liquid constituents being suspended in a gas.", false));
+            TermData.Add(CVID.PATO_C_shaped, new TermInfo(CVID.PATO_C_shaped, @"PATO", @"PATO:0015019", @"C-shaped", @"A concave 3-D shape quality inhering in a bearer by virtue of the bearer's being shaped in the form of the letter C.", false));
+            TermData.Add(CVID.PATO_J_shaped, new TermInfo(CVID.PATO_J_shaped, @"PATO", @"PATO:0015020", @"J-shaped", @"A concave 3-D shape quality inhering in a bearer by virtue of the bearer's being shaped in the form of the letter J.", false));
+            TermData.Add(CVID.PATO_combustibility, new TermInfo(CVID.PATO_combustibility, @"PATO", @"PATO:0015021", @"combustibility", @"The propensity of a material to undergo combustion. Combustion encompasses smouldering and flaming combustion. Combustibility is usually applied to solids.", false));
+            TermData.Add(CVID.PATO_increased_combustibility, new TermInfo(CVID.PATO_increased_combustibility, @"PATO", @"PATO:0015022", @"increased combustibility", @"An increase in combustibility.", false));
+            TermData.Add(CVID.PATO_decreased_combustibility, new TermInfo(CVID.PATO_decreased_combustibility, @"PATO", @"PATO:0015023", @"decreased combustibility", @"An decrease in combustibility.", false));
             TermData.Add(CVID.PATO_genotypic_sex, new TermInfo(CVID.PATO_genotypic_sex, @"PATO", @"PATO:0020000", @"genotypic sex", @"A biological sex quality inhering in an individual based upon genotypic composition of sex chromosomes.", false));
             TermData.Add(CVID.PATO_male_genotypic_sex, new TermInfo(CVID.PATO_male_genotypic_sex, @"PATO", @"PATO:0020001", @"male genotypic sex", @"A biological sex quality inhering in an individual based upon genotypic composition that confers the capability for an organism to differentiate male gonads.", false));
             TermData.Add(CVID.PATO_female_genotypic_sex, new TermInfo(CVID.PATO_female_genotypic_sex, @"PATO", @"PATO:0020002", @"female genotypic sex", @"A biological sex quality inhering in an individual or a population based upon genotypic composition that confers the capability for an organism to differentiate female gonads.", false));
@@ -29571,8 +29671,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_X500R_QTOF, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_protein_pair_level_global_FDR, new List<CVID> { CVID.MS_interaction_score_derived_from_cross_linking, });
             RelationsIsA.Add(CVID.MS_residue_pair_level_global_FDR, new List<CVID> { CVID.MS_interaction_score_derived_from_cross_linking, });
-            RelationsIsA.Add(CVID.MS_supplemental_higher_energy_beam_type_collision_induced_dissociation, new List<CVID> { CVID.MS_beam_type_collision_induced_dissociation, });
-            RelationsIsA.Add(CVID.MS_supplemental_collision_induced_dissociation, new List<CVID> { CVID.MS_dissociation_method, });
+            RelationsIsA.Add(CVID.MS_supplemental_beam_type_collision_induced_dissociation, new List<CVID> { CVID.MS_beam_type_collision_induced_dissociation, });
+            RelationsIsA.Add(CVID.MS_supplemental_collision_induced_dissociation, new List<CVID> { CVID.MS_collision_induced_dissociation, });
             RelationsIsA.Add(CVID.MS_supplemental_collision_energy, new List<CVID> { CVID.MS_precursor_activation_attribute, });
             RelationsIsA.Add(CVID.MS_OpenXQuest_combined_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_OpenXQuest_xcorr_xlink, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, CVID.MS_search_engine_specific_score, });
@@ -29599,6 +29699,13 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_protein_level_result_list_attribute, new List<CVID> { CVID.MS_result_list_attribute, });
             RelationsIsA.Add(CVID.MS_protein_level_result_list_statistic, new List<CVID> { CVID.MS_protein_level_result_list_attribute, });
             RelationsIsA.Add(CVID.MS_protein_group_level_result_list_statistic, new List<CVID> { CVID.MS_protein_group_level_result_list_attribute, });
+            RelationsIsA.Add(CVID.MS_Pegasus_BT, new List<CVID> { CVID.MS_LECO_instrument_model, });
+            RelationsIsA.Add(CVID.MS_MSPathFinder, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_MSPathFinder_SpecEValue, new List<CVID> { CVID.MS_PSM_level_e_value, CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MSPathFinder_EValue, new List<CVID> { CVID.MS_PSM_level_e_value, CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MSPathFinder_QValue, new List<CVID> { CVID.MS_PSM_level_q_value, CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MSPathFinder_PepQValue, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_MSPathFinder_RawScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.UNIMOD_Acetyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Amidated, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -30957,6 +31064,19 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_RNPXL, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Glu__pyro_Glu_Methyl_2H_2_13C_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_LRGG_methyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_LRGG_dimethyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Biotin_tyramide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Tris, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_IASD, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_NP40, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Tween20, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Tween80, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Triton, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Brij35, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Brij58, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_beta_FNA, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_7_HexNAc_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.PATO_mobility, new List<CVID> { CVID.PATO_physical_quality, });
             RelationsIsA.Add(CVID.PATO_speed, new List<CVID> { CVID.PATO_movement_quality, });
             RelationsIsA.Add(CVID.PATO_age, new List<CVID> { CVID.PATO_time, });
@@ -32572,6 +32692,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_stepped, new List<CVID> { CVID.PATO_shape, });
             RelationsIsA.Add(CVID.PATO_quality_of_a_colloidal_suspension, new List<CVID> { CVID.PATO_quality_of_a_substance, });
             RelationsIsA.Add(CVID.PATO_quality_of_an_aerosol, new List<CVID> { CVID.PATO_quality_of_a_colloidal_suspension, });
+            RelationsIsA.Add(CVID.PATO_C_shaped, new List<CVID> { CVID.PATO_concave_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_J_shaped, new List<CVID> { CVID.PATO_concave_3_D_shape, });
+            RelationsIsA.Add(CVID.PATO_combustibility, new List<CVID> { CVID.PATO_physical_quality, });
+            RelationsIsA.Add(CVID.PATO_increased_combustibility, new List<CVID> { CVID.PATO_increased_object_quality, CVID.PATO_combustibility, });
+            RelationsIsA.Add(CVID.PATO_decreased_combustibility, new List<CVID> { CVID.PATO_decreased_object_quality, CVID.PATO_combustibility, });
             RelationsIsA.Add(CVID.PATO_genotypic_sex, new List<CVID> { CVID.PATO_biological_sex, });
             RelationsIsA.Add(CVID.PATO_male_genotypic_sex, new List<CVID> { CVID.PATO_genotypic_sex, });
             RelationsIsA.Add(CVID.PATO_female_genotypic_sex, new List<CVID> { CVID.PATO_genotypic_sex, });
