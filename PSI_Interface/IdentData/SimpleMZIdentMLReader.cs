@@ -1144,21 +1144,26 @@ namespace PSI_Interface.IdentData
                 specItem.AllParamsDict.Add(reader.GetAttribute("name"), reader.GetAttribute("value"));
                 switch (reader.GetAttribute("name"))
                 {
+                    case "MSPathFinder:RawScore":
                     case "MS-GF:RawScore":
                         specItem.RawScore = Convert.ToInt32(reader.GetAttribute("value"));
                         break;
                     case "MS-GF:DeNovoScore":
                         specItem.DeNovoScore = Convert.ToInt32(reader.GetAttribute("value"));
                         break;
+                    case "MSPathFinder:SpecEValue":
                     case "MS-GF:SpecEValue":
                         specItem.SpecEv = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+                    case "MSPathFinder:EValue":
                     case "MS-GF:EValue":
                         specItem.EValue = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+                    case "MSPathFinder:QValue":
                     case "MS-GF:QValue":
                         specItem.QValue = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+                    case "MSPathFinder:PepQValue":
                     case "MS-GF:PepQValue":
                         specItem.PepQValue = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
