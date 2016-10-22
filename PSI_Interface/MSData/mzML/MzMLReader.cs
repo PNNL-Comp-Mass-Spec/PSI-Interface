@@ -10,8 +10,16 @@ using System.Xml.Serialization;
 
 namespace PSI_Interface.MSData.mzML
 {
+    /// <summary>
+    /// Read a mzML file into a mzMLType object
+    /// </summary>
     public class MzMLReader
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="bufferSize"></param>
         public MzMLReader(string path, int bufferSize = 65536)
         {
             _filePath = path;
@@ -30,8 +38,15 @@ namespace PSI_Interface.MSData.mzML
 
         private Stream _reader;
 
+        /// <summary>
+        /// Schema of the file being read
+        /// </summary>
         public MzMLSchemaType MzMLType { get; private set; }
 
+        /// <summary>
+        /// Read the file specified in the constructor, and return the object
+        /// </summary>
+        /// <returns></returns>
         public mzMLType Read()
         {
             if (_hasRead)

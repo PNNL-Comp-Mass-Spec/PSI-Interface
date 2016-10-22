@@ -10,8 +10,16 @@ using System.Xml.Serialization;
 
 namespace PSI_Interface.MSData.mzML
 {
+    /// <summary>
+    /// Functions for writing a mzMLType object to file
+    /// </summary>
     public class MzMLWriter
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="bufferSize"></param>
         public MzMLWriter(string path, int bufferSize = 65536)
         {
             _filePath = path;
@@ -28,8 +36,15 @@ namespace PSI_Interface.MSData.mzML
 
         private readonly string _filePath;
 
+        /// <summary>
+        /// Whether to write plain mzML or IndexedMzML
+        /// </summary>
         public MzMLSchemaType MzMLType { get; set; }
 
+        /// <summary>
+        /// Write the supplied object to the file specified in the constructor
+        /// </summary>
+        /// <param name="mzMLData"></param>
         public void Write(mzMLType mzMLData)
         {
             ConfigureWriter();

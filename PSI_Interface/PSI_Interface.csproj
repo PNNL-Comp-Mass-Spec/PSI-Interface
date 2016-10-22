@@ -139,12 +139,8 @@
     <Compile Include="MSData\mzML\MzMLSchemaType.cs" />
     <Compile Include="MSData\mzML\MzMLWriter.cs" />
     <Compile Include="MSData\mzML\mzML_Extra.cs" />
-    <Compile Include="MSData\mzML_DataSet\mzML1.1.0.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MSData\mzML_DataSet\mzML1.1.1_idx.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="MSData\mzML_DataSet\mzML1.1.0.cs" />
+    <Compile Include="MSData\mzML_DataSet\mzML1.1.1_idx.cs" />
     <Compile Include="MSData\MzML_MSData.cs" />
     <Compile Include="MSData\SimpleMzMLReader.cs" />
     <Compile Include="MSData\Zlib.cs" />

@@ -471,6 +471,9 @@ namespace PSI_Interface.MSData
         //private CV.CV.CVID _unitCvid;
 
         //[System.Xml.Serialization.XmlIgnore]
+        /// <summary>
+        /// CV term enum
+        /// </summary>
         public CV.CV.CVID Cvid { get; set; }
 
         //[System.Xml.Serialization.XmlIgnore]
@@ -545,10 +548,10 @@ namespace PSI_Interface.MSData
             set { this._value = value; }
         } // TODO: Perform validation of the value according to CVID/UnitCVID?
 
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
+        /*/// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
         /// Optional Attribute
         /// IDREF
-        /*internal string UnitCVRef
+        internal string UnitCVRef
         {
             get
             {
@@ -565,10 +568,10 @@ namespace PSI_Interface.MSData
             }
         }*/
 
-        /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
+        /*/// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
         /// Optional Attribute
         /// string
-        /*internal string UnitAccession
+        internal string UnitAccession
         {
             get
             {
@@ -591,10 +594,10 @@ namespace PSI_Interface.MSData
             } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }*/
 
-        /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
+        /*/// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
         /// Optional Attribute
         /// string
-        /*internal string UnitName
+        internal string UnitName
         {
             get
             {
@@ -636,10 +639,10 @@ namespace PSI_Interface.MSData
         /// string
         public string Value { get; set; }
 
-        /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
+        /*/// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
         /// Optional Attribute
         /// string
-        /*internal string UnitAccession
+        internal string UnitAccession
         {
             get
             {
@@ -662,10 +665,10 @@ namespace PSI_Interface.MSData
             }
         }*/
 
-        /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
+        /*/// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
         /// Optional Attribute
         /// string
-        /*internal string UnitName
+        internal string UnitName
         {
             get
             {
@@ -675,10 +678,10 @@ namespace PSI_Interface.MSData
             //set { this._unitName = value; }
         }*/
 
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
+        /*/// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
         /// Optional Attribute
         /// IDREF
-        /*internal string UnitCVRef
+        internal string UnitCVRef
         {
             get
             {
@@ -711,6 +714,9 @@ namespace PSI_Interface.MSData
         private bool _unitsSet = false;
 
         //[System.Xml.Serialization.XmlIgnore]
+        /// <summary>
+        /// CV term enum for the units
+        /// </summary>
         public CV.CV.CVID UnitCvid
         {
             get { return this._unitCvid; }
@@ -980,17 +986,39 @@ namespace PSI_Interface.MSData
         //MUST supply a *child* term of MS:1000518 (binary data type) only once
         //  e.g.: MS:1000521 (32-bit float)
         //  e.g.: MS:1000523 (64-bit float)
+        /// <summary>
+        /// Type of data in the binary data array
+        /// </summary>
         public enum ArrayType : int
         {
+            /// <summary>m/z data</summary>
             m_z,
+
+            /// <summary>intensity data</summary>
             intensity,
+
+            /// <summary>charge data</summary>
             charge,
+
+            /// <summary>signal to noise data</summary>
             signal_to_noise,
+
+            /// <summary>time data</summary>
             time,
+
+            /// <summary>wavelength data</summary>
             wavelength,
+
+            /// <summary>other data</summary>
             non_standard_data,
+
+            /// <summary>flow rate data</summary>
             flow_rate,
+
+            /// <summary>pressure data</summary>
             pressure,
+
+            /// <summary>temperature data</summary>
             temperature,
         }
 
@@ -1030,12 +1058,18 @@ namespace PSI_Interface.MSData
         private bool _isCompressed;
 
         //[System.Xml.Serialization.XmlIgnore] // can use this attribute to ignore a field/property.
+        /// <summary>
+        /// Array of data, in the form of doubles
+        /// </summary>
         public double[] Data
         {
             get { return this._data; }
             set { this._data = value; }
         }
 
+        /// <summary>
+        /// Type of data in the array
+        /// </summary>
         public ArrayType DataType
         {
             get { return this._dataType; }
@@ -1061,6 +1095,9 @@ namespace PSI_Interface.MSData
             }
         }
 
+        /// <summary>
+        /// byte width of the data in the array - 4 bytes or 8 bytes
+        /// </summary>
         public int DataWidth
         {
             get { return this._dataWidth; }
@@ -1099,6 +1136,9 @@ namespace PSI_Interface.MSData
             }
         }
 
+        /// <summary>
+        /// If the binary data form of the array is compressed
+        /// </summary>
         public bool IsCompressed
         {
             get { return this._isCompressed; }
@@ -1128,12 +1168,15 @@ namespace PSI_Interface.MSData
             }
         }
 
+        /// <summary>
+        /// Length of the data array
+        /// </summary>
         public int DataLength
         {
             get { return this._data.Length; }
         }
 
-        /// <remarks>The actual base64 encoded binary data. The byte order is always 'little endian'.</remarks>
+        /// <summary>The actual base64 encoded binary data. The byte order is always 'little endian'.</summary>
         /// base64Binary
         public byte[] Binary
         {

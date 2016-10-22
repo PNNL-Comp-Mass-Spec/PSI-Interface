@@ -474,7 +474,7 @@ namespace PSI_Interface.IdentData
 
             /// <summary>
             /// Peptide sequence with numeric mods and prefix/suffix residues
-            /// For the sequence without mods, use <see cref="PeptideRef.Sequence"/>
+            /// For the sequence without mods, use <see cref="PSI_Interface.IdentData.SimpleMZIdentMLReader.PeptideRef.Sequence"/>
             /// </summary>
             public string SequenceWithNumericMods
             {

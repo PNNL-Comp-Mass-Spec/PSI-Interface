@@ -24,6 +24,10 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType object
+        /// </summary>
+        /// <param name="mzML"></param>
         public MSData(mzMLType mzML)
         {
             // Default values....
@@ -145,6 +149,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Information about an ontology or CV source and a short 'lookup' tag to refer to.</remarks>
     public partial class CVInfo
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="cv"></param>
+        /// <param name="instance"></param>
         public CVInfo(CVType cv, MSData instance)
             : base(instance)
         {
@@ -187,6 +196,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the way in which a particular software was used.</remarks>
     public partial class DataProcessingInfo
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="dp"></param>
+        /// <param name="instance"></param>
         public DataProcessingInfo(DataProcessingType dp, MSData instance)
             : base(instance)
         {
@@ -210,6 +224,11 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class ProcessingMethodInfo : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="pm"></param>
+        /// <param name="instance"></param>
         public ProcessingMethodInfo(ProcessingMethodType pm, MSData instance)
             : base(pm, instance)
         {
@@ -224,6 +243,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Structure allowing the use of a controlled (cvParam) or uncontrolled vocabulary (userParam), or a reference to a predefined set of these in this mzML file (paramGroupRef).</remarks>
     public partial class ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="pg"></param>
+        /// <param name="instance"></param>
         public ParamGroup(ParamGroupType pg, MSData instance)
             : base(instance)
         {
@@ -291,6 +315,11 @@ namespace PSI_Interface.MSData
     /// <remarks>A collection of CVParam and UserParam elements that can be referenced from elsewhere in this mzML document by using the 'paramGroupRef' element in that location to reference the 'id' attribute value of this element.</remarks>
     public partial class ReferenceableParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="rpg"></param>
+        /// <param name="instance"></param>
         public ReferenceableParamGroup(ReferenceableParamGroupType rpg, MSData instance)
             : base(instance)
         {
@@ -324,6 +353,11 @@ namespace PSI_Interface.MSData
     /// <remarks>A reference to a previously defined ParamGroup, which is a reusable container of one or more cvParams.</remarks>
     public partial class ReferenceableParamGroupRef
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="rpgr"></param>
+        /// <param name="instance"></param>
         public ReferenceableParamGroupRef(ReferenceableParamGroupRefType rpgr, MSData instance)
             : base(instance)
         {
@@ -337,6 +371,11 @@ namespace PSI_Interface.MSData
     /// <remarks>This element holds additional data or annotation. Only controlled values are allowed here.</remarks>
     public partial class CVParam : ParamBase
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="cvp"></param>
+        /// <param name="instance"></param>
         public CVParam(CVParamType cvp, MSData instance)
             : base(instance)
         {
@@ -358,6 +397,11 @@ namespace PSI_Interface.MSData
     /// CV term available, and if so, use the CV term instead</remarks>
     public partial class UserParam : ParamBase
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="up"></param>
+        /// <param name="instance"></param>
         public UserParam(UserParamType up, MSData instance)
             : base(instance)
         {
@@ -377,6 +421,10 @@ namespace PSI_Interface.MSData
     /// <remarks>Base type for CVParam and UserParam to reduce code duplication.</remarks>
     public partial class ParamBase
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="instance"></param>
         public ParamBase(MSData instance) // TODO: Is there a good way to pass data into this from mzML?
             : base(instance)
         {
@@ -425,6 +473,11 @@ namespace PSI_Interface.MSData
     /// <remarks>The method of precursor ion selection and activation</remarks>
     public partial class Precursor
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="instance"></param>
         public Precursor(PrecursorType p, MSData instance)
             : base(instance)
         {
@@ -519,6 +572,12 @@ namespace PSI_Interface.MSData
     /// Computers using a different endian style must convert to/from little endian when writing/reading mzML</remarks>
     public partial class BinaryDataArray : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="bda"></param>
+        /// <param name="instance"></param>
+        /// <param name="defaultArrayLength"></param>
         public BinaryDataArray(BinaryDataArrayType bda, MSData instance, int defaultArrayLength) // TODO: will need another parameter to pass in the default array length....
             : base(bda, instance)
         {
@@ -580,6 +639,11 @@ namespace PSI_Interface.MSData
     /// <remarks>List and descriptions of scans.</remarks>
     public partial class ScanList : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="sl"></param>
+        /// <param name="instance"></param>
         public ScanList(ScanListType sl, MSData instance)
             : base(sl, instance)
         {
@@ -603,6 +667,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Scan or acquisition from original raw file used to create this peak list, as specified in sourceF</remarks>
     public partial class Scan : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="instance"></param>
         public Scan(ScanType s, MSData instance)
             : base(s, instance)
         {
@@ -659,6 +728,11 @@ namespace PSI_Interface.MSData
     /// <remarks>List and descriptions of spectra.</remarks>
     public partial class SpectrumList
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="sl"></param>
+        /// <param name="instance"></param>
         public SpectrumList(SpectrumListType sl, MSData instance)
             : base(instance)
         {
@@ -684,6 +758,11 @@ namespace PSI_Interface.MSData
     /// Also describes some of the parameters for the mass spectrometer for a given acquisition (or list of acquisitions).</remarks>
     public partial class Spectrum : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="instance"></param>
         public Spectrum(SpectrumType s, MSData instance)
             : base(s, instance)
         {
@@ -755,6 +834,11 @@ namespace PSI_Interface.MSData
     /// <remarks>The method of product ion selection and activation in a precursor ion scan</remarks>
     public partial class Product
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="instance"></param>
         public Product(ProductType p, MSData instance)
             : base(instance)
         {
@@ -774,6 +858,11 @@ namespace PSI_Interface.MSData
     /// <remarks>A run in mzML should correspond to a single, consecutive and coherent set of scans on an instrument.</remarks>
     public partial class Run : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="instance"></param>
         public Run(RunType r, MSData instance)
             : base(r, instance)
         {
@@ -804,6 +893,11 @@ namespace PSI_Interface.MSData
     /// <remarks>List of chromatograms.</remarks>
     public partial class ChromatogramList
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="cl"></param>
+        /// <param name="instance"></param>
         public ChromatogramList(ChromatogramListType cl, MSData instance)
             : base(instance)
         {
@@ -828,6 +922,11 @@ namespace PSI_Interface.MSData
     /// <remarks>A single Chromatogram</remarks>
     public partial class Chromatogram : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="instance"></param>
         public Chromatogram(ChromatogramType c, MSData instance)
             : base(c, instance)
         {
@@ -893,6 +992,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the acquisition settings of the instrument prior to the start of the run.</remarks>
     public partial class ScanSettingsInfo : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="ss"></param>
+        /// <param name="instance"></param>
         public ScanSettingsInfo(ScanSettingsType ss, MSData instance)
             : base(ss, instance)
         {
@@ -954,6 +1058,11 @@ namespace PSI_Interface.MSData
     /// <remarks></remarks>
     public partial class SourceFileRef
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="sfr"></param>
+        /// <param name="instance"></param>
         public SourceFileRef(SourceFileRefType sfr, MSData instance)
             : base(instance)
         {
@@ -1023,6 +1132,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Software information</remarks>
     public partial class SoftwareInfo : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="instance"></param>
         public SoftwareInfo(SoftwareType s, MSData instance)
             : base(s, instance)
         {
@@ -1072,6 +1186,11 @@ namespace PSI_Interface.MSData
     /// the components that is used in the document. For software configuration, use a ReferenceableParamGroup element</remarks>
     public partial class InstrumentConfigurationInfo : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="ic"></param>
+        /// <param name="instance"></param>
         public InstrumentConfigurationInfo(InstrumentConfigurationType ic, MSData instance)
             : base(ic, instance)
         {
@@ -1098,6 +1217,11 @@ namespace PSI_Interface.MSData
     /// <remarks>List with the different components used in the mass spectrometer. At least one source, one mass analyzer and one detector need to be specified.</remarks>
     public partial class ComponentList
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="cl"></param>
+        /// <param name="instance"></param>
         public ComponentList(ComponentListType cl, MSData instance)
             : base(instance)
         {
@@ -1138,6 +1262,11 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class Component : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="instance"></param>
         public Component(ComponentType c, MSData instance)
             : base(c, instance)
         {
@@ -1153,6 +1282,11 @@ namespace PSI_Interface.MSData
     /// have any impact on the base schema validation.</remarks>
     public partial class SourceComponent : Component
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="sc"></param>
+        /// <param name="instance"></param>
         public SourceComponent(SourceComponentType sc, MSData instance)
             : base(sc, instance)
         { }
@@ -1166,6 +1300,11 @@ namespace PSI_Interface.MSData
     /// have any impact on the base schema validation.</remarks>
     public partial class AnalyzerComponent : Component
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="ac"></param>
+        /// <param name="instance"></param>
         public AnalyzerComponent(AnalyzerComponentType ac, MSData instance)
             : base(ac, instance)
         { }
@@ -1179,6 +1318,11 @@ namespace PSI_Interface.MSData
     /// have any impact on the base schema validation.</remarks>
     public partial class DetectorComponent : Component
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="dc"></param>
+        /// <param name="instance"></param>
         public DetectorComponent(DetectorComponentType dc, MSData instance)
             : base(dc, instance)
         { }
@@ -1190,6 +1334,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Reference to a previously defined software element</remarks>
     public partial class SoftwareRef
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="sr"></param>
+        /// <param name="instance"></param>
         public SoftwareRef(SoftwareRefType sr, MSData instance)
             : base(instance)
         {
@@ -1231,6 +1380,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Expansible description of the sample used to generate the dataset, named in sampleName.</remarks>
     public partial class SampleInfo : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="instance"></param>
         public SampleInfo(SampleType s, MSData instance)
             : base(s, instance)
         {
@@ -1273,6 +1427,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the source file, including location and type.</remarks>
     public partial class SourceFileInfo : ParamGroup
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="sf"></param>
+        /// <param name="instance"></param>
         public SourceFileInfo(SourceFileType sf, MSData instance)
             : base(sf, instance)
         {
@@ -1288,6 +1447,11 @@ namespace PSI_Interface.MSData
     /// <remarks>Information pertaining to the entire mzML file (i.e. not specific to any part of the data set) is stored here.</remarks>
     public partial class FileDescription
     {
+        /// <summary>
+        /// Translating Constructor from a mzMLType child object
+        /// </summary>
+        /// <param name="fd"></param>
+        /// <param name="instance"></param>
         public FileDescription(FileDescriptionType fd, MSData instance)
             : base(instance)
         {

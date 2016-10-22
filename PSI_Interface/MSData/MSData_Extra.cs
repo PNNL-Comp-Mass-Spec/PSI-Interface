@@ -24,6 +24,10 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="createTranslator"></param>
         public MSData(bool createTranslator = true)
         {
             this.CvTranslator = null;
@@ -46,6 +50,9 @@ namespace PSI_Interface.MSData
             this.Version = null;
         }
 
+        /// <summary>
+        /// Configure the default CV library
+        /// </summary>
         public void DefaultCV()
         {
             this.CVList = new MSDataList<CVInfo>();
@@ -101,6 +108,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Information about an ontology or CV source and a short 'lookup' tag to refer to.</remarks>
     public partial class CVInfo : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public CVInfo()
         {
             this.Id = null;
@@ -142,6 +152,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the way in which a particular software was used.</remarks>
     public partial class DataProcessingInfo : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DataProcessingInfo()
         {
             this.ProcessingMethods = null;
@@ -154,6 +167,9 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class ProcessingMethodInfo : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ProcessingMethodInfo()
         {
             this.Order = 0;
@@ -167,6 +183,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Structure allowing the use of a controlled (cvParam) or uncontrolled vocabulary (userParam), or a reference to a predefined set of these in this mzML file (paramGroupRef).</remarks>
     public partial class ParamGroup : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ParamGroup()
         {
             this.ReferenceableParamGroupRefs = null;
@@ -207,6 +226,9 @@ namespace PSI_Interface.MSData
     /// <remarks>A collection of CVParam and UserParam elements that can be referenced from elsewhere in this mzML document by using the 'paramGroupRef' element in that location to reference the 'id' attribute value of this element.</remarks>
     public partial class ReferenceableParamGroup : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ReferenceableParamGroup()
         {
             this.CVParams = null;
@@ -221,6 +243,9 @@ namespace PSI_Interface.MSData
     /// <remarks>A reference to a previously defined ParamGroup, which is a reusable container of one or more cvParams.</remarks>
     public partial class ReferenceableParamGroupRef : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ReferenceableParamGroupRef()
         {
             this.Ref = null;
@@ -233,6 +258,9 @@ namespace PSI_Interface.MSData
     /// <remarks>This element holds additional data or annotation. Only controlled values are allowed here.</remarks>
     public partial class CVParam : ParamBase
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public CVParam()
         {
             //this.CVRef = null;
@@ -257,6 +285,9 @@ namespace PSI_Interface.MSData
     /// CV term available, and if so, use the CV term instead</remarks>
     public partial class UserParam : ParamBase
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public UserParam()
         {
             this.Name = null;
@@ -276,6 +307,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Base type for CVParam and UserParam to reduce code duplication.</remarks>
     public partial class ParamBase : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ParamBase()
         {
             //this.Value = null;
@@ -322,6 +356,9 @@ namespace PSI_Interface.MSData
     /// <remarks>The method of precursor ion selection and activation</remarks>
     public partial class Precursor : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Precursor()
         {
             this.IsolationWindow = null;
@@ -397,6 +434,9 @@ namespace PSI_Interface.MSData
     /// Computers using a different endian style must convert to/from little endian when writing/reading mzML</remarks>
     public partial class BinaryDataArray : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public BinaryDataArray()
         {
             this.DataProcessingRef = null;
@@ -414,6 +454,9 @@ namespace PSI_Interface.MSData
     /// <remarks>List and descriptions of scans.</remarks>
     public partial class ScanList : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ScanList()
         {
             this.Scan = null;
@@ -426,6 +469,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Scan or acquisition from original raw file used to create this peak list, as specified in sourceF</remarks>
     public partial class Scan : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Scan()
         {
             this.ScanWindowList = null;
@@ -471,6 +517,9 @@ namespace PSI_Interface.MSData
     /// <remarks>List and descriptions of spectra.</remarks>
     public partial class SpectrumList : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SpectrumList()
         {
             this.Spectra = null;
@@ -485,6 +534,9 @@ namespace PSI_Interface.MSData
     /// Also describes some of the parameters for the mass spectrometer for a given acquisition (or list of acquisitions).</remarks>
     public partial class Spectrum : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Spectrum()
         {
             this.ScanList = null;
@@ -533,6 +585,9 @@ namespace PSI_Interface.MSData
     /// <remarks>The method of product ion selection and activation in a precursor ion scan</remarks>
     public partial class Product : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Product()
         {
             this.IsolationWindow = null;
@@ -545,6 +600,9 @@ namespace PSI_Interface.MSData
     /// <remarks>A run in mzML should correspond to a single, consecutive and coherent set of scans on an instrument.</remarks>
     public partial class Run : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Run()
         {
             this.SpectrumList = null;
@@ -564,6 +622,9 @@ namespace PSI_Interface.MSData
     /// <remarks>List of chromatograms.</remarks>
     public partial class ChromatogramList : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ChromatogramList()
         {
             this.Chromatograms = null;
@@ -577,6 +638,9 @@ namespace PSI_Interface.MSData
     /// <remarks>A single Chromatogram</remarks>
     public partial class Chromatogram : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Chromatogram()
         {
             this.Precursor = null;
@@ -623,6 +687,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the acquisition settings of the instrument prior to the start of the run.</remarks>
     public partial class ScanSettingsInfo : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ScanSettingsInfo()
         {
             this.SourceFileRefList = null;
@@ -665,6 +732,9 @@ namespace PSI_Interface.MSData
     /// <remarks></remarks>
     public partial class SourceFileRef : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SourceFileRef()
         {
             this.Ref = null;
@@ -733,6 +803,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Software information</remarks>
     public partial class SoftwareInfo : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SoftwareInfo()
         {
             this.Id = null;
@@ -781,6 +854,9 @@ namespace PSI_Interface.MSData
     /// the components that is used in the document. For software configuration, use a ReferenceableParamGroup element</remarks>
     public partial class InstrumentConfigurationInfo : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public InstrumentConfigurationInfo()
         {
             this.ComponentList = null;
@@ -796,6 +872,9 @@ namespace PSI_Interface.MSData
     /// <remarks>List with the different components used in the mass spectrometer. At least one source, one mass analyzer and one detector need to be specified.</remarks>
     public partial class ComponentList : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ComponentList()
         {
             this.Sources = null;
@@ -809,6 +888,9 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class Component : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Component()
         {
             this.Order = 0;
@@ -823,6 +905,9 @@ namespace PSI_Interface.MSData
     /// have any impact on the base schema validation.</remarks>
     public partial class SourceComponent : Component
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SourceComponent()
         { }
     }
@@ -835,6 +920,9 @@ namespace PSI_Interface.MSData
     /// have any impact on the base schema validation.</remarks>
     public partial class AnalyzerComponent : Component
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public AnalyzerComponent()
         { }
     }
@@ -847,6 +935,9 @@ namespace PSI_Interface.MSData
     /// have any impact on the base schema validation.</remarks>
     public partial class DetectorComponent : Component
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DetectorComponent()
         { }
     }
@@ -857,6 +948,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Reference to a previously defined software element</remarks>
     public partial class SoftwareRef : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SoftwareRef()
         {
             this.Ref = null;
@@ -897,6 +991,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Expansible description of the sample used to generate the dataset, named in sampleName.</remarks>
     public partial class SampleInfo : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SampleInfo()
         {
             this.Id = null;
@@ -938,6 +1035,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the source file, including location and type.</remarks>
     public partial class SourceFileInfo : ParamGroup
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SourceFileInfo()
         {
             this.Id = null;
@@ -952,6 +1052,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Information pertaining to the entire mzML file (i.e. not specific to any part of the data set) is stored here.</remarks>
     public partial class FileDescription : MSDataInternalTypeAbstract
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public FileDescription()
         {
             this.FileContentInfo = null;
