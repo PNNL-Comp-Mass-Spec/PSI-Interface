@@ -213,7 +213,8 @@ namespace CV_Generator
                               "/// A full enumeration of the Controlled Vocabularies PSI-MS, UNIMOD, and the vocabularies they depend on\n" +
                               indent + "/// </summary>\n" + 
                               indent + "public enum CVID : int\n" + indent + "{\n";
-            foreach (var term in _cvEnumData.Values)
+
+            /*foreach (var term in _cvEnumData.Values)
             {
                 if (!string.IsNullOrWhiteSpace(term.Def))
                 {
@@ -223,7 +224,46 @@ namespace CV_Generator
                 {
                     enumData += indent + "    /// <summary>Description not provided</summary>\n";
                 }
-                enumData += indent + "    " + term.EnumName + ",\n\n";
+                var idValue = term.Id.Split(':')[1];
+                if (term.EnumName.Equals("CVID_Unknown"))
+                {
+                    idValue = "-1";
+                }
+                enumData += indent + "    " + term.EnumName + " = " + idValue + ",\n\n";
+            }*/
+            foreach (var cv in _cvMapData)
+            {
+                foreach (var term in cv.Value.Values)
+                {
+                    var idValue = int.Parse(term.Id.Split(':')[1]);
+                    if (cv.Key.Equals("??") && term.EnumName.Equals("CVID_Unknown"))
+                    {
+                        idValue = -1;
+                    }
+                    else if (cv.Key.Equals("UNIMOD"))
+                    {
+                        // To match ProteoWizard values
+                        idValue += 100000000;
+                    }
+                    else if (cv.Key.Equals("UO"))
+                    {
+                        // To match ProteoWizard values
+                        idValue += 200000000;
+                    }
+                    else if (cv.Key.Equals("PATO"))
+                    {
+                        idValue += 300000000;
+                    }
+                    if (!string.IsNullOrWhiteSpace(term.Def))
+                    {
+                        enumData += indent + "    /// " + EscapeXmlEntities("summary", term.DefShort) + "\n";
+                    }
+                    else
+                    {
+                        enumData += indent + "    /// <summary>Description not provided</summary>\n";
+                    }
+                    enumData += indent + "    " + term.EnumName + " = " + idValue + ",\n\n";
+                }
             }
             return enumData + indent + "}";
         }
