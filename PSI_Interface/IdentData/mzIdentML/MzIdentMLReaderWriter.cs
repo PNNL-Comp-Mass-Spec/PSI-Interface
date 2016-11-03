@@ -47,7 +47,6 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <param name="bufferSize">File stream buffer size</param>
         public static void Write(MzIdentMLType identData, string filePath, int bufferSize = 65536)
         {
-            CreateWriter(filePath, bufferSize);
             var xRoot = new XmlRootAttribute()
             {
                 ElementName = "MzIdentML",
