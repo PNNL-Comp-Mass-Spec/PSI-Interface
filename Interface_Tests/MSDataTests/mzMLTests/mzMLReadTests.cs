@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using PSI_Interface.MSData.mzML;
 using NUnit.Framework;
 
@@ -40,27 +41,55 @@ namespace Interface_Tests.MSDataTests.mzMLTests
         #endregion
 
         [Test]
-        [TestCase(@"mzML\VA139IMSMS_noIndex.mzML", 3145)]
-        [TestCase(@"mzML\VA139IMSMS_noIndex.mzML.gz", 3145)]
+        //[TestCase(@"mzML\VA139IMSMS_noIndex.mzML", 3145)]
+        //[TestCase(@"mzML\VA139IMSMS_noIndex.mzML.gz", 3145)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293)]
         public void MzMLReadTest(string path, int expectedSpectra)
         {
-            var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, path));
+            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
+            if (!sourceFile.Exists)
+            {
+                Console.WriteLine("File not found: " + sourceFile.FullName);
+                return;
+            }
+
+            var reader = new MzMLReader(sourceFile.FullName);
             mzMLType mzMLData = reader.Read();
-            Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count.ToString(), "Stored Count");
+
+            Console.WriteLine("Spectrum count: " + mzMLData.run.spectrumList.count);
+            Console.WriteLine("Array length: " + mzMLData.run.spectrumList.spectrum.Count);
+
+            Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count.ToString(), "Spectrum Count");
             Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Count, "Array length");
+
         }
 
         [Test]
-        [TestCase(@"mzML\VA139IMSMS.mzML", 3145)]
-        [TestCase(@"mzML\VA139IMSMS_compressed.mzML", 3145)]
-        [TestCase(@"mzML\VA139IMSMS.mzML.gz", 3145)]
-        [TestCase(@"mzML\sample1-A_BB2_01_922.mzML", 43574)]
+        //[TestCase(@"mzML\VA139IMSMS.mzML", 3145)]
+        //[TestCase(@"mzML\VA139IMSMS_compressed.mzML", 3145)]
+        //[TestCase(@"mzML\VA139IMSMS.mzML.gz", 3145)]
+        //[TestCase(@"mzML\sample1-A_BB2_01_922.mzML", 43574)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293)]
         public void MzMLIndexedReadTest(string path, int expectedSpectra)
         {
-            var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, path));
+            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
+            if (!sourceFile.Exists)
+            {
+                Console.WriteLine("File not found: " + sourceFile.FullName);
+                return;
+            }
+
+            var reader = new MzMLReader(sourceFile.FullName);
             mzMLType mzMLData = reader.Read();
-            Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count.ToString(), "Stored Count");
+
+            Console.WriteLine("Spectrum count: " + mzMLData.run.spectrumList.count);
+            Console.WriteLine("Array length: " + mzMLData.run.spectrumList.spectrum.Count);
+
+            Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count, "Spectrum Count");
             Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Count, "Array length");
+
         }
     }
 }

@@ -42,12 +42,50 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
 
         #endregion
 
+        /// <summary>
+        /// Read/Write using MzIdentMlReaderWriter
+        /// but use PSI_Interface.IdentData.IdentDataObj
+        /// </summary>
+        /// <param name="inPath"></param>
+        /// <param name="outFolderName"></param>
+        /// <param name="expectedSpecLists"></param>
+        /// <param name="expectedSpecResults"></param>
+        /// <param name="expectedSpecItems"></param>
+        /// <param name="expectedPeptides"></param>
+        /// <param name="expectedSeqs"></param>
+        /// <remarks>
+        /// cv id="PSI-MS" fullName="PSI-MS" version="3.30.0" 
+        ///    uri="http://psidev.cvs.sourceforge.net/viewvc/*checkout*/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo"
+        /// cv id="UNIMOD" fullName="UNIMOD" 
+        ///    uri="http://www.unimod.org/obo/unimod.obo"
+        /// cv id="UO" fullName="UNIT-ONTOLOGY" 
+        ///    uri="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/unit.obo"
+        /// </remarks>
         [Test]
-        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", 1, 10894, 11612, 8806, 4507)]
-        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", @"MzIdentML\output\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", 1, 10894, 11612, 8806, 4507)]
-        [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", @"MzIdentML\output\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
-        public void MzIdentMLWriteTest(string inPath, string outPath, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
+        // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid","output", 1, 10894, 11612, 8806, 4507)]
+        // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", "output", 1, 10894, 11612, 8806, 4507)]
+        // [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", "output", 1, 18427, 20218, 17224, 5665)]
+        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid           ", "output_MzIdentMLType", 1, 11443, 12172, 8889, 4361)]
+        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid.gz        ", "output_MzIdentMLType", 1, 11443, 12172, 8889, 4361)]
+        [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid       ", "output_MzIdentMLType", 1, 15510, 16486, 13486, 4912)]
+        [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz    ", "output_MzIdentMLType", 1, 15510, 16486, 13486, 4912)]
+        public void MzIdentMLWriteTest(string inPath, string outFolderName, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
         {
+            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
+            if (!sourceFile.Exists)
+            {
+                Console.WriteLine("File not found: " + sourceFile.FullName);
+                return;
+            }
+
+            if (sourceFile.DirectoryName == null)
+                throw new DirectoryNotFoundException("Cannot determine the parent folder of " + sourceFile.FullName);
+
+            var outFolder = new DirectoryInfo(Path.Combine(sourceFile.DirectoryName, outFolderName));
+            if (!outFolder.Exists)
+                outFolder.Create();
+
+            var outFile = new FileInfo(Path.Combine(outFolder.FullName, sourceFile.Name));
             MzIdentMLType identData = MzIdentMlReaderWriter.Read(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
             int specResults = 0;
             int specItems = 0;
@@ -59,14 +97,21 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
                     specItems += specResult.SpectrumIdentificationItem.Count;
                 }
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Spectrum Identification Lists: {0}", identData.DataCollection.AnalysisData.SpectrumIdentificationList.Count);
+            Console.WriteLine("Spectrum Identification Results: {0,6:N0}", specResults);
+            Console.WriteLine("Spectrum Identification Items: {0,6:N0}", specItems);
+            Console.WriteLine("Unique Peptides: {0,6:N0}", identData.SequenceCollection.Peptide.Count);
+            Console.WriteLine("Unique Protein Sequences: {0,6:N0}", identData.SequenceCollection.DBSequence.Count);
+
             Assert.AreEqual(expectedSpecLists, identData.DataCollection.AnalysisData.SpectrumIdentificationList.Count, "Spectrum Identification Lists");
-            //Assert.AreEqual(expectedSpecResults, identData.DataCollection.AnalysisData.SpectrumIdentificationList[0].SpectrumIdentificationResult.Length, "Spectrum Identification Results");
             Assert.AreEqual(expectedSpecResults, specResults, "Spectrum Identification Results");
             Assert.AreEqual(expectedSpecItems, specItems, "Spectrum Identification Items");
-            Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptide.Count, "Peptide Matches");
-            Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequence.Count, "DB Sequences");
+            Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptide.Count, "Unique Peptides");
+            Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequence.Count, "Unique Protein Sequences");
 
-            MzIdentMlReaderWriter.Write(identData, Path.Combine(TestPath.ExtTestDataDirectory, outPath));
+            MzIdentMlReaderWriter.Write(identData, outFile.FullName);
         }
 
         /*

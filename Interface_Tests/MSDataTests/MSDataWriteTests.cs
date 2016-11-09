@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using NUnit.Framework;
 using PSI_Interface.MSData;
 using PSI_Interface.MSData.mzML;
@@ -48,15 +45,35 @@ namespace Interface_Tests.MSDataTests
         #endregion
 
         [Test]
-        [TestCase(@"mzML\VA139IMSMS_noIndex.mzML", @"mzML\output\VA139IMSMS_noIndex.mzML", 3145)]
-        [TestCase(@"mzML\VA139IMSMS_noIndex.mzML.gz", @"mzML\output\VA139IMSMS_noIndex.mzML.gz", 3145)]
-        public void MzMLWriteTest(string inPath, string outPath, int expectedSpectra)
+        //[TestCase(@"mzML\VA139IMSMS_noIndex.mzML", @"mzML\output\VA139IMSMS_noIndex.mzML", 3145)]
+        //[TestCase(@"mzML\VA139IMSMS_noIndex.mzML.gz", @"mzML\output\VA139IMSMS_noIndex.mzML.gz", 3145)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", "output", 9293)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", "output", 9293)]
+        public void MzMLWriteTest(string inPath, string outFolderName, int expectedSpectra)
         {
+            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
+            if (!sourceFile.Exists)
+            {
+                Console.WriteLine("File not found: " + sourceFile.FullName);
+                return;
+            }
+
+            if (sourceFile.DirectoryName == null)
+                throw new DirectoryNotFoundException("Cannot determine the parent folder of " + sourceFile.FullName);
+
+            var outFolder = new DirectoryInfo(Path.Combine(sourceFile.DirectoryName, outFolderName));
+            if (!outFolder.Exists)
+                outFolder.Create();
+
+            var outFile = new FileInfo(Path.Combine(outFolder.FullName, sourceFile.Name));
+
             var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
             MSData mzMLData = new MSData(reader.Read());
-            //Assert.AreEqual(expectedSpectra.ToString(), mzMLData.Run.SpectrumList.Count.ToString(), "Stored Count");
+
+            Console.WriteLine("Array length: " + mzMLData.Run.SpectrumList.Spectra.Count);
             Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Array length");
-            var writer = new MzMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outPath));
+
+            var writer = new MzMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outFile.FullName));
             writer.MzMLType = MzMLSchemaType.MzML;
             writer.Write(new mzMLType(mzMLData));
         }

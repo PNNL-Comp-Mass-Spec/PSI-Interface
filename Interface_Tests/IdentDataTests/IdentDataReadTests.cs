@@ -42,29 +42,57 @@ namespace Interface_Tests.IdentDataTests
         #endregion
 
         [Test]
-        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", 1, 10894, 11612, 8806, 4507)]
-        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", 1, 10894, 11612, 8806, 4507)]
-        [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
+        // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid", 1, 10894, 11612, 8806, 4507)]
+        // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", 1, 10894, 11612, 8806, 4507)]
+        // [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz", 1, 18427, 20218, 17224, 5665)]
+        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid           ", 1, 11443, 12172, 8889, 4361)]
+        [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid.gz        ", 1, 11443, 12172, 8889, 4361)]
+        [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid       ", 1, 15510, 16486, 13486, 4912)]
+        [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz    ", 1, 15510, 16486, 13486, 4912)]
+        [TestCase(@"MzIdentML\Cj_media_DOC_R2_23Feb15_Arwen_14-12-03_NoResults_msgfplus.mzid", 1, 0, 0, 0, 0)]
         public void MzIdentMLReadTest(string path, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
         {
-            //MzIdentMLType identData = MzIdentMLReader.Read(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            IdentDataObj identData = new IdentDataObj(MzIdentMlReaderWriter.Read(Path.Combine(TestPath.ExtTestDataDirectory, path)));
+            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
+            if (!sourceFile.Exists)
+            {
+                Console.WriteLine("File not found: " + sourceFile.FullName);
+                return;
+            }
+
+            IdentDataObj identData = new IdentDataObj(MzIdentMlReaderWriter.Read(sourceFile.FullName));
             int specResults = 0;
             int specItems = 0;
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
             {
+                if (specList.SpectrumIdentificationResults == null)
+                    continue;
+
                 specResults += specList.SpectrumIdentificationResults.Count;
                 foreach (var specResult in specList.SpectrumIdentificationResults)
                 {
                     specItems += specResult.SpectrumIdentificationItems.Count;
                 }
             }
-            Assert.AreEqual(expectedSpecLists, identData.DataCollection.AnalysisData.SpectrumIdentificationList.Count, "Spectrum Identification Lists");
-            //Assert.AreEqual(expectedSpecResults, identData.DataCollection.AnalysisData.SpectrumIdentificationList[0].SpectrumIdentificationResult.Length, "Spectrum Identification Results");
+
+            var observedPeptides = 0;
+            if (identData.SequenceCollection.Peptides != null)
+                observedPeptides = identData.SequenceCollection.Peptides.Count;
+
+            var observeProteins = 0;
+            if (identData.SequenceCollection.DBSequences != null)
+                observeProteins = identData.SequenceCollection.DBSequences.Count;
+
+            Console.WriteLine();
+            Console.WriteLine("Spectrum Identification Results: {0,6:N0}", specResults);
+            Console.WriteLine("Native IDs: {0,6:N0}", specItems);            
+            Console.WriteLine("Unique Peptides: {0,6:N0}", observedPeptides);
+            Console.WriteLine("Unique Protein Sequences: {0,6:N0}", observeProteins);
+
             Assert.AreEqual(expectedSpecResults, specResults, "Spectrum Identification Results");
-            Assert.AreEqual(expectedSpecItems, specItems, "Spectrum Identification Items");
-            Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptides.Count, "Peptide Matches");
-            Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequences.Count, "DB Sequences");
+            Assert.AreEqual(expectedSpecItems, specItems, "Native IDs");
+            Assert.AreEqual(expectedPeptides, observedPeptides, "Unique Peptides");
+            Assert.AreEqual(expectedSeqs, observeProteins, "Unique Protein Sequences");
+
         }
     }
 }

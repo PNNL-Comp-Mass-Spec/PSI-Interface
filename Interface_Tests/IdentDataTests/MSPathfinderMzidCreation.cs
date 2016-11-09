@@ -13,7 +13,7 @@ namespace Interface_Tests.IdentDataTests
     [TestFixture]
     public class MsPathfinderMzidCreation
     {
-        [Test]
+        [Test, Ignore("Disabled")]
         public void CreateMzidFile()
         {
             var dir = @"F:\MSPathfinder_Tests";
