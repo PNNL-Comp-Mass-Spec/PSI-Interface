@@ -68,13 +68,14 @@ namespace Interface_Tests.MSDataTests
             var outFile = new FileInfo(Path.Combine(outFolder.FullName, sourceFile.Name));
 
             var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
-            MSData mzMLData = new MSData(reader.Read());
+            var mzMLData = new MSData(reader.Read());
 
             Console.WriteLine("Array length: " + mzMLData.Run.SpectrumList.Spectra.Count);
             Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Array length");
 
-            var writer = new MzMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outFile.FullName));
-            writer.MzMLType = MzMLSchemaType.MzML;
+            var writer = new MzMLWriter(Path.Combine(TestPath.ExtTestDataDirectory, outFile.FullName)) {
+                MzMLType = MzMLSchemaType.MzML
+            };
             writer.Write(new mzMLType(mzMLData));
         }
 

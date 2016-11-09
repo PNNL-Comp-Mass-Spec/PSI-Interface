@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace CV_Generator
         private OBO_File _unimod;
         private OBO_File _psiMs;
         private List<OBO_File> _psiMsImports;
-        private List<OBO_File> _allObo = new List<OBO_File>();
+        private readonly List<OBO_File> _allObo = new List<OBO_File>();
 
         public CVWriter()
         {
@@ -36,7 +36,7 @@ namespace CV_Generator
 
         public void WriteFile(string filename)
         {
-            using (StreamWriter file = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
+            using (var file = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
                 file.WriteLine(Header());
@@ -93,7 +93,7 @@ namespace CV_Generator
 
         private string CVInfoList(string indent)
         {
-            string values = indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>\n" +
+            var values = indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>\n" +
                             indent + "public static void PopulateCVInfoList()\n" +
                             indent + "{\n";
             foreach (var cv in _allObo)
@@ -108,11 +108,12 @@ namespace CV_Generator
 
         private string GenerateRelationOtherTypesEnum(string indent)
         {
-            string enumData = indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>\n";
+            var enumData = indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>\n";
             enumData += indent + "public enum " + RelationsOtherTypesEnumName + " : int\n" + indent + "{\n";
             var dict = new Dictionary<string, OBO_File.OBO_Typedef>();
-            var unknownDef = new OBO_File.OBO_Typedef();
-            unknownDef.Def = "Unknown term relationship";
+            var unknownDef = new OBO_File.OBO_Typedef {
+                Def = "Unknown term relationship"
+            };
             dict.Add("Unknown", unknownDef);
             foreach (var obo in _allObo)
             {
@@ -146,22 +147,24 @@ namespace CV_Generator
             return enumData + indent + "}";
         }
 
-        private Dictionary<string, OBO_File.OBO_Term> _cvEnumData = new Dictionary<string, OBO_File.OBO_Term>();
-        private Dictionary<string, Dictionary<string, OBO_File.OBO_Term>> _cvMapData = new Dictionary<string, Dictionary<string, OBO_File.OBO_Term>>();
+        private readonly Dictionary<string, OBO_File.OBO_Term> _cvEnumData = new Dictionary<string, OBO_File.OBO_Term>();
+        private readonly Dictionary<string, Dictionary<string, OBO_File.OBO_Term>> _cvMapData = new Dictionary<string, Dictionary<string, OBO_File.OBO_Term>>();
 
         private void PopulateCVEnumData()
         {
-            string invalidSymbols = @" @/[():^?*+<=!~`#$%&{}|;'.,>\"; // WARNING: '-' must be at beginning or end, in middle it must be escaped, or it is interpreted as a range
-            string invalidSymbolsEscaped = System.Text.RegularExpressions.Regex.Escape(invalidSymbols);
-            string invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]"; // add all whitespace matching, manually escape the ']', since above call doesn't
+            var invalidSymbols = @" @/[():^?*+<=!~`#$%&{}|;'.,>\"; // WARNING: '-' must be at beginning or end, in middle it must be escaped, or it is interpreted as a range
+            var invalidSymbolsEscaped = System.Text.RegularExpressions.Regex.Escape(invalidSymbols);
+            var invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]"; // add all whitespace matching, manually escape the ']', since above call doesn't
 
             // Add "CVID_Unknown" to the list first
-            var unknown = new OBO_File.OBO_Term();
-            unknown.Id = "??:0000000";
-            unknown.Name = "CVID_Unknown";
-            unknown.EnumName = "CVID_Unknown";
-            unknown.Def = "CVID_Unknown [Unknown]";
-            unknown.IsObsolete = false;
+            var unknown = new OBO_File.OBO_Term
+            {
+                Id = "??:0000000",
+                Name = "CVID_Unknown",
+                EnumName = "CVID_Unknown",
+                Def = "CVID_Unknown [Unknown]",
+                IsObsolete = false
+            };
             _cvEnumData.Add("CVID_Unknown", unknown);
             _cvMapData.Add("??", new Dictionary<string, OBO_File.OBO_Term>() { { "CVID_Unknown", unknown } });
 
@@ -170,7 +173,7 @@ namespace CV_Generator
             {
                 if (obo.IsGeneratedId && obo.Terms.Count > 0)
                 {
-                    string tempId = obo.Terms.Values.ToList()[0].Id;
+                    var tempId = obo.Terms.Values.ToList()[0].Id;
                     tempId = tempId.Split(':')[0];
                     obo.Id = tempId;
                 }
@@ -180,7 +183,7 @@ namespace CV_Generator
 
                 foreach (var term in obo.Terms.Values)
                 {
-                    string name = id + "_";
+                    var name = id + "_";
                     //name += term.Name.Replace(' ', '_');
                     name += System.Text.RegularExpressions.Regex.Replace(term.Name, invalidSymbolsRegex, "_");
                     //name += System.Text.RegularExpressions.Regex.Replace(term.Name.Replace(' ', '_'), invalidSymbolsRegex, "_");
@@ -188,8 +191,8 @@ namespace CV_Generator
                     {
                         name += obsol;
                     }
-                    string tName = name;
-                    int counter = 0;
+                    var tName = name;
+                    var counter = 0;
                     while (_cvEnumData.ContainsKey(name))
                     {
                         counter++;
@@ -209,7 +212,7 @@ namespace CV_Generator
                 PopulateCVEnumData();
             }
 
-            string enumData = indent + "/// <summary>\n" + indent +
+            var enumData = indent + "/// <summary>\n" + indent +
                               "/// A full enumeration of the Controlled Vocabularies PSI-MS, UNIMOD, and the vocabularies they depend on\n" +
                               indent + "/// </summary>\n" + 
                               indent + "public enum CVID : int\n" + indent + "{\n";
@@ -240,7 +243,7 @@ namespace CV_Generator
                 PopulateCVEnumData();
             }
 
-            string dictData = indent + "/// <summary>Populate the CV Term data objects</summary>\n" +
+            var dictData = indent + "/// <summary>Populate the CV Term data objects</summary>\n" +
                               indent + "private static void PopulateTermData()\n" + indent + "{\n";
             /*foreach (var term in _cvEnumData.Values)
             {
@@ -265,7 +268,7 @@ namespace CV_Generator
         }
 
         private readonly Dictionary<string, OBO_File.OBO_Term> _bigTermDict = new Dictionary<string, OBO_File.OBO_Term>();
-        private bool _bigTermDictPopulated = false;
+        private bool _bigTermDictPopulated;
 
         private void PopulateTermDict()
         {
@@ -295,7 +298,7 @@ namespace CV_Generator
                         items.Add(term.EnumName, new List<string>());
                         foreach (var rel in term.IsA)
                         {
-                            string rel2 = rel.Trim().Split(' ')[0];
+                            var rel2 = rel.Trim().Split(' ')[0];
                             if (_bigTermDict.ContainsKey(rel2))
                             {
                                 items[term.EnumName].Add(_bigTermDict[rel2].EnumName);
@@ -309,7 +312,7 @@ namespace CV_Generator
                 }
             }
 
-            string fillData = indent + "/// <summary>Populate the relationships between CV terms</summary>\n" +
+            var fillData = indent + "/// <summary>Populate the relationships between CV terms</summary>\n" +
                               indent + "private static void FillRelationsIsA()\n" + indent + "{\n";
             foreach (var item in items)
             {

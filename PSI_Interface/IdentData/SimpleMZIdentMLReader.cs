@@ -4,7 +4,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace PSI_Interface.IdentData
 {
@@ -39,7 +38,7 @@ namespace PSI_Interface.IdentData
         {
             private static Dictionary<string, string> ParseNativeId(string nativeId)
             {
-                var tokens = nativeId.Split(new char[] { '\t', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                var tokens = nativeId.Split(new[] { '\t', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
                 var map = new Dictionary<string, string>();
                 foreach (var token in tokens)
                 {

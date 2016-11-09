@@ -14,7 +14,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public MSDataList()
         {
-            this._msData = new MSData(false);
+            _msData = new MSData(false);
         }
         //public event EventHandler OnAdd;
 
@@ -39,8 +39,8 @@ namespace PSI_Interface.MSData
         /// <param name="items"></param>
         public MSDataList(IEnumerable<T> items)
         {
-            this._msData = new MSData(false);
-            this.AddRange(items);
+            _msData = new MSData(false);
+            AddRange(items);
         }
 
         private MSData _msData;
@@ -54,12 +54,12 @@ namespace PSI_Interface.MSData
             get { return _msData; }
             set
             {
-                if (!ReferenceEquals(this._msData, value))
+                if (!ReferenceEquals(_msData, value))
                 {
-                    this._msData = value;
-                    foreach (T item in this)
+                    _msData = value;
+                    foreach (var item in this)
                     {
-                        item.MsData = this._msData;
+                        item.MsData = _msData;
                     }
                 }
             }
@@ -74,9 +74,9 @@ namespace PSI_Interface.MSData
             set
             {
                 _defaultArrayLength = value;
-                foreach (T item in this)
+                foreach (var item in this)
                 {
-                    item.BdaDefaultArrayLength = this._defaultArrayLength;
+                    item.BdaDefaultArrayLength = _defaultArrayLength;
                 }
             }
         }
@@ -85,14 +85,14 @@ namespace PSI_Interface.MSData
         /// Add an item
         /// </summary>
         /// <param name="item"></param>
-        new public void Add(T item)
+        public new void Add(T item)
         {
             //if (null != OnAdd)
             //{
             //    OnAdd(this, null);
             //}
-            item.MsData = this._msData;
-            item.BdaDefaultArrayLength = this._defaultArrayLength;
+            item.MsData = _msData;
+            item.BdaDefaultArrayLength = _defaultArrayLength;
             base.Add(item);
         }
 
@@ -100,12 +100,12 @@ namespace PSI_Interface.MSData
         /// Add a group of items
         /// </summary>
         /// <param name="items"></param>
-        new public void AddRange(IEnumerable<T> items)
+        public new void AddRange(IEnumerable<T> items)
         {
             foreach (var item in items)
             {
-                item.MsData = this._msData;
-                item.BdaDefaultArrayLength = this._defaultArrayLength;
+                item.MsData = _msData;
+                item.BdaDefaultArrayLength = _defaultArrayLength;
                 base.Add(item);
             }
         }

@@ -65,7 +65,7 @@ namespace CV_Generator
 
         private void SetNameAndId()
         {
-            string filename = Url.Substring(Url.LastIndexOf("/") + 1);
+            var filename = Url.Substring(Url.LastIndexOf("/", StringComparison.Ordinal) + 1);
             switch (filename.ToLower())
             {
                 case "psi-ms.obo":
@@ -93,7 +93,7 @@ namespace CV_Generator
                     _id = GetAvailableId("UNIMOD");
                     break;
                 default:
-                    Name = filename.Substring(0, filename.LastIndexOf("."));
+                    Name = filename.Substring(0, filename.LastIndexOf(".", StringComparison.Ordinal));
                     _id = GetAvailableId(Name.ToUpper());
                     IsGeneratedId = true;
                     break;
@@ -102,7 +102,7 @@ namespace CV_Generator
 
         private string GetAvailableId(string desiredId)
         {
-            string finalId = desiredId;
+            var finalId = desiredId;
             // Id safety mechanism: If the Id already exists, add a number and continue.
             while (Ids.ContainsKey(finalId))
             {
@@ -284,7 +284,7 @@ namespace CV_Generator
                     var cleaned = Def;
                     if (cleaned.Contains("["))
                     {
-                        cleaned = cleaned.Substring(0, Def.IndexOf("[")).Trim();
+                        cleaned = cleaned.Substring(0, Def.IndexOf("[", StringComparison.Ordinal)).Trim();
                     }
                     cleaned = cleaned.Replace('"', ' ').Trim();
                     return cleaned;
@@ -430,7 +430,7 @@ namespace CV_Generator
                     {
                         return string.Empty;
                     }
-                    var pos = Def.IndexOf("[");
+                    var pos = Def.IndexOf("[", StringComparison.Ordinal);
                     if (pos >= 0)
                     {
                         return Def.Substring(0, pos).Trim();

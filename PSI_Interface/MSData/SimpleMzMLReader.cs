@@ -14,23 +14,23 @@ namespace PSI_Interface.MSData
     {
         #region Private Members
         private readonly string _filePath;
-        private Stream _file = null;
-        private StreamReader _fileReader = null;
-        private XmlReader _xmlReaderForYield = null;
-        private bool _reduceMemoryUsage = false;
+        private Stream _file;
+        private StreamReader _fileReader;
+        private XmlReader _xmlReaderForYield;
+        private bool _reduceMemoryUsage;
         private long _artificialScanNum = 1;
         private long _numSpectra = -1;
-        private IndexList _spectrumOffsets = new IndexList() {IndexType = IndexList.IndexListType.Spectrum};
-        private IndexList _chromatogramOffsets = new IndexList() { IndexType = IndexList.IndexListType.Chromatogram };
-        private long _indexListOffset = 0;
-        private bool _haveIndex = false;
-        private bool _haveMetaData = false;
-        private bool _isGzipped = false;
-        private string _unzippedFilePath = string.Empty;
-        private bool _randomAccess = false;
-        private bool _allRead = false;
-        private XmlReaderSettings _xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
-        private Encoding _encoding = null;
+        private readonly IndexList _spectrumOffsets = new IndexList() {IndexType = IndexList.IndexListType.Spectrum};
+        private readonly IndexList _chromatogramOffsets = new IndexList() { IndexType = IndexList.IndexListType.Chromatogram };
+        private long _indexListOffset;
+        private bool _haveIndex;
+        private bool _haveMetaData;
+        private bool _isGzipped;
+        private string _unzippedFilePath;
+        private bool _randomAccess;
+        private bool _allRead;
+        private readonly XmlReaderSettings _xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
+        private Encoding _encoding;
         private readonly List<SimpleSpectrum> _spectra = new List<SimpleSpectrum>();
         #endregion
 
@@ -69,7 +69,7 @@ namespace PSI_Interface.MSData
 
         private abstract class Param
         {
-            public ParamType ParamType { get; protected set; }
+            protected ParamType ParamType { get; set; }
             public string Name;          // Required
             public string Value;         // Optional
             public string UnitCVRef;     // Optional
@@ -150,9 +150,9 @@ namespace PSI_Interface.MSData
             private long _artificialScanNum = 1;
             public class IndexItem // A struct would be faster, but it can also be a pain since it is a value type
             {
-                public string Ref;
-                public long Offset;
-                public long IdNum;
+                public readonly string Ref;
+                public readonly long Offset;
+                public readonly long IdNum;
 
                 public IndexItem(string idRef, long offset, long idNum)
                 {
@@ -485,7 +485,7 @@ namespace PSI_Interface.MSData
                     _file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
                 }
             }
-            _fileReader = new StreamReader(_file, System.Text.Encoding.UTF8, true, 65536);
+            _fileReader = new StreamReader(_file, Encoding.UTF8, true, 65536);
 
             if (!_isGzipped || _randomAccess) // can't reset the position on a gzipped file...
             {
@@ -761,11 +761,11 @@ namespace PSI_Interface.MSData
         private void ReadIndexFromEnd()
         {
             var stream = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1);
-            long testPos = stream.Length;
+            var testPos = stream.Length;
             //stream.Position = testPos; // 300 bytes from the end of the file - should be enough
-            var streamReader = new StreamReader(stream, System.Text.Encoding.UTF8, true, 65536);
+            var streamReader = new StreamReader(stream, Encoding.UTF8, true, 65536);
             streamReader.DiscardBufferedData();
-            bool haveOffset = false;
+            var haveOffset = false;
 
             while (!haveOffset)
             {
@@ -773,31 +773,28 @@ namespace PSI_Interface.MSData
                 const int bufSize = 512; //65536 (17 bits), 131072 (18 bits), 262144 (19 bits), 524288 (20 bits)
                 testPos -= bufSize;
                 stream.Position = testPos;
-                byte[] byteBuffer = new byte[bufSize];
-                string stringBuffer = string.Empty;
-                long bufStart = stream.Position;
-                int bytesRead = 0;
+                var byteBuffer = new byte[bufSize];
                 while (stream.Position < stream.Length && !haveOffset)
                 {
-                    bufStart = stream.Position;
-                    bytesRead = stream.Read(byteBuffer, 0, bufSize);
-                    stringBuffer = _encoding.GetString(byteBuffer, 0, bytesRead);
+                    var bufStart = stream.Position;
+                    var bytesRead = stream.Read(byteBuffer, 0, bufSize);
+                    var stringBuffer = _encoding.GetString(byteBuffer, 0, bytesRead);
                     // set up the rewind to ensure full tags
-                    int lastTagEnd = stringBuffer.LastIndexOf('>');
-                    int lastTagStart = stringBuffer.LastIndexOf('<');
+                    var lastTagEnd = stringBuffer.LastIndexOf('>');
+                    var lastTagStart = stringBuffer.LastIndexOf('<');
                     if (lastTagStart != -1 && lastTagEnd != -1 && lastTagStart > lastTagEnd)
                     {
-                        int endOfString = lastTagStart;
-                        int rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
+                        var endOfString = lastTagStart;
+                        var rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
                         stringBuffer = stringBuffer.Substring(0, endOfString);
                         stream.Seek(-rewindBy, SeekOrigin.Current);
                         //file.Position = bufEnd - rewindBy;
                     }
 
-                    int found = stringBuffer.IndexOf("<indexListOffset");
+                    var found = stringBuffer.IndexOf("<indexListOffset", StringComparison.Ordinal);
                     if (found >= 0)
                     {
-                        long pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
+                        var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
                         streamReader.DiscardBufferedData();
                         streamReader.BaseStream.Position = pos;
                         using (var reader = XmlReader.Create(streamReader, _xSettings))
@@ -823,31 +820,28 @@ namespace PSI_Interface.MSData
                 {
                     testPos -= bufSize;
                     stream.Position = testPos;
-                    byte[] byteBuffer = new byte[bufSize];
-                    string stringBuffer = string.Empty;
-                    long bufStart = stream.Position;
-                    int bytesRead = 0;
+                    var byteBuffer = new byte[bufSize];
                     while (stream.Position < stream.Length && !haveOffset)
                     {
-                        bufStart = stream.Position;
-                        bytesRead = stream.Read(byteBuffer, 0, bufSize);
-                        stringBuffer = _encoding.GetString(byteBuffer, 0, bytesRead);
+                        var bufStart = stream.Position;
+                        var bytesRead = stream.Read(byteBuffer, 0, bufSize);
+                        var stringBuffer = _encoding.GetString(byteBuffer, 0, bytesRead);
                         // set up the rewind to ensure full tags
-                        int lastTagEnd = stringBuffer.LastIndexOf('>');
-                        int lastTagStart = stringBuffer.LastIndexOf('<');
+                        var lastTagEnd = stringBuffer.LastIndexOf('>');
+                        var lastTagStart = stringBuffer.LastIndexOf('<');
                         if (lastTagStart != -1 && lastTagEnd != -1 && lastTagStart > lastTagEnd)
                         {
-                            int endOfString = lastTagStart;
-                            int rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
+                            var endOfString = lastTagStart;
+                            var rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
                             stringBuffer = stringBuffer.Substring(0, endOfString);
                             stream.Seek(-rewindBy, SeekOrigin.Current);
                             //file.Position = bufEnd - rewindBy;
                         }
 
-                        int found = stringBuffer.IndexOf("<indexList ");
+                        var found = stringBuffer.IndexOf("<indexList ", StringComparison.Ordinal);
                         if (found >= 0)
                         {
-                            long pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
+                            var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
                             _indexListOffset = pos;
                             haveOffset = true;
                         }
@@ -864,9 +858,9 @@ namespace PSI_Interface.MSData
                 reader.MoveToContent();
                 ReadIndexList(reader.ReadSubtree());
             }
-            bool isValid = true;
+            var isValid = true;
             // Validate the index - if there are duplicate offsets, it is probably invalid
-            Dictionary<long, int> collisions = new Dictionary<long, int>();
+            var collisions = new Dictionary<long, int>();
             foreach (var index in _spectrumOffsets.Offsets)
             {
                 if (!collisions.ContainsKey(index.Offset))
@@ -899,33 +893,29 @@ namespace PSI_Interface.MSData
                 const string specTag = "spectrum";
                 const string chromTag = "chromatogram";
                 const int maxRead = 524288; //65536 (17 bits), 131072 (18 bits), 262144 (19 bits), 524288 (20 bits)
-                byte[] byteBuffer = new byte[maxRead];
-                string stringBuffer = string.Empty;
-                long bufStart = file.Position;
-                int bytesRead = 0;
-                string builder = string.Empty;
+                var byteBuffer = new byte[maxRead];
                 while (file.Position < file.Length)
                 {
-                    bufStart = file.Position;
-                    bytesRead = file.Read(byteBuffer, 0, maxRead);
-                    stringBuffer = _encoding.GetString(byteBuffer, 0, bytesRead);
+                    var bufStart = file.Position;
+                    var bytesRead = file.Read(byteBuffer, 0, maxRead);
+                    var stringBuffer = _encoding.GetString(byteBuffer, 0, bytesRead);
                     // set up the rewind to ensure full tags
-                    int lastTagEnd = stringBuffer.LastIndexOf('>');
-                    int lastTagStart = stringBuffer.LastIndexOf('<');
+                    var lastTagEnd = stringBuffer.LastIndexOf('>');
+                    var lastTagStart = stringBuffer.LastIndexOf('<');
                     if (lastTagStart != -1 && lastTagEnd != -1 && lastTagStart > lastTagEnd)
                     {
-                        int endOfString = lastTagStart;
-                        int rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
+                        var endOfString = lastTagStart;
+                        var rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
                         stringBuffer = stringBuffer.Substring(0, endOfString);
                         file.Seek(-rewindBy, SeekOrigin.Current);
                         //file.Position = bufEnd - rewindBy;
                     }
 
-                    int searchPoint = 0;
+                    var searchPoint = 0;
                     while (searchPoint < stringBuffer.Length)
                     {
-                        int foundSpec = stringBuffer.IndexOf("<" + specTag + " ", searchPoint);
-                        int foundChrom = stringBuffer.IndexOf("<" + chromTag + " ", searchPoint);
+                        var foundSpec = stringBuffer.IndexOf("<" + specTag + " ", searchPoint, StringComparison.Ordinal);
+                        var foundChrom = stringBuffer.IndexOf("<" + chromTag + " ", searchPoint, StringComparison.Ordinal);
                         if (foundSpec >= 0)
                         {
                             searchPoint = foundSpec;
@@ -938,19 +928,19 @@ namespace PSI_Interface.MSData
                         {
                             break;
                         }
-                        long pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, searchPoint));
-                        int end = stringBuffer.IndexOf('>', searchPoint + 1);
+                        var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, searchPoint));
+                        var end = stringBuffer.IndexOf('>', searchPoint + 1);
                         // Grab everything between '<' and the next '>'
-                        builder = stringBuffer.Substring(searchPoint + 1, (end - 1) - (searchPoint + 1));
+                        var builder = stringBuffer.Substring(searchPoint + 1, (end - 1) - (searchPoint + 1));
                         // Get the ID of the tag
-                        string attribName = "id";
+                        var attribName = "id";
                         if (_version == MzML_Version.mzML1_0_0)
                         {
                             attribName = "nativeID";
                         }
-                        var idIndex = builder.IndexOf(attribName + "=\"");
-                        var idOpenQuote = builder.IndexOf("\"", idIndex);
-                        var idCloseQuote = builder.IndexOf("\"", idOpenQuote + 1);
+                        var idIndex = builder.IndexOf(attribName + "=\"", StringComparison.Ordinal);
+                        var idOpenQuote = builder.IndexOf("\"", idIndex, StringComparison.Ordinal);
+                        var idCloseQuote = builder.IndexOf("\"", idOpenQuote + 1, StringComparison.Ordinal);
                         var length = idCloseQuote - idOpenQuote - 1;
                         var id = builder.Substring(idOpenQuote + 1, length);
                         // Add offset to the correct list
@@ -1079,15 +1069,18 @@ namespace PSI_Interface.MSData
         private void ReadIndex(XmlReader reader)
         {
             reader.MoveToContent();
-            string iType = reader.GetAttribute("name");
-            IndexList.IndexListType eType = IndexList.IndexListType.Unknown;
-            if (iType.ToLower() == "spectrum")
+            var iType = reader.GetAttribute("name");
+            var eType = IndexList.IndexListType.Unknown;
+            if (iType != null)
             {
-                eType = IndexList.IndexListType.Spectrum;
-            }
-            else if (iType.ToLower() == "chromatogram")
-            {
-                eType = IndexList.IndexListType.Chromatogram;
+                if (iType.ToLower() == "spectrum")
+                {
+                    eType = IndexList.IndexListType.Spectrum;
+                }
+                else if (iType.ToLower() == "chromatogram")
+                {
+                    eType = IndexList.IndexListType.Chromatogram;
+                }
             }
             reader.ReadStartElement("index"); // Throws exception if we are not at the "run" tag.
             while (reader.ReadState == ReadState.Interactive)
@@ -1103,8 +1096,8 @@ namespace PSI_Interface.MSData
                     case "offset":
                         // Schema requirements: zero to one instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                        string idRef = reader.GetAttribute("idRef");
-                        string offset = reader.ReadElementContentAsString(); // Reads the start element, content, and end element
+                        var idRef = reader.GetAttribute("idRef");
+                        var offset = reader.ReadElementContentAsString(); // Reads the start element, content, and end element
                         switch (eType)
                         {
                             case IndexList.IndexListType.Spectrum:
@@ -1158,10 +1151,10 @@ namespace PSI_Interface.MSData
                 reader = reader.ReadSubtree();
                 reader.MoveToContent();
             }
-            string schemaName = reader.GetAttribute("xsi:schemaLocation");
+            var schemaName = reader.GetAttribute("xsi:schemaLocation");
             // We automatically assume it uses the mzML_1.1.0 schema. Check for the old version.
             //if (!schemaName.Contains("mzML1.1.0.xsd"))
-            if (schemaName.Contains("mzML1.0.0.xsd"))
+            if (schemaName != null && schemaName.Contains("mzML1.0.0.xsd"))
             {
                 _version = MzML_Version.mzML1_0_0;
             }
@@ -1169,7 +1162,7 @@ namespace PSI_Interface.MSData
             // Throws exception if we are not at the "mzML" tag.
             // This is a critical error; we want to stop processing for this file if we encounter this error
             reader.ReadStartElement("mzML");
-            bool continueReading = true;
+            var continueReading = true;
             // Read the next node - should be the first child node
             while (reader.ReadState == ReadState.Interactive && continueReading)
             {
@@ -1563,7 +1556,7 @@ namespace PSI_Interface.MSData
         {
             _referenceableParamGroups.Clear(); // In case of second read of file, clear out existing.
             reader.MoveToContent();
-            int count = Convert.ToInt32(reader.GetAttribute("count"));
+            var count = Convert.ToInt32(reader.GetAttribute("count"));
             reader.ReadStartElement("referenceableParamGroupList"); // Throws exception if we are not at the "referenceableParamGroupList" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -1576,8 +1569,8 @@ namespace PSI_Interface.MSData
                 if (reader.Name == "referenceableParamGroup")
                 {
                     // Schema requirements: one to many instances of this element
-                    string id = reader.GetAttribute("id");
-                    List<Param> paramList = new List<Param>();
+                    var id = reader.GetAttribute("id");
+                    var paramList = new List<Param>();
                     var innerReader = reader.ReadSubtree();
                     innerReader.MoveToContent();
                     innerReader.ReadStartElement("referenceableParamGroup"); // Throws exception if we are not at the "sourceFile" tag.
@@ -1608,7 +1601,8 @@ namespace PSI_Interface.MSData
                     }
                     innerReader.Close();
                     reader.Read();
-                    _referenceableParamGroups.Add(id, paramList);
+                    if (id != null)
+                        _referenceableParamGroups.Add(id, paramList);
                 }
                 else
                 {
@@ -1625,14 +1619,16 @@ namespace PSI_Interface.MSData
         private CVParam ReadCvParam(XmlReader reader)
         {
             reader.MoveToContent();
-            CVParam cvParam = new CVParam();
-            cvParam.Accession = reader.GetAttribute("accession");
-            cvParam.CVRef = reader.GetAttribute("cvRef");
-            cvParam.Name = reader.GetAttribute("name");
-            cvParam.Value = reader.GetAttribute("value");
-            cvParam.UnitAccession = reader.GetAttribute("unitAccession");
-            cvParam.UnitCVRef = reader.GetAttribute("unitCVRef");
-            cvParam.UnitName = reader.GetAttribute("unitName");
+            var cvParam = new CVParam
+            {
+                Accession = reader.GetAttribute("accession"),
+                CVRef = reader.GetAttribute("cvRef"),
+                Name = reader.GetAttribute("name"),
+                Value = reader.GetAttribute("value"),
+                UnitAccession = reader.GetAttribute("unitAccession"),
+                UnitCVRef = reader.GetAttribute("unitCVRef"),
+                UnitName = reader.GetAttribute("unitName")
+            };
 
             reader.Close();
             return cvParam;
@@ -1645,13 +1641,15 @@ namespace PSI_Interface.MSData
         private UserParam ReadUserParam(XmlReader reader)
         {
             reader.MoveToContent();
-            UserParam userParam = new UserParam();
-            userParam.Name = reader.GetAttribute("name");
-            userParam.Type = reader.GetAttribute("type");
-            userParam.Value = reader.GetAttribute("value");
-            userParam.UnitAccession = reader.GetAttribute("unitAccession");
-            userParam.UnitCVRef = reader.GetAttribute("unitCVRef");
-            userParam.UnitName = reader.GetAttribute("unitName");
+            var userParam = new UserParam
+            {
+                Name = reader.GetAttribute("name"),
+                Type = reader.GetAttribute("type"),
+                Value = reader.GetAttribute("value"),
+                UnitAccession = reader.GetAttribute("unitAccession"),
+                UnitCVRef = reader.GetAttribute("unitCVRef"),
+                UnitName = reader.GetAttribute("unitName")
+            };
 
             reader.Close();
             return userParam;
@@ -1783,19 +1781,19 @@ namespace PSI_Interface.MSData
         private SimpleSpectrum ReadSpectrum(XmlReader reader, bool includePeaks = true)
         {
             reader.MoveToContent();
-            string index = reader.GetAttribute("index");
+            var index = reader.GetAttribute("index");
             //Console.WriteLine("Reading spectrum indexed by " + index);
             // This is correct for Thermo files converted by msConvert, but need to implement for others as well
-            string spectrumId = reader.GetAttribute("id"); // Native ID in mzML_1.1.0; unique identifier in mzML_1.0.0, often same as nativeID
-            string nativeId = spectrumId;
+            var spectrumId = reader.GetAttribute("id"); // Native ID in mzML_1.1.0; unique identifier in mzML_1.0.0, often same as nativeID
+            var nativeId = spectrumId;
             if (_version == MzML_Version.mzML1_0_0)
             {
                 nativeId = reader.GetAttribute("nativeID"); // Native ID in mzML_1.0.0
             }
 
-            int scanNum = -1;
+            int scanNum;
             // If a random access reader, there is already a scan number stored, based on the order of the index. Use it instead.
-            if (_randomAccess)
+            if (_randomAccess && nativeId != null && _spectrumOffsets.NativeToIdMap.ContainsKey(nativeId))
             {
                 scanNum = (int) (_spectrumOffsets.NativeToIdMap[nativeId]);
             }
@@ -1804,22 +1802,22 @@ namespace PSI_Interface.MSData
                 scanNum = (int)(_artificialScanNum++);
                 // Interpret the NativeID (if the format has an interpreter) and use it instead of the artificial number.
                 // TODO: Better handling than the artificial ID for other nativeIDs (ones currently not supported)
-                int num = 0;
+                int num;
                 if (NativeIdConversion.TryGetScanNumberInt(nativeId, out num))
                 {
                     scanNum = num;
                 }
             }
 
-            int defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
+            var defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
             reader.ReadStartElement("spectrum"); // Throws exception if we are not at the "spectrum" tag.
-            bool is_ms_ms = false;
-            int msLevel = 0;
-            bool centroided = false;
+            var is_ms_ms = false;
+            var msLevel = 0;
+            var centroided = false;
             double tic = 0;
-            List<Precursor> precursors = new List<Precursor>();
-            List<ScanData> scans = new List<ScanData>();
-            List<BinaryDataArray> bdas = new List<BinaryDataArray>();
+            var precursors = new List<Precursor>();
+            var scans = new List<ScanData>();
+            var bdas = new List<BinaryDataArray>();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -1949,10 +1947,10 @@ namespace PSI_Interface.MSData
             }
             reader.Close();
             // Process the spectrum data
-            ScanData scan = new ScanData();
+            var scan = new ScanData();
             SimpleSpectrum spectrum;
-            BinaryDataArray mzs = new BinaryDataArray();
-            BinaryDataArray intensities = new BinaryDataArray();
+            var mzs = new BinaryDataArray();
+            var intensities = new BinaryDataArray();
             foreach (var bda in bdas)
             {
                 if (bda.ArrayType == ArrayType.m_z_array)
@@ -1987,7 +1985,7 @@ namespace PSI_Interface.MSData
 
             if (is_ms_ms)
             {
-                Precursor precursor = new Precursor();
+                var precursor = new Precursor();
                 if (precursors.Count == 1)
                 {
                     precursor = precursors[0];
@@ -1997,7 +1995,7 @@ namespace PSI_Interface.MSData
                     // TODO: Should do something else to appropriately handle multiple precursors...
                     precursor = precursors[0];
                 }
-                SelectedIon ion = new SelectedIon();
+                var ion = new SelectedIon();
                 if (precursor.Ions.Count == 1)
                 {
                     ion = precursor.Ions[0];
@@ -2008,11 +2006,12 @@ namespace PSI_Interface.MSData
                     ion = precursor.Ions[0];
                 }
 
-                var pspectrum = new SimpleProductSpectrum(mzs.Data, intensities.Data, scanNum);
-                pspectrum.ActivationMethod = precursor.ActivationMethod;
+                var pspectrum = new SimpleProductSpectrum(mzs.Data, intensities.Data, scanNum) {
+                    ActivationMethod = precursor.ActivationMethod
+                };
                 // Select mz value to use based on presence of a Thermo-specific user param.
                 // The user param has a slightly higher precision, if that matters.
-                double mz = scan.MonoisotopicMz == 0.0 ? ion.SelectedIonMz : scan.MonoisotopicMz;
+                var mz = Math.Abs(scan.MonoisotopicMz) < float.Epsilon ? ion.SelectedIonMz : scan.MonoisotopicMz;
                 pspectrum.MonoisotopicMz = mz;
                 pspectrum.Charge = ion.Charge;
                 pspectrum.IsolationWindowTargetMz = precursor.IsolationWindowTargetMz;
@@ -2124,8 +2123,8 @@ namespace PSI_Interface.MSData
         private List<ScanData> ReadScanList(XmlReader reader)
         {
             reader.MoveToContent();
-            int count = Convert.ToInt32(reader.GetAttribute("count"));
-            List<ScanData> scans = new List<ScanData>();
+            var count = Convert.ToInt32(reader.GetAttribute("count"));
+            var scans = new List<ScanData>();
             if (_version == MzML_Version.mzML1_0_0)
             {
                 reader.ReadStartElement("acquisitionList"); // Throws exception if we are not at the "scanList" tag.
@@ -2204,7 +2203,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             if (_version == MzML_Version.mzML1_0_0)
             {
-                string name = reader.Name;
+                var name = reader.Name;
                 if (!name.Equals("scan") && !name.Equals("acquisition"))
                 {
                     throw new XmlException("Invalid schema");
@@ -2215,7 +2214,7 @@ namespace PSI_Interface.MSData
             {
                 reader.ReadStartElement("scan"); // Throws exception if we are not at the "scan" tag.
             }
-            ScanData scan = new ScanData();
+            var scan = new ScanData();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2256,8 +2255,8 @@ namespace PSI_Interface.MSData
                         {
                             case "MS:1000016":
                                 // name="scan start time"
-                                double time = Convert.ToDouble(reader.GetAttribute("value"));
-                                bool isSeconds = reader.GetAttribute("unitName") == "second";
+                                var time = Convert.ToDouble(reader.GetAttribute("value"));
+                                var isSeconds = reader.GetAttribute("unitName") == "second";
                                 // Should only see "second" and "minute"
                                 scan.StartTime = isSeconds ? time / 60.0 : time;
                                 //scan.StartTime = Convert.ToDouble(reader.GetAttribute("value"));
@@ -2310,8 +2309,8 @@ namespace PSI_Interface.MSData
         private List<Precursor> ReadPrecursorList(XmlReader reader)
         {
             reader.MoveToContent();
-            int count = Convert.ToInt32(reader.GetAttribute("count"));
-            List<Precursor> precursors = new List<Precursor>();
+            var count = Convert.ToInt32(reader.GetAttribute("count"));
+            var precursors = new List<Precursor>();
             reader.ReadStartElement("precursorList"); // Throws exception if we are not at the "precursorList" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -2348,8 +2347,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("precursor"); // Throws exception if we are not at the "precursor" tag.
-            XmlReader innerReader;
-            Precursor precursor = new Precursor();
+            var precursor = new Precursor();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2359,6 +2357,7 @@ namespace PSI_Interface.MSData
                     continue;
                 }
 
+                XmlReader innerReader;
                 switch (reader.Name)
                 {
                     case "isolationWindow":
@@ -2645,8 +2644,8 @@ namespace PSI_Interface.MSData
         private List<BinaryDataArray> ReadBinaryDataArrayList(XmlReader reader, int defaultArrayLength)
         {
             reader.MoveToContent();
-            int bdArrays = Convert.ToInt32(reader.GetAttribute("count"));
-            List<BinaryDataArray> bdaList = new List<BinaryDataArray>();
+            var bdArrays = Convert.ToInt32(reader.GetAttribute("count"));
+            var bdaList = new List<BinaryDataArray>();
             reader.ReadStartElement("binaryDataArrayList"); // Throws exception if we are not at the "binaryDataArrayList" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -2683,17 +2682,18 @@ namespace PSI_Interface.MSData
         private BinaryDataArray ReadBinaryDataArray(XmlReader reader, int defaultLength)
         {
             reader.MoveToContent();
-            BinaryDataArray bda = new BinaryDataArray();
-            bda.ArrayLength = defaultLength;
-            int encLength = Convert.ToInt32(reader.GetAttribute("encodedLength"));
-            int arrLength = Convert.ToInt32(reader.GetAttribute("arrayLength")); // Override the default; if non-existent, should get 0
+            var bda = new BinaryDataArray {
+                ArrayLength = defaultLength
+            };
+            var encLength = Convert.ToInt32(reader.GetAttribute("encodedLength"));
+            var arrLength = Convert.ToInt32(reader.GetAttribute("arrayLength")); // Override the default; if non-existent, should get 0
             if (arrLength > 0)
             {
                 bda.ArrayLength = arrLength;
             }
-            bool compressed = false;
+            var compressed = false;
             reader.ReadStartElement("binaryDataArray"); // Throws exception if we are not at the "spectrum" tag.
-            List<Param> paramList = new List<Param>();
+            var paramList = new List<Param>();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2707,8 +2707,9 @@ namespace PSI_Interface.MSData
                 {
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
-                        string rpgRef = reader.GetAttribute("ref");
-                        paramList.AddRange(_referenceableParamGroups[rpgRef]);
+                        var rpgRef = reader.GetAttribute("ref");
+                        if (rpgRef != null)
+                            paramList.AddRange(_referenceableParamGroups[rpgRef]);
                         reader.Read();
                         break;
                     case "cvParam":
@@ -2724,7 +2725,7 @@ namespace PSI_Interface.MSData
                     case "binary":
                         // Schema requirements: zero to many instances of this element
                         // Process the ParamList first.
-                        foreach (Param param in paramList)
+                        foreach (var param in paramList)
                         {
                             /*
                              * MUST supply a *child* term of MS:1000572 (binary data compression type) only once
@@ -2808,12 +2809,12 @@ namespace PSI_Interface.MSData
                                     break;
                             }
                         }
-                        int dataSize = 8;
+                        var dataSize = 8;
                         if (bda.Precision == Precision.Precision32)
                         {
                             dataSize = 4;
                         }
-                        byte[] bytes = Convert.FromBase64String(reader.ReadElementContentAsString()); // Consumes the start and end elements.
+                        var bytes = Convert.FromBase64String(reader.ReadElementContentAsString()); // Consumes the start and end elements.
                         //var bytesread = reader.ReadContentAsBase64(bytes, 0, dataSize);
                         if (compressed)
                         {
@@ -2826,7 +2827,7 @@ namespace PSI_Interface.MSData
                         //byte[] oneNumber = new byte[dataSize];
                         //bool swapBytes = true;
                         bda.Data = new double[bda.ArrayLength];
-                        for (int i = 0; i < bytes.Length; i += dataSize)
+                        for (var i = 0; i < bytes.Length; i += dataSize)
                         {
                             // mzML binary data should always be Little Endian. Some other data formats may use Big Endian, which would require a byte swap
                             //Array.Copy(bytes, i, oneNumber, 0, dataSize);
@@ -2870,7 +2871,7 @@ namespace PSI_Interface.MSData
             msCompressed.ReadByte();
             //var msInflated = new MemoryStream((int)(msCompressed.Length * 2));
             //var newBytes = new byte[msCompressed.Length * 2];
-            byte[] newBytes = new byte[expectedBytes];
+            var newBytes = new byte[expectedBytes];
             // The last 32 bits (4 bytes) are supposed to be an Adler-32 checksum. Might need to remove them as well.
             using (var inflater = new DeflateStream(msCompressed, CompressionMode.Decompress))
             {

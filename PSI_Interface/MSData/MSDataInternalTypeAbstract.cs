@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-
+﻿
 namespace PSI_Interface.MSData
 {
     /// <summary>
@@ -9,12 +8,12 @@ namespace PSI_Interface.MSData
     {
         internal MSDataInternalTypeAbstract()
         {
-            this._msData = new MSData(false);
+            _msData = new MSData(false);
         }
 
         internal MSDataInternalTypeAbstract(MSData instance)
         {
-            this.MsData = instance;
+            MsData = instance;
         }
 
         private MSData _msData;
@@ -23,16 +22,16 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                return this._msData;
+                return _msData;
             }
             set
             {
-                if (!ReferenceEquals(this._msData, value))
+                if (!ReferenceEquals(_msData, value))
                 {
-                    this._msData = value;
-                    if (this._msData != null)
+                    _msData = value;
+                    if (_msData != null)
                     {
-                        this.CascadeProperties();
+                        CascadeProperties();
                     }
                 }
             }

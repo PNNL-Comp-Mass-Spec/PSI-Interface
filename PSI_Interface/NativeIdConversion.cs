@@ -11,7 +11,7 @@ namespace PSI_Interface
     {
         private static Dictionary<string, string> ParseNativeId(string nativeId)
         {
-            var tokens = nativeId.Split(new char[] { '\t', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            var tokens = nativeId.Split(new[] { '\t', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             var map = new Dictionary<string, string>();
             foreach (var token in tokens)
             {

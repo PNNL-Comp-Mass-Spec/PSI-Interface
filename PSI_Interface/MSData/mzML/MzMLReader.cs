@@ -24,13 +24,13 @@ namespace PSI_Interface.MSData.mzML
             ConfigureReader();
         }
 
-        private int _bufferSize = 16384;
+        private readonly int _bufferSize;
 
         private Type _mzMLType;
 
         private readonly string _filePath;
 
-        private bool _hasRead = false;
+        private readonly bool _hasRead = false;
 
         private Stream _reader;
 
@@ -57,13 +57,13 @@ namespace PSI_Interface.MSData.mzML
             xRoot.Namespace = "http://psi.hupo.org/ms/mzml";
             xRoot.IsNullable = false;
             var serializer = new XmlSerializer(_mzMLType, xRoot);
-            mzMLType mzMLData = new mzMLType();
+            var mzMLData = new mzMLType();
             using (_reader)
             {
                 switch (MzMLType)
                 {
                     case MzMLSchemaType.IndexedMzML:
-                        indexedmzML imzML = (indexedmzML) serializer.Deserialize(_reader);
+                        var imzML = (indexedmzML) serializer.Deserialize(_reader);
                         mzMLData = imzML.mzML;
                         break;
                     case MzMLSchemaType.MzML:
@@ -89,7 +89,7 @@ namespace PSI_Interface.MSData.mzML
                 tempReader = new GZipStream(tempReader, CompressionMode.Decompress);
             }
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
-            XmlReader reader = XmlReader.Create(new StreamReader(tempReader, System.Text.Encoding.UTF8, true, _bufferSize), xSettings);
+            var reader = XmlReader.Create(new StreamReader(tempReader, System.Text.Encoding.UTF8, true, _bufferSize), xSettings);
             using (reader)
             {
                 reader.MoveToContent();

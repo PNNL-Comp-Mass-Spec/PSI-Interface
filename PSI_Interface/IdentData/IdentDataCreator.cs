@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PSI_Interface.IdentData.IdentDataObjs;
 
 namespace PSI_Interface.IdentData
@@ -33,7 +30,7 @@ namespace PSI_Interface.IdentData
         private int searchProtocolCounter = 1;
         private int specListCounter = 1;
 
-        private Dictionary<string, SpectrumIdentificationResultObj> identificationResults = new Dictionary<string, SpectrumIdentificationResultObj>();
+        private readonly Dictionary<string, SpectrumIdentificationResultObj> identificationResults = new Dictionary<string, SpectrumIdentificationResultObj>();
 
         /// <summary>
         /// Prepare to populate and then generate an MZID file
@@ -192,7 +189,7 @@ namespace PSI_Interface.IdentData
             foreach (var mod in pep.Modifications)
             {
                 var modCv = mod.CVParams.First();
-                var modName = "";
+                string modName;
                 if (modCv.Cvid == CV.CV.CVID.MS_unknown_modification)
                 {
                     modName = modCv.Value;
@@ -218,13 +215,13 @@ namespace PSI_Interface.IdentData
         public AnalysisSoftwareObj AddAnalysisSoftware(string id, string name, string version, CV.CV.CVID cvid,
             string userParamSoftwareName = "")
         {
-            var software = new AnalysisSoftwareObj()
+            var software = new AnalysisSoftwareObj
             {
                 Name = name,
                 Id = id,
                 Version = version,
+                SoftwareName = new ParamObj(),
             };
-            software.SoftwareName = new ParamObj();
             if (cvid != CV.CV.CVID.CVID_Unknown)
             {
                 software.SoftwareName.Item = new CVParamObj(cvid);
@@ -283,14 +280,14 @@ namespace PSI_Interface.IdentData
         public SearchDatabaseInfo AddSearchDatabase(string location, long numberOfSequences, string databaseName, CV.CV.CVID publicDatabaseName = CV.CV.CVID.CVID_Unknown,
             CV.CV.CVID fileFormatCvid = CV.CV.CVID.CVID_Unknown)
         {
-            var db = new SearchDatabaseInfo()
+            var db = new SearchDatabaseInfo
             {
                 Id = "SearchDB_" + dbCounter++,
                 Location = location,
                 Name = databaseName,
                 NumDatabaseSequences = numberOfSequences,
+                DatabaseName = new ParamObj(),
             };
-            db.DatabaseName = new ParamObj();
             if (publicDatabaseName != CV.CV.CVID.CVID_Unknown)
             {
                 db.DatabaseName.Item = new CVParamObj(publicDatabaseName);
@@ -304,8 +301,9 @@ namespace PSI_Interface.IdentData
             }
             if (fileFormatCvid != CV.CV.CVID.CVID_Unknown)
             {
-                db.FileFormat = new FileFormatInfo();
-                db.FileFormat.CVParam = new CVParamObj(fileFormatCvid);
+                db.FileFormat = new FileFormatInfo {
+                    CVParam = new CVParamObj(fileFormatCvid)
+                };
             }
 
             if (identData.DataCollection.Inputs == null)
@@ -332,15 +330,15 @@ namespace PSI_Interface.IdentData
         public SpectraDataObj AddSpectraData(string location, string name, CV.CV.CVID spectrumIdFormat,
             CV.CV.CVID fileFormatCvid = CV.CV.CVID.CVID_Unknown)
         {
-            var dataFile = new SpectraDataObj()
+            var dataFile = new SpectraDataObj
             {
                 Id = "SD_" + specDataCounter++,
                 Location = location,
                 Name = name,
-            };
-            dataFile.SpectrumIDFormat = new SpectrumIDFormatObj()
-            {
-                CVParam = new CVParamObj(spectrumIdFormat),
+                SpectrumIDFormat = new SpectrumIDFormatObj()
+                {
+                    CVParam = new CVParamObj(spectrumIdFormat),
+                },
             };
             if (fileFormatCvid != CV.CV.CVID.CVID_Unknown)
             {
@@ -386,14 +384,14 @@ namespace PSI_Interface.IdentData
         /// <returns>An object that needs multiple items set - add CV/User params to AdditionalSearchParams, ModificationParams, Enzymes, FragmentTolerances, ParentTolerances, and Threshold</returns>
         public SpectrumIdentificationProtocolObj AddAnalysisSettings(AnalysisSoftwareObj analysisSoftwareInfo, string name, CV.CV.CVID searchType)
         {
-            var settings = new SpectrumIdentificationProtocolObj()
+            var settings = new SpectrumIdentificationProtocolObj
             {
                 Id = "SearchProtocol_" + searchProtocolCounter++,
                 AnalysisSoftware = analysisSoftwareInfo,
                 Name = name,
+                SearchType = new ParamObj(),
             };
 
-            settings.SearchType = new ParamObj();
             if (searchType != CV.CV.CVID.CVID_Unknown)
             {
                 settings.SearchType.Item = new CVParamObj(searchType);

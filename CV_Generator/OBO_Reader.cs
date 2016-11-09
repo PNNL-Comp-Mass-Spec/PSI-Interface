@@ -8,7 +8,7 @@ namespace CV_Generator
     public class OBO_Reader
     {
         public OBO_File FileData;
-        public List<OBO_File> ImportedFileData = new List<OBO_File>();
+        public readonly List<OBO_File> ImportedFileData = new List<OBO_File>();
 
         public void Read(string url)
         {
@@ -16,13 +16,13 @@ namespace CV_Generator
             FileData = new OBO_File(url);
             using (var reader = new StringReader(fileData))
             {
-                string line = reader.ReadLine();
+                var line = reader.ReadLine();
                 while (string.IsNullOrWhiteSpace(line) && line != null)
                 {
                     line = reader.ReadLine();
                 }
 
-                string type = "header";
+                var type = "header";
                 var data = new List<KeyValuePair<string, string>>();
                 while (reader.Peek() != -1 && !string.IsNullOrWhiteSpace(line))
                 {

@@ -86,9 +86,9 @@ namespace Interface_Tests.IdentDataTests
 
             var outFile = new FileInfo(Path.Combine(outFolder.FullName, sourceFile.Name));
 
-            IdentDataObj identData = new IdentDataObj(MzIdentMlReaderWriter.Read(sourceFile.FullName));
-            int specResults = 0;
-            int specItems = 0;
+            var identData = new IdentDataObj(MzIdentMlReaderWriter.Read(sourceFile.FullName));
+            var specResults = 0;
+            var specItems = 0;
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
             {
                 if (specList.SpectrumIdentificationResults == null)
@@ -123,7 +123,7 @@ namespace Interface_Tests.IdentDataTests
             Assert.AreEqual(expectedSeqs, observeProteins, "Unique Protein Sequences");
 
             identData.DefaultCV();
-            MzIdentMlReaderWriter.Write(new MzIdentMLType(identData), outFile.FullName); ;
+            MzIdentMlReaderWriter.Write(new MzIdentMLType(identData), outFile.FullName);
         }
     }
 }

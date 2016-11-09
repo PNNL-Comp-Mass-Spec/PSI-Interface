@@ -55,12 +55,12 @@ namespace Interface_Tests.MSDataTests.mzMLTests
             }
 
             var reader = new MzMLReader(sourceFile.FullName);
-            mzMLType mzMLData = reader.Read();
+            var mzMLData = reader.Read();
 
             Console.WriteLine("Spectrum count: " + mzMLData.run.spectrumList.count);
             Console.WriteLine("Array length: " + mzMLData.run.spectrumList.spectrum.Count);
 
-            Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count.ToString(), "Spectrum Count");
+            Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count, "Spectrum Count");
             Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Count, "Array length");
 
         }
@@ -82,7 +82,7 @@ namespace Interface_Tests.MSDataTests.mzMLTests
             }
 
             var reader = new MzMLReader(sourceFile.FullName);
-            mzMLType mzMLData = reader.Read();
+            var mzMLData = reader.Read();
 
             Console.WriteLine("Spectrum count: " + mzMLData.run.spectrumList.count);
             Console.WriteLine("Array length: " + mzMLData.run.spectrumList.spectrum.Count);

@@ -124,8 +124,9 @@ namespace PSI_Interface.IdentData
             if (mzid.DataCollection != null)
             {
                 //this._dataCollection = new DataCollection(mzid.DataCollection, this);
-                _dataCollection = new DataCollectionObj();
-                _dataCollection.Inputs = new InputsObj(mzid.DataCollection.Inputs, this);
+                _dataCollection = new DataCollectionObj {
+                    Inputs = new InputsObj(mzid.DataCollection.Inputs, this)
+                };
             }
             // Referenced by SpectrumIdentificationItem, ProteinDetectionHypothesis, PeptideHypothesis
             // References InputsInfo.DBSequence, AnalysisProtocolCollection.SoftwareIdentificationProtocol.DatabaseTranslation.TranslationTable
@@ -380,11 +381,13 @@ namespace PSI_Interface.IdentData
                 {
                     continue;
                 }
-                var newcv = new CVInfo();
-                newcv.FullName = cv.Name;
-                newcv.Id = cv.Id;
-                newcv.URI = cv.URI;
-                newcv.Version = cv.Version;
+                var newcv = new CVInfo
+                {
+                    FullName = cv.Name,
+                    Id = cv.Id,
+                    URI = cv.URI,
+                    Version = cv.Version
+                };
                 CVList.Add(newcv);
             }
             CvTranslator = new CVTranslator(CVList);
@@ -480,8 +483,9 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -505,8 +509,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -530,8 +535,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -555,8 +561,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -583,8 +590,9 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -611,8 +619,9 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -636,8 +645,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -661,8 +671,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -693,8 +704,9 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -718,8 +730,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch 
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -743,8 +756,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -768,8 +782,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -794,8 +809,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -820,8 +836,9 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -844,8 +861,9 @@ namespace PSI_Interface.IdentData
                     return AnalysisProtocolCollection.ProteinDetectionProtocol;
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -868,8 +886,9 @@ namespace PSI_Interface.IdentData
                     return DataCollection.AnalysisData.ProteinDetectionList;
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }
@@ -896,8 +915,9 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch // Ignore errors; must resolve reference later...
+            catch
             {
+                // Ignore errors; must resolve reference later...
             }
             return null;
         }

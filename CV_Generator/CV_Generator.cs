@@ -2,7 +2,7 @@
 
 namespace CV_Generator
 {
-    public class CV_Generator
+    public static class CV_Generator
     {
         [STAThread]
         public static void Main(string[] args)

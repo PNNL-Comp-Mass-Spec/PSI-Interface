@@ -54,7 +54,7 @@ namespace Interface_Tests.MSDataTests
 
             var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, sourceFile.FullName));
             //mzMLType mzMLData = reader.Read();
-            MSData mzMLData = new MSData(reader.Read());
+            var mzMLData = new MSData(reader.Read());
 
             Console.WriteLine("Spectrum count: " + mzMLData.Run.SpectrumList.Spectra.Count);
             Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Spectrum count");
@@ -78,7 +78,7 @@ namespace Interface_Tests.MSDataTests
 
             var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, sourceFile.FullName));
             //mzMLType mzMLData = reader.Read();
-            MSData mzMLData = new MSData(reader.Read());
+            var mzMLData = new MSData(reader.Read());
 
             Console.WriteLine("Spectrum count: " + mzMLData.Run.SpectrumList.Spectra.Count);
             Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Spectrum count");

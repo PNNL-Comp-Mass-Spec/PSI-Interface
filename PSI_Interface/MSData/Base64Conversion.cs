@@ -58,7 +58,7 @@ namespace PSI_Interface.MSData
             //byte[] oneNumber = new byte[dataSize];
             //bool swapBytes = true;
             var data = new double[expectedLength];
-            for (int i = 0; i < bytes.Length; i += bytesPerValue)
+            for (var i = 0; i < bytes.Length; i += bytesPerValue)
             {
                 // mzML binary data should always be Little Endian. Some other data formats may use Big Endian, which would require a byte swap
                 //Array.Copy(bytes, i, oneNumber, 0, dataSize);
@@ -98,7 +98,7 @@ namespace PSI_Interface.MSData
             //byte[] oneNumber = new byte[dataSize];
             //bool swapBytes = true;
             var bytes = new byte[data.Length * bytesPerValue];
-            for (int i = 0; i < data.Length; i++)
+            for (var i = 0; i < data.Length; i++)
             {
                 // mzML binary data should always be Little Endian. Some other data formats may use Big Endian, which would require a byte swap
                 //Array.Copy(bytes, i, oneNumber, 0, dataSize);

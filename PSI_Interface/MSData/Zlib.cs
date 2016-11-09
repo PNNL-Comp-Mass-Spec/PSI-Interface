@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
 
 namespace PSI_Interface.MSData
@@ -25,7 +24,7 @@ namespace PSI_Interface.MSData
             msCompressed.ReadByte();
             //var msInflated = new MemoryStream((int)(msCompressed.Length * 2));
             //var newBytes = new byte[msCompressed.Length * 2];
-            byte[] newBytes = new byte[expectedBytes];
+            var newBytes = new byte[expectedBytes];
             // The last 32 bits (4 bytes) are supposed to be an Adler-32 checksum. Might need to remove them as well.
             using (var inflater = new DeflateStream(msCompressed, CompressionMode.Decompress))
             {
@@ -67,13 +66,13 @@ namespace PSI_Interface.MSData
 
             //var msInflated = new MemoryStream((int)(msCompressed.Length * 2));
             //var newBytes = new byte[msCompressed.Length * 2];
-            byte[] newBytes = new byte[decompressedBytes.Length];
+            var newBytes = new byte[decompressedBytes.Length];
 
             // TODO: Add the zlib headers to the data....
             // TODO: Also need the Adler32 Checksum at the end...
 
             var deflate2 = new Ionic.Zlib.DeflateStream(msDecompressed, Ionic.Zlib.CompressionMode.Compress);
-            compressedBytes = deflate2.Read(newBytes, 0, decompressedBytes.Length);
+            deflate2.Read(newBytes, 0, decompressedBytes.Length);
 
             // The last 32 bits (4 bytes) are supposed to be an Adler-32 checksum. Might need to remove them as well.
             using (var deflater = new DeflateStream(msDecompressed, CompressionMode.Compress))

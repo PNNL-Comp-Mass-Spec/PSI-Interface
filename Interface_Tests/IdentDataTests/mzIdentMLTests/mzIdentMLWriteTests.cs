@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using PSI_Interface.IdentData.mzIdentML;
 
@@ -86,9 +82,9 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
                 outFolder.Create();
 
             var outFile = new FileInfo(Path.Combine(outFolder.FullName, sourceFile.Name));
-            MzIdentMLType identData = MzIdentMlReaderWriter.Read(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
-            int specResults = 0;
-            int specItems = 0;
+            var identData = MzIdentMlReaderWriter.Read(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
+            var specResults = 0;
+            var specItems = 0;
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
             {
                 specResults += specList.SpectrumIdentificationResult.Count;

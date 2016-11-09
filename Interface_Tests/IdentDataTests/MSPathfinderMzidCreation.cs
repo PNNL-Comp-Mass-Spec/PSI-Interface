@@ -103,8 +103,9 @@ namespace Interface_Tests.IdentDataTests
                 while (line != null && !reader.EndOfStream)
                 {
                     var tokens = line.Split('\t');
-                    var result = new MsPathfinderResult();
-                    result.Modifications = new List<Tuple<string, int>>();
+                    var result = new MsPathfinderResult {
+                        Modifications = new List<Tuple<string, int>>()
+                    };
                     if (tokens.Length > 0)
                     {
                         result.Scan = int.Parse(tokens[0]);

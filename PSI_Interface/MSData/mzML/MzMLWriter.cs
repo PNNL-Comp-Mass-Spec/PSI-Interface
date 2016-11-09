@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -28,11 +25,11 @@ namespace PSI_Interface.MSData.mzML
             _mzMLType = typeof (mzMLType);
         }
 
-        private int _bufferSize = 16384;
+        private readonly int _bufferSize;
 
         private XmlWriter _writer;
 
-        private Type _mzMLType;
+        private readonly Type _mzMLType;
 
         private readonly string _filePath;
 
@@ -77,11 +74,13 @@ namespace PSI_Interface.MSData.mzML
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
             }
-            var xSettings = new XmlWriterSettings();
-            xSettings.CloseOutput = true;
-            xSettings.NewLineChars = "\n";
-            xSettings.Indent = true;
-            xSettings.Encoding = Encoding.UTF8;
+            var xSettings = new XmlWriterSettings
+            {
+                CloseOutput = true,
+                NewLineChars = "\n",
+                Indent = true,
+                Encoding = Encoding.UTF8
+            };
             //xSettings.WriteEndDocumentOnClose = false; // This will be necessary to properly output a checksum for indexedmzML.
             _writer = XmlWriter.Create(new StreamWriter(writer, Encoding.UTF8, _bufferSize), xSettings);
         }
