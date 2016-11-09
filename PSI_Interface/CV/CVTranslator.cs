@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using PSI_Interface.MSData;
 
 namespace PSI_Interface.CV
@@ -29,12 +31,13 @@ namespace PSI_Interface.CV
         /// <param name="fileCvInfo"></param>
         public CVTranslator(IEnumerable<CV.CVInfo> fileCvInfo)
         {
+            var cvInfos = fileCvInfo.ToList();
             foreach (var cv in CV.CVInfoList)
             {
-                foreach (var fcv in fileCvInfo)
+                foreach (var fcv in cvInfos)
                 {
-                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/") + 1);
-                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/") + 1);
+                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
+                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
                     {
                         _oboToFile.Add(cv.Id, fcv.Id);
@@ -58,12 +61,13 @@ namespace PSI_Interface.CV
         /// <param name="fileCvInfo"></param>
         public CVTranslator(IEnumerable<IdentData.IdentDataObjs.CVInfo> fileCvInfo)
         {
+            var cvInfos = fileCvInfo.ToList();
             foreach (var cv in CV.CVInfoList)
             {
-                foreach (var fcv in fileCvInfo)
+                foreach (var fcv in cvInfos)
                 {
-                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/") + 1);
-                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/") + 1);
+                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
+                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
                     {
                         _oboToFile.Add(cv.Id, fcv.Id);
@@ -87,12 +91,13 @@ namespace PSI_Interface.CV
         /// <param name="fileCvInfo"></param>
         public CVTranslator(IEnumerable<CVInfo> fileCvInfo)
         {
+            var cvInfos = fileCvInfo.ToList();
             foreach (var cv in CV.CVInfoList)
             {
-                foreach (var fcv in fileCvInfo)
+                foreach (var fcv in cvInfos)
                 {
-                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/") + 1);
-                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/") + 1);
+                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
+                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
                     {
                         _oboToFile.Add(cv.Id, fcv.Id);
