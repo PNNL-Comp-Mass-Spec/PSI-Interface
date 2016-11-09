@@ -590,6 +590,26 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
+        /// If the reader is at an EndElement, read it so we can move on to the next node
+        /// Otherwise, if the element name matches currentNodeName, move to the next node
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="currentNodeName"></param>
+        private void PossiblyReadEndElement(XmlReader reader, string currentNodeName)
+        {
+            // If the Node is empty, the end element may not be present
+            if (reader.NodeType == XmlNodeType.EndElement)
+            {
+                reader.ReadEndElement();
+            }
+            else if (reader.Name == currentNodeName)
+            {
+                // Empty Node; move on to the next element
+                reader.Read();
+            }
+        }
+
+        /// <summary>
         /// Read and parse a .mzid file, or mzIdentML
         /// Files are commonly larger than 30 MB, so use a streaming reader instead of a DOM reader
         /// </summary>
@@ -624,7 +644,7 @@ namespace PSI_Interface.IdentData
                         case "AnalysisSoftwareList":
                             // Schema requirements: zero to one instances of this element
                             ReadAnalysisSoftwareList(reader.ReadSubtree());
-                            reader.ReadEndElement(); // "AnalysisSoftwareList", if it exists, must have child nodes
+                            PossiblyReadEndElement(reader, "AnalysisSoftwareList");
                             break;
                         case "Provider":
                             // Schema requirements: zero to one instances of this element
@@ -642,7 +662,7 @@ namespace PSI_Interface.IdentData
                             // Schema requirements: zero to one instances of this element
                             // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                             ReadSequenceCollection(reader.ReadSubtree());
-                            reader.ReadEndElement(); // "SequenceCollection", if it exists, must have child nodes
+                            PossiblyReadEndElement(reader, "SequenceCollection");
                             break;
                         case "AnalysisCollection":
                             // Schema requirements: one instance of this element
@@ -656,7 +676,7 @@ namespace PSI_Interface.IdentData
                             // Schema requirements: one instance of this element
                             // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                             ReadDataCollection(reader.ReadSubtree());
-                            reader.ReadEndElement(); // "DataCollection" must have child nodes
+                            PossiblyReadEndElement(reader, "DataCollection");
                             break;
                         case "BibliographicReference":
                             // Schema requirements: zero to many instances of this element
@@ -694,9 +714,7 @@ namespace PSI_Interface.IdentData
                         // Schema requirements: one to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         ReadAnalysisSoftware(reader.ReadSubtree());
-                        // "AnalysisSoftware" must have 1 child node
-                        // Consume the EndElement
-                        reader.ReadEndElement();
+                        PossiblyReadEndElement(reader, "AnalysisSoftware");
                         break;
                     default:
                         reader.Skip();
@@ -759,9 +777,8 @@ namespace PSI_Interface.IdentData
                             innerReader.Read();
                         }
                         innerReader.Close();
-                        // "SoftwareName" must have 1 child node
                         // Consume the EndElement
-                        reader.ReadEndElement();
+                        PossiblyReadEndElement(reader, "SoftwareName");
                         break;
                     default:
                         reader.Skip();
@@ -932,13 +949,13 @@ namespace PSI_Interface.IdentData
                 {
                     case "Inputs":
                         ReadInputs(reader.ReadSubtree());
-                        reader.ReadEndElement(); // "Inputs" must have child nodes
+                        PossiblyReadEndElement(reader, "Inputs");
                         break;
                     case "AnalysisData":
                         // Schema requirements: one and only one instance of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         ReadAnalysisData(reader.ReadSubtree());
-                        reader.ReadEndElement(); // "AnalysisData" must have child nodes
+                        PossiblyReadEndElement(reader, "AnalysisData");
                         break;
                     default:
                         reader.Skip();
@@ -1011,7 +1028,7 @@ namespace PSI_Interface.IdentData
                     // Schema requirements: one to many instances of this element
                     // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                     ReadSpectrumIdentificationList(reader.ReadSubtree());
-                    reader.ReadEndElement(); // "SpectrumIdentificationList" must have child nodes
+                    PossiblyReadEndElement(reader, "SpectrumIdentificationList");
                 }
                 else
                 {
@@ -1043,7 +1060,7 @@ namespace PSI_Interface.IdentData
                     // Schema requirements: one to many instances of this element
                     // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                     ReadSpectrumIdentificationResult(reader.ReadSubtree());
-                    reader.ReadEndElement(); // "SpectrumIdentificationResult" must have child nodes
+                    PossiblyReadEndElement(reader, "SpectrumIdentificationResult");
                 }
                 else
                 {
@@ -1080,7 +1097,7 @@ namespace PSI_Interface.IdentData
                     case "SpectrumIdentificationItem":
                         // Schema requirements: one to many instances of this element
                         specRes.Add(ReadSpectrumIdentificationItem(reader.ReadSubtree()));
-                        reader.ReadEndElement(); // "SpectrumIdentificationItem" must have child nodes
+                        PossiblyReadEndElement(reader, "SpectrumIdentificationItem");
                         break;
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
