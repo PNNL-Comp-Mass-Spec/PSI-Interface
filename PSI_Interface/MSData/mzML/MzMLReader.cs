@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -80,10 +76,14 @@ namespace PSI_Interface.MSData.mzML
 
         private void ConfigureReader()
         {
-            _reader = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read, _bufferSize);
+            var sourceFile = new FileInfo(_filePath);
+            if (!sourceFile.Exists)
+                throw new FileNotFoundException(".mzML file not found", _filePath);
+
+            _reader = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, _bufferSize);
             // Temp reader to determine mzML schema type - indexed or not
-            Stream tempReader = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read, _bufferSize);
-            if (_filePath.EndsWith(".gz"))
+            Stream tempReader = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, _bufferSize);
+            if (sourceFile.Name.Trim().EndsWith(".gz"))
             {
                 _reader = new GZipStream(_reader, CompressionMode.Decompress);
                 tempReader = new GZipStream(tempReader, CompressionMode.Decompress);

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 using System.Text;
 using System.Xml;
@@ -32,8 +33,12 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         private static Stream CreateReader(string filePath, int bufferSize)
         {
-            Stream reader = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize);
-            if (filePath.EndsWith(".gz"))
+            var sourceFile = new FileInfo(filePath);
+            if (!sourceFile.Exists)
+                throw new FileNotFoundException(".mzID file not found", filePath);
+
+            Stream reader = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize);
+            if (sourceFile.Name.Trim().EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
             {
                 reader = new GZipStream(reader, CompressionMode.Decompress);
             }
@@ -63,8 +68,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         private static XmlWriter CreateWriter(string filePath, int bufferSize)
         {
-            Stream writer = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read, bufferSize);
-            if (filePath.EndsWith(".gz"))
+            Stream writer = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite, bufferSize);
+            if (filePath.Trim().EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
             }

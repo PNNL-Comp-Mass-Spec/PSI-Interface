@@ -13,7 +13,7 @@ namespace PSI_Interface.MSData
     public sealed class SimpleMzMLReader: IDisposable
     {
         #region Private Members
-        private string _filePath;
+        private readonly string _filePath;
         private Stream _file = null;
         private StreamReader _fileReader = null;
         private XmlReader _xmlReaderForYield = null;
@@ -451,13 +451,18 @@ namespace PSI_Interface.MSData
             {
                 _file.Close();
             }
+
+            var sourceFile = new FileInfo(_filePath);
+            if (!sourceFile.Exists)
+                throw new FileNotFoundException(".mzID file not found", _filePath);
+
             // Set a very large read buffer, it does decrease the read times for uncompressed files.
-            _file = new FileStream(_filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 65536);
+            _file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
             /*****************************************************************************************************************************************************
              * TODO: Change how the file handles are used for safety purposes - open up each time, or what?
              *****************************************************************************************************************************************************/
 
-            if (_filePath.EndsWith(".mzML.gz"))
+            if (sourceFile.Name.Trim().EndsWith(".mzML.gz", StringComparison.InvariantCultureIgnoreCase))
             {
                 _isGzipped = true;
                 var file = new GZipStream(_file, CompressionMode.Decompress);
@@ -468,7 +473,7 @@ namespace PSI_Interface.MSData
                 else
                 {
                     // Unzip the file to the temp path
-                    _unzippedFilePath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(_filePath));
+                    _unzippedFilePath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(sourceFile.Name));
                     using (_file)
                     using (file)
                     using (
@@ -477,7 +482,7 @@ namespace PSI_Interface.MSData
                     {
                         file.CopyTo(tempFile/*, 65536*/);
                     }
-                    _file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 65536);
+                    _file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
                 }
             }
             _fileReader = new StreamReader(_file, System.Text.Encoding.UTF8, true, 65536);
@@ -755,7 +760,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         private void ReadIndexFromEnd()
         {
-            var stream = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 1);
+            var stream = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1);
             long testPos = stream.Length;
             //stream.Position = testPos; // 300 bytes from the end of the file - should be enough
             var streamReader = new StreamReader(stream, System.Text.Encoding.UTF8, true, 65536);
@@ -884,7 +889,7 @@ namespace PSI_Interface.MSData
         private void ReadRunForOffsets()
         {
             // Set the buffer to 1 byte (minimum allowed value), since we need accurate positions for the indices
-            Stream file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 1);
+            Stream file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1);
 
             _chromatogramOffsets.Clear();
             _spectrumOffsets.Clear();

@@ -562,10 +562,14 @@ namespace PSI_Interface.IdentData
         /// </remarks>
         public SimpleMZIdentMLData Read(string path)
         {
-            // Set a large buffer size. Doesn't affect gzip reading speed, but speeds up non-gzipped
-            Stream file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
+            var sourceFile = new FileInfo(path);
+            if (!sourceFile.Exists)
+                throw new FileNotFoundException(".mzID file not found", path);
 
-            if (path.EndsWith(".mzid.gz"))
+            // Set a large buffer size. Doesn't affect gzip reading speed, but speeds up non-gzipped
+            Stream file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
+
+            if (sourceFile.Name.Trim().EndsWith(".mzid.gz", StringComparison.InvariantCultureIgnoreCase))
             {
                 file = new GZipStream(file, CompressionMode.Decompress);
             }
@@ -576,7 +580,7 @@ namespace PSI_Interface.IdentData
             // Read in the file
             ReadMzIdentMl(reader);
 
-            var results = new SimpleMZIdentMLData(path);
+            var results = new SimpleMZIdentMLData(sourceFile.FullName);
             results.SpectrumFile = spectrumFile;
             results.AnalysisSoftware = softwareName;
             results.AnalysisSoftwareVersion = softwareVersion;
@@ -970,7 +974,7 @@ namespace PSI_Interface.IdentData
                     // SpectrumIDFormat child element: required
                     var location = reader.GetAttribute("location");
                     spectrumFile = Path.GetFileName(location);
-                    if (location != null && location.ToLower().EndsWith("_dta.txt"))
+                    if (location != null && location.Trim().EndsWith("_dta.txt", StringComparison.InvariantCultureIgnoreCase))
                     {
                         isFromDTA = true;
                     }
