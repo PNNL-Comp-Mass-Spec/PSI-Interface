@@ -53,6 +53,34 @@ namespace PSI_Interface.CV
         public static readonly Dictionary<string, Dictionary<string, CVID>> TermAccessionLookup = new Dictionary<string, Dictionary<string, CVID>>();
 
         /// <summary>
+        /// Returns true if child has an IsA relationship with parent
+        /// </summary>
+        /// <param name="child"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        public static bool CvidIsA(CVID child, CVID parent)
+        {
+            if (!RelationsIsA.ContainsKey(child))
+            {
+                return false;
+            }
+            var relList = RelationsIsA[child];
+            if (relList.Contains(parent))
+            {
+                return true;
+            }
+            // Dig deeper - check grandparents, etc.
+            foreach (var ancestor in RelationsIsA[child])
+            {
+                if (CvidIsA(ancestor, parent))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Primary identifying information about a particular CV
         /// </summary>
         public class CVInfo
