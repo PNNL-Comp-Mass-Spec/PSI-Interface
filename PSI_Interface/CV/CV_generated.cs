@@ -13,7 +13,7 @@ namespace PSI_Interface.CV
         /// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.3"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.4"));
             CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:09:23 13:49"));
             CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://www.berkeleybop.org/ontologies/pato/pato.obo", "releases/2016-09-15"));
             CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://www.berkeleybop.org/ontologies/uo/uo.obo", "releases/2016-05-13"));
@@ -7927,6 +7927,9 @@ namespace PSI_Interface.CV
 
             /// <summary>Waters Corporation Xevo TQ-S micro triple quadrupole mass spectrometer.</summary>
             MS_Xevo_TQ_S_micro = 1002731,
+
+            /// <summary>Thermo Scientific Orbitrap Fusion Lumos mass spectrometer with Tribrid architecture consisting of quadrupole mass filter, linear ion trap and Orbitrap mass analyzers.</summary>
+            MS_Orbitrap_Fusion_Lumos = 1002732,
 
             /// <summary>The root node of the unimod modifications ontology.</summary>
             UNIMOD_unimod_root_node = 100000000,
@@ -23202,6 +23205,7 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_Xevo_G2_XS_Tof, new TermInfo(CVID.MS_Xevo_G2_XS_Tof, @"MS", @"MS:1002729", @"Xevo G2 XS Tof", @"Waters Corporation Xevo G2 XS Tof orthogonal acceleration time-of-flight mass spectrometer.", false));
             TermData.Add(CVID.MS_Xevo_TQ_XS, new TermInfo(CVID.MS_Xevo_TQ_XS, @"MS", @"MS:1002730", @"Xevo TQ-XS", @"Waters Corporation Xevo TQ-XS triple quadrupole mass spectrometer.", false));
             TermData.Add(CVID.MS_Xevo_TQ_S_micro, new TermInfo(CVID.MS_Xevo_TQ_S_micro, @"MS", @"MS:1002731", @"Xevo TQ-S micro", @"Waters Corporation Xevo TQ-S micro triple quadrupole mass spectrometer.", false));
+            TermData.Add(CVID.MS_Orbitrap_Fusion_Lumos, new TermInfo(CVID.MS_Orbitrap_Fusion_Lumos, @"MS", @"MS:1002732", @"Orbitrap Fusion Lumos", @"Thermo Scientific Orbitrap Fusion Lumos mass spectrometer with Tribrid architecture consisting of quadrupole mass filter, linear ion trap and Orbitrap mass analyzers.", false));
             TermData.Add(CVID.UNIMOD_unimod_root_node, new TermInfo(CVID.UNIMOD_unimod_root_node, @"UNIMOD", @"UNIMOD:0", @"unimod root node", @"The root node of the unimod modifications ontology.", false));
             TermData.Add(CVID.UNIMOD_Acetyl, new TermInfo(CVID.UNIMOD_Acetyl, @"UNIMOD", @"UNIMOD:1", @"Acetyl", @"Acetylation.", false));
             TermData.Add(CVID.UNIMOD_Amidated, new TermInfo(CVID.UNIMOD_Amidated, @"UNIMOD", @"UNIMOD:2", @"Amidated", @"Amidation.", false));
@@ -29736,6 +29740,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_Xevo_G2_XS_Tof, new List<CVID> { CVID.MS_Waters_instrument_model, });
             RelationsIsA.Add(CVID.MS_Xevo_TQ_XS, new List<CVID> { CVID.MS_Waters_instrument_model, });
             RelationsIsA.Add(CVID.MS_Xevo_TQ_S_micro, new List<CVID> { CVID.MS_Waters_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Orbitrap_Fusion_Lumos, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
             RelationsIsA.Add(CVID.UNIMOD_Acetyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Amidated, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
