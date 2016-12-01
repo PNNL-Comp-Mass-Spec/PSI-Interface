@@ -364,14 +364,14 @@ namespace PSI_Interface.IdentData
         /// </summary>
         public class PeptideRef
         {
-            private readonly Dictionary<int, Modification> mods;
+            private readonly List<KeyValuePair<int, Modification>> mods;
 
             /// <summary>
             /// Constructor
             /// </summary>
             public PeptideRef()
             {
-                mods = new Dictionary<int, Modification>();
+                mods = new List<KeyValuePair<int, Modification>>(10);
             }
 
             /// <summary>
@@ -386,18 +386,18 @@ namespace PSI_Interface.IdentData
             /// <param name="mod">modification</param>
             public void ModsAdd(int location, Modification mod)
             {
-                mods.Add(location, mod);
+                mods.Add(new KeyValuePair<int, Modification>(location, mod));
             }
 
             /// <summary>
-            /// The dictionary of modifications affecting this peptide - key (location of modification) should be considered as being 1-based (see remarks)
+            /// The List of modifications affecting this peptide - key (location of modification) should be considered as being 1-based (see remarks)
             /// </summary>
             /// <remarks>Key is location of the modification within the peptide - position in peptide sequence,
             /// counted from the N-terminus residue, starting at position 1. Specific modifications to the N-terminus
             /// should be given the location 0. Modification to the C-terminus should be given as peptide length + 1.
             /// If the modification location is unknown e.g. for PMF data, this attribute should be omitted.
             /// (See mzIdentML specification, version 1.1.0)</remarks>
-            public Dictionary<int, Modification> Mods
+            public List<KeyValuePair<int, Modification>> Mods
             {
                 get { return mods; }
             }
