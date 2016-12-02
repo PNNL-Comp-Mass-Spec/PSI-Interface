@@ -413,6 +413,7 @@ namespace PSI_Interface.IdentData
                     if (string.IsNullOrEmpty(sequenceWithNumericMods))
                     {
                         var sequenceText = string.Copy(Sequence);
+                        var sequenceOrigLength = Sequence.Length;
                         // Insert the mods from the last occurring to the first.
                         foreach (var mod in Mods.OrderByDescending(x => x.Key))
                         {
@@ -423,8 +424,15 @@ namespace PSI_Interface.IdentData
                                 sign = "";
                             }
                             // Using "0.0##" to use 3 decimal places, but drop trailing zeros - "F3" would keep trailing zeros.
-                            sequenceText = sequenceText.Substring(0, mod.Key) + sign + string.Format("{0:0.0##}", mod.Value.Mass) +
-                                           sequenceText.Substring(mod.Key);
+                            var loc = mod.Key;
+                            if (loc > sequenceOrigLength)
+                            {
+                                // C-terminal modification - the location is sequence length + 1, but it really just goes at the end.
+                                loc = sequenceOrigLength;
+                            }
+                            var leftSide = sequenceText.Substring(0, loc);
+                            var rightSide = sequenceText.Substring(loc);
+                            sequenceText = leftSide + sign + string.Format("{0:0.0##}", mod.Value.Mass) + rightSide;
                         }
                         sequenceWithNumericMods = sequenceText;
                     }
