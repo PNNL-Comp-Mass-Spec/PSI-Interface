@@ -19,7 +19,7 @@ namespace PSI_Interface.IdentData
         public SimpleMZIdentMLReader()
         {
         }
-        
+
         /*/// <summary>
         /// Initialize a MzIdentMlReader object
         /// </summary>
@@ -282,7 +282,17 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// If the mzid results are from searching a DTA file
             /// </summary>
-            public bool IsDtaSpectrum { get; set; }
+            [Obsolete("Use IsSpectrumIdNotTheScanNumber")]
+            public bool IsDtaSpectrum
+            {
+                get { return IsSpectrumIdNotTheScanNumber; }
+                set { IsSpectrumIdNotTheScanNumber = value; }
+            }
+
+            /// <summary>
+            /// If the mzid results are from searching a DTA file
+            /// </summary>
+            public bool IsSpectrumIdNotTheScanNumber { get; set; }
 
             /// <summary>
             /// Scan number, as specified in the mzid using a CVParam (if available)
@@ -303,7 +313,7 @@ namespace PSI_Interface.IdentData
                 {
                     int num;
                     // Do not parse the SpectrumID for DTA file search results - the index is the DTA file index, not the spectrum index
-                    if (!IsDtaSpectrum && !string.IsNullOrWhiteSpace(NativeId) && NativeIdConversion.TryGetScanNumberInt(NativeId, out num))
+                    if (!IsSpectrumIdNotTheScanNumber && !string.IsNullOrWhiteSpace(NativeId) && NativeIdConversion.TryGetScanNumberInt(NativeId, out num))
                     {
                         return num;
                     }
@@ -320,7 +330,7 @@ namespace PSI_Interface.IdentData
 
         }
 
-        private bool isFromDTA = false;
+        private bool isSpectrumIdNotAScanNum = false;
 
         /// <summary>
         /// Protein information
@@ -999,9 +1009,11 @@ namespace PSI_Interface.IdentData
                     // SpectrumIDFormat child element: required
                     var location = reader.GetAttribute("location");
                     spectrumFile = Path.GetFileName(location);
-                    if (location != null && location.Trim().EndsWith("_dta.txt", StringComparison.InvariantCultureIgnoreCase))
+                    if (location != null && (location.Trim().EndsWith("_dta.txt", StringComparison.InvariantCultureIgnoreCase)
+                        || location.Trim().EndsWith(".mgf", StringComparison.InvariantCultureIgnoreCase)
+                        || location.Trim().EndsWith(".ms2", StringComparison.InvariantCultureIgnoreCase)))
                     {
-                        isFromDTA = true;
+                        isSpectrumIdNotAScanNum = true;
                     }
                     reader.Skip(); // "SpectrumIdentificationList" must have child nodes
                 }
@@ -1143,7 +1155,7 @@ namespace PSI_Interface.IdentData
             reader.MoveToContent(); // Move to the "SpectrumIdentificationItem" element
             var specItem = new SpectrumIdItem
             {
-                IsDtaSpectrum = isFromDTA,
+                IsSpectrumIdNotTheScanNumber = isSpectrumIdNotAScanNum,
                 PepEvCount = 0,
                 SpecItemId = reader.GetAttribute("id"),
                 PassThreshold = Convert.ToBoolean(reader.GetAttribute("passThreshold")),
