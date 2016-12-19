@@ -46,7 +46,10 @@
   <ItemGroup>
     <Compile Include="CV\CV.cs" />
     <Compile Include="CV\CVTranslator.cs" />
-    <Compile Include="CV\CV_generated.cs" />
+    <Compile Include="CV\CV_enum.cs" />
+    <Compile Include="CV\CV_metadata.cs" />
+    <Compile Include="CV\CV_relationships.cs" />
+    <Compile Include="CV\CV_termData.cs" />
     <Compile Include="IdentData\IdentDataCreator.cs" />
     <Compile Include="IdentData\IdentDataObjs\IdentDataInternalTypeAbstract.cs" />
     <Compile Include="IdentData\IdentDataObjs\IdentDataList.cs" />

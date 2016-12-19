@@ -16,7 +16,7 @@ namespace PSI_Interface.CV
         /// CV term children relationships
         /// </summary>
         public static readonly Dictionary<CVID, List<CVID>> RelationsChildren = new Dictionary<CVID, List<CVID>>();
-        
+
         /// <summary>
         /// CV term part-of relationships
         /// </summary>
