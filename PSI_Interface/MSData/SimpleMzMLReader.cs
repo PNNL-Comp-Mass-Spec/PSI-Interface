@@ -184,7 +184,7 @@ namespace PSI_Interface.MSData
             public readonly Dictionary<string, long> OffsetsMapNative = new Dictionary<string, long>();
             public readonly Dictionary<long, long> OffsetsMapInt = new Dictionary<long, long>();
             public readonly Dictionary<long, string> IdToNativeMap = new Dictionary<long, string>();
-            public readonly Dictionary<string, long> NativeToIdMap = new Dictionary<string, long>(); 
+            public readonly Dictionary<string, long> NativeToIdMap = new Dictionary<string, long>();
 
             public void AddOffset(string idRef, string offset)
             {
@@ -720,9 +720,15 @@ namespace PSI_Interface.MSData
         /// </summary>
         public void Cleanup()
         {
-            if (_randomAccess && _isGzipped)
+            if (_randomAccess && _isGzipped && File.Exists(_unzippedFilePath))
             {
-                File.Delete(_unzippedFilePath);
+                try
+                {
+                    File.Delete(_unzippedFilePath);
+                }
+                // ReSharper disable once EmptyGeneralCatchClause
+                catch
+                { } // We failed, it's not optimal, but it's okay.
             }
         }
 
@@ -731,8 +737,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public void Dispose()
         {
-            Close();
-            Cleanup();
+            Dispose(true);
         }
 
         /// <summary>
@@ -740,6 +745,19 @@ namespace PSI_Interface.MSData
         /// </summary>
         ~SimpleMzMLReader()
         {
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// Dispose, with a decreased chance of issues/failure
+        /// </summary>
+        /// <param name="disposing"></param>
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
             Close();
             Cleanup();
         }
@@ -1611,7 +1629,7 @@ namespace PSI_Interface.MSData
             }
             reader.Close();
         }
-        
+
         /// <summary>
         /// Handle the cvParam element
         /// </summary>
@@ -1827,11 +1845,11 @@ namespace PSI_Interface.MSData
                     continue;
                 }
                 /////////////////////////////////////////////////////////////////////////////////////
-                // 
+                //
                 // MS1 Spectra: only need Spectrum data: scanNum, MSLevel, ElutionTime, mzArray, IntensityArray
-                // 
+                //
                 // MS2 Spectra: use ProductSpectrum; adds ActivationMethod and IsolationWindow
-                // 
+                //
                 /////////////////////////////////////////////////////////////////////////////////////
                 switch (reader.Name)
                 {
@@ -1962,7 +1980,7 @@ namespace PSI_Interface.MSData
                     intensities = bda;
                 }
             }
-            
+
             /*if (!centroided && includePeaks)
             {
                 // Centroid spectrum
@@ -2028,7 +2046,7 @@ namespace PSI_Interface.MSData
             spectrum.NativeId = nativeId;
             spectrum.TotalIonCurrent = tic;
             spectrum.Centroided = centroided;
-            
+
             return spectrum;
         }
         #endregion
@@ -2464,7 +2482,7 @@ namespace PSI_Interface.MSData
                                      *   e.g.: MS:1000422 (high-energy collision-induced dissociation)
                                      *   e.g.: MS:1000433 (low-energy collision-induced dissociation)
                                      *   et al.
-                                     *   
+                                     *
                                      *   e.g.: MS:1000133 "collision-induced dissociation"
                                      *   e.g.: MS:1000134 "plasma desorption"
                                      *   e.g.: MS:1000135 "post-source decay"
@@ -2859,7 +2877,7 @@ namespace PSI_Interface.MSData
         /*********************************************************************************************************************************************
          * TODO: Flesh out the algorithm/double check it, etc.
          * Do some more work here.
-         * 
+         *
          ********************************************************************************************************************************************/
         private byte[] DecompressZLib(byte[] compressedBytes, int expectedBytes)
         {
