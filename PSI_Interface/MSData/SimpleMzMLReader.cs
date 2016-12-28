@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -348,12 +349,23 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// Array of m/z values
             /// </summary>
-            public double[] Mzs { get; private set; }
+            public double[] Mzs
+            {
+                get { return Peaks.Select(x => x.Mz).ToArray(); }
+            }
 
             /// <summary>
             /// Array of intensity values
             /// </summary>
-            public double[] Intensities { get; private set; }
+            public double[] Intensities
+            {
+                get { return Peaks.Select(x => x.Intensity).ToArray(); }
+            }
+
+            /// <summary>
+            /// Array of peak data
+            /// </summary>
+            public Peak[] Peaks { get; private set; }
 
             /// <summary>
             /// Total Ion Current
@@ -374,9 +386,41 @@ namespace PSI_Interface.MSData
             public SimpleSpectrum(double[] mzs, double[] intensities, int scanNum)
             {
                 ScanNumber = scanNum;
-                Mzs = mzs;
-                Intensities = intensities;
+                //Mzs = mzs;
+                //Intensities = intensities;
+                Peaks = new Peak[mzs.Length];
+                for (var i = 0; i < mzs.Length; i++)
+                {
+                    Peaks[i] = new Peak() { Mz = mzs[i], Intensity = intensities[i] };
+                }
             }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="peaks">array of peaks</param>
+            /// <param name="scanNum">spectrum scan number</param>
+            public SimpleSpectrum(Peak[] peaks, int scanNum)
+            {
+                ScanNumber = scanNum;
+                Peaks = peaks;
+            }
+        }
+
+        /// <summary>
+        /// Peak data
+        /// </summary>
+        public struct Peak
+        {
+            /// <summary>
+            /// Peak m/z
+            /// </summary>
+            public double Mz { get; set; }
+
+            /// <summary>
+            /// Peak intensity
+            /// </summary>
+            public double Intensity { get; set; }
         }
 
         /// <summary>
@@ -422,6 +466,16 @@ namespace PSI_Interface.MSData
             /// <param name="scanNum">spectrum scan number</param>
             public SimpleProductSpectrum(double[] mzs, double[] intensities, int scanNum)
                 : base(mzs, intensities, scanNum)
+            {
+            }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="peaks">array of peaks</param>
+            /// <param name="scanNum">spectrum scan number</param>
+            public SimpleProductSpectrum(Peak[] peaks, int scanNum)
+                : base(peaks, scanNum)
             {
             }
         }
