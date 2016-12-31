@@ -2497,6 +2497,8 @@ namespace PSI_Interface.MSData
                     case "activation":
                         // Schema requirements: one instance of this element
                         //var activationMethods = new List<ActivationMethod>();
+                        var supplementalActivation = "";
+                        //var supplementalCollisionEnergy = 0d;
                         innerReader = reader.ReadSubtree();
                         innerReader.MoveToContent();
                         innerReader.ReadStartElement("activation"); // Throws exception if we are not at the "activation" tag.
@@ -2554,34 +2556,49 @@ namespace PSI_Interface.MSData
                                      *   e.g.: MS:1002000 "LIFT"
                                      *   e.g.: MS:1002472 "trap-type collision-induced dissociation"
                                      */
-                                    /*switch (innerReader.GetAttribute("accession"))
+                                    // TODO: Should probably change this to store a CVID instead.
+                                    switch (innerReader.GetAttribute("accession"))
                                     {
-                                        case "MS:1000133":
-                                            // name="collision-induced dissociation"
-                                            activationMethods.Add(ActivationMethod.CID);
-                                            break;
-                                        case "MS:1000598":
-                                            // name="electron transfer dissociation"
-                                            activationMethods.Add(ActivationMethod.ETD);
-                                            break;
+                                        case "MS:1000133": // name="collision-induced dissociation"
+                                        case "MS:1000134": // name="plasma desorption"
+                                        case "MS:1000135": // name="post-source decay"
+                                        case "MS:1000136": // name="surface-induced dissociation"
+                                        case "MS:1000242": // name="blackbody infrared radiative dissociation"
+                                        case "MS:1000250": // name="electron capture dissociation"
+                                        case "MS:1000262": // name="infrared multiphoton dissociation"
+                                        case "MS:1000282": // name="sustained off-resonance irradiation"
                                         case "MS:1000422":
                                             // name="beam-type collision-induced dissociation", "high-energy collision-induced dissociation"
-                                            activationMethods.Add(ActivationMethod.HCD);
+                                        case "MS:1000433": // name="low-energy collision-induced dissociation"
+                                        case "MS:1000435": // name="photodissociation"
+                                        case "MS:1000598": // name="electron transfer dissociation"
+                                        case "MS:1000599": // name="pulsed q dissociation"
+                                        case "MS:1001880": // name="in-source collision-induced dissociation"
+                                        case "MS:1002000": // name="LIFT"
+                                        case "MS:1002472": // name="trap-type collision-induced dissociation"
+                                        case "MS:1002631": // name="Electron-Transfer/Higher-Energy Collision Dissociation (EThcD)"
+                                            var actName = innerReader.GetAttribute("name");
+                                            if (string.IsNullOrWhiteSpace(precursor.ActivationMethod))
+                                            {
+                                                precursor.ActivationMethod = actName;
+                                            }
+                                            else
+                                            {
+                                                precursor.ActivationMethod += ", " + actName;
+                                            }
                                             break;
-                                        case "MS:1000250":
-                                            // name="electron capture dissociation"
-                                            activationMethods.Add(ActivationMethod.ECD);
-                                            break;
-                                        case "MS:1000599":
-                                            // name="pulsed q dissociation"
-                                            activationMethods.Add(ActivationMethod.PQD);
+                                        case "MS:1002678": // name="supplemental beam-type collision-induced dissociation"
+                                        case "MS:1002679": // name="supplemental collision-induced dissociation"
+                                            supplementalActivation = innerReader.GetAttribute("name");
                                             break;
                                         case "MS:1000045":
                                             // name="collision energy"
                                             //energy = Convert.ToDouble(innerReader.GetAttribute("value"));
                                             break;
-                                    }*/
-                                    precursor.ActivationMethod = innerReader.GetAttribute("name");
+                                        case "MS:1002680": // name="supplemental collision energy"
+                                            //supplementalCollisionEnergy = Convert.ToDouble(innerReader.GetAttribute("value"));
+                                            break;
+                                    }
                                     innerReader.Read(); // Consume the cvParam element (no child nodes)
                                     break;
                                 case "userParam":
@@ -2595,6 +2612,11 @@ namespace PSI_Interface.MSData
                         }
                         innerReader.Close();
                         reader.Read(); // "selectedIon" might not have child nodes
+
+                        if (!string.IsNullOrWhiteSpace(supplementalActivation))
+                        {
+                            precursor.ActivationMethod = ", " + supplementalActivation;
+                        }
 
                         /*if (activationMethods.Count > 1 && activationMethods.Contains(ActivationMethod.ETD))
                         {
