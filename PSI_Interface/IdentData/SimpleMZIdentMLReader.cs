@@ -247,7 +247,7 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Raw score from MS-GF+
             /// </summary>
-            public int RawScore { get; set; }
+            public double RawScore { get; set; }
 
             /// <summary>
             /// DeNovo score from MS-GF+
@@ -1187,7 +1187,7 @@ namespace PSI_Interface.IdentData
                 {
                     case "MSPathFinder:RawScore":
                     case "MS-GF:RawScore":
-                        specItem.RawScore = Convert.ToInt32(reader.GetAttribute("value"));
+                        specItem.RawScore = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
                     case "MS-GF:DeNovoScore":
                         specItem.DeNovoScore = Convert.ToInt32(reader.GetAttribute("value"));
