@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Xml;
 
 namespace PSI_Interface.IdentData
@@ -174,6 +175,7 @@ namespace PSI_Interface.IdentData
         private string softwareName = string.Empty;
         private string softwareVersion = string.Empty;
         private bool isSpectrumIdNotAScanNum = false;
+        private CancellationToken cancellationToken = default(CancellationToken);
 
         /// <summary>
         /// Information about a single search result
@@ -589,8 +591,9 @@ namespace PSI_Interface.IdentData
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
         /// </remarks>
-        public SimpleMZIdentMLData Read(string path)
+        public SimpleMZIdentMLData Read(string path, CancellationToken cancelToken = default(CancellationToken))
         {
+            cancellationToken = cancelToken;
             var sourceFile = new FileInfo(path);
             if (!sourceFile.Exists)
                 throw new FileNotFoundException(".mzID file not found", path);
@@ -657,6 +660,10 @@ namespace PSI_Interface.IdentData
                 // Read the next node - should be the first child node
                 while (reader.ReadState == ReadState.Interactive)
                 {
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        return;
+                    }
                     // Handle exiting out properly at EndElement tags
                     if (reader.NodeType != XmlNodeType.Element)
                     {
@@ -828,6 +835,10 @@ namespace PSI_Interface.IdentData
             reader.ReadStartElement("SequenceCollection"); // Throws exception if we are not at the "SequenceCollection" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
@@ -1157,6 +1168,10 @@ namespace PSI_Interface.IdentData
             reader.ReadStartElement("SpectrumIdentificationList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
