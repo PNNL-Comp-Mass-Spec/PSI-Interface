@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace PSI_Interface.IdentData
@@ -167,10 +168,12 @@ namespace PSI_Interface.IdentData
         private readonly Dictionary<string, PeptideRef> m_peptides = new Dictionary<string, PeptideRef>();
         private readonly Dictionary<string, PeptideEvidence> m_evidences = new Dictionary<string, PeptideEvidence>();
         private readonly Dictionary<string, SpectrumIdItem> m_specItems = new Dictionary<string, SpectrumIdItem>();
+        private readonly Dictionary<string, Regex> m_decoyDbAccessionRegex = new Dictionary<string, Regex>();
         private string spectrumFile = string.Empty;
         private string softwareCvAccession = string.Empty;
         private string softwareName = string.Empty;
         private string softwareVersion = string.Empty;
+        private bool isSpectrumIdNotAScanNum = false;
 
         /// <summary>
         /// Information about a single search result
@@ -330,8 +333,6 @@ namespace PSI_Interface.IdentData
 
         }
 
-        private bool isSpectrumIdNotAScanNum = false;
-
         /// <summary>
         /// Protein information
         /// </summary>
@@ -351,6 +352,11 @@ namespace PSI_Interface.IdentData
             /// Protein description
             /// </summary>
             public string ProteinDescription { get; set; }
+
+            /// <summary>
+            /// Database Id - internal reference in mzid file
+            /// </summary>
+            internal string DatabaseId { get; set; }
         }
 
         /// <summary>
@@ -462,6 +468,11 @@ namespace PSI_Interface.IdentData
             /// If the result is a decoy
             /// </summary>
             public bool IsDecoy { get; set; }
+
+            /// <summary>
+            /// Set to true if the 'isDecoy' attribute was present in the mzid file for this peptide evidence
+            /// </summary>
+            internal bool HadDecoyAttribute { get; set; }
 
             /// <summary>
             /// Peptide suffix / post flanking residue
@@ -866,10 +877,12 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             string id = reader.GetAttribute("id");
+            string dbId = reader.GetAttribute("searchDatabase_ref");
             if (id != null)
             {
                 var dbSeq = new DatabaseSequence
                 {
+                    DatabaseId = dbId,
                     Length = Convert.ToInt32(reader.GetAttribute("length")),
                     Accession = reader.GetAttribute("accession")
                 };
@@ -935,6 +948,7 @@ namespace PSI_Interface.IdentData
             var pepEvidence = new PeptideEvidence
             {
                 IsDecoy = Convert.ToBoolean(reader.GetAttribute("isDecoy")),
+                HadDecoyAttribute = !string.IsNullOrWhiteSpace(reader.GetAttribute("isDecoy")),
                 Post = reader.GetAttribute("post"),
                 Pre = reader.GetAttribute("pre"),
                 End = Convert.ToInt32(reader.GetAttribute("end")),
@@ -1001,25 +1015,99 @@ namespace PSI_Interface.IdentData
                     reader.Read();
                     continue;
                 }
-                if (reader.Name == "SpectraData")
+
+                switch (reader.Name)
                 {
-                    // Schema requirements: one to many instances of this element
-                    // location attribute: required
-                    // id attribute: required
-                    // SpectrumIDFormat child element: required
-                    var location = reader.GetAttribute("location");
-                    spectrumFile = Path.GetFileName(location);
-                    if (location != null && (location.Trim().EndsWith("_dta.txt", StringComparison.InvariantCultureIgnoreCase)
-                        || location.Trim().EndsWith(".mgf", StringComparison.InvariantCultureIgnoreCase)
-                        || location.Trim().EndsWith(".ms2", StringComparison.InvariantCultureIgnoreCase)))
-                    {
-                        isSpectrumIdNotAScanNum = true;
-                    }
-                    reader.Skip(); // "SpectrumIdentificationList" must have child nodes
+                    case "SpectraData":
+                        // Schema requirements: one to many instances of this element
+                        // location attribute: required
+                        // id attribute: required
+                        // SpectrumIDFormat child element: required
+                        var location = reader.GetAttribute("location");
+                        spectrumFile = Path.GetFileName(location);
+                        if (location != null && (location.Trim().EndsWith("_dta.txt", StringComparison.InvariantCultureIgnoreCase)
+                                                 || location.Trim().EndsWith(".mgf", StringComparison.InvariantCultureIgnoreCase)
+                                                 || location.Trim().EndsWith(".ms2", StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            isSpectrumIdNotAScanNum = true;
+                        }
+                        reader.Skip(); // "SpectraData" child nodes - we currently don't use them.
+                        break;
+                    case "SearchDatabase":
+                        // Schema requirements: zero to many instances of this element
+                        ReadSearchDatabase(reader.ReadSubtree());
+                        PossiblyReadEndElement(reader, "SearchDatabase");
+                        break;
+                    case "userParam":
+                        // Schema requirements: zero to many instances of this element
+                        reader.Skip();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
-                else
+            }
+            reader.Close();
+
+            if (m_decoyDbAccessionRegex.Count > 0)
+            {
+                foreach (var pepEv in m_evidences.Values)
                 {
-                    reader.Skip();
+                    if (!pepEv.HadDecoyAttribute)
+                    {
+                        var dbSeq = pepEv.DbSeq;
+                        if (m_decoyDbAccessionRegex.ContainsKey(dbSeq.DatabaseId))
+                        {
+                            pepEv.IsDecoy = m_decoyDbAccessionRegex[dbSeq.DatabaseId].IsMatch(dbSeq.Accession);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handle child nodes of SeachDatabase element
+        /// Called by ReadDataCollection (xml hierarchy)
+        /// Currently we are only working with the SpectraData child elements
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single AnalysisData element</param>
+        private void ReadSearchDatabase(XmlReader reader)
+        {
+            reader.MoveToContent();
+            var id = reader.GetAttribute("id");
+            reader.ReadStartElement("SearchDatabase"); // Throws exception if we are not at the "AnalysisData" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+
+                switch (reader.Name)
+                {
+                    case "FileFormat":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    case "DatabaseName":
+                        // Schema requirements: one instance of this element
+                        reader.Skip();
+                        break;
+                    case "cvParam":
+                        // Schema requirements: zero to many instances of this element
+                        if (reader.GetAttribute("accession") == "MS:1001283")
+                        {
+                            var regexString = reader.GetAttribute("value");
+                            var regex = new Regex(regexString, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                            m_decoyDbAccessionRegex.Add(id, regex);
+                        }
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
             reader.Close();
