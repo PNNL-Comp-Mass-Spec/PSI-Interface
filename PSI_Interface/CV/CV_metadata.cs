@@ -11,10 +11,10 @@ namespace PSI_Interface.CV
         /// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.5"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2016:09:23 13:49"));
-            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://www.berkeleybop.org/ontologies/pato/pato.obo", "releases/2016-09-15"));
-            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://www.berkeleybop.org/ontologies/uo/uo.obo", "releases/2016-05-13"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.11"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2017:03:10 16:18"));
+            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://ontologies.berkeleybop.org/pato.obo", "releases/2017-03-22"));
+            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://ontologies.berkeleybop.org/uo.obo", "releases/2016-11-23"));
         }
 
         /// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>
@@ -88,6 +88,9 @@ namespace PSI_Interface.CV
 
             /// <summary>Description not provided</summary>
             is_measurement_of,
+
+            /// <summary>Description not provided</summary>
+            is_opposite_of,
 
             /// <summary>Description not provided</summary>
             is_unit_of,

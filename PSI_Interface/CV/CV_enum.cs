@@ -5086,7 +5086,7 @@ namespace PSI_Interface.CV
             /// <summary>LECO bench-top GC time-of-flight mass spectrometer.</summary>
             MS_TruTOF = 1001804,
 
-            /// <summary>The data type of the value reported in a QuantLayer for a feature, peptide, protein, protein group.</summary>
+            /// <summary>The data type of the value reported in a QuantLayer.</summary>
             MS_quantification_datatype = 1001805,
 
             /// <summary>Attributes describing the details of an object relevant for reporting quantification workflows or values.</summary>
@@ -5182,7 +5182,7 @@ namespace PSI_Interface.CV
             /// <summary>Spectral counting workflow (number of identified MS2 spectra as approximation of peptide / protein quant).</summary>
             MS_spectral_counting_quantitation_analysis = 1001836,
 
-            /// <summary>Quantification analysis using the SCIEX iTRAQ isobaric labelling workflow, wherein 2-8 reporter ions are measured in MS2 spectra near 114 m/z.</summary>
+            /// <summary>Quantification analysis using the SCIEX amine-reactive isobaric tags for relative and absolute quantification (iTRAQ) labelling workflow, wherein 2-8 reporter ions are measured in MS2 spectra near in the 114-121 m/z range.</summary>
             MS_iTRAQ_quantitation_analysis = 1001837,
 
             /// <summary>Selected Reaction Monitoring workflow (XIC quantitation of precursor / fragment mass pair).</summary>
@@ -5197,8 +5197,8 @@ namespace PSI_Interface.CV
             /// <summary>Real (intensity times area) volume of the LC-MS feature.</summary>
             MS_LC_MS_feature_volume = 1001841,
 
-            /// <summary>The number of MS2 spectra identified for this peptide in spectral counting.</summary>
-            MS_peptide_PSM_count = 1001842,
+            /// <summary>The number of MS2 spectra identified for a raw peptide sequence without PTMs and charge state in spectral counting.</summary>
+            MS_sequence_level_spectral_count = 1001842,
 
             /// <summary>Maximum intensity of MS1 feature.</summary>
             MS_MS1_feature_maximum_intensity = 1001843,
@@ -5698,7 +5698,7 @@ namespace PSI_Interface.CV
             /// <summary>Quantitation analysis using an isobaric labelling workflow.</summary>
             MS_isobaric_label_quantitation_analysis = 1002009,
 
-            /// <summary>Quantitation analysis using the Thermo Fisher tandem mass tag (TMT) labelling workflow.</summary>
+            /// <summary>Quantitation analysis using the Thermo Fisher amine-reactive tandem mass tag (TMT) labelling workflow, wherein 2-10 reporter ions are measured in MS2 spectra in the 126-131 m/z.</summary>
             MS_TMT_quantitation_analysis = 1002010,
 
             /// <summary>Combination of electrospray and desorption ionization method that ionizes gases, liquids and solids in open air under atmospheric pressure.</summary>
@@ -7309,7 +7309,7 @@ namespace PSI_Interface.CV
             /// <summary>A normalized spectral abundance factor (NSAF).</summary>
             MS_normalized_spectral_abundance_factor = 1002547,
 
-            /// <summary>A distributed normalized spectral abundance factor (dNSAF.</summary>
+            /// <summary>A distributed normalized spectral abundance factor (dNSAF).</summary>
             MS_distributed_normalized_spectral_abundance_factor = 1002548,
 
             /// <summary>Statistic to convey the confidence of the localization of an amino acid modification on a peptide sequence.</summary>
@@ -7510,7 +7510,7 @@ namespace PSI_Interface.CV
             /// <summary>The name of the sample labelled with the light SILAC label.</summary>
             MS_SILAC_light_reagent = 1002614,
 
-            /// <summary>Tandem mass tag reagent.</summary>
+            /// <summary>Tandem mass tag reagent used in TMT, glycoTMT, iodoTMT, aminoxyTMT or hydrazideTMT isobaric labeling.</summary>
             MS_TMT_reagent = 1002615,
 
             /// <summary>The name of the sample labelled with the TMT reagent 126.</summary>
@@ -7531,7 +7531,7 @@ namespace PSI_Interface.CV
             /// <summary>The name of the sample labelled with the TMT reagent 131.</summary>
             MS_TMT_reagent_131 = 1002621,
 
-            /// <summary>Isobaric tag for relative and absolute quantitation reagent.</summary>
+            /// <summary>Isobaric tag for relative and absolute quantitation (iTRAQ or iTRAQH) reagent.</summary>
             MS_iTRAQ_reagent = 1002622,
 
             /// <summary>The name of the sample labelled with the iTRAQ reagent 113.</summary>
@@ -7824,6 +7824,156 @@ namespace PSI_Interface.CV
 
             /// <summary>Thermo Scientific Orbitrap Fusion Lumos mass spectrometer with Tribrid architecture consisting of quadrupole mass filter, linear ion trap and Orbitrap mass analyzers.</summary>
             MS_Orbitrap_Fusion_Lumos = 1002732,
+
+            /// <summary>The number of MS2 spectra identified for a peptide sequence specified by the amino acid one-letter codes plus optional PTMs in spectral counting.</summary>
+            MS_peptide_level_spectral_count = 1002733,
+
+            /// <summary>The number of MS2 spectra identified for a molecular ion defined by the peptide sequence represented by the amino acid one-letter codes, plus optional PTMs plus optional charged aducts plus the charge state, in spectral counting.</summary>
+            MS_peptide_ion_level_spectral_count = 1002734,
+
+            /// <summary>The data type of the value reported in a QuantLayer for a feature.</summary>
+            MS_feature_level_quantification_datatype = 1002735,
+
+            /// <summary>The data type of the value reported in a QuantLayer for a PSM.</summary>
+            MS_PSM_level_quantification_datatype = 1002736,
+
+            /// <summary>The data type of the value reported in a QuantLayer for a peptide.</summary>
+            MS_peptide_level_quantification_datatype = 1002737,
+
+            /// <summary>The data type of the value reported in a QuantLayer for a protein.</summary>
+            MS_protein_level_quantification_datatype = 1002738,
+
+            /// <summary>The data type of the value reported in a QuantLayer for a protein group.</summary>
+            MS_protein_group_level_quantification_datatype = 1002739,
+
+            /// <summary>Within the context of a proteogenomics approach, a peptide sequence that has not been mapped to a genomic location.</summary>
+            MS_unmapped_peptide = 1002740,
+
+            /// <summary>Within the context of a proteogenomics approach, a protein sequence that has not been mapped to a genomic location.</summary>
+            MS_unmapped_protein = 1002741,
+
+            /// <summary>A data array of noise values.</summary>
+            MS_noise_array = 1002742,
+
+            /// <summary>A data array of parallel, independent m/z values for a sampling of noise across a spectrum (typically much smaller than MS:1000514, the m/z array).</summary>
+            MS_sampled_noise_m_z_array = 1002743,
+
+            /// <summary>A data array of intensity values for the amplitude of noise variation superposed on the baseline (MS:1002745) across a spectrum (for use with MS:1002743, sampled noise m/z array).</summary>
+            MS_sampled_noise_intensity_array = 1002744,
+
+            /// <summary>A data array of baseline intensity values (the intensity in the absence of analytes) for a sampling of noise across a spectrum (for use with MS:1002743, sampled noise m/z array).</summary>
+            MS_sampled_noise_baseline_array = 1002745,
+
+            /// <summary>Compression using MS-Numpress linear prediction compression and zlib.</summary>
+            MS_MS_Numpress_linear_prediction_compression_followed_by_zlib_compression = 1002746,
+
+            /// <summary>Compression using MS-Numpress positive integer compression and zlib.</summary>
+            MS_MS_Numpress_positive_integer_compression_followed_by_zlib_compression = 1002747,
+
+            /// <summary>Compression using MS-Numpress short logged float compression and zlib.</summary>
+            MS_MS_Numpress_short_logged_float_compression_followed_by_zlib_compression = 1002748,
+
+            /// <summary>Means that Mascot has integrated the search results of database and spectral library search into a single data set.</summary>
+            MS_Mascot_IntegratedSpectralLibrarySearch = 1002749,
+
+            /// <summary>Search tool of the NIST (National Institute of Standrads and Technology) for spectral library searches.</summary>
+            MS_NIST_MSPepSearch = 1002750,
+
+            /// <summary>MSP text format defined by the NIST.</summary>
+            MS_NIST_MSP_format = 1002751,
+
+            /// <summary>Database containing spectra.</summary>
+            MS_database_type_spectral_library = 1002752,
+
+            /// <summary>Value range for scores.</summary>
+            MS_value_between_0_and_1000_inclusive = 1002753,
+
+            /// <summary>MSPepSearch score (0 for entirely dissimilar and 1000 for identical observed spectrum and library spectrum.</summary>
+            MS_MSPepSearch_score = 1002754,
+
+            /// <summary>A combined MS2 (with fragment ions) and spectral library search.</summary>
+            MS_combined_ms_ms___spectral_library_search = 1002755,
+
+            /// <summary>Quantitation analysis using the Thermo Fisher sulfhydryl-reactive iodo tandem mass tag (iodoTMT) labelling workflow.</summary>
+            MS_iodoTMT_quantitation_analysis = 1002756,
+
+            /// <summary>Quantitation analysis using the Thermo Fisher carbonyl-reactive glyco-tandem mass tag (glyco-TMT) labelling workflow.</summary>
+            MS_glyco_TMT_quantitation_analysis = 1002757,
+
+            /// <summary>Quantitation analysis using the Thermo Fisher carbonyl-reactive aminoxy tandem mass tag (aminoxyTMT) labelling workflow.</summary>
+            MS_aminoxyTMT_quantitation_analysis = 1002758,
+
+            /// <summary>Quantitation analysis using the Thermo Fisher carbonyl-reactive hydrazide tandem mass tag (hydrazide-TMT) labelling workflow.</summary>
+            MS_hydrazideTMT_quantitation_analysis = 1002759,
+
+            /// <summary>Quantification analysis using the carbonyl-reactive isobaric tags for relative and absolute quantification hydrazide (iTRAQH) labelling workflow.</summary>
+            MS_iTRAQH_quantitation_analysis = 1002760,
+
+            /// <summary>Quantification analysis using the amine-reactive deuterium isobaric amine reactive tag (DiART) labelling workflow.</summary>
+            MS_DiART_quantitation_analysis = 1002761,
+
+            /// <summary>Quantification analysis using the amine-reactive dimethyl leucine (DiLeu) tag labelling workflow.</summary>
+            MS_DiLeu_quantitation_analysis = 1002762,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 127N.</summary>
+            MS_TMT_reagent_127N = 1002763,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 127C.</summary>
+            MS_TMT_reagent_127C = 1002764,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 128N.</summary>
+            MS_TMT_reagent_128N = 1002765,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 128C.</summary>
+            MS_TMT_reagent_128C = 1002766,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 129N.</summary>
+            MS_TMT_reagent_129N = 1002767,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 129C.</summary>
+            MS_TMT_reagent_129C = 1002768,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 130N.</summary>
+            MS_TMT_reagent_130N = 1002769,
+
+            /// <summary>The name of the sample labelled with the TMT reagent 130C.</summary>
+            MS_TMT_reagent_130C = 1002770,
+
+            /// <summary>Deuterium isobaric amine reactive tag labeling reagent.</summary>
+            MS_DiART_reagent = 1002771,
+
+            /// <summary>The name of the sample labelled with the DiART reagent 114.</summary>
+            MS_DiART_reagent_114 = 1002772,
+
+            /// <summary>The name of the sample labelled with the DiART reagent 115.</summary>
+            MS_DiART_reagent_115 = 1002773,
+
+            /// <summary>The name of the sample labelled with the DiART reagent 116.</summary>
+            MS_DiART_reagent_116 = 1002774,
+
+            /// <summary>The name of the sample labelled with the DiART reagent 117.</summary>
+            MS_DiART_reagent_117 = 1002775,
+
+            /// <summary>The name of the sample labelled with the DiART reagent 118.</summary>
+            MS_DiART_reagent_118 = 1002776,
+
+            /// <summary>The name of the sample labelled with the DiART reagent 119.</summary>
+            MS_DiART_reagent_119 = 1002777,
+
+            /// <summary>Dimethyl leucine labeling reagent.</summary>
+            MS_DiLeu_reagent = 1002778,
+
+            /// <summary>The name of the sample labelled with the DiLeu reagent 115.</summary>
+            MS_DiLeu_reagent_115 = 1002779,
+
+            /// <summary>The name of the sample labelled with the DiLeu reagent 116.</summary>
+            MS_DiLeu_reagent_116 = 1002780,
+
+            /// <summary>The name of the sample labelled with the DiLeu reagent 117.</summary>
+            MS_DiLeu_reagent_117 = 1002781,
+
+            /// <summary>The name of the sample labelled with the DiLeu reagent 118.</summary>
+            MS_DiLeu_reagent_118 = 1002782,
 
             /// <summary>The root node of the unimod modifications ontology.</summary>
             UNIMOD_unimod_root_node = 100000000,
@@ -8341,7 +8491,7 @@ namespace PSI_Interface.CV
             /// <summary>Mercury Mercaptan.</summary>
             UNIMOD_Delta_Hg_1_ = 100000291,
 
-            /// <summary>Cross-link of (Iodo)-uracil MP with W,F,Y.</summary>
+            /// <summary>(Iodo)-uracil MP.</summary>
             UNIMOD_IodoU_AMP = 100000292,
 
             /// <summary>3-(carbamidomethylthio)propanoyl.</summary>
@@ -8411,7 +8561,7 @@ namespace PSI_Interface.CV
             UNIMOD_Xlink_B10621 = 100000323,
 
             /// <summary>Dimethyl 3,3\'-dithiobispropionimidate.</summary>
-            UNIMOD_DTBP = 100000324,
+            UNIMOD_Xlink_DTBPc = 100000324,
 
             /// <summary>10-ethoxyphosphinyl-N-(biotinamidopentyl)decanamide.</summary>
             UNIMOD_FP_Biotin = 100000325,
@@ -9437,10 +9587,10 @@ namespace PSI_Interface.CV
             UNIMOD_Gly_loss_Amide = 100000822,
 
             /// <summary>Addition of BMOE crosslinker.</summary>
-            UNIMOD_BMOE = 100000824,
+            UNIMOD_Xlink_BMOE = 100000824,
 
             /// <summary>Addition of DFDNB crosslinker.</summary>
-            UNIMOD_DFDNB = 100000825,
+            UNIMOD_Xlink_DFDNB = 100000825,
 
             /// <summary>Tris(2,4,6-trimethoxyphenyl)phosphonium acetic acid N-hydroxysuccinimide ester derivative.</summary>
             UNIMOD_TMPP_Ac = 100000827,
@@ -9631,7 +9781,7 @@ namespace PSI_Interface.CV
             /// <summary>High molecular absorption label for proteins.</summary>
             UNIMOD_SulfoGMBS = 100000942,
 
-            /// <summary>Modified GMBS X linker for proteins.</summary>
+            /// <summary>Modified GMBS X linker.</summary>
             UNIMOD_DimethylamineGMBS = 100000943,
 
             /// <summary>SILAC label.</summary>
@@ -9799,8 +9949,8 @@ namespace PSI_Interface.CV
             /// <summary>Water-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.</summary>
             UNIMOD_Xlink_DSS = 100001020,
 
-            /// <summary>Monolink of EGS crosslinker to Lys or N-terminus.</summary>
-            UNIMOD_Xlink_EGS = 100001021,
+            /// <summary>Water quenched monolink of EGS cross-linker.</summary>
+            UNIMOD_Xlink_EGS244 = 100001021,
 
             /// <summary>Monolink of DST crosslinker to Lys or N-terminus.</summary>
             UNIMOD_Xlink_DST = 100001022,
@@ -9814,8 +9964,8 @@ namespace PSI_Interface.CV
             /// <summary>Monolink of DMP crosslinker to Lys or N-terminus.</summary>
             UNIMOD_Xlink_DMP_de = 100001027,
 
-            /// <summary>EGS crosslinker to Lys or N-terminus following hydroxylamine cleavage.</summary>
-            UNIMOD_Xlink_EGScleaved = 100001028,
+            /// <summary>Cleavage product of EGS protein crosslinks by hydroylamine treatment.</summary>
+            UNIMOD_Xlink_EGS115 = 100001028,
 
             /// <summary>Desthiobiotin modification of lysine.</summary>
             UNIMOD_Biotin_Thermo_88310 = 100001031,
@@ -11935,11 +12085,23 @@ namespace PSI_Interface.CV
             /// <summary>Brij 58 synthetic polymer terminus.</summary>
             UNIMOD_Brij58 = 100001838,
 
-            /// <summary>Î’-Funaltrexamine.</summary>
-            UNIMOD_beta_FNA = 100001839,
+            /// <summary>Beta-Funaltrexamine.</summary>
+            UNIMOD_betaFNA = 100001839,
 
             /// <summary>Fucosylated biantennary + 2 alphaGal.</summary>
             UNIMOD_dHex_1_Hex_7_HexNAc_4_ = 100001840,
+
+            /// <summary>EZ-Link Sulfo-NHS-SS-Biotin.</summary>
+            UNIMOD_Biotin_Thermo_21328 = 100001841,
+
+            /// <summary>Cytidine monophosphate.</summary>
+            UNIMOD_PhosphoCytidine = 100001843,
+
+            /// <summary>Azidophenylalanine.</summary>
+            UNIMOD_AzidoF = 100001845,
+
+            /// <summary>Cys alkylation by dimethylaminoethyl halide.</summary>
+            UNIMOD_Dimethylaminoethyl = 100001846,
 
             /// <summary>Description not provided</summary>
             PATO_pato_OBSOLETE = 300000000,
