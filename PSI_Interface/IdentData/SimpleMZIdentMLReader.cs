@@ -943,6 +943,12 @@ namespace PSI_Interface.IdentData
                     }
                     reader.ReadEndElement(); // Consume EndElement for Modification
                 }
+
+                if (m_peptides.ContainsKey(id))
+                {
+                    throw new Exception(string.Format("Cannot add duplicate peptide id {0}: {1}", id, pepRef.SequenceWithNumericMods));
+                }
+
                 m_peptides.Add(id, pepRef);
             }
             reader.Close();
