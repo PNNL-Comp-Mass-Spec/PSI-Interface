@@ -1,0 +1,24 @@
+version: 1.2.0.{build}
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+before_build:
+- cmd: nuget.exe restore PSI_Interface.sln
+build:
+  project: PSI_Interface.sln
+  verbosity: minimal
+test: off
+artifacts:
+- path: PSI_Interface\bin\Release\PSI_Interface*.nupkg
+deploy:
+- provider: NuGet
+  api_key:
+    secure: K/JOcKhtKsDzJTZm384EnU3rqil/gUr7BqLfdQiZiRLDA76hMtgNAQ8//ZAku3sd
+  skip_symbols: true
+notifications:
+- provider: Email
+  to:
+  - bryson.gibbons@pnnl.gov
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
