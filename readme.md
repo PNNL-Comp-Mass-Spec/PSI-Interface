@@ -2,11 +2,20 @@
 
 Objects and interfaces to support reading and writing of PSI/HUPO standard formats.
 
-### Current Status:
+### Current Project Status:
 
 mzIdentML can be read and written.
 
 mzML can be read, writing is low priority and hasn't been implemented yet in a way that minimizes memory usage.
+
+## Downloads
+### Nuget
+
+NuGet package [PSI_Interface](https://www.nuget.org/packages/PSI_Interface)
+
+### Continuous Integration
+
+[![Build status](https://ci.appveyor.com/api/projects/status/1cc3qxeg7p4603kg?svg=true)](https://ci.appveyor.com/project/PNNLCompMassSpec/psi-interface)
 
 ## General:
 The readers support reading gzipped mzid and mzML files without needing to extract them
