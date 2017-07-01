@@ -503,7 +503,7 @@ namespace PSI_Interface.MSData
         {
             if (_file != null)
             {
-                _file.Close();
+                _file.Dispose();
             }
 
             var sourceFile = new FileInfo(_filePath);
@@ -516,7 +516,7 @@ namespace PSI_Interface.MSData
              * TODO: Change how the file handles are used for safety purposes - open up each time, or what?
              *****************************************************************************************************************************************************/
 
-            if (sourceFile.Name.Trim().EndsWith(".mzML.gz", StringComparison.InvariantCultureIgnoreCase))
+            if (sourceFile.Name.Trim().EndsWith(".mzML.gz", StringComparison.OrdinalIgnoreCase))
             {
                 _isGzipped = true;
                 var file = new GZipStream(_file, CompressionMode.Decompress);
@@ -757,15 +757,15 @@ namespace PSI_Interface.MSData
         {
             if (_xmlReaderForYield != null)
             {
-                _xmlReaderForYield.Close();
+                _xmlReaderForYield.Dispose();
             }
             if (_fileReader != null)
             {
-                _fileReader.Close();
+                _fileReader.Dispose();
             }
             if (_file != null)
             {
-                _file.Close();
+                _file.Dispose();
             }
         }
 
@@ -863,7 +863,7 @@ namespace PSI_Interface.MSData
                         //file.Position = bufEnd - rewindBy;
                     }
 
-                    var found = stringBuffer.IndexOf("<indexListOffset", StringComparison.Ordinal);
+                    var found = stringBuffer.IndexOf("<indexListOffset", StringComparison.OrdinalIgnoreCase);
                     if (found >= 0)
                     {
                         var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
@@ -875,7 +875,7 @@ namespace PSI_Interface.MSData
                             var reader2 = reader.ReadSubtree(); // Get past root element problems
                             reader2.MoveToContent();
                             _indexListOffset = reader2.ReadElementContentAsLong();
-                            reader2.Close();
+                            reader2.Dispose();
                         }
                         haveOffset = true;
                     }
@@ -910,7 +910,7 @@ namespace PSI_Interface.MSData
                             //file.Position = bufEnd - rewindBy;
                         }
 
-                        var found = stringBuffer.IndexOf("<indexList ", StringComparison.Ordinal);
+                        var found = stringBuffer.IndexOf("<indexList ", StringComparison.OrdinalIgnoreCase);
                         if (found >= 0)
                         {
                             var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
@@ -986,8 +986,8 @@ namespace PSI_Interface.MSData
                     var searchPoint = 0;
                     while (searchPoint < stringBuffer.Length)
                     {
-                        var foundSpec = stringBuffer.IndexOf("<" + specTag + " ", searchPoint, StringComparison.Ordinal);
-                        var foundChrom = stringBuffer.IndexOf("<" + chromTag + " ", searchPoint, StringComparison.Ordinal);
+                        var foundSpec = stringBuffer.IndexOf("<" + specTag + " ", searchPoint, StringComparison.OrdinalIgnoreCase);
+                        var foundChrom = stringBuffer.IndexOf("<" + chromTag + " ", searchPoint, StringComparison.OrdinalIgnoreCase);
                         if (foundSpec >= 0)
                         {
                             searchPoint = foundSpec;
@@ -1010,9 +1010,9 @@ namespace PSI_Interface.MSData
                         {
                             attribName = "nativeID";
                         }
-                        var idIndex = builder.IndexOf(attribName + "=\"", StringComparison.Ordinal);
-                        var idOpenQuote = builder.IndexOf("\"", idIndex, StringComparison.Ordinal);
-                        var idCloseQuote = builder.IndexOf("\"", idOpenQuote + 1, StringComparison.Ordinal);
+                        var idIndex = builder.IndexOf(attribName + "=\"", StringComparison.OrdinalIgnoreCase);
+                        var idOpenQuote = builder.IndexOf("\"", idIndex, StringComparison.OrdinalIgnoreCase);
+                        var idCloseQuote = builder.IndexOf("\"", idOpenQuote + 1, StringComparison.OrdinalIgnoreCase);
                         var length = idCloseQuote - idOpenQuote - 1;
                         var id = builder.Substring(idOpenQuote + 1, length);
                         // Add offset to the correct list
@@ -1130,7 +1130,7 @@ namespace PSI_Interface.MSData
                 }
             }
             _haveIndex = true;
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1185,7 +1185,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
         #endregion
 
@@ -1365,7 +1365,7 @@ namespace PSI_Interface.MSData
                             break;
                     }
                 }
-                reader.Close();
+                reader.Dispose();
             } */
             if (!_reduceMemoryUsage)
             {
@@ -1373,11 +1373,11 @@ namespace PSI_Interface.MSData
                 // reader is the root if it is not an indexed mzML file.
                 if (indexReader == null)
                 {
-                    reader.Close();
+                    reader.Dispose();
                 }
                 else
                 {
-                    indexReader.Close();
+                    indexReader.Dispose();
                 }
             }
         }
@@ -1421,7 +1421,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1608,7 +1608,7 @@ namespace PSI_Interface.MSData
                                 break;
                         }
                     }
-                    innerReader.Close();
+                    innerReader.Dispose();
                     reader.Read();
                 }
                 else
@@ -1616,7 +1616,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1671,7 +1671,7 @@ namespace PSI_Interface.MSData
                                 break;
                         }
                     }
-                    innerReader.Close();
+                    innerReader.Dispose();
                     reader.Read();
                     if (id != null)
                         _referenceableParamGroups.Add(id, paramList);
@@ -1681,7 +1681,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1702,7 +1702,7 @@ namespace PSI_Interface.MSData
                 UnitName = reader.GetAttribute("unitName")
             };
 
-            reader.Close();
+            reader.Dispose();
             return cvParam;
         }
 
@@ -1723,7 +1723,7 @@ namespace PSI_Interface.MSData
                 UnitName = reader.GetAttribute("unitName")
             };
 
-            reader.Close();
+            reader.Dispose();
             return userParam;
         }
         #endregion
@@ -1786,7 +1786,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1802,7 +1802,7 @@ namespace PSI_Interface.MSData
             {
                 // randomAccess: We only read to this point for the count of spectra.
                 // We only want to read for offsets if we weren't able to get valid offsets from an index
-                //reader.Close(); // Closing can be slow for a subtree...
+                //reader.Dispose(); // Closing can be slow for a subtree...
                 if (!_haveIndex)
                 {
                     ReadRunForOffsets();
@@ -1839,7 +1839,7 @@ namespace PSI_Interface.MSData
                     reader.Skip();
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
         #endregion
 
@@ -2017,7 +2017,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             // Process the spectrum data
             var scan = new ScanData();
             SimpleSpectrum spectrum;
@@ -2183,7 +2183,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -2260,7 +2260,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             return scans;
         }
 
@@ -2368,7 +2368,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             return scan;
         }
 
@@ -2405,7 +2405,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             return precursors;
         }
 
@@ -2484,7 +2484,7 @@ namespace PSI_Interface.MSData
                                     break;
                             }
                         }
-                        innerReader.Close();
+                        innerReader.Dispose();
                         reader.Read(); // "selectedIon" might not have child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         break;
@@ -2610,7 +2610,7 @@ namespace PSI_Interface.MSData
                                     break;
                             }
                         }
-                        innerReader.Close();
+                        innerReader.Dispose();
                         reader.Read(); // "selectedIon" might not have child nodes
 
                         if (!string.IsNullOrWhiteSpace(supplementalActivation))
@@ -2633,7 +2633,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             return precursor;
         }
 
@@ -2714,7 +2714,7 @@ namespace PSI_Interface.MSData
                                     break;
                             }
                         }
-                        innerReader.Close();
+                        innerReader.Dispose();
                         ions.Add(ion);
                         reader.Read(); // "selectedIon" might not have child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
@@ -2724,7 +2724,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             return ions;
         }
 
@@ -2762,7 +2762,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             return bdaList;
         }
 
@@ -2946,7 +2946,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
             return bda;
         }
 

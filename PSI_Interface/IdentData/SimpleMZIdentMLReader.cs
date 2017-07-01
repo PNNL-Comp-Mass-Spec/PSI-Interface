@@ -430,7 +430,7 @@ namespace PSI_Interface.IdentData
                 {
                     if (string.IsNullOrEmpty(sequenceWithNumericMods))
                     {
-                        var sequenceText = string.Copy(Sequence);
+                        var sequenceText = Sequence; // Strings are immutable, don't need a copy (cannot change the value of Sequence using sequenceText)
                         var sequenceOrigLength = Sequence.Length;
                         // Insert the mods from the last occurring to the first.
                         foreach (var mod in Mods.OrderByDescending(x => x.Key))
@@ -580,6 +580,7 @@ namespace PSI_Interface.IdentData
         /// Read the MZIdentML file, map the data to easy-to-use objects, and return the collection of objects
         /// </summary>
         /// <param name="path">Path to *.mzid/mzIdentML file</param>
+        /// <param name="cancelToken">Cancellation token, to interrupt reading between spectra</param>
         /// <returns><see cref="SimpleMZIdentMLData"/></returns>
         /// <remarks>
         /// XML Reader parses an MZIdentML file, storing data as follows:
@@ -601,7 +602,7 @@ namespace PSI_Interface.IdentData
             // Set a large buffer size. Doesn't affect gzip reading speed, but speeds up non-gzipped
             Stream file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
 
-            if (sourceFile.Name.Trim().EndsWith(".mzid.gz", StringComparison.InvariantCultureIgnoreCase))
+            if (sourceFile.Name.Trim().EndsWith(".mzid.gz", StringComparison.OrdinalIgnoreCase))
             {
                 file = new GZipStream(file, CompressionMode.Decompress);
             }
@@ -757,7 +758,7 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -812,7 +813,7 @@ namespace PSI_Interface.IdentData
                             }
                             innerReader.Read();
                         }
-                        innerReader.Close();
+                        innerReader.Dispose();
                         // Consume the EndElement
                         PossiblyReadEndElement(reader, "SoftwareName");
                         break;
@@ -821,7 +822,7 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -876,7 +877,7 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -903,7 +904,7 @@ namespace PSI_Interface.IdentData
                 }
                 m_database.Add(id, dbSeq);
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -951,7 +952,7 @@ namespace PSI_Interface.IdentData
 
                 m_peptides.Add(id, pepRef);
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -974,7 +975,7 @@ namespace PSI_Interface.IdentData
                 DbSeq = m_database[reader.GetAttribute("dBSequence_ref")]
             };
             m_evidences.Add(reader.GetAttribute("id"), pepEvidence);
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1011,7 +1012,7 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1042,9 +1043,9 @@ namespace PSI_Interface.IdentData
                         // SpectrumIDFormat child element: required
                         var location = reader.GetAttribute("location");
                         spectrumFile = Path.GetFileName(location);
-                        if (location != null && (location.Trim().EndsWith("_dta.txt", StringComparison.InvariantCultureIgnoreCase)
-                                                 || location.Trim().EndsWith(".mgf", StringComparison.InvariantCultureIgnoreCase)
-                                                 || location.Trim().EndsWith(".ms2", StringComparison.InvariantCultureIgnoreCase)))
+                        if (location != null && (location.Trim().EndsWith("_dta.txt", StringComparison.OrdinalIgnoreCase)
+                                                 || location.Trim().EndsWith(".mgf", StringComparison.OrdinalIgnoreCase)
+                                                 || location.Trim().EndsWith(".ms2", StringComparison.OrdinalIgnoreCase)))
                         {
                             isSpectrumIdNotAScanNum = true;
                         }
@@ -1064,7 +1065,7 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
 
             if (m_decoyDbAccessionRegex.Count > 0)
             {
@@ -1127,7 +1128,7 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1160,7 +1161,7 @@ namespace PSI_Interface.IdentData
                     reader.Skip();
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1196,7 +1197,7 @@ namespace PSI_Interface.IdentData
                     reader.Skip();
                 }
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1251,7 +1252,7 @@ namespace PSI_Interface.IdentData
                 item.NativeId = nativeId;
                 m_specItems.Add(item.SpecItemId, item);
             }
-            reader.Close();
+            reader.Dispose();
         }
 
         /// <summary>
@@ -1333,7 +1334,7 @@ namespace PSI_Interface.IdentData
             }
             specItem.PepEvCount = specItem.PepEvidence.Count;
 
-            reader.Close();
+            reader.Dispose();
 
             return specItem;
         }

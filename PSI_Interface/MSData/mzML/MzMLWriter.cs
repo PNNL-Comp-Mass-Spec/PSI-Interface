@@ -70,7 +70,7 @@ namespace PSI_Interface.MSData.mzML
         private void ConfigureWriter()
         {
             Stream writer = new FileStream(_filePath, FileMode.Create, FileAccess.Write, FileShare.None, _bufferSize);
-            if (_filePath.Trim().EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+            if (_filePath.Trim().EndsWith(".gz", StringComparison.OrdinalIgnoreCase))
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
             }

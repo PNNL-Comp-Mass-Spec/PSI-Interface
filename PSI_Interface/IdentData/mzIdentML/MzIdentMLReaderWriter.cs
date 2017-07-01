@@ -38,7 +38,7 @@ namespace PSI_Interface.IdentData.mzIdentML
                 throw new FileNotFoundException(".mzID file not found", filePath);
 
             Stream reader = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize);
-            if (sourceFile.Name.Trim().EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+            if (sourceFile.Name.Trim().EndsWith(".gz", StringComparison.OrdinalIgnoreCase))
             {
                 reader = new GZipStream(reader, CompressionMode.Decompress);
             }
@@ -68,7 +68,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         private static XmlWriter CreateWriter(string filePath, int bufferSize)
         {
             Stream writer = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite, bufferSize);
-            if (filePath.Trim().EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+            if (filePath.Trim().EndsWith(".gz", StringComparison.OrdinalIgnoreCase))
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
             }

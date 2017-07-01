@@ -134,7 +134,7 @@ namespace PSI_Interface.IdentData
             {
                 _sequenceCollection = new SequenceCollectionObj(mzid.SequenceCollection, this);
             }
-            // AnalysisData referenced by SpectrumIdentification, InputSpectrumIdentifications, ProteinDetection, references Peptides, PeptideEvidence, SampleInfo, MassTable, 
+            // AnalysisData referenced by SpectrumIdentification, InputSpectrumIdentifications, ProteinDetection, references Peptides, PeptideEvidence, SampleInfo, MassTable,
             if (mzid.DataCollection != null)
             {
                 _dataCollection.AnalysisData = new AnalysisDataObj(mzid.DataCollection.AnalysisData, this);
@@ -483,7 +483,7 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -509,7 +509,7 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -535,7 +535,7 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -561,7 +561,7 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -590,7 +590,7 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -619,7 +619,7 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -645,7 +645,7 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -671,7 +671,7 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -704,7 +704,7 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }
@@ -730,7 +730,7 @@ namespace PSI_Interface.IdentData
                     return result.First();
                 }
             }
-            catch 
+            catch
             {
                 // Ignore errors; must resolve reference later...
             }

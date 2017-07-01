@@ -1,169 +1,45 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{96F29CF8-7B30-471C-BCAB-C15C87D7DBB8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net45;netstandard1.5</TargetFrameworks>
     <RootNamespace>PSI_Interface</RootNamespace>
     <AssemblyName>PSI_Interface</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>PSI_Interface</PackageId>
+    <Version>1.2.0</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <Description>Set of classes for reading and writing mzML and mMzIdentML files, with classes that allow full access to all features of the formats, and classes designed to quickly read both formats.</Description>
+    <Company>Pacific Northwest National Laboratory</Company>
+    <Product>PSI Interface</Product>
+    <Authors>PNNL-Comp-Mass-Spec</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RepositoryUrl>https://github.com/PNNL-Comp-Mass-Spec/PSI-Interface</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageLicenseUrl>https://opensource.org/licenses/ECL-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/PNNL-Comp-Mass-Spec/PSI-Interface</PackageProjectUrl>
+    <Copyright>Copyright @ PNNL 2017</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
+    <DefineConstants>NET_STD</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\PSI_Interface.XML</DocumentationFile>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>NET_STD2</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Ionic.Zip">
-      <HintPath>..\packages\DotNetZip.1.9.3\lib\net20\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Serialization" />
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.5' OR '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="System.Linq.Parallel" Version="4.3.0" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+    <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+    <PackageReference Include="Iconic.Zlib.Netstandard" Version="1.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CV\CV.cs" />
-    <Compile Include="CV\CVTranslator.cs" />
-    <Compile Include="CV\CV_enum.cs" />
-    <Compile Include="CV\CV_metadata.cs" />
-    <Compile Include="CV\CV_relationships.cs" />
-    <Compile Include="CV\CV_termData.cs" />
-    <Compile Include="IdentData\IdentDataCreator.cs" />
-    <Compile Include="IdentData\IdentDataObjs\IdentDataInternalTypeAbstract.cs" />
-    <Compile Include="IdentData\IdentDataObjs\IdentDataList.cs" />
-    <Compile Include="IdentData\IdentDataObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\AbstractContactObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\AffiliationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\AmbiguousResidueObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\AnalysisCollectionObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\AnalysisDataObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\AnalysisProtocolCollectionObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\AnalysisSoftwareObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\BibliographicReferenceObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ContactRoleObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\CVInfo.cs" />
-    <Compile Include="IdentData\IdentDataObjs\CVParamGroupObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\CVParamObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\DatabaseTranslationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\DataCollectionObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\DbSequenceObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\EnzymeListObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\EnzymeObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\FileFormatInfo.cs" />
-    <Compile Include="IdentData\IdentDataObjs\FilterInfo.cs" />
-    <Compile Include="IdentData\IdentDataObjs\FragmentArrayObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\IExternalDataType.cs" />
-    <Compile Include="IdentData\IdentDataObjs\IIdentifiableType.cs" />
-    <Compile Include="IdentData\IdentDataObjs\InputsObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\InputSpectraRefObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\InputSpectrumIdentificationsObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\IonTypeObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\MassTableObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\MeasureObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ModificationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\OrganizationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\OrganizationRefObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ParamBaseObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ParamGroupObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ParamListObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ParamObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ParentOrganizationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\PeptideEvidenceObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\PeptideEvidenceRefObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\PeptideHypothesisObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\PeptideObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\PersonObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ProteinAmbiguityGroupObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ProteinDetectionHypothesisObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ProteinDetectionListObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ProteinDetectionObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ProteinDetectionProtocolObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ProtocolApplicationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ProviderObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\ResidueObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\RoleObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SampleObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SearchDatabaseInfo.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SearchDatabaseRefObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SearchModificationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SequenceCollectionObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SourceFileInfo.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpecificityRulesListObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectraDataObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectrumIdentificationItemObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectrumIdentificationItemRefObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectrumIdentificationListObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectrumIdentificationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectrumIdentificationProtocolObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectrumIdentificationResultObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SpectrumIDFormatObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SubSampleObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\SubstitutionModificationObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\TranslationTableObj.cs" />
-    <Compile Include="IdentData\IdentDataObjs\UserParamObj.cs" />
-    <Compile Include="IdentData\mzIdentML\IdentData_mzIdentML.cs" />
-    <Compile Include="IdentData\mzIdentML\mzIdentML1_1_0.cs" />
-    <Compile Include="IdentData\mzIdentML\mzIdentMLInterfaces.cs" />
-    <Compile Include="IdentData\mzIdentML\MzIdentMLReaderWriter.cs" />
-    <Compile Include="IdentData\mzIdentML\mzIdentML_Extra.cs" />
-    <Compile Include="IdentData\mzIdentML_IdentData.cs" />
-    <Compile Include="IdentData\SimpleMZIdentMLReader.cs" />
-    <Compile Include="MSData\Base64Conversion.cs" />
-    <Compile Include="MSData\MSDataInternalTypeAbstract.cs" />
-    <Compile Include="MSData\MSDataList.cs" />
-    <Compile Include="MSData\MSData.cs" />
-    <Compile Include="MSData\MSData_Extra.cs" />
-    <Compile Include="MSData\mzML\MSData_mzML.cs" />
-    <Compile Include="MSData\mzML\mzML1_1_0.cs" />
-    <Compile Include="MSData\mzML\mzML1_1_1_idx.cs" />
-    <Compile Include="MSData\mzML\MzMLReader.cs" />
-    <Compile Include="MSData\mzML\MzMLSchemaType.cs" />
-    <Compile Include="MSData\mzML\MzMLWriter.cs" />
-    <Compile Include="MSData\mzML\mzML_Extra.cs" />
-    <Compile Include="MSData\mzML_DataSet\mzML1.1.0.cs" />
-    <Compile Include="MSData\mzML_DataSet\mzML1.1.1_idx.cs" />
-    <Compile Include="MSData\MzML_MSData.cs" />
-    <Compile Include="MSData\SimpleMzMLReader.cs" />
-    <Compile Include="MSData\Zlib.cs" />
-    <Compile Include="NativeIdConversion.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\ListUtils.cs" />
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <PackageReference Include="DotNetZip" Version="1.10.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

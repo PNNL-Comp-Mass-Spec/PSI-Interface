@@ -46,7 +46,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             foreach (var prop in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
             {
                 var propValue = prop.GetValue(this);
-                var propType = prop.PropertyType;
+                var propType = prop.PropertyType.GetTypeInfo();
                 if (propValue != null)
                 {
                     if (prop.Name.Equals("IdentData"))

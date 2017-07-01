@@ -78,7 +78,7 @@ namespace PSI_Interface.MSData
             using (var deflater = new DeflateStream(msDecompressed, CompressionMode.Compress))
             {
                 compressedBytes = deflater.Read(newBytes, 0, decompressedBytes.Length) + 2;
-                
+
                 //while (inflater.CanRead)
                 //{
                 //  var readBytes = new byte[4095];
