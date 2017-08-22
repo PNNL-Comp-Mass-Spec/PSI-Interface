@@ -19,6 +19,7 @@
     <PackageLicenseUrl>https://opensource.org/licenses/ECL-2.0</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/PNNL-Comp-Mass-Spec/PSI-Interface</PackageProjectUrl>
     <Copyright>Copyright @ PNNL 2017</Copyright>
+    <Title>PSI Interface</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
