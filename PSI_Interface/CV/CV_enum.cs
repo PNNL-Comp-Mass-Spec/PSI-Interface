@@ -1075,8 +1075,8 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE Electrons that are ejected from a sample surface as a result of bombardment by a primary beam of atoms, ions or photons. WAS IN DETECTOR TYPE. Where should it go.</summary>
             MS_secondary_electron_OBSOLETE = 1000352,
 
-            /// <summary>OBSOLETE Ion formed by the interaction of an ion with one or more atoms or molecules to form an ion containing all the constituent atoms of the precursor ion as well as the additional atoms from the associated atoms or molecules.</summary>
-            MS_adduct_ion_OBSOLETE = 1000353,
+            /// <summary>Ion formed by the interaction of an ion with one or more atoms or molecules to form an ion containing all the constituent atoms of the precursor ion as well as the additional atoms from the associated atoms or molecules.</summary>
+            MS_adduct_ion = 1000353,
 
             /// <summary>OBSOLETE A planar cyclic ion that obeys the Hueckel (4n + 2) rule where n is a positive integer representing the number of conjugated Pi electrons. Charge delocalization leads to greater stability compared to a hypothetical localized structure.</summary>
             MS_aromatic_ion_OBSOLETE = 1000354,
@@ -1420,8 +1420,8 @@ namespace PSI_Interface.CV
             /// <summary>The 6110 Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with an entry level single quadrupole mass spectrometer from the 6100 Series of Agilent quadrupole mass spectrometers. 6110 Quadrupole mass spectrometer has m/z range of 10-1500 and 2500 u/s scan speed. It proves useful for wide range of SIM quantitative applications.</summary>
             MS_6110_Quadrupole_LC_MS = 1000468,
 
-            /// <summary>The 6120 Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a single quadrupole mass spectrometer from the 6100 Series of Agilent mass spectrometers. 6120 quadrupole mass spectrometer has m/z range of 10-1500, 2500 u/s scan speed and utilizes multiple signal acquisition.</summary>
-            MS_6120_Quadrupole_LC_MS = 1000469,
+            /// <summary>The 6120A Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a single quadrupole mass spectrometer from the 6100 Series of Agilent mass spectrometers. 6120 quadrupole mass spectrometer has m/z range of 10-1500, 2500 u/s scan speed and utilizes multiple signal acquisition.</summary>
+            MS_6120A_Quadrupole_LC_MS = 1000469,
 
             /// <summary>The 6130 Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a single quadrupole mass spectrometer from the 6100 series of Agilent mass spectrometers. The 6130 quadrupole mass spectrometer has m/z range of 2-3000, 2500 u/s scan speed in standard mode and 5250 u/s speed in fast-scan mode. It also uses multiple signal acquisition.</summary>
             MS_6130_Quadrupole_LC_MS = 1000470,
@@ -2041,8 +2041,8 @@ namespace PSI_Interface.CV
             /// <summary>The 6510 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer. This time of flight mass spectrometer has a m/z range of 50-12000, mass accuracy of less than 2 ppm and resolution greater than 13,000 at m/z 2722. It has multiple ion sources and can be used with multimode ion sources.</summary>
             MS_6510_Quadrupole_Time_of_Flight_LC_MS = 1000676,
 
-            /// <summary>The 6520 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer. This time of flight mass spectrometer has a m/z range of 50-12000, mass accuracy of less than 2 ppm and resolution greater than 26,000 at m/z 2722. It has multiple ion sources and can be used with multimode ion sources.</summary>
-            MS_6520_Quadrupole_Time_of_Flight_LC_MS = 1000677,
+            /// <summary>The 6520A Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer. This time of flight mass spectrometer has a m/z range of 50-12000, mass accuracy of less than 2 ppm and resolution greater than 26,000 at m/z 2722. It has multiple ion sources and can be used with multimode ion sources.</summary>
+            MS_6520A_Quadrupole_Time_of_Flight_LC_MS = 1000677,
 
             /// <summary>Software for data acquisition of 6000 series instruments.</summary>
             MS_MassHunter_Data_Acquisition = 1000678,
@@ -3946,10 +3946,10 @@ namespace PSI_Interface.CV
             /// <summary>SpectraST normalised difference between dot product of top hit and runner-up.</summary>
             MS_SpectraST_delta = 1001420,
 
-            /// <summary>Source file for this mzIdentML was in a pepXML file format.</summary>
+            /// <summary>The XML-based pepXML file format for encoding PSM information, created and maintained by the Trans-Proteomic Pipeline developers.</summary>
             MS_pepXML_format = 1001421,
 
-            /// <summary>Source file for this mzIdentML was in protXML file format.</summary>
+            /// <summary>The XML-based protXML file format for encoding protein identifications, created and maintained by the Trans-Proteomic Pipeline developers.</summary>
             MS_protXML_format = 1001422,
 
             /// <summary>A URL that describes the translation table used to translate the nucleotides to amino acids.</summary>
@@ -7394,7 +7394,7 @@ namespace PSI_Interface.CV
             MS_Tide = 1002575,
 
             /// <summary>Andromeda result file output format.</summary>
-            MS_Andromeda_result_file = 1002576,
+            MS_Andromeda_result_format = 1002576,
 
             /// <summary>SCIEX 2000 QTRAP.</summary>
             MS_2000_QTRAP = 1002577,
@@ -7974,6 +7974,135 @@ namespace PSI_Interface.CV
 
             /// <summary>The name of the sample labelled with the DiLeu reagent 118.</summary>
             MS_DiLeu_reagent_118 = 1002782,
+
+            /// <summary>The 6550 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6550_iFunnel_Q_TOF_LC_MS = 1002783,
+
+            /// <summary>The 6550A Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6550A_iFunnel_Q_TOF_LC_MS = 1002784,
+
+            /// <summary>The 6520B Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6520B_Q_TOF_LC_MS = 1002785,
+
+            /// <summary>The 6530A Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6530A_Q_TOF_LC_MS = 1002786,
+
+            /// <summary>The 6530B Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6530B_Q_TOF_LC_MS = 1002787,
+
+            /// <summary>The 6538 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6538_Q_TOF_LC_MS = 1002788,
+
+            /// <summary>The 6540 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6540_Q_TOF_LC_MS = 1002789,
+
+            /// <summary>The 6542 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6542_Q_TOF_LC_MS = 1002790,
+
+            /// <summary>The 6545 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6545_Q_TOF_LC_MS = 1002791,
+
+            /// <summary>The 6560 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6560_Q_TOF_LC_MS = 1002792,
+
+            /// <summary>The 6570 Quadrupole Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6570_Q_TOF_LC_MS = 1002793,
+
+            /// <summary>The 6120B Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a single quadrupole mass spectrometer from the 6100 Series of Agilent mass spectrometers.</summary>
+            MS_6120B_Quadrupole_LC_MS = 1002794,
+
+            /// <summary>The 6150 Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a single quadrupole mass spectrometer from the 6100 Series of Agilent mass spectrometers.</summary>
+            MS_6150_Quadrupole_LC_MS = 1002795,
+
+            /// <summary>The 6224 Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6224_Time_of_Flight_LC_MS = 1002796,
+
+            /// <summary>The 6230A Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6230A_Time_of_Flight_LC_MS = 1002797,
+
+            /// <summary>The 6230B Time-of-Flight LC/MS is a Agilent liquid chromatography instrument combined with a Agilent time of flight mass spectrometer.</summary>
+            MS_6230B_Time_of_Flight_LC_MS = 1002798,
+
+            /// <summary>The 6430 Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a Agilent triple quadrupole mass spectrometer.</summary>
+            MS_6430_Triple_Quadrupole_LC_MS = 1002799,
+
+            /// <summary>The 6495A Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a Agilent triple quadrupole mass spectrometer.</summary>
+            MS_6495A_Triple_Quadrupole_LC_MS = 1002800,
+
+            /// <summary>The 6495B Quadrupole LC/MS system is a Agilent liquid chromatography instrument combined with a Agilent triple quadrupole mass spectrometer.</summary>
+            MS_6495B_Triple_Quadrupole_LC_MS = 1002801,
+
+            /// <summary>The 7000A Quadrupole GC/MS system is a Agilent gas chromatography instrument combined with a Agilent triple quadrupole mass spectrometer.</summary>
+            MS_7000A_Triple_Quadrupole_GC_MS = 1002802,
+
+            /// <summary>The 7000B Quadrupole GC/MS system is a Agilent gas chromatography instrument combined with a Agilent triple quadrupole mass spectrometer.</summary>
+            MS_7000B_Triple_Quadrupole_GC_MS = 1002803,
+
+            /// <summary>The 7800 Quadrupole ICP-MS system is a Agilent inductively couple plasma instrument combined with a Agilent quadrupole mass spectrometer.</summary>
+            MS_7800_Quadrupole_ICP_MS = 1002804,
+
+            /// <summary>The 8800 Quadrupole ICP-MS system is a Agilent inductively couple plasma instrument combined with a Agilent quadrupole mass spectrometer.</summary>
+            MS_8800_Triple_Quadrupole_ICP_MS = 1002805,
+
+            /// <summary>An atomic or molecular species having a net positive or negative electric charge.</summary>
+            MS_ion = 1002806,
+
+            /// <summary>Adduct ion with positive ionization.</summary>
+            MS_positive_mode_adduct_ion = 1002807,
+
+            /// <summary>Adduct ion with negative ionization.</summary>
+            MS_negative_mode_adduct_ion = 1002808,
+
+            /// <summary>Attribute describing an adduct formation.</summary>
+            MS_adduct_ion_attribute = 1002809,
+
+            /// <summary>Mass of an adduct formation specified by the given value.</summary>
+            MS_adduct_ion_mass = 1002810,
+
+            /// <summary>Isotope of the matrix molecule M of an adduct formation.</summary>
+            MS_adduct_ion_isotope = 1002811,
+
+            /// <summary>(\</summary>
+            MS_Regular_expression_for_adduct_ion_formula = 1002812,
+
+            /// <summary>Adduct formation formula specified by the given value.</summary>
+            MS_adduct_ion_formula = 1002813,
+
+            /// <summary>An electrical mobility unit that equals the speed</summary>
+            MS_volt_second_per_square_centimeter = 1002814,
+
+            /// <summary>Ion mobility measurement for an ion or spectrum of ions as measured in an ion mobility mass spectrometer. This might refer to the central value of a bin into which all ions within a narrow range of mobilities have been aggregated.</summary>
+            MS_inverse_reduced_ion_mobility = 1002815,
+
+            /// <summary>Array of drift times or inverse reduced ion mobilities, averaged from a matrix of binned m/z and ion mobility values, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_mean_ion_mobility_array = 1002816,
+
+            /// <summary>Bruker TDF raw file format.</summary>
+            MS_Bruker_TDF_format = 1002817,
+
+            /// <summary>Native format defined by frame=xsd:nonNegativeInteger scan=xsd:nonNegativeInteger.</summary>
+            MS_Bruker_TDF_nativeID_format = 1002818,
+
+            /// <summary>Bruker TDF comma separated list of spectra that have been combined prior to searching or interpretation.</summary>
+            MS_Bruker_TDF_nativeID_format__combined_spectra = 1002819,
+
+            /// <summary>M+H ion from positive ion mode (M in the property ionMass denotes the mass of the neutral molecule).</summary>
+            MS_M_H_ion = 1002820,
+
+            /// <summary>M-H ion from negative ion mode (M in the property ionMass denotes the mass of the neutral molecule).</summary>
+            MS_M_H_ion1 = 1002821,
+
+            /// <summary>File format developed by the OpenMS team.</summary>
+            MS_OpenMS_file_format = 1002822,
+
+            /// <summary>OpenMS intermediate identification format.</summary>
+            MS_idXML = 1002823,
+
+            /// <summary>OpenMS feature file format.</summary>
+            MS_featureXML = 1002824,
+
+            /// <summary>OpenMS consensus map format.</summary>
+            MS_consensusXML = 1002825,
 
             /// <summary>The root node of the unimod modifications ontology.</summary>
             UNIMOD_unimod_root_node = 100000000,
@@ -12104,46 +12233,46 @@ namespace PSI_Interface.CV
             UNIMOD_Dimethylaminoethyl = 100001846,
 
             /// <summary>Description not provided</summary>
-            PATO_pato_OBSOLETE = 300000000,
+            PATO_obsolete_pato_OBSOLETE = 300000000,
 
             /// <summary>A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities</summary>
             PATO_quality = 300000001,
 
             /// <summary>Description not provided</summary>
-            PATO_value_OBSOLETE = 300000002,
+            PATO_obsolete_value_OBSOLETE = 300000002,
 
             /// <summary>Description not provided</summary>
-            PATO_assay_OBSOLETE = 300000003,
+            PATO_obsolete_assay_OBSOLETE = 300000003,
 
             /// <summary>A quality of inhering in a bearer by virtue of the bearer's disposition to move freely.</summary>
             PATO_mobility = 300000004,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_activity_OBSOLETE = 300000005,
+            PATO_obsolete_absolute_activity_OBSOLETE = 300000005,
 
             /// <summary>Description not provided</summary>
-            PATO_process_OBSOLETE = 300000006,
+            PATO_obsolete_process_OBSOLETE = 300000006,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_activity_OBSOLETE = 300000007,
+            PATO_obsolete_relative_activity_OBSOLETE = 300000007,
 
             /// <summary>A physical quality inhering in a bearer by virtue of the bearer's scalar absolute value of the rate of change of the bearer's position.</summary>
             PATO_speed = 300000008,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_speed_OBSOLETE = 300000009,
+            PATO_obsolete_absolute_speed_OBSOLETE = 300000009,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_speed_OBSOLETE = 300000010,
+            PATO_obsolete_relative_speed_OBSOLETE = 300000010,
 
             /// <summary>A time quality inhering in a bearer by virtue of how long the bearer has existed.</summary>
             PATO_age = 300000011,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_age_OBSOLETE = 300000012,
+            PATO_obsolete_absolute_age_OBSOLETE = 300000012,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_age_OBSOLETE = 300000013,
+            PATO_obsolete_relative_age_OBSOLETE = 300000013,
 
             /// <summary>A composite chromatic quality composed of hue, saturation and intensity parts.</summary>
             PATO_color = 300000014,
@@ -12167,55 +12296,55 @@ namespace PSI_Interface.CV
             PATO_compatibility = 300000021,
 
             /// <summary>Description not provided</summary>
-            PATO_gametophytic_compatability_OBSOLETE = 300000022,
+            PATO_obsolete_gametophytic_compatability_OBSOLETE = 300000022,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_compatability_OBSOLETE = 300000023,
+            PATO_obsolete_relative_compatability_OBSOLETE = 300000023,
 
             /// <summary>Description not provided</summary>
-            PATO_sporophytic_compatability_OBSOLETE = 300000024,
+            PATO_obsolete_sporophytic_compatability_OBSOLETE = 300000024,
 
             /// <summary>A single physical entity inhering in an bearer by virtue of the bearer's quantities or relative ratios of subparts.</summary>
             PATO_composition = 300000025,
 
             /// <summary>Description not provided</summary>
-            PATO_carbohydrate_composition_OBSOLETE = 300000026,
+            PATO_obsolete_carbohydrate_composition_OBSOLETE = 300000026,
 
             /// <summary>Description not provided</summary>
-            PATO_electrolyte_composition_OBSOLETE = 300000027,
+            PATO_obsolete_electrolyte_composition_OBSOLETE = 300000027,
 
             /// <summary>Description not provided</summary>
-            PATO_macromolecular_composition_OBSOLETE = 300000028,
+            PATO_obsolete_macromolecular_composition_OBSOLETE = 300000028,
 
             /// <summary>Description not provided</summary>
-            PATO_protein_composition_OBSOLETE = 300000029,
+            PATO_obsolete_protein_composition_OBSOLETE = 300000029,
 
             /// <summary>Description not provided</summary>
-            PATO_enzyme_composition_OBSOLETE = 300000030,
+            PATO_obsolete_enzyme_composition_OBSOLETE = 300000030,
 
             /// <summary>Description not provided</summary>
-            PATO_metabolite_composition_OBSOLETE = 300000031,
+            PATO_obsolete_metabolite_composition_OBSOLETE = 300000031,
 
             /// <summary>Description not provided</summary>
-            PATO_secondary_product_composition_OBSOLETE = 300000032,
+            PATO_obsolete_secondary_product_composition_OBSOLETE = 300000032,
 
             /// <summary>A quality inhering in a substance by virtue of the amount of the bearer's there is mixed with another substance.</summary>
             PATO_concentration_of = 300000033,
 
             /// <summary>Description not provided</summary>
-            PATO_protein_concentration_OBSOLETE = 300000034,
+            PATO_obsolete_protein_concentration_OBSOLETE = 300000034,
 
             /// <summary>Description not provided</summary>
-            PATO_carbohydrate_concentration_OBSOLETE = 300000035,
+            PATO_obsolete_carbohydrate_concentration_OBSOLETE = 300000035,
 
             /// <summary>Description not provided</summary>
-            PATO_water_content_OBSOLETE = 300000036,
+            PATO_obsolete_water_content_OBSOLETE = 300000036,
 
             /// <summary>A physical quality inhering in a bearer by virtue of the bearer's density, firmness, or viscosity.</summary>
             PATO_consistency = 300000037,
 
             /// <summary>Description not provided</summary>
-            PATO_gel_consistency_OBSOLETE = 300000038,
+            PATO_obsolete_gel_consistency_OBSOLETE = 300000038,
 
             /// <summary>A physical quality inhering in a bearer by virtue of the bearer's orientation in space.</summary>
             PATO_direction = 300000039,
@@ -12224,10 +12353,10 @@ namespace PSI_Interface.CV
             PATO_distance = 300000040,
 
             /// <summary>Description not provided</summary>
-            PATO_absolutedistance_OBSOLETE = 300000041,
+            PATO_obsolete_absolutedistance_OBSOLETE = 300000041,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_distance_OBSOLETE = 300000042,
+            PATO_obsolete_relative_distance_OBSOLETE = 300000042,
 
             /// <summary>A quality of a physical entity inhering in a bearer by virtue of whether the bearer's molecules are being perceived by a taste and odorant receptors.</summary>
             PATO_flavor = 300000043,
@@ -12236,10 +12365,10 @@ namespace PSI_Interface.CV
             PATO_frequency = 300000044,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_frequency_OBSOLETE = 300000045,
+            PATO_obsolete_absolute_frequency_OBSOLETE = 300000045,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_frequency_OBSOLETE = 300000046,
+            PATO_obsolete_relative_frequency_OBSOLETE = 300000046,
 
             /// <summary>An organismal quality inhering in a bearer by virtue of the bearer's ability to undergo sexual reproduction in order to differentiate the individuals or types involved.</summary>
             PATO_biological_sex = 300000047,
@@ -12260,10 +12389,10 @@ namespace PSI_Interface.CV
             PATO_shape = 300000052,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_number_OBSOLETE = 300000054,
+            PATO_obsolete_absolute_number_OBSOLETE = 300000054,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_number_OBSOLETE = 300000055,
+            PATO_obsolete_relative_number_OBSOLETE = 300000055,
 
             /// <summary>An organismal quality inhering in a bearer by virtue of the bearer's disposition to synthesize a particular organic compound required for its growth.</summary>
             PATO_trophic_quality = 300000056,
@@ -12275,31 +12404,31 @@ namespace PSI_Interface.CV
             PATO_odor = 300000058,
 
             /// <summary>A parental quality inhering in a bearer by virtue of exhibiting the characteristic of a parent.</summary>
-            PATO_parental_quality_OBSOLETE = 300000059,
+            PATO_obsolete_parental_quality_OBSOLETE = 300000059,
 
             /// <summary>A spatial quality inhering in a bearer by virtue of the bearer's exhibiting repetition of placement of its parts.</summary>
             PATO_spatial_pattern = 300000060,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_pattern_OBSOLETE = 300000061,
+            PATO_obsolete_relative_pattern_OBSOLETE = 300000061,
 
             /// <summary>A sleep quality defined by the mathematic properties of the relative time frames of the sleep cycle.</summary>
             PATO_sleep_pattern = 300000062,
 
             /// <summary>Description not provided</summary>
-            PATO_percentage_OBSOLETE = 300000063,
+            PATO_obsolete_percentage_OBSOLETE = 300000063,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_percentage_OBSOLETE = 300000064,
+            PATO_obsolete_absolute_percentage_OBSOLETE = 300000064,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_percentage_OBSOLETE = 300000065,
+            PATO_obsolete_relative_percentage_OBSOLETE = 300000065,
 
             /// <summary>A texture quality inhering in a bearer by virtue of the bearer's having hair or bristles.</summary>
             PATO_pilosity = 300000066,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_pilosity_OBSOLETE = 300000067,
+            PATO_obsolete_relative_pilosity_OBSOLETE = 300000067,
 
             /// <summary>Description not provided</summary>
             PATO_qualitative = 300000068,
@@ -12311,16 +12440,16 @@ namespace PSI_Interface.CV
             PATO_amount = 300000070,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_quality_OBSOLETE = 300000073,
+            PATO_obsolete_relative_quality_OBSOLETE = 300000073,
 
             /// <summary>Description not provided</summary>
-            PATO_shattering_OBSOLETE = 300000074,
+            PATO_obsolete_shattering_OBSOLETE = 300000074,
 
             /// <summary>Description not provided</summary>
-            PATO_threshability_OBSOLETE = 300000075,
+            PATO_obsolete_threshability_OBSOLETE = 300000075,
 
             /// <summary>Description not provided</summary>
-            PATO_regulation_OBSOLETE = 300000076,
+            PATO_obsolete_regulation_OBSOLETE = 300000076,
 
             /// <summary>A quality inhering in a bearer by virtue of the whether the bearer's disposition to react to a stimulus or an agent.</summary>
             PATO_response_to = 300000077,
@@ -12329,7 +12458,7 @@ namespace PSI_Interface.CV
             PATO_rhythm_quality = 300000078,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_rhythym_OBSOLETE = 300000079,
+            PATO_obsolete_absolute_rhythym_OBSOLETE = 300000079,
 
             /// <summary>A physical quality of a process inhering in a bearer by virtue of the size of the bearer's maximum displacement from the 'normal' position, when periodic motion is taking place.</summary>
             PATO_amplitude = 300000080,
@@ -12341,166 +12470,166 @@ namespace PSI_Interface.CV
             PATO_phase = 300000083,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_rhythym_OBSOLETE = 300000084,
+            PATO_obsolete_relative_rhythym_OBSOLETE = 300000084,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's disposition to detect or perceive external stimulation.</summary>
             PATO_sensitivity_toward = 300000085,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_sensitivity_OBSOLETE = 300000086,
+            PATO_obsolete_absolute_sensitivity_OBSOLETE = 300000086,
 
             /// <summary>Description not provided</summary>
-            PATO_disease_sensitivity_OBSOLETE = 300000087,
+            PATO_obsolete_disease_sensitivity_OBSOLETE = 300000087,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_disease_sensitivity_OBSOLETE = 300000088,
+            PATO_obsolete_absolute_disease_sensitivity_OBSOLETE = 300000088,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_disease_sensitivity_OBSOLETE = 300000089,
+            PATO_obsolete_relative_disease_sensitivity_OBSOLETE = 300000089,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_sensitivity_OBSOLETE = 300000090,
+            PATO_obsolete_relative_sensitivity_OBSOLETE = 300000090,
 
             /// <summary>Description not provided</summary>
-            PATO_stress_sensitivity_OBSOLETE = 300000091,
+            PATO_obsolete_stress_sensitivity_OBSOLETE = 300000091,
 
             /// <summary>Description not provided</summary>
-            PATO_abiotic_stress_sensitivity_OBSOLETE = 300000092,
+            PATO_obsolete_abiotic_stress_sensitivity_OBSOLETE = 300000092,
 
             /// <summary>Description not provided</summary>
-            PATO_chemical_sensitivity_OBSOLETE = 300000093,
+            PATO_obsolete_chemical_sensitivity_OBSOLETE = 300000093,
 
             /// <summary>Description not provided</summary>
-            PATO_drug_sensitivity_OBSOLETE = 300000094,
+            PATO_obsolete_drug_sensitivity_OBSOLETE = 300000094,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_drug_sensitivity_OBSOLETE = 300000095,
+            PATO_obsolete_absolute_drug_sensitivity_OBSOLETE = 300000095,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_drug_sensitivity_OBSOLETE = 300000096,
+            PATO_obsolete_relative_drug_sensitivity_OBSOLETE = 300000096,
 
             /// <summary>Description not provided</summary>
-            PATO_herbicide_sensitivity_OBSOLETE = 300000097,
+            PATO_obsolete_herbicide_sensitivity_OBSOLETE = 300000097,
 
             /// <summary>Description not provided</summary>
-            PATO_insecticide_sensitivity_OBSOLETE = 300000098,
+            PATO_obsolete_insecticide_sensitivity_OBSOLETE = 300000098,
 
             /// <summary>Description not provided</summary>
-            PATO_plant_growth_hormone_sensitivity_OBSOLETE = 300000099,
+            PATO_obsolete_plant_growth_hormone_sensitivity_OBSOLETE = 300000099,
 
             /// <summary>Description not provided</summary>
-            PATO_soil_composition_sensitivity_OBSOLETE = 300000100,
+            PATO_obsolete_soil_composition_sensitivity_OBSOLETE = 300000100,
 
             /// <summary>Description not provided</summary>
-            PATO_soil_nutrient_sensitivity_OBSOLETE = 300000101,
+            PATO_obsolete_soil_nutrient_sensitivity_OBSOLETE = 300000101,
 
             /// <summary>Description not provided</summary>
-            PATO_macronutrient_sensitivity_OBSOLETE = 300000102,
+            PATO_obsolete_macronutrient_sensitivity_OBSOLETE = 300000102,
 
             /// <summary>Description not provided</summary>
-            PATO_micronutrient_sensitivity_OBSOLETE = 300000103,
+            PATO_obsolete_micronutrient_sensitivity_OBSOLETE = 300000103,
 
             /// <summary>Description not provided</summary>
-            PATO_osmotic_response_sensitivity_OBSOLETE = 300000104,
+            PATO_obsolete_osmotic_response_sensitivity_OBSOLETE = 300000104,
 
             /// <summary>Description not provided</summary>
-            PATO_p_h_sensitivity_OBSOLETE = 300000105,
+            PATO_obsolete_p_h_sensitivity_OBSOLETE = 300000105,
 
             /// <summary>Description not provided</summary>
-            PATO_acid_sensitivity_OBSOLETE = 300000106,
+            PATO_obsolete_acid_sensitivity_OBSOLETE = 300000106,
 
             /// <summary>Description not provided</summary>
-            PATO_alkali_sensitivity_OBSOLETE = 300000107,
+            PATO_obsolete_alkali_sensitivity_OBSOLETE = 300000107,
 
             /// <summary>Description not provided</summary>
-            PATO_salt_sensitivity_OBSOLETE = 300000108,
+            PATO_obsolete_salt_sensitivity_OBSOLETE = 300000108,
 
             /// <summary>Description not provided</summary>
-            PATO_water_sensitivity_OBSOLETE = 300000109,
+            PATO_obsolete_water_sensitivity_OBSOLETE = 300000109,
 
             /// <summary>Description not provided</summary>
-            PATO_drought_sensitivity_OBSOLETE = 300000110,
+            PATO_obsolete_drought_sensitivity_OBSOLETE = 300000110,
 
             /// <summary>Description not provided</summary>
-            PATO_flooding_sensitivity_OBSOLETE = 300000111,
+            PATO_obsolete_flooding_sensitivity_OBSOLETE = 300000111,
 
             /// <summary>Description not provided</summary>
-            PATO_humidity_sensitivity_OBSOLETE = 300000112,
+            PATO_obsolete_humidity_sensitivity_OBSOLETE = 300000112,
 
             /// <summary>Description not provided</summary>
-            PATO_radiation_sensitivity_OBSOLETE = 300000113,
+            PATO_obsolete_radiation_sensitivity_OBSOLETE = 300000113,
 
             /// <summary>Description not provided</summary>
-            PATO_temperature_sensitivity_OBSOLETE = 300000114,
+            PATO_obsolete_temperature_sensitivity_OBSOLETE = 300000114,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_temperature_sensitivity_OBSOLETE = 300000115,
+            PATO_obsolete_absolute_temperature_sensitivity_OBSOLETE = 300000115,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_temperature_sensitivity_OBSOLETE = 300000116,
+            PATO_obsolete_relative_temperature_sensitivity_OBSOLETE = 300000116,
 
             /// <summary>A morphology quality inhering in a bearer by virtue of the bearer's physical magnitude.</summary>
             PATO_size = 300000117,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_size_OBSOLETE = 300000118,
+            PATO_obsolete_absolute_size_OBSOLETE = 300000118,
 
             /// <summary>A 1-D extent quality inhering in a bearer by virtue of the bearer's vertical dimension of extension.</summary>
             PATO_height = 300000119,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_height_OBSOLETE = 300000120,
+            PATO_obsolete_absolute_height_OBSOLETE = 300000120,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_height_OBSOLETE = 300000121,
+            PATO_obsolete_relative_height_OBSOLETE = 300000121,
 
             /// <summary>A 1-D extent quality which is equal to the distance between two points.</summary>
             PATO_length = 300000122,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_length_OBSOLETE = 300000123,
+            PATO_obsolete_absolute_length_OBSOLETE = 300000123,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_length_OBSOLETE = 300000124,
+            PATO_obsolete_relative_length_OBSOLETE = 300000124,
 
             /// <summary>A physical quality that inheres in a bearer by virtue of the proportion of the bearer's amount of matter.</summary>
             PATO_mass = 300000125,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_mass_OBSOLETE = 300000126,
+            PATO_obsolete_absolute_mass_OBSOLETE = 300000126,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_mass_OBSOLETE = 300000127,
+            PATO_obsolete_relative_mass_OBSOLETE = 300000127,
 
             /// <summary>A physical quality inhering in a bearer that has mass near a gravitational body.</summary>
             PATO_weight = 300000128,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_weight_OBSOLETE = 300000129,
+            PATO_obsolete_absolute_weight_OBSOLETE = 300000129,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_weight_OBSOLETE = 300000130,
+            PATO_obsolete_relative_weight_OBSOLETE = 300000130,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_size_OBSOLETE = 300000131,
+            PATO_obsolete_relative_size_OBSOLETE = 300000131,
 
             /// <summary>A spatial quality inhering in a bearer by virtue of the bearer's placement which is defined by the angle between the bearer and an axis, or the angle between the bearer and another object.</summary>
             PATO_orientation = 300000133,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_angle_OBSOLETE = 300000134,
+            PATO_obsolete_absolute_angle_OBSOLETE = 300000134,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_angle_OBSOLETE = 300000135,
+            PATO_obsolete_relative_angle_OBSOLETE = 300000135,
 
             /// <summary>A morphological quality pertaining to the degree to which an object contains an opening, aperture, orifice or vent.</summary>
             PATO_closure = 300000136,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_orientation_OBSOLETE = 300000138,
+            PATO_obsolete_absolute_orientation_OBSOLETE = 300000138,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_orientation_OBSOLETE = 300000139,
+            PATO_obsolete_relative_orientation_OBSOLETE = 300000139,
 
             /// <summary>A spatial quality inhering in a bearer by virtue of the bearer's spatial location relative to other objects in the vicinity.</summary>
             PATO_position = 300000140,
@@ -12509,127 +12638,127 @@ namespace PSI_Interface.CV
             PATO_structure = 300000141,
 
             /// <summary>Description not provided</summary>
-            PATO_substance_OBSOLETE = 300000142,
+            PATO_obsolete_substance_OBSOLETE = 300000142,
 
             /// <summary>Description not provided</summary>
-            PATO_addictive_substance_OBSOLETE = 300000143,
+            PATO_obsolete_addictive_substance_OBSOLETE = 300000143,
 
             /// <summary>Description not provided</summary>
-            PATO_solid_substance_OBSOLETE = 300000144,
+            PATO_obsolete_solid_substance_OBSOLETE = 300000144,
 
             /// <summary>Description not provided</summary>
-            PATO_liquid_substance_OBSOLETE = 300000145,
+            PATO_obsolete_liquid_substance_OBSOLETE = 300000145,
 
             /// <summary>A physical quality of the thermal energy of a system.</summary>
             PATO_temperature = 300000146,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_temperature_OBSOLETE = 300000147,
+            PATO_obsolete_absolute_temperature_OBSOLETE = 300000147,
 
             /// <summary>Description not provided</summary>
-            PATO_body_temperature_OBSOLETE = 300000148,
+            PATO_obsolete_body_temperature_OBSOLETE = 300000148,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_temperature_OBSOLETE = 300000149,
+            PATO_obsolete_relative_temperature_OBSOLETE = 300000149,
 
             /// <summary>A morphologic quality inhering in a bearer by virtue of the bearer's relative size, organization and distribution of its surface elements or the representation or invention of the appearance of its surface; visual and tactile surface characteristics.</summary>
             PATO_texture = 300000150,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_texture_OBSOLETE = 300000151,
+            PATO_obsolete_relative_texture_OBSOLETE = 300000151,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's sensitivity towards a fixed location or value where a change is observed; upper limit.</summary>
             PATO_threshold = 300000152,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_threshold_OBSOLETE = 300000153,
+            PATO_obsolete_absolute_threshold_OBSOLETE = 300000153,
 
             /// <summary>Description not provided</summary>
-            PATO_pain_threshold_OBSOLETE = 300000154,
+            PATO_obsolete_pain_threshold_OBSOLETE = 300000154,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_threshold_OBSOLETE = 300000155,
+            PATO_obsolete_relative_threshold_OBSOLETE = 300000155,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_temporal_OBSOLETE = 300000157,
+            PATO_obsolete_absolute_temporal_OBSOLETE = 300000157,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_incidence_OBSOLETE = 300000159,
+            PATO_obsolete_absolute_incidence_OBSOLETE = 300000159,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_incidence_OBSOLETE = 300000160,
+            PATO_obsolete_relative_incidence_OBSOLETE = 300000160,
 
             /// <summary>A quality of a single process inhering in a bearer by virtue of the bearer's occurrence per unit time.</summary>
             PATO_rate = 300000161,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_rate_OBSOLETE = 300000162,
+            PATO_obsolete_absolute_rate_OBSOLETE = 300000162,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_rate_OBSOLETE = 300000163,
+            PATO_obsolete_relative_rate_OBSOLETE = 300000163,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_temporal_OBSOLETE = 300000164,
+            PATO_obsolete_relative_temporal_OBSOLETE = 300000164,
 
             /// <summary>A quality in which events occur in sequence.</summary>
             PATO_time = 300000165,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_time_OBSOLETE = 300000166,
+            PATO_obsolete_absolute_time_OBSOLETE = 300000166,
 
             /// <summary>A limited, often assigned period of activity.</summary>
-            PATO_bouts_OBSOLETE = 300000167,
+            PATO_obsolete_bouts_OBSOLETE = 300000167,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_time_OBSOLETE = 300000168,
+            PATO_obsolete_relative_time_OBSOLETE = 300000168,
 
             /// <summary>An organismal quality inhering in a bearer or a population by virtue of the bearer's disposition to survive and develop normally or the number of surviving individuals in a given population.</summary>
             PATO_viability = 300000169,
 
             /// <summary>Description not provided</summary>
-            PATO_yield_OBSOLETE = 300000170,
+            PATO_obsolete_yield_OBSOLETE = 300000170,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_yield_OBSOLETE = 300000171,
+            PATO_obsolete_absolute_yield_OBSOLETE = 300000171,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_yield_OBSOLETE = 300000172,
+            PATO_obsolete_relative_yield_OBSOLETE = 300000172,
 
             /// <summary>Description not provided</summary>
-            PATO_function_OBSOLETE = 300000173,
+            PATO_obsolete_function_OBSOLETE = 300000173,
 
             /// <summary>Description not provided</summary>
-            PATO_autonomic_function_OBSOLETE = 300000174,
+            PATO_obsolete_autonomic_function_OBSOLETE = 300000174,
 
             /// <summary>Description not provided</summary>
-            PATO_behavioral_function_OBSOLETE = 300000175,
+            PATO_obsolete_behavioral_function_OBSOLETE = 300000175,
 
             /// <summary>Description not provided</summary>
-            PATO_metabolic_function_OBSOLETE = 300000176,
+            PATO_obsolete_metabolic_function_OBSOLETE = 300000176,
 
             /// <summary>Description not provided</summary>
-            PATO_physiological_function_OBSOLETE = 300000177,
+            PATO_obsolete_physiological_function_OBSOLETE = 300000177,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_function_OBSOLETE = 300000178,
+            PATO_obsolete_relative_function_OBSOLETE = 300000178,
 
             /// <summary>Description not provided</summary>
-            PATO_body_position_OBSOLETE = 300000179,
+            PATO_obsolete_body_position_OBSOLETE = 300000179,
 
             /// <summary>Description not provided</summary>
-            PATO_body_tone_OBSOLETE = 300000180,
+            PATO_obsolete_body_tone_OBSOLETE = 300000180,
 
             /// <summary>Description not provided</summary>
-            PATO_piloerection_OBSOLETE = 300000181,
+            PATO_obsolete_piloerection_OBSOLETE = 300000181,
 
             /// <summary>Description not provided</summary>
-            PATO_abdominal_tone_OBSOLETE = 300000182,
+            PATO_obsolete_abdominal_tone_OBSOLETE = 300000182,
 
             /// <summary>Description not provided</summary>
-            PATO_limb_tone_OBSOLETE = 300000183,
+            PATO_obsolete_limb_tone_OBSOLETE = 300000183,
 
             /// <summary>Description not provided</summary>
-            PATO_arousal_OBSOLETE = 300000184,
+            PATO_obsolete_arousal_OBSOLETE = 300000184,
 
             /// <summary>A behavioral quality inhering in a bearer by virtue of having physical steadiness.</summary>
             PATO_balance = 300000185,
@@ -12638,7 +12767,7 @@ namespace PSI_Interface.CV
             PATO_behavioral_quality = 300000186,
 
             /// <summary>A relational quality of occurrent inhering in a bearer by virtue of the bearer's ability to consume a resource.</summary>
-            PATO_consumption_quality_OBSOLETE = 300000187,
+            PATO_obsolete_consumption_quality_OBSOLETE = 300000187,
 
             /// <summary>A behavioral quality inhering in a bearer by virtue of the bearer's having or lacking skillful and effective interaction of movement.</summary>
             PATO_coordination = 300000188,
@@ -12647,253 +12776,253 @@ namespace PSI_Interface.CV
             PATO_discrimination = 300000189,
 
             /// <summary>Description not provided</summary>
-            PATO_gait_OBSOLETE = 300000190,
+            PATO_obsolete_gait_OBSOLETE = 300000190,
 
             /// <summary>Description not provided</summary>
-            PATO_learning_and_memory_OBSOLETE = 300000191,
+            PATO_obsolete_learning_and_memory_OBSOLETE = 300000191,
 
             /// <summary>Description not provided</summary>
-            PATO_locomotor_activity_OBSOLETE = 300000192,
+            PATO_obsolete_locomotor_activity_OBSOLETE = 300000192,
 
             /// <summary>Description not provided</summary>
-            PATO_mating_OBSOLETE = 300000193,
+            PATO_obsolete_mating_OBSOLETE = 300000193,
 
             /// <summary>Description not provided</summary>
-            PATO_spontaneous_activity_OBSOLETE = 300000194,
+            PATO_obsolete_spontaneous_activity_OBSOLETE = 300000194,
 
             /// <summary>Description not provided</summary>
-            PATO_startle_response_OBSOLETE = 300000195,
+            PATO_obsolete_startle_response_OBSOLETE = 300000195,
 
             /// <summary>Description not provided</summary>
-            PATO_vocalization_OBSOLETE = 300000196,
+            PATO_obsolete_vocalization_OBSOLETE = 300000196,
 
             /// <summary>Description not provided</summary>
-            PATO_transfer_arousal_OBSOLETE = 300000197,
+            PATO_obsolete_transfer_arousal_OBSOLETE = 300000197,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_consumption_OBSOLETE = 300000198,
+            PATO_obsolete_absolute_consumption_OBSOLETE = 300000198,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_consumption_OBSOLETE = 300000199,
+            PATO_obsolete_relative_consumption_OBSOLETE = 300000199,
 
             /// <summary>Description not provided</summary>
-            PATO_learning_OBSOLETE = 300000200,
+            PATO_obsolete_learning_OBSOLETE = 300000200,
 
             /// <summary>Description not provided</summary>
-            PATO_memory_OBSOLETE = 300000201,
+            PATO_obsolete_memory_OBSOLETE = 300000201,
 
             /// <summary>Description not provided</summary>
-            PATO_long_term_memory_OBSOLETE = 300000202,
+            PATO_obsolete_long_term_memory_OBSOLETE = 300000202,
 
             /// <summary>Description not provided</summary>
-            PATO_short_term_memory_OBSOLETE = 300000203,
+            PATO_obsolete_short_term_memory_OBSOLETE = 300000203,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_locomotor_activity_OBSOLETE = 300000204,
+            PATO_obsolete_absolute_locomotor_activity_OBSOLETE = 300000204,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_locomotor_activity_OBSOLETE = 300000205,
+            PATO_obsolete_relative_locomotor_activity_OBSOLETE = 300000205,
 
             /// <summary>Description not provided</summary>
-            PATO_enzyme_function_OBSOLETE = 300000206,
+            PATO_obsolete_enzyme_function_OBSOLETE = 300000206,
 
             /// <summary>Description not provided</summary>
-            PATO_circulatory_function_OBSOLETE = 300000207,
+            PATO_obsolete_circulatory_function_OBSOLETE = 300000207,
 
             /// <summary>Description not provided</summary>
-            PATO_defensive_function_OBSOLETE = 300000208,
+            PATO_obsolete_defensive_function_OBSOLETE = 300000208,
 
             /// <summary>Description not provided</summary>
-            PATO_digestive_function_OBSOLETE = 300000209,
+            PATO_obsolete_digestive_function_OBSOLETE = 300000209,
 
             /// <summary>Description not provided</summary>
-            PATO_excretory_function_OBSOLETE = 300000210,
+            PATO_obsolete_excretory_function_OBSOLETE = 300000210,
 
             /// <summary>Description not provided</summary>
-            PATO_muscle_function_OBSOLETE = 300000211,
+            PATO_obsolete_muscle_function_OBSOLETE = 300000211,
 
             /// <summary>Description not provided</summary>
-            PATO_neural_function_OBSOLETE = 300000212,
+            PATO_obsolete_neural_function_OBSOLETE = 300000212,
 
             /// <summary>Description not provided</summary>
-            PATO_neurobehavioral_function_OBSOLETE = 300000213,
+            PATO_obsolete_neurobehavioral_function_OBSOLETE = 300000213,
 
             /// <summary>Description not provided</summary>
-            PATO_reproductive_function_OBSOLETE = 300000214,
+            PATO_obsolete_reproductive_function_OBSOLETE = 300000214,
 
             /// <summary>Description not provided</summary>
-            PATO_respiratory_function_OBSOLETE = 300000215,
+            PATO_obsolete_respiratory_function_OBSOLETE = 300000215,
 
             /// <summary>Description not provided</summary>
-            PATO_heart_rate_OBSOLETE = 300000216,
+            PATO_obsolete_heart_rate_OBSOLETE = 300000216,
 
             /// <summary>Description not provided</summary>
-            PATO_immune_function_OBSOLETE = 300000217,
+            PATO_obsolete_immune_function_OBSOLETE = 300000217,
 
             /// <summary>Description not provided</summary>
-            PATO_repair_function_OBSOLETE = 300000218,
+            PATO_obsolete_repair_function_OBSOLETE = 300000218,
 
             /// <summary>Description not provided</summary>
-            PATO_healing_OBSOLETE = 300000219,
+            PATO_obsolete_healing_OBSOLETE = 300000219,
 
             /// <summary>Description not provided</summary>
-            PATO_regeneration_OBSOLETE = 300000220,
+            PATO_obsolete_regeneration_OBSOLETE = 300000220,
 
             /// <summary>Description not provided</summary>
-            PATO_urination_OBSOLETE = 300000221,
+            PATO_obsolete_urination_OBSOLETE = 300000221,
 
             /// <summary>Description not provided</summary>
-            PATO_muscle_elevation_OBSOLETE = 300000222,
+            PATO_obsolete_muscle_elevation_OBSOLETE = 300000222,
 
             /// <summary>Description not provided</summary>
-            PATO_muscle_strength_OBSOLETE = 300000223,
+            PATO_obsolete_muscle_strength_OBSOLETE = 300000223,
 
             /// <summary>Description not provided</summary>
-            PATO_motor_function_OBSOLETE = 300000224,
+            PATO_obsolete_motor_function_OBSOLETE = 300000224,
 
             /// <summary>Description not provided</summary>
-            PATO_sensory_function_OBSOLETE = 300000225,
+            PATO_obsolete_sensory_function_OBSOLETE = 300000225,
 
             /// <summary>Description not provided</summary>
-            PATO_tactile_response_OBSOLETE = 300000226,
+            PATO_obsolete_tactile_response_OBSOLETE = 300000226,
 
             /// <summary>Description not provided</summary>
-            PATO_motor_performance_OBSOLETE = 300000227,
+            PATO_obsolete_motor_performance_OBSOLETE = 300000227,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_OBSOLETE = 300000228,
+            PATO_obsolete_auditory_OBSOLETE = 300000228,
 
             /// <summary>Description not provided</summary>
-            PATO_olfactory_OBSOLETE = 300000229,
+            PATO_obsolete_olfactory_OBSOLETE = 300000229,
 
             /// <summary>Description not provided</summary>
-            PATO_proprioreception_OBSOLETE = 300000230,
+            PATO_obsolete_proprioreception_OBSOLETE = 300000230,
 
             /// <summary>Description not provided</summary>
-            PATO_reflex_OBSOLETE = 300000231,
+            PATO_obsolete_reflex_OBSOLETE = 300000231,
 
             /// <summary>Description not provided</summary>
-            PATO_taste_OBSOLETE = 300000232,
+            PATO_obsolete_taste_OBSOLETE = 300000232,
 
             /// <summary>Description not provided</summary>
-            PATO_touch_OBSOLETE = 300000233,
+            PATO_obsolete_touch_OBSOLETE = 300000233,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_OBSOLETE = 300000234,
+            PATO_obsolete_visual_OBSOLETE = 300000234,
 
             /// <summary>Description not provided</summary>
-            PATO_odor_acuity_OBSOLETE = 300000235,
+            PATO_obsolete_odor_acuity_OBSOLETE = 300000235,
 
             /// <summary>Description not provided</summary>
-            PATO_odor_type_OBSOLETE = 300000236,
+            PATO_obsolete_odor_type_OBSOLETE = 300000236,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_odor_acuity_OBSOLETE = 300000237,
+            PATO_obsolete_absolute_odor_acuity_OBSOLETE = 300000237,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_odor_acuity_OBSOLETE = 300000238,
+            PATO_obsolete_relative_odor_acuity_OBSOLETE = 300000238,
 
             /// <summary>Description not provided</summary>
-            PATO_blinking_reflex_OBSOLETE = 300000239,
+            PATO_obsolete_blinking_reflex_OBSOLETE = 300000239,
 
             /// <summary>Description not provided</summary>
-            PATO_contact_righting_reflex_OBSOLETE = 300000240,
+            PATO_obsolete_contact_righting_reflex_OBSOLETE = 300000240,
 
             /// <summary>Description not provided</summary>
-            PATO_corneal_reflex_OBSOLETE = 300000241,
+            PATO_obsolete_corneal_reflex_OBSOLETE = 300000241,
 
             /// <summary>Description not provided</summary>
-            PATO_flinch_reflex_OBSOLETE = 300000242,
+            PATO_obsolete_flinch_reflex_OBSOLETE = 300000242,
 
             /// <summary>Description not provided</summary>
-            PATO_lordosis_reflex_OBSOLETE = 300000243,
+            PATO_obsolete_lordosis_reflex_OBSOLETE = 300000243,
 
             /// <summary>Description not provided</summary>
-            PATO_ocular_reflex_OBSOLETE = 300000244,
+            PATO_obsolete_ocular_reflex_OBSOLETE = 300000244,
 
             /// <summary>Description not provided</summary>
-            PATO_pinna_reflex_OBSOLETE = 300000245,
+            PATO_obsolete_pinna_reflex_OBSOLETE = 300000245,
 
             /// <summary>Description not provided</summary>
-            PATO_postural_reflex_OBSOLETE = 300000246,
+            PATO_obsolete_postural_reflex_OBSOLETE = 300000246,
 
             /// <summary>Description not provided</summary>
-            PATO_proboscis_extension_reflex_OBSOLETE = 300000247,
+            PATO_obsolete_proboscis_extension_reflex_OBSOLETE = 300000247,
 
             /// <summary>Description not provided</summary>
-            PATO_pupillary_reflex_OBSOLETE = 300000248,
+            PATO_obsolete_pupillary_reflex_OBSOLETE = 300000248,
 
             /// <summary>Description not provided</summary>
-            PATO_righting_reflex_OBSOLETE = 300000249,
+            PATO_obsolete_righting_reflex_OBSOLETE = 300000249,
 
             /// <summary>Description not provided</summary>
-            PATO_spinal_reflex_OBSOLETE = 300000250,
+            PATO_obsolete_spinal_reflex_OBSOLETE = 300000250,
 
             /// <summary>Description not provided</summary>
-            PATO_startle_reflex_OBSOLETE = 300000251,
+            PATO_obsolete_startle_reflex_OBSOLETE = 300000251,
 
             /// <summary>Description not provided</summary>
-            PATO_suckling_reflex_OBSOLETE = 300000252,
+            PATO_obsolete_suckling_reflex_OBSOLETE = 300000252,
 
             /// <summary>Description not provided</summary>
-            PATO_swallowing_reflex_OBSOLETE = 300000253,
+            PATO_obsolete_swallowing_reflex_OBSOLETE = 300000253,
 
             /// <summary>Description not provided</summary>
-            PATO_vibrissae_reflex_OBSOLETE = 300000254,
+            PATO_obsolete_vibrissae_reflex_OBSOLETE = 300000254,
 
             /// <summary>Description not provided</summary>
-            PATO_taste_acuity_OBSOLETE = 300000255,
+            PATO_obsolete_taste_acuity_OBSOLETE = 300000255,
 
             /// <summary>Description not provided</summary>
-            PATO_taste_type_OBSOLETE = 300000256,
+            PATO_obsolete_taste_type_OBSOLETE = 300000256,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_taste_acuity_OBSOLETE = 300000257,
+            PATO_obsolete_absolute_taste_acuity_OBSOLETE = 300000257,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_taste_acuity_OBSOLETE = 300000258,
+            PATO_obsolete_relative_taste_acuity_OBSOLETE = 300000258,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_ability_OBSOLETE = 300000259,
+            PATO_obsolete_visual_ability_OBSOLETE = 300000259,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_acuity_OBSOLETE = 300000260,
+            PATO_obsolete_visual_acuity_OBSOLETE = 300000260,
 
             /// <summary>A quality of a single physical entity which is held by a bearer when the latter exhibits complete growth, differentiation, or development.</summary>
             PATO_maturity = 300000261,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_placing_OBSOLETE = 300000262,
+            PATO_obsolete_visual_placing_OBSOLETE = 300000262,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_threshold_OBSOLETE = 300000263,
+            PATO_obsolete_visual_threshold_OBSOLETE = 300000263,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_visual_ability_OBSOLETE = 300000264,
+            PATO_obsolete_absolute_visual_ability_OBSOLETE = 300000264,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_visual_ability_OBSOLETE = 300000265,
+            PATO_obsolete_relative_visual_ability_OBSOLETE = 300000265,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_visual_acuity_OBSOLETE = 300000266,
+            PATO_obsolete_absolute_visual_acuity_OBSOLETE = 300000266,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_visual_acuity_OBSOLETE = 300000267,
+            PATO_obsolete_relative_visual_acuity_OBSOLETE = 300000267,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_visual_threshold_OBSOLETE = 300000268,
+            PATO_obsolete_absolute_visual_threshold_OBSOLETE = 300000268,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_visual_threshold_OBSOLETE = 300000269,
+            PATO_obsolete_relative_visual_threshold_OBSOLETE = 300000269,
 
             /// <summary>Description not provided</summary>
-            PATO_defecation_OBSOLETE = 300000270,
+            PATO_obsolete_defecation_OBSOLETE = 300000270,
 
             /// <summary>Description not provided</summary>
-            PATO_prepulse_inhibition_OBSOLETE = 300000271,
+            PATO_obsolete_prepulse_inhibition_OBSOLETE = 300000271,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_neurobehavioral_function_OBSOLETE = 300000272,
+            PATO_obsolete_relative_neurobehavioral_function_OBSOLETE = 300000272,
 
             /// <summary>A reproductive quality inhering in an organism or population by virtue of the bearer's potential reproductive capacity ad measured by the number of gametes.</summary>
             PATO_fecundity = 300000273,
@@ -12902,7 +13031,7 @@ namespace PSI_Interface.CV
             PATO_fertility = 300000274,
 
             /// <summary>Description not provided</summary>
-            PATO_gestational_period_OBSOLETE = 300000275,
+            PATO_obsolete_gestational_period_OBSOLETE = 300000275,
 
             /// <summary>A reproductive quality inhering in the young of an animal by virtue of their number.</summary>
             PATO_brood_size = 300000276,
@@ -12911,67 +13040,67 @@ namespace PSI_Interface.CV
             PATO_female_fertility = 300000277,
 
             /// <summary>Description not provided</summary>
-            PATO_hybrid_fertility_OBSOLETE = 300000278,
+            PATO_obsolete_hybrid_fertility_OBSOLETE = 300000278,
 
             /// <summary>A fertility quality of inhering in a male by virtue of the bearer's disposition to initiate, sustain, or support reproduction.</summary>
             PATO_male_fertility = 300000279,
 
             /// <summary>Description not provided</summary>
-            PATO_backcross_fertility_OBSOLETE = 300000280,
+            PATO_obsolete_backcross_fertility_OBSOLETE = 300000280,
 
             /// <summary>Description not provided</summary>
-            PATO_cytoplasmic_sterility_OBSOLETE = 300000281,
+            PATO_obsolete_cytoplasmic_sterility_OBSOLETE = 300000281,
 
             /// <summary>Description not provided</summary>
-            PATO_f1_fertility_OBSOLETE = 300000282,
+            PATO_obsolete_f1_fertility_OBSOLETE = 300000282,
 
             /// <summary>Description not provided</summary>
-            PATO_f2_fertility_OBSOLETE = 300000283,
+            PATO_obsolete_f2_fertility_OBSOLETE = 300000283,
 
             /// <summary>Description not provided</summary>
-            PATO_germ_line_dependent_fertility_OBSOLETE = 300000284,
+            PATO_obsolete_germ_line_dependent_fertility_OBSOLETE = 300000284,
 
             /// <summary>Description not provided</summary>
-            PATO_soma_dependent_fertility_OBSOLETE = 300000285,
+            PATO_obsolete_soma_dependent_fertility_OBSOLETE = 300000285,
 
             /// <summary>Description not provided</summary>
-            PATO_cytoplasmic_male_sterility_OBSOLETE = 300000286,
+            PATO_obsolete_cytoplasmic_male_sterility_OBSOLETE = 300000286,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_litter_size_OBSOLETE = 300000287,
+            PATO_obsolete_absolute_litter_size_OBSOLETE = 300000287,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_litter_size_OBSOLETE = 300000288,
+            PATO_obsolete_relative_litter_size_OBSOLETE = 300000288,
 
             /// <summary>Description not provided</summary>
-            PATO_respiratory_rate_OBSOLETE = 300000289,
+            PATO_obsolete_respiratory_rate_OBSOLETE = 300000289,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_respiratory_rate_OBSOLETE = 300000290,
+            PATO_obsolete_absolute_respiratory_rate_OBSOLETE = 300000290,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_respiratory_rate_OBSOLETE = 300000291,
+            PATO_obsolete_relative_respiratory_rate_OBSOLETE = 300000291,
 
             /// <summary>Description not provided</summary>
-            PATO_mobility_value_OBSOLETE = 300000292,
+            PATO_obsolete_mobility_value_OBSOLETE = 300000292,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_activity_value_OBSOLETE = 300000293,
+            PATO_obsolete_absolute_activity_value_OBSOLETE = 300000293,
 
             /// <summary>Description not provided</summary>
-            PATO_process_value_OBSOLETE = 300000294,
+            PATO_obsolete_process_value_OBSOLETE = 300000294,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_activity_value_OBSOLETE = 300000295,
+            PATO_obsolete_relative_activity_value_OBSOLETE = 300000295,
 
             /// <summary>Description not provided</summary>
-            PATO_speed_value_OBSOLETE = 300000296,
+            PATO_obsolete_speed_value_OBSOLETE = 300000296,
 
             /// <summary>A quality of a process which ends earlier than the natural end time or reference process.</summary>
             PATO_arrested = 300000297,
 
             /// <summary>Description not provided</summary>
-            PATO_not_arrested_value_OBSOLETE = 300000298,
+            PATO_obsolete_not_arrested_value_OBSOLETE = 300000298,
 
             /// <summary>A mobility quality of inhering in a bearer by virtue of the bearer's disposition to move freely.</summary>
             PATO_mobile = 300000299,
@@ -12980,10 +13109,10 @@ namespace PSI_Interface.CV
             PATO_immobile = 300000300,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_speed_value_OBSOLETE = 300000301,
+            PATO_obsolete_absolute_speed_value_OBSOLETE = 300000301,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_speed_value_OBSOLETE = 300000302,
+            PATO_obsolete_relative_speed_value_OBSOLETE = 300000302,
 
             /// <summary>A speed which is relatively high.</summary>
             PATO_increased_speed = 300000303,
@@ -12992,13 +13121,13 @@ namespace PSI_Interface.CV
             PATO_decreased_speed = 300000304,
 
             /// <summary>Description not provided</summary>
-            PATO_age_value_OBSOLETE = 300000305,
+            PATO_obsolete_age_value_OBSOLETE = 300000305,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_age_value_OBSOLETE = 300000306,
+            PATO_obsolete_absolute_age_value_OBSOLETE = 300000306,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_age_value_OBSOLETE = 300000307,
+            PATO_obsolete_relative_age_value_OBSOLETE = 300000307,
 
             /// <summary>An age which is relatively high.</summary>
             PATO_old = 300000308,
@@ -13007,25 +13136,25 @@ namespace PSI_Interface.CV
             PATO_young = 300000309,
 
             /// <summary>Description not provided</summary>
-            PATO_color_value_OBSOLETE = 300000310,
+            PATO_obsolete_color_value_OBSOLETE = 300000310,
 
             /// <summary>Description not provided</summary>
-            PATO_color_hue_value_OBSOLETE = 300000311,
+            PATO_obsolete_color_hue_value_OBSOLETE = 300000311,
 
             /// <summary>Description not provided</summary>
-            PATO_color_intensity_value_OBSOLETE = 300000312,
+            PATO_obsolete_color_intensity_value_OBSOLETE = 300000312,
 
             /// <summary>Description not provided</summary>
-            PATO_color_saturation_value_OBSOLETE = 300000313,
+            PATO_obsolete_color_saturation_value_OBSOLETE = 300000313,
 
             /// <summary>Description not provided</summary>
-            PATO_flourescence_value_OBSOLETE = 300000314,
+            PATO_obsolete_flourescence_value_OBSOLETE = 300000314,
 
             /// <summary>Description not provided</summary>
-            PATO_color_pattern_value_OBSOLETE = 300000315,
+            PATO_obsolete_color_pattern_value_OBSOLETE = 300000315,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_color_value_OBSOLETE = 300000316,
+            PATO_obsolete_relative_color_value_OBSOLETE = 300000316,
 
             /// <summary>A color that lacks any hues as parts.</summary>
             PATO_black = 300000317,
@@ -13052,10 +13181,10 @@ namespace PSI_Interface.CV
             PATO_yellow = 300000324,
 
             /// <summary>Description not provided</summary>
-            PATO_bright_OBSOLETE = 300000325,
+            PATO_obsolete_bright_OBSOLETE = 300000325,
 
             /// <summary>Description not provided</summary>
-            PATO_dim_OBSOLETE = 300000326,
+            PATO_obsolete_dim_OBSOLETE = 300000326,
 
             /// <summary>A color brightness which is relatively low.</summary>
             PATO_low_brightness = 300000327,
@@ -13076,7 +13205,7 @@ namespace PSI_Interface.CV
             PATO_spotted = 300000333,
 
             /// <summary>Description not provided</summary>
-            PATO_variegated_OBSOLETE = 300000335,
+            PATO_obsolete_variegated_OBSOLETE = 300000335,
 
             /// <summary>A color quality inhering in a bearer by virtue of the bearer's having color.</summary>
             PATO_colored = 300000336,
@@ -13085,22 +13214,22 @@ namespace PSI_Interface.CV
             PATO_colorless = 300000337,
 
             /// <summary>Description not provided</summary>
-            PATO_compatability_value_OBSOLETE = 300000338,
+            PATO_obsolete_compatability_value_OBSOLETE = 300000338,
 
             /// <summary>Description not provided</summary>
-            PATO_gametophytic_compatability_value_OBSOLETE = 300000339,
+            PATO_obsolete_gametophytic_compatability_value_OBSOLETE = 300000339,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_compatability_value_OBSOLETE = 300000340,
+            PATO_obsolete_relative_compatability_value_OBSOLETE = 300000340,
 
             /// <summary>Description not provided</summary>
-            PATO_sporophytic_compatability_value_OBSOLETE = 300000341,
+            PATO_obsolete_sporophytic_compatability_value_OBSOLETE = 300000341,
 
             /// <summary>Description not provided</summary>
-            PATO_gametophyte_compatible_value_OBSOLETE = 300000342,
+            PATO_obsolete_gametophyte_compatible_value_OBSOLETE = 300000342,
 
             /// <summary>Description not provided</summary>
-            PATO_gametophyte_incompatible_value_OBSOLETE = 300000343,
+            PATO_obsolete_gametophyte_incompatible_value_OBSOLETE = 300000343,
 
             /// <summary>A compatibility quality inhering in a bearer by virtue of the bearer's being capable of harmonious coexistence.</summary>
             PATO_compatible = 300000344,
@@ -13109,61 +13238,61 @@ namespace PSI_Interface.CV
             PATO_incompatible = 300000345,
 
             /// <summary>Description not provided</summary>
-            PATO_sporophyte_compatible_value_OBSOLETE = 300000346,
+            PATO_obsolete_sporophyte_compatible_value_OBSOLETE = 300000346,
 
             /// <summary>Description not provided</summary>
-            PATO_sporophyte_incompatible_value_OBSOLETE = 300000347,
+            PATO_obsolete_sporophyte_incompatible_value_OBSOLETE = 300000347,
 
             /// <summary>Description not provided</summary>
-            PATO_composition_value_OBSOLETE = 300000348,
+            PATO_obsolete_composition_value_OBSOLETE = 300000348,
 
             /// <summary>Description not provided</summary>
-            PATO_carbohydrate_composition_value_OBSOLETE = 300000349,
+            PATO_obsolete_carbohydrate_composition_value_OBSOLETE = 300000349,
 
             /// <summary>Description not provided</summary>
-            PATO_electrolyte_composition_value_OBSOLETE = 300000350,
+            PATO_obsolete_electrolyte_composition_value_OBSOLETE = 300000350,
 
             /// <summary>Description not provided</summary>
-            PATO_macromolecular_composition_value_OBSOLETE = 300000351,
+            PATO_obsolete_macromolecular_composition_value_OBSOLETE = 300000351,
 
             /// <summary>Description not provided</summary>
-            PATO_metabolite_composition_value_OBSOLETE = 300000352,
+            PATO_obsolete_metabolite_composition_value_OBSOLETE = 300000352,
 
             /// <summary>Description not provided</summary>
-            PATO_secondary_product_composition_value_OBSOLETE = 300000353,
+            PATO_obsolete_secondary_product_composition_value_OBSOLETE = 300000353,
 
             /// <summary>Description not provided</summary>
-            PATO_protein_composition_value_OBSOLETE = 300000354,
+            PATO_obsolete_protein_composition_value_OBSOLETE = 300000354,
 
             /// <summary>Description not provided</summary>
-            PATO_enzyme_composition_value_OBSOLETE = 300000355,
+            PATO_obsolete_enzyme_composition_value_OBSOLETE = 300000355,
 
             /// <summary>Description not provided</summary>
-            PATO_concentration_value_OBSOLETE = 300000356,
+            PATO_obsolete_concentration_value_OBSOLETE = 300000356,
 
             /// <summary>Description not provided</summary>
-            PATO_protein_concentration_value_OBSOLETE = 300000357,
+            PATO_obsolete_protein_concentration_value_OBSOLETE = 300000357,
 
             /// <summary>Description not provided</summary>
-            PATO_sugar_concentration_value_OBSOLETE = 300000358,
+            PATO_obsolete_sugar_concentration_value_OBSOLETE = 300000358,
 
             /// <summary>Description not provided</summary>
-            PATO_water_content_value_OBSOLETE = 300000359,
+            PATO_obsolete_water_content_value_OBSOLETE = 300000359,
 
             /// <summary>Description not provided</summary>
-            PATO_consistency_value_OBSOLETE = 300000360,
+            PATO_obsolete_consistency_value_OBSOLETE = 300000360,
 
             /// <summary>Description not provided</summary>
-            PATO_gel_consistency_value_OBSOLETE = 300000361,
+            PATO_obsolete_gel_consistency_value_OBSOLETE = 300000361,
 
             /// <summary>Description not provided</summary>
-            PATO_direction_value_OBSOLETE = 300000362,
+            PATO_obsolete_direction_value_OBSOLETE = 300000362,
 
             /// <summary>Description not provided</summary>
-            PATO_away_OBSOLETE = 300000363,
+            PATO_obsolete_away_OBSOLETE = 300000363,
 
             /// <summary>Description not provided</summary>
-            PATO_bi_directional_OBSOLETE = 300000364,
+            PATO_obsolete_bi_directional_OBSOLETE = 300000364,
 
             /// <summary>A directional quality inhering in a bearer by virtue of the bearer's direction from a higher to a lower point.</summary>
             PATO_down = 300000365,
@@ -13175,22 +13304,22 @@ namespace PSI_Interface.CV
             PATO_right = 300000367,
 
             /// <summary>Description not provided</summary>
-            PATO_towards1_OBSOLETE = 300000368,
+            PATO_obsolete_towards1_OBSOLETE = 300000368,
 
             /// <summary>Description not provided</summary>
-            PATO_unidirectional_OBSOLETE = 300000369,
+            PATO_obsolete_unidirectional_OBSOLETE = 300000369,
 
             /// <summary>A directional quality inhering in a bearer by virtue of the bearer's direction from a lower to a higher point.</summary>
             PATO_up = 300000370,
 
             /// <summary>Description not provided</summary>
-            PATO_distance_value_OBSOLETE = 300000371,
+            PATO_obsolete_distance_value_OBSOLETE = 300000371,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_distance_value_OBSOLETE = 300000372,
+            PATO_obsolete_absolute_distance_value_OBSOLETE = 300000372,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_distance_value_OBSOLETE = 300000373,
+            PATO_obsolete_relative_distance_value_OBSOLETE = 300000373,
 
             /// <summary>A distance which is greater relative to the normal or average.</summary>
             PATO_increased_distance = 300000374,
@@ -13199,16 +13328,16 @@ namespace PSI_Interface.CV
             PATO_decreased_distance = 300000375,
 
             /// <summary>Description not provided</summary>
-            PATO_flavor_value_OBSOLETE = 300000376,
+            PATO_obsolete_flavor_value_OBSOLETE = 300000376,
 
             /// <summary>Description not provided</summary>
-            PATO_frequency_value_OBSOLETE = 300000377,
+            PATO_obsolete_frequency_value_OBSOLETE = 300000377,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_frequency_value_OBSOLETE = 300000378,
+            PATO_obsolete_absolute_frequency_value_OBSOLETE = 300000378,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_frequency_value_OBSOLETE = 300000379,
+            PATO_obsolete_relative_frequency_value_OBSOLETE = 300000379,
 
             /// <summary>A frequency which is relatively high.</summary>
             PATO_increased_frequency = 300000380,
@@ -13217,7 +13346,7 @@ namespace PSI_Interface.CV
             PATO_decreased_frequency = 300000381,
 
             /// <summary>Description not provided</summary>
-            PATO_gender_value_OBSOLETE = 300000382,
+            PATO_obsolete_gender_value_OBSOLETE = 300000382,
 
             /// <summary>A biological sex quality inhering in an individual or a population that only produces gametes that can be fertilised by male gametes.</summary>
             PATO_female = 300000383,
@@ -13226,7 +13355,7 @@ namespace PSI_Interface.CV
             PATO_male = 300000384,
 
             /// <summary>Description not provided</summary>
-            PATO_hardness_value_OBSOLETE = 300000385,
+            PATO_obsolete_hardness_value_OBSOLETE = 300000385,
 
             /// <summary>A hardness quality of being rigid and resistant to pressure.</summary>
             PATO_hard = 300000386,
@@ -13235,22 +13364,22 @@ namespace PSI_Interface.CV
             PATO_soft = 300000387,
 
             /// <summary>Description not provided</summary>
-            PATO_intensity_value_OBSOLETE = 300000388,
+            PATO_obsolete_intensity_value_OBSOLETE = 300000388,
 
             /// <summary>A quality of a process inhering in a bearer by virtue of the bearer's having a sudden onset, sharp rise, and short course.</summary>
             PATO_acute = 300000389,
 
             /// <summary>Description not provided</summary>
-            PATO_extreme_OBSOLETE = 300000390,
+            PATO_obsolete_extreme_OBSOLETE = 300000390,
 
             /// <summary>Description not provided</summary>
-            PATO_intense_OBSOLETE = 300000391,
+            PATO_obsolete_intense_OBSOLETE = 300000391,
 
             /// <summary>Description not provided</summary>
-            PATO_limited_OBSOLETE = 300000392,
+            PATO_obsolete_limited_OBSOLETE = 300000392,
 
             /// <summary>Description not provided</summary>
-            PATO_maximal_OBSOLETE = 300000393,
+            PATO_obsolete_maximal_OBSOLETE = 300000393,
 
             /// <summary>An intensity which is less than moderate in type or degree or effect or force.</summary>
             PATO_mild_intensity = 300000394,
@@ -13262,19 +13391,19 @@ namespace PSI_Interface.CV
             PATO_severe_intensity = 300000396,
 
             /// <summary>Description not provided</summary>
-            PATO_slight_OBSOLETE = 300000397,
+            PATO_obsolete_slight_OBSOLETE = 300000397,
 
             /// <summary>Description not provided</summary>
-            PATO_vigorous_OBSOLETE = 300000398,
+            PATO_obsolete_vigorous_OBSOLETE = 300000398,
 
             /// <summary>Description not provided</summary>
-            PATO_life_span_value_OBSOLETE = 300000399,
+            PATO_obsolete_life_span_value_OBSOLETE = 300000399,
 
             /// <summary>Description not provided</summary>
-            PATO_morphology_value_OBSOLETE = 300000400,
+            PATO_obsolete_morphology_value_OBSOLETE = 300000400,
 
             /// <summary>Description not provided</summary>
-            PATO_shape_value_OBSOLETE = 300000401,
+            PATO_obsolete_shape_value_OBSOLETE = 300000401,
 
             /// <summary>A branchiness quality inhering in a bearer by virtue of the bearer's having branches.</summary>
             PATO_branched = 300000402,
@@ -13313,16 +13442,16 @@ namespace PSI_Interface.CV
             PATO_uncoiled = 300000415,
 
             /// <summary>Description not provided</summary>
-            PATO_count_value_OBSOLETE = 300000416,
+            PATO_obsolete_count_value_OBSOLETE = 300000416,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_number_value_OBSOLETE = 300000417,
+            PATO_obsolete_absolute_number_value_OBSOLETE = 300000417,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_number_value_OBSOLETE = 300000418,
+            PATO_obsolete_relative_number_value_OBSOLETE = 300000418,
 
             /// <summary>Description not provided</summary>
-            PATO_nutritional_value_OBSOLETE = 300000421,
+            PATO_obsolete_nutritional_value_OBSOLETE = 300000421,
 
             /// <summary>A nutritional quality inhering in a bearer by virtue of the bearer's inability to synthesize a particular organic compound required for its growth.</summary>
             PATO_auxotrophic = 300000422,
@@ -13331,10 +13460,10 @@ namespace PSI_Interface.CV
             PATO_prototrophic = 300000423,
 
             /// <summary>Description not provided</summary>
-            PATO_occurence_value_OBSOLETE = 300000424,
+            PATO_obsolete_occurence_value_OBSOLETE = 300000424,
 
             /// <summary>Description not provided</summary>
-            PATO_continual_OBSOLETE = 300000425,
+            PATO_obsolete_continual_OBSOLETE = 300000425,
 
             /// <summary>A quality of a single process inhering in a bearer by virtue of the bearer's occurring or appearing again or repeatedly.</summary>
             PATO_recurrent = 300000427,
@@ -13343,34 +13472,34 @@ namespace PSI_Interface.CV
             PATO_sporadic = 300000428,
 
             /// <summary>Description not provided</summary>
-            PATO_unique_OBSOLETE = 300000430,
+            PATO_obsolete_unique_OBSOLETE = 300000430,
 
             /// <summary>Description not provided</summary>
-            PATO_odor_value_OBSOLETE = 300000431,
+            PATO_obsolete_odor_value_OBSOLETE = 300000431,
 
             /// <summary>Description not provided</summary>
-            PATO_parental_type_value_OBSOLETE = 300000432,
+            PATO_obsolete_parental_type_value_OBSOLETE = 300000432,
 
             /// <summary>A parental quality inhering in a bearer by virtue of exhibiting the characteristic of a father.</summary>
-            PATO_paternal_OBSOLETE = 300000433,
+            PATO_obsolete_paternal_OBSOLETE = 300000433,
 
             /// <summary>A parental quality inhering in a bearer by virtue of exhibiting the characteristic of a mother.</summary>
-            PATO_maternal_OBSOLETE = 300000434,
+            PATO_obsolete_maternal_OBSOLETE = 300000434,
 
             /// <summary>Description not provided</summary>
-            PATO_pattern_value_OBSOLETE = 300000435,
+            PATO_obsolete_pattern_value_OBSOLETE = 300000435,
 
             /// <summary>Description not provided</summary>
-            PATO_concrete_OBSOLETE = 300000436,
+            PATO_obsolete_concrete_OBSOLETE = 300000436,
 
             /// <summary>Description not provided</summary>
-            PATO_sleep_pattern_value_OBSOLETE = 300000437,
+            PATO_obsolete_sleep_pattern_value_OBSOLETE = 300000437,
 
             /// <summary>A variability quality inhering in a bearer by virtue of the bearer's lacking or not exhibiting variation.</summary>
             PATO_invariant = 300000438,
 
             /// <summary>Description not provided</summary>
-            PATO_perseverative_OBSOLETE = 300000439,
+            PATO_obsolete_perseverative_OBSOLETE = 300000439,
 
             /// <summary>A pattern quality inhering in a bearer by virtue of the bearer's having a repeatable or predictable placement.</summary>
             PATO_regular_spatial_pattern = 300000440,
@@ -13379,37 +13508,37 @@ namespace PSI_Interface.CV
             PATO_repetitive = 300000441,
 
             /// <summary>A sleep pattern quality inhering in a bearer by virtue of the bearer's inability to sleep.</summary>
-            PATO_insomnia_OBSOLETE = 300000442,
+            PATO_obsolete_insomnia_OBSOLETE = 300000442,
 
             /// <summary>A sleep pattern quality inhering in a bearer by virtue of the bearer's disrupted sleep during normal sleeping period; often accompanied by cataplexy, sleep paralysis.</summary>
-            PATO_narcolepsy_OBSOLETE = 300000443,
+            PATO_obsolete_narcolepsy_OBSOLETE = 300000443,
 
             /// <summary>Description not provided</summary>
-            PATO_percentage_value_OBSOLETE = 300000444,
+            PATO_obsolete_percentage_value_OBSOLETE = 300000444,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_percentage_value_OBSOLETE = 300000445,
+            PATO_obsolete_relative_percentage_value_OBSOLETE = 300000445,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_percentage_value_OBSOLETE = 300000446,
+            PATO_obsolete_absolute_percentage_value_OBSOLETE = 300000446,
 
             /// <summary>Description not provided</summary>
-            PATO_decreased_percentage_OBSOLETE = 300000447,
+            PATO_obsolete_decreased_percentage_OBSOLETE = 300000447,
 
             /// <summary>Description not provided</summary>
-            PATO_high_percentage_OBSOLETE = 300000448,
+            PATO_obsolete_high_percentage_OBSOLETE = 300000448,
 
             /// <summary>Description not provided</summary>
-            PATO_increased_percentage_OBSOLETE = 300000449,
+            PATO_obsolete_increased_percentage_OBSOLETE = 300000449,
 
             /// <summary>Description not provided</summary>
-            PATO_low_percentage_OBSOLETE = 300000450,
+            PATO_obsolete_low_percentage_OBSOLETE = 300000450,
 
             /// <summary>Description not provided</summary>
-            PATO_pilosity_value_OBSOLETE = 300000451,
+            PATO_obsolete_pilosity_value_OBSOLETE = 300000451,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_pilosity_value_OBSOLETE = 300000452,
+            PATO_obsolete_relative_pilosity_value_OBSOLETE = 300000452,
 
             /// <summary>A pilosity quality inhering in a bearer by virtue of the bearer's lack of hairs or bristles.</summary>
             PATO_glabrous = 300000453,
@@ -13421,16 +13550,16 @@ namespace PSI_Interface.CV
             PATO_pubescent = 300000455,
 
             /// <summary>Description not provided</summary>
-            PATO_abstract_OBSOLETE = 300000456,
+            PATO_obsolete_abstract_OBSOLETE = 300000456,
 
             /// <summary>Description not provided</summary>
-            PATO_deviation_from_normal__value_OBSOLETE = 300000457,
+            PATO_obsolete_deviation_from_normal__value_OBSOLETE = 300000457,
 
             /// <summary>Description not provided</summary>
-            PATO_presence_value_OBSOLETE = 300000458,
+            PATO_obsolete_presence_value_OBSOLETE = 300000458,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_quantity_value_OBSOLETE = 300000459,
+            PATO_obsolete_relative_quantity_value_OBSOLETE = 300000459,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's deviation from normal or average.</summary>
             PATO_abnormal = 300000460,
@@ -13448,67 +13577,67 @@ namespace PSI_Interface.CV
             PATO_inconspicuous = 300000464,
 
             /// <summary>Description not provided</summary>
-            PATO_marked_OBSOLETE = 300000465,
+            PATO_obsolete_marked_OBSOLETE = 300000465,
 
             /// <summary>Description not provided</summary>
-            PATO_none_OBSOLETE = 300000466,
+            PATO_obsolete_none_OBSOLETE = 300000466,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's existence.</summary>
             PATO_present = 300000467,
 
             /// <summary>Description not provided</summary>
-            PATO_high_OBSOLETE = 300000469,
+            PATO_obsolete_high_OBSOLETE = 300000469,
 
             /// <summary>An amount which is relatively high.</summary>
             PATO_increased_amount = 300000470,
 
             /// <summary>Description not provided</summary>
-            PATO_low_OBSOLETE = 300000471,
+            PATO_obsolete_low_OBSOLETE = 300000471,
 
             /// <summary>Description not provided</summary>
-            PATO_quality_value_OBSOLETE = 300000472,
+            PATO_obsolete_quality_value_OBSOLETE = 300000472,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_quality_value_OBSOLETE = 300000473,
+            PATO_obsolete_relative_quality_value_OBSOLETE = 300000473,
 
             /// <summary>Description not provided</summary>
-            PATO_shattering_value_OBSOLETE = 300000474,
+            PATO_obsolete_shattering_value_OBSOLETE = 300000474,
 
             /// <summary>Description not provided</summary>
-            PATO_threshability_value_OBSOLETE = 300000475,
+            PATO_obsolete_threshability_value_OBSOLETE = 300000475,
 
             /// <summary>Description not provided</summary>
-            PATO_bad_value_OBSOLETE = 300000476,
+            PATO_obsolete_bad_value_OBSOLETE = 300000476,
 
             /// <summary>Description not provided</summary>
-            PATO_good_value_OBSOLETE = 300000477,
+            PATO_obsolete_good_value_OBSOLETE = 300000477,
 
             /// <summary>Description not provided</summary>
-            PATO_poor_value_OBSOLETE = 300000478,
+            PATO_obsolete_poor_value_OBSOLETE = 300000478,
 
             /// <summary>Description not provided</summary>
-            PATO_regulation_value_OBSOLETE = 300000479,
+            PATO_obsolete_regulation_value_OBSOLETE = 300000479,
 
             /// <summary>Description not provided</summary>
-            PATO_positive_regulation_OBSOLETE = 300000480,
+            PATO_obsolete_positive_regulation_OBSOLETE = 300000480,
 
             /// <summary>Description not provided</summary>
-            PATO_negative_regulation_OBSOLETE = 300000481,
+            PATO_obsolete_negative_regulation_OBSOLETE = 300000481,
 
             /// <summary>Description not provided</summary>
-            PATO_response_value_OBSOLETE = 300000482,
+            PATO_obsolete_response_value_OBSOLETE = 300000482,
 
             /// <summary>Description not provided</summary>
-            PATO_tactile_hyperresponsive_OBSOLETE = 300000483,
+            PATO_obsolete_tactile_hyperresponsive_OBSOLETE = 300000483,
 
             /// <summary>Description not provided</summary>
-            PATO_tactile_hyporesponsive_OBSOLETE = 300000484,
+            PATO_obsolete_tactile_hyporesponsive_OBSOLETE = 300000484,
 
             /// <summary>Description not provided</summary>
-            PATO_mild_response_OBSOLETE = 300000485,
+            PATO_obsolete_mild_response_OBSOLETE = 300000485,
 
             /// <summary>Description not provided</summary>
-            PATO_moderate_response_OBSOLETE = 300000486,
+            PATO_obsolete_moderate_response_OBSOLETE = 300000486,
 
             /// <summary>A response quality inhering in a bearer by virtue of the bearer's disposition to react to a stimulus or an agent.</summary>
             PATO_responsive_to = 300000487,
@@ -13517,31 +13646,31 @@ namespace PSI_Interface.CV
             PATO_unresponsive_to = 300000488,
 
             /// <summary>Description not provided</summary>
-            PATO_vigorous_response_OBSOLETE = 300000489,
+            PATO_obsolete_vigorous_response_OBSOLETE = 300000489,
 
             /// <summary>Description not provided</summary>
-            PATO_rhythym_value_OBSOLETE = 300000490,
+            PATO_obsolete_rhythym_value_OBSOLETE = 300000490,
 
             /// <summary>Description not provided</summary>
-            PATO_sensitivity_value_OBSOLETE = 300000491,
+            PATO_obsolete_sensitivity_value_OBSOLETE = 300000491,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_rhythym_value_OBSOLETE = 300000492,
+            PATO_obsolete_absolute_rhythym_value_OBSOLETE = 300000492,
 
             /// <summary>Description not provided</summary>
-            PATO_amplitude_value_OBSOLETE = 300000493,
+            PATO_obsolete_amplitude_value_OBSOLETE = 300000493,
 
             /// <summary>Description not provided</summary>
-            PATO_period_value_OBSOLETE = 300000494,
+            PATO_obsolete_period_value_OBSOLETE = 300000494,
 
             /// <summary>Description not provided</summary>
-            PATO_persistence_value_OBSOLETE = 300000495,
+            PATO_obsolete_persistence_value_OBSOLETE = 300000495,
 
             /// <summary>Description not provided</summary>
-            PATO_phase_value_OBSOLETE = 300000496,
+            PATO_obsolete_phase_value_OBSOLETE = 300000496,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_rhythym_value_OBSOLETE = 300000497,
+            PATO_obsolete_relative_rhythym_value_OBSOLETE = 300000497,
 
             /// <summary>A duration quality of a process which is relatively high.</summary>
             PATO_increased_duration = 300000498,
@@ -13568,31 +13697,31 @@ namespace PSI_Interface.CV
             PATO_rhythmic = 300000505,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_sensitivity_value_OBSOLETE = 300000506,
+            PATO_obsolete_absolute_sensitivity_value_OBSOLETE = 300000506,
 
             /// <summary>Description not provided</summary>
-            PATO_disease_sensitivity_value_OBSOLETE = 300000507,
+            PATO_obsolete_disease_sensitivity_value_OBSOLETE = 300000507,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_sensitivity_value_OBSOLETE = 300000508,
+            PATO_obsolete_relative_sensitivity_value_OBSOLETE = 300000508,
 
             /// <summary>Description not provided</summary>
-            PATO_stress_sensitivity_value_OBSOLETE = 300000509,
+            PATO_obsolete_stress_sensitivity_value_OBSOLETE = 300000509,
 
             /// <summary>Description not provided</summary>
-            PATO_temperature_sensitivity_value_OBSOLETE = 300000510,
+            PATO_obsolete_temperature_sensitivity_value_OBSOLETE = 300000510,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_disease_sensitivity_value_OBSOLETE = 300000511,
+            PATO_obsolete_absolute_disease_sensitivity_value_OBSOLETE = 300000511,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_disease_sensitivity_value_OBSOLETE = 300000512,
+            PATO_obsolete_relative_disease_sensitivity_value_OBSOLETE = 300000512,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's lacking sensitivity toward an external stimulus.</summary>
             PATO_insensitive_toward = 300000513,
 
             /// <summary>Description not provided</summary>
-            PATO_intolerant_value_OBSOLETE = 300000514,
+            PATO_obsolete_intolerant_value_OBSOLETE = 300000514,
 
             /// <summary>A resistance quality inhering in a bearer by virtue of its disposition to endure or being insensitive to a stimulus.</summary>
             PATO_tolerant_to = 300000515,
@@ -13601,91 +13730,91 @@ namespace PSI_Interface.CV
             PATO_sensitive_toward = 300000516,
 
             /// <summary>Description not provided</summary>
-            PATO_abiotic_stress_sensitivity_value_OBSOLETE = 300000517,
+            PATO_obsolete_abiotic_stress_sensitivity_value_OBSOLETE = 300000517,
 
             /// <summary>Description not provided</summary>
-            PATO_chemical_sensitivity_value_OBSOLETE = 300000518,
+            PATO_obsolete_chemical_sensitivity_value_OBSOLETE = 300000518,
 
             /// <summary>Description not provided</summary>
-            PATO_humidity_sensitivity_value_OBSOLETE = 300000519,
+            PATO_obsolete_humidity_sensitivity_value_OBSOLETE = 300000519,
 
             /// <summary>Description not provided</summary>
-            PATO_radiation_sensitivity_value_OBSOLETE = 300000520,
+            PATO_obsolete_radiation_sensitivity_value_OBSOLETE = 300000520,
 
             /// <summary>Description not provided</summary>
-            PATO_drug_sensitivity_value_OBSOLETE = 300000521,
+            PATO_obsolete_drug_sensitivity_value_OBSOLETE = 300000521,
 
             /// <summary>Description not provided</summary>
-            PATO_herbicide_sensitivity_value_OBSOLETE = 300000522,
+            PATO_obsolete_herbicide_sensitivity_value_OBSOLETE = 300000522,
 
             /// <summary>Description not provided</summary>
-            PATO_insecticide_sensitivity_value_OBSOLETE = 300000523,
+            PATO_obsolete_insecticide_sensitivity_value_OBSOLETE = 300000523,
 
             /// <summary>Description not provided</summary>
-            PATO_plant_growth_hormone_sensitivity_value_OBSOLETE = 300000524,
+            PATO_obsolete_plant_growth_hormone_sensitivity_value_OBSOLETE = 300000524,
 
             /// <summary>Description not provided</summary>
-            PATO_soil_composition_sensitivity_value_OBSOLETE = 300000525,
+            PATO_obsolete_soil_composition_sensitivity_value_OBSOLETE = 300000525,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_drug_sensitivity_value_OBSOLETE = 300000526,
+            PATO_obsolete_absolute_drug_sensitivity_value_OBSOLETE = 300000526,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_drug_sensitivity_value_OBSOLETE = 300000527,
+            PATO_obsolete_relative_drug_sensitivity_value_OBSOLETE = 300000527,
 
             /// <summary>Description not provided</summary>
-            PATO_drug_insensitive_OBSOLETE = 300000528,
+            PATO_obsolete_drug_insensitive_OBSOLETE = 300000528,
 
             /// <summary>Description not provided</summary>
-            PATO_drug_sensitive_OBSOLETE = 300000529,
+            PATO_obsolete_drug_sensitive_OBSOLETE = 300000529,
 
             /// <summary>Description not provided</summary>
-            PATO_soil_nutrient_sensitivity_value_OBSOLETE = 300000530,
+            PATO_obsolete_soil_nutrient_sensitivity_value_OBSOLETE = 300000530,
 
             /// <summary>Description not provided</summary>
-            PATO_macronutrient_sensitivity_value_OBSOLETE = 300000531,
+            PATO_obsolete_macronutrient_sensitivity_value_OBSOLETE = 300000531,
 
             /// <summary>Description not provided</summary>
-            PATO_micronutrient_sensitivity_value_OBSOLETE = 300000532,
+            PATO_obsolete_micronutrient_sensitivity_value_OBSOLETE = 300000532,
 
             /// <summary>Description not provided</summary>
-            PATO_osmotic_response_sensitivity_OBSOLETE1 = 300000533,
+            PATO_obsolete_osmotic_response_sensitivity_OBSOLETE1 = 300000533,
 
             /// <summary>Description not provided</summary>
-            PATO_p_h_sensitivity_value_OBSOLETE = 300000534,
+            PATO_obsolete_p_h_sensitivity_value_OBSOLETE = 300000534,
 
             /// <summary>Description not provided</summary>
-            PATO_salt_sensitivity_value_OBSOLETE = 300000535,
+            PATO_obsolete_salt_sensitivity_value_OBSOLETE = 300000535,
 
             /// <summary>Description not provided</summary>
-            PATO_water_sensitivity_value_OBSOLETE = 300000536,
+            PATO_obsolete_water_sensitivity_value_OBSOLETE = 300000536,
 
             /// <summary>Description not provided</summary>
-            PATO_acid_sensitivity_value_OBSOLETE = 300000537,
+            PATO_obsolete_acid_sensitivity_value_OBSOLETE = 300000537,
 
             /// <summary>Description not provided</summary>
-            PATO_alkali_sensitivity_value_OBSOLETE = 300000538,
+            PATO_obsolete_alkali_sensitivity_value_OBSOLETE = 300000538,
 
             /// <summary>Description not provided</summary>
-            PATO_drought_sensitivity_value_OBSOLETE = 300000539,
+            PATO_obsolete_drought_sensitivity_value_OBSOLETE = 300000539,
 
             /// <summary>Description not provided</summary>
-            PATO_flooding_sensitivity_value_OBSOLETE = 300000540,
+            PATO_obsolete_flooding_sensitivity_value_OBSOLETE = 300000540,
 
             /// <summary>Description not provided</summary>
-            PATO_photosensitivity_value_OBSOLETE = 300000541,
+            PATO_obsolete_photosensitivity_value_OBSOLETE = 300000541,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_photosensitivity_value_OBSOLETE = 300000542,
+            PATO_obsolete_absolute_photosensitivity_value_OBSOLETE = 300000542,
 
             /// <summary>Description not provided</summary>
-            PATO_light_intensivity_sensitivity_value_OBSOLETE = 300000543,
+            PATO_obsolete_light_intensivity_sensitivity_value_OBSOLETE = 300000543,
 
             /// <summary>Description not provided</summary>
-            PATO_light_quality_sensitivity_value_OBSOLETE = 300000544,
+            PATO_obsolete_light_quality_sensitivity_value_OBSOLETE = 300000544,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_photosensitivity_value_OBSOLETE = 300000545,
+            PATO_obsolete_relative_photosensitivity_value_OBSOLETE = 300000545,
 
             /// <summary>A photosensitivity quality inhering in a bearer by virtue of the bearer's lacking photosensitivity.</summary>
             PATO_photoinsensitive = 300000546,
@@ -13694,67 +13823,67 @@ namespace PSI_Interface.CV
             PATO_photosensitive = 300000547,
 
             /// <summary>Description not provided</summary>
-            PATO_blue_light_sensitivity_value_OBSOLETE = 300000548,
+            PATO_obsolete_blue_light_sensitivity_value_OBSOLETE = 300000548,
 
             /// <summary>Description not provided</summary>
-            PATO_far_red_light_sensitivity_value_OBSOLETE = 300000549,
+            PATO_obsolete_far_red_light_sensitivity_value_OBSOLETE = 300000549,
 
             /// <summary>Description not provided</summary>
-            PATO_red_light_sensitivity_value_OBSOLETE = 300000550,
+            PATO_obsolete_red_light_sensitivity_value_OBSOLETE = 300000550,
 
             /// <summary>Description not provided</summary>
-            PATO_u_v_light_sensitivity_value_OBSOLETE = 300000551,
+            PATO_obsolete_u_v_light_sensitivity_value_OBSOLETE = 300000551,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_temperature_sensitivity_value_OBSOLETE = 300000552,
+            PATO_obsolete_absolute_temperature_sensitivity_value_OBSOLETE = 300000552,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_temperature_sensitivity_value_OBSOLETE = 300000553,
+            PATO_obsolete_relative_temperature_sensitivity_value_OBSOLETE = 300000553,
 
             /// <summary>Description not provided</summary>
-            PATO_cold_sensitive_OBSOLETE = 300000554,
+            PATO_obsolete_cold_sensitive_OBSOLETE = 300000554,
 
             /// <summary>Description not provided</summary>
-            PATO_heat_sensitive_OBSOLETE = 300000555,
+            PATO_obsolete_heat_sensitive_OBSOLETE = 300000555,
 
             /// <summary>Description not provided</summary>
-            PATO_thermoinsensitive_OBSOLETE = 300000556,
+            PATO_obsolete_thermoinsensitive_OBSOLETE = 300000556,
 
             /// <summary>Description not provided</summary>
-            PATO_thermosensitive_OBSOLETE = 300000557,
+            PATO_obsolete_thermosensitive_OBSOLETE = 300000557,
 
             /// <summary>Description not provided</summary>
-            PATO_size_value_OBSOLETE = 300000558,
+            PATO_obsolete_size_value_OBSOLETE = 300000558,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_size_value_OBSOLETE = 300000559,
+            PATO_obsolete_absolute_size_value_OBSOLETE = 300000559,
 
             /// <summary>Description not provided</summary>
-            PATO_height_value_OBSOLETE = 300000560,
+            PATO_obsolete_height_value_OBSOLETE = 300000560,
 
             /// <summary>Description not provided</summary>
-            PATO_length_value_OBSOLETE = 300000561,
+            PATO_obsolete_length_value_OBSOLETE = 300000561,
 
             /// <summary>Description not provided</summary>
-            PATO_mass_value_OBSOLETE = 300000562,
+            PATO_obsolete_mass_value_OBSOLETE = 300000562,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_size_value_OBSOLETE = 300000563,
+            PATO_obsolete_relative_size_value_OBSOLETE = 300000563,
 
             /// <summary>Description not provided</summary>
-            PATO_thickness_value_OBSOLETE = 300000564,
+            PATO_obsolete_thickness_value_OBSOLETE = 300000564,
 
             /// <summary>Description not provided</summary>
-            PATO_volume_value_OBSOLETE = 300000565,
+            PATO_obsolete_volume_value_OBSOLETE = 300000565,
 
             /// <summary>Description not provided</summary>
-            PATO_width_value_OBSOLETE = 300000566,
+            PATO_obsolete_width_value_OBSOLETE = 300000566,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_height_value_OBSOLETE = 300000567,
+            PATO_obsolete_absolute_height_value_OBSOLETE = 300000567,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_height_value_OBSOLETE = 300000568,
+            PATO_obsolete_relative_height_value_OBSOLETE = 300000568,
 
             /// <summary>A height which is relatively low.</summary>
             PATO_decreased_height = 300000569,
@@ -13763,10 +13892,10 @@ namespace PSI_Interface.CV
             PATO_increased_height = 300000570,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_length_value_OBSOLETE = 300000571,
+            PATO_obsolete_absolute_length_value_OBSOLETE = 300000571,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_length_value_OBSOLETE = 300000572,
+            PATO_obsolete_relative_length_value_OBSOLETE = 300000572,
 
             /// <summary>A length quality which is relatively large.</summary>
             PATO_increased_length = 300000573,
@@ -13775,19 +13904,19 @@ namespace PSI_Interface.CV
             PATO_decreased_length = 300000574,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_mass_value_OBSOLETE = 300000575,
+            PATO_obsolete_absolute_mass_value_OBSOLETE = 300000575,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_mass_value_OBSOLETE = 300000576,
+            PATO_obsolete_relative_mass_value_OBSOLETE = 300000576,
 
             /// <summary>Description not provided</summary>
-            PATO_weight_value_OBSOLETE = 300000577,
+            PATO_obsolete_weight_value_OBSOLETE = 300000577,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_weight_value_OBSOLETE = 300000580,
+            PATO_obsolete_absolute_weight_value_OBSOLETE = 300000580,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_weight_value_OBSOLETE = 300000581,
+            PATO_obsolete_relative_weight_value_OBSOLETE = 300000581,
 
             /// <summary>A weight which is relatively high.</summary>
             PATO_increased_weight = 300000582,
@@ -13811,10 +13940,10 @@ namespace PSI_Interface.CV
             PATO_vestigial = 300000588,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_thickness_value_OBSOLETE = 300000589,
+            PATO_obsolete_absolute_thickness_value_OBSOLETE = 300000589,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_thickness_value_OBSOLETE = 300000590,
+            PATO_obsolete_relative_thickness_value_OBSOLETE = 300000590,
 
             /// <summary>A thickness which is relatively high.</summary>
             PATO_increased_thickness = 300000591,
@@ -13823,10 +13952,10 @@ namespace PSI_Interface.CV
             PATO_decreased_thickness = 300000592,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_volume_value_OBSOLETE = 300000593,
+            PATO_obsolete_absolute_volume_value_OBSOLETE = 300000593,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_volume_value_OBSOLETE = 300000594,
+            PATO_obsolete_relative_volume_value_OBSOLETE = 300000594,
 
             /// <summary>A volume which is relatively high.</summary>
             PATO_increased_volume = 300000595,
@@ -13835,10 +13964,10 @@ namespace PSI_Interface.CV
             PATO_decreased_volume = 300000596,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_width_value_OBSOLETE = 300000597,
+            PATO_obsolete_absolute_width_value_OBSOLETE = 300000597,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_width_value_OBSOLETE = 300000598,
+            PATO_obsolete_relative_width_value_OBSOLETE = 300000598,
 
             /// <summary>A width which is relatively small.</summary>
             PATO_decreased_width = 300000599,
@@ -13847,25 +13976,25 @@ namespace PSI_Interface.CV
             PATO_increased_width = 300000600,
 
             /// <summary>Description not provided</summary>
-            PATO_spatial_value_OBSOLETE = 300000601,
+            PATO_obsolete_spatial_value_OBSOLETE = 300000601,
 
             /// <summary>Description not provided</summary>
-            PATO_angle_value_OBSOLETE = 300000602,
+            PATO_obsolete_angle_value_OBSOLETE = 300000602,
 
             /// <summary>Description not provided</summary>
-            PATO_closure_value_OBSOLETE = 300000603,
+            PATO_obsolete_closure_value_OBSOLETE = 300000603,
 
             /// <summary>Description not provided</summary>
-            PATO_orientation_value_OBSOLETE = 300000604,
+            PATO_obsolete_orientation_value_OBSOLETE = 300000604,
 
             /// <summary>Description not provided</summary>
-            PATO_placement_value_OBSOLETE = 300000605,
+            PATO_obsolete_placement_value_OBSOLETE = 300000605,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_angle_value_OBSOLETE = 300000606,
+            PATO_obsolete_absolute_angle_value_OBSOLETE = 300000606,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_angle_value_OBSOLETE = 300000607,
+            PATO_obsolete_relative_angle_value_OBSOLETE = 300000607,
 
             /// <summary>A morphological quality inhering in a bearer by virtue of the bearer's affording blocked passage or view.</summary>
             PATO_closed = 300000608,
@@ -13877,10 +14006,10 @@ namespace PSI_Interface.CV
             PATO_open = 300000610,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_orientation_value_OBSOLETE = 300000611,
+            PATO_obsolete_absolute_orientation_value_OBSOLETE = 300000611,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_orientation_value_OBSOLETE = 300000612,
+            PATO_obsolete_relative_orientation_value_OBSOLETE = 300000612,
 
             /// <summary>A spatial pattern inhering in a bearer by virtue of the bearer's lacking orientation.</summary>
             PATO_disoriented = 300000613,
@@ -13888,8 +14017,8 @@ namespace PSI_Interface.CV
             /// <summary>A pattern where all the repeated elements are oriented in the same direction.</summary>
             PATO_oriented = 300000614,
 
-            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally anterior structures.</summary>
-            PATO_anterioralized = 300000615,
+            /// <summary>An anterioralized quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally anterior structures.</summary>
+            PATO_wholly_anterioralized = 300000615,
 
             /// <summary>A symmetry quality inhering in a bearer by virtue of the bearer's lacking symmetry.</summary>
             PATO_asymmetrical = 300000616,
@@ -13903,8 +14032,8 @@ namespace PSI_Interface.CV
             /// <summary>A positional quality inhering in a bearer by virtue of the bearer's being overfilled.</summary>
             PATO_crowded = 300000619,
 
-            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally dorsal structures.</summary>
-            PATO_dorsalized = 300000620,
+            /// <summary>A dorsalized quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally dorsal structures.</summary>
+            PATO_wholly_dorsalized = 300000620,
 
             /// <summary>A positional quality inhering in a bearer by virtue of the bearer's being upright in position or posture.</summary>
             PATO_erect = 300000622,
@@ -13930,8 +14059,8 @@ namespace PSI_Interface.CV
             /// <summary>A positional quality inhering in a bearer by virtue of the bearer's having mistakenly taken course, way, or passage; ill-routed.</summary>
             PATO_misrouted = 300000629,
 
-            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally posterior structures.</summary>
-            PATO_posterioralized = 300000630,
+            /// <summary>A posterioralized quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally posterior structures.</summary>
+            PATO_wholly_posterioralized = 300000630,
 
             /// <summary>A positional quality inhering in a bearer by virtue of the bearer's being stretched out and lying at full length along the ground.</summary>
             PATO_prostrate = 300000631,
@@ -13948,11 +14077,11 @@ namespace PSI_Interface.CV
             /// <summary>A spatial pattern inhering in a bearer by virtue of the bearer's not being confined or restricted to a particular location.</summary>
             PATO_unlocalised = 300000635,
 
-            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally ventral structures.</summary>
-            PATO_ventralized = 300000636,
+            /// <summary>A ventralized quality inhering in a bearer by virtue of the bearer's gross morphology containing only what are normally ventral structures.</summary>
+            PATO_wholly_ventralized = 300000636,
 
             /// <summary>Description not provided</summary>
-            PATO_structure_value_OBSOLETE = 300000637,
+            PATO_obsolete_structure_value_OBSOLETE = 300000637,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer's consisting of blebbing of the nucleus and DNA fragmentation due to the cell undergoing a specific form of programmed cell death termed apoptosis.</summary>
             PATO_apoptotic = 300000638,
@@ -13964,7 +14093,7 @@ namespace PSI_Interface.CV
             PATO_dysplastic = 300000640,
 
             /// <summary>Description not provided</summary>
-            PATO_deposition_defective_OBSOLETE = 300000641,
+            PATO_obsolete_deposition_defective_OBSOLETE = 300000641,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer's being merged with another entity.</summary>
             PATO_fused_with = 300000642,
@@ -13991,106 +14120,106 @@ namespace PSI_Interface.CV
             PATO_unfused_from = 300000651,
 
             /// <summary>Description not provided</summary>
-            PATO_substance_value_OBSOLETE = 300000652,
+            PATO_obsolete_substance_value_OBSOLETE = 300000652,
 
             /// <summary>Description not provided</summary>
-            PATO_addictive_substance_value_OBSOLETE = 300000653,
+            PATO_obsolete_addictive_substance_value_OBSOLETE = 300000653,
 
             /// <summary>Description not provided</summary>
-            PATO_alcochol_value_OBSOLETE = 300000654,
+            PATO_obsolete_alcochol_value_OBSOLETE = 300000654,
 
             /// <summary>Description not provided</summary>
-            PATO_amphetamine_value_OBSOLETE = 300000655,
+            PATO_obsolete_amphetamine_value_OBSOLETE = 300000655,
 
             /// <summary>Description not provided</summary>
-            PATO_time_quantity_OBSOLETE = 300000656,
+            PATO_obsolete_time_quantity_OBSOLETE = 300000656,
 
             /// <summary>Description not provided</summary>
-            PATO_length_quantity_OBSOLETE = 300000657,
+            PATO_obsolete_length_quantity_OBSOLETE = 300000657,
 
             /// <summary>Description not provided</summary>
-            PATO_metamphetamine_value_OBSOLETE = 300000658,
+            PATO_obsolete_metamphetamine_value_OBSOLETE = 300000658,
 
             /// <summary>Description not provided</summary>
-            PATO_temparature_quantity_OBSOLETE = 300000659,
+            PATO_obsolete_temparature_quantity_OBSOLETE = 300000659,
 
             /// <summary>Description not provided</summary>
-            PATO_angle_quantity_OBSOLETE = 300000660,
+            PATO_obsolete_angle_quantity_OBSOLETE = 300000660,
 
             /// <summary>Description not provided</summary>
-            PATO_solid_substance_value_OBSOLETE = 300000661,
+            PATO_obsolete_solid_substance_value_OBSOLETE = 300000661,
 
             /// <summary>Description not provided</summary>
-            PATO_volume_quantity_OBSOLETE = 300000662,
+            PATO_obsolete_volume_quantity_OBSOLETE = 300000662,
 
             /// <summary>Description not provided</summary>
-            PATO_occurrent_OBSOLETE = 300000663,
+            PATO_obsolete_occurrent_OBSOLETE = 300000663,
 
             /// <summary>Description not provided</summary>
-            PATO_substance_quantity_OBSOLETE = 300000664,
+            PATO_obsolete_substance_quantity_OBSOLETE = 300000664,
 
             /// <summary>A color brightness which is relatively high.</summary>
             PATO_high_brightness = 300000665,
 
             /// <summary>Description not provided</summary>
-            PATO_energy_quantity_OBSOLETE = 300000666,
+            PATO_obsolete_energy_quantity_OBSOLETE = 300000666,
 
             /// <summary>Description not provided</summary>
-            PATO_liquid_substance_value_OBSOLETE = 300000667,
+            PATO_obsolete_liquid_substance_value_OBSOLETE = 300000667,
 
             /// <summary>Description not provided</summary>
-            PATO_mass_quantity_OBSOLETE = 300000668,
+            PATO_obsolete_mass_quantity_OBSOLETE = 300000668,
 
             /// <summary>Description not provided</summary>
-            PATO_concentration_unit_OBSOLETE = 300000669,
+            PATO_obsolete_concentration_unit_OBSOLETE = 300000669,
 
             /// <summary>Description not provided</summary>
-            PATO_saccharin_versus_water_value_OBSOLETE = 300000670,
+            PATO_obsolete_saccharin_versus_water_value_OBSOLETE = 300000670,
 
             /// <summary>Description not provided</summary>
-            PATO_water_value_OBSOLETE = 300000671,
+            PATO_obsolete_water_value_OBSOLETE = 300000671,
 
             /// <summary>Description not provided</summary>
-            PATO_unit_OBSOLETE = 300000672,
+            PATO_obsolete_unit_OBSOLETE = 300000672,
 
             /// <summary>Description not provided</summary>
-            PATO_temperature_value_OBSOLETE = 300000673,
+            PATO_obsolete_temperature_value_OBSOLETE = 300000673,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_temperature_value_OBSOLETE = 300000674,
+            PATO_obsolete_absolute_temperature_value_OBSOLETE = 300000674,
 
             /// <summary>Description not provided</summary>
-            PATO_body_temperature_value_OBSOLETE = 300000675,
+            PATO_obsolete_body_temperature_value_OBSOLETE = 300000675,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_temperature_value_OBSOLETE = 300000676,
+            PATO_obsolete_relative_temperature_value_OBSOLETE = 300000676,
 
             /// <summary>Description not provided</summary>
-            PATO_temporal_value_OBSOLETE = 300000679,
+            PATO_obsolete_temporal_value_OBSOLETE = 300000679,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_temporal_value_OBSOLETE = 300000680,
+            PATO_obsolete_absolute_temporal_value_OBSOLETE = 300000680,
 
             /// <summary>Description not provided</summary>
-            PATO_incidence_value_OBSOLETE = 300000681,
+            PATO_obsolete_incidence_value_OBSOLETE = 300000681,
 
             /// <summary>Description not provided</summary>
-            PATO_rate_value_OBSOLETE = 300000682,
+            PATO_obsolete_rate_value_OBSOLETE = 300000682,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_temporal_value_OBSOLETE = 300000683,
+            PATO_obsolete_relative_temporal_value_OBSOLETE = 300000683,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_incidence_value_OBSOLETE = 300000684,
+            PATO_obsolete_absolute_incidence_value_OBSOLETE = 300000684,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_incidence_value_OBSOLETE = 300000685,
+            PATO_obsolete_relative_incidence_value_OBSOLETE = 300000685,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_rate_value_OBSOLETE = 300000686,
+            PATO_obsolete_absolute_rate_value_OBSOLETE = 300000686,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_rate_value_OBSOLETE = 300000687,
+            PATO_obsolete_relative_rate_value_OBSOLETE = 300000687,
 
             /// <summary>A quality of a single process inhering in a bearer by virtue of the bearer's not occurring or existing at the same time or having the same period or phase.</summary>
             PATO_asynchronous = 300000688,
@@ -14105,7 +14234,7 @@ namespace PSI_Interface.CV
             PATO_heterochronic = 300000692,
 
             /// <summary>Description not provided</summary>
-            PATO_late_OBSOLETE = 300000693,
+            PATO_obsolete_late_OBSOLETE = 300000693,
 
             /// <summary>A quality of a process which starts earlier than the natural start time or the reference process.</summary>
             PATO_premature = 300000694,
@@ -14114,16 +14243,16 @@ namespace PSI_Interface.CV
             PATO_synchronous = 300000695,
 
             /// <summary>Description not provided</summary>
-            PATO_texture_value_OBSOLETE = 300000696,
+            PATO_obsolete_texture_value_OBSOLETE = 300000696,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_texture_value_OBSOLETE = 300000697,
+            PATO_obsolete_relative_texture_value_OBSOLETE = 300000697,
 
             /// <summary>Description not provided</summary>
-            PATO_floury_OBSOLETE = 300000698,
+            PATO_obsolete_floury_OBSOLETE = 300000698,
 
             /// <summary>Description not provided</summary>
-            PATO_glutinous_OBSOLETE = 300000699,
+            PATO_obsolete_glutinous_OBSOLETE = 300000699,
 
             /// <summary>A texture quality inhering in a bearer by virtue of the bearer's irregular surface.</summary>
             PATO_rough = 300000700,
@@ -14132,16 +14261,16 @@ namespace PSI_Interface.CV
             PATO_smooth = 300000701,
 
             /// <summary>Description not provided</summary>
-            PATO_threshold_value_OBSOLETE = 300000702,
+            PATO_obsolete_threshold_value_OBSOLETE = 300000702,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_threshold_value_OBSOLETE = 300000703,
+            PATO_obsolete_absolute_threshold_value_OBSOLETE = 300000703,
 
             /// <summary>Description not provided</summary>
-            PATO_pain_threshold_value_OBSOLETE = 300000704,
+            PATO_obsolete_pain_threshold_value_OBSOLETE = 300000704,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_threshold_value_OBSOLETE = 300000705,
+            PATO_obsolete_relative_threshold_value_OBSOLETE = 300000705,
 
             /// <summary>A threshold which is relatively high.</summary>
             PATO_increased_threshold = 300000706,
@@ -14150,22 +14279,22 @@ namespace PSI_Interface.CV
             PATO_decreased_threshold = 300000708,
 
             /// <summary>Description not provided</summary>
-            PATO_time_value_OBSOLETE = 300000710,
+            PATO_obsolete_time_value_OBSOLETE = 300000710,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_time_value_OBSOLETE = 300000711,
+            PATO_obsolete_absolute_time_value_OBSOLETE = 300000711,
 
             /// <summary>Description not provided</summary>
-            PATO_bouts_value_OBSOLETE = 300000712,
+            PATO_obsolete_bouts_value_OBSOLETE = 300000712,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_time_value_OBSOLETE = 300000713,
+            PATO_obsolete_relative_time_value_OBSOLETE = 300000713,
 
             /// <summary>Description not provided</summary>
-            PATO_latency_value_OBSOLETE = 300000714,
+            PATO_obsolete_latency_value_OBSOLETE = 300000714,
 
             /// <summary>Description not provided</summary>
-            PATO_viability_value_OBSOLETE = 300000717,
+            PATO_obsolete_viability_value_OBSOLETE = 300000717,
 
             /// <summary>A viability quality inhering in a population by virtue of the bearer's long term survival inability.</summary>
             PATO_lethal__sensu_genetics_ = 300000718,
@@ -14174,115 +14303,115 @@ namespace PSI_Interface.CV
             PATO_viable = 300000719,
 
             /// <summary>Description not provided</summary>
-            PATO_yield_value_OBSOLETE = 300000720,
+            PATO_obsolete_yield_value_OBSOLETE = 300000720,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_yield_value_OBSOLETE = 300000721,
+            PATO_obsolete_absolute_yield_value_OBSOLETE = 300000721,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_yield_value_OBSOLETE = 300000722,
+            PATO_obsolete_relative_yield_value_OBSOLETE = 300000722,
 
             /// <summary>Description not provided</summary>
-            PATO_high_yield_OBSOLETE = 300000723,
+            PATO_obsolete_high_yield_OBSOLETE = 300000723,
 
             /// <summary>Description not provided</summary>
-            PATO_low_yield_OBSOLETE = 300000724,
+            PATO_obsolete_low_yield_OBSOLETE = 300000724,
 
             /// <summary>Description not provided</summary>
-            PATO_function_value_OBSOLETE = 300000725,
+            PATO_obsolete_function_value_OBSOLETE = 300000725,
 
             /// <summary>Description not provided</summary>
-            PATO_autonomic_function_value_OBSOLETE = 300000726,
+            PATO_obsolete_autonomic_function_value_OBSOLETE = 300000726,
 
             /// <summary>Description not provided</summary>
-            PATO_behavioral_function_value_OBSOLETE = 300000727,
+            PATO_obsolete_behavioral_function_value_OBSOLETE = 300000727,
 
             /// <summary>Description not provided</summary>
-            PATO_metabolic_function_value_OBSOLETE = 300000728,
+            PATO_obsolete_metabolic_function_value_OBSOLETE = 300000728,
 
             /// <summary>Description not provided</summary>
-            PATO_physiological_function_value_OBSOLETE = 300000729,
+            PATO_obsolete_physiological_function_value_OBSOLETE = 300000729,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_function_value_OBSOLETE = 300000730,
+            PATO_obsolete_relative_function_value_OBSOLETE = 300000730,
 
             /// <summary>Description not provided</summary>
-            PATO_body_position_value_OBSOLETE = 300000731,
+            PATO_obsolete_body_position_value_OBSOLETE = 300000731,
 
             /// <summary>Description not provided</summary>
-            PATO_body_tone_value_OBSOLETE = 300000732,
+            PATO_obsolete_body_tone_value_OBSOLETE = 300000732,
 
             /// <summary>Description not provided</summary>
-            PATO_piloerection_value_OBSOLETE = 300000733,
+            PATO_obsolete_piloerection_value_OBSOLETE = 300000733,
 
             /// <summary>Description not provided</summary>
-            PATO_abdominal_tone_value_OBSOLETE = 300000734,
+            PATO_obsolete_abdominal_tone_value_OBSOLETE = 300000734,
 
             /// <summary>Description not provided</summary>
-            PATO_limb_tone_value_OBSOLETE = 300000735,
+            PATO_obsolete_limb_tone_value_OBSOLETE = 300000735,
 
             /// <summary>Description not provided</summary>
-            PATO_dysfunctional_value_OBSOLETE = 300000736,
+            PATO_obsolete_dysfunctional_value_OBSOLETE = 300000736,
 
             /// <summary>Description not provided</summary>
-            PATO_functional_value_OBSOLETE = 300000737,
+            PATO_obsolete_functional_value_OBSOLETE = 300000737,
 
             /// <summary>Description not provided</summary>
-            PATO_enzyme_function_value_OBSOLETE = 300000738,
+            PATO_obsolete_enzyme_function_value_OBSOLETE = 300000738,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_enzyme_function_value_OBSOLETE = 300000739,
+            PATO_obsolete_absolute_enzyme_function_value_OBSOLETE = 300000739,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_enzyme_function_value_OBSOLETE = 300000740,
+            PATO_obsolete_relative_enzyme_function_value_OBSOLETE = 300000740,
 
             /// <summary>Description not provided</summary>
-            PATO_high_enzyme_function_value_OBSOLETE = 300000741,
+            PATO_obsolete_high_enzyme_function_value_OBSOLETE = 300000741,
 
             /// <summary>Description not provided</summary>
-            PATO_low_enzyme_function_value_OBSOLETE = 300000742,
+            PATO_obsolete_low_enzyme_function_value_OBSOLETE = 300000742,
 
             /// <summary>Description not provided</summary>
-            PATO_arousal_value_OBSOLETE = 300000743,
+            PATO_obsolete_arousal_value_OBSOLETE = 300000743,
 
             /// <summary>Description not provided</summary>
-            PATO_balance_value_OBSOLETE = 300000744,
+            PATO_obsolete_balance_value_OBSOLETE = 300000744,
 
             /// <summary>Description not provided</summary>
-            PATO_behavioral_quality_value_OBSOLETE = 300000745,
+            PATO_obsolete_behavioral_quality_value_OBSOLETE = 300000745,
 
             /// <summary>Description not provided</summary>
-            PATO_consumption_value_OBSOLETE = 300000746,
+            PATO_obsolete_consumption_value_OBSOLETE = 300000746,
 
             /// <summary>Description not provided</summary>
-            PATO_coordination_value_OBSOLETE = 300000747,
+            PATO_obsolete_coordination_value_OBSOLETE = 300000747,
 
             /// <summary>Description not provided</summary>
-            PATO_discrimination_value_OBSOLETE = 300000748,
+            PATO_obsolete_discrimination_value_OBSOLETE = 300000748,
 
             /// <summary>Description not provided</summary>
-            PATO_gait_value_OBSOLETE = 300000749,
+            PATO_obsolete_gait_value_OBSOLETE = 300000749,
 
             /// <summary>Description not provided</summary>
-            PATO_learning_and_memory_value_OBSOLETE = 300000750,
+            PATO_obsolete_learning_and_memory_value_OBSOLETE = 300000750,
 
             /// <summary>Description not provided</summary>
-            PATO_locomotor_activity_value_OBSOLETE = 300000751,
+            PATO_obsolete_locomotor_activity_value_OBSOLETE = 300000751,
 
             /// <summary>Description not provided</summary>
-            PATO_mating_value_OBSOLETE = 300000752,
+            PATO_obsolete_mating_value_OBSOLETE = 300000752,
 
             /// <summary>Description not provided</summary>
-            PATO_spontaneous_activity_value_OBSOLETE = 300000753,
+            PATO_obsolete_spontaneous_activity_value_OBSOLETE = 300000753,
 
             /// <summary>Description not provided</summary>
-            PATO_startle_response_OBSOLETE1 = 300000754,
+            PATO_obsolete_startle_response_OBSOLETE1 = 300000754,
 
             /// <summary>Description not provided</summary>
-            PATO_vocalization_value_OBSOLETE = 300000755,
+            PATO_obsolete_vocalization_value_OBSOLETE = 300000755,
 
             /// <summary>Description not provided</summary>
-            PATO_transfer_arousal_value_OBSOLETE = 300000756,
+            PATO_obsolete_transfer_arousal_value_OBSOLETE = 300000756,
 
             /// <summary>A balance quality inhering in a bearer by virtue of the bearer's having balance.</summary>
             PATO_balanced = 300000757,
@@ -14300,7 +14429,7 @@ namespace PSI_Interface.CV
             PATO_decreased_behavioural_activity = 300000761,
 
             /// <summary>Diminished, damaged, or weakened.</summary>
-            PATO_impaired_OBSOLETE = 300000762,
+            PATO_obsolete_impaired_OBSOLETE = 300000762,
 
             /// <summary>A behavioral quality inhering in a bearer by virtue of the bearer's being affected by loss of the ability to move a body part.</summary>
             PATO_paralysed = 300000763,
@@ -14309,16 +14438,16 @@ namespace PSI_Interface.CV
             PATO_passive = 300000764,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_consumption_value_OBSOLETE = 300000765,
+            PATO_obsolete_absolute_consumption_value_OBSOLETE = 300000765,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_consumption_value_OBSOLETE = 300000766,
+            PATO_obsolete_relative_consumption_value_OBSOLETE = 300000766,
 
             /// <summary>A consumption which is relatively high.</summary>
-            PATO_increased_consumption_OBSOLETE = 300000767,
+            PATO_obsolete_increased_consumption_OBSOLETE = 300000767,
 
             /// <summary>A consumption which is relatively low.</summary>
-            PATO_decreased_consumption_OBSOLETE = 300000768,
+            PATO_obsolete_decreased_consumption_OBSOLETE = 300000768,
 
             /// <summary>A coordination quality of inhering in a bearer by virtue of the bearer's having skillful and effective interaction of movement.</summary>
             PATO_coordinated = 300000769,
@@ -14336,352 +14465,352 @@ namespace PSI_Interface.CV
             PATO_preference = 300000773,
 
             /// <summary>Description not provided</summary>
-            PATO_bizarre_gate_OBSOLETE = 300000774,
+            PATO_obsolete_bizarre_gate_OBSOLETE = 300000774,
 
             /// <summary>Description not provided</summary>
-            PATO_learning_value_OBSOLETE = 300000775,
+            PATO_obsolete_learning_value_OBSOLETE = 300000775,
 
             /// <summary>Description not provided</summary>
-            PATO_memory_value_OBSOLETE = 300000776,
+            PATO_obsolete_memory_value_OBSOLETE = 300000776,
 
             /// <summary>Description not provided</summary>
-            PATO_long_term_memory_value_OBSOLETE = 300000777,
+            PATO_obsolete_long_term_memory_value_OBSOLETE = 300000777,
 
             /// <summary>Description not provided</summary>
-            PATO_short_term_memory_value_OBSOLETE = 300000778,
+            PATO_obsolete_short_term_memory_value_OBSOLETE = 300000778,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_locomotor_activity_value_OBSOLETE = 300000779,
+            PATO_obsolete_absolute_locomotor_activity_value_OBSOLETE = 300000779,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_locomotor_activity_value_OBSOLETE = 300000780,
+            PATO_obsolete_relative_locomotor_activity_value_OBSOLETE = 300000780,
 
             /// <summary>Description not provided</summary>
-            PATO_circulatory_function_value_OBSOLETE = 300000781,
+            PATO_obsolete_circulatory_function_value_OBSOLETE = 300000781,
 
             /// <summary>Description not provided</summary>
-            PATO_defensive_function_value_OBSOLETE = 300000782,
+            PATO_obsolete_defensive_function_value_OBSOLETE = 300000782,
 
             /// <summary>Description not provided</summary>
-            PATO_digestive_function_value_OBSOLETE = 300000783,
+            PATO_obsolete_digestive_function_value_OBSOLETE = 300000783,
 
             /// <summary>Description not provided</summary>
-            PATO_excretory_function_value_OBSOLETE = 300000784,
+            PATO_obsolete_excretory_function_value_OBSOLETE = 300000784,
 
             /// <summary>Description not provided</summary>
-            PATO_muscle_function_value_OBSOLETE = 300000785,
+            PATO_obsolete_muscle_function_value_OBSOLETE = 300000785,
 
             /// <summary>Description not provided</summary>
-            PATO_neural_function_value_OBSOLETE = 300000786,
+            PATO_obsolete_neural_function_value_OBSOLETE = 300000786,
 
             /// <summary>Description not provided</summary>
-            PATO_neurobehavioral_function_value_OBSOLETE = 300000787,
+            PATO_obsolete_neurobehavioral_function_value_OBSOLETE = 300000787,
 
             /// <summary>Description not provided</summary>
-            PATO_reproductive_function_value_OBSOLETE = 300000788,
+            PATO_obsolete_reproductive_function_value_OBSOLETE = 300000788,
 
             /// <summary>Description not provided</summary>
-            PATO_respiratory_function_value_OBSOLETE = 300000789,
+            PATO_obsolete_respiratory_function_value_OBSOLETE = 300000789,
 
             /// <summary>Description not provided</summary>
-            PATO_heart_rate_value_OBSOLETE = 300000790,
+            PATO_obsolete_heart_rate_value_OBSOLETE = 300000790,
 
             /// <summary>Description not provided</summary>
-            PATO_immune_function_value_OBSOLETE = 300000791,
+            PATO_obsolete_immune_function_value_OBSOLETE = 300000791,
 
             /// <summary>Description not provided</summary>
-            PATO_repair_function_value_OBSOLETE = 300000792,
+            PATO_obsolete_repair_function_value_OBSOLETE = 300000792,
 
             /// <summary>Description not provided</summary>
-            PATO_immubocompetent_value_OBSOLETE = 300000793,
+            PATO_obsolete_immubocompetent_value_OBSOLETE = 300000793,
 
             /// <summary>Description not provided</summary>
-            PATO_immunodeficient_value_OBSOLETE = 300000794,
+            PATO_obsolete_immunodeficient_value_OBSOLETE = 300000794,
 
             /// <summary>Description not provided</summary>
-            PATO_healing_value_OBSOLETE = 300000795,
+            PATO_obsolete_healing_value_OBSOLETE = 300000795,
 
             /// <summary>Description not provided</summary>
-            PATO_regeneration_value_OBSOLETE = 300000796,
+            PATO_obsolete_regeneration_value_OBSOLETE = 300000796,
 
             /// <summary>Description not provided</summary>
-            PATO_urination_value_OBSOLETE = 300000797,
+            PATO_obsolete_urination_value_OBSOLETE = 300000797,
 
             /// <summary>Description not provided</summary>
-            PATO_defecation_value_OBSOLETE = 300000798,
+            PATO_obsolete_defecation_value_OBSOLETE = 300000798,
 
             /// <summary>Description not provided</summary>
-            PATO_muscle_elevation_value_OBSOLETE = 300000799,
+            PATO_obsolete_muscle_elevation_value_OBSOLETE = 300000799,
 
             /// <summary>Description not provided</summary>
-            PATO_muscle_strength_value_OBSOLETE = 300000800,
+            PATO_obsolete_muscle_strength_value_OBSOLETE = 300000800,
 
             /// <summary>Description not provided</summary>
-            PATO_motor_function_value_OBSOLETE = 300000801,
+            PATO_obsolete_motor_function_value_OBSOLETE = 300000801,
 
             /// <summary>Description not provided</summary>
-            PATO_sensory_function_value_OBSOLETE = 300000802,
+            PATO_obsolete_sensory_function_value_OBSOLETE = 300000802,
 
             /// <summary>Description not provided</summary>
-            PATO_tactile_response_value_OBSOLETE = 300000803,
+            PATO_obsolete_tactile_response_value_OBSOLETE = 300000803,
 
             /// <summary>Description not provided</summary>
-            PATO_motor_performance_value_OBSOLETE = 300000804,
+            PATO_obsolete_motor_performance_value_OBSOLETE = 300000804,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_value_OBSOLETE = 300000805,
+            PATO_obsolete_auditory_value_OBSOLETE = 300000805,
 
             /// <summary>Description not provided</summary>
-            PATO_olfactory_value_OBSOLETE = 300000806,
+            PATO_obsolete_olfactory_value_OBSOLETE = 300000806,
 
             /// <summary>Description not provided</summary>
-            PATO_proprioreception_value_OBSOLETE = 300000807,
+            PATO_obsolete_proprioreception_value_OBSOLETE = 300000807,
 
             /// <summary>Description not provided</summary>
-            PATO_reflex_value_OBSOLETE = 300000808,
+            PATO_obsolete_reflex_value_OBSOLETE = 300000808,
 
             /// <summary>Description not provided</summary>
-            PATO_taste_value_OBSOLETE = 300000809,
+            PATO_obsolete_taste_value_OBSOLETE = 300000809,
 
             /// <summary>Description not provided</summary>
-            PATO_touch_value_OBSOLETE = 300000810,
+            PATO_obsolete_touch_value_OBSOLETE = 300000810,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_value_OBSOLETE = 300000811,
+            PATO_obsolete_visual_value_OBSOLETE = 300000811,
 
             /// <summary>Description not provided</summary>
-            PATO_odor_acuity_value_OBSOLETE = 300000812,
+            PATO_obsolete_odor_acuity_value_OBSOLETE = 300000812,
 
             /// <summary>Description not provided</summary>
-            PATO_odor_type_value_OBSOLETE = 300000813,
+            PATO_obsolete_odor_type_value_OBSOLETE = 300000813,
 
             /// <summary>Description not provided</summary>
-            PATO_taste_acuity_value_OBSOLETE = 300000814,
+            PATO_obsolete_taste_acuity_value_OBSOLETE = 300000814,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_odor_acuity_value_OBSOLETE = 300000815,
+            PATO_obsolete_absolute_odor_acuity_value_OBSOLETE = 300000815,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_odor_acuity_value_OBSOLETE = 300000816,
+            PATO_obsolete_relative_odor_acuity_value_OBSOLETE = 300000816,
 
             /// <summary>Description not provided</summary>
-            PATO_anosmia_OBSOLETE = 300000817,
+            PATO_obsolete_anosmia_OBSOLETE = 300000817,
 
             /// <summary>Description not provided</summary>
-            PATO_concentration_quantity_OBSOLETE = 300000818,
+            PATO_obsolete_concentration_quantity_OBSOLETE = 300000818,
 
             /// <summary>Description not provided</summary>
-            PATO_quantity_OBSOLETE = 300000819,
+            PATO_obsolete_quantity_OBSOLETE = 300000819,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_taste_acuity_value_OBSOLETE = 300000820,
+            PATO_obsolete_absolute_taste_acuity_value_OBSOLETE = 300000820,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_taste_acuity_value_OBSOLETE = 300000821,
+            PATO_obsolete_relative_taste_acuity_value_OBSOLETE = 300000821,
 
             /// <summary>Description not provided</summary>
-            PATO_taste_type_value_OBSOLETE = 300000822,
+            PATO_obsolete_taste_type_value_OBSOLETE = 300000822,
 
             /// <summary>Description not provided</summary>
-            PATO_quinine_taste_OBSOLETE = 300000823,
+            PATO_obsolete_quinine_taste_OBSOLETE = 300000823,
 
             /// <summary>Description not provided</summary>
-            PATO_water_taste_OBSOLETE = 300000824,
+            PATO_obsolete_water_taste_OBSOLETE = 300000824,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_ability_value_OBSOLETE = 300000825,
+            PATO_obsolete_visual_ability_value_OBSOLETE = 300000825,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_acuity_value_OBSOLETE = 300000826,
+            PATO_obsolete_visual_acuity_value_OBSOLETE = 300000826,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_threshold_value_OBSOLETE = 300000827,
+            PATO_obsolete_visual_threshold_value_OBSOLETE = 300000827,
 
             /// <summary>Description not provided</summary>
-            PATO_visual_placing_value_OBSOLETE = 300000828,
+            PATO_obsolete_visual_placing_value_OBSOLETE = 300000828,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_visual_ability_value_OBSOLETE = 300000829,
+            PATO_obsolete_absolute_visual_ability_value_OBSOLETE = 300000829,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_visual_ability_value_OBSOLETE = 300000830,
+            PATO_obsolete_relative_visual_ability_value_OBSOLETE = 300000830,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_visual_acuity_value_OBSOLETE = 300000831,
+            PATO_obsolete_absolute_visual_acuity_value_OBSOLETE = 300000831,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_visual_acuity_value_OBSOLETE = 300000832,
+            PATO_obsolete_relative_visual_acuity_value_OBSOLETE = 300000832,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_visual_threshold_value_OBSOLETE = 300000833,
+            PATO_obsolete_absolute_visual_threshold_value_OBSOLETE = 300000833,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_visual_threshold_value_OBSOLETE = 300000834,
+            PATO_obsolete_relative_visual_threshold_value_OBSOLETE = 300000834,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_acuity_value_OBSOLETE = 300000835,
+            PATO_obsolete_auditory_acuity_value_OBSOLETE = 300000835,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_ability_value_OBSOLETE = 300000836,
+            PATO_obsolete_auditory_ability_value_OBSOLETE = 300000836,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_threshold_value_OBSOLETE = 300000837,
+            PATO_obsolete_auditory_threshold_value_OBSOLETE = 300000837,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_auditory_ability_value_OBSOLETE = 300000838,
+            PATO_obsolete_absolute_auditory_ability_value_OBSOLETE = 300000838,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_auditory_ability_value_OBSOLETE = 300000839,
+            PATO_obsolete_relative_auditory_ability_value_OBSOLETE = 300000839,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_auditory_acuity_value_OBSOLETE = 300000840,
+            PATO_obsolete_absolute_auditory_acuity_value_OBSOLETE = 300000840,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_auditory_acuity_value_OBSOLETE = 300000841,
+            PATO_obsolete_relative_auditory_acuity_value_OBSOLETE = 300000841,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_auditory_threshold_value_OBSOLETE = 300000842,
+            PATO_obsolete_absolute_auditory_threshold_value_OBSOLETE = 300000842,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_auditory_threshold_value_OBSOLETE = 300000843,
+            PATO_obsolete_relative_auditory_threshold_value_OBSOLETE = 300000843,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_acuity_OBSOLETE = 300000844,
+            PATO_obsolete_auditory_acuity_OBSOLETE = 300000844,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_ability_OBSOLETE = 300000845,
+            PATO_obsolete_auditory_ability_OBSOLETE = 300000845,
 
             /// <summary>Description not provided</summary>
-            PATO_auditory_threshold_OBSOLETE = 300000846,
+            PATO_obsolete_auditory_threshold_OBSOLETE = 300000846,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_auditory_acuity_OBSOLETE = 300000847,
+            PATO_obsolete_absolute_auditory_acuity_OBSOLETE = 300000847,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_auditory_acuity_OBSOLETE = 300000848,
+            PATO_obsolete_relative_auditory_acuity_OBSOLETE = 300000848,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_auditory_ability_OBSOLETE = 300000849,
+            PATO_obsolete_absolute_auditory_ability_OBSOLETE = 300000849,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_auditory_ability_OBSOLETE = 300000850,
+            PATO_obsolete_relative_auditory_ability_OBSOLETE = 300000850,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_auditory_threshold_OBSOLETE = 300000851,
+            PATO_obsolete_absolute_auditory_threshold_OBSOLETE = 300000851,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_auditory_threshold_OBSOLETE = 300000852,
+            PATO_obsolete_relative_auditory_threshold_OBSOLETE = 300000852,
 
             /// <summary>Description not provided</summary>
-            PATO_blinking_reflex_value_OBSOLETE = 300000853,
+            PATO_obsolete_blinking_reflex_value_OBSOLETE = 300000853,
 
             /// <summary>Description not provided</summary>
-            PATO_contact_righting_reflex_value_OBSOLETE = 300000854,
+            PATO_obsolete_contact_righting_reflex_value_OBSOLETE = 300000854,
 
             /// <summary>Description not provided</summary>
-            PATO_corneal_reflex_value_OBSOLETE = 300000855,
+            PATO_obsolete_corneal_reflex_value_OBSOLETE = 300000855,
 
             /// <summary>Description not provided</summary>
-            PATO_flinch_reflex_value_OBSOLETE = 300000856,
+            PATO_obsolete_flinch_reflex_value_OBSOLETE = 300000856,
 
             /// <summary>Description not provided</summary>
-            PATO_lordosis_reflex_value_OBSOLETE = 300000857,
+            PATO_obsolete_lordosis_reflex_value_OBSOLETE = 300000857,
 
             /// <summary>Description not provided</summary>
-            PATO_ocular_reflex_value_OBSOLETE = 300000858,
+            PATO_obsolete_ocular_reflex_value_OBSOLETE = 300000858,
 
             /// <summary>Description not provided</summary>
-            PATO_pinna_reflex_value_OBSOLETE = 300000859,
+            PATO_obsolete_pinna_reflex_value_OBSOLETE = 300000859,
 
             /// <summary>Description not provided</summary>
-            PATO_postural_reflex_value_OBSOLETE = 300000860,
+            PATO_obsolete_postural_reflex_value_OBSOLETE = 300000860,
 
             /// <summary>Description not provided</summary>
-            PATO_proboscis_extension_reflex_value_OBSOLETE = 300000861,
+            PATO_obsolete_proboscis_extension_reflex_value_OBSOLETE = 300000861,
 
             /// <summary>Description not provided</summary>
-            PATO_pupillary_reflex_value_OBSOLETE = 300000862,
+            PATO_obsolete_pupillary_reflex_value_OBSOLETE = 300000862,
 
             /// <summary>Description not provided</summary>
-            PATO_righting_reflex_value_OBSOLETE = 300000863,
+            PATO_obsolete_righting_reflex_value_OBSOLETE = 300000863,
 
             /// <summary>Description not provided</summary>
-            PATO_spinal_reflex_value_OBSOLETE = 300000864,
+            PATO_obsolete_spinal_reflex_value_OBSOLETE = 300000864,
 
             /// <summary>Description not provided</summary>
-            PATO_startle_reflex_value_OBSOLETE = 300000865,
+            PATO_obsolete_startle_reflex_value_OBSOLETE = 300000865,
 
             /// <summary>Description not provided</summary>
-            PATO_suckling_reflex_value_OBSOLETE = 300000866,
+            PATO_obsolete_suckling_reflex_value_OBSOLETE = 300000866,
 
             /// <summary>Description not provided</summary>
-            PATO_swallowing_reflex_value_OBSOLETE = 300000867,
+            PATO_obsolete_swallowing_reflex_value_OBSOLETE = 300000867,
 
             /// <summary>Description not provided</summary>
-            PATO_vibrissae_reflex_value_OBSOLETE = 300000868,
+            PATO_obsolete_vibrissae_reflex_value_OBSOLETE = 300000868,
 
             /// <summary>Description not provided</summary>
-            PATO_prepulse_inhibition_value_OBSOLETE = 300000869,
+            PATO_obsolete_prepulse_inhibition_value_OBSOLETE = 300000869,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_neurobehavioral_function_value_OBSOLETE = 300000870,
+            PATO_obsolete_relative_neurobehavioral_function_value_OBSOLETE = 300000870,
 
             /// <summary>Description not provided</summary>
-            PATO_aggressive_OBSOLETE = 300000871,
+            PATO_obsolete_aggressive_OBSOLETE = 300000871,
 
             /// <summary>Description not provided</summary>
-            PATO_anxious_OBSOLETE = 300000872,
+            PATO_obsolete_anxious_OBSOLETE = 300000872,
 
             /// <summary>Description not provided</summary>
-            PATO_cataleptic_OBSOLETE = 300000873,
+            PATO_obsolete_cataleptic_OBSOLETE = 300000873,
 
             /// <summary>Description not provided</summary>
-            PATO_fearful_OBSOLETE = 300000874,
+            PATO_obsolete_fearful_OBSOLETE = 300000874,
 
             /// <summary>Description not provided</summary>
-            PATO_irritable_OBSOLETE = 300000875,
+            PATO_obsolete_irritable_OBSOLETE = 300000875,
 
             /// <summary>Description not provided</summary>
-            PATO_respiratory_rate_value_OBSOLETE = 300000876,
+            PATO_obsolete_respiratory_rate_value_OBSOLETE = 300000876,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_respiratory_rate_value_OBSOLETE = 300000877,
+            PATO_obsolete_absolute_respiratory_rate_value_OBSOLETE = 300000877,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_respiratory_rate_value_OBSOLETE = 300000878,
+            PATO_obsolete_relative_respiratory_rate_value_OBSOLETE = 300000878,
 
             /// <summary>Description not provided</summary>
-            PATO_fecundity_value_OBSOLETE = 300000879,
+            PATO_obsolete_fecundity_value_OBSOLETE = 300000879,
 
             /// <summary>Description not provided</summary>
-            PATO_fertility_value_OBSOLETE = 300000880,
+            PATO_obsolete_fertility_value_OBSOLETE = 300000880,
 
             /// <summary>Description not provided</summary>
-            PATO_gestational_period_value_OBSOLETE = 300000881,
+            PATO_obsolete_gestational_period_value_OBSOLETE = 300000881,
 
             /// <summary>Description not provided</summary>
-            PATO_litter_size_value_OBSOLETE = 300000882,
+            PATO_obsolete_litter_size_value_OBSOLETE = 300000882,
 
             /// <summary>Description not provided</summary>
-            PATO_female_fertility_value_OBSOLETE = 300000883,
+            PATO_obsolete_female_fertility_value_OBSOLETE = 300000883,
 
             /// <summary>Description not provided</summary>
-            PATO_hybrid_fertility_value_OBSOLETE = 300000884,
+            PATO_obsolete_hybrid_fertility_value_OBSOLETE = 300000884,
 
             /// <summary>Description not provided</summary>
-            PATO_male_fertility_value_OBSOLETE = 300000885,
+            PATO_obsolete_male_fertility_value_OBSOLETE = 300000885,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_litter_size_value_OBSOLETE = 300000886,
+            PATO_obsolete_absolute_litter_size_value_OBSOLETE = 300000886,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_litter_size_value_OBSOLETE = 300000887,
+            PATO_obsolete_relative_litter_size_value_OBSOLETE = 300000887,
 
             /// <summary>A female fertility quality inhering in a female by virtue of the bearer's disposition to initiate, sustain, or support reproduction.</summary>
             PATO_female_fertile = 300000888,
 
             /// <summary>Description not provided</summary>
-            PATO_cytoplasmic_male_sterility_value_OBSOLETE = 300000889,
+            PATO_obsolete_cytoplasmic_male_sterility_value_OBSOLETE = 300000889,
 
             /// <summary>A male fertility quality inhering in a male by virtue of the bearer's being incapable of initiating, sustaining, or supporting reproduction.</summary>
             PATO_male_sterile = 300000890,
@@ -14693,58 +14822,58 @@ namespace PSI_Interface.CV
             PATO_female_sterile = 300000892,
 
             /// <summary>Description not provided</summary>
-            PATO_backcross_fertility_value_OBSOLETE = 300000893,
+            PATO_obsolete_backcross_fertility_value_OBSOLETE = 300000893,
 
             /// <summary>Description not provided</summary>
-            PATO_cytoplasmic_sterility_value_OBSOLETE = 300000894,
+            PATO_obsolete_cytoplasmic_sterility_value_OBSOLETE = 300000894,
 
             /// <summary>Description not provided</summary>
-            PATO_f1_fertility_value_OBSOLETE = 300000895,
+            PATO_obsolete_f1_fertility_value_OBSOLETE = 300000895,
 
             /// <summary>Description not provided</summary>
-            PATO_f2_fertility_value_OBSOLETE = 300000896,
+            PATO_obsolete_f2_fertility_value_OBSOLETE = 300000896,
 
             /// <summary>Description not provided</summary>
-            PATO_germ_line_dependent_fertility_value_OBSOLETE = 300000897,
+            PATO_obsolete_germ_line_dependent_fertility_value_OBSOLETE = 300000897,
 
             /// <summary>Description not provided</summary>
-            PATO_intercross_fertility_value_OBSOLETE = 300000898,
+            PATO_obsolete_intercross_fertility_value_OBSOLETE = 300000898,
 
             /// <summary>Description not provided</summary>
-            PATO_soma_dependent_fertility_value_OBSOLETE = 300000899,
+            PATO_obsolete_soma_dependent_fertility_value_OBSOLETE = 300000899,
 
             /// <summary>Description not provided</summary>
-            PATO_backcross_fertile_OBSOLETE = 300000900,
+            PATO_obsolete_backcross_fertile_OBSOLETE = 300000900,
 
             /// <summary>Description not provided</summary>
-            PATO_backcross_sterile_OBSOLETE = 300000901,
+            PATO_obsolete_backcross_sterile_OBSOLETE = 300000901,
 
             /// <summary>Description not provided</summary>
-            PATO_chinsurah_boro_type_value_OBSOLETE = 300000902,
+            PATO_obsolete_chinsurah_boro_type_value_OBSOLETE = 300000902,
 
             /// <summary>Description not provided</summary>
-            PATO_cms_hl_type_value_OBSOLETE = 300000903,
+            PATO_obsolete_cms_hl_type_value_OBSOLETE = 300000903,
 
             /// <summary>Description not provided</summary>
-            PATO_wild_abortive_value_OBSOLETE = 300000904,
+            PATO_obsolete_wild_abortive_value_OBSOLETE = 300000904,
 
             /// <summary>Description not provided</summary>
-            PATO_f1_fertile_OBSOLETE = 300000905,
+            PATO_obsolete_f1_fertile_OBSOLETE = 300000905,
 
             /// <summary>Description not provided</summary>
-            PATO_f1_sterile_OBSOLETE = 300000906,
+            PATO_obsolete_f1_sterile_OBSOLETE = 300000906,
 
             /// <summary>Description not provided</summary>
-            PATO_f2_fertile_OBSOLETE = 300000907,
+            PATO_obsolete_f2_fertile_OBSOLETE = 300000907,
 
             /// <summary>Description not provided</summary>
-            PATO_f2_sterile_OBSOLETE = 300000908,
+            PATO_obsolete_f2_sterile_OBSOLETE = 300000908,
 
             /// <summary>Description not provided</summary>
-            PATO_intercross_fertile_OBSOLETE = 300000909,
+            PATO_obsolete_intercross_fertile_OBSOLETE = 300000909,
 
             /// <summary>Description not provided</summary>
-            PATO_intercross_sterile_OBSOLETE = 300000910,
+            PATO_obsolete_intercross_sterile_OBSOLETE = 300000910,
 
             /// <summary>A rate which is relatively low.</summary>
             PATO_decreased_rate = 300000911,
@@ -14753,73 +14882,73 @@ namespace PSI_Interface.CV
             PATO_increased_rate = 300000912,
 
             /// <summary>Description not provided</summary>
-            PATO_qualitative_value_OBSOLETE = 300000913,
+            PATO_obsolete_qualitative_value_OBSOLETE = 300000913,
 
             /// <summary>Description not provided</summary>
-            PATO_continuant_OBSOLETE = 300000914,
+            PATO_obsolete_continuant_OBSOLETE = 300000914,
 
             /// <summary>A 1-D extent quality which is equal to the dimension through an object as opposed to its length or width.</summary>
             PATO_thickness = 300000915,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_thickness_OBSOLETE = 300000916,
+            PATO_obsolete_absolute_thickness_OBSOLETE = 300000916,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_thickness_OBSOLETE = 300000917,
+            PATO_obsolete_relative_thickness_OBSOLETE = 300000917,
 
             /// <summary>A 3-D extent quality inhering in a bearer by virtue of the bearer's amount of 3-dimensional space it occupies.</summary>
             PATO_volume = 300000918,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_volume_OBSOLETE = 300000919,
+            PATO_obsolete_absolute_volume_OBSOLETE = 300000919,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_volume_OBSOLETE = 300000920,
+            PATO_obsolete_relative_volume_OBSOLETE = 300000920,
 
             /// <summary>A 1-D extent quality which is equal to the distance from one side of an object to another side which is opposite.</summary>
             PATO_width = 300000921,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_width_OBSOLETE = 300000922,
+            PATO_obsolete_absolute_width_OBSOLETE = 300000922,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_width_OBSOLETE = 300000923,
+            PATO_obsolete_relative_width_OBSOLETE = 300000923,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_enzyme_function_OBSOLETE = 300000924,
+            PATO_obsolete_relative_enzyme_function_OBSOLETE = 300000924,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_enzyme_function_OBSOLETE = 300000925,
+            PATO_obsolete_absolute_enzyme_function_OBSOLETE = 300000925,
 
             /// <summary>Description not provided</summary>
-            PATO_intercross_fertility_OBSOLETE = 300000926,
+            PATO_obsolete_intercross_fertility_OBSOLETE = 300000926,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's disposition to being sensitivity to the action of radiant energy.</summary>
             PATO_photosensitivity = 300000927,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_photosensitivity_OBSOLETE = 300000928,
+            PATO_obsolete_absolute_photosensitivity_OBSOLETE = 300000928,
 
             /// <summary>Description not provided</summary>
-            PATO_light_intensivity_sensitivity_OBSOLETE = 300000929,
+            PATO_obsolete_light_intensivity_sensitivity_OBSOLETE = 300000929,
 
             /// <summary>Description not provided</summary>
-            PATO_light_quality_sensitivity_OBSOLETE = 300000930,
+            PATO_obsolete_light_quality_sensitivity_OBSOLETE = 300000930,
 
             /// <summary>Description not provided</summary>
-            PATO_blue_light_sensitivity_OBSOLETE = 300000931,
+            PATO_obsolete_blue_light_sensitivity_OBSOLETE = 300000931,
 
             /// <summary>Description not provided</summary>
-            PATO_far_red_light_sensitivity_OBSOLETE = 300000932,
+            PATO_obsolete_far_red_light_sensitivity_OBSOLETE = 300000932,
 
             /// <summary>Description not provided</summary>
-            PATO_red_light_sensitivity_OBSOLETE = 300000933,
+            PATO_obsolete_red_light_sensitivity_OBSOLETE = 300000933,
 
             /// <summary>Description not provided</summary>
-            PATO_u_v_light_sensitivity_OBSOLETE = 300000934,
+            PATO_obsolete_u_v_light_sensitivity_OBSOLETE = 300000934,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_photosensitivity_OBSOLETE = 300000935,
+            PATO_obsolete_relative_photosensitivity_OBSOLETE = 300000935,
 
             /// <summary>A shape quality inhering in a bearer by virtue of the bearer's terminating abruptly by having or as if having an end or point cut off.</summary>
             PATO_truncated = 300000936,
@@ -14831,7 +14960,7 @@ namespace PSI_Interface.CV
             PATO_organized = 300000938,
 
             /// <summary>Description not provided</summary>
-            PATO_regular_shape_OBSOLETE = 300000939,
+            PATO_obsolete_regular_shape_OBSOLETE = 300000939,
 
             /// <summary>Description not provided</summary>
             PATO_obsolete_irregular_shape_OBSOLETE = 300000940,
@@ -14882,19 +15011,19 @@ namespace PSI_Interface.CV
             PATO_opacity = 300000957,
 
             /// <summary>Description not provided</summary>
-            PATO_opacity_value_OBSOLETE = 300000958,
+            PATO_obsolete_opacity_value_OBSOLETE = 300000958,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_opacity_OBSOLETE = 300000959,
+            PATO_obsolete_relative_opacity_OBSOLETE = 300000959,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_opacity_OBSOLETE = 300000960,
+            PATO_obsolete_absolute_opacity_OBSOLETE = 300000960,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_opacity_value_OBSOLETE = 300000961,
+            PATO_obsolete_relative_opacity_value_OBSOLETE = 300000961,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_opacity_value_OBSOLETE = 300000962,
+            PATO_obsolete_absolute_opacity_value_OBSOLETE = 300000962,
 
             /// <summary>A optical quality inhering in a bearer by virtue of the bearer's not being clear; not transmitting or reflecting light or radiant energy.</summary>
             PATO_opaque = 300000963,
@@ -14906,13 +15035,13 @@ namespace PSI_Interface.CV
             PATO_symmetry = 300000965,
 
             /// <summary>Description not provided</summary>
-            PATO_symmetry_value_OBSOLETE = 300000966,
+            PATO_obsolete_symmetry_value_OBSOLETE = 300000966,
 
             /// <summary>A shape quality inhering in a bearer by virtue of the bearer's having a sinuate margin and rippled surface.</summary>
             PATO_undulate = 300000967,
 
             /// <summary>Description not provided</summary>
-            PATO_albino_value_OBSOLETE = 300000968,
+            PATO_obsolete_albino_value_OBSOLETE = 300000968,
 
             /// <summary>A size quality inhering in a bearer by virtue of the bearer's being abnormally small.</summary>
             PATO_dwarf_like = 300000969,
@@ -14921,37 +15050,37 @@ namespace PSI_Interface.CV
             PATO_permeability = 300000970,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_permeability_OBSOLETE = 300000971,
+            PATO_obsolete_absolute_permeability_OBSOLETE = 300000971,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_permeability_OBSOLETE = 300000972,
+            PATO_obsolete_relative_permeability_OBSOLETE = 300000972,
 
             /// <summary>A permeability quality inhering in a bearer by virtue of the bearer's disposition to admit the passage of gas or liquid through pores or interstices.</summary>
             PATO_porosity = 300000973,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_porosity_OBSOLETE = 300000974,
+            PATO_obsolete_relative_porosity_OBSOLETE = 300000974,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_porosity_OBSOLETE = 300000975,
+            PATO_obsolete_absolute_porosity_OBSOLETE = 300000975,
 
             /// <summary>Description not provided</summary>
-            PATO_permeability_value_OBSOLETE = 300000976,
+            PATO_obsolete_permeability_value_OBSOLETE = 300000976,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_permeability_value_OBSOLETE = 300000977,
+            PATO_obsolete_absolute_permeability_value_OBSOLETE = 300000977,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_permeability_value_OBSOLETE = 300000978,
+            PATO_obsolete_relative_permeability_value_OBSOLETE = 300000978,
 
             /// <summary>Description not provided</summary>
-            PATO_porosity_value_OBSOLETE = 300000979,
+            PATO_obsolete_porosity_value_OBSOLETE = 300000979,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_porosity_value_OBSOLETE = 300000980,
+            PATO_obsolete_absolute_porosity_value_OBSOLETE = 300000980,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_porosity_value_OBSOLETE = 300000981,
+            PATO_obsolete_relative_porosity_value_OBSOLETE = 300000981,
 
             /// <summary>A permeability quality inhering in a bearer by virtue of the bearer's being capable to be permeated or pervaded by a gas or liquid (as by osmosis or diffusion).</summary>
             PATO_permeable = 300000982,
@@ -14966,40 +15095,40 @@ namespace PSI_Interface.CV
             PATO_non_porous = 300000985,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_consistency_OBSOLETE = 300000986,
+            PATO_obsolete_absolute_consistency_OBSOLETE = 300000986,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_consistency_OBSOLETE = 300000987,
+            PATO_obsolete_relative_consistency_OBSOLETE = 300000987,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_consistency_value_OBSOLETE = 300000988,
+            PATO_obsolete_relative_consistency_value_OBSOLETE = 300000988,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_consistency_value_OBSOLETE = 300000989,
+            PATO_obsolete_absolute_consistency_value_OBSOLETE = 300000989,
 
             /// <summary>Description not provided</summary>
-            PATO_consistent_OBSOLETE = 300000990,
+            PATO_obsolete_consistent_OBSOLETE = 300000990,
 
             /// <summary>Description not provided</summary>
-            PATO_inconsistent_OBSOLETE = 300000991,
+            PATO_obsolete_inconsistent_OBSOLETE = 300000991,
 
             /// <summary>A physical quality of a liquid inhering in a bearer by virtue of the bearer's disposition to internal resistance to flow.</summary>
             PATO_viscosity = 300000992,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_viscosity_OBSOLETE = 300000993,
+            PATO_obsolete_relative_viscosity_OBSOLETE = 300000993,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_viscosity_OBSOLETE = 300000994,
+            PATO_obsolete_absolute_viscosity_OBSOLETE = 300000994,
 
             /// <summary>Description not provided</summary>
-            PATO_viscosity_value_OBSOLETE = 300000995,
+            PATO_obsolete_viscosity_value_OBSOLETE = 300000995,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_viscosity_value_OBSOLETE = 300000996,
+            PATO_obsolete_absolute_viscosity_value_OBSOLETE = 300000996,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_viscosity_value_OBSOLETE = 300000997,
+            PATO_obsolete_relative_viscosity_value_OBSOLETE = 300000997,
 
             /// <summary>A viscosity quality inhering in a bearer by virtue of the bearer's having viscosity.</summary>
             PATO_viscous = 300000998,
@@ -15008,58 +15137,58 @@ namespace PSI_Interface.CV
             PATO_alternation = 300000999,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_alternation_OBSOLETE = 300001000,
+            PATO_obsolete_relative_alternation_OBSOLETE = 300001000,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_alternation_OBSOLETE = 300001001,
+            PATO_obsolete_absolute_alternation_OBSOLETE = 300001001,
 
             /// <summary>Description not provided</summary>
-            PATO_alternation_value_OBSOLETE = 300001002,
+            PATO_obsolete_alternation_value_OBSOLETE = 300001002,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_alternation_value_OBSOLETE = 300001003,
+            PATO_obsolete_relative_alternation_value_OBSOLETE = 300001003,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_alternation_value_OBSOLETE = 300001004,
+            PATO_obsolete_absolute_alternation_value_OBSOLETE = 300001004,
 
             /// <summary>A time quality inhering in a bearer by virtue of the time it elapses for the bearer to respond to a stimulus.</summary>
             PATO_latency = 300001005,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_latency_OBSOLETE = 300001006,
+            PATO_obsolete_absolute_latency_OBSOLETE = 300001006,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_latency_OBSOLETE = 300001007,
+            PATO_obsolete_relative_latency_OBSOLETE = 300001007,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_latency_value_OBSOLETE = 300001008,
+            PATO_obsolete_absolute_latency_value_OBSOLETE = 300001008,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_latency_value_OBSOLETE = 300001009,
+            PATO_obsolete_relative_latency_value_OBSOLETE = 300001009,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_intensity_OBSOLETE = 300001010,
+            PATO_obsolete_relative_intensity_OBSOLETE = 300001010,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_intensity_OBSOLETE = 300001011,
+            PATO_obsolete_absolute_intensity_OBSOLETE = 300001011,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_intensity_value_OBSOLETE = 300001012,
+            PATO_obsolete_relative_intensity_value_OBSOLETE = 300001012,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_intensity_value_OBSOLETE = 300001013,
+            PATO_obsolete_absolute_intensity_value_OBSOLETE = 300001013,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_occurence_OBSOLETE = 300001014,
+            PATO_obsolete_absolute_occurence_OBSOLETE = 300001014,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_occurence_OBSOLETE = 300001015,
+            PATO_obsolete_relative_occurence_OBSOLETE = 300001015,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_occurence_value_OBSOLETE = 300001016,
+            PATO_obsolete_absolute_occurence_value_OBSOLETE = 300001016,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_occurence_value_OBSOLETE = 300001017,
+            PATO_obsolete_relative_occurence_value_OBSOLETE = 300001017,
 
             /// <summary>A quality of a physical entity that exists through action of continuants at the physical level of organisation in relation to other entities.</summary>
             PATO_physical_quality = 300001018,
@@ -15089,7 +15218,7 @@ namespace PSI_Interface.CV
             PATO_work = 300001026,
 
             /// <summary>Description not provided</summary>
-            PATO_physical_quantity_OBSOLETE = 300001027,
+            PATO_obsolete_physical_quantity_OBSOLETE = 300001027,
 
             /// <summary>A physical quality inhering in a bearer by virtue of the rate of change of the bearer's velocity in either speed or direction.</summary>
             PATO_acceleration = 300001028,
@@ -15104,7 +15233,7 @@ namespace PSI_Interface.CV
             PATO_elasticity = 300001031,
 
             /// <summary>Description not provided</summary>
-            PATO_stiffness_OBSOLETE = 300001033,
+            PATO_obsolete_stiffness_OBSOLETE = 300001033,
 
             /// <summary>A physical quality inhering in a bearer by virtue of the relative change in the bearer's length or the bearer's volume when being stretched or squashed.</summary>
             PATO_strain = 300001034,
@@ -15113,49 +15242,49 @@ namespace PSI_Interface.CV
             PATO_force = 300001035,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_life_span_OBSOLETE = 300001036,
+            PATO_obsolete_relative_life_span_OBSOLETE = 300001036,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_life_span_OBSOLETE = 300001037,
+            PATO_obsolete_absolute_life_span_OBSOLETE = 300001037,
 
             /// <summary>Description not provided</summary>
-            PATO_ratio_OBSOLETE = 300001038,
+            PATO_obsolete_ratio_OBSOLETE = 300001038,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_ratio_OBSOLETE = 300001039,
+            PATO_obsolete_absolute_ratio_OBSOLETE = 300001039,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_ratio_OBSOLETE = 300001040,
+            PATO_obsolete_relative_ratio_OBSOLETE = 300001040,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_amplitude_OBSOLETE = 300001041,
+            PATO_obsolete_relative_amplitude_OBSOLETE = 300001041,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_amplitude_OBSOLETE = 300001042,
+            PATO_obsolete_absolute_amplitude_OBSOLETE = 300001042,
 
             /// <summary>A quality inhering in an entity by virtue of the bearer's propensity to resist an external stimulus.</summary>
             PATO_susceptibility_toward = 300001043,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_power_OBSOLETE = 300001044,
+            PATO_obsolete_absolute_power_OBSOLETE = 300001044,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_power_OBSOLETE = 300001045,
+            PATO_obsolete_relative_power_OBSOLETE = 300001045,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's disposition to resist to a stimulus.</summary>
             PATO_resistance_to = 300001046,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_resistance_OBSOLETE = 300001047,
+            PATO_obsolete_absolute_resistance_OBSOLETE = 300001047,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_resistance_OBSOLETE = 300001048,
+            PATO_obsolete_relative_resistance_OBSOLETE = 300001048,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_susceptibility_OBSOLETE = 300001049,
+            PATO_obsolete_absolute_susceptibility_OBSOLETE = 300001049,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_susceptibility_OBSOLETE = 300001050,
+            PATO_obsolete_relative_susceptibility_OBSOLETE = 300001050,
 
             /// <summary>An angle which is less than 90 degrees.</summary>
             PATO_acute_angle_to = 300001051,
@@ -15173,292 +15302,292 @@ namespace PSI_Interface.CV
             PATO_reflex_angle_to = 300001055,
 
             /// <summary>Description not provided</summary>
-            PATO_number_OBSOLETE = 300001056,
+            PATO_obsolete_number_OBSOLETE = 300001056,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_acceleration_OBSOLETE = 300001057,
+            PATO_obsolete_relative_acceleration_OBSOLETE = 300001057,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_acceleration_OBSOLETE = 300001058,
+            PATO_obsolete_absolute_acceleration_OBSOLETE = 300001058,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_efficiency_OBSOLETE = 300001059,
+            PATO_obsolete_relative_efficiency_OBSOLETE = 300001059,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_efficiency_OBSOLETE = 300001060,
+            PATO_obsolete_absolute_efficiency_OBSOLETE = 300001060,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_elasticity_OBSOLETE = 300001061,
+            PATO_obsolete_relative_elasticity_OBSOLETE = 300001061,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_elasticity_OBSOLETE = 300001062,
+            PATO_obsolete_absolute_elasticity_OBSOLETE = 300001062,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_flux_OBSOLETE = 300001063,
+            PATO_obsolete_relative_flux_OBSOLETE = 300001063,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_flux_OBSOLETE = 300001064,
+            PATO_obsolete_absolute_flux_OBSOLETE = 300001064,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_stiffness_OBSOLETE = 300001065,
+            PATO_obsolete_relative_stiffness_OBSOLETE = 300001065,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_stiffness_OBSOLETE = 300001066,
+            PATO_obsolete_absolute_stiffness_OBSOLETE = 300001066,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_strain_OBSOLETE = 300001067,
+            PATO_obsolete_absolute_strain_OBSOLETE = 300001067,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_strain_OBSOLETE = 300001068,
+            PATO_obsolete_relative_strain_OBSOLETE = 300001068,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_density_OBSOLETE = 300001069,
+            PATO_obsolete_relative_density_OBSOLETE = 300001069,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_density_OBSOLETE = 300001070,
+            PATO_obsolete_absolute_density_OBSOLETE = 300001070,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_energy_OBSOLETE = 300001071,
+            PATO_obsolete_relative_energy_OBSOLETE = 300001071,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_energy_OBSOLETE = 300001072,
+            PATO_obsolete_absolute_energy_OBSOLETE = 300001072,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_impulse_OBSOLETE = 300001073,
+            PATO_obsolete_relative_impulse_OBSOLETE = 300001073,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_impulse_OBSOLETE = 300001074,
+            PATO_obsolete_absolute_impulse_OBSOLETE = 300001074,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_momentum_OBSOLETE = 300001075,
+            PATO_obsolete_absolute_momentum_OBSOLETE = 300001075,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_momentum_OBSOLETE = 300001076,
+            PATO_obsolete_relative_momentum_OBSOLETE = 300001076,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_pressure_OBSOLETE = 300001077,
+            PATO_obsolete_absolute_pressure_OBSOLETE = 300001077,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_pressure_OBSOLETE = 300001078,
+            PATO_obsolete_relative_pressure_OBSOLETE = 300001078,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_work_OBSOLETE = 300001079,
+            PATO_obsolete_absolute_work_OBSOLETE = 300001079,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_work_OBSOLETE = 300001080,
+            PATO_obsolete_relative_work_OBSOLETE = 300001080,
 
             /// <summary>Description not provided</summary>
-            PATO_physical_measure_value_OBSOLETE = 300001081,
+            PATO_obsolete_physical_measure_value_OBSOLETE = 300001081,
 
             /// <summary>Description not provided</summary>
-            PATO_damage_value_OBSOLETE = 300001082,
+            PATO_obsolete_damage_value_OBSOLETE = 300001082,
 
             /// <summary>Description not provided</summary>
-            PATO_acceleration_value_OBSOLETE = 300001083,
+            PATO_obsolete_acceleration_value_OBSOLETE = 300001083,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_acceleration_value_OBSOLETE = 300001084,
+            PATO_obsolete_relative_acceleration_value_OBSOLETE = 300001084,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_acceleration_value_OBSOLETE = 300001085,
+            PATO_obsolete_absolute_acceleration_value_OBSOLETE = 300001085,
 
             /// <summary>Description not provided</summary>
-            PATO_efficiency_value_OBSOLETE = 300001086,
+            PATO_obsolete_efficiency_value_OBSOLETE = 300001086,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_efficiency_value_OBSOLETE = 300001087,
+            PATO_obsolete_relative_efficiency_value_OBSOLETE = 300001087,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_efficiency_value_OBSOLETE = 300001088,
+            PATO_obsolete_absolute_efficiency_value_OBSOLETE = 300001088,
 
             /// <summary>Description not provided</summary>
-            PATO_elasticity_value_OBSOLETE = 300001089,
+            PATO_obsolete_elasticity_value_OBSOLETE = 300001089,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_elasticity_value_OBSOLETE = 300001090,
+            PATO_obsolete_absolute_elasticity_value_OBSOLETE = 300001090,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_elasticity_value_OBSOLETE = 300001091,
+            PATO_obsolete_relative_elasticity_value_OBSOLETE = 300001091,
 
             /// <summary>Description not provided</summary>
-            PATO_flux_value_OBSOLETE = 300001092,
+            PATO_obsolete_flux_value_OBSOLETE = 300001092,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_flux_value_OBSOLETE = 300001093,
+            PATO_obsolete_relative_flux_value_OBSOLETE = 300001093,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_flux_value_OBSOLETE = 300001094,
+            PATO_obsolete_absolute_flux_value_OBSOLETE = 300001094,
 
             /// <summary>Description not provided</summary>
-            PATO_force_value_OBSOLETE = 300001095,
+            PATO_obsolete_force_value_OBSOLETE = 300001095,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_force_value_OBSOLETE = 300001096,
+            PATO_obsolete_absolute_force_value_OBSOLETE = 300001096,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_force_value_OBSOLETE = 300001097,
+            PATO_obsolete_relative_force_value_OBSOLETE = 300001097,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_force_OBSOLETE = 300001098,
+            PATO_obsolete_absolute_force_OBSOLETE = 300001098,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_force_OBSOLETE = 300001099,
+            PATO_obsolete_relative_force_OBSOLETE = 300001099,
 
             /// <summary>Description not provided</summary>
-            PATO_position_value_OBSOLETE = 300001100,
+            PATO_obsolete_position_value_OBSOLETE = 300001100,
 
             /// <summary>Description not provided</summary>
-            PATO_stiffness_value_OBSOLETE = 300001101,
+            PATO_obsolete_stiffness_value_OBSOLETE = 300001101,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_stiffness_value_OBSOLETE = 300001102,
+            PATO_obsolete_absolute_stiffness_value_OBSOLETE = 300001102,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_stiffness_value_OBSOLETE = 300001103,
+            PATO_obsolete_relative_stiffness_value_OBSOLETE = 300001103,
 
             /// <summary>Description not provided</summary>
-            PATO_strain_value_OBSOLETE = 300001104,
+            PATO_obsolete_strain_value_OBSOLETE = 300001104,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_strain_value_OBSOLETE = 300001105,
+            PATO_obsolete_absolute_strain_value_OBSOLETE = 300001105,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_strain_value_OBSOLETE = 300001106,
+            PATO_obsolete_relative_strain_value_OBSOLETE = 300001106,
 
             /// <summary>Description not provided</summary>
-            PATO_density_value_OBSOLETE = 300001107,
+            PATO_obsolete_density_value_OBSOLETE = 300001107,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_amplitude_value_OBSOLETE = 300001108,
+            PATO_obsolete_relative_amplitude_value_OBSOLETE = 300001108,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_amplitude_value_OBSOLETE = 300001109,
+            PATO_obsolete_absolute_amplitude_value_OBSOLETE = 300001109,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_density_value_OBSOLETE = 300001110,
+            PATO_obsolete_absolute_density_value_OBSOLETE = 300001110,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_density_value_OBSOLETE = 300001111,
+            PATO_obsolete_relative_density_value_OBSOLETE = 300001111,
 
             /// <summary>Description not provided</summary>
-            PATO_energy_value_OBSOLETE = 300001112,
+            PATO_obsolete_energy_value_OBSOLETE = 300001112,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_energy_value_OBSOLETE = 300001113,
+            PATO_obsolete_absolute_energy_value_OBSOLETE = 300001113,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_energy_value_OBSOLETE = 300001114,
+            PATO_obsolete_relative_energy_value_OBSOLETE = 300001114,
 
             /// <summary>Description not provided</summary>
-            PATO_impulse_value_OBSOLETE = 300001115,
+            PATO_obsolete_impulse_value_OBSOLETE = 300001115,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_impulse_value_OBSOLETE = 300001116,
+            PATO_obsolete_relative_impulse_value_OBSOLETE = 300001116,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_impulse_value_OBSOLETE = 300001117,
+            PATO_obsolete_absolute_impulse_value_OBSOLETE = 300001117,
 
             /// <summary>Description not provided</summary>
-            PATO_momentum_value_OBSOLETE = 300001118,
+            PATO_obsolete_momentum_value_OBSOLETE = 300001118,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_momentum_value_OBSOLETE = 300001119,
+            PATO_obsolete_absolute_momentum_value_OBSOLETE = 300001119,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_momentum_value_OBSOLETE = 300001120,
+            PATO_obsolete_relative_momentum_value_OBSOLETE = 300001120,
 
             /// <summary>Description not provided</summary>
-            PATO_power_value_OBSOLETE = 300001121,
+            PATO_obsolete_power_value_OBSOLETE = 300001121,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_power_value_OBSOLETE = 300001122,
+            PATO_obsolete_absolute_power_value_OBSOLETE = 300001122,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_power_value_OBSOLETE = 300001123,
+            PATO_obsolete_relative_power_value_OBSOLETE = 300001123,
 
             /// <summary>Description not provided</summary>
-            PATO_pressure_value_OBSOLETE = 300001124,
+            PATO_obsolete_pressure_value_OBSOLETE = 300001124,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_pressure_value_OBSOLETE = 300001125,
+            PATO_obsolete_absolute_pressure_value_OBSOLETE = 300001125,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_pressure_value_OBSOLETE = 300001126,
+            PATO_obsolete_relative_pressure_value_OBSOLETE = 300001126,
 
             /// <summary>Description not provided</summary>
-            PATO_work_value_OBSOLETE = 300001127,
+            PATO_obsolete_work_value_OBSOLETE = 300001127,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_work_value_OBSOLETE = 300001128,
+            PATO_obsolete_absolute_work_value_OBSOLETE = 300001128,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_work_value_OBSOLETE = 300001129,
+            PATO_obsolete_relative_work_value_OBSOLETE = 300001129,
 
             /// <summary>Description not provided</summary>
-            PATO_ratio_value_OBSOLETE = 300001130,
+            PATO_obsolete_ratio_value_OBSOLETE = 300001130,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_ratio_value_OBSOLETE = 300001131,
+            PATO_obsolete_absolute_ratio_value_OBSOLETE = 300001131,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_ratio_value_OBSOLETE = 300001132,
+            PATO_obsolete_relative_ratio_value_OBSOLETE = 300001132,
 
             /// <summary>Description not provided</summary>
-            PATO_immunoglobulin_concentration_OBSOLETE = 300001133,
+            PATO_obsolete_immunoglobulin_concentration_OBSOLETE = 300001133,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_a_concentration_OBSOLETE = 300001134,
+            PATO_obsolete_ig_a_concentration_OBSOLETE = 300001134,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_d_concentration_OBSOLETE = 300001135,
+            PATO_obsolete_ig_d_concentration_OBSOLETE = 300001135,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_e_concentration_OBSOLETE = 300001136,
+            PATO_obsolete_ig_e_concentration_OBSOLETE = 300001136,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_g_concentration_OBSOLETE = 300001137,
+            PATO_obsolete_ig_g_concentration_OBSOLETE = 300001137,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_m_concentration_OBSOLETE = 300001138,
+            PATO_obsolete_ig_m_concentration_OBSOLETE = 300001138,
 
             /// <summary>Description not provided</summary>
-            PATO_urine_glucose_composition_OBSOLETE = 300001139,
+            PATO_obsolete_urine_glucose_composition_OBSOLETE = 300001139,
 
             /// <summary>Description not provided</summary>
-            PATO_immunoglobulin_concentration_value_OBSOLETE = 300001140,
+            PATO_obsolete_immunoglobulin_concentration_value_OBSOLETE = 300001140,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_a_concentration_value_OBSOLETE = 300001141,
+            PATO_obsolete_ig_a_concentration_value_OBSOLETE = 300001141,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_d_concentration_value_OBSOLETE = 300001142,
+            PATO_obsolete_ig_d_concentration_value_OBSOLETE = 300001142,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_e_concentration_value_OBSOLETE = 300001143,
+            PATO_obsolete_ig_e_concentration_value_OBSOLETE = 300001143,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_g_concentration_value_OBSOLETE = 300001144,
+            PATO_obsolete_ig_g_concentration_value_OBSOLETE = 300001144,
 
             /// <summary>Description not provided</summary>
-            PATO_ig_m_concentration_value_OBSOLETE = 300001145,
+            PATO_obsolete_ig_m_concentration_value_OBSOLETE = 300001145,
 
             /// <summary>Description not provided</summary>
-            PATO_resistance_value_OBSOLETE = 300001146,
+            PATO_obsolete_resistance_value_OBSOLETE = 300001146,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_resistance_value_OBSOLETE = 300001147,
+            PATO_obsolete_absolute_resistance_value_OBSOLETE = 300001147,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_resistance_value_OBSOLETE = 300001148,
+            PATO_obsolete_relative_resistance_value_OBSOLETE = 300001148,
 
             /// <summary>Description not provided</summary>
-            PATO_susceptibility_value_OBSOLETE = 300001149,
+            PATO_obsolete_susceptibility_value_OBSOLETE = 300001149,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_susceptibility_value_OBSOLETE = 300001150,
+            PATO_obsolete_absolute_susceptibility_value_OBSOLETE = 300001150,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_susceptibility_value_OBSOLETE = 300001151,
+            PATO_obsolete_relative_susceptibility_value_OBSOLETE = 300001151,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's having susceptibilty toward an external stimulus.</summary>
             PATO_susceptible_toward = 300001152,
@@ -15470,22 +15599,22 @@ namespace PSI_Interface.CV
             PATO_elongated = 300001154,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_concentration_OBSOLETE = 300001155,
+            PATO_obsolete_absolute_concentration_OBSOLETE = 300001155,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_concentration_OBSOLETE = 300001156,
+            PATO_obsolete_relative_concentration_OBSOLETE = 300001156,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_concentration_value_OBSOLETE = 300001157,
+            PATO_obsolete_absolute_concentration_value_OBSOLETE = 300001157,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_concentration_value_OBSOLETE = 300001158,
+            PATO_obsolete_relative_concentration_value_OBSOLETE = 300001158,
 
             /// <summary>A concentration quality inhering in a bearer by virtue of the bearer's exhibiting concentration.</summary>
             PATO_concentrated = 300001159,
 
             /// <summary>Description not provided</summary>
-            PATO_unconcentrated_OBSOLETE = 300001160,
+            PATO_obsolete_unconcentrated_OBSOLETE = 300001160,
 
             /// <summary>A concentration which relatively low.</summary>
             PATO_diluted = 300001161,
@@ -15500,10 +15629,10 @@ namespace PSI_Interface.CV
             PATO_dense = 300001164,
 
             /// <summary>Description not provided</summary>
-            PATO_urine_enzyme_composition_value_OBSOLETE = 300001165,
+            PATO_obsolete_urine_enzyme_composition_value_OBSOLETE = 300001165,
 
             /// <summary>Description not provided</summary>
-            PATO_urine_enzyme_composition_OBSOLETE = 300001166,
+            PATO_obsolete_urine_enzyme_composition_OBSOLETE = 300001166,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer being harmed or injured or spoiled, such that its functionality is impaired.</summary>
             PATO_damaged = 300001167,
@@ -15512,7 +15641,7 @@ namespace PSI_Interface.CV
             PATO_undamaged = 300001168,
 
             /// <summary>Description not provided</summary>
-            PATO_numerical_value_OBSOLETE = 300001170,
+            PATO_obsolete_numerical_value_OBSOLETE = 300001170,
 
             /// <summary>An elasticity quality inhering in a bearer by virtue of the bearer's ability to recover its size and shape after deformation in any way.</summary>
             PATO_elastic = 300001171,
@@ -15521,40 +15650,40 @@ namespace PSI_Interface.CV
             PATO_inelastic = 300001172,
 
             /// <summary>Description not provided</summary>
-            PATO_urine_glucose_composition_value_OBSOLETE = 300001173,
+            PATO_obsolete_urine_glucose_composition_value_OBSOLETE = 300001173,
 
             /// <summary>Description not provided</summary>
-            PATO_urine_composition_OBSOLETE = 300001174,
+            PATO_obsolete_urine_composition_OBSOLETE = 300001174,
 
             /// <summary>Description not provided</summary>
-            PATO_urine_composition_OBSOLETE1 = 300001175,
+            PATO_obsolete_urine_composition_OBSOLETE1 = 300001175,
 
             /// <summary>Description not provided</summary>
-            PATO_deaf_OBSOLETE = 300001176,
+            PATO_obsolete_deaf_OBSOLETE = 300001176,
 
             /// <summary>Description not provided</summary>
-            PATO_blind_OBSOLETE = 300001177,
+            PATO_obsolete_blind_OBSOLETE = 300001177,
 
             /// <summary>A resistance quality inhering in a bearer by virtue of the bearer's resistance to a stimulus.</summary>
             PATO_resistant_to = 300001178,
 
             /// <summary>Description not provided</summary>
-            PATO_immune_OBSOLETE = 300001179,
+            PATO_obsolete_immune_OBSOLETE = 300001179,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_response_OBSOLETE = 300001180,
+            PATO_obsolete_relative_response_OBSOLETE = 300001180,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_response_OBSOLETE = 300001181,
+            PATO_obsolete_absolute_response_OBSOLETE = 300001181,
 
             /// <summary>Description not provided</summary>
-            PATO_relative_response_OBSOLETE1 = 300001182,
+            PATO_obsolete_relative_response_OBSOLETE1 = 300001182,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_response_value_OBSOLETE = 300001183,
+            PATO_obsolete_absolute_response_value_OBSOLETE = 300001183,
 
             /// <summary>Description not provided</summary>
-            PATO_maturity_value_OBSOLETE = 300001184,
+            PATO_obsolete_maturity_value_OBSOLETE = 300001184,
 
             /// <summary>A maturity quality inhering in a bearer by virtue of the bearer's indirect development, undergoing metamorphosis.</summary>
             PATO_larval = 300001185,
@@ -15593,10 +15722,10 @@ namespace PSI_Interface.CV
             PATO_ventral_to = 300001196,
 
             /// <summary>Description not provided</summary>
-            PATO_modified_direction_OBSOLETE = 300001197,
+            PATO_obsolete_modified_direction_OBSOLETE = 300001197,
 
             /// <summary>Description not provided</summary>
-            PATO_unmodified_direction_OBSOLETE = 300001198,
+            PATO_obsolete_unmodified_direction_OBSOLETE = 300001198,
 
             /// <summary>A shape quality inhering in a bearer by virtue of the bearer's being narrow, with the two opposite margins parallel.</summary>
             PATO_linear = 300001199,
@@ -15608,7 +15737,7 @@ namespace PSI_Interface.CV
             PATO_Y_shaped = 300001201,
 
             /// <summary>Description not provided</summary>
-            PATO_not_enlarged_OBSOLETE = 300001204,
+            PATO_obsolete_not_enlarged_OBSOLETE = 300001204,
 
             /// <summary>A surface feature shape quality inhering in a bearer by virtue of the bearer's having toothlike projections in the margin.</summary>
             PATO_dentated = 300001205,
@@ -15617,67 +15746,67 @@ namespace PSI_Interface.CV
             PATO_serrated = 300001206,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_compatability_OBSOLETE = 300001207,
+            PATO_obsolete_absolute_compatability_OBSOLETE = 300001207,
 
             /// <summary>An odor quality inhering in a bearer by virtue of the bearer's lacking odour.</summary>
             PATO_odorless = 300001208,
 
             /// <summary>Description not provided</summary>
-            PATO_absolute_function_OBSOLETE = 300001209,
+            PATO_obsolete_absolute_function_OBSOLETE = 300001209,
 
             /// <summary>Description not provided</summary>
-            PATO_plane_angle_quantity_OBSOLETE = 300001210,
+            PATO_obsolete_plane_angle_quantity_OBSOLETE = 300001210,
 
             /// <summary>Description not provided</summary>
-            PATO_solid_angle_quantity_OBSOLETE = 300001211,
+            PATO_obsolete_solid_angle_quantity_OBSOLETE = 300001211,
 
             /// <summary>Description not provided</summary>
-            PATO_length_unit_OBSOLETE = 300001212,
+            PATO_obsolete_length_unit_OBSOLETE = 300001212,
 
             /// <summary>Description not provided</summary>
-            PATO_mass_unit_OBSOLETE = 300001213,
+            PATO_obsolete_mass_unit_OBSOLETE = 300001213,
 
             /// <summary>Description not provided</summary>
-            PATO_temparature_unit_OBSOLETE = 300001214,
+            PATO_obsolete_temparature_unit_OBSOLETE = 300001214,
 
             /// <summary>Description not provided</summary>
-            PATO_time_unit_OBSOLETE = 300001215,
+            PATO_obsolete_time_unit_OBSOLETE = 300001215,
 
             /// <summary>Description not provided</summary>
-            PATO_volume_unit_OBSOLETE = 300001216,
+            PATO_obsolete_volume_unit_OBSOLETE = 300001216,
 
             /// <summary>Description not provided</summary>
-            PATO_energy_unit_OBSOLETE = 300001217,
+            PATO_obsolete_energy_unit_OBSOLETE = 300001217,
 
             /// <summary>Description not provided</summary>
-            PATO_substance_unit_OBSOLETE = 300001218,
+            PATO_obsolete_substance_unit_OBSOLETE = 300001218,
 
             /// <summary>Description not provided</summary>
-            PATO_area_unit_OBSOLETE = 300001219,
+            PATO_obsolete_area_unit_OBSOLETE = 300001219,
 
             /// <summary>Description not provided</summary>
-            PATO_angle_unit_OBSOLETE = 300001220,
+            PATO_obsolete_angle_unit_OBSOLETE = 300001220,
 
             /// <summary>Description not provided</summary>
-            PATO_plane_angle_unit_OBSOLETE = 300001221,
+            PATO_obsolete_plane_angle_unit_OBSOLETE = 300001221,
 
             /// <summary>Description not provided</summary>
-            PATO_solid_angle_unit_OBSOLETE = 300001222,
+            PATO_obsolete_solid_angle_unit_OBSOLETE = 300001222,
 
             /// <summary>Description not provided</summary>
-            PATO_quantitative_value_OBSOLETE = 300001223,
+            PATO_obsolete_quantitative_value_OBSOLETE = 300001223,
 
             /// <summary>Description not provided</summary>
-            PATO_real_number_OBSOLETE = 300001224,
+            PATO_obsolete_real_number_OBSOLETE = 300001224,
 
             /// <summary>Description not provided</summary>
-            PATO_relational_number_OBSOLETE = 300001225,
+            PATO_obsolete_relational_number_OBSOLETE = 300001225,
 
             /// <summary>A variability quality inhering in a bearer by virtue of whether the bearer exhibits variation or change.</summary>
             PATO_variant = 300001227,
 
             /// <summary>Description not provided</summary>
-            PATO_dull_OBSOLETE = 300001228,
+            PATO_obsolete_dull_OBSOLETE = 300001228,
 
             /// <summary>A color saturation which is of high purity.</summary>
             PATO_high_saturation = 300001229,
@@ -15686,10 +15815,10 @@ namespace PSI_Interface.CV
             PATO_strength = 300001230,
 
             /// <summary>Description not provided</summary>
-            PATO_cold_insensitive_OBSOLETE = 300001231,
+            PATO_obsolete_cold_insensitive_OBSOLETE = 300001231,
 
             /// <summary>Description not provided</summary>
-            PATO_heat_insentive_OBSOLETE = 300001232,
+            PATO_obsolete_heat_insentive_OBSOLETE = 300001232,
 
             /// <summary>A spatial quality inhering in a bearer by virtue of the bearer's being located toward the back or upper surface of an organism relative to another entity.</summary>
             PATO_dorsal_to = 300001233,
@@ -15698,7 +15827,7 @@ namespace PSI_Interface.CV
             PATO_distal_to = 300001234,
 
             /// <summary>Description not provided</summary>
-            PATO_strength_value_OBSOLETE = 300001235,
+            PATO_obsolete_strength_value_OBSOLETE = 300001235,
 
             /// <summary>A quality which inheres in an process.</summary>
             PATO_process_quality = 300001236,
@@ -15800,10 +15929,10 @@ namespace PSI_Interface.CV
             PATO_desaturated_green = 300001272,
 
             /// <summary>A color consisting of grey color and high saturation.</summary>
-            PATO_bright_grey_OBSOLETE = 300001273,
+            PATO_obsolete_bright_grey_OBSOLETE = 300001273,
 
             /// <summary>A color consisting of grey color and low saturation.</summary>
-            PATO_pale_grey_OBSOLETE = 300001274,
+            PATO_obsolete_pale_grey_OBSOLETE = 300001274,
 
             /// <summary>A color consisting of magenta color and high saturation.</summary>
             PATO_saturated_magenta = 300001275,
@@ -15956,7 +16085,7 @@ namespace PSI_Interface.CV
             PATO_radial_symmetry = 300001325,
 
             /// <summary>Description not provided</summary>
-            PATO_left_right_symmetry_OBSOLETE = 300001326,
+            PATO_obsolete_left_right_symmetry_OBSOLETE = 300001326,
 
             /// <summary>A symmetry quality inhering in a bearer by virtue of the bearer's being capable of division into symmetrical halves by only one longitudinal plane passing through the axis.</summary>
             PATO_zygomorphic = 300001327,
@@ -15986,7 +16115,7 @@ namespace PSI_Interface.CV
             PATO_bacterial_mating_type = 300001335,
 
             /// <summary>A biological sex quality inhering in an individual whose sex is unknown.</summary>
-            PATO_unknown_sex_OBSOLETE = 300001336,
+            PATO_obsolete_unknown_sex_OBSOLETE = 300001336,
 
             /// <summary>A yeast mating type.</summary>
             PATO_yeast_mating_type = 300001337,
@@ -16325,7 +16454,7 @@ namespace PSI_Interface.CV
             PATO_edematous = 300001450,
 
             /// <summary>An extended swelling in plant organs caused primarily by an excessive accumulation of water.</summary>
-            PATO_edematous__sensu_botany__OBSOLETE = 300001451,
+            PATO_obsolete_edematous__sensu_botany__OBSOLETE = 300001451,
 
             /// <summary>An attachment quality inhering in a bearer by virtue of the bearer's lacking connection or association with another entity.</summary>
             PATO_detached_from = 300001453,
@@ -16676,7 +16805,7 @@ namespace PSI_Interface.CV
             PATO_decreased_contractility = 300001581,
 
             /// <summary>A spatial quality inhering in an inactive muscle or muscle fibers by virtue of the bearer's exhibiting gradual lengthening.</summary>
-            PATO_relaxational_quality_OBSOLETE = 300001582,
+            PATO_obsolete_relaxational_quality_OBSOLETE = 300001582,
 
             /// <summary>A variability which is relatively low.</summary>
             PATO_decreased_variability = 300001583,
@@ -16697,7 +16826,7 @@ namespace PSI_Interface.CV
             PATO_decreased_variability_of_rate = 300001588,
 
             /// <summary>Increased, intensified.</summary>
-            PATO_enhanced_OBSOLETE = 300001589,
+            PATO_obsolete_enhanced_OBSOLETE = 300001589,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer's coinciding spatially, partially or wholly with another entity.</summary>
             PATO_overlap_with = 300001590,
@@ -16886,10 +17015,10 @@ namespace PSI_Interface.CV
             PATO_ventrally_rotated = 300001659,
 
             /// <summary>An action potential which is relatively low.</summary>
-            PATO_decreased_action_potential_OBSOLETE = 300001660,
+            PATO_obsolete_decreased_action_potential_OBSOLETE = 300001660,
 
             /// <summary>An action potential which is relatively high.</summary>
-            PATO_increased_action_potential_OBSOLETE = 300001661,
+            PATO_obsolete_increased_action_potential_OBSOLETE = 300001661,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer's disposition to being damaged or destroyed.</summary>
             PATO_fragility = 300001662,
@@ -17195,7 +17324,7 @@ namespace PSI_Interface.CV
             PATO_decreased_age = 300001765,
 
             /// <summary>A cellular quality inhering in a cell by virtue of its anisotropic intracellular organization.</summary>
-            PATO_cellular_polarity_OBSOLETE = 300001766,
+            PATO_obsolete_cellular_polarity_OBSOLETE = 300001766,
 
             /// <summary>Description not provided</summary>
             PATO_semi_fertile = 300001767,
@@ -17324,10 +17453,10 @@ namespace PSI_Interface.CV
             PATO_wrinkled = 300001810,
 
             /// <summary>A relaxation which is relatively high.</summary>
-            PATO_increased_relaxation_OBSOLETE = 300001811,
+            PATO_obsolete_increased_relaxation_OBSOLETE = 300001811,
 
             /// <summary>A relaxation which is relatively low.</summary>
-            PATO_decreased_relaxation_OBSOLETE = 300001812,
+            PATO_obsolete_decreased_relaxation_OBSOLETE = 300001812,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer's lack elastic tension that facilitate response to stimuli.</summary>
             PATO_atonicity = 300001813,
@@ -17885,7 +18014,7 @@ namespace PSI_Interface.CV
             PATO_population_quality = 300002003,
 
             /// <summary>A shape that inheres in a part of a surface. An object can have different surface shapes on different parts of its surface.</summary>
-            PATO_surface_shape_OBSOLETE = 300002004,
+            PATO_obsolete_surface_shape_OBSOLETE = 300002004,
 
             /// <summary>Surface shape that refers to the inward or outward curvature of the surface.</summary>
             PATO_concavity = 300002005,
@@ -18116,10 +18245,10 @@ namespace PSI_Interface.CV
             PATO_altered_number_of = 300002083,
 
             /// <summary>The period after death of the organism.</summary>
-            PATO_post_mortem_OBSOLETE = 300002084,
+            PATO_obsolete_post_mortem_OBSOLETE = 300002084,
 
             /// <summary>The period before death of the organism.</summary>
-            PATO_pre_mortem_OBSOLETE = 300002085,
+            PATO_obsolete_pre_mortem_OBSOLETE = 300002085,
 
             /// <summary>A quality inhering in a bearer by virtue of the bearer's being short and wide and tapered distally.</summary>
             PATO_bullet_shaped = 300002087,
@@ -18146,7 +18275,7 @@ namespace PSI_Interface.CV
             PATO_basophilic = 300002094,
 
             /// <summary>A disposition inhering in a tumour to progress or fail to progress during it's life time.</summary>
-            PATO_neoplasm_disposition_OBSOLETE = 300002095,
+            PATO_obsolete_neoplasm_disposition_OBSOLETE = 300002095,
 
             /// <summary>A disposition inhering in a tumour by virtue of the bearer's disposition not to progress, invade surrounding tissues or metastasize.</summary>
             PATO_neoplastic__non_malignant = 300002096,
@@ -19046,7 +19175,7 @@ namespace PSI_Interface.CV
             PATO_subcircular = 300002397,
 
             /// <summary>Description not provided</summary>
-            PATO__new_term__OBSOLETE = 300002398,
+            PATO_obsolete__new_term__OBSOLETE = 300002398,
 
             /// <summary>A rotation quality inhering in a bearer by virtue of being rotated towards the front and the middle of an organism.</summary>
             PATO_anteromedially_rotated = 300002399,
@@ -19642,6 +19771,21 @@ namespace PSI_Interface.CV
             /// <summary>An decrease in combustibility.</summary>
             PATO_decreased_combustibility = 300015023,
 
+            /// <summary>An increase in porosity.</summary>
+            PATO_increased_porosity = 300015024,
+
+            /// <summary>An decrease in porosity.</summary>
+            PATO_decreased_porosity = 300015025,
+
+            /// <summary>quality, state, or degree of being stable.</summary>
+            PATO_stability = 300015026,
+
+            /// <summary>An increase in stability.</summary>
+            PATO_increased_stability = 300015027,
+
+            /// <summary>A decrease in stability.</summary>
+            PATO_decreased_stability = 300015028,
+
             /// <summary>A biological sex quality inhering in an individual based upon genotypic composition of sex chromosomes.</summary>
             PATO_genotypic_sex = 300020000,
 
@@ -19659,6 +19803,30 @@ namespace PSI_Interface.CV
 
             /// <summary>A physical quality inhering in a bearer by virtue of the bearer being suitable for use as a safe means of hydration.</summary>
             PATO_potable = 300025002,
+
+            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally anterior structures and missing some or all of what are normally posterior structures.</summary>
+            PATO_anterioralized = 300030000,
+
+            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally dorsal structures and missing some or all of what are normally ventral structures.</summary>
+            PATO_dorsalized = 300030001,
+
+            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally posterior structures and missing some or all of what are normally anterior structures.</summary>
+            PATO_posterioralized = 300030002,
+
+            /// <summary>A malformed quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally ventral structures and missing some or all of what are normally dorsal structures.</summary>
+            PATO_ventralized = 300030003,
+
+            /// <summary>An anterioralized quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally anterior structures and missing some but not all of what are normally posterior structures.</summary>
+            PATO_partially_anterioralized = 300030004,
+
+            /// <summary>A dorsalized quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally dorsal structures and missing some but not all of what are normally ventral structures.</summary>
+            PATO_partially_dorsalized = 300030005,
+
+            /// <summary>A posterioralized quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally posterior structures and missing some but not all of what are normally anterior structures.</summary>
+            PATO_partially_posterioralized = 300030006,
+
+            /// <summary>A ventralized quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally ventral structures and missing some but not all of what are normally dorsal structures.</summary>
+            PATO_partially_ventralized = 300030007,
 
             /// <summary>A unit of measurement is a standardized quantity of a physical quality.</summary>
             UO_unit = 200000000,
@@ -19903,7 +20071,7 @@ namespace PSI_Interface.CV
             /// <summary>An area unit which is equal to an area enclosed by a square with sides each 1 meter long.</summary>
             UO_square_meter = 200000080,
 
-            /// <summary>An area unit which is equal to one thousand of square meter or 10^</summary>
+            /// <summary>An area unit which is equal to one ten thousandth of a square meter or 10^</summary>
             UO_square_centimeter = 200000081,
 
             /// <summary>An area unit which is equal to one millionth of a square meter or 10^</summary>
