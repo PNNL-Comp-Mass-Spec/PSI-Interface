@@ -48,6 +48,11 @@ namespace PSI_Interface.CV
         public static readonly Dictionary<string, Dictionary<string, CVID>> TermAccessionLookup = new Dictionary<string, Dictionary<string, CVID>>();
 
         /// <summary>
+        /// Mapping from CV to CV term name (lowercase) to CV term enum
+        /// </summary>
+        public static readonly Dictionary<string, Dictionary<string, CVID>> TermNameLookup = new Dictionary<string, Dictionary<string, CVID>>();
+
+        /// <summary>
         /// Returns true if child has an IsA relationship with parent
         /// </summary>
         /// <param name="child"></param>
@@ -199,7 +204,29 @@ namespace PSI_Interface.CV
                 {
                     TermAccessionLookup.Add(term.CVRef, new Dictionary<string, CVID>() {{term.Id, term.Cvid}});
                 }
+                if (TermNameLookup.ContainsKey(term.CVRef))
+                {
+                    //TermNameLookup[term.CVRef].Add(term.Name, term.Cvid);
+                    TermNameLookupSafeAdd(TermNameLookup[term.CVRef], term);
+                }
+                else
+                {
+                    TermNameLookup.Add(term.CVRef, new Dictionary<string, CVID>() {{term.Name.ToLower(), term.Cvid}});
+                }
             }
+        }
+
+        private static void TermNameLookupSafeAdd(Dictionary<string, CVID> cvDict, TermInfo term)
+        {
+            var safeName = term.Name.ToLower();
+            var counter = 0;
+            while (cvDict.ContainsKey(safeName))
+            {
+                counter++;
+                safeName = term.Name.ToLower() + counter;
+            }
+
+            cvDict.Add(safeName, term.Cvid);
         }
 
         private static void CreateParentRelations()

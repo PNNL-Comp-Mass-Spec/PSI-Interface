@@ -168,11 +168,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (modName.ToLower().StartsWith("unimod"))
                 modName = modName.Remove(0, 6);
-            modName = modName.Trim('_').Trim().Replace(' ', '_');
-            var testEnum = "UNIMOD_" + modName;
+            var nameSearch = modName.ToLower().TrimStart('_');
             CV.CV.CVID result;
-            if (!Enum.TryParse(testEnum, true, out result))
-                result = CV.CV.CVID.MS_unknown_modification;
+            // First search for the name in the lookup
+            if (!CV.CV.TermNameLookup["UNIMOD"].TryGetValue(nameSearch, out result))
+            {
+                // If searching for the name fails, try a last ditch attempt to parse it as an enum, before giving up
+                modName = modName.Trim('_').Trim().Replace(' ', '_');
+                var testEnum = "UNIMOD_" + modName;
+                if (!Enum.TryParse(testEnum, true, out result))
+                    result = CV.CV.CVID.MS_unknown_modification;
+            }
 
             return result;
         }

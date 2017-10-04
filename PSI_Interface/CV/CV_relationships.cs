@@ -2504,7 +2504,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Formyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ICAT_H, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ICAT_H_13C_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Thioacyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DTSSP_88_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Fluoro, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Fluorescein, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Iodo, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -2582,7 +2582,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Cytopiloyne, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Cytopiloyne_water, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_CAF, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_SSD, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Nitrosyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_AEBS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Ethanolyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -2618,7 +2617,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Delta_H_2_C_3_O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Nethylmaleimide_water, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Xlink_B10621, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DTBPc, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DTBP_87_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_FP_Biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_H_4_C_2_O__1_S_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Methyl_2H_3_13C_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -2722,8 +2721,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_GluGluGlu, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_GluGluGluGlu, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_HexN, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DMP_s, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DMP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DMP_154_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NDA, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_SPITC_13C_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_AEC_MAEC, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -2924,8 +2922,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_iTRAQ8plex, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_iTRAQ8plex_13C_6_15N_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Ethanolamine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_DTT_ST, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_DTT_C, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_BEMAD_ST, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_BEMAD_C, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_TMT6plex, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_TMT2plex, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_TMT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -2940,8 +2938,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_trifluoro, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_TNBS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_IDEnT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_DTT_ST_2H_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_DTT_C_2H_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_BEMAD_ST_2H_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_BEMAD_C_2H_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Met_loss, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Met_loss_Acetyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Menadione_HQ, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3004,7 +3002,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Leu__MetOx, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Lys__MetOx, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Galactosyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_SMCC_maleimide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_SMCC_321_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Bacillosamine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_MTSL, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_HNE_BAHAH, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3023,13 +3021,13 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_AROD, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Cys__methylaminoAla, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Cys__ethylaminoAla, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DNPS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_SulfoGMBS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 4</summary>
         private static void FillRelationsIsAPart4()
         {
-            RelationsIsA.Add(CVID.UNIMOD_DNPS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_SulfoGMBS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_DimethylamineGMBS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_15N_2_2H_9_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_LG_anhydrolactam, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3085,13 +3083,13 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_DMPO, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ICDID, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_ICDID_2H_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_EGS244, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DST, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DTSSP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_SMCC, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DMP_de, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_EGS115, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS_156_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_EGS_244_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DST_132_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DTSSP_192_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_SMCC_237_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DMP_140_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_EGS_115_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_88310, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_2_nitrobenzyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Cys__SecNEM, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3779,7 +3777,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_4_HexNAc_5_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_1_Ac_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_2_15N_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS_NH2, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS_155_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NQIGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Carboxyethylpyrrole, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Fluorescein_tyramine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3804,6 +3802,41 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_PhosphoCytidine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_AzidoF, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Dimethylaminoethyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Gluratylation, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_2_hydroxyisobutyrylation, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_MeMePhosphorothioate, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cation_Fe_III_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DTT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DYn_2, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_MesitylOxide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_methylol, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS_259_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSSO_176_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSSO_175_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSSO_279_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSSO_54_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSSO_86_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSSO_104_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BuUrBu_111_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BuUrBu_85_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BuUrBu_213_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BuUrBu_214_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BuUrBu_317_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSSO_158_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_EGS_226_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DSS_138_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BuUrBu_196_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DTBP_172_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DST_114_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DTSSP_174_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_SMCC_219_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BS2G_96_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BS2G_113_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BS2G_114_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_BS2G_217_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cation_Al_III_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DMP_139_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Xlink_DMP_122_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.PATO_mobility, new List<CVID> { CVID.PATO_physical_quality, });
             RelationsIsA.Add(CVID.PATO_speed, new List<CVID> { CVID.PATO_movement_quality, });
             RelationsIsA.Add(CVID.PATO_age, new List<CVID> { CVID.PATO_time, });
@@ -3995,6 +4028,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_unilateral, new List<CVID> { CVID.PATO_spatial_pattern, });
             RelationsIsA.Add(CVID.PATO_unlocalised, new List<CVID> { CVID.PATO_spatial_pattern, });
             RelationsIsA.Add(CVID.PATO_wholly_ventralized, new List<CVID> { CVID.PATO_ventralized, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 5</summary>
+        private static void FillRelationsIsAPart5()
+        {
             RelationsIsA.Add(CVID.PATO_apoptotic, new List<CVID> { CVID.PATO_structure, });
             RelationsIsA.Add(CVID.PATO_degenerate, new List<CVID> { CVID.PATO_degeneration, });
             RelationsIsA.Add(CVID.PATO_dysplastic, new List<CVID> { CVID.PATO_structure, });
@@ -4028,11 +4066,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_passive, new List<CVID> { CVID.PATO_behavioral_quality, });
             RelationsIsA.Add(CVID.PATO_coordinated, new List<CVID> { CVID.PATO_coordination, });
             RelationsIsA.Add(CVID.PATO_uncoordinated, new List<CVID> { CVID.PATO_coordination, });
-        }
-
-        /// <summary>Populate the relationships between CV terms, breakdown part 5</summary>
-        private static void FillRelationsIsAPart5()
-        {
             RelationsIsA.Add(CVID.PATO_aversion, new List<CVID> { CVID.PATO_preference, });
             RelationsIsA.Add(CVID.PATO_indifference, new List<CVID> { CVID.PATO_preference, });
             RelationsIsA.Add(CVID.PATO_preference, new List<CVID> { CVID.PATO_discrimination, });
@@ -5000,6 +5033,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_laterally_rotated, new List<CVID> { CVID.PATO_rotated, });
             RelationsIsA.Add(CVID.PATO_partially_dislocated, new List<CVID> { CVID.PATO_dislocated, });
             RelationsIsA.Add(CVID.PATO_bicornuate, new List<CVID> { CVID.PATO_concave_3_D_shape, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 6</summary>
+        private static void FillRelationsIsAPart6()
+        {
             RelationsIsA.Add(CVID.PATO_high_arched, new List<CVID> { CVID.PATO_arched, CVID.PATO_increased_object_quality, });
             RelationsIsA.Add(CVID.PATO_herniated_into, new List<CVID> { CVID.PATO_protruding_into, });
             RelationsIsA.Add(CVID.PATO_curved_medial, new List<CVID> { CVID.PATO_curved, });
@@ -5033,11 +5071,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_non_aromatic, new List<CVID> { CVID.PATO_aromaticity, });
             RelationsIsA.Add(CVID.PATO_electric_charge, new List<CVID> { CVID.PATO_molecular_quality, });
             RelationsIsA.Add(CVID.PATO_neutral_charge, new List<CVID> { CVID.PATO_electric_charge, });
-        }
-
-        /// <summary>Populate the relationships between CV terms, breakdown part 6</summary>
-        private static void FillRelationsIsAPart6()
-        {
             RelationsIsA.Add(CVID.PATO_positive_charge, new List<CVID> { CVID.PATO_electric_charge, });
             RelationsIsA.Add(CVID.PATO_negative_charge, new List<CVID> { CVID.PATO_electric_charge, });
             RelationsIsA.Add(CVID.PATO_electronegativity, new List<CVID> { CVID.PATO_molecular_quality, });

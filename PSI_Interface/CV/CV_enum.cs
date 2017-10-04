@@ -8347,8 +8347,8 @@ namespace PSI_Interface.CV
             /// <summary>N-iodoacetyl, p-chlorobenzyl-13C6-glucamine.</summary>
             UNIMOD_ICAT_H_13C_6_ = 100000124,
 
-            /// <summary>3-sulfanylpropanoyl.</summary>
-            UNIMOD_Thioacyl = 100000126,
+            /// <summary>Cleaved and reduced DSP/DTSSP crosslinker.</summary>
+            UNIMOD_Xlink_DTSSP_88_ = 100000126,
 
             /// <summary>Fluorination.</summary>
             UNIMOD_Fluoro = 100000127,
@@ -8581,9 +8581,6 @@ namespace PSI_Interface.CV
             /// <summary>Sulfonation of N-terminus.</summary>
             UNIMOD_CAF = 100000272,
 
-            /// <summary>Covalent modification of lysine by cross-linking reagent.</summary>
-            UNIMOD_Xlink_SSD = 100000273,
-
             /// <summary>S-nitrosylation.</summary>
             UNIMOD_Nitrosyl = 100000275,
 
@@ -8686,11 +8683,11 @@ namespace PSI_Interface.CV
             /// <summary>Nethylmaleimidehydrolysis.</summary>
             UNIMOD_Nethylmaleimide_water = 100000320,
 
-            /// <summary>Bis-N-I-sulfonerahodamine.</summary>
+            /// <summary>Bis-((N-iodoacetyl)piperazinyl)sulfonerhodamine.</summary>
             UNIMOD_Xlink_B10621 = 100000323,
 
-            /// <summary>Dimethyl 3,3\'-dithiobispropionimidate.</summary>
-            UNIMOD_Xlink_DTBPc = 100000324,
+            /// <summary>Cleaved and reduced DTBP crosslinker.</summary>
+            UNIMOD_Xlink_DTBP_87_ = 100000324,
 
             /// <summary>10-ethoxyphosphinyl-N-(biotinamidopentyl)decanamide.</summary>
             UNIMOD_FP_Biotin = 100000325,
@@ -9001,11 +8998,8 @@ namespace PSI_Interface.CV
             /// <summary>Hexosamine.</summary>
             UNIMOD_HexN = 100000454,
 
-            /// <summary>One end of crosslink attached, one end free.</summary>
-            UNIMOD_Xlink_DMP_s = 100000455,
-
-            /// <summary>Both ends of crosslink attached to same peptide.</summary>
-            UNIMOD_Xlink_DMP = 100000456,
+            /// <summary>Free monolink of DMP crosslinker.</summary>
+            UNIMOD_Xlink_DMP_154_ = 100000455,
 
             /// <summary>Naphthalene-2,3-dicarboxaldehyde.</summary>
             UNIMOD_NDA = 100000457,
@@ -9607,11 +9601,11 @@ namespace PSI_Interface.CV
             /// <summary>Carboxyl modification with ethanolamine.</summary>
             UNIMOD_Ethanolamine = 100000734,
 
-            /// <summary>Dithiothreitol (DTT).</summary>
-            UNIMOD_DTT_ST = 100000735,
+            /// <summary>Beta elimination of modified S or T followed by Michael addition of DTT.</summary>
+            UNIMOD_BEMAD_ST = 100000735,
 
-            /// <summary>Dithiothreitol (DTT) on Cys.</summary>
-            UNIMOD_DTT_C = 100000736,
+            /// <summary>Beta elimination of alkylated Cys followed by Michael addition of DTT.</summary>
+            UNIMOD_BEMAD_C = 100000736,
 
             /// <summary>Sixplex Tandem Mass TagÂ®.</summary>
             UNIMOD_TMT6plex = 100000737,
@@ -9640,7 +9634,7 @@ namespace PSI_Interface.CV
             /// <summary>Nitroso Sulfamethoxazole Sulfinamide thiol adduct.</summary>
             UNIMOD_NO_SMX_SIMD = 100000746,
 
-            /// <summary>Malonylation of C and S residues.</summary>
+            /// <summary>Malonylation.</summary>
             UNIMOD_Malonyl = 100000747,
 
             /// <summary>Derivatization by N-term modification using 3-Sulfobenzoic succinimidyl ester.</summary>
@@ -9655,11 +9649,11 @@ namespace PSI_Interface.CV
             /// <summary>Isotope Distribution Encoded Tag.</summary>
             UNIMOD_IDEnT = 100000762,
 
-            /// <summary>Isotopically labeled Dithiothreitol (DTT) modification of serines or threonines.</summary>
-            UNIMOD_DTT_ST_2H_6_ = 100000763,
+            /// <summary>Beta elimination of modified S or T followed by Michael addition of labelled DTT.</summary>
+            UNIMOD_BEMAD_ST_2H_6_ = 100000763,
 
-            /// <summary>Isotopically labeled Dithiothreitol (DTT) modification of cysteines.</summary>
-            UNIMOD_DTT_C_2H_6_ = 100000764,
+            /// <summary>Beta elimination of alkylated Cys followed by Michael addition of labelled DTT.</summary>
+            UNIMOD_BEMAD_C_2H_6_ = 100000764,
 
             /// <summary>Removal of initiator methionine from protein N-terminus.</summary>
             UNIMOD_Met_loss = 100000765,
@@ -9715,10 +9709,10 @@ namespace PSI_Interface.CV
             /// <summary>Enzymatic glycine removal leaving an amidated C-terminus.</summary>
             UNIMOD_Gly_loss_Amide = 100000822,
 
-            /// <summary>Addition of BMOE crosslinker.</summary>
+            /// <summary>Intact or monolink BMOE crosslinker.</summary>
             UNIMOD_Xlink_BMOE = 100000824,
 
-            /// <summary>Addition of DFDNB crosslinker.</summary>
+            /// <summary>Intact DFDNB crosslinker.</summary>
             UNIMOD_Xlink_DFDNB = 100000825,
 
             /// <summary>Tris(2,4,6-trimethoxyphenyl)phosphonium acetic acid N-hydroxysuccinimide ester derivative.</summary>
@@ -9847,8 +9841,8 @@ namespace PSI_Interface.CV
             /// <summary>Gluconoylation.</summary>
             UNIMOD_Galactosyl = 100000907,
 
-            /// <summary>Modified SMCC maleimide with 3-(dimethylamino)-1-propylamine.</summary>
-            UNIMOD_SMCC_maleimide = 100000908,
+            /// <summary>Monolink of SMCC terminated with 3-(dimethylamino)-1-propylamine.</summary>
+            UNIMOD_Xlink_SMCC_321_ = 100000908,
 
             /// <summary>2,4-diacetamido-2,4,6-trideoxyglucopyranose.</summary>
             UNIMOD_Bacillosamine = 100000910,
@@ -10051,7 +10045,7 @@ namespace PSI_Interface.CV
             /// <summary>Sec Iodoacetamide derivative.</summary>
             UNIMOD_Cys__CamSec = 100001008,
 
-            /// <summary>Addition of Carbon to cysteine.</summary>
+            /// <summary>Formaldehyde adduct.</summary>
             UNIMOD_Thiazolidine = 100001009,
 
             /// <summary>Addition of DEDGFLYMVYASQETFG.</summary>
@@ -10075,26 +10069,26 @@ namespace PSI_Interface.CV
             /// <summary>Isotope-Coded Dimedone heavy form.</summary>
             UNIMOD_ICDID_2H_6_ = 100001019,
 
-            /// <summary>Water-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.</summary>
-            UNIMOD_Xlink_DSS = 100001020,
+            /// <summary>Water-quenched monolink of DSS/BS3 crosslinker.</summary>
+            UNIMOD_Xlink_DSS_156_ = 100001020,
 
             /// <summary>Water quenched monolink of EGS cross-linker.</summary>
-            UNIMOD_Xlink_EGS244 = 100001021,
+            UNIMOD_Xlink_EGS_244_ = 100001021,
 
-            /// <summary>Monolink of DST crosslinker to Lys or N-terminus.</summary>
-            UNIMOD_Xlink_DST = 100001022,
+            /// <summary>Water quenched monolink of DST crosslinker.</summary>
+            UNIMOD_Xlink_DST_132_ = 100001022,
 
-            /// <summary>Monolink of DSP/DTSSP crosslinker to Lys or N-terminus.</summary>
-            UNIMOD_Xlink_DTSSP = 100001023,
+            /// <summary>Water quenched monolink of DSP/DTSSP crosslinker.</summary>
+            UNIMOD_Xlink_DTSSP_192_ = 100001023,
 
-            /// <summary>Monolink of sulfoSMCC/SMCC crosslinker to Cys.</summary>
-            UNIMOD_Xlink_SMCC = 100001024,
+            /// <summary>Water quenched monolink of SMCC.</summary>
+            UNIMOD_Xlink_SMCC_237_ = 100001024,
 
-            /// <summary>Monolink of DMP crosslinker to Lys or N-terminus.</summary>
-            UNIMOD_Xlink_DMP_de = 100001027,
+            /// <summary>Water quenched monolink of DMP crosslinker.</summary>
+            UNIMOD_Xlink_DMP_140_ = 100001027,
 
             /// <summary>Cleavage product of EGS protein crosslinks by hydroylamine treatment.</summary>
-            UNIMOD_Xlink_EGS115 = 100001028,
+            UNIMOD_Xlink_EGS_115_ = 100001028,
 
             /// <summary>Desthiobiotin modification of lysine.</summary>
             UNIMOD_Biotin_Thermo_88310 = 100001031,
@@ -12157,8 +12151,8 @@ namespace PSI_Interface.CV
             /// <summary>13C(2) 15N(2).</summary>
             UNIMOD_Label_13C_2_15N_2_ = 100001787,
 
-            /// <summary>Ammonium-quenched monolink of DSS/BS3 crosslinker to Lys or N-terminus.</summary>
-            UNIMOD_Xlink_DSS_NH2 = 100001789,
+            /// <summary>Ammonium-quenched monolink of DSS/BS3 crosslinker.</summary>
+            UNIMOD_Xlink_DSS_155_ = 100001789,
 
             /// <summary>SUMOylation by Giardia lamblia.</summary>
             UNIMOD_NQIGG = 100001799,
@@ -12231,6 +12225,111 @@ namespace PSI_Interface.CV
 
             /// <summary>Cys alkylation by dimethylaminoethyl halide.</summary>
             UNIMOD_Dimethylaminoethyl = 100001846,
+
+            /// <summary>Glutarylation.</summary>
+            UNIMOD_Gluratylation = 100001848,
+
+            /// <summary>2-hydroxyisobutyrylation.</summary>
+            UNIMOD_2_hydroxyisobutyrylation = 100001849,
+
+            /// <summary>S-Methyl Methyl phosphorothioate.</summary>
+            UNIMOD_MeMePhosphorothioate = 100001868,
+
+            /// <summary>Replacement of 3 protons by iron.</summary>
+            UNIMOD_Cation_Fe_III_ = 100001870,
+
+            /// <summary>DTT adduct of cysteine.</summary>
+            UNIMOD_DTT = 100001871,
+
+            /// <summary>Sulfenic Acid specific probe.</summary>
+            UNIMOD_DYn_2 = 100001872,
+
+            /// <summary>Acetone chemical artifact.</summary>
+            UNIMOD_MesitylOxide = 100001873,
+
+            /// <summary>Formaldehyde induced modifications.</summary>
+            UNIMOD_methylol = 100001875,
+
+            /// <summary>Tris-quenched monolink of DSS/BS3 crosslinker.</summary>
+            UNIMOD_Xlink_DSS_259_ = 100001877,
+
+            /// <summary>Water-quenched monolink of DSSO crosslinker.</summary>
+            UNIMOD_Xlink_DSSO_176_ = 100001878,
+
+            /// <summary>Ammonia-quenched monolink of DSSO crosslinker.</summary>
+            UNIMOD_Xlink_DSSO_175_ = 100001879,
+
+            /// <summary>Tris-quenched monolink of DSSO crosslinker.</summary>
+            UNIMOD_Xlink_DSSO_279_ = 100001880,
+
+            /// <summary>Alkene fragment of DSSO crosslinker.</summary>
+            UNIMOD_Xlink_DSSO_54_ = 100001881,
+
+            /// <summary>Thiol fragment of DSSO crosslinker.</summary>
+            UNIMOD_Xlink_DSSO_86_ = 100001882,
+
+            /// <summary>Sulfenic acid fragment of DSSO crosslinker.</summary>
+            UNIMOD_Xlink_DSSO_104_ = 100001883,
+
+            /// <summary>BuUr fragment of BuUrBu crosslinker.</summary>
+            UNIMOD_Xlink_BuUrBu_111_ = 100001885,
+
+            /// <summary>Bu fragment of BuUrBu crosslinker.</summary>
+            UNIMOD_Xlink_BuUrBu_85_ = 100001886,
+
+            /// <summary>Ammonia quenched monolink of BuUrBu crosslinker.</summary>
+            UNIMOD_Xlink_BuUrBu_213_ = 100001887,
+
+            /// <summary>Water quenched monolink of BuUrBu crosslinker.</summary>
+            UNIMOD_Xlink_BuUrBu_214_ = 100001888,
+
+            /// <summary>Tris quenched monolink of BuUrBu crosslinker.</summary>
+            UNIMOD_Xlink_BuUrBu_317_ = 100001889,
+
+            /// <summary>Intact DSSO crosslinker.</summary>
+            UNIMOD_Xlink_DSSO_158_ = 100001896,
+
+            /// <summary>Intact EGS cross-linker.</summary>
+            UNIMOD_Xlink_EGS_226_ = 100001897,
+
+            /// <summary>Intact DSS/BS3 crosslinker.</summary>
+            UNIMOD_Xlink_DSS_138_ = 100001898,
+
+            /// <summary>Intact BuUrBu crosslinker.</summary>
+            UNIMOD_Xlink_BuUrBu_196_ = 100001899,
+
+            /// <summary>Intact DTBP crosslinker.</summary>
+            UNIMOD_Xlink_DTBP_172_ = 100001900,
+
+            /// <summary>Intact DST crosslinker.</summary>
+            UNIMOD_Xlink_DST_114_ = 100001901,
+
+            /// <summary>Intact DSP/DTSSP crosslinker.</summary>
+            UNIMOD_Xlink_DTSSP_174_ = 100001902,
+
+            /// <summary>Intact SMCC cross-link.</summary>
+            UNIMOD_Xlink_SMCC_219_ = 100001903,
+
+            /// <summary>Intact BS2-G crosslinker.</summary>
+            UNIMOD_Xlink_BS2G_96_ = 100001905,
+
+            /// <summary>Ammonium-quenched monolink of BS2-G crosslinker.</summary>
+            UNIMOD_Xlink_BS2G_113_ = 100001906,
+
+            /// <summary>Water-quenched monolink of BS2-G crosslinker.</summary>
+            UNIMOD_Xlink_BS2G_114_ = 100001907,
+
+            /// <summary>Tris-quenched monolink of BS2-G crosslinker.</summary>
+            UNIMOD_Xlink_BS2G_217_ = 100001908,
+
+            /// <summary>Replacement of 3 protons by aluminium.</summary>
+            UNIMOD_Cation_Al_III_ = 100001910,
+
+            /// <summary>Ammonia quenched monolink of DMP crosslinker.</summary>
+            UNIMOD_Xlink_DMP_139_ = 100001911,
+
+            /// <summary>Intact DMP crosslinker.</summary>
+            UNIMOD_Xlink_DMP_122_ = 100001912,
 
             /// <summary>Description not provided</summary>
             PATO_obsolete_pato_OBSOLETE = 300000000,
