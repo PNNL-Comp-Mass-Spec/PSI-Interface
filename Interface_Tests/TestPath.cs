@@ -18,7 +18,7 @@ namespace Interface_Tests
                 dirFinder = System.IO.Path.GetDirectoryName(dirFinder);
             }
             //Console.WriteLine("Project: " + dirFinder);
-            
+
             // Local test directory
             TestDirectory = System.IO.Path.GetDirectoryName(dirFinder);
 

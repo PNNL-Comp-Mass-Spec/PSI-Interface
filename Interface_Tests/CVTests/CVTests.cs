@@ -1,6 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using CV_Generator;
 using NUnit.Framework;
+using PSI_Interface.CV;
+using PSI_Interface.IdentData.IdentDataObjs;
 
 namespace Interface_Tests.CVTests
 {
@@ -25,7 +29,7 @@ namespace Interface_Tests.CVTests
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
+        // Use TestInitialize to run code before running each test
         // [TestInitialize()]
         // public void MyTestInitialize() { }
         //
@@ -62,8 +66,8 @@ namespace Interface_Tests.CVTests
             WriteCVTerms(outFile, fileData);
 
             foreach (var oboFile in imports)
-            {                
-                var importedFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, 
+            {
+                var importedFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory,
                     Path.GetFileNameWithoutExtension(outFileName) + " imported " + oboFile.Name + ".txt"));
 
                 WriteCVTerms(importedFile, oboFile);
@@ -96,6 +100,36 @@ namespace Interface_Tests.CVTests
 
             return value.Substring(0, maxLength - 3) + "...";
         }
-    }
 
+        [Test]
+        public void TestUnimodNameMapping()
+        {
+            var termGroup = CV.TermAccessionLookup["UNIMOD"].Where(x => x.Value != CV.CVID.UNIMOD_unimod_root_node);
+            foreach (var term in termGroup)
+            {
+                var info = CV.TermData[term.Value];
+                var mod = new ModificationObj(CV.CVID.CVID_Unknown, info.Name, 5, 42);
+                if (mod.CVParams.Count == 1)
+                {
+                    Assert.AreEqual(term.Value, mod.CVParams[0].Cvid, "Enums do not match!");
+                }
+                else
+                {
+                    var foundMatch = false;
+                    foreach (var cvParam in mod.CVParams)
+                    {
+                        if (cvParam.Cvid.Equals(term.Value))
+                        {
+                            foundMatch = true;
+                            break;
+                        }
+                    }
+                    if (!foundMatch)
+                    {
+                        Assert.Fail("No matching enum found! {0}", term.Value);
+                    }
+                }
+            }
+        }
+    }
 }
