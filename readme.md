@@ -91,3 +91,16 @@ Several runtime options exist:
 * Using reduced memory (i.e., not reading the entire file into memory; default true)
 * Reading spectra without reading the binary data (i.e., all the metadata, but not peak m/zs or intensities)
 * Reading spectra with reading the binary data (i.e., all the metadata, with peak m/zs and intensities)
+
+## Contacts
+
+Written by Bryson Gibbons for the Department of Energy (PNNL, Richland, WA) \
+Copyright 2017, Battelle Memorial Institute.  All Rights Reserved. \
+E-mail: proteomics@pnnl.gov \
+Website: https://panomics.pnl.gov/ or https://omics.pnl.gov
+
+## License
+
+Licensed under the Apache License, Version 2.0; you may not use this file except
+in compliance with the License.  You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
