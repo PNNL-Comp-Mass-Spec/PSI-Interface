@@ -168,7 +168,7 @@ namespace PSI_Interface.IdentData
         private readonly Dictionary<string, DatabaseSequence> m_database = new Dictionary<string, DatabaseSequence>();
         private readonly Dictionary<string, PeptideRef> m_peptides = new Dictionary<string, PeptideRef>();
         private readonly Dictionary<string, PeptideEvidence> m_evidences = new Dictionary<string, PeptideEvidence>();
-        private readonly Dictionary<string, SpectrumIdItem> m_specItems = new Dictionary<string, SpectrumIdItem>();
+        //private readonly Dictionary<string, SpectrumIdItem> m_specItems = new Dictionary<string, SpectrumIdItem>();
         private readonly Dictionary<string, Regex> m_decoyDbAccessionRegex = new Dictionary<string, Regex>();
         private string spectrumFile = string.Empty;
         private string softwareCvAccession = string.Empty;
@@ -530,23 +530,18 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        /// Container class for holding the mzIdentML data
+        /// Container class for holding the mzIdentML metadata
         /// </summary>
-        public class SimpleMZIdentMLData
+        public class SimpleMZIdentMLMetaData
         {
             /// <summary>
             /// Constructor
             /// </summary>
             /// <param name="path">path to the mzid file</param>
-            public SimpleMZIdentMLData(string path)
+            public SimpleMZIdentMLMetaData(string path)
             {
                 DatasetFile = path;
             }
-
-            /// <summary>
-            /// List of identifications contained in <see cref="DatasetFile"/>
-            /// </summary>
-            public readonly List<SpectrumIdItem> Identifications = new List<SpectrumIdItem>();
 
             /// <summary>
             /// Path to the mzid file
@@ -574,6 +569,56 @@ namespace PSI_Interface.IdentData
             public string AnalysisSoftwareVersion { get; internal set; }
         }
 
+        /// <summary>
+        /// Container class for holding the mzIdentML data, when reading all results into memory
+        /// </summary>
+        public class SimpleMZIdentMLData : SimpleMZIdentMLMetaData
+        {
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="path">path to the mzid file</param>
+            public SimpleMZIdentMLData(string path) : base(path)
+            {
+            }
+
+            /// <summary>
+            /// List of identifications contained in <see cref="SimpleMZIdentMLMetaData.DatasetFile"/>
+            /// </summary>
+            public readonly List<SpectrumIdItem> Identifications = new List<SpectrumIdItem>();
+        }
+
+        /// <summary>
+        /// Container class for holding the mzIdentML data, when reading low-memory style; disposable to properly close the XML reader
+        /// </summary>
+        public class SimpleMZIdentMLDataLowMem : SimpleMZIdentMLMetaData, IDisposable
+        {
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="path">path to the mzid file</param>
+            /// <param name="identifications"></param>
+            public SimpleMZIdentMLDataLowMem(string path, IEnumerable<SpectrumIdItem> identifications, XmlReader dataReader) : base(path)
+            {
+                Identifications = identifications;
+                xmlDataReader = dataReader;
+            }
+
+            private readonly XmlReader xmlDataReader = null;
+
+            /// <summary>
+            /// List of identifications contained in <see cref="SimpleMZIdentMLMetaData.DatasetFile"/>
+            /// </summary>
+            public IEnumerable<SpectrumIdItem> Identifications { get; }
+
+            /// <summary>
+            /// Close the xmlReader that is supplying data to <see cref="Identifications"/>
+            /// </summary>
+            public void Dispose()
+            {
+                xmlDataReader?.Dispose();
+            }
+        }
 
         /// <summary>
         /// Entry point for SimpleMZIdentMLReader
@@ -600,6 +645,55 @@ namespace PSI_Interface.IdentData
                 throw new FileNotFoundException(".mzID file not found", path);
 
             // Set a large buffer size. Doesn't affect gzip reading speed, but speeds up non-gzipped
+            // Stream file should be closed properly via close/dispose chaining from the XmlReader
+            Stream file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
+            if (sourceFile.Name.Trim().EndsWith(".mzid.gz", StringComparison.OrdinalIgnoreCase))
+            {
+                file = new GZipStream(file, CompressionMode.Decompress);
+            }
+
+            var results = new SimpleMZIdentMLData(sourceFile.FullName);
+            var xSettings = new XmlReaderSettings {IgnoreWhitespace = true};
+            using (var reader = XmlReader.Create(new StreamReader(file, System.Text.Encoding.UTF8, true, 65536), xSettings))
+            {
+                // Read in the file
+                var spectrumMatches = ReadMzIdentMl(reader);
+
+                results.SpectrumFile = spectrumFile;
+                results.AnalysisSoftware = softwareName;
+                results.AnalysisSoftwareVersion = softwareVersion;
+                results.AnalysisSoftwareCvAccession = softwareCvAccession;
+                results.Identifications.AddRange(spectrumMatches);
+            }
+            return results;
+        }
+
+        /// <summary>
+        /// Entry point for SimpleMZIdentMLReader
+        /// Read the MZIdentML file, map the data to easy-to-use objects, and return the collection of objects
+        /// Returns only the metadata, and reads the identifications as they are read from the returned object
+        /// </summary>
+        /// <param name="path">Path to *.mzid/mzIdentML file</param>
+        /// <param name="cancelToken">Cancellation token, to interrupt reading between spectra</param>
+        /// <returns><see cref="SimpleMZIdentMLData"/></returns>
+        /// <remarks>
+        /// XML Reader parses an MZIdentML file, storing data as follows:
+        ///   PeptideRef holds Peptide data, such as sequence, number, and type of modifications
+        ///   Database Information holds the length of the peptide and the protein description
+        ///   Peptide Evidence holds the pre, post, start and end for the peptide for Tryptic End calculations.
+        /// The element that holds the most information is the Spectrum ID Item, which has the calculated mz,
+        /// experimental mz, charge state, MSGF raw score, Denovo score, MSGF SpecEValue, MSGF EValue,
+        /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
+        /// it has from the analysis run.
+        /// </remarks>
+        public SimpleMZIdentMLDataLowMem ReadLowMem(string path, CancellationToken cancelToken = default(CancellationToken))
+        {
+            cancellationToken = cancelToken;
+            var sourceFile = new FileInfo(path);
+            if (!sourceFile.Exists)
+                throw new FileNotFoundException(".mzID file not found", path);
+
+            // Set a large buffer size. Doesn't affect gzip reading speed, but speeds up non-gzipped
             Stream file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
 
             if (sourceFile.Name.Trim().EndsWith(".mzid.gz", StringComparison.OrdinalIgnoreCase))
@@ -610,15 +704,14 @@ namespace PSI_Interface.IdentData
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
             var reader = XmlReader.Create(new StreamReader(file, System.Text.Encoding.UTF8, true, 65536), xSettings);
 
-            // Read in the file
-            ReadMzIdentMl(reader);
+            // Read in the file metadata, stopping after the first yield return.
+            var enumerable = ReadMzIdentMl(reader);
 
-            var results = new SimpleMZIdentMLData(sourceFile.FullName);
+            var results = new SimpleMZIdentMLDataLowMem(sourceFile.FullName, enumerable, reader);
             results.SpectrumFile = spectrumFile;
             results.AnalysisSoftware = softwareName;
             results.AnalysisSoftwareVersion = softwareVersion;
             results.AnalysisSoftwareCvAccession = softwareCvAccession;
-            results.Identifications.AddRange(m_specItems.Values);
             return results;
         }
 
@@ -647,7 +740,7 @@ namespace PSI_Interface.IdentData
         /// Files are commonly larger than 30 MB, so use a streaming reader instead of a DOM reader
         /// </summary>
         /// <param name="reader">XmlReader object for the file to be read</param>
-        private void ReadMzIdentMl(XmlReader reader)
+        private IEnumerable<SpectrumIdItem> ReadMzIdentMl(XmlReader reader)
         {
             // Handle disposal of allocated object correctly
             using (reader)
@@ -663,7 +756,7 @@ namespace PSI_Interface.IdentData
                 {
                     if (cancellationToken.IsCancellationRequested)
                     {
-                        return;
+                        break;
                     }
                     // Handle exiting out properly at EndElement tags
                     if (reader.NodeType != XmlNodeType.Element)
@@ -712,7 +805,11 @@ namespace PSI_Interface.IdentData
                         case "DataCollection":
                             // Schema requirements: one instance of this element
                             // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                            ReadDataCollection(reader.ReadSubtree());
+                            // we can use "return ReadDataCollection(...)", but then that would immediately exit the function, without any subsequent operations occurring (like closing the reader)
+                            foreach (var item in ReadDataCollection(reader.ReadSubtree()))
+                            {
+                                yield return item;
+                            }
                             PossiblyReadEndElement(reader, "DataCollection");
                             break;
                         case "BibliographicReference":
@@ -983,7 +1080,7 @@ namespace PSI_Interface.IdentData
         /// Called by ReadMzIdentML (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single DataCollection element</param>
-        private void ReadDataCollection(XmlReader reader)
+        private IEnumerable<SpectrumIdItem> ReadDataCollection(XmlReader reader)
         {
             reader.MoveToContent();
             reader.ReadStartElement("DataCollection"); // Throws exception if we are not at the "DataCollection" tag.
@@ -1004,7 +1101,11 @@ namespace PSI_Interface.IdentData
                     case "AnalysisData":
                         // Schema requirements: one and only one instance of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                        ReadAnalysisData(reader.ReadSubtree());
+                        // we can use "return ReadDataCollection(...)", but then that would immediately exit the function, without any subsequent operations occurring (like closing the reader)
+                        foreach (var item in ReadAnalysisData(reader.ReadSubtree()))
+                        {
+                            yield return item;
+                        }
                         PossiblyReadEndElement(reader, "AnalysisData");
                         break;
                     default:
@@ -1137,7 +1238,7 @@ namespace PSI_Interface.IdentData
         /// Currently we are only working with the SpectrumIdentificationList child elements
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single AnalysisData element</param>
-        private void ReadAnalysisData(XmlReader reader)
+        private IEnumerable<SpectrumIdItem> ReadAnalysisData(XmlReader reader)
         {
             reader.MoveToContent();
             reader.ReadStartElement("AnalysisData"); // Throws exception if we are not at the "AnalysisData" tag.
@@ -1153,7 +1254,11 @@ namespace PSI_Interface.IdentData
                 {
                     // Schema requirements: one to many instances of this element
                     // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                    ReadSpectrumIdentificationList(reader.ReadSubtree());
+                    // we can use "return ReadDataCollection(...)", but then that would immediately exit the function, without any subsequent operations occurring (like closing the reader)
+                    foreach (var item in ReadSpectrumIdentificationList(reader.ReadSubtree()))
+                    {
+                        yield return item;
+                    }
                     PossiblyReadEndElement(reader, "SpectrumIdentificationList");
                 }
                 else
@@ -1169,7 +1274,7 @@ namespace PSI_Interface.IdentData
         /// Called by ReadAnalysisData (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single SpectrumIdentificationList element</param>
-        private void ReadSpectrumIdentificationList(XmlReader reader)
+        private IEnumerable<SpectrumIdItem> ReadSpectrumIdentificationList(XmlReader reader)
         {
             reader.MoveToContent();
             reader.ReadStartElement("SpectrumIdentificationList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
@@ -1177,7 +1282,7 @@ namespace PSI_Interface.IdentData
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
-                    return;
+                    break;
                 }
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
@@ -1189,7 +1294,11 @@ namespace PSI_Interface.IdentData
                 {
                     // Schema requirements: one to many instances of this element
                     // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                    ReadSpectrumIdentificationResult(reader.ReadSubtree());
+                    // we can use "return ReadDataCollection(...)", but then that would immediately exit the function, without any subsequent operations occurring (like closing the reader, or reading the remaining spectrum identification results)
+                    foreach (var item in ReadSpectrumIdentificationResult(reader.ReadSubtree()))
+                    {
+                        yield return item;
+                    }
                     PossiblyReadEndElement(reader, "SpectrumIdentificationResult");
                 }
                 else
@@ -1205,7 +1314,7 @@ namespace PSI_Interface.IdentData
         /// Called by ReadSpectrumIdentificationList (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single SpectrumIdentificationResult element</param>
-        private void ReadSpectrumIdentificationResult(XmlReader reader)
+        private IEnumerable<SpectrumIdItem> ReadSpectrumIdentificationResult(XmlReader reader)
         {
             var specRes = new List<SpectrumIdItem>();
 
@@ -1250,7 +1359,7 @@ namespace PSI_Interface.IdentData
             {
                 item.ScanNum = scanNum;
                 item.NativeId = nativeId;
-                m_specItems.Add(item.SpecItemId, item);
+                yield return item;
             }
             reader.Dispose();
         }
