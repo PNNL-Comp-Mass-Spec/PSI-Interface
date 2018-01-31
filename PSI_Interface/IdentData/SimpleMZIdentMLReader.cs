@@ -532,13 +532,13 @@ namespace PSI_Interface.IdentData
         /// <summary>
         /// Container class for holding the mzIdentML metadata
         /// </summary>
-        public class SimpleMZIdentMLMetaData
+        public abstract class SimpleMZIdentMLMetaData
         {
             /// <summary>
             /// Constructor
             /// </summary>
             /// <param name="path">path to the mzid file</param>
-            public SimpleMZIdentMLMetaData(string path)
+            protected SimpleMZIdentMLMetaData(string path)
             {
                 DatasetFile = path;
             }
@@ -578,7 +578,7 @@ namespace PSI_Interface.IdentData
             /// Constructor
             /// </summary>
             /// <param name="path">path to the mzid file</param>
-            public SimpleMZIdentMLData(string path) : base(path)
+            internal SimpleMZIdentMLData(string path) : base(path)
             {
             }
 
@@ -598,7 +598,8 @@ namespace PSI_Interface.IdentData
             /// </summary>
             /// <param name="path">path to the mzid file</param>
             /// <param name="identifications"></param>
-            public SimpleMZIdentMLDataLowMem(string path, IEnumerable<SpectrumIdItem> identifications, XmlReader dataReader) : base(path)
+            /// <param name="dataReader"></param>
+            internal SimpleMZIdentMLDataLowMem(string path, IEnumerable<SpectrumIdItem> identifications, XmlReader dataReader) : base(path)
             {
                 Identifications = identifications;
                 xmlDataReader = dataReader;
