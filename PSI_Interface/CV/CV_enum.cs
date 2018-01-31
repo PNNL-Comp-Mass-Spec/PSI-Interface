@@ -1408,7 +1408,7 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE A unit of measurement for mass.</summary>
             MS_mass_unit_OBSOLETE = 1000464,
 
-            /// <summary>An acquisition mode to which specifies weather polarity is negative, positive or alternating.</summary>
+            /// <summary>Relative orientation of the electromagnetic field during the selection and detection of ions in the mass spectrometer.</summary>
             MS_scan_polarity = 1000465,
 
             /// <summary>OBSOLETE Alternating.</summary>
@@ -8104,6 +8104,288 @@ namespace PSI_Interface.CV
             /// <summary>OpenMS consensus map format.</summary>
             MS_consensusXML = 1002825,
 
+            /// <summary>MetaMorpheus search engine.</summary>
+            MS_MetaMorpheus = 1002826,
+
+            /// <summary>MetaMorpheus score for PSMs.</summary>
+            MS_MetaMorpheus_score = 1002827,
+
+            /// <summary>MetaMorpheus score for protein groups.</summary>
+            MS_MetaMorpheus_protein_score = 1002828,
+
+            /// <summary>Feature intensity produced by XCMS findPeaks() from integrated peak intensity.</summary>
+            MS_XCMS_into = 1002829,
+
+            /// <summary>Feature intensity produced by XCMS findPeaks() from baseline corrected integrated peak intensity.</summary>
+            MS_XCMS_intf = 1002830,
+
+            /// <summary>Feature intensity produced by XCMS findPeaks() from maximum peak intensity.</summary>
+            MS_XCMS_maxo = 1002831,
+
+            /// <summary>Feature intensity produced by XCMS findPeaks() from feature area that is not normalized by the scan rate.</summary>
+            MS_XCMS_area = 1002832,
+
+            /// <summary>Polarities of the scans of a run are alternating, i.e. both positive and negative mode scans are acquired.</summary>
+            MS_alternating_polarity_mode = 1002833,
+
+            /// <summary>The Delta Score reported by Proteome Discoverer version 2.</summary>
+            MS_ProteomeDiscoverer_Delta_Score = 1002834,
+
+            /// <summary>Thermo Fisher Scientific LTQ Orbitrap Classic.</summary>
+            MS_LTQ_Orbitrap_Classic = 1002835,
+
+            /// <summary>Dataset identifier issued by the iProX repository. A dataset can refer to either a single sample as part of a study, or all samples that are part of the study corresponding to a publication.</summary>
+            MS_iProX_dataset_identifier = 1002836,
+
+            /// <summary>URI that allows the access to one dataset in the iProX repository. A dataset can refer to either a single sample as part of a study, or all samples that are part of the study corresponding to a publication.</summary>
+            MS_iProX_dataset_URI = 1002837,
+
+            /// <summary>mzMLb file format, mzML encapsulated within HDF5.</summary>
+            MS_mzMLb_format = 1002838,
+
+            /// <summary>Conversion of a file format to Proteomics Standards Initiative mzMLb file format.</summary>
+            MS_Conversion_to_mzMLb = 1002839,
+
+            /// <summary>Data belonging to an external reference.</summary>
+            MS_external_reference_data = 1002840,
+
+            /// <summary>The HDF5 dataset location containing the binary data, relative to the dataset containing the mzML. Also indicates that there is no data in the &lt;binary&gt; section of the BinaryDataArray.</summary>
+            MS_external_HDF5_dataset = 1002841,
+
+            /// <summary>The position in the external data where the array begins.</summary>
+            MS_external_offset = 1002842,
+
+            /// <summary>Describes how many fields an array contains.</summary>
+            MS_external_array_length = 1002843,
+
+            /// <summary>Root node for terms relating to the description of an Experiment in relation to the PRIDE-XML element ExperimentCollection/Experiment/additional/cvParam.</summary>
+            MS_Experiment_additional_parameter = 1002844,
+
+            /// <summary>URI of one external file associated to the PRIDE experiment (maybe through a PX submission).</summary>
+            MS_Associated_file_URI = 1002845,
+
+            /// <summary>URI of one raw data file associated to the PRIDE experiment (maybe through a PX submission).</summary>
+            MS_Associated_raw_file_URI = 1002846,
+
+            /// <summary>URI associated to one PX submission in ProteomeCentral.</summary>
+            MS_ProteomeCentral_dataset_URI = 1002847,
+
+            /// <summary>URI of one file labeled as 'Result', associated to one PX submission.</summary>
+            MS_Result_file_URI = 1002848,
+
+            /// <summary>URI of one search engine output file associated to one PX submission.</summary>
+            MS_Search_engine_output_file_URI = 1002849,
+
+            /// <summary>URI of one of one search engine output file associated to one PX submission.</summary>
+            MS_Peak_list_file_URI = 1002850,
+
+            /// <summary>URI of one file labeled as 'Other', associated to one PX submission.</summary>
+            MS_Other_type_file_URI = 1002851,
+
+            /// <summary>FTP location of one entire PX data set.</summary>
+            MS_Dataset_FTP_location = 1002852,
+
+            /// <summary>A dataset which does not have an associated published manuscript.</summary>
+            MS_Dataset_with_no_associated_published_manuscript = 1002853,
+
+            /// <summary>Dataset has been peer-reviewed somehow.</summary>
+            MS_Peer_reviewed_dataset = 1002854,
+
+            /// <summary>Dataset that has not been peer-reviewed by any means.</summary>
+            MS_Non_peer_reviewed_dataset = 1002855,
+
+            /// <summary>The PX dataset is supported by and is available through the submission repository.</summary>
+            MS_Supported_dataset_by_repository = 1002856,
+
+            /// <summary>The PX dataset is not fully supported by the submission repository.</summary>
+            MS_Unsupported_dataset_by_repository = 1002857,
+
+            /// <summary>A dataset which has an associated manuscript pending for publication.</summary>
+            MS_Dataset_with_its_publication_pending = 1002858,
+
+            /// <summary>Additional URI of one raw data file associated to the PRIDE experiment (maybe through a PX submission). The URI is provided via an additional resource to PRIDE.</summary>
+            MS_Additional_associated_raw_file_URI = 1002859,
+
+            /// <summary>URI of one gel image file associated to one PX submission.</summary>
+            MS_Gel_image_file_URI = 1002860,
+
+            /// <summary>All the raw files included in the original dataset (or group of original datasets) have been reanalysed.</summary>
+            MS_Reprocessed_complete_dataset = 1002861,
+
+            /// <summary>A subset of the raw files included in the original dataset (or group of original datasets) has been reanalysed.</summary>
+            MS_Reprocessed_subset_dataset = 1002862,
+
+            /// <summary>One dataset is a reanalysis of previously published data.</summary>
+            MS_Data_derived_from_previous_dataset = 1002863,
+
+            /// <summary>No post-translational-modifications are been included in the identified peptides of one dataset.</summary>
+            MS_No_PTMs_are_included_in_the_dataset = 1002864,
+
+            /// <summary>A dataset has one associated manuscript, which has been accepted but no PubMedID is available yet.</summary>
+            MS_Accepted_manuscript = 1002865,
+
+            /// <summary>Literature reference associated with one dataset (including the authors, title, year and journal details). The value field can be used for the PubMedID, or to specify if one manuscript is just submitted or accepted, but it does not have a PubMedID yet.</summary>
+            MS_Reference = 1002866,
+
+            /// <summary>This means that the experimental information available has been improved, for instance precursor charges were added.</summary>
+            MS_Experimental_information_has_been_refined_since_this_experiment_was_originally_made_publicly_available = 1002867,
+
+            /// <summary>One dataset is not a reanalysis of previously published data.</summary>
+            MS_Original_data = 1002868,
+
+            /// <summary>PSI Extended FASTA Format Controlled Vocabulary term.</summary>
+            MS_PEFF_CV_term = 1,
+
+            /// <summary>CV term that may appear in a PEFF File Header Section.</summary>
+            MS_File_Header_Section_term = 2,
+
+            /// <summary>CV term that may appear in a PEFF Individual Entry Section.</summary>
+            MS_Individual_Sequence_Entries_Section_term = 3,
+
+            /// <summary>Sequence Database Name.</summary>
+            MS_DbName = 8,
+
+            /// <summary>Sequence Database Prefix.</summary>
+            MS_Prefix = 9,
+
+            /// <summary>Sequence Database Short description.</summary>
+            MS_DbDescription = 10,
+
+            /// <summary>Specifies whether the Sequence Database is a Decoy.</summary>
+            MS_Decoy = 11,
+
+            /// <summary>Source of the database file.</summary>
+            MS_DbSource = 12,
+
+            /// <summary>Database version (release date) according to database provider.</summary>
+            MS_DbVersion = 13,
+
+            /// <summary>Database date (release or file date of the source) according to database provider.</summary>
+            MS_DbDate_OBSOLETE = 14,
+
+            /// <summary>Number of sequence entries in the database.</summary>
+            MS_NumberOfEntries = 15,
+
+            /// <summary>Description of the conversion from original format to this current one.</summary>
+            MS_Conversion = 16,
+
+            /// <summary>Molecular type of the sequences.</summary>
+            MS_SequenceType = 17,
+
+            /// <summary>Db specific information (not included in the current list of allowed keys).</summary>
+            MS_SpecificKey = 18,
+
+            /// <summary>PEFF specific values for a defined key.</summary>
+            MS_SpecificValue = 19,
+
+            /// <summary>Short Description of the PEFF.</summary>
+            MS_DatabaseDescription = 20,
+
+            /// <summary>PEFF file general comment.</summary>
+            MS_GeneralComment = 21,
+
+            /// <summary>Proteoform database flag.</summary>
+            MS_ProteoformDb = 22,
+
+            /// <summary>A tag (short string) used to categorize a sequence annotation (variant or modification).</summary>
+            MS_CustomTag = 23,
+
+            /// <summary>Sequence Database unique identifier.</summary>
+            MS_DbUniqueId = 1001,
+
+            /// <summary>Protein Name, description.</summary>
+            MS_PName = 1002,
+
+            /// <summary>NCBI taxonomy identifier.</summary>
+            MS_NcbiTaxId = 1003,
+
+            /// <summary>Taxonomy name (latin or common name).</summary>
+            MS_TaxName = 1004,
+
+            /// <summary>Gene name.</summary>
+            MS_GName = 1005,
+
+            /// <summary>Sequence length.</summary>
+            MS_Length = 1006,
+
+            /// <summary>Sequence version.</summary>
+            MS_SV = 1007,
+
+            /// <summary>Entry version.</summary>
+            MS_EV = 1008,
+
+            /// <summary>Protein Evidence; A UniprotKB code.</summary>
+            MS_PE = 1009,
+
+            /// <summary>Processed Molecule.</summary>
+            MS_Processed = 1010,
+
+            /// <summary>DEPRECATED in favor of VariantSimple and VariantComplex. Former definition: Sequence variation (substitution, insertion, deletion).</summary>
+            MS_Variant = 1011,
+
+            /// <summary>Modified residue with PSI-MOD identifier.</summary>
+            MS_ModResPsi = 1012,
+
+            /// <summary>Modified residue without PSI-MOD identifier.</summary>
+            MS_ModRes = 1013,
+
+            /// <summary>Alternative Accession Code.</summary>
+            MS_AltAC = 1014,
+
+            /// <summary>Sequence Status. Complete or Fragment.</summary>
+            MS_SeqStatus = 1015,
+
+            /// <summary>Entry associated comment.</summary>
+            MS_CC = 1016,
+
+            /// <summary>Entry associated keyword(s).</summary>
+            MS_KW = 1017,
+
+            /// <summary>Gene Ontology code.</summary>
+            MS_GO = 1018,
+
+            /// <summary>Cross-reference to an external resource.</summary>
+            MS_XRef = 1019,
+
+            /// <summary>Sequence range of active processed polypeptide.</summary>
+            MS_Chain = 1020,
+
+            /// <summary>Sequence range of signal peptide.</summary>
+            MS_Signal = 1021,
+
+            /// <summary>Sequence range of transit peptide.</summary>
+            MS_Transit = 1022,
+
+            /// <summary>Sequence conflict; a UniProtKB term.</summary>
+            MS_Conflict = 1023,
+
+            /// <summary>Sequence checksum in crc64.</summary>
+            MS_Crc64 = 1024,
+
+            /// <summary>Sequence range of a domain.</summary>
+            MS_Domain = 1025,
+
+            /// <summary>UniProtKB specific Protein identifier ID; a UniProtKB term.</summary>
+            MS_ID = 1026,
+
+            /// <summary>Modified residue with Unimod identifier.</summary>
+            MS_ModResUnimod = 1027,
+
+            /// <summary>Simple sequence variation of a single amino acid change. A change to a stop codon is permitted with a * symbol. More complex variations must be encoded with the VariantComplex term.</summary>
+            MS_VariantSimple = 1028,
+
+            /// <summary>Simple sequence variation of a single amino acid change. A change to a stop codon is permitted with a * symbol. More complex variations must be encoded with the VariantComplex term.</summary>
+            MS_VariantComplex = 1029,
+
+            /// <summary>Regular expression for PEFF description line value with three components.</summary>
+            MS____0_9_____0_9_____a_zA_Z0_9____ = 1002001,
+
+            /// <summary>Regular expression for the molecular type of the sequences.</summary>
+            MS__AA_NA_DNA_cDNA_RNA_RNAi_tRNA_rRNA_siRNA_mDNA_mRNA_snoRNA_ncRNA_EST__a_z0_9A_Z___ = 1002002,
+
+            /// <summary>Regular expression for the Sequence Status.</summary>
+            MS___Complete_Fragment__a_z0_9A_Z___ = 1002003,
+
             /// <summary>The root node of the unimod modifications ontology.</summary>
             UNIMOD_unimod_root_node = 100000000,
 
@@ -8440,7 +8722,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex3HexNAc2.</summary>
             UNIMOD_Hex_3_HexNAc_2_ = 100000159,
 
-            /// <summary>Hex1HexNAc1NeuAc2.</summary>
+            /// <summary>Hex HexNAc NeuAc(2) ---OR--- Hex HexNAc(3) HexA.</summary>
             UNIMOD_Hex_1_HexNAc_1_NeuAc_2_ = 100000160,
 
             /// <summary>Hex(3) HexNAc(2) Phos.</summary>
@@ -8647,7 +8929,7 @@ namespace PSI_Interface.CV
             /// <summary>Fucosylated biantennary (-2 galactose).</summary>
             UNIMOD_dHex_1_Hex_3_HexNAc_4_ = 100000305,
 
-            /// <summary>Fucosylated biantennary (-1 galactose).</summary>
+            /// <summary>DHex Hex(4) HexNAc(4) ---OR--- Hex(4) HexNAc(4) Pent Me.</summary>
             UNIMOD_dHex_1_Hex_4_HexNAc_4_ = 100000307,
 
             /// <summary>Fucosylated biantennary.</summary>
@@ -11116,7 +11398,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex HexNAc Sulf.</summary>
             UNIMOD_Hex_1_HexNAc_1_Sulf_1_ = 100001430,
 
-            /// <summary>Hex NeuAc.</summary>
+            /// <summary>Hex NeuAc ---OR--- HexNAc Kdn.</summary>
             UNIMOD_Hex_1_NeuAc_1_ = 100001431,
 
             /// <summary>Hex NeuGc.</summary>
@@ -11146,8 +11428,8 @@ namespace PSI_Interface.CV
             /// <summary>Hex(2) HexNAc Me.</summary>
             UNIMOD_Hex_2_HexNAc_1_Me_1_ = 100001440,
 
-            /// <summary>Hex(3) Phos.</summary>
-            UNIMOD_Hex_3_Phos_1_ = 100001441,
+            /// <summary>Hex Pent(3).</summary>
+            UNIMOD_Hex_1_Pent_3_ = 100001441,
 
             /// <summary>Hex NeuAc Pent.</summary>
             UNIMOD_Hex_1_NeuAc_1_Pent_1_ = 100001442,
@@ -11155,7 +11437,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(2) HexNAc Sulf.</summary>
             UNIMOD_Hex_2_HexNAc_1_Sulf_1_ = 100001443,
 
-            /// <summary>Hex(2) NeuAc.</summary>
+            /// <summary>Hex(2) NeuAc ---OR--- Hex HexNAc Kdn.</summary>
             UNIMOD_Hex_2_NeuAc_1_ = 100001444,
 
             /// <summary>Hex2 dHex2.</summary>
@@ -11173,7 +11455,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(2) HexNAc(2) Pent.</summary>
             UNIMOD_dHex_1_Hex_2_HexNAc_2_Pent_1_ = 100001449,
 
-            /// <summary>Hex(2) HexNAc(2) NeuAc.</summary>
+            /// <summary>Hex(2) HexNAc(2) NeuAc ---OR--- dHex Hex HexNAc(2) NeuGc.</summary>
             UNIMOD_Hex_2_HexNAc_2_NeuAc_1_ = 100001450,
 
             /// <summary>Hex(3) HexNAc(2) Pent.</summary>
@@ -11206,7 +11488,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(7) HexNAc.</summary>
             UNIMOD_Hex_7_HexNAc_1_ = 100001460,
 
-            /// <summary>Hex(4) HexNAc(2) NeuAc.</summary>
+            /// <summary>Hex(4) HexNAc(2) NeuAc ---OR--- Hex(3) HexNAc(2) dHex NeuGc.</summary>
             UNIMOD_Hex_4_HexNAc_2_NeuAc_1_ = 100001461,
 
             /// <summary>DHex Hex(5) HexNAc(2).</summary>
@@ -11287,7 +11569,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(6) HexNAc(3).</summary>
             UNIMOD_Hex_6_HexNAc_3_ = 100001487,
 
-            /// <summary>Hex(3) HexNAc(4) NeuAc.</summary>
+            /// <summary>Hex(3) HexNAc(4) NeuAc ---OR--- Hex(2) HexNAc(4) dHex NeuGc.</summary>
             UNIMOD_Hex_3_HexNAc_4_NeuAc_1_ = 100001488,
 
             /// <summary>Hex(4) HexNAc(4) Pent.</summary>
@@ -11299,7 +11581,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(4) HexNAc(4) Me(2) Pent.</summary>
             UNIMOD_Hex_4_HexNAc_4_Me_2_Pent_1_ = 100001491,
 
-            /// <summary>DHex Hex(3) HexNAc(3) Pent(3).</summary>
+            /// <summary>DHex Hex(3) HexNAc(3) Pent(3) ---OR--- Hex(4) HexNAc(2) dHex(2) NeuAc.</summary>
             UNIMOD_dHex_1_Hex_3_HexNAc_3_Pent_3_ = 100001492,
 
             /// <summary>DHex Hex(5) HexNAc(3) Sulf.</summary>
@@ -11326,7 +11608,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(7) HexNAc(2).</summary>
             UNIMOD_dHex_1_Hex_7_HexNAc_2_ = 100001500,
 
-            /// <summary>DHex Hex(4) HexNAc(3) NeuAc.</summary>
+            /// <summary>DHex Hex(4) HexNAc(3) NeuAc ---OR--- dHex(2) Hex(3) HexNAc(3) NeuGc.</summary>
             UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuAc_1_ = 100001501,
 
             /// <summary>Hex(7) HexNAc(2) Phos(2).</summary>
@@ -11341,7 +11623,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(3) HexNAc(4) Pent(2).</summary>
             UNIMOD_dHex_1_Hex_3_HexNAc_4_Pent_2_ = 100001505,
 
-            /// <summary>DHex Hex(4) HexNAc(3) NeuGc.</summary>
+            /// <summary>DHex Hex(4) HexNAc(3) NeuGc ---OR--- Hex(5) HexNAc(3) NeuAc.</summary>
             UNIMOD_dHex_1_Hex_4_HexNAc_3_NeuGc_1_ = 100001506,
 
             /// <summary>DHex(2) Hex(3) HexNAc(4) Pent.</summary>
@@ -11425,7 +11707,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex(3) Hex(3) HexNAc(4) Pent.</summary>
             UNIMOD_dHex_3_Hex_3_HexNAc_4_Pent_1_ = 100001533,
 
-            /// <summary>DHex Hex(5) HexNAc(3) NeuGc.</summary>
+            /// <summary>DHex Hex(5) HexNAc(3) NeuGc ---OR--- Hex(6) HexNAc(3) NeuAc.</summary>
             UNIMOD_dHex_1_Hex_5_HexNAc_3_NeuGc_1_ = 100001534,
 
             /// <summary>DHex(2) Hex(4) HexNAc(4) Pent.</summary>
@@ -11530,7 +11812,7 @@ namespace PSI_Interface.CV
             /// <summary>HexNAc(2) NeuAc.</summary>
             UNIMOD_HexNAc_2_NeuAc_1_ = 100001568,
 
-            /// <summary>HexNAc Kdn(2).</summary>
+            /// <summary>HexNAc Kdn(2) ---OR--- Hex(2) HexNAc HexA.</summary>
             UNIMOD_HexNAc_1_Kdn_2_ = 100001570,
 
             /// <summary>Hex(3) HexNAc Me.</summary>
@@ -11557,7 +11839,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex HexNAc(3).</summary>
             UNIMOD_dHex_1_HexNAc_3_ = 100001580,
 
-            /// <summary>DHex Hex HexNAc Kdn.</summary>
+            /// <summary>DHex Hex HexNAc Kdn ---OR--- Hex(2) dHex NeuAc.</summary>
             UNIMOD_dHex_1_Hex_1_HexNAc_1_Kdn_1_ = 100001581,
 
             /// <summary>Hex HexNAc(3).</summary>
@@ -11593,7 +11875,7 @@ namespace PSI_Interface.CV
             /// <summary>HexNAc NeuGc(2).</summary>
             UNIMOD_HexNAc_1_NeuGc_2_ = 100001592,
 
-            /// <summary>DHex Hex HexNAc NeuGc.</summary>
+            /// <summary>DHex Hex HexNAc NeuGc ---OR--- Hex(2) HexNAc NeuAc.</summary>
             UNIMOD_dHex_1_Hex_1_HexNAc_1_NeuGc_1_ = 100001593,
 
             /// <summary>DHex(2) Hex(2) HexNAc.</summary>
@@ -11656,7 +11938,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex HexNAc NeuAc NeuGc.</summary>
             UNIMOD_Hex_1_HexNAc_1_NeuAc_1_NeuGc_1_ = 100001617,
 
-            /// <summary>DHex Hex HexNAc(2) Kdn.</summary>
+            /// <summary>DHex Hex HexNAc(2) Kdn ---OR--- Hex(2) HexNAc dHex NeuAc.</summary>
             UNIMOD_dHex_1_Hex_1_HexNAc_2_Kdn_1_ = 100001618,
 
             /// <summary>Hex HexNAc NeuGc(2).</summary>
@@ -11688,9 +11970,6 @@ namespace PSI_Interface.CV
 
             /// <summary>HexNAc(5).</summary>
             UNIMOD_HexNAc_5_ = 100001628,
-
-            /// <summary>DHex Hex HexNAc(2) NeuGc.</summary>
-            UNIMOD_dHex_1_Hex_1_HexNAc_2_NeuGc_1_ = 100001629,
 
             /// <summary>Ac(2) Hex HexNAc NeuAc(2).</summary>
             UNIMOD_Hex_1_HexNAc_1_NeuAc_2_Ac_2_ = 100001630,
@@ -11734,7 +12013,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex(2) Hex(2) HexNAc(2) Sulf.</summary>
             UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_1_ = 100001643,
 
-            /// <summary>DHex(2) Hex HexNAc(2) Kdn.</summary>
+            /// <summary>DHex(2) Hex HexNAc(2) Kdn ---OR--- Hex(2) HexNAc dHex(2) NeuAc.</summary>
             UNIMOD_dHex_2_Hex_1_HexNAc_2_Kdn_1_ = 100001644,
 
             /// <summary>DHex Hex HexNAc(4).</summary>
@@ -11761,7 +12040,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex HexNAc(5).</summary>
             UNIMOD_dHex_1_HexNAc_5_ = 100001652,
 
-            /// <summary>DHex(2) Hex HexNAc(2) NeuGc.</summary>
+            /// <summary>DHex(2) Hex HexNAc(2) NeuGc ---OR--- Hex(2) HexNAc(2) dHex NeuAc ---OR--- Hex HexNAc(3) dHex Kdn.</summary>
             UNIMOD_dHex_2_Hex_1_HexNAc_2_NeuGc_1_ = 100001653,
 
             /// <summary>DHex(3) Hex(2) HexNAc(2).</summary>
@@ -11773,7 +12052,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex(2) Hex(2) HexNAc(2) Sulf(2).</summary>
             UNIMOD_dHex_2_Hex_2_HexNAc_2_Sulf_2_ = 100001656,
 
-            /// <summary>DHex Hex(2) HexNAc(2) NeuGc.</summary>
+            /// <summary>DHex Hex(2) HexNAc(2) NeuGc ---OR--- Hex(3) HexNAc(2) NeuAc.</summary>
             UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_1_ = 100001657,
 
             /// <summary>DHex Hex HexNAc(3) NeuAc.</summary>
@@ -11785,7 +12064,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(3) HexA HexNAc(2).</summary>
             UNIMOD_dHex_1_Hex_3_HexA_1_HexNAc_2_ = 100001660,
 
-            /// <summary>DHex Hex HexNAc(3) NeuGc.</summary>
+            /// <summary>DHex Hex HexNAc(3) NeuGc ---OR--- Hex(2) HexNAc(3) NeuAc.</summary>
             UNIMOD_dHex_1_Hex_1_HexNAc_3_NeuGc_1_ = 100001661,
 
             /// <summary>Hex HexNAc(2) NeuAc(2) Sulf.</summary>
@@ -11845,13 +12124,13 @@ namespace PSI_Interface.CV
             /// <summary>Hex(2) HexNAc(2) NeuAc(2).</summary>
             UNIMOD_Hex_2_HexNAc_2_NeuAc_2_ = 100001681,
 
-            /// <summary>DHex(2) Hex(2) HexNAc(2) NeuAc.</summary>
+            /// <summary>DHex(2) Hex(2) HexNAc(2) NeuAc ---OR--- Hex HexNAc(3) dHex(2) Kdn.</summary>
             UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuAc_1_ = 100001682,
 
             /// <summary>DHex Hex(3) HexNAc(3) Sulf.</summary>
             UNIMOD_dHex_1_Hex_3_HexNAc_3_Sulf_1_ = 100001683,
 
-            /// <summary>DHex(2) Hex(2) HexNAc(2) NeuGc.</summary>
+            /// <summary>DHex(2) Hex(2) HexNAc(2) NeuGc ---OR--- Hex(3) HexNAc(2) dHex NeuAc ---OR--- Hex(2) HexNAc(3) dHex Kdn.</summary>
             UNIMOD_dHex_2_Hex_2_HexNAc_2_NeuGc_1_ = 100001684,
 
             /// <summary>Hex(2) HexNAc(5).</summary>
@@ -11875,7 +12154,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(4) HexA HexNAc(2).</summary>
             UNIMOD_dHex_1_Hex_4_HexA_1_HexNAc_2_ = 100001691,
 
-            /// <summary>Hex(3) HexNAc(3) NeuAc.</summary>
+            /// <summary>Hex(3) HexNAc(3) NeuAc ---OR--- Hex(2) HexNAc(3) dHex NeuGc ---OR--- Hex(2) HexNAc(4) Kdn.</summary>
             UNIMOD_Hex_3_HexNAc_3_NeuAc_1_ = 100001692,
 
             /// <summary>DHex Hex(3) HexA(2) HexNAc(2).</summary>
@@ -11938,7 +12217,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(2) HexNAc(2) NeuGc(2).</summary>
             UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuGc_2_ = 100001714,
 
-            /// <summary>DHex(2) Hex(3) HexNAc(2) NeuGc.</summary>
+            /// <summary>DHex(2) Hex(3) HexNAc(2) NeuGc ---OR--- Hex(4) HexNAc(2) dHex NeuAc.</summary>
             UNIMOD_dHex_2_Hex_3_HexNAc_2_NeuGc_1_ = 100001715,
 
             /// <summary>DHex Hex(3) HexA HexNAc(3) Sulf.</summary>
@@ -11956,7 +12235,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(2) HexNAc(3) NeuAc NeuGc.</summary>
             UNIMOD_Hex_2_HexNAc_3_NeuAc_1_NeuGc_1_ = 100001720,
 
-            /// <summary>DHex(2) Hex(2) HexNAc(3) NeuGc.</summary>
+            /// <summary>DHex(2) Hex(2) HexNAc(3) NeuGc ---OR--- Hex(3) HexNAc(3) dHex NeuAc ---OR--- Hex(2) HexNAc(4) dHex Kdn.</summary>
             UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuGc_1_ = 100001721,
 
             /// <summary>DHex(3) Hex(3) HexNAc(3).</summary>
@@ -11989,7 +12268,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(4) HexNAc(4) Sulf(2).</summary>
             UNIMOD_Hex_4_HexNAc_4_Sulf_2_ = 100001732,
 
-            /// <summary>DHex(3) Hex(2) HexNAc(3) Kdn.</summary>
+            /// <summary>DHex(3) Hex(2) HexNAc(3) Kdn ---OR--- Hex(3) HexNAc(2) dHex(3) NeuAc.</summary>
             UNIMOD_dHex_3_Hex_2_HexNAc_3_Kdn_1_ = 100001733,
 
             /// <summary>DHex(2) Hex(2) HexNAc(5).</summary>
@@ -12004,14 +12283,11 @@ namespace PSI_Interface.CV
             /// <summary>Hex(3) HexNAc(3) NeuAc(2).</summary>
             UNIMOD_Hex_3_HexNAc_3_NeuAc_2_ = 100001738,
 
-            /// <summary>DHex(2) Hex(3) HexNAc(3) NeuAc.</summary>
+            /// <summary>DHex(2) Hex(3) HexNAc(3) NeuAc ---OR--- Hex(2) HexNAc(4) dHex(2) Kdn.</summary>
             UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuAc_1_ = 100001739,
 
             /// <summary>DHex(4) Hex(3) HexNAc(3).</summary>
             UNIMOD_dHex_4_Hex_3_HexNAc_3_ = 100001740,
-
-            /// <summary>DHex(2) Hex(3) HexNAc(3) NeuGc.</summary>
-            UNIMOD_dHex_2_Hex_3_HexNAc_3_NeuGc_1_ = 100001741,
 
             /// <summary>Hex(9) Phos(3).</summary>
             UNIMOD_Hex_9_Phos_3_ = 100001742,
@@ -12106,7 +12382,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(3) HexNAc(5).</summary>
             UNIMOD_Hex_3_HexNAc_5_ = 100001772,
 
-            /// <summary>Hex(4) HexNAc(3) NeuAc.</summary>
+            /// <summary>Hex(4) HexNAc(3) NeuAc ---OR--- Hex(3) HexNAc(4) Kdn.</summary>
             UNIMOD_Hex_4_HexNAc_3_NeuAc_1_ = 100001773,
 
             /// <summary>DHex(2) Hex(3) HexNAc(4).</summary>
@@ -12121,7 +12397,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(4) HexNAc(4) NeuAc.</summary>
             UNIMOD_Hex_4_HexNAc_4_NeuAc_1_ = 100001777,
 
-            /// <summary>DHex(2) Hex(4) HexNAc(4).</summary>
+            /// <summary>DHex(2) Hex(4) HexNAc(4) ---OR--- Hex(4) HexNAc(4) dHex Pent Me.</summary>
             UNIMOD_dHex_2_Hex_4_HexNAc_4_ = 100001778,
 
             /// <summary>Hex(6) HexNAc(4).</summary>
@@ -12133,7 +12409,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(3) HexNAc(6).</summary>
             UNIMOD_dHex_1_Hex_3_HexNAc_6_ = 100001781,
 
-            /// <summary>DHex Hex(4) HexNAc(4) NeuAc.</summary>
+            /// <summary>DHex Hex(4) HexNAc(4) NeuAc ---OR--- Hex(3) HexNAc(5) dHex Kdn.</summary>
             UNIMOD_dHex_1_Hex_4_HexNAc_4_NeuAc_1_ = 100001782,
 
             /// <summary>DHex(3) Hex(4) HexNAc(4).</summary>
@@ -12330,6 +12606,201 @@ namespace PSI_Interface.CV
 
             /// <summary>Intact DMP crosslinker.</summary>
             UNIMOD_Xlink_DMP_122_ = 100001912,
+
+            /// <summary>Glyoxal-derived AGE.</summary>
+            UNIMOD_glyoxalAGE = 100001913,
+
+            /// <summary>Methionine oxidation to aspartic semialdehyde.</summary>
+            UNIMOD_Met__AspSA = 100001914,
+
+            /// <summary>Decarboxylation.</summary>
+            UNIMOD_Decarboxylation = 100001915,
+
+            /// <summary>Aspartylurea.</summary>
+            UNIMOD_Aspartylurea = 100001916,
+
+            /// <summary>In Bachi as Formylaspargine (typo?).</summary>
+            UNIMOD_Formylasparagine = 100001917,
+
+            /// <summary>Aldehyde and ketone modifications.</summary>
+            UNIMOD_Carbonyl = 100001918,
+
+            /// <summary>Adduction of aflatoxin B1 Dialdehyde to lysine.</summary>
+            UNIMOD_AFB1_Dialdehyde = 100001920,
+
+            /// <summary>Proline oxidation to 5-hydroxy-2-aminovaleric acid.</summary>
+            UNIMOD_Pro__HAVA = 100001922,
+
+            /// <summary>Tryptophan oxidation to beta-unsaturated-2,4-bis-tryptophandione.</summary>
+            UNIMOD_Delta_H__4_O_2_ = 100001923,
+
+            /// <summary>Tryptophan oxidation to hydroxy-bis-tryptophandione.</summary>
+            UNIMOD_Delta_H__4_O_3_ = 100001924,
+
+            /// <summary>Tryptophan oxidation to dihydroxy-N-formaylkynurenine.</summary>
+            UNIMOD_Delta_O_4_ = 100001925,
+
+            /// <summary>Methylglyoxal-derived carboxyethyllysine.</summary>
+            UNIMOD_Delta_H_3_C_3_O_2_ = 100001926,
+
+            /// <summary>Methylglyoxal-derived argpyrimidine.</summary>
+            UNIMOD_Delta_H_4_C_6_O_1_ = 100001927,
+
+            /// <summary>Crotonaldehyde-derived dimethyl-FDP-lysine.</summary>
+            UNIMOD_Delta_H_10_C_8_O_1_ = 100001928,
+
+            /// <summary>Methylglyoxal-derived tetrahydropyrimidine.</summary>
+            UNIMOD_Delta_H_6_C_7_O_4_ = 100001929,
+
+            /// <summary>Pent(2).</summary>
+            UNIMOD_Pent_2_ = 100001930,
+
+            /// <summary>Pent HexNAc.</summary>
+            UNIMOD_Pent_1_HexNAc_1_ = 100001931,
+
+            /// <summary>Hex(2) O(3) S.</summary>
+            UNIMOD_Hex_2_Sulf_1_ = 100001932,
+
+            /// <summary>Hex:1 Pent:2 Me:1.</summary>
+            UNIMOD_Hex_1_Pent_2_Me_1_ = 100001933,
+
+            /// <summary>HexNAc(2) Sulf.</summary>
+            UNIMOD_HexNAc_2_Sulf_1_ = 100001934,
+
+            /// <summary>Hex Pent(3) Me.</summary>
+            UNIMOD_Hex_1_Pent_3_Me_1_ = 100001935,
+
+            /// <summary>Hex(2) Pent(2).</summary>
+            UNIMOD_Hex_2_Pent_2_ = 100001936,
+
+            /// <summary>Hex(2) Pent(2) Me.</summary>
+            UNIMOD_Hex_2_Pent_2_Me_1_ = 100001937,
+
+            /// <summary>Hex(4) HexA.</summary>
+            UNIMOD_Hex_4_HexA_1_ = 100001938,
+
+            /// <summary>Hex(2) HexNAc Pent HexA.</summary>
+            UNIMOD_Hex_2_HexNAc_1_Pent_1_HexA_1_ = 100001939,
+
+            /// <summary>Hex(3) HexNAc HexA.</summary>
+            UNIMOD_Hex_3_HexNAc_1_HexA_1_ = 100001940,
+
+            /// <summary>Hex HexNAc(2) dHex(2) Sulf.</summary>
+            UNIMOD_Hex_1_HexNAc_2_dHex_2_Sulf_1_ = 100001941,
+
+            /// <summary>HexA(2) HexNAc(3).</summary>
+            UNIMOD_HexA_2_HexNAc_3_ = 100001942,
+
+            /// <summary>DHex Hex(4) HexA.</summary>
+            UNIMOD_dHex_1_Hex_4_HexA_1_ = 100001943,
+
+            /// <summary>Hex(5) HexA.</summary>
+            UNIMOD_Hex_5_HexA_1_ = 100001944,
+
+            /// <summary>Hex(4) HexA HexNAc.</summary>
+            UNIMOD_Hex_4_HexA_1_HexNAc_1_ = 100001945,
+
+            /// <summary>DHex(3) Hex(3) HexNAc.</summary>
+            UNIMOD_dHex_3_Hex_3_HexNAc_1_ = 100001946,
+
+            /// <summary>Hex(6) HexNAc.</summary>
+            UNIMOD_Hex_6_HexNAc_1_ = 100001947,
+
+            /// <summary>Sulf dHex Hex HexNAc(4).</summary>
+            UNIMOD_Hex_1_HexNAc_4_dHex_1_Sulf_1_ = 100001948,
+
+            /// <summary>DHex Hex(2) HexNAc NeuAc(2).</summary>
+            UNIMOD_dHex_1_Hex_2_HexNAc_1_NeuAc_2_ = 100001949,
+
+            /// <summary>DHex(3) Hex(3) HexNAc(2).</summary>
+            UNIMOD_dHex_3_Hex_3_HexNAc_2_ = 100001950,
+
+            /// <summary>DHex(2) Hex HexNAc(4) Sulf.</summary>
+            UNIMOD_dHex_2_Hex_1_HexNAc_4_Sulf_1_ = 100001951,
+
+            /// <summary>DHex Hex(2) HexNAc(4) Sulf(2).</summary>
+            UNIMOD_dHex_1_Hex_2_HexNAc_4_Sulf_2_ = 100001952,
+
+            /// <summary>Hex(9).</summary>
+            UNIMOD_Hex_9_ = 100001953,
+
+            /// <summary>Sulf dHex(2) Hex(3) HexNAc(3).</summary>
+            UNIMOD_dHex_2_Hex_3_HexNAc_3_Sulf_1_ = 100001954,
+
+            /// <summary>Me dHex(2) Hex(5) HexNAc(2).</summary>
+            UNIMOD_dHex_2_Hex_5_HexNAc_2_Me_1_ = 100001955,
+
+            /// <summary>Sulf(2) dHex(2) Hex(2) HexNAc(4).</summary>
+            UNIMOD_dHex_2_Hex_2_HexNAc_4_Sulf_2_ = 100001956,
+
+            /// <summary>Hex(9) HexNAc.</summary>
+            UNIMOD_Hex_9_HexNAc_1_ = 100001957,
+
+            /// <summary>DHex(3) Hex(2) HexNAc(4) Sulf(2).</summary>
+            UNIMOD_dHex_3_Hex_2_HexNAc_4_Sulf_2_ = 100001958,
+
+            /// <summary>Hex(4) HexNAc(4) NeuGc.</summary>
+            UNIMOD_Hex_4_HexNAc_4_NeuGc_1_ = 100001959,
+
+            /// <summary>DHex(4) Hex(3) HexNAc(2) NeuAc(1).</summary>
+            UNIMOD_dHex_4_Hex_3_HexNAc_2_NeuAc_1_ = 100001960,
+
+            /// <summary>Hex(3) HexNAc(5) NeuAc(1).</summary>
+            UNIMOD_Hex_3_HexNAc_5_NeuAc_1_ = 100001961,
+
+            /// <summary>Hex(10) HexNAc(1).</summary>
+            UNIMOD_Hex_10_HexNAc_1_ = 100001962,
+
+            /// <summary>DHex Hex(8) HexNAc(2).</summary>
+            UNIMOD_dHex_1_Hex_8_HexNAc_2_ = 100001963,
+
+            /// <summary>Hex(3) HexNAc(4) NeuAc(2).</summary>
+            UNIMOD_Hex_3_HexNAc_4_NeuAc_2_ = 100001964,
+
+            /// <summary>DHex(2) Hex(3) HexNAc(4) NeuAc.</summary>
+            UNIMOD_dHex_2_Hex_3_HexNAc_4_NeuAc_1_ = 100001965,
+
+            /// <summary>DHex(2) Hex(2) HexNAc(6) Sulf.</summary>
+            UNIMOD_dHex_2_Hex_2_HexNAc_6_Sulf_1_ = 100001966,
+
+            /// <summary>Hex(5) HexNAc(4) NeuAc Ac.</summary>
+            UNIMOD_Hex_5_HexNAc_4_NeuAc_1_Ac_1_ = 100001967,
+
+            /// <summary>Hex(3) HexNAc(3) NeuAc(3).</summary>
+            UNIMOD_Hex_3_HexNAc_3_NeuAc_3_ = 100001968,
+
+            /// <summary>Hex(5) HexNAc(4) NeuAc Ac(2).</summary>
+            UNIMOD_Hex_5_HexNAc_4_NeuAc_1_Ac_2_ = 100001969,
+
+            /// <summary>Unidentified modification of 162.1258 found in open search.</summary>
+            UNIMOD_Unknown_162 = 100001970,
+
+            /// <summary>Unidentified modification of 176.7462 found in open search.</summary>
+            UNIMOD_Unknown_177 = 100001971,
+
+            /// <summary>Unidentified modification of 210.1616 found in open search.</summary>
+            UNIMOD_Unknown_210 = 100001972,
+
+            /// <summary>Unidentified modification of 216.1002 found in open search.</summary>
+            UNIMOD_Unknown_216 = 100001973,
+
+            /// <summary>Unidentified modification of 234.0742 found in open search.</summary>
+            UNIMOD_Unknown_234 = 100001974,
+
+            /// <summary>Unidentified modification of 248.1986 found in open search.</summary>
+            UNIMOD_Unknown_248 = 100001975,
+
+            /// <summary>Unidentified modification of 249.981 found in open search.</summary>
+            UNIMOD_Unknown_250 = 100001976,
+
+            /// <summary>Unidentified modification of 301.9864 found in open search.</summary>
+            UNIMOD_Unknown_302 = 100001977,
+
+            /// <summary>Unidentified modification of 306.0952 found in open search.</summary>
+            UNIMOD_Unknown_306 = 100001978,
+
+            /// <summary>Unidentified modification of 420.0506 found in open search.</summary>
+            UNIMOD_Unknown_420 = 100001979,
 
             /// <summary>Description not provided</summary>
             PATO_obsolete_pato_OBSOLETE = 300000000,
@@ -20770,7 +21241,7 @@ namespace PSI_Interface.CV
             /// <summary>A rate unit which is equal to one over one molar second.</summary>
             UO_count_per_molar_second = 200000282,
 
-            /// <summary>An area density unit which is equal to the mass of an object in kilograms divided by the surface area in hectares..</summary>
+            /// <summary>An area density unit which is equal to the mass of an object in kilograms divided by the surface area in hectares.</summary>
             UO_kilogram_per_hectare = 200000283,
 
             /// <summary>A rate unit which is equal to one over one nanomolar.</summary>
@@ -20919,6 +21390,36 @@ namespace PSI_Interface.CV
 
             /// <summary>An information unit which is equal to 1000 gigabytes.</summary>
             UO_terabyte = 200000332,
+
+            /// <summary>An area unit which is equal to an area enclosed by a square with sides each 1 micrometer long.</summary>
+            UO_square_micrometer = 200010001,
+
+            /// <summary>An electrical conduction unit which is equal to one thousandth of a siemen or 10^</summary>
+            UO_millisiemens = 200010002,
+
+            /// <summary>A specific concentration unit which is equal to 1 micromole in a given volume of one thousandth of a cubic meter.</summary>
+            UO_micromole_per_litre = 200010003,
+
+            /// <summary>A specific concentration unit which is equal to 1 micromole of a given substance per kilogram of solvent.</summary>
+            UO_micromole_per_kilogram = 200010004,
+
+            /// <summary>A speed/velocity unit which is equal to the speed of an object traveling 1 millimeter distance in one day.</summary>
+            UO_millimeters_per_day = 200010005,
+
+            /// <summary>A dimensionless ratio unit which, given a pair of quantities a and b, for which b is a multiple of a, denotes b by giving the multiplier (coefficient) c for a to result in b.</summary>
+            UO_ratio1 = 200010006,
+
+            /// <summary>An electrical mobility unit which is equal to one volt second per square centimeter.</summary>
+            UO_volt_second_per_square_centimeter = 200010007,
+
+            /// <summary>A speed/velocity unit which is equal to the speed of an object traveling 1 kilometer distance in one hour.</summary>
+            UO_kilometer_per_hour = 200010008,
+
+            /// <summary>A mass unit which is equal to 1/12 the mass of 12C</summary>
+            UO_milli1 = 200010009,
+
+            /// <summary>An area unit which is equal to an area of 10,000 square meters. Equivalent to 2.471 acres.</summary>
+            UO_hectare = 200010010,
 
         }
     }

@@ -11,10 +11,10 @@ namespace PSI_Interface.CV
         /// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.0.14"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2017:09:06 10:04"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.1"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2017:12:07 10:03"));
             CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://ontologies.berkeleybop.org/pato.obo", "releases/2017-07-10"));
-            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://ontologies.berkeleybop.org/uo.obo", "releases/2017-06-27"));
+            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://ontologies.berkeleybop.org/uo.obo", "releases/2018-01-11"));
         }
 
         /// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>
