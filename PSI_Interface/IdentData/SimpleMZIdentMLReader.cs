@@ -597,20 +597,37 @@ namespace PSI_Interface.IdentData
             /// Constructor
             /// </summary>
             /// <param name="path">path to the mzid file</param>
-            /// <param name="identifications"></param>
+            /// <param name="identificationsEnumerator"></param>
             /// <param name="dataReader"></param>
-            internal SimpleMZIdentMLDataLowMem(string path, IEnumerable<SpectrumIdItem> identifications, XmlReader dataReader) : base(path)
+            internal SimpleMZIdentMLDataLowMem(string path, IEnumerator<SpectrumIdItem> identificationsEnumerator, XmlReader dataReader) : base(path)
             {
-                Identifications = identifications;
+                identEnumerator = identificationsEnumerator;
                 xmlDataReader = dataReader;
             }
 
             private readonly XmlReader xmlDataReader = null;
+            private readonly IEnumerator<SpectrumIdItem> identEnumerator;
 
             /// <summary>
             /// List of identifications contained in <see cref="SimpleMZIdentMLMetaData.DatasetFile"/>
             /// </summary>
-            public IEnumerable<SpectrumIdItem> Identifications { get; }
+            public IEnumerable<SpectrumIdItem> Identifications
+            {
+                get
+                {
+                    // if movenext has previously been called, return the current item
+                    if (identEnumerator.Current != null)
+                    {
+                        yield return identEnumerator.Current;
+                    }
+
+                    // Return all of the items
+                    while (identEnumerator.MoveNext())
+                    {
+                        yield return identEnumerator.Current;
+                    }
+                }
+            }
 
             /// <summary>
             /// Close the xmlReader that is supplying data to <see cref="Identifications"/>
@@ -660,11 +677,13 @@ namespace PSI_Interface.IdentData
                 // Read in the file
                 var spectrumMatches = ReadMzIdentMl(reader);
 
+                // Read first, otherwise the member data fields will not be populated
+                results.Identifications.AddRange(spectrumMatches);
+
                 results.SpectrumFile = spectrumFile;
                 results.AnalysisSoftware = softwareName;
                 results.AnalysisSoftwareVersion = softwareVersion;
                 results.AnalysisSoftwareCvAccession = softwareCvAccession;
-                results.Identifications.AddRange(spectrumMatches);
             }
             return results;
         }
@@ -705,14 +724,18 @@ namespace PSI_Interface.IdentData
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
             var reader = XmlReader.Create(new StreamReader(file, System.Text.Encoding.UTF8, true, 65536), xSettings);
 
-            // Read in the file metadata, stopping after the first yield return.
-            var enumerable = ReadMzIdentMl(reader);
+            var enumerator = ReadMzIdentMl(reader).GetEnumerator();
 
-            var results = new SimpleMZIdentMLDataLowMem(sourceFile.FullName, enumerable, reader);
-            results.SpectrumFile = spectrumFile;
-            results.AnalysisSoftware = softwareName;
-            results.AnalysisSoftwareVersion = softwareVersion;
-            results.AnalysisSoftwareCvAccession = softwareCvAccession;
+            // Read in the file metadata, stopping after the first yield return.
+            enumerator.MoveNext();
+
+            var results = new SimpleMZIdentMLDataLowMem(sourceFile.FullName, enumerator, reader)
+            {
+                SpectrumFile = spectrumFile,
+                AnalysisSoftware = softwareName,
+                AnalysisSoftwareVersion = softwareVersion,
+                AnalysisSoftwareCvAccession = softwareCvAccession
+            };
             return results;
         }
 
