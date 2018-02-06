@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CV_Generator.OBO_Objects;
 
 namespace CV_Generator
 {

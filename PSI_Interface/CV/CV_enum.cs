@@ -8234,157 +8234,157 @@ namespace PSI_Interface.CV
             MS_Original_data = 1002868,
 
             /// <summary>PSI Extended FASTA Format Controlled Vocabulary term.</summary>
-            MS_PEFF_CV_term = 1,
+            PEFF_PEFF_CV_term = 400000001,
 
             /// <summary>CV term that may appear in a PEFF File Header Section.</summary>
-            MS_File_Header_Section_term = 2,
+            PEFF_File_Header_Section_term = 400000002,
 
             /// <summary>CV term that may appear in a PEFF Individual Entry Section.</summary>
-            MS_Individual_Sequence_Entries_Section_term = 3,
+            PEFF_Individual_Sequence_Entries_Section_term = 400000003,
 
             /// <summary>Sequence Database Name.</summary>
-            MS_DbName = 8,
+            PEFF_DbName = 400000008,
 
             /// <summary>Sequence Database Prefix.</summary>
-            MS_Prefix = 9,
+            PEFF_Prefix = 400000009,
 
             /// <summary>Sequence Database Short description.</summary>
-            MS_DbDescription = 10,
+            PEFF_DbDescription = 400000010,
 
             /// <summary>Specifies whether the Sequence Database is a Decoy.</summary>
-            MS_Decoy = 11,
+            PEFF_Decoy = 400000011,
 
             /// <summary>Source of the database file.</summary>
-            MS_DbSource = 12,
+            PEFF_DbSource = 400000012,
 
             /// <summary>Database version (release date) according to database provider.</summary>
-            MS_DbVersion = 13,
+            PEFF_DbVersion = 400000013,
 
             /// <summary>Database date (release or file date of the source) according to database provider.</summary>
-            MS_DbDate_OBSOLETE = 14,
+            PEFF_DbDate_OBSOLETE = 400000014,
 
             /// <summary>Number of sequence entries in the database.</summary>
-            MS_NumberOfEntries = 15,
+            PEFF_NumberOfEntries = 400000015,
 
             /// <summary>Description of the conversion from original format to this current one.</summary>
-            MS_Conversion = 16,
+            PEFF_Conversion = 400000016,
 
             /// <summary>Molecular type of the sequences.</summary>
-            MS_SequenceType = 17,
+            PEFF_SequenceType = 400000017,
 
             /// <summary>Db specific information (not included in the current list of allowed keys).</summary>
-            MS_SpecificKey = 18,
+            PEFF_SpecificKey = 400000018,
 
             /// <summary>PEFF specific values for a defined key.</summary>
-            MS_SpecificValue = 19,
+            PEFF_SpecificValue = 400000019,
 
             /// <summary>Short Description of the PEFF.</summary>
-            MS_DatabaseDescription = 20,
+            PEFF_DatabaseDescription = 400000020,
 
             /// <summary>PEFF file general comment.</summary>
-            MS_GeneralComment = 21,
+            PEFF_GeneralComment = 400000021,
 
             /// <summary>Proteoform database flag.</summary>
-            MS_ProteoformDb = 22,
+            PEFF_ProteoformDb = 400000022,
 
             /// <summary>A tag (short string) used to categorize a sequence annotation (variant or modification).</summary>
-            MS_CustomTag = 23,
+            PEFF_CustomTag = 400000023,
 
             /// <summary>Sequence Database unique identifier.</summary>
-            MS_DbUniqueId = 1001,
+            PEFF_DbUniqueId = 400001001,
 
             /// <summary>Protein Name, description.</summary>
-            MS_PName = 1002,
+            PEFF_PName = 400001002,
 
             /// <summary>NCBI taxonomy identifier.</summary>
-            MS_NcbiTaxId = 1003,
+            PEFF_NcbiTaxId = 400001003,
 
             /// <summary>Taxonomy name (latin or common name).</summary>
-            MS_TaxName = 1004,
+            PEFF_TaxName = 400001004,
 
             /// <summary>Gene name.</summary>
-            MS_GName = 1005,
+            PEFF_GName = 400001005,
 
             /// <summary>Sequence length.</summary>
-            MS_Length = 1006,
+            PEFF_Length = 400001006,
 
             /// <summary>Sequence version.</summary>
-            MS_SV = 1007,
+            PEFF_SV = 400001007,
 
             /// <summary>Entry version.</summary>
-            MS_EV = 1008,
+            PEFF_EV = 400001008,
 
             /// <summary>Protein Evidence; A UniprotKB code.</summary>
-            MS_PE = 1009,
+            PEFF_PE = 400001009,
 
             /// <summary>Processed Molecule.</summary>
-            MS_Processed = 1010,
+            PEFF_Processed = 400001010,
 
             /// <summary>DEPRECATED in favor of VariantSimple and VariantComplex. Former definition: Sequence variation (substitution, insertion, deletion).</summary>
-            MS_Variant = 1011,
+            PEFF_Variant = 400001011,
 
             /// <summary>Modified residue with PSI-MOD identifier.</summary>
-            MS_ModResPsi = 1012,
+            PEFF_ModResPsi = 400001012,
 
             /// <summary>Modified residue without PSI-MOD identifier.</summary>
-            MS_ModRes = 1013,
+            PEFF_ModRes = 400001013,
 
             /// <summary>Alternative Accession Code.</summary>
-            MS_AltAC = 1014,
+            PEFF_AltAC = 400001014,
 
             /// <summary>Sequence Status. Complete or Fragment.</summary>
-            MS_SeqStatus = 1015,
+            PEFF_SeqStatus = 400001015,
 
             /// <summary>Entry associated comment.</summary>
-            MS_CC = 1016,
+            PEFF_CC = 400001016,
 
             /// <summary>Entry associated keyword(s).</summary>
-            MS_KW = 1017,
+            PEFF_KW = 400001017,
 
             /// <summary>Gene Ontology code.</summary>
-            MS_GO = 1018,
+            PEFF_GO = 400001018,
 
             /// <summary>Cross-reference to an external resource.</summary>
-            MS_XRef = 1019,
+            PEFF_XRef = 400001019,
 
             /// <summary>Sequence range of active processed polypeptide.</summary>
-            MS_Chain = 1020,
+            PEFF_Chain = 400001020,
 
             /// <summary>Sequence range of signal peptide.</summary>
-            MS_Signal = 1021,
+            PEFF_Signal = 400001021,
 
             /// <summary>Sequence range of transit peptide.</summary>
-            MS_Transit = 1022,
+            PEFF_Transit = 400001022,
 
             /// <summary>Sequence conflict; a UniProtKB term.</summary>
-            MS_Conflict = 1023,
+            PEFF_Conflict = 400001023,
 
             /// <summary>Sequence checksum in crc64.</summary>
-            MS_Crc64 = 1024,
+            PEFF_Crc64 = 400001024,
 
             /// <summary>Sequence range of a domain.</summary>
-            MS_Domain = 1025,
+            PEFF_Domain = 400001025,
 
             /// <summary>UniProtKB specific Protein identifier ID; a UniProtKB term.</summary>
-            MS_ID = 1026,
+            PEFF_ID = 400001026,
 
             /// <summary>Modified residue with Unimod identifier.</summary>
-            MS_ModResUnimod = 1027,
+            PEFF_ModResUnimod = 400001027,
 
             /// <summary>Simple sequence variation of a single amino acid change. A change to a stop codon is permitted with a * symbol. More complex variations must be encoded with the VariantComplex term.</summary>
-            MS_VariantSimple = 1028,
+            PEFF_VariantSimple = 400001028,
 
             /// <summary>Simple sequence variation of a single amino acid change. A change to a stop codon is permitted with a * symbol. More complex variations must be encoded with the VariantComplex term.</summary>
-            MS_VariantComplex = 1029,
+            PEFF_VariantComplex = 400001029,
 
             /// <summary>Regular expression for PEFF description line value with three components.</summary>
-            MS____0_9_____0_9_____a_zA_Z0_9____ = 1002001,
+            PEFF____0_9_____0_9_____a_zA_Z0_9____ = 401002001,
 
             /// <summary>Regular expression for the molecular type of the sequences.</summary>
-            MS__AA_NA_DNA_cDNA_RNA_RNAi_tRNA_rRNA_siRNA_mDNA_mRNA_snoRNA_ncRNA_EST__a_z0_9A_Z___ = 1002002,
+            PEFF__AA_NA_DNA_cDNA_RNA_RNAi_tRNA_rRNA_siRNA_mDNA_mRNA_snoRNA_ncRNA_EST__a_z0_9A_Z___ = 401002002,
 
             /// <summary>Regular expression for the Sequence Status.</summary>
-            MS___Complete_Fragment__a_z0_9A_Z___ = 1002003,
+            PEFF___Complete_Fragment__a_z0_9A_Z___ = 401002003,
 
             /// <summary>The root node of the unimod modifications ontology.</summary>
             UNIMOD_unimod_root_node = 100000000,

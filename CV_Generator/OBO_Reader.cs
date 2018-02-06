@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
+using CV_Generator.OBO_Objects;
 
 namespace CV_Generator
 {
@@ -53,10 +55,10 @@ namespace CV_Generator
                     switch (type.ToLower())
                     {
                         case "header":
-                            FileData.Header = new OBO_File.OBO_Header(data);
+                            FileData.Header = new OBO_Header(data);
                             break;
                         case "[term]":
-                            var term = new OBO_File.OBO_Term(data);
+                            var term = new OBO_Term(data);
                             if (FileData.Terms.ContainsKey(term.Id))
                             {
                                 Console.WriteLine("Warning: Duplicate term id found");
@@ -69,13 +71,29 @@ namespace CV_Generator
                             FileData.Terms.Add(term.Id, term);
                             break;
                         case "[typedef]":
-                            var typeDef = new OBO_File.OBO_Typedef(data);
+                            var typeDef = new OBO_Typedef(data);
                             FileData.Typedefs.Add(typeDef.Id, typeDef);
                             break;
                         case "[instance]":
-                            var instance = new OBO_File.OBO_Instance(data);
+                            var instance = new OBO_Instance(data);
                             FileData.Instances.Add(instance.Id, instance);
                             break;
+                    }
+                }
+            }
+
+            if (FileData.Terms.Count > 0)
+            {
+                var namespaces = FileData.Terms.Values.Select(x => x.Id_Namespace).Distinct();
+                foreach (var ns in namespaces)
+                {
+                    if (FileData.IsGeneratedId)
+                    {
+                        FileData.Id = ns;
+                    }
+                    else if (!FileData.Id.Equals(ns))
+                    {
+                        FileData.AdditionalNamespaces.Add(ns);
                     }
                 }
             }

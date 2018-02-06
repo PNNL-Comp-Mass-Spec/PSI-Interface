@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using CV_Generator.OBO_Objects;
 
 namespace CV_Generator
 {
@@ -169,6 +170,10 @@ namespace CV_Generator
             foreach (var cv in _allObo)
             {
                 values += indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));\n";
+                foreach (var ns in cv.AdditionalNamespaces)
+                {
+                    values += indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));\n";
+                }
             }
             values += indent + "}";
             return values;
@@ -180,8 +185,8 @@ namespace CV_Generator
         {
             var enumData = indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>\n";
             enumData += indent + "public enum " + RelationsOtherTypesEnumName + " : int\n" + indent + "{\n";
-            var dict = new Dictionary<string, OBO_File.OBO_Typedef>();
-            var unknownDef = new OBO_File.OBO_Typedef {
+            var dict = new Dictionary<string, OBO_Typedef>();
+            var unknownDef = new OBO_Typedef {
                 Def = "Unknown term relationship"
             };
             dict.Add("Unknown", unknownDef);
@@ -217,8 +222,8 @@ namespace CV_Generator
             return enumData + indent + "}";
         }
 
-        private readonly Dictionary<string, OBO_File.OBO_Term> _cvEnumData = new Dictionary<string, OBO_File.OBO_Term>();
-        private readonly Dictionary<string, Dictionary<string, OBO_File.OBO_Term>> _cvMapData = new Dictionary<string, Dictionary<string, OBO_File.OBO_Term>>();
+        private readonly Dictionary<string, OBO_Term> _cvEnumData = new Dictionary<string, OBO_Term>();
+        private readonly Dictionary<string, Dictionary<string, OBO_Term>> _cvMapData = new Dictionary<string, Dictionary<string, OBO_Term>>();
 
         private void PopulateCVEnumData()
         {
@@ -227,7 +232,7 @@ namespace CV_Generator
             var invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]"; // add all whitespace matching, manually escape the ']', since above call doesn't
 
             // Add "CVID_Unknown" to the list first
-            var unknown = new OBO_File.OBO_Term
+            var unknown = new OBO_Term
             {
                 Id = "??:0000000",
                 Name = "CVID_Unknown",
@@ -236,24 +241,22 @@ namespace CV_Generator
                 IsObsolete = false
             };
             _cvEnumData.Add("CVID_Unknown", unknown);
-            _cvMapData.Add("??", new Dictionary<string, OBO_File.OBO_Term>() { { "CVID_Unknown", unknown } });
+            _cvMapData.Add("??", new Dictionary<string, OBO_Term>() { { "CVID_Unknown", unknown } });
 
             const string obsol = "_OBSOLETE";
             foreach (var obo in _allObo)
             {
-                if (obo.IsGeneratedId && obo.Terms.Count > 0)
-                {
-                    var tempId = obo.Terms.Values.ToList()[0].Id;
-                    tempId = tempId.Split(':')[0];
-                    obo.Id = tempId;
-                }
                 var id = obo.Id;
-                var parent = new Dictionary<string, OBO_File.OBO_Term>();
+                var parent = new Dictionary<string, OBO_Term>();
                 _cvMapData.Add(id, parent);
 
                 foreach (var term in obo.Terms.Values)
                 {
                     var name = id + "_";
+                    if (!string.IsNullOrWhiteSpace(term.Id_Namespace))
+                    {
+                        name = term.Id_Namespace + "_";
+                    }
                     //name += term.Name.Replace(' ', '_');
                     name += System.Text.RegularExpressions.Regex.Replace(term.Name, invalidSymbolsRegex, "_");
                     //name += System.Text.RegularExpressions.Regex.Replace(term.Name.Replace(' ', '_'), invalidSymbolsRegex, "_");
@@ -308,24 +311,26 @@ namespace CV_Generator
             {
                 foreach (var term in cv.Value.Values)
                 {
-                    var idValue = int.Parse(term.Id.Split(':')[1]);
+                    var idValue = term.Id_Value;
                     if (cv.Key.Equals("??") && term.EnumName.Equals("CVID_Unknown"))
                     {
                         idValue = -1;
                     }
                     else if (cv.Key.Equals("UNIMOD"))
                     {
-                        // To match ProteoWizard values
                         idValue += 100000000;
                     }
                     else if (cv.Key.Equals("UO"))
                     {
-                        // To match ProteoWizard values
                         idValue += 200000000;
                     }
                     else if (cv.Key.Equals("PATO"))
                     {
                         idValue += 300000000;
+                    }
+                    else if (term.Id_Namespace.Equals("PEFF"))
+                    {
+                        idValue += 400000000;
                     }
                     if (!string.IsNullOrWhiteSpace(term.Def))
                     {
@@ -445,7 +450,7 @@ namespace CV_Generator
             return dictData;
         }
 
-        private readonly Dictionary<string, OBO_File.OBO_Term> _bigTermDict = new Dictionary<string, OBO_File.OBO_Term>();
+        private readonly Dictionary<string, OBO_Term> _bigTermDict = new Dictionary<string, OBO_Term>();
         private bool _bigTermDictPopulated;
 
         private void PopulateTermDict()

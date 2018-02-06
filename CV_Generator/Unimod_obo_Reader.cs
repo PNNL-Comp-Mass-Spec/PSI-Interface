@@ -1,4 +1,6 @@
-﻿namespace CV_Generator
+﻿using CV_Generator.OBO_Objects;
+
+namespace CV_Generator
 {
     public class Unimod_obo_Reader
     {

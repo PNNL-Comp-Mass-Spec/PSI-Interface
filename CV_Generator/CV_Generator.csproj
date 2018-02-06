@@ -44,7 +44,11 @@
   <ItemGroup>
     <Compile Include="CVWriter.cs" />
     <Compile Include="CV_Generator.cs" />
-    <Compile Include="OBO_File.cs" />
+    <Compile Include="OBO_Objects\OBO_File.cs" />
+    <Compile Include="OBO_Objects\OBO_Header.cs" />
+    <Compile Include="OBO_Objects\OBO_Instance.cs" />
+    <Compile Include="OBO_Objects\OBO_Term.cs" />
+    <Compile Include="OBO_Objects\OBO_Typedef.cs" />
     <Compile Include="OBO_Reader.cs" />
     <Compile Include="PSI_MS_obo_Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

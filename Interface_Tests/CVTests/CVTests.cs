@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using CV_Generator;
+using CV_Generator.OBO_Objects;
 using NUnit.Framework;
 using PSI_Interface.CV;
 using PSI_Interface.IdentData.IdentDataObjs;
