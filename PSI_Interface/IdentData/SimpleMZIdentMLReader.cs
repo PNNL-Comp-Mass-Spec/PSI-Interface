@@ -16,20 +16,39 @@ namespace PSI_Interface.IdentData
     public class SimpleMZIdentMLReader
     {
         /// <summary>
-        /// Initialize a MzIdentMlReader object
+        /// A wrapper around an exception that provides a single level of abstraction, but no additional detail.
         /// </summary>
-        public SimpleMZIdentMLReader()
+        public class DuplicateKeyException : Exception
         {
+            /// <summary>
+            /// default constructor
+            /// </summary>
+            public DuplicateKeyException() : base() { }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="message"></param>
+            public DuplicateKeyException(string message) : base(message) { }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="message"></param>
+            /// <param name="innerEx"></param>
+            public DuplicateKeyException(string message, Exception innerEx) : base(message, innerEx) { }
         }
 
-        /*/// <summary>
+        /// <summary>
         /// Initialize a MzIdentMlReader object
         /// </summary>
-        /// <param name="options">Options used for the MSGFPlus Target Filter</param>
-        public SimpleMZIdentMLReader(Options options)
+        /// <param name="skipDuplicates">If true, duplicate IDs for DBSequence, Peptide, and PeptideEvidence will be dropped, rather than causing an exception</param>
+        /// <param name="errorReporter">Action to perform when the parsing reports errors (output to console, log, etc.)</param>
+        public SimpleMZIdentMLReader(bool skipDuplicates = false, Action<string> errorReporter = null)
         {
-            ReaderOptions = options;
-        }*/
+            dropDuplicates = skipDuplicates;
+            errorReportAction = errorReporter;
+        }
 
         #region NativeId Conversion
         /// <summary>
@@ -176,6 +195,8 @@ namespace PSI_Interface.IdentData
         private string softwareVersion = string.Empty;
         private bool isSpectrumIdNotAScanNum = false;
         private CancellationToken cancellationToken = default(CancellationToken);
+        private readonly bool dropDuplicates = false;
+        private readonly Action<string> errorReportAction = null;
 
         /// <summary>
         /// Information about a single search result
@@ -1023,7 +1044,20 @@ namespace PSI_Interface.IdentData
                 {
                     dbSeq.ProteinDescription = reader.GetAttribute("value"); //.Split(' ')[0];
                 }
-                m_database.Add(id, dbSeq);
+
+                if (m_database.ContainsKey(id))
+                {
+                    if (!dropDuplicates)
+                    {
+                        throw new DuplicateKeyException($"Cannot add duplicate DBSequence id \"{id}\"!");
+                    }
+
+                    errorReportAction?.Invoke($"Dropping duplicate DBSequence id \"{id}\"!");
+                }
+                else
+                {
+                    m_database.Add(id, dbSeq);
+                }
             }
             reader.Dispose();
         }
@@ -1068,10 +1102,17 @@ namespace PSI_Interface.IdentData
 
                 if (m_peptides.ContainsKey(id))
                 {
-                    throw new Exception(string.Format("Cannot add duplicate peptide id {0}: {1}", id, pepRef.SequenceWithNumericMods));
-                }
+                    if (!dropDuplicates)
+                    {
+                        throw new DuplicateKeyException($"Cannot add duplicate peptide id \"{id}\": {pepRef.SequenceWithNumericMods}");
+                    }
 
-                m_peptides.Add(id, pepRef);
+                    errorReportAction?.Invoke($"Dropping duplicate peptide id \"{id}\": {pepRef.SequenceWithNumericMods}");
+                }
+                else
+                {
+                    m_peptides.Add(id, pepRef);
+                }
             }
             reader.Dispose();
         }
@@ -1095,7 +1136,21 @@ namespace PSI_Interface.IdentData
                 PeptideRef = m_peptides[reader.GetAttribute("peptide_ref")],
                 DbSeq = m_database[reader.GetAttribute("dBSequence_ref")]
             };
-            m_evidences.Add(reader.GetAttribute("id"), pepEvidence);
+            var id = reader.GetAttribute("id");
+            if (m_evidences.ContainsKey(id))
+            {
+                if (!dropDuplicates)
+                {
+                    throw new DuplicateKeyException($"Cannot add duplicate peptideEvidence id \"{id}\"!");
+                }
+
+                errorReportAction?.Invoke($"Skipping duplicate peptideEvidence id \"{id}\"!");
+            }
+            else
+            {
+                m_evidences.Add(id, pepEvidence);
+            }
+
             reader.Dispose();
         }
 
