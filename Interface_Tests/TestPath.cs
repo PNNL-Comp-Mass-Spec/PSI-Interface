@@ -1,4 +1,5 @@
 ﻿using System;
+using NUnit.Framework;
 
 namespace Interface_Tests
 {
@@ -11,6 +12,10 @@ namespace Interface_Tests
 
             // The Execution directory
             var dirFinder = Environment.CurrentDirectory;
+            if (!dirFinder.ToLower().Contains("bin"))
+            {
+                dirFinder = TestContext.CurrentContext.TestDirectory;
+            }
             // Find the bin folder...
             while (!string.IsNullOrWhiteSpace(dirFinder) && !dirFinder.EndsWith("bin"))
             {
@@ -37,28 +42,12 @@ namespace Interface_Tests
             */
         }
 
-        public static string ExtTestDataDirectory
-        {
-            get;
-            private set;
-        }
+        public static string ExtTestDataDirectory { get; private set; }
 
-        public static string TestDirectory
-        {
-            get;
-            private set;
-        }
+        public static string TestDirectory { get; private set; }
 
-        public static string TestDataDirectory
-        {
-            get;
-            private set;
-        }
+        public static string TestDataDirectory { get; private set; }
 
-        public static string ProjectDirectory
-        {
-            get;
-            private set;
-        }
+        public static string ProjectDirectory { get; private set; }
     }
 }
