@@ -51,7 +51,14 @@ namespace PSI_Interface.CV
 
             foreach (var mapping in _oboToFile)
             {
-                _fileToObo.Add(mapping.Value, mapping.Key);
+                if (_fileToObo.ContainsKey(mapping.Value))
+                {
+                    _fileToObo[mapping.Value] = mapping.Key;
+                }
+                else
+                {
+                    _fileToObo.Add(mapping.Value, mapping.Key);
+                }
             }
         }
 
@@ -81,7 +88,14 @@ namespace PSI_Interface.CV
 
             foreach (var mapping in _oboToFile)
             {
-                _fileToObo.Add(mapping.Value, mapping.Key);
+                if (_fileToObo.ContainsKey(mapping.Value))
+                {
+                    _fileToObo[mapping.Value] = mapping.Key;
+                }
+                else
+                {
+                    _fileToObo.Add(mapping.Value, mapping.Key);
+                }
             }
         }
 
@@ -111,7 +125,14 @@ namespace PSI_Interface.CV
 
             foreach (var mapping in _oboToFile)
             {
-                _fileToObo.Add(mapping.Value, mapping.Key);
+                if (_fileToObo.ContainsKey(mapping.Value))
+                {
+                    _fileToObo[mapping.Value] = mapping.Key;
+                }
+                else
+                {
+                    _fileToObo.Add(mapping.Value, mapping.Key);
+                }
             }
         }
 
