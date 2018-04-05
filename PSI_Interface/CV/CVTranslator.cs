@@ -38,8 +38,14 @@ namespace PSI_Interface.CV
                 {
                     var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
+                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()) && !_oboToFile.ContainsValue(fcv.Id))
                     {
+                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.ToLower().Contains("peff"))
+                        {
+                            // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
+                            continue;
+                        }
+
                         _oboToFile.Add(cv.Id, fcv.Id);
                     }
                 }
@@ -51,14 +57,7 @@ namespace PSI_Interface.CV
 
             foreach (var mapping in _oboToFile)
             {
-                if (_fileToObo.ContainsKey(mapping.Value))
-                {
-                    _fileToObo[mapping.Value] = mapping.Key;
-                }
-                else
-                {
-                    _fileToObo.Add(mapping.Value, mapping.Key);
-                }
+                _fileToObo.Add(mapping.Value, mapping.Key);
             }
         }
 
@@ -75,8 +74,14 @@ namespace PSI_Interface.CV
                 {
                     var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
+                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()) && !_oboToFile.ContainsValue(fcv.Id))
                     {
+                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.ToLower().Contains("peff"))
+                        {
+                            // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
+                            continue;
+                        }
+
                         _oboToFile.Add(cv.Id, fcv.Id);
                     }
                 }
@@ -88,14 +93,7 @@ namespace PSI_Interface.CV
 
             foreach (var mapping in _oboToFile)
             {
-                if (_fileToObo.ContainsKey(mapping.Value))
-                {
-                    _fileToObo[mapping.Value] = mapping.Key;
-                }
-                else
-                {
-                    _fileToObo.Add(mapping.Value, mapping.Key);
-                }
+                _fileToObo.Add(mapping.Value, mapping.Key);
             }
         }
 
@@ -112,8 +110,14 @@ namespace PSI_Interface.CV
                 {
                     var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()))
+                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()) && !_oboToFile.ContainsValue(fcv.Id))
                     {
+                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.ToLower().Contains("peff"))
+                        {
+                            // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
+                            continue;
+                        }
+
                         _oboToFile.Add(cv.Id, fcv.Id);
                     }
                 }
@@ -125,14 +129,7 @@ namespace PSI_Interface.CV
 
             foreach (var mapping in _oboToFile)
             {
-                if (_fileToObo.ContainsKey(mapping.Value))
-                {
-                    _fileToObo[mapping.Value] = mapping.Key;
-                }
-                else
-                {
-                    _fileToObo.Add(mapping.Value, mapping.Key);
-                }
+                _fileToObo.Add(mapping.Value, mapping.Key);
             }
         }
 
