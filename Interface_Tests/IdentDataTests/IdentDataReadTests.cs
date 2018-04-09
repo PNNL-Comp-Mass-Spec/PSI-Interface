@@ -27,7 +27,7 @@ namespace Interface_Tests.IdentDataTests
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
+        // Use TestInitialize to run code before running each test
         // [TestInitialize()]
         // public void MyTestInitialize() { }
         //
@@ -80,7 +80,7 @@ namespace Interface_Tests.IdentDataTests
 
             Console.WriteLine();
             Console.WriteLine("Spectrum Identification Results: {0,6:N0}", specResults);
-            Console.WriteLine("Native IDs: {0,6:N0}", specItems);            
+            Console.WriteLine("Native IDs: {0,6:N0}", specItems);
             Console.WriteLine("Unique Peptides: {0,6:N0}", observedPeptides);
             Console.WriteLine("Unique Protein Sequences: {0,6:N0}", observeProteins);
 
