@@ -144,8 +144,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <returns></returns>
         public double BestSpecEVal()
         {
-            Sort();
-            return SpectrumIdentificationItems.First().GetSpecEValue();
+            return SpectrumIdentificationItems.Min(x => x.GetSpecEValue());
         }
 
         /// <summary>
