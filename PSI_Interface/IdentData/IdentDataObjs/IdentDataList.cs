@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
@@ -15,6 +16,64 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public IdentDataList()
         {
             this._identData = null;
+        }
+
+        private Dictionary<string, T> idMap = null;
+
+        /// <summary>
+        /// When called, initializes an internal dictionary that then tracks all adds and allows fast ID-to-object reference resolving (only valid for objects implementing <see cref="IIdentifiableType"/>)
+        /// </summary>
+        /// <remarks>Will ignore duplicate IDs, only ever adding the first it encounters</remarks>
+        public void AddIdMap()
+        {
+            if (idMap != null)
+            {
+                return;
+            }
+
+            idMap = new Dictionary<string, T>();
+
+            foreach (var item in this)
+            {
+                if (item is IIdentifiableType idType && !idMap.ContainsKey(idType.Id))
+                {
+                    idMap.Add(idType.Id, item);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Remove the internal dictionary
+        /// </summary>
+        public void RemoveIdMap()
+        {
+            idMap = null;
+        }
+
+        /// <summary>
+        /// Find the first item that matches <paramref name="id"/>. Much faster if <see cref="AddIdMap"/> is called beforehand (and this is called before <see cref="RemoveIdMap"/> is called)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public T GetItemById(string id)
+        {
+            if (idMap != null)
+            {
+                if (idMap.TryGetValue(id, out var value))
+                {
+                    return value;
+                }
+
+                return null;
+            }
+
+            var results = this.Where(x => x is IIdentifiableType idType && id.Equals(idType.Id)).ToList();
+            if (results.Any())
+            {
+                return results.First();
+            }
+
+            return null;
         }
 
         //public event EventHandler OnAdd;
@@ -85,6 +144,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             //    OnAdd(this, null);
             //}
             item.IdentData = this._identData;
+            if (idMap != null && item is IIdentifiableType idType && !idMap.ContainsKey(idType.Id))
+            {
+                idMap.Add(idType.Id, item);
+            }
             base.Add(item);
         }
 
@@ -94,10 +157,26 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="items"></param>
         public new void AddRange(IEnumerable<T> items)
         {
-            foreach (var item in items)
+            if (items is ICollection<T> itemsColl)
             {
-                item.IdentData = this._identData;
-                base.Add(item);
+                // ICollection: make use of the List<T> implementation optimizations for AddRange.
+                foreach (var item in itemsColl)
+                {
+                    item.IdentData = this._identData;
+                    if (idMap != null && item is IIdentifiableType idType && !idMap.ContainsKey(idType.Id))
+                    {
+                        idMap.Add(idType.Id, item);
+                    }
+                }
+
+                base.AddRange(itemsColl);
+            }
+            else
+            {
+                foreach (var item in items)
+                {
+                    this.Add(item);
+                }
             }
         }
 
@@ -108,8 +187,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var o = obj as IdentDataList<T>;
-            if (o == null)
+            if (!(obj is IdentDataList<T> o))
             {
                 return false;
             }

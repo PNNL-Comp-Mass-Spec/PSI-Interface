@@ -32,6 +32,7 @@ namespace PSI_Interface.IdentData
         #endregion
 
         #region Constructors
+
         /// <summary>
         ///     Create an IdentDataObj directly from an MzIdentMLType object - fully cascades for the entire contents of
         ///     MzIdentMLType
@@ -139,11 +140,16 @@ namespace PSI_Interface.IdentData
             {
                 _dataCollection.AnalysisData = new AnalysisDataObj(mzid.DataCollection.AnalysisData, this);
             }
-            // References SpectrumIdentificationProtocol, SpectrumIdentificationList, SpectraData, SeqrchDatabaseInfo, ProteinDetectionList, ProteinDetectionProtocol
+            // References SpectrumIdentificationProtocol, SpectrumIdentificationList, SpectraData, SearchDatabaseInfo, ProteinDetectionList, ProteinDetectionProtocol
             if (mzid.AnalysisCollection != null)
             {
                 _analysisCollection = new AnalysisCollectionObj(mzid.AnalysisCollection, this);
             }
+
+            // Reduce memory footprint by removing IdentDataList IdMaps that are created during the translation process
+            SequenceCollection?.DBSequences?.RemoveIdMap();
+            SequenceCollection?.PeptideEvidences?.RemoveIdMap();
+            SequenceCollection?.Peptides?.RemoveIdMap();
         }
 
         /// <summary>
@@ -503,11 +509,7 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                var result = SequenceCollection.DBSequences.AsParallel().Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
+                return SequenceCollection?.DBSequences?.GetItemById(id);
             }
             catch
             {
@@ -529,11 +531,7 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                var result = SequenceCollection.Peptides.AsParallel().Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
+                return SequenceCollection?.Peptides?.GetItemById(id);
             }
             catch
             {
@@ -555,11 +553,7 @@ namespace PSI_Interface.IdentData
             }
             try
             {
-                var result = SequenceCollection.PeptideEvidences.AsParallel().Where(item => item.Id == id).ToList();
-                if (result.Count > 0)
-                {
-                    return result.First();
-                }
+                return SequenceCollection?.PeptideEvidences?.GetItemById(id);
             }
             catch
             {

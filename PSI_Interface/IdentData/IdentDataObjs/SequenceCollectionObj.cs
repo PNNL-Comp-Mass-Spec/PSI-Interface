@@ -48,18 +48,21 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if ((sc.DBSequence != null) && (sc.DBSequence.Count > 0))
             {
                 DBSequences = new IdentDataList<DbSequenceObj>();
+                DBSequences.AddIdMap();
                 foreach (var dbs in sc.DBSequence)
                     DBSequences.Add(new DbSequenceObj(dbs, IdentData));
             }
             if ((sc.Peptide != null) && (sc.Peptide.Count > 0))
             {
                 Peptides = new IdentDataList<PeptideObj>();
+                Peptides.AddIdMap();
                 foreach (var p in sc.Peptide)
                     Peptides.Add(new PeptideObj(p, IdentData));
             }
             if ((sc.PeptideEvidence != null) && (sc.PeptideEvidence.Count > 0))
             {
                 PeptideEvidences = new IdentDataList<PeptideEvidenceObj>();
+                PeptideEvidences.AddIdMap();
                 foreach (var pe in sc.PeptideEvidence)
                     PeptideEvidences.Add(new PeptideEvidenceObj(pe, IdentData));
             }
