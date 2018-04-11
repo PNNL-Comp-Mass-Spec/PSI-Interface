@@ -15,7 +15,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     public class CVParamObj : ParamBaseObj, IEquatable<CVParamObj>
     {
         private string _cvRef;
-        //private string _name;
+        private string _name;
         //private string _accession;
         private string _value;
 
@@ -28,7 +28,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public CVParamObj(CV.CV.CVID cvid = CV.CV.CVID.CVID_Unknown, string value = null)
         {
             _cvRef = null;
-            //this._name = null;
+            _name = null;
             //this._accession = null;
             _value = value;
 
@@ -46,9 +46,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             : base(idata)
         {
             CVRef = cvp.cvRef;
-            //this._name = cvp.name;
             //this._accession = cvp.accession;
             Accession = cvp.accession;
+            Name = cvp.name;
             _value = cvp.value;
 
             UnitCvRef = cvp.unitCvRef;
@@ -73,7 +73,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             get
             {
-                //return this._cvRef; 
+                //return this._cvRef;
                 return IdentData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[Cvid].CVRef);
             }
             set
@@ -91,11 +91,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             get
             {
                 return CV.CV.TermData[Cvid].Id;
-                //return this._accession; 
+                //return this._accession;
             }
             set
             {
-                //this._accession = value; 
+                //this._accession = value;
                 if (CV.CV.TermAccessionLookup.ContainsKey(_cvRef) &&
                     CV.CV.TermAccessionLookup[_cvRef].ContainsKey(value))
                 {
@@ -116,13 +116,19 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             get
             {
-                return CV.CV.TermData[Cvid].Name;
-                //return this._name; 
+                if (Cvid != CV.CV.CVID.CVID_Unknown)
+                {
+                    return CV.CV.TermData[Cvid].Name;
+                }
+                return _name;
             }
             set
             {
-                /*this._name = value;*/
-            } // Don't want to do anything here. public interface uses CVID
+                if (Cvid == CV.CV.CVID.CVID_Unknown)
+                {
+                    _name = value;
+                }
+            } // Only store name if the CVID is Unknown.
         }
 
         /// <remarks>The user-entered value of the parameter.</remarks>

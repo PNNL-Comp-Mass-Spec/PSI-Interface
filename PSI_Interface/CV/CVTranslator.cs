@@ -150,16 +150,26 @@ namespace PSI_Interface.CV
         /// <returns></returns>
         public string ConvertOboCVRef(string cvRef)
         {
-            return ConvertCVRef(cvRef, _oboToFile);
+            var newCvRef = ConvertCVRef(cvRef, _oboToFile);
+            if (string.IsNullOrWhiteSpace(newCvRef))
+            {
+                return null;
+            }
+
+            return newCvRef;
         }
 
         private string ConvertCVRef(string cvRef, Dictionary<string, string> map)
         {
+            if (string.IsNullOrWhiteSpace(cvRef))
+            {
+                return "";
+            }
             if (map.ContainsKey(cvRef))
             {
                 return map[cvRef];
             }
-            return null;
+            return "";
         }
 }
 }
