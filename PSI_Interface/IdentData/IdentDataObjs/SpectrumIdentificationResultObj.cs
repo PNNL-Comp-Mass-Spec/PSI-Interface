@@ -169,7 +169,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public void RemoveMatchesNotBestSpecEValue()
         {
-            ReRankBySpecEValue();
             var best = BestSpecEVal();
             SpectrumIdentificationItems.RemoveAll(item => item.GetSpecEValue() > best);
         }
