@@ -197,6 +197,7 @@ namespace PSI_Interface.IdentData
         private CancellationToken cancellationToken = default(CancellationToken);
         private readonly bool dropDuplicates = false;
         private readonly Action<string> errorReportAction = null;
+        private readonly List<SearchModification> searchModifications = new List<SearchModification>();
 
         /// <summary>
         /// Information about a single search result
@@ -399,6 +400,42 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
+        /// Search modification information; information from <see cref="Modification"/> should be mappable to one of these objects
+        /// </summary>
+        public class SearchModification
+        {
+            /// <summary>
+            /// If the modification is fixed/static
+            /// </summary>
+            public bool IsFixed { get; set; }
+
+            /// <summary>
+            /// If the modification affects the N-Terminus
+            /// </summary>
+            public bool IsNTerm { get; set; }
+
+            /// <summary>
+            /// If the modification affects the C-Terminus
+            /// </summary>
+            public bool IsCTerm { get; set; }
+
+            /// <summary>
+            /// Monoisotopic mass of the modification
+            /// </summary>
+            public double Mass { get; set; }
+
+            /// <summary>
+            /// Modification name
+            /// </summary>
+            public string Tag { get; set; }
+
+            /// <summary>
+            /// Residues that can be affected by this modification; '.' is used to signify terminus modifications that can affect any residue
+            /// </summary>
+            public string Residues { get; set; }
+        }
+
+        /// <summary>
         /// Peptide information, including modifications
         /// </summary>
         public class PeptideRef
@@ -588,6 +625,11 @@ namespace PSI_Interface.IdentData
             /// Get the version of the analysis software, if provided
             /// </summary>
             public string AnalysisSoftwareVersion { get; internal set; }
+
+            /// <summary>
+            /// The modification settings for the search
+            /// </summary>
+            public List<SearchModification> SearchModifications { get; } = new List<SearchModification>();
         }
 
         /// <summary>
@@ -705,6 +747,7 @@ namespace PSI_Interface.IdentData
                 results.AnalysisSoftware = softwareName;
                 results.AnalysisSoftwareVersion = softwareVersion;
                 results.AnalysisSoftwareCvAccession = softwareCvAccession;
+                results.SearchModifications.AddRange(searchModifications);
             }
             return results;
         }
@@ -755,8 +798,11 @@ namespace PSI_Interface.IdentData
                 SpectrumFile = spectrumFile,
                 AnalysisSoftware = softwareName,
                 AnalysisSoftwareVersion = softwareVersion,
-                AnalysisSoftwareCvAccession = softwareCvAccession
+                AnalysisSoftwareCvAccession = softwareCvAccession,
             };
+
+            results.SearchModifications.AddRange(searchModifications);
+
             return results;
         }
 
@@ -845,7 +891,8 @@ namespace PSI_Interface.IdentData
                             break;
                         case "AnalysisProtocolCollection":
                             // Schema requirements: one instance of this element
-                            reader.Skip();
+                            ReadAnalysisProtocolCollection(reader.ReadSubtree());
+                            PossiblyReadEndElement(reader, "AnalysisProtocolCollection");
                             break;
                         case "DataCollection":
                             // Schema requirements: one instance of this element
@@ -1149,6 +1196,264 @@ namespace PSI_Interface.IdentData
             else
             {
                 m_evidences.Add(id, pepEvidence);
+            }
+
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle AnalysisProtocolCollection element
+        /// Called by ReadMzIdentML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single AnalysisProtocolCollection element</param>
+        private void ReadAnalysisProtocolCollection(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("AnalysisProtocolCollection"); // Throws exception if we are not at the "AnalysisProtocolCollection" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "SpectrumIdentificationProtocol":
+                        // Schema requirements: one to many instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        ReadSpectrumIdentificationProtocol(reader.ReadSubtree());
+                        PossiblyReadEndElement(reader, "SpectrumIdentificationProtocol");
+                        break;
+                    case "ProteinDetectionProtocol":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle SpectrumIdentificationProtocol element
+        /// Called by ReadMzIdentML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single SpectrumIdentificationProtocol element</param>
+        private void ReadSpectrumIdentificationProtocol(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("SpectrumIdentificationProtocol"); // Throws exception if we are not at the "SpectrumIdentificationProtocol" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "SearchType":
+                        // Schema requirements: one instance of this element
+                        reader.Skip();
+                        break;
+                    case "AdditionalSearchParams":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    case "ModificationParams":
+                        // Schema requirements: zero to one instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        ReadModificationParams(reader.ReadSubtree());
+                        PossiblyReadEndElement(reader, "ModificationParams");
+                        break;
+                    case "Enzymes":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    case "MassTable":
+                        // Schema requirements: zero to many instances of this element
+                        reader.Skip();
+                        break;
+                    case "FragmentTolerance":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    case "ParentTolerance":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    case "Threshold":
+                        // Schema requirements: one instance of this element
+                        reader.Skip();
+                        break;
+                    case "DatabaseFilters":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    case "DatabaseTranslation":
+                        // Schema requirements: zero to one instances of this element
+                        reader.Skip();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle ModificationParams element
+        /// Called by ReadMzIdentML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single ModificationParams element</param>
+        private void ReadModificationParams(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("ModificationParams"); // Throws exception if we are not at the "ModificationParams" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "SearchModification":
+                        // Schema requirements: one to many instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        ReadSearchModification(reader.ReadSubtree());
+                        PossiblyReadEndElement(reader, "SearchModification");
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle SearchModification element
+        /// Called by ReadMzIdentML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single SearchModification element</param>
+        private void ReadSearchModification(XmlReader reader)
+        {
+            var modSetting = new SearchModification();
+            reader.MoveToContent();
+
+            modSetting.IsFixed = Convert.ToBoolean(reader.GetAttribute("fixedMod"));
+            modSetting.Mass = Convert.ToDouble(reader.GetAttribute("massDelta"));
+            modSetting.Residues = reader.GetAttribute("residues");
+
+            reader.ReadStartElement("SearchModification"); // Throws exception if we are not at the "SearchModification" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "SpecificityRules":
+                        // Schema requirements: zero to one instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        ReadSpecificityRules(reader.ReadSubtree(), modSetting);
+                        PossiblyReadEndElement(reader, "SpecificityRules");
+                        break;
+                    case "cvParam":
+                        // Schema requirements: one to many instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        var accession = reader.GetAttribute("accession");
+                        if (accession.ToLower().Contains("unimod") || accession.Equals("MS:1001460"))
+                        {
+                            modSetting.Tag = reader.GetAttribute("name");
+                        }
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            searchModifications.Add(modSetting);
+
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle SpecificityRules element
+        /// Called by ReadMzIdentML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single SpecificityRules element</param>
+        /// <param name="modSetting">SearchModification object</param>
+        private void ReadSpecificityRules(XmlReader reader, SearchModification modSetting)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("SpecificityRules"); // Throws exception if we are not at the "SpecificityRules" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "cvParam":
+                        // Schema requirements: one to many instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        var accession = reader.GetAttribute("accession");
+                        if (accession.Equals("MS:1001189") || accession.Equals("MS:1002057"))
+                        {
+                            // Modification Specificity Peptide-N-Term: MS:1001189
+                            // Modification Specificity Protein-N-Term: MS:1002057
+                            modSetting.IsNTerm = true;
+                        }
+                        else if (accession.Equals("MS:1001190") || accession.Equals("MS:1002058"))
+                        {
+                            // Modification Specificity Peptide-C-Term: MS:1001190
+                            // Modification Specificity Protein-C-Term: MS:1002058
+                            modSetting.IsCTerm = true;
+                        }
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
             }
 
             reader.Dispose();
