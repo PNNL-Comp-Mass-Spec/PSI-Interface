@@ -1526,7 +1526,6 @@ namespace PSI_Interface.MSData
                                  */
                                 switch (innerReader.GetAttribute("accession"))
                                 {
-
                                     case "MS:1000768":
                                         // name="Thermo nativeID format"
                                         _instrument = Instrument.Thermo_RAW_format;

@@ -396,13 +396,18 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Modification name
             /// </summary>
-            public string Tag { get; set; }
+            public string Tag => Name;
+
+            /// <summary>
+            /// Modification name
+            /// </summary>
+            public string Name { get; set; }
         }
 
         /// <summary>
         /// Search modification information; information from <see cref="Modification"/> should be mappable to one of these objects
         /// </summary>
-        public class SearchModification
+        public class SearchModification : Modification
         {
             /// <summary>
             /// If the modification is fixed/static
@@ -418,16 +423,6 @@ namespace PSI_Interface.IdentData
             /// If the modification affects the C-Terminus
             /// </summary>
             public bool IsCTerm { get; set; }
-
-            /// <summary>
-            /// Monoisotopic mass of the modification
-            /// </summary>
-            public double Mass { get; set; }
-
-            /// <summary>
-            /// Modification name
-            /// </summary>
-            public string Tag { get; set; }
 
             /// <summary>
             /// Residues that can be affected by this modification; '.' is used to signify terminus modifications that can affect any residue
@@ -1136,7 +1131,7 @@ namespace PSI_Interface.IdentData
                     // Read down to get the name of the modification, then add the modification to the peptide reference
                     reader.ReadToDescendant("cvParam"); // The cvParam child node is required
 
-                    mod.Tag = reader.GetAttribute("name");
+                    mod.Name = reader.GetAttribute("name");
                     pepRef.ModsAdd(mods.Key, mods.Value);
 
                     // There could theoretically exist more than one cvParam element. Clear them out.
@@ -1393,7 +1388,7 @@ namespace PSI_Interface.IdentData
                         var accession = reader.GetAttribute("accession");
                         if (accession.ToLower().Contains("unimod") || accession.Equals("MS:1001460"))
                         {
-                            modSetting.Tag = reader.GetAttribute("name");
+                            modSetting.Name = reader.GetAttribute("name");
                         }
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
