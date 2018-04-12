@@ -428,6 +428,18 @@ namespace PSI_Interface.IdentData
             /// Residues that can be affected by this modification; '.' is used to signify terminus modifications that can affect any residue
             /// </summary>
             public string Residues { get; set; }
+
+            /// <summary>
+            /// Compares 2 search modifications for equality, excluding <see cref="Residues"/> from the comparison
+            /// </summary>
+            /// <param name="other"></param>
+            /// <returns>true if the modifications match (with the exception of the residues)</returns>
+            /// <remarks>MS-GF+ adds all modifications and affected sites as distinct search modifications, so Phos STY becomes Phos S, Phos T, and Phos Y.</remarks>
+            public bool AreModificationsSimilar(SearchModification other)
+            {
+                return Name.Equals(other.Name) && Mass.Equals(other.Mass) && IsFixed == other.IsFixed && IsNTerm == other.IsNTerm &&
+                       IsCTerm == other.IsCTerm;
+            }
         }
 
         /// <summary>
@@ -1398,7 +1410,17 @@ namespace PSI_Interface.IdentData
                 }
             }
 
-            searchModifications.Add(modSetting);
+
+            if (searchModifications.Any(x => x.AreModificationsSimilar(modSetting)))
+            {
+                // if only the residues don't match, then just add the residues to the existing modification
+                var existing = searchModifications.First(x => x.AreModificationsSimilar(modSetting));
+                existing.Residues += modSetting.Residues;
+            }
+            else
+            {
+                searchModifications.Add(modSetting);
+            }
 
             reader.Dispose();
         }
