@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PSI_Interface.IdentData.IdentDataObjs;
 
 namespace PSI_Interface.IdentData.mzIdentML
@@ -303,13 +304,31 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.charge = iti.Charge;
 
             this.cvParam = null;
+            this.userParam = null;
             this.FragmentArray = null;
             this.index = null;
 
-            if (iti.CVParam != null)
+            if (iti.CVParams != null && iti.CVParams.Count > 0)
             {
-                this.cvParam = new CVParamType(iti.CVParam);
+                this.cvParam = new List<CVParamType>();
+                this.cvParam.AddRange(iti.CVParams.Select(x => new CVParamType(x)));
             }
+
+            if (iti.UserParams != null && iti.UserParams.Count > 0)
+            {
+                this.userParam = new List<UserParamType>();
+                this.userParam.AddRange(iti.UserParams.Select(x => new UserParamType(x)));
+            }
+
+            if (iti.IdentData.Version.Equals("1.1"))
+            {
+                if (this.cvParam != null && this.cvParam.Count > 1)
+                {
+                    this.cvParam.RemoveRange(1, this.cvParam.Count - 1);
+                }
+                this.userParam = null;
+            }
+
             if (iti.FragmentArrays != null && iti.FragmentArrays.Count > 0)
             {
                 this.FragmentArray = new List<FragmentArrayType>();
@@ -327,11 +346,18 @@ namespace PSI_Interface.IdentData.mzIdentML
         /*/// min 0, max unbounded
         //public List<FragmentArrayType> FragmentArray
 
+        /// <remarks>In case more information about the ions annotation has to be conveyed, that has no fit in FragmentArray. Note: It is suggested that the value attribute takes the form of a list of the same size as FragmentArray values. However, there is no formal encoding and it cannot be expeceted that other software will process or impart that information properly.</remarks>
+        /// min 0, max unbounded
+        //public List<UserParamType> userParam // mzIdentML 1.2
+
         /// <remarks>The type of ion identified.</remarks>
+        /// <remarks>(mzIdentML 1.2 add) In the case of neutral losses, one term should report the ion type, a second term should report the neutral loss - note: this is a change in practice from mzIdentML 1.1.</remarks>
         /// min 1, max 1
-        //public CVParamType CVParam
+        //public CVParamType CVParam // mzIdentML 1.1
+        //public List<CVParamType> CVParam // mzIdentML 1.2
 
         /// <remarks>The index of ions identified as integers, following standard notation for a-c, x-z e.g. if b3 b5 and b6 have been identified, the index would store "3 5 6". For internal ions, the index contains pairs defining the start and end point - see specification document for examples. For immonium ions, the index is the position of the identified ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be distinguished, all positions should be given.</remarks>
+        /// <remarks>(mzIdentML 1.2 add) For precursor ions, including neutral losses, the index value MUST be 0. For any other ions not related to the position within the peptide sequence e.g. quantification reporter ions, the index value MUST be 0.</remarks>
         /// Optional Attribute
         /// listOfIntegers: string, space-separated integers
         //public List<string> Index
@@ -834,9 +860,12 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 0, max unbounded
         //public List<UserParamType> UserParams
 
-        /// <remarks>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence
-        /// elements referenced from here also map to the DBSequence.</remarks>
-        /// Optional Attribute
+        /// <remarks>A reference to the corresponding DBSequence entry.
+        /// (mzIdentML 1.1) This optional and redundant, because the PeptideEvidence elements referenced from here also map to the DBSequence.
+        /// (mzIdentML 1.2) Note - this attribute was optional in mzIdentML 1.1 but is now mandatory in mzIdentML 1.2. Consuming software should assume that the DBSequence entry referenced here is the definitive identifier for the protein.
+        /// </remarks>
+        /// Optional Attribute (mzIdentML 1.1)
+        /// Required Attribute (mzIdentML 1.2)
         /// string
         //public string DBSequenceRef
 
@@ -987,7 +1016,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// string
         //public string Name
 
-        /// min 1, max unbounded
+        /// min 1, max unbounded // mzIdentML 1.1
+        /// min 0, max unbounded // mzIdentML 1.2 (0 only allowed if AddtionalSearchParams contains cvParam "De novo search")
         //public List<PeptideEvidenceRefType> PeptideEvidenceRef
 
         /// min 0, max 1
@@ -1029,7 +1059,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         //public bool CalculatedPISpecified
 
         /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Optional Attribute
+        /// Optional Attribute // mzIdentML 1.1
+        /// Required Attribute // mzIdentML 1.2
         /// string
         //public string PeptideRef
 
@@ -1141,7 +1172,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 0, max 1
         //public string ExternalFormatDocumentation
 
-        /// min 0, max 1
+        /// min 0, max 1 (mzIdentML 1.1)
+        /// min 1, max 1 (mzIdentML 1.2)
         //public FileFormatType FileFormat
 
         /// <remarks>The location of the data file.</remarks>
@@ -1279,7 +1311,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SearchDatabaseType
     /// </summary>
-    /// <remarks>A database for searching mass spectra. Examples include a set of amino acid sequence entries, or annotated spectra libraries.</remarks>
+    /// <remarks>A database for searching mass spectra. Examples include a set of amino acid sequence entries, nucleotide databases (e.g. 6 frame translated) (mzIdentML 1.2), or annotated spectra libraries.</remarks>
     public partial class SearchDatabaseType : ExternalDataType, ICVParamGroup
     {
         /// <summary>
@@ -3050,7 +3082,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// min 1, max unbounded (mzIdentML 1.1)
+        /// min 0, max unbounded (mzIdentML 1.2, 0 only valid if additional search params contains "de novo search" cvParam)
         //public List<DBSequenceType> DBSequences
 
         /// min 0, max unbounded

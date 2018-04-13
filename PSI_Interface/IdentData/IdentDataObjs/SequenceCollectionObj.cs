@@ -68,7 +68,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <remarks>min 1, max unbounded (mzIdentML 1.1)</remarks>
+        /// <remarks>min 0, max unbounded (mzIdentML 1.2, 0 only valid if additional search params contains "de novo search" cvParam)</remarks>
         public IdentDataList<DbSequenceObj> DBSequences
         {
             get { return _dBSequences; }

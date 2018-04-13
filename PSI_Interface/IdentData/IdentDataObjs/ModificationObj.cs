@@ -19,6 +19,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     ///     on particular product ions), this can additionally be encoded within the FragmentationArray.
     /// </remarks>
     /// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary. min 1, max unbounded</remarks>
+    /// <remarks>(mzIdentML 1.2) If AdditionalSearchParams contains MS:1002491 (modification localization scoring), must add cvParam MS:1002491 (modification index) with a within-peptide unique identifier</remarks>
     public class ModificationObj : CVParamGroupObj, IEquatable<ModificationObj>
     {
         private double _avgMassDelta;

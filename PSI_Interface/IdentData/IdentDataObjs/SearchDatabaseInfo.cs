@@ -8,8 +8,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     ///     MzIdentML SearchDatabaseType
     /// </summary>
     /// <remarks>
-    ///     A database for searching mass spectra. Examples include a set of amino acid sequence entries, or annotated
-    ///     spectra libraries.
+    ///     A database for searching mass spectra. Examples include a set of amino acid sequence entries,
+    ///     nucleotide databases (e.g. 6 frame translated) (mzIdentML 1.2),
+    ///     or annotated spectra libraries.
     /// </remarks>
     public class SearchDatabaseInfo : CVParamGroupObj, IExternalDataType, IEquatable<SearchDatabaseInfo>
     {
@@ -162,7 +163,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation { get; set; }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <remarks>min 0, max 1 (mzIdentML 1.1)</remarks>
+        /// <remarks>min 1, max 1 (mzIdentML 1.2)</remarks>
         public FileFormatInfo FileFormat
         {
             get { return _fileFormat; }

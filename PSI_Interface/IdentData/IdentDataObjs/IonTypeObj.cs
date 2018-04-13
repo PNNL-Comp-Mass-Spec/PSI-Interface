@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -17,7 +18,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// <remarks>FragmentationType: child element IonType, of type IonTypeType, min 1, max unbounded</remarks>
     public class IonTypeObj : IdentDataInternalTypeAbstract, IEquatable<IonTypeObj>
     {
-        private CVParamObj _cvParam;
+        private IdentDataList<CVParamObj> _cvParams;
+        private IdentDataList<UserParamObj> _userParams;
 
         private IdentDataList<FragmentArrayObj> _fragmentArrays;
 
@@ -29,7 +31,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Charge = 0;
 
             FragmentArrays = new IdentDataList<FragmentArrayObj>();
-            _cvParam = null;
+            CVParams = new IdentDataList<CVParamObj>();
+            UserParams = new IdentDataList<UserParamObj>();
             Index = new List<string>();
         }
 
@@ -44,8 +47,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Charge = it.charge;
 
             _fragmentArrays = null;
-            _cvParam = null;
-            Index = null;
+            CVParams = new IdentDataList<CVParamObj>();
+            UserParams = new IdentDataList<UserParamObj>();
+            Index = new List<string>();
 
             if (it.FragmentArray != null && it.FragmentArray.Count > 0)
             {
@@ -54,6 +58,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     FragmentArrays.Add(new FragmentArrayObj(f, IdentData));
                 }
+            }
+
+            if (it.cvParam != null && it.cvParam.Count > 0)
+            {
+                CVParams.AddRange(it.cvParam.Select(x => new CVParamObj(x, idata)));
+            }
+
+            if (it.userParam != null && it.userParam.Count > 0)
+            {
+                UserParams.AddRange(it.userParam.Select(x => new UserParamObj(x, idata)));
             }
         }
 
@@ -70,18 +84,36 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 }
             }
         }
-
-        /// <remarks>The type of ion identified.</remarks>
-        /// <remarks>min 1, max 1</remarks>
-        public CVParamObj CVParam
+        /// <summary>
+        /// mzIdentML 1.2 addition: In case more information about the ions annotation has to be conveyed, that has no fit in FragmentArray. Note: It is suggested that the value attribute takes the form of a list of the same size as FragmentArray values. However, there is no formal encoding and it cannot be expeceted that other software will process or impart that information properly.
+        /// </summary>
+        /// <remarks>min 0, max n (mzIdentML 1.2)</remarks>
+        public IdentDataList<UserParamObj> UserParams
         {
-            get { return _cvParam; }
+            get { return _userParams; }
             set
             {
-                _cvParam = value;
-                if (_cvParam != null)
+                _userParams = value;
+                if (_userParams != null)
                 {
-                    _cvParam.IdentData = IdentData;
+                    _userParams.IdentData = IdentData;
+                }
+            }
+        }
+
+        /// <remarks>The type of ion identified.</remarks>
+        /// <remarks>(mzIdentML 1.2 add) In the case of neutral losses, one term should report the ion type, a second term should report the neutral loss - note: this is a change in practice from mzIdentML 1.1.</remarks>
+        /// <remarks>min 1, max 1 (mzIdentML 1.1)</remarks>
+        /// <remarks>min 1, max n (mzIdentML 1.2)</remarks>
+        public IdentDataList<CVParamObj> CVParams
+        {
+            get { return _cvParams; }
+            set
+            {
+                _cvParams = value;
+                if (_cvParams != null)
+                {
+                    _cvParams.IdentData = IdentData;
                 }
             }
         }
@@ -93,6 +125,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         ///     ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be
         ///     distinguished, all positions should be given.
         /// </remarks>
+        /// <remarks>(mzIdentML 1.2 add) For precursor ions, including neutral losses, the index value MUST be 0. For any other ions not related to the position within the peptide sequence e.g. quantification reporter ions, the index value MUST be 0.</remarks>
         /// Optional Attribute
         /// listOfIntegers: string, space-separated integers
         public List<string> Index { get; set; }
@@ -136,7 +169,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
 
             if (Charge == other.Charge && Equals(FragmentArrays, other.FragmentArrays) &&
-                Equals(CVParam, other.CVParam) && Equals(Index, other.Index))
+                Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams) && Equals(Index, other.Index))
             {
                 return true;
             }
@@ -154,7 +187,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 var hashCode = Charge;
                 hashCode = (hashCode * 397) ^ (FragmentArrays != null ? FragmentArrays.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Index != null ? Index.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParam != null ? CVParam.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
                 return hashCode;
             }
         }

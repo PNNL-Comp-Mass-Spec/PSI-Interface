@@ -82,7 +82,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation { get; set; }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <remarks>min 0, max 1 (mzIdentML 1.1)</remarks>
+        /// <remarks>min 1, max 1 (mzIdentML 1.2)</remarks>
         public FileFormatInfo FileFormat
         {
             get { return _fileFormat; }

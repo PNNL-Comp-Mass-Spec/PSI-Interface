@@ -92,7 +92,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private string _id;
         private string _name;
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope 
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -125,10 +125,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-
-        /// <remarks>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence 
-        /// elements referenced from here also map to the DBSequence.</remarks>
-        /// Optional Attribute
+        /// <remarks>A reference to the corresponding DBSequence entry.
+        /// (mzIdentML 1.1) This optional and redundant, because the PeptideEvidence elements referenced from here also map to the DBSequence.
+        /// (mzIdentML 1.2) Note - this attribute was optional in mzIdentML 1.1 but is now mandatory in mzIdentML 1.2. Consuming software should assume that the DBSequence entry referenced here is the definitive identifier for the protein.
+        /// </remarks>
+        /// Optional Attribute (mzIdentML 1.1)
+        /// Required Attribute (mzIdentML 1.2)
         /// string
         protected internal string DBSequenceRef
         {
@@ -150,9 +152,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence 
-        /// elements referenced from here also map to the DBSequence.</remarks>
-        /// Optional Attribute
+        /// <remarks>A reference to the corresponding DBSequence entry.
+        /// (mzIdentML 1.1) This optional and redundant, because the PeptideEvidence elements referenced from here also map to the DBSequence.
+        /// (mzIdentML 1.2) Note - this attribute was optional in mzIdentML 1.1 but is now mandatory in mzIdentML 1.2. Consuming software should assume that the DBSequence entry referenced here is the definitive identifier for the protein.
+        /// </remarks>
+        /// Optional Attribute (mzIdentML 1.1)
+        /// Required Attribute (mzIdentML 1.2)
         /// string
         public DbSequenceObj DBSequence
         {
@@ -168,7 +173,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given 
+        /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given
         /// threshold or been validated as correct. If no such threshold has been set, value of true should be given for all results.</remarks>
         /// Required Attribute
         /// boolean

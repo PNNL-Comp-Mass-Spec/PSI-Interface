@@ -94,7 +94,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <remarks>min 1, max unbounded // mzIdentML 1.1</remarks>
+        /// <remarks>min 0, max unbounded // mzIdentML 1.2 (0 only allowed if AddtionalSearchParams contains cvParam "De novo search")</remarks>
         public IdentDataList<PeptideEvidenceRefObj> PeptideEvidences
         {
             get { return _peptideEvidences; }
@@ -164,7 +165,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool CalculatedPISpecified { get; private set; }
 
         /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Optional Attribute
+        /// Optional Attribute // mzIdentML 1.1
+        /// Required Attribute // mzIdentML 1.2
         /// string
         protected internal string PeptideRef
         {
@@ -183,7 +185,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Optional Attribute
+        /// Optional Attribute // mzIdentML 1.1
+        /// Required Attribute // mzIdentML 1.2
         /// string
         public PeptideObj Peptide
         {
