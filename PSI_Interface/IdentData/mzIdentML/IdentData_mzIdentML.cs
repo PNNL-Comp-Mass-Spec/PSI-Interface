@@ -6,7 +6,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML MzIdentMLType
     /// </summary>
-    /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software, 
+    /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software,
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
     public partial class MzIdentMLType : IdentifiableType
     {
@@ -146,7 +146,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Attribute Existence
         //public bool CreationDateSpecified
 
-        /// <remarks>The version of the schema this instance document refers to, in the format x.y.z. 
+        /// <remarks>The version of the schema this instance document refers to, in the format x.y.z.
         /// Changes to z should not affect prevent instance documents from validating.</remarks>
         /// Required Attribute
         /// string, regex: "(1\.1\.\d+)"
@@ -157,7 +157,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// MzIdentML cvType : Container CVListType
     /// </summary>
     /// <remarks>A source controlled vocabulary from which cvParams will be obtained.</remarks>
-    /// 
+    ///
     /// <remarks>CVListType: The list of controlled vocabularies used in the file.</remarks>
     /// <remarks>CVListType: child element cv of type cvType, min 1, max unbounded</remarks>
     public partial class cvType
@@ -198,8 +198,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SpectrumIdentificationItemRefType
     /// </summary>
-    /// <remarks>Reference(s) to the SpectrumIdentificationItem element(s) that support the given PeptideEvidence element. 
-    /// Using these references it is possible to indicate which spectra were actually accepted as evidence for this 
+    /// <remarks>Reference(s) to the SpectrumIdentificationItem element(s) that support the given PeptideEvidence element.
+    /// Using these references it is possible to indicate which spectra were actually accepted as evidence for this
     /// peptide identification in the given protein.</remarks>
     public partial class SpectrumIdentificationItemRefType
     {
@@ -287,8 +287,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML IonTypeType: list form is FragmentationType
     /// </summary>
-    /// <remarks>IonType defines the index of fragmentation ions being reported, importing a CV term for the type of ion e.g. b ion. 
-    /// Example: if b3 b7 b8 and b10 have been identified, the index attribute will contain 3 7 8 10, and the corresponding values 
+    /// <remarks>IonType defines the index of fragmentation ions being reported, importing a CV term for the type of ion e.g. b ion.
+    /// Example: if b3 b7 b8 and b10 have been identified, the index attribute will contain 3 7 8 10, and the corresponding values
     /// will be reported in parallel arrays below</remarks>
     /// <remarks>FragmentationType: The product ions identified in this result.</remarks>
     /// <remarks>FragmentationType: child element IonType, of type IonTypeType, min 1, max unbounded</remarks>
@@ -541,7 +541,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML PeptideEvidenceRefType
     /// </summary>
-    /// <remarks>Reference to the PeptideEvidence element identified. If a specific sequence can be assigned to multiple 
+    /// <remarks>Reference to the PeptideEvidence element identified. If a specific sequence can be assigned to multiple
     /// proteins and or positions in a protein all possible PeptideEvidence elements should be referenced here.</remarks>
     public partial class PeptideEvidenceRefType
     {
@@ -665,7 +665,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// MzIdentML MeasureType; list form is FragmentationTableType
     /// </summary>
     /// <remarks>References to CV terms defining the measures about product ions to be reported in SpectrumIdentificationItem</remarks>
-    /// <remarks>FragmentationTableType: Contains the types of measures that will be reported in generic arrays 
+    /// <remarks>FragmentationTableType: Contains the types of measures that will be reported in generic arrays
     /// for each SpectrumIdentificationItem e.g. product ion m/z, product ion intensity, product ion m/z error</remarks>
     /// <remarks>FragmentationTableType: child element Measure of type MeasureType, min 1, max unbounded</remarks>
     public partial class MeasureType : IdentifiableType, ICVParamGroup
@@ -687,7 +687,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML IdentifiableType
     /// </summary>
-    /// <remarks>Other classes in the model can be specified as sub-classes, inheriting from Identifiable. 
+    /// <remarks>Other classes in the model can be specified as sub-classes, inheriting from Identifiable.
     /// Identifiable gives classes a unique identifier within the scope and a name that need not be unique.</remarks>
     public abstract partial class IdentifiableType
     {
@@ -700,8 +700,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.id = idId.Id;
             this.name = idId.Name;
         }
-        
-        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
+
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -834,13 +834,13 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 0, max unbounded
         //public List<UserParamType> UserParams
 
-        /// <remarks>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence 
+        /// <remarks>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence
         /// elements referenced from here also map to the DBSequence.</remarks>
         /// Optional Attribute
         /// string
         //public string DBSequenceRef
 
-        /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given 
+        /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given
         /// threshold or been validated as correct. If no such threshold has been set, value of true should be given for all results.</remarks>
         /// Required Attribute
         /// boolean
@@ -928,8 +928,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SpectrumIdentificationItemType
     /// </summary>
-    /// <remarks>An identification of a single (poly)peptide, resulting from querying an input spectra, along with 
-    /// the set of confidence values for that identification. PeptideEvidence elements should be given for all 
+    /// <remarks>An identification of a single (poly)peptide, resulting from querying an input spectra, along with
+    /// the set of confidence values for that identification. PeptideEvidence elements should be given for all
     /// mappings of the corresponding Peptide sequence within protein sequences.</remarks>
     public partial class SpectrumIdentificationItemType : IdentifiableType, IParamGroup
     {
@@ -975,8 +975,8 @@ namespace PSI_Interface.IdentData.mzIdentML
                 }
             }
         }
-        
-        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope 
+
+        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
         /// Required Attribute
         /// string
@@ -1019,7 +1019,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Attribute Existence
         //public bool CalculatedMassToChargeSpecified
 
-        /// <remarks>The calculated isoelectric point of the (poly)peptide, with relevant modifications included. 
+        /// <remarks>The calculated isoelectric point of the (poly)peptide, with relevant modifications included.
         /// Do not supply this value if the PI cannot be calcuated properly.</remarks>
         /// Optional Attribute
         /// float
@@ -1033,14 +1033,14 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// string
         //public string PeptideRef
 
-        /// <remarks>For an MS/MS result set, this is the rank of the identification quality as scored by the search engine. 
-        /// 1 is the top rank. If multiple identifications have the same top score, they should all be assigned rank =1. 
+        /// <remarks>For an MS/MS result set, this is the rank of the identification quality as scored by the search engine.
+        /// 1 is the top rank. If multiple identifications have the same top score, they should all be assigned rank =1.
         /// For PMF data, the rank attribute may be meaningless and values of rank = 0 should be given.</remarks>
         /// Required Attribute
         /// integer
         //public int Rank
 
-        /// <remarks>Set to true if the producers of the file has deemed that the identification has passed a given threshold 
+        /// <remarks>Set to true if the producers of the file has deemed that the identification has passed a given threshold
         /// or been validated as correct. If no such threshold has been set, value of true should be given for all results.</remarks>
         /// Required Attribute
         /// boolean
@@ -1051,7 +1051,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// string
         //public string MassTableRef
 
-        /// <remarks>A reference should be provided to link the SpectrumIdentificationItem to a Sample 
+        /// <remarks>A reference should be provided to link the SpectrumIdentificationItem to a Sample
         /// if more than one sample has been described in the AnalysisSampleCollection.</remarks>
         /// Optional Attribute
         //public string SampleRef*/
@@ -1060,8 +1060,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SpectrumIdentificationResultType
     /// </summary>
-    /// <remarks>All identifications made from searching one spectrum. For PMF data, all peptide identifications 
-    /// will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked 
+    /// <remarks>All identifications made from searching one spectrum. For PMF data, all peptide identifications
+    /// will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked
     /// SpectrumIdentificationItems corresponding to possible different peptide IDs.</remarks>
     public partial class SpectrumIdentificationResultType : IdentifiableType, IParamGroup
     {
@@ -1092,8 +1092,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /*/// min 1, max unbounded
         //public List<SpectrumIdentificationItemType> SpectrumIdentificationItems
 
-        /// <remarks>___ParamGroup___: Scores or parameters associated with the SpectrumIdentificationResult 
-        /// (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide 
+        /// <remarks>___ParamGroup___: Scores or parameters associated with the SpectrumIdentificationResult
+        /// (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide
         /// sequences within the parent tolerance for this spectrum.</remarks>
         /// min 0, max unbounded
         //public List<CVParamType> CVParams
@@ -1102,7 +1102,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 0, max unbounded
         //public List<UserParamType> UserParams
 
-        /// <remarks>The locally unique id for the spectrum in the spectra data set specified by SpectraData_ref. 
+        /// <remarks>The locally unique id for the spectrum in the spectra data set specified by SpectraData_ref.
         /// External guidelines are provided on the use of consistent identifiers for spectra in different external formats.</remarks>
         /// Required Attribute
         /// string
@@ -1135,8 +1135,8 @@ namespace PSI_Interface.IdentData.mzIdentML
                 this.FileFormat = new FileFormatType(ed.FileFormat);
             }
         }
-        
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
+
+        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
         /// min 0, max 1
         //public string ExternalFormatDocumentation
@@ -1195,7 +1195,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
         }
 
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
+        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
         /// min 0, max 1
         //public string ExternalFormatDocumentation
@@ -1254,7 +1254,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             ParamGroupFunctions.CopyParamGroup(this, sfi);
         }
 
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
+        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
         /// min 0, max 1
         //public string ExternalFormatDocumentation
@@ -1306,7 +1306,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
         }
 
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance. 
+        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
         /// min 0, max 1
         //public string ExternalFormatDocumentation
@@ -1388,7 +1388,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 0, max 1
         //public ParamListType AnalysisParams
 
-        /// <remarks>The threshold(s) applied to determine that a result is significant. 
+        /// <remarks>The threshold(s) applied to determine that a result is significant.
         /// If multiple terms are used it is assumed that all conditions are satisfied by the passing results.</remarks>
         /// min 1, max 1
         //public ParamListType Threshold
@@ -1415,7 +1415,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             ParamGroupFunctions.CopyCVParamGroup(this, tt);
         }
 
-        /*/// <remarks>The details specifying this translation table are captured as cvParams, e.g. translation table, translation 
+        /*/// <remarks>The details specifying this translation table are captured as cvParams, e.g. translation table, translation
         /// start codons and translation table description (see specification document and mapping file)</remarks>
         /// min 0, max unbounded
         //public List<CVParamType> CVParams*/
@@ -1514,7 +1514,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML AmbiguousResidueType
     /// </summary>
-    /// <remarks>Ambiguous residues e.g. X can be specified by the Code attribute and a set of parameters 
+    /// <remarks>Ambiguous residues e.g. X can be specified by the Code attribute and a set of parameters
     /// for example giving the different masses that will be used in the search.</remarks>
     public partial class AmbiguousResidueType : IParamGroup
     {
@@ -1548,7 +1548,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML EnzymeType
     /// </summary>
-    /// <remarks>The details of an individual cleavage enzyme should be provided by giving a regular expression 
+    /// <remarks>The details of an individual cleavage enzyme should be provided by giving a regular expression
     /// or a CV term if a "standard" enzyme cleavage has been performed.</remarks>
     public partial class EnzymeType : IdentifiableType
     {
@@ -1593,8 +1593,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// string, regex: "[A-Za-z0-9 ]+"
         //public string CTermGain
 
-        /// <remarks>Set to true if the enzyme cleaves semi-specifically (i.e. one terminus must cleave 
-        /// according to the rules, the other can cleave at any residue), false if the enzyme cleavage 
+        /// <remarks>Set to true if the enzyme cleaves semi-specifically (i.e. one terminus must cleave
+        /// according to the rules, the other can cleave at any residue), false if the enzyme cleavage
         /// is assumed to be specific to both termini (accepting for any missed cleavages).</remarks>
         /// Optional Attribute
         /// boolean
@@ -1749,8 +1749,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SpecificityRulesType
     /// </summary>
-    /// <remarks>The specificity rules of the searched modification including for example 
-    /// the probability of a modification's presence or peptide or protein termini. Standard 
+    /// <remarks>The specificity rules of the searched modification including for example
+    /// the probability of a modification's presence or peptide or protein termini. Standard
     /// fixed or variable status should be provided by the attribute fixedMod.</remarks>
     public partial class SpecificityRulesType : ICVParamGroup
     {
@@ -1771,7 +1771,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SearchModificationType: Container ModificationParamsType
     /// </summary>
-    /// <remarks>Specification of a search modification as parameter for a spectra search. Contains the name of the 
+    /// <remarks>Specification of a search modification as parameter for a spectra search. Contains the name of the
     /// modification, the mass, the specificity and whether it is a static modification.</remarks>
     /// <remarks>ModificationParamsType: The specification of static/variable modifications (e.g. Oxidation of Methionine) that are to be considered in the spectra search.</remarks>
     /// <remarks>ModificationParamsType: child element SearchModification, of type SearchModificationType, min 1, max unbounded</remarks>
@@ -1804,7 +1804,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /*/// min 0, max unbounded
         //public List<SpecificityRulesType> SpecificityRules
 
-        /// <remarks>The modification is uniquely identified by references to external CVs such as UNIMOD, see 
+        /// <remarks>The modification is uniquely identified by references to external CVs such as UNIMOD, see
         /// specification document and mapping file for more details.</remarks>
         /// min 1, max unbounded
         //public List<CVParamType> CVParams
@@ -1819,7 +1819,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// float
         //public float MassDelta
 
-        /// <remarks>The residue(s) searched with the specified modification. For N or C terminal modifications that can occur 
+        /// <remarks>The residue(s) searched with the specified modification. For N or C terminal modifications that can occur
         /// on any residue, the . character should be used to specify any, otherwise the list of amino acids should be provided.</remarks>
         /// Required Attribute
         /// listOfCharsOrAny: string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."
@@ -1867,7 +1867,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML FilterType : Containers DatabaseFiltersType
     /// </summary>
-    /// <remarks>Filters applied to the search database. The filter must include at least one of Include and Exclude. 
+    /// <remarks>Filters applied to the search database. The filter must include at least one of Include and Exclude.
     /// If both are used, it is assumed that inclusion is performed first.</remarks>
     /// <remarks>DatabaseFiltersType: The specification of filters applied to the database searched.</remarks>
     /// <remarks>DatabaseFiltersType: child element Filter, of type FilterType, min 1, max unbounded</remarks>
@@ -1953,7 +1953,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML ProtocolApplicationType
     /// </summary>
-    /// <remarks>The use of a protocol with the requisite Parameters and ParameterValues. 
+    /// <remarks>The use of a protocol with the requisite Parameters and ParameterValues.
     /// ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both) as output.</remarks>
     public abstract partial class ProtocolApplicationType : IdentifiableType
     {
@@ -2040,7 +2040,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SpectrumIdentificationType
     /// </summary>
-    /// <remarks>An Analysis which tries to identify peptides in input spectra, referencing the database searched, 
+    /// <remarks>An Analysis which tries to identify peptides in input spectra, referencing the database searched,
     /// the input spectra, the output results and the protocol that is run.</remarks>
     public partial class SpectrumIdentificationType : ProtocolApplicationType
     {
@@ -2136,7 +2136,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML PeptideEvidenceType
     /// </summary>
-    /// <remarks>PeptideEvidence links a specific Peptide element to a specific position in a DBSequence. 
+    /// <remarks>PeptideEvidence links a specific Peptide element to a specific position in a DBSequence.
     /// There must only be one PeptideEvidence item per Peptide-to-DBSequence-position.</remarks>
     public partial class PeptideEvidenceType : IdentifiableType, IParamGroup
     {
@@ -2179,7 +2179,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// boolean, default false
         //public bool IsDecoy
 
-        /// <remarks>Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="". 
+        /// <remarks>Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="".
         /// If for any reason it is unknown (e.g. denovo), pre="?" should be used.</remarks>
         /// Optional Attribute
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
@@ -2190,7 +2190,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
         //public string Post
 
-        /// <remarks>Start position of the peptide inside the protein sequence, where the first amino acid of the 
+        /// <remarks>Start position of the peptide inside the protein sequence, where the first amino acid of the
         /// protein sequence is position 1. Must be provided unless this is a de novo search.</remarks>
         /// Optional Attribute
         /// integer
@@ -2199,7 +2199,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Attribute Existence
         //public bool StartSpecified
 
-        /// <remarks>The index position of the last amino acid of the peptide inside the protein sequence, where the first 
+        /// <remarks>The index position of the last amino acid of the peptide inside the protein sequence, where the first
         /// amino acid of the protein sequence is position 1. Must be provided unless this is a de novo search.</remarks>
         /// Optional Attribute
         /// integer
@@ -2215,7 +2215,7 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         /// <remarks>The translation frame of this sequence if this is PeptideEvidence derived from nucleic acid sequence</remarks>
         /// Optional Attribute
-        /// "Allowed Frames", int: -3, -2, -1, 1, 2, 3 
+        /// "Allowed Frames", int: -3, -2, -1, 1, 2, 3
         //public int Frame
 
         /// Attribute Existence
@@ -2294,13 +2294,13 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML ModificationType
     /// </summary>
-    /// <remarks>A molecule modification specification. If n modifications have been found on a peptide, there should 
-    /// be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the 
-    /// modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification 
-    /// of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and 
-    /// this will be checked by the semantic validator within a given tolerance window), there is a â€œunknown 
-    /// modificationâ€? CV term that must be used instead. A neutral loss should be defined as an additional CVParam 
-    /// within Modification. If more complex information should be given about neutral losses (such as presence/absence 
+    /// <remarks>A molecule modification specification. If n modifications have been found on a peptide, there should
+    /// be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the
+    /// modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification
+    /// of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and
+    /// this will be checked by the semantic validator within a given tolerance window), there is a â€œunknown
+    /// modificationâ€? CV term that must be used instead. A neutral loss should be defined as an additional CVParam
+    /// within Modification. If more complex information should be given about neutral losses (such as presence/absence
     /// on particular product ions), this can additionally be encoded within the FragmentationArray.</remarks>
     public partial class ModificationType : ICVParamGroup
     {
@@ -2331,9 +2331,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 1, max unbounded
         //public List<CVParamType> CVParams
 
-        /// <remarks>Location of the modification within the peptide - position in peptide sequence, counted from 
-        /// the N-terminus residue, starting at position 1. Specific modifications to the N-terminus should be 
-        /// given the location 0. Modification to the C-terminus should be given as peptide length + 1. If the 
+        /// <remarks>Location of the modification within the peptide - position in peptide sequence, counted from
+        /// the N-terminus residue, starting at position 1. Specific modifications to the N-terminus should be
+        /// given the location 0. Modification to the C-terminus should be given as peptide length + 1. If the
         /// modification location is unknown e.g. for PMF data, this attribute should be omitted.</remarks>
         /// Optional Attribute
         /// integer
@@ -2342,8 +2342,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Attribute Existence
         //public bool LocationSpecified
 
-        /// <remarks>Specification of the residue (amino acid) on which the modification occurs. If multiple values 
-        /// are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of 
+        /// <remarks>Specification of the residue (amino acid) on which the modification occurs. If multiple values
+        /// are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of
         /// the residues listed. Multiple residues would usually only be specified for PMF data.</remarks>
         /// Optional Attribute
         /// listOfChars, string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
@@ -2398,8 +2398,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
         //public string ReplacementResidue
 
-        /// <remarks>Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus residue, starting at position 1. 
-        /// Specific modifications to the N-terminus should be given the location 0. 
+        /// <remarks>Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus residue, starting at position 1.
+        /// Specific modifications to the N-terminus should be given the location 0.
         /// Modification to the C-terminus should be given as peptide length + 1.</remarks>
         /// Optional Attribute
         /// integer
@@ -2408,7 +2408,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Attribute Existence
         //public bool LocationSpecified
 
-        /// <remarks>Atomic mass delta considering the natural distribution of isotopes in Daltons. 
+        /// <remarks>Atomic mass delta considering the natural distribution of isotopes in Daltons.
         /// This should only be reported if the original amino acid is known i.e. it is not "X"</remarks>
         /// Optional Attribute
         /// double
@@ -2417,7 +2417,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Attribute Existence
         //public bool AvgMassDeltaSpecified
 
-        /// <remarks>Atomic mass delta when assuming only the most common isotope of elements in Daltons. 
+        /// <remarks>Atomic mass delta when assuming only the most common isotope of elements in Daltons.
         /// This should only be reported if the original amino acid is known i.e. it is not "X"</remarks>
         /// Optional Attribute
         /// double
@@ -2430,8 +2430,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML DBSequenceType
     /// </summary>
-    /// <remarks>A database sequence from the specified SearchDatabase (nucleic acid or amino acid). 
-    /// If the sequence is nucleic acid, the source nucleic acid sequence should be given in 
+    /// <remarks>A database sequence from the specified SearchDatabase (nucleic acid or amino acid).
+    /// If the sequence is nucleic acid, the source nucleic acid sequence should be given in
     /// the seq attribute rather than a translated sequence.</remarks>
     public partial class DBSequenceType : IdentifiableType, IParamGroup
     {
@@ -2486,12 +2486,12 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SampleType : Containers AnalysisSampleCollectionType
     /// </summary>
-    /// <remarks>A description of the sample analysed by mass spectrometry using CVParams or UserParams. 
-    /// If a composite sample has been analysed, a parent sample should be defined, which references subsamples. 
-    /// This represents any kind of substance used in an experimental workflow, such as whole organisms, cells, 
+    /// <remarks>A description of the sample analysed by mass spectrometry using CVParams or UserParams.
+    /// If a composite sample has been analysed, a parent sample should be defined, which references subsamples.
+    /// This represents any kind of substance used in an experimental workflow, such as whole organisms, cells,
     /// DNA, solutions, compounds and experimental substances (gels, arrays etc.).</remarks>
-    /// 
-    /// <remarks>AnalysisSampleCollectionType: The samples analysed can optionally be recorded using CV terms for descriptions. 
+    ///
+    /// <remarks>AnalysisSampleCollectionType: The samples analysed can optionally be recorded using CV terms for descriptions.
     /// If a composite sample has been analysed, the subsample association can be used to build a hierarchical description.</remarks>
     /// <remarks>AnalysisSampleCollectionType: child element Sample of type SampleType, min 1, max unbounded</remarks>
     public partial class SampleType : IdentifiableType, IParamGroup
@@ -2545,8 +2545,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML ContactRoleType
     /// </summary>
-    /// <remarks>The role that a Contact plays in an organization or with respect to the associating class. 
-    /// A Contact may have several Roles within scope, and as such, associations to ContactRole 
+    /// <remarks>The role that a Contact plays in an organization or with respect to the associating class.
+    /// A Contact may have several Roles within scope, and as such, associations to ContactRole
     /// allow the use of a Contact in a certain manner. Examples might include a provider, or a data analyst.</remarks>
     public partial class ContactRoleType
     {
@@ -2651,7 +2651,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML OrganizationType
     /// </summary>
-    /// <remarks>Organizations are entities like companies, universities, government agencies. 
+    /// <remarks>Organizations are entities like companies, universities, government agencies.
     /// Any additional information such as the address, email etc. should be supplied either as CV parameters or as user parameters.</remarks>
     public partial class OrganizationType : AbstractContactType
     {
@@ -2696,7 +2696,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML PersonType
     /// </summary>
-    /// <remarks>A person's name and contact details. Any additional information such as the address, 
+    /// <remarks>A person's name and contact details. Any additional information such as the address,
     /// contact email etc. should be supplied using CV parameters or user parameters.</remarks>
     public partial class PersonType : AbstractContactType
     {
@@ -2793,7 +2793,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// MzIdentML AnalysisSoftwareType : Containers AnalysisSoftwareListType
     /// </summary>
     /// <remarks>The software used for performing the analyses.</remarks>
-    /// 
+    ///
     /// <remarks>AnalysisSoftwareListType: The software packages used to perform the analyses.</remarks>
     /// <remarks>AnalysisSoftwareListType: child element AnalysisSoftware of type AnalysisSoftwareType, min 1, max unbounded</remarks>
     public partial class AnalysisSoftwareType : IdentifiableType
@@ -2971,7 +2971,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML AnalysisCollectionType
     /// </summary>
-    /// <remarks>The analyses performed to get the results, which map the input and output data sets. 
+    /// <remarks>The analyses performed to get the results, which map the input and output data sets.
     /// Analyses are for example: SpectrumIdentification (resulting in peptides) or ProteinDetection (assemble proteins from peptides).</remarks>
     public partial class AnalysisCollectionType
     {
@@ -3009,7 +3009,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SequenceCollectionType
     /// </summary>
-    /// <remarks>The collection of sequences (DBSequence or Peptide) identified and their relationship between 
+    /// <remarks>The collection of sequences (DBSequence or Peptide) identified and their relationship between
     /// each other (PeptideEvidence) to be referenced elsewhere in the results.</remarks>
     public partial class SequenceCollectionType
     {

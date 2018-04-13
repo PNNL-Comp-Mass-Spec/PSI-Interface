@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -28,8 +29,18 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Name = p.name;
             PeptideSequence = p.PeptideSequence;
 
-            _modifications = null;
-            _substitutionModifications = null;
+            Modifications = new IdentDataList<ModificationObj>();
+            SubstitutionModifications = new IdentDataList<SubstitutionModificationObj>();
+
+            if (p.Modification != null)
+            {
+                Modifications.AddRange(p.Modification.Select(x => new ModificationObj(x, idata)));
+            }
+
+            if (p.SubstitutionModification != null)
+            {
+                SubstitutionModifications.AddRange(p.SubstitutionModification.Select(x => new SubstitutionModificationObj(x, idata)));
+            }
         }
 
         /// <summary>
