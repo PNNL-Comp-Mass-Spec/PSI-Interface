@@ -11,7 +11,7 @@ namespace PSI_Interface.IdentData
         /// Read the mzid file into IdentData class objects
         /// </summary>
         /// <returns></returns>
-        public static IdentDataObj ReadIdentData(string filePath, int bufferSize = 65536)
+        public static IdentDataObj Read(string filePath, int bufferSize = 65536)
         {
             return new IdentDataObj(MzIdentMlReaderWriter.Read(filePath, bufferSize));
         }

@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             var detectedVersion = DetectFileSchemaVersion(filePath);
 
             XmlSerializer serializer;
-            if (detectedVersion.Equals("1.2"))
+            if (detectedVersion.StartsWith("1.2"))
             {
                 var overrides = GetMzIdentMl12Overrides(out var ns, out var xsdUrl);
                 serializer = new XmlSerializer(typeof(MzIdentMLType), overrides);
@@ -60,7 +60,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         public static void Write(MzIdentMLType identData, string filePath, int bufferSize = 65536)
         {
             XmlSerializer serializer;
-            if (identData.version.Equals("1.2"))
+            if (identData.version.StartsWith("1.2"))
             {
                 var overrides = GetMzIdentMl12Overrides(out var ns, out var xsdUrl);
                 identData.xsiSchemaLocation = $"{ns} {xsdUrl}";
