@@ -24,8 +24,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = null;
             Name = null;
 
-            Residues = new IdentDataList<ResidueObj>();
-            AmbiguousResidues = new IdentDataList<AmbiguousResidueObj>();
+            Residues = new IdentDataList<ResidueObj>(1);
+            AmbiguousResidues = new IdentDataList<AmbiguousResidueObj>(1);
             MsLevels = new List<string>();
         }
 
@@ -40,21 +40,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = mt.id;
             Name = mt.name;
 
-            _residues = null;
-            _ambiguousResidues = null;
+            Residues = new IdentDataList<ResidueObj>(1);
+            AmbiguousResidues = new IdentDataList<AmbiguousResidueObj>(1);
             MsLevels = null;
 
             if ((mt.Residue != null) && (mt.Residue.Count > 0))
             {
-                Residues = new IdentDataList<ResidueObj>();
-                foreach (var r in mt.Residue)
-                    Residues.Add(new ResidueObj(r, IdentData));
+                Residues.AddRange(mt.Residue, r => new ResidueObj(r, IdentData));
             }
             if ((mt.AmbiguousResidue != null) && (mt.AmbiguousResidue.Count > 0))
             {
-                AmbiguousResidues = new IdentDataList<AmbiguousResidueObj>();
-                foreach (var ar in mt.AmbiguousResidue)
-                    AmbiguousResidues.Add(new AmbiguousResidueObj(ar, IdentData));
+                AmbiguousResidues.AddRange(mt.AmbiguousResidue, ar => new AmbiguousResidueObj(ar, IdentData));
             }
             if (mt.msLevel != null)
                 MsLevels = new List<string>(mt.msLevel);

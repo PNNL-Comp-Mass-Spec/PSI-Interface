@@ -21,69 +21,30 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             this._passThreshold = false;
 
             this._dBSequence = null;
-            this.PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>();
-        }
-
-
-        #region Object Equality
-        /// <summary>
-        /// Object equality
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public override bool Equals(object other)
-        {
-            var o = other as ProteinDetectionHypothesisObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            this.PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>(1);
         }
 
         /// <summary>
-        /// Object equality
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public bool Equals(ProteinDetectionHypothesisObj other)
+        /// <param name="pdh"></param>
+        /// <param name="idata"></param>
+        public ProteinDetectionHypothesisObj(ProteinDetectionHypothesisType pdh, IdentDataObj idata)
+            : base(pdh, idata)
         {
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            if (other == null)
-            {
-                return false;
-            }
+            this._id = pdh.id;
+            this._name = pdh.name;
+            this.DBSequenceRef = pdh.dBSequence_ref;
+            this._passThreshold = pdh.passThreshold;
 
-            if (this.Name == other.Name && this.PassThreshold == other.PassThreshold &&
-                Equals(this.DBSequence, other.DBSequence) && Equals(this.PeptideHypotheses, other.PeptideHypotheses) &&
-                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            this.PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>(1);
+
+            if (pdh.PeptideHypothesis != null && pdh.PeptideHypothesis.Count > 0)
             {
-                return true;
+                this.PeptideHypotheses.AddRange(pdh.PeptideHypothesis, ph => new PeptideHypothesisObj(ph, this.IdentData));
             }
-            return false;
         }
 
-        /// <summary>
-        /// Object hash code
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (Name != null ? Name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ PassThreshold.GetHashCode();
-                hashCode = (hashCode * 397) ^ (DBSequence != null ? DBSequence.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (PeptideHypotheses != null ? PeptideHypotheses.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
-        #endregion
 
         private IdentDataList<PeptideHypothesisObj> _peptideHypotheses;
         private string _dBSequenceRef;
@@ -183,30 +144,64 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set { this._passThreshold = value; }
         }
 
+        #region Object Equality
         /// <summary>
-        /// Create an object using the contents of the corresponding MzIdentML object
+        /// Object equality
         /// </summary>
-        /// <param name="pdh"></param>
-        /// <param name="idata"></param>
-        public ProteinDetectionHypothesisObj(ProteinDetectionHypothesisType pdh, IdentDataObj idata)
-            : base(pdh, idata)
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public override bool Equals(object other)
         {
-            this._id = pdh.id;
-            this._name = pdh.name;
-            this.DBSequenceRef = pdh.dBSequence_ref;
-            this._passThreshold = pdh.passThreshold;
-
-            this._peptideHypotheses = null;
-
-            if (pdh.PeptideHypothesis != null && pdh.PeptideHypothesis.Count > 0)
+            var o = other as ProteinDetectionHypothesisObj;
+            if (o == null)
             {
-                this.PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>();
-                foreach (var ph in pdh.PeptideHypothesis)
-                {
-                    this.PeptideHypotheses.Add(new PeptideHypothesisObj(ph, this.IdentData));
-                }
+                return false;
             }
+            return Equals(o);
         }
 
+        /// <summary>
+        /// Object equality
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(ProteinDetectionHypothesisObj other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (this.Name == other.Name && this.PassThreshold == other.PassThreshold &&
+                Equals(this.DBSequence, other.DBSequence) && Equals(this.PeptideHypotheses, other.PeptideHypotheses) &&
+                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Object hash code
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ PassThreshold.GetHashCode();
+                hashCode = (hashCode * 397) ^ (DBSequence != null ? DBSequence.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (PeptideHypotheses != null ? PeptideHypotheses.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+        #endregion
     }
 }

@@ -26,9 +26,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public InputsObj()
         {
-            SourceFiles = new IdentDataList<SourceFileInfo>();
-            SearchDatabases = new IdentDataList<SearchDatabaseInfo>();
-            SpectraDataList = new IdentDataList<SpectraDataObj>();
+            SourceFiles = new IdentDataList<SourceFileInfo>(1);
+            SearchDatabases = new IdentDataList<SearchDatabaseInfo>(1);
+            SpectraDataList = new IdentDataList<SpectraDataObj>(1);
         }
 
         /// <summary>
@@ -39,27 +39,20 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public InputsObj(InputsType i, IdentDataObj idata)
             : base(idata)
         {
-            _sourceFiles = null;
-            _searchDatabases = null;
-            _spectraDataList = null;
-
+            SourceFiles = new IdentDataList<SourceFileInfo>(1);
+            SearchDatabases = new IdentDataList<SearchDatabaseInfo>(1);
+            SpectraDataList = new IdentDataList<SpectraDataObj>(1);
             if ((i.SourceFile != null) && (i.SourceFile.Count > 0))
             {
-                SourceFiles = new IdentDataList<SourceFileInfo>();
-                foreach (var sf in i.SourceFile)
-                    SourceFiles.Add(new SourceFileInfo(sf, IdentData));
+                SourceFiles.AddRange(i.SourceFile, sf => new SourceFileInfo(sf, IdentData));
             }
             if ((i.SearchDatabase != null) && (i.SearchDatabase.Count > 0))
             {
-                SearchDatabases = new IdentDataList<SearchDatabaseInfo>();
-                foreach (var sd in i.SearchDatabase)
-                    SearchDatabases.Add(new SearchDatabaseInfo(sd, IdentData));
+                SearchDatabases.AddRange(i.SearchDatabase, sd => new SearchDatabaseInfo(sd, IdentData));
             }
             if ((i.SpectraData != null) && (i.SpectraData.Count > 0))
             {
-                SpectraDataList = new IdentDataList<SpectraDataObj>();
-                foreach (var sd in i.SpectraData)
-                    SpectraDataList.Add(new SpectraDataObj(sd, IdentData));
+                SpectraDataList.AddRange(i.SpectraData, sd => new SpectraDataObj(sd, IdentData));
             }
         }
 

@@ -16,7 +16,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public ParamGroupObj()
         {
-            UserParams = new IdentDataList<UserParamObj>();
+            UserParams = new IdentDataList<UserParamObj>(1);
         }
 
         /// <summary>
@@ -27,15 +27,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public ParamGroupObj(IParamGroup pg, IdentDataObj idata)
             : base(pg, idata)
         {
-            _userParams = null;
+            UserParams = new IdentDataList<UserParamObj>(1);
 
             if (pg.userParam != null && pg.userParam.Count > 0)
             {
-                UserParams = new IdentDataList<UserParamObj>();
-                foreach (var up in pg.userParam)
-                {
-                    UserParams.Add(new UserParamObj(up, IdentData));
-                }
+                UserParams.AddRange(pg.userParam, up => new UserParamObj(up, IdentData));
             }
         }
         #endregion

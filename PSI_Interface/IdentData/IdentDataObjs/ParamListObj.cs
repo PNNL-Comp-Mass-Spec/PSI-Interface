@@ -17,7 +17,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public ParamListObj()
         {
-            Items = new IdentDataList<ParamBaseObj>();
+            Items = new IdentDataList<ParamBaseObj>(1);
         }
 
         /// <summary>
@@ -28,22 +28,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public ParamListObj(ParamListType pl, IdentDataObj idata)
             : base(idata)
         {
-            _items = null;
+            Items = new IdentDataList<ParamBaseObj>(1);
 
             if (pl != null && pl.Items.Count > 0)
             {
-                Items = new IdentDataList<ParamBaseObj>();
-                foreach (var p in pl.Items)
+                Items.AddRange(pl.Items, p =>
                 {
-                    if (p is CVParamType)
+                    if (p is CVParamType cvp)
                     {
-                        Items.Add(new CVParamObj(p as CVParamType, IdentData));
+                        return new CVParamObj(cvp, IdentData);
                     }
-                    else if (p is UserParamType)
+
+                    if (p is UserParamType up)
                     {
-                        Items.Add(new UserParamObj(p as UserParamType, IdentData));
+                        return new UserParamObj(up, IdentData);
                     }
-                }
+
+                    return null;
+                });
             }
         }
         #endregion

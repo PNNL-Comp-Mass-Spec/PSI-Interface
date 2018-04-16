@@ -16,7 +16,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public CVParamGroupObj()
         {
-            CVParams = new IdentDataList<CVParamObj>();
+            CVParams = new IdentDataList<CVParamObj>(1);
         }
 
         /// <summary>
@@ -27,15 +27,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public CVParamGroupObj(ICVParamGroup cvpg, IdentDataObj idata)
             : base(idata)
         {
-            _cvParams = null;
+            CVParams = new IdentDataList<CVParamObj>(1);
 
             if (cvpg.cvParam != null && cvpg.cvParam.Count > 0)
             {
-                CVParams = new IdentDataList<CVParamObj>();
-                foreach (var cvp in cvpg.cvParam)
-                {
-                    CVParams.Add(new CVParamObj(cvp, IdentData));
-                }
+                CVParams.AddRange(cvpg.cvParam, cvp => new CVParamObj(cvp, IdentData));
             }
         }
         #endregion

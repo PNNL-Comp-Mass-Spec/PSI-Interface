@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -13,7 +14,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Create a new list
         /// </summary>
-        public IdentDataList()
+        /// <remarks>By default limit the initial allocation</remarks>
+        public IdentDataList() : base(1)
+        {
+            this._identData = null;
+        }
+
+        /// <summary>
+        /// Create a new list with the specified initial capacity
+        /// </summary>
+        /// <param name="capacity">The initial capacity</param>
+        public IdentDataList(int capacity) : base(capacity)
         {
             this._identData = null;
         }
@@ -81,7 +92,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         // Experiment at implicitly converting from a List<T> to a IdentDataList<T> fails (not allowed on base class of type);
         // Trying the same with IList or IEnumerable also fails (not allowed on interfaces);
         // But, I can do it with an array, but it is potentially more expensive (from conversion to array)
-        // The only reason to to allow those using the interface to use a list, without using a special function to set the list...
+        // The only reason is to allow those using the interface to use a list, without using a special function to set the list...
         // Not sure if it is worth the cost.
         /// <summary>
         /// Attempt at converting from an array to an IdentDataList
@@ -177,6 +188,34 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     this.Add(item);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Add a range of items to the list, setting the IdentData property of each added object
+        /// </summary>
+        /// <typeparam name="TInput"></typeparam>
+        /// <param name="items">IEnumerable of items, of a different type than <typeparamref name="T"/></param>
+        /// <param name="transform">Transform to convert from <typeparamref name="TInput"/> to <typeparamref name="T"/></param>
+        /// <param name="dropNull">If true, items that are null after the transform will not be added</param>
+        internal void AddRange<TInput>(IEnumerable<TInput> items, Func<TInput, T> transform, bool dropNull = true)
+        {
+            if (items is ICollection<TInput> itemsColl)
+            {
+                // Ensure capacity
+                if (Capacity < Count + itemsColl.Count)
+                {
+                    Capacity = Count + itemsColl.Count + 1;
+                }
+            }
+
+            if (dropNull)
+            {
+                AddRange(items.Select(transform).Where(x => x != null));
+            }
+            else
+            {
+                AddRange(items.Select(transform));
             }
         }
 

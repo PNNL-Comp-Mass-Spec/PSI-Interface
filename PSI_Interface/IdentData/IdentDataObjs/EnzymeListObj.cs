@@ -20,7 +20,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _independent = false;
             IndependentSpecified = false;
 
-            Enzymes = new IdentDataList<EnzymeObj>();
+            Enzymes = new IdentDataList<EnzymeObj>(1);
         }
 
         /// <summary>
@@ -34,13 +34,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _independent = el.independent;
             IndependentSpecified = el.independentSpecified;
 
-            _enzymes = null;
+            Enzymes = new IdentDataList<EnzymeObj>(1);
 
             if ((el.Enzyme != null) && (el.Enzyme.Count > 0))
             {
-                Enzymes = new IdentDataList<EnzymeObj>();
-                foreach (var e in el.Enzyme)
-                    Enzymes.Add(new EnzymeObj(e, IdentData));
+                Enzymes.AddRange(el.Enzyme, e => new EnzymeObj(e, IdentData));
             }
         }
 

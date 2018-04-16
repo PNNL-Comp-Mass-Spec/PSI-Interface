@@ -20,7 +20,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = null;
             Name = null;
 
-            ProteinAmbiguityGroups = new IdentDataList<ProteinAmbiguityGroupObj>();
+            ProteinAmbiguityGroups = new IdentDataList<ProteinAmbiguityGroupObj>(1);
         }
 
         /// <summary>
@@ -34,13 +34,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = pdl.id;
             Name = pdl.name;
 
-            _proteinAmbiguityGroups = null;
+            ProteinAmbiguityGroups = new IdentDataList<ProteinAmbiguityGroupObj>(1);
 
             if ((pdl.ProteinAmbiguityGroup != null) && (pdl.ProteinAmbiguityGroup.Count > 0))
             {
-                ProteinAmbiguityGroups = new IdentDataList<ProteinAmbiguityGroupObj>();
-                foreach (var pag in pdl.ProteinAmbiguityGroup)
-                    ProteinAmbiguityGroups.Add(new ProteinAmbiguityGroupObj(pag, IdentData));
+                ProteinAmbiguityGroups.AddRange(pdl.ProteinAmbiguityGroup, pag => new ProteinAmbiguityGroupObj(pag, IdentData));
             }
         }
 

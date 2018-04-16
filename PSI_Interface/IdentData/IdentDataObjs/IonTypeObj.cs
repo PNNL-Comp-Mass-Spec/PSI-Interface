@@ -30,9 +30,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             Charge = 0;
 
-            FragmentArrays = new IdentDataList<FragmentArrayObj>();
-            CVParams = new IdentDataList<CVParamObj>();
-            UserParams = new IdentDataList<UserParamObj>();
+            FragmentArrays = new IdentDataList<FragmentArrayObj>(1);
+            CVParams = new IdentDataList<CVParamObj>(1);
+            UserParams = new IdentDataList<UserParamObj>(1);
             Index = new List<string>();
         }
 
@@ -46,28 +46,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             Charge = it.charge;
 
-            _fragmentArrays = null;
-            CVParams = new IdentDataList<CVParamObj>();
-            UserParams = new IdentDataList<UserParamObj>();
+            FragmentArrays = new IdentDataList<FragmentArrayObj>(1);
+            CVParams = new IdentDataList<CVParamObj>(1);
+            UserParams = new IdentDataList<UserParamObj>(1);
             Index = new List<string>();
 
             if (it.FragmentArray != null && it.FragmentArray.Count > 0)
             {
-                FragmentArrays = new IdentDataList<FragmentArrayObj>();
-                foreach (var f in it.FragmentArray)
-                {
-                    FragmentArrays.Add(new FragmentArrayObj(f, IdentData));
-                }
+                FragmentArrays.AddRange(it.FragmentArray, f => new FragmentArrayObj(f, IdentData));
             }
 
             if (it.cvParam != null && it.cvParam.Count > 0)
             {
-                CVParams.AddRange(it.cvParam.Select(x => new CVParamObj(x, idata)));
+                CVParams.AddRange(it.cvParam.Select(cvp => new CVParamObj(cvp, idata)));
             }
 
             if (it.userParam != null && it.userParam.Count > 0)
             {
-                UserParams.AddRange(it.userParam.Select(x => new UserParamObj(x, idata)));
+                UserParams.AddRange(it.userParam.Select(up => new UserParamObj(up, idata)));
             }
         }
 

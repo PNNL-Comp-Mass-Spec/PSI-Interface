@@ -23,7 +23,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             FirstName = null;
             MidInitials = null;
 
-            Affiliations = new IdentDataList<AffiliationObj>();
+            Affiliations = new IdentDataList<AffiliationObj>(1);
         }
 
         /// <summary>
@@ -38,13 +38,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             FirstName = p.firstName;
             MidInitials = p.midInitials;
 
-            _affiliations = null;
+            Affiliations = new IdentDataList<AffiliationObj>(1);
 
             if ((p.Affiliation != null) && (p.Affiliation.Count > 0))
             {
-                Affiliations = new IdentDataList<AffiliationObj>();
-                foreach (var a in p.Affiliation)
-                    Affiliations.Add(new AffiliationObj(a, IdentData));
+                Affiliations.AddRange(p.Affiliation, a => new AffiliationObj(a, IdentData));
             }
         }
 

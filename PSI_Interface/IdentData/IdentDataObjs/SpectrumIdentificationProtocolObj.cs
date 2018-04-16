@@ -36,13 +36,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _analysisSoftware = null;
             _searchType = null;
             _additionalSearchParams = null;
-            ModificationParams = new IdentDataList<SearchModificationObj>();
+            ModificationParams = new IdentDataList<SearchModificationObj>(1);
             _enzymes = null;
-            MassTables = new IdentDataList<MassTableObj>();
-            FragmentTolerances = new IdentDataList<CVParamObj>();
-            ParentTolerances = new IdentDataList<CVParamObj>();
+            MassTables = new IdentDataList<MassTableObj>(1);
+            FragmentTolerances = new IdentDataList<CVParamObj>(1);
+            ParentTolerances = new IdentDataList<CVParamObj>(1);
             _threshold = null;
-            DatabaseFilters = new IdentDataList<FilterInfo>();
+            DatabaseFilters = new IdentDataList<FilterInfo>(1);
             _databaseTranslation = null;
         }
 
@@ -60,14 +60,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             _searchType = null;
             _additionalSearchParams = null;
-            _modificationParams = null;
             _enzymes = null;
-            _massTables = null;
-            _fragmentTolerances = null;
-            _parentTolerances = null;
             _threshold = null;
-            _databaseFilters = null;
             _databaseTranslation = null;
+
+            ModificationParams = new IdentDataList<SearchModificationObj>(1);
+            MassTables = new IdentDataList<MassTableObj>(1);
+            FragmentTolerances = new IdentDataList<CVParamObj>(1);
+            ParentTolerances = new IdentDataList<CVParamObj>(1);
+            DatabaseFilters = new IdentDataList<FilterInfo>(1);
 
             if (sip.SearchType != null)
                 _searchType = new ParamObj(sip.SearchType, IdentData);
@@ -75,37 +76,27 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _additionalSearchParams = new ParamListObj(sip.AdditionalSearchParams, IdentData);
             if ((sip.ModificationParams != null) && (sip.ModificationParams.Count > 0))
             {
-                ModificationParams = new IdentDataList<SearchModificationObj>();
-                foreach (var mp in sip.ModificationParams)
-                    ModificationParams.Add(new SearchModificationObj(mp, IdentData));
+                ModificationParams.AddRange(sip.ModificationParams, mp => new SearchModificationObj(mp, IdentData));
             }
             if (sip.Enzymes != null)
                 _enzymes = new EnzymeListObj(sip.Enzymes, IdentData);
             if ((sip.MassTable != null) && (sip.MassTable.Count > 0))
             {
-                MassTables = new IdentDataList<MassTableObj>();
-                foreach (var mt in sip.MassTable)
-                    MassTables.Add(new MassTableObj(mt, IdentData));
+                MassTables.AddRange(sip.MassTable, mt => new MassTableObj(mt, IdentData));
             }
             if ((sip.FragmentTolerance != null) && (sip.FragmentTolerance.Count > 0))
             {
-                FragmentTolerances = new IdentDataList<CVParamObj>();
-                foreach (var ft in sip.FragmentTolerance)
-                    FragmentTolerances.Add(new CVParamObj(ft, IdentData));
+                FragmentTolerances.AddRange(sip.FragmentTolerance, ft => new CVParamObj(ft, IdentData));
             }
-            if (sip.ParentTolerance != null)
+            if (sip.ParentTolerance != null && sip.ParentTolerance.Count > 0)
             {
-                ParentTolerances = new IdentDataList<CVParamObj>();
-                foreach (var pt in sip.ParentTolerance)
-                    ParentTolerances.Add(new CVParamObj(pt, IdentData));
+                ParentTolerances.AddRange(sip.ParentTolerance, pt => new CVParamObj(pt, IdentData));
             }
             if (sip.Threshold != null)
                 _threshold = new ParamListObj(sip.Threshold, IdentData);
-            if ((sip.DatabaseFilters != null) && (sip.DatabaseFilters.Count > 0))
+            if (sip.DatabaseFilters != null && sip.DatabaseFilters.Count > 0)
             {
-                DatabaseFilters = new IdentDataList<FilterInfo>();
-                foreach (var df in sip.DatabaseFilters)
-                    DatabaseFilters.Add(new FilterInfo(df, IdentData));
+                DatabaseFilters.AddRange(sip.DatabaseFilters, df => new FilterInfo(df, IdentData));
             }
             if (sip.DatabaseTranslation != null)
                 _databaseTranslation = new DatabaseTranslationObj(sip.DatabaseTranslation, IdentData);

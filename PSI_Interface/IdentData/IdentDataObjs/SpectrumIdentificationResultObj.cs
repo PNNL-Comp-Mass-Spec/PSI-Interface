@@ -35,7 +35,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _spectraDataRef = null;
 
             _spectraData = null;
-            SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemObj>();
+            SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemObj>(1);
         }
 
         /// <summary>
@@ -51,13 +51,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             SpectrumID = sir.spectrumID;
             SpectraDataRef = sir.spectraData_ref;
 
-            _spectrumIdentificationItems = null;
+            SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemObj>(1);
 
-            if ((sir.SpectrumIdentificationItem != null) && (sir.SpectrumIdentificationItem.Count > 0))
+            if (sir.SpectrumIdentificationItem != null && sir.SpectrumIdentificationItem.Count > 0)
             {
-                SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemObj>();
-                foreach (var sii in sir.SpectrumIdentificationItem)
-                    SpectrumIdentificationItems.Add(new SpectrumIdentificationItemObj(sii, IdentData));
+                SpectrumIdentificationItems.AddRange(sir.SpectrumIdentificationItem, sii => new SpectrumIdentificationItemObj(sii, IdentData));
             }
         }
 

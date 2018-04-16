@@ -18,7 +18,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public AnalysisDataObj()
         {
-            SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationListObj>();
+            SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationListObj>(1);
             _proteinDetectionList = null;
         }
 
@@ -30,16 +30,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public AnalysisDataObj(AnalysisDataType ad, IdentDataObj idata)
             : base(idata)
         {
-            _spectrumIdentificationList = null;
+            SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationListObj>(1);
             _proteinDetectionList = null;
 
             if (ad.SpectrumIdentificationList != null && ad.SpectrumIdentificationList.Count > 0)
             {
-                SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationListObj>();
-                foreach (var sil in ad.SpectrumIdentificationList)
-                {
-                    SpectrumIdentificationList.Add(new SpectrumIdentificationListObj(sil, IdentData));
-                }
+                SpectrumIdentificationList.AddRange(ad.SpectrumIdentificationList, sil => new SpectrumIdentificationListObj(sil, IdentData));
             }
             if (ad.ProteinDetectionList != null)
             {

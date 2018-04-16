@@ -51,8 +51,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _peptide = null;
             _massTable = null;
             _sample = null;
-            PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>();
-            Fragmentations = new IdentDataList<IonTypeObj>();
+            PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>(1);
+            Fragmentations = new IdentDataList<IonTypeObj>(1);
         }
 
         /// <summary>
@@ -77,20 +77,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             MassTableRef = sii.massTable_ref;
             SampleRef = sii.sample_ref;
 
-            _peptideEvidences = null;
-            _fragmentations = null;
+            PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>(1);
+            Fragmentations = new IdentDataList<IonTypeObj>(1);
 
             if ((sii.PeptideEvidenceRef != null) && (sii.PeptideEvidenceRef.Count > 0))
             {
-                PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>();
-                foreach (var pe in sii.PeptideEvidenceRef)
-                    PeptideEvidences.Add(new PeptideEvidenceRefObj(pe, IdentData));
+                PeptideEvidences.AddRange(sii.PeptideEvidenceRef, pe => new PeptideEvidenceRefObj(pe, IdentData));
             }
             if ((sii.Fragmentation != null) && (sii.Fragmentation.Count > 0))
             {
-                Fragmentations = new IdentDataList<IonTypeObj>();
-                foreach (var f in sii.Fragmentation)
-                    Fragmentations.Add(new IonTypeObj(f, IdentData));
+                Fragmentations.AddRange(sii.Fragmentation, f => new IonTypeObj(f, IdentData));
             }
         }
 

@@ -24,8 +24,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _numSequencesSearched = -1;
             NumSequencesSearchedSpecified = false;
 
-            FragmentationTables = new IdentDataList<MeasureObj>();
-            SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>();
+            FragmentationTables = new IdentDataList<MeasureObj>(1);
+            SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>(1);
         }
 
         /// <summary>
@@ -41,20 +41,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _numSequencesSearched = sil.numSequencesSearched;
             NumSequencesSearchedSpecified = sil.numSequencesSearchedSpecified;
 
-            _fragmentationTables = null;
-            _spectrumIdentificationResults = null;
+            FragmentationTables = new IdentDataList<MeasureObj>(1);
+            SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>(1);
 
             if ((sil.FragmentationTable != null) && (sil.FragmentationTable.Count > 0))
             {
-                FragmentationTables = new IdentDataList<MeasureObj>();
-                foreach (var f in sil.FragmentationTable)
-                    FragmentationTables.Add(new MeasureObj(f, IdentData));
+                FragmentationTables.AddRange(sil.FragmentationTable, f => new MeasureObj(f, IdentData));
             }
             if ((sil.SpectrumIdentificationResult != null) && (sil.SpectrumIdentificationResult.Count > 0))
             {
-                SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>();
-                foreach (var sir in sil.SpectrumIdentificationResult)
-                    SpectrumIdentificationResults.Add(new SpectrumIdentificationResultObj(sir, IdentData));
+                SpectrumIdentificationResults.AddRange(sil.SpectrumIdentificationResult, sir => new SpectrumIdentificationResultObj(sir, IdentData));
             }
         }
 

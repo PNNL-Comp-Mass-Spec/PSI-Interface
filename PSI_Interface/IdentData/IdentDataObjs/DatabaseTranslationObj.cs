@@ -18,7 +18,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public DatabaseTranslationObj()
         {
-            TranslationTables = new IdentDataList<TranslationTableObj>();
+            TranslationTables = new IdentDataList<TranslationTableObj>(1);
             Frames = new List<int>();
         }
 
@@ -30,14 +30,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public DatabaseTranslationObj(DatabaseTranslationType dt, IdentDataObj idata)
             : base(idata)
         {
-            _translationTables = null;
-            Frames = null;
+            TranslationTables = new IdentDataList<TranslationTableObj>(1);
+            Frames = new List<int>(1);
 
             if ((dt.TranslationTable != null) && (dt.TranslationTable.Count > 0))
             {
-                TranslationTables = new IdentDataList<TranslationTableObj>();
-                foreach (var t in dt.TranslationTable)
-                    TranslationTables.Add(new TranslationTableObj(t, IdentData));
+                TranslationTables.AddRange(dt.TranslationTable, t => new TranslationTableObj(t, IdentData));
             }
             if (dt.frames != null)
                 Frames = new List<int>(dt.frames);

@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public AnalysisProtocolCollectionObj()
         {
-            SpectrumIdentificationProtocols = new IdentDataList<SpectrumIdentificationProtocolObj>();
+            SpectrumIdentificationProtocols = new IdentDataList<SpectrumIdentificationProtocolObj>(1);
             _proteinDetectionProtocol = null;
         }
 
@@ -33,18 +33,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public AnalysisProtocolCollectionObj(AnalysisProtocolCollectionType apc, IdentDataObj idata)
             : base(idata)
         {
-            _spectrumIdentificationProtocols = null;
+            SpectrumIdentificationProtocols = new IdentDataList<SpectrumIdentificationProtocolObj>(1);
             _proteinDetectionProtocol = null;
 
             idata.AnalysisProtocolCollection = this;
 
             if (apc.SpectrumIdentificationProtocol != null && apc.SpectrumIdentificationProtocol.Count > 0)
             {
-                SpectrumIdentificationProtocols = new IdentDataList<SpectrumIdentificationProtocolObj>();
-                foreach (var sip in apc.SpectrumIdentificationProtocol)
-                {
-                    SpectrumIdentificationProtocols.Add(new SpectrumIdentificationProtocolObj(sip, IdentData));
-                }
+                SpectrumIdentificationProtocols.AddRange(apc.SpectrumIdentificationProtocol, sip => new SpectrumIdentificationProtocolObj(sip, IdentData));
             }
             if (apc.ProteinDetectionProtocol != null)
             {

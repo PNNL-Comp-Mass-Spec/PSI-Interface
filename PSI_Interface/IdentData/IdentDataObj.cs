@@ -58,58 +58,50 @@ namespace PSI_Interface.IdentData
             _dataCollection = null;
             _bibliographicReferences = null;
 
+            CVList = new IdentDataList<CVInfo>(1);
+            BibliographicReferences = new IdentDataList<BibliographicReferenceObj>(1);
+            AuditCollection = new IdentDataList<AbstractContactObj>(1);
+            AnalysisSampleCollection = new IdentDataList<SampleObj>(1);
+            AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>(1);
+
             // Referenced by anything using CV/User params
             if (mzid.cvList != null && mzid.cvList.Count > 0)
             {
-                CVList = new IdentDataList<CVInfo>();
-                foreach (var cv in mzid.cvList)
-                {
-                    CVList.Add(new CVInfo(cv, this));
-                }
+                CVList.AddRange(mzid.cvList, cv => new CVInfo(cv, this));
                 CvTranslator = new CVTranslator(_cvList);
             }
             // Referenced by nothing
             if (mzid.BibliographicReference != null && mzid.BibliographicReference.Count > 0)
             {
-                BibliographicReferences = new IdentDataList<BibliographicReferenceObj>();
-                foreach (var br in mzid.BibliographicReference)
-                {
-                    BibliographicReferences.Add(new BibliographicReferenceObj(br, this));
-                }
+                BibliographicReferences.AddRange(mzid.BibliographicReference, br => new BibliographicReferenceObj(br, this));
             }
             // Referenced by anything using organization, person, contactRoleInfo - SampleInfo, ProviderInfo, AnalysisSoftwareInfo
             if (mzid.AuditCollection != null && mzid.AuditCollection.Count > 0)
             {
-                AuditCollection = new IdentDataList<AbstractContactObj>();
-                foreach (var ac in mzid.AuditCollection)
+                AuditCollection.AddRange(mzid.AuditCollection, ac =>
                 {
-                    if (ac is PersonType)
+                    if (ac is PersonType p)
                     {
-                        AuditCollection.Add(new PersonObj(ac as PersonType, this));
+                        return new PersonObj(p, this);
                     }
-                    else if (ac is OrganizationType)
+
+                    if (ac is OrganizationType o)
                     {
-                        AuditCollection.Add(new OrganizationObj(ac as OrganizationType, this));
+                        return new OrganizationObj(o, this);
                     }
-                }
+
+                    return null;
+                });
             }
             // Referenced by anything using SampleInfo: SubSample, SpectrumIdentificationItem
             if (mzid.AnalysisSampleCollection != null && mzid.AnalysisSampleCollection.Count > 0)
             {
-                AnalysisSampleCollection = new IdentDataList<SampleObj>();
-                foreach (var asc in mzid.AnalysisSampleCollection)
-                {
-                    AnalysisSampleCollection.Add(new SampleObj(asc, this));
-                }
+                AnalysisSampleCollection.AddRange(mzid.AnalysisSampleCollection, asc => new SampleObj(asc, this));
             }
             // Referenced by ProviderInfo, ProteinDetectionProtocol, SpectrumIdentificationProtocol, references AbstractContactInfo through ContactRoleInfo
             if (mzid.AnalysisSoftwareList != null && mzid.AnalysisSoftwareList.Count > 0)
             {
-                AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>();
-                foreach (var asl in mzid.AnalysisSoftwareList)
-                {
-                    AnalysisSoftwareList.Add(new AnalysisSoftwareObj(asl, this));
-                }
+                AnalysisSoftwareList.AddRange(mzid.AnalysisSoftwareList, asl => new AnalysisSoftwareObj(asl, this));
             }
             // Referenced by nothing, references AnalysisSoftwareInfo
             if (mzid.Provider != null)
@@ -166,21 +158,21 @@ namespace PSI_Interface.IdentData
 
             //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
             CvTranslator = null;
-            CVList = new IdentDataList<CVInfo>();
+            CVList = new IdentDataList<CVInfo>(1);
             if (createTranslator)
             {
                 //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
                 DefaultCV(); // Create a generic translator by default; must be re-mapped when reading a file
             }
-            AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>();
+            AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>(1);
             _provider = null;
-            AuditCollection = new IdentDataList<AbstractContactObj>();
-            AnalysisSampleCollection = new IdentDataList<SampleObj>();
+            AuditCollection = new IdentDataList<AbstractContactObj>(1);
+            AnalysisSampleCollection = new IdentDataList<SampleObj>(1);
             _sequenceCollection = null;
             _analysisCollection = null;
             _analysisProtocolCollection = null;
             _dataCollection = null;
-            BibliographicReferences = new IdentDataList<BibliographicReferenceObj>();
+            BibliographicReferences = new IdentDataList<BibliographicReferenceObj>(1);
         }
         #endregion
 
@@ -380,7 +372,7 @@ namespace PSI_Interface.IdentData
         /// </summary>
         public void DefaultCV()
         {
-            CVList = new IdentDataList<CVInfo>();
+            CVList = new IdentDataList<CVInfo>(CV.CV.CVInfoList.Count);
             foreach (var cv in CV.CV.CVInfoList)
             {
                 if (cv.Id.ToLower() == "pato")

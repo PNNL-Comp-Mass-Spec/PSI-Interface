@@ -29,17 +29,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Name = p.name;
             PeptideSequence = p.PeptideSequence;
 
-            Modifications = new IdentDataList<ModificationObj>();
-            SubstitutionModifications = new IdentDataList<SubstitutionModificationObj>();
+            Modifications = new IdentDataList<ModificationObj>(1);
+            SubstitutionModifications = new IdentDataList<SubstitutionModificationObj>(1);
 
             if (p.Modification != null)
             {
-                Modifications.AddRange(p.Modification.Select(x => new ModificationObj(x, idata)));
+                Modifications.AddRange(p.Modification, m => new ModificationObj(m, idata));
             }
 
             if (p.SubstitutionModification != null)
             {
-                SubstitutionModifications.AddRange(p.SubstitutionModification.Select(x => new SubstitutionModificationObj(x, idata)));
+                SubstitutionModifications.AddRange(p.SubstitutionModification, sm => new SubstitutionModificationObj(sm, idata));
             }
         }
 
@@ -52,8 +52,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Name = null;
             PeptideSequence = null;
 
-            Modifications = new IdentDataList<ModificationObj>();
-            SubstitutionModifications = new IdentDataList<SubstitutionModificationObj>();
+            Modifications = new IdentDataList<ModificationObj>(1);
+            SubstitutionModifications = new IdentDataList<SubstitutionModificationObj>(1);
         }
 
         /// <summary>

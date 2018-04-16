@@ -29,8 +29,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             _spectrumIdentificationProtocol = null;
             _spectrumIdentificationList = null;
-            InputSpectra = new IdentDataList<InputSpectraRefObj>();
-            SearchDatabases = new IdentDataList<SearchDatabaseRefObj>();
+            InputSpectra = new IdentDataList<InputSpectraRefObj>(1);
+            SearchDatabases = new IdentDataList<SearchDatabaseRefObj>(1);
         }
 
         /// <summary>
@@ -44,20 +44,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             SpectrumIdentificationProtocolRef = si.spectrumIdentificationProtocol_ref;
             SpectrumIdentificationListRef = si.spectrumIdentificationList_ref;
 
-            _inputSpectra = null;
-            _searchDatabases = null;
+            InputSpectra = new IdentDataList<InputSpectraRefObj>(1);
+            SearchDatabases = new IdentDataList<SearchDatabaseRefObj>(1);
 
             if ((si.InputSpectra != null) && (si.InputSpectra.Count > 0))
             {
-                InputSpectra = new IdentDataList<InputSpectraRefObj>();
-                foreach (var ispec in si.InputSpectra)
-                    InputSpectra.Add(new InputSpectraRefObj(ispec, IdentData));
+                InputSpectra.AddRange(si.InputSpectra, ispec => new InputSpectraRefObj(ispec, IdentData));
             }
             if ((si.SearchDatabaseRef != null) && (si.SearchDatabaseRef.Count > 0))
             {
-                SearchDatabases = new IdentDataList<SearchDatabaseRefObj>();
-                foreach (var sd in si.SearchDatabaseRef)
-                    SearchDatabases.Add(new SearchDatabaseRefObj(sd, IdentData));
+                SearchDatabases.AddRange(si.SearchDatabaseRef, sd => new SearchDatabaseRefObj(sd, IdentData));
             }
         }
 

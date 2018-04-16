@@ -22,7 +22,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _peptideEvidenceRef = null;
 
             _peptideEvidence = null;
-            SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemRefObj>();
+            SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemRefObj>(1);
         }
 
         /// <summary>
@@ -35,15 +35,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             PeptideEvidenceRef = ph.peptideEvidence_ref;
 
-            _spectrumIdentificationItems = null;
+            SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemRefObj>(1);
 
             if (ph.SpectrumIdentificationItemRef != null && ph.SpectrumIdentificationItemRef.Count > 0)
             {
-                SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemRefObj>();
-                foreach (var siir in ph.SpectrumIdentificationItemRef)
-                {
-                    SpectrumIdentificationItems.Add(new SpectrumIdentificationItemRefObj(siir, IdentData));
-                }
+                SpectrumIdentificationItems.AddRange(ph.SpectrumIdentificationItemRef, siir => new SpectrumIdentificationItemRefObj(siir, IdentData));
             }
         }
 

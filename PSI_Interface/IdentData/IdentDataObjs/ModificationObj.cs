@@ -40,7 +40,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _monoisotopicMassDelta = 0;
             MonoisotopicMassDeltaSpecified = false;
 
-            Residues = new List<string>();
+            Residues = new List<string>(1);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _monoisotopicMassDelta = m.monoisotopicMassDelta;
             MonoisotopicMassDeltaSpecified = m.monoisotopicMassDeltaSpecified;
 
-            Residues = null;
+            Residues = new List<string>(1);
 
             if (m.residues != null)
                 Residues = new List<string>(m.residues);

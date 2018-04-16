@@ -23,7 +23,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = null;
             Name = null;
 
-            ProteinDetectionHypotheses = new IdentDataList<ProteinDetectionHypothesisObj>();
+            ProteinDetectionHypotheses = new IdentDataList<ProteinDetectionHypothesisObj>(1);
         }
 
         /// <summary>
@@ -37,13 +37,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = pag.id;
             Name = pag.name;
 
-            _proteinDetectionHypotheses = null;
+            ProteinDetectionHypotheses = new IdentDataList<ProteinDetectionHypothesisObj>(1);
 
             if ((pag.ProteinDetectionHypothesis != null) && (pag.ProteinDetectionHypothesis.Count > 0))
             {
-                ProteinDetectionHypotheses = new IdentDataList<ProteinDetectionHypothesisObj>();
-                foreach (var pdh in pag.ProteinDetectionHypothesis)
-                    ProteinDetectionHypotheses.Add(new ProteinDetectionHypothesisObj(pdh, IdentData));
+                ProteinDetectionHypotheses.AddRange(pag.ProteinDetectionHypothesis, pdh => new ProteinDetectionHypothesisObj(pdh, IdentData));
             }
         }
 

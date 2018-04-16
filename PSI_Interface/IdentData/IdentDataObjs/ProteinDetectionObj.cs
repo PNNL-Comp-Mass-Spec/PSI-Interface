@@ -25,7 +25,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             _proteinDetectionList = null;
             _proteinDetectionProtocol = null;
-            InputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentificationsObj>();
+            InputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentificationsObj>(1);
         }
 
         /// <summary>
@@ -39,13 +39,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             ProteinDetectionListRef = pd.proteinDetectionList_ref;
             ProteinDetectionProtocolRef = pd.proteinDetectionProtocol_ref;
 
-            _inputSpectrumIdentifications = null;
+            InputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentificationsObj>(1);
 
             if ((pd.InputSpectrumIdentifications != null) && (pd.InputSpectrumIdentifications.Count > 0))
             {
-                InputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentificationsObj>();
-                foreach (var isi in pd.InputSpectrumIdentifications)
-                    InputSpectrumIdentifications.Add(new InputSpectrumIdentificationsObj(isi, IdentData));
+                InputSpectrumIdentifications.AddRange(pd.InputSpectrumIdentifications, isi => new InputSpectrumIdentificationsObj(isi, IdentData));
             }
         }
 

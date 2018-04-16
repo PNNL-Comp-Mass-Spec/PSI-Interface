@@ -24,7 +24,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _measureRef = null;
 
             _measure = null;
-            Values = new List<float>();
+            Values = new List<float>(1);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             MeasureRef = fa.measure_ref;
 
-            Values = null;
+            Values = new List<float>(1);
             if (fa.values != null)
             {
                 Values = new List<float>(fa.values);

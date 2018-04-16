@@ -32,7 +32,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             MassDelta = 0;
             Residues = null;
 
-            SpecificityRules = new IdentDataList<SpecificityRulesListObj>();
+            SpecificityRules = new IdentDataList<SpecificityRulesListObj>(1);
         }
 
         /// <summary>
@@ -47,13 +47,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             MassDelta = sm.massDelta;
             Residues = sm.residues;
 
-            _specificityRules = null;
+            SpecificityRules = new IdentDataList<SpecificityRulesListObj>(1);
 
             if ((sm.SpecificityRules != null) && (sm.SpecificityRules.Count > 0))
             {
-                SpecificityRules = new IdentDataList<SpecificityRulesListObj>();
-                foreach (var sr in sm.SpecificityRules)
-                    SpecificityRules.Add(new SpecificityRulesListObj(sr, IdentData));
+                SpecificityRules.AddRange(sm.SpecificityRules, sr => new SpecificityRulesListObj(sr, IdentData));
             }
         }
 

@@ -31,8 +31,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = null;
             Name = null;
 
-            ContactRoles = new IdentDataList<ContactRoleObj>();
-            SubSamples = new IdentDataList<SubSampleObj>();
+            ContactRoles = new IdentDataList<ContactRoleObj>(1);
+            SubSamples = new IdentDataList<SubSampleObj>(1);
         }
 
         /// <summary>
@@ -46,20 +46,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Id = s.id;
             Name = s.name;
 
-            _contactRoles = null;
-            _subSamples = null;
+            ContactRoles = new IdentDataList<ContactRoleObj>(1);
+            SubSamples = new IdentDataList<SubSampleObj>(1);
 
             if ((s.ContactRole != null) && (s.ContactRole.Count > 0))
             {
-                ContactRoles = new IdentDataList<ContactRoleObj>();
-                foreach (var cr in s.ContactRole)
-                    ContactRoles.Add(new ContactRoleObj(cr, IdentData));
+                ContactRoles.AddRange(s.ContactRole, cr => new ContactRoleObj(cr, IdentData));
             }
             if ((s.SubSample != null) && (s.SubSample.Count > 0))
             {
-                SubSamples = new IdentDataList<SubSampleObj>();
-                foreach (var ss in s.SubSample)
-                    SubSamples.Add(new SubSampleObj(ss, IdentData));
+                SubSamples.AddRange(s.SubSample, ss => new SubSampleObj(ss, IdentData));
             }
         }
 

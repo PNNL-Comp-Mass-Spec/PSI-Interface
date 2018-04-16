@@ -26,9 +26,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public SequenceCollectionObj()
         {
-            DBSequences = new IdentDataList<DbSequenceObj>();
-            Peptides = new IdentDataList<PeptideObj>();
-            PeptideEvidences = new IdentDataList<PeptideEvidenceObj>();
+            DBSequences = new IdentDataList<DbSequenceObj>(1);
+            Peptides = new IdentDataList<PeptideObj>(1);
+            PeptideEvidences = new IdentDataList<PeptideEvidenceObj>(1);
         }
 
         /// <summary>
@@ -39,32 +39,26 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public SequenceCollectionObj(SequenceCollectionType sc, IdentDataObj idata)
             : base(idata)
         {
-            _dBSequences = null;
-            _peptides = null;
-            _peptideEvidences = null;
+            DBSequences = new IdentDataList<DbSequenceObj>(1);
+            Peptides = new IdentDataList<PeptideObj>(1);
+            PeptideEvidences = new IdentDataList<PeptideEvidenceObj>(1);
 
             idata.SequenceCollection = this;
 
             if ((sc.DBSequence != null) && (sc.DBSequence.Count > 0))
             {
-                DBSequences = new IdentDataList<DbSequenceObj>();
                 DBSequences.AddIdMap();
-                foreach (var dbs in sc.DBSequence)
-                    DBSequences.Add(new DbSequenceObj(dbs, IdentData));
+                DBSequences.AddRange(sc.DBSequence, dbs => new DbSequenceObj(dbs, IdentData));
             }
             if ((sc.Peptide != null) && (sc.Peptide.Count > 0))
             {
-                Peptides = new IdentDataList<PeptideObj>();
                 Peptides.AddIdMap();
-                foreach (var p in sc.Peptide)
-                    Peptides.Add(new PeptideObj(p, IdentData));
+                Peptides.AddRange(sc.Peptide, p => new PeptideObj(p, IdentData));
             }
             if ((sc.PeptideEvidence != null) && (sc.PeptideEvidence.Count > 0))
             {
-                PeptideEvidences = new IdentDataList<PeptideEvidenceObj>();
                 PeptideEvidences.AddIdMap();
-                foreach (var pe in sc.PeptideEvidence)
-                    PeptideEvidences.Add(new PeptideEvidenceObj(pe, IdentData));
+                PeptideEvidences.AddRange(sc.PeptideEvidence, pe => new PeptideEvidenceObj(pe, IdentData));
             }
         }
 
