@@ -40,19 +40,13 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (identData.CVList != null && identData.CVList.Count > 0)
             {
-                this.cvList = new List<cvType>();
-                foreach (var cv in identData.CVList)
-                {
-                    this.cvList.Add(new cvType(cv));
-                }
+                this.cvList = new List<cvType>(identData.CVList.Count);
+                this.cvList.AddRange(identData.CVList, cv => new cvType(cv));
             }
             if (identData.AnalysisSoftwareList != null && identData.AnalysisSoftwareList.Count > 0)
             {
-                this.AnalysisSoftwareList = new List<AnalysisSoftwareType>();
-                foreach (var asl in identData.AnalysisSoftwareList)
-                {
-                    this.AnalysisSoftwareList.Add(new AnalysisSoftwareType(asl));
-                }
+                this.AnalysisSoftwareList = new List<AnalysisSoftwareType>(identData.AnalysisSoftwareList.Count);
+                this.AnalysisSoftwareList.AddRange(identData.AnalysisSoftwareList, asl => new AnalysisSoftwareType(asl));
             }
             if (identData.Provider != null)
             {
@@ -60,26 +54,25 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
             if (identData.AuditCollection != null && identData.AuditCollection.Count > 0)
             {
-                this.AuditCollection = new List<AbstractContactType>();
-                foreach (var a in identData.AuditCollection)
+                this.AuditCollection = new List<AbstractContactType>(identData.AuditCollection.Count);
+                this.AuditCollection.AddRange(identData.AuditCollection, a =>
                 {
-                    if (a is OrganizationObj)
+                    if (a is OrganizationObj o)
                     {
-                        this.AuditCollection.Add(new OrganizationType(a as OrganizationObj));
+                        return new OrganizationType(o);
                     }
-                    else if (a is PersonObj)
+                    else if (a is PersonObj p)
                     {
-                        this.AuditCollection.Add(new PersonType(a as PersonObj));
+                        return new PersonType(p);
                     }
-                }
+
+                    return null; // If this is hit, something is very wrong...
+                });
             }
             if (identData.AnalysisSampleCollection != null && identData.AnalysisSampleCollection.Count > 0)
             {
-                this.AnalysisSampleCollection = new List<SampleType>();
-                foreach (var s in identData.AnalysisSampleCollection)
-                {
-                    this.AnalysisSampleCollection.Add(new SampleType(s));
-                }
+                this.AnalysisSampleCollection = new List<SampleType>(identData.AnalysisSampleCollection.Count);
+                this.AnalysisSampleCollection.AddRange(identData.AnalysisSampleCollection, s => new SampleType(s));
             }
             if (identData.SequenceCollection != null)
             {
@@ -99,11 +92,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
             if (identData.BibliographicReferences != null && identData.BibliographicReferences.Count > 0)
             {
-                this.BibliographicReference = new List<BibliographicReferenceType>();
-                foreach (var br in identData.BibliographicReferences)
-                {
-                    this.BibliographicReference.Add(new BibliographicReferenceType(br));
-                }
+                this.BibliographicReference = new List<BibliographicReferenceType>(identData.BibliographicReferences.Count);
+                this.BibliographicReference.AddRange(identData.BibliographicReferences, br => new BibliographicReferenceType(br));
             }
         }
 
@@ -236,11 +226,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SpectrumIdentificationItemRef = null;
             if (ph.SpectrumIdentificationItems != null && ph.SpectrumIdentificationItems.Count > 0)
             {
-                this.SpectrumIdentificationItemRef = new List<SpectrumIdentificationItemRefType>();
-                foreach (var siir in ph.SpectrumIdentificationItems)
-                {
-                    this.SpectrumIdentificationItemRef.Add(new SpectrumIdentificationItemRefType(siir));
-                }
+                this.SpectrumIdentificationItemRef = new List<SpectrumIdentificationItemRefType>(ph.SpectrumIdentificationItems.Count);
+                this.SpectrumIdentificationItemRef.AddRange(ph.SpectrumIdentificationItems, siir => new SpectrumIdentificationItemRefType(siir));
             }
         }
 
@@ -310,14 +297,14 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (iti.CVParams != null && iti.CVParams.Count > 0)
             {
-                this.cvParam = new List<CVParamType>();
-                this.cvParam.AddRange(iti.CVParams.Select(x => new CVParamType(x)));
+                this.cvParam = new List<CVParamType>(iti.CVParams.Count);
+                this.cvParam.AddRange(iti.CVParams, cvp => new CVParamType(cvp));
             }
 
             if (iti.UserParams != null && iti.UserParams.Count > 0)
             {
-                this.userParam = new List<UserParamType>();
-                this.userParam.AddRange(iti.UserParams.Select(x => new UserParamType(x)));
+                this.userParam = new List<UserParamType>(iti.UserParams.Count);
+                this.userParam.AddRange(iti.UserParams, up => new UserParamType(up));
             }
 
             if (iti.IdentData.Version.Equals("1.1"))
@@ -331,11 +318,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (iti.FragmentArrays != null && iti.FragmentArrays.Count > 0)
             {
-                this.FragmentArray = new List<FragmentArrayType>();
-                foreach (var fa in iti.FragmentArrays)
-                {
-                    this.FragmentArray.Add(new FragmentArrayType(fa));
-                }
+                this.FragmentArray = new List<FragmentArrayType>(iti.FragmentArrays.Count);
+                this.FragmentArray.AddRange(iti.FragmentArrays, fa => new FragmentArrayType(fa));
             }
             if (iti.Index != null && iti.Index.Count > 0)
             {
@@ -515,13 +499,13 @@ namespace PSI_Interface.IdentData.mzIdentML
         {
             this.Item = null;
 
-            if (p.Item != null && p.Item is CVParamObj)
+            if (p.Item is CVParamObj cvp)
             {
-                this.Item = new CVParamType(p.Item as CVParamObj);
+                this.Item = new CVParamType(cvp);
             }
-            else if (p.Item != null && p.Item is UserParamObj)
+            else if (p.Item is UserParamObj up)
             {
-                this.Item = new UserParamType(p.Item as UserParamObj);
+                this.Item = new UserParamType(up);
             }
         }
 
@@ -545,18 +529,20 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (pl.Items != null && pl.Items.Count > 0)
             {
-                this.Items = new List<AbstractParamType>();
-                foreach (var p in pl.Items)
+                this.Items = new List<AbstractParamType>(pl.Items.Count);
+                this.Items.AddRange(pl.Items, p =>
                 {
-                    if (p != null && p is CVParamObj)
+                    if (p is CVParamObj cvp)
                     {
-                        this.Items.Add(new CVParamType(p as CVParamObj));
+                        return new CVParamType(cvp);
                     }
-                    else if (p != null && p is UserParamObj)
+                    else if (p is UserParamObj up)
                     {
-                        this.Items.Add(new UserParamType(p as UserParamObj));
+                        return new UserParamType(up);
                     }
-                }
+
+                    return null;
+                });
             }
         }
 
@@ -604,11 +590,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (ad.SpectrumIdentificationList != null && ad.SpectrumIdentificationList.Count > 0)
             {
-                this.SpectrumIdentificationList = new List<SpectrumIdentificationListType>();
-                foreach (var sil in ad.SpectrumIdentificationList)
-                {
-                    this.SpectrumIdentificationList.Add(new SpectrumIdentificationListType(sil));
-                }
+                this.SpectrumIdentificationList = new List<SpectrumIdentificationListType>(ad.SpectrumIdentificationList.Count);
+                this.SpectrumIdentificationList.AddRange(ad.SpectrumIdentificationList, sil => new SpectrumIdentificationListType(sil));
             }
             if (ad.ProteinDetectionList != null)
             {
@@ -646,21 +629,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SpectrumIdentificationResult = null;
             if (sil.FragmentationTables != null && sil.FragmentationTables.Count > 0)
             {
-                this.FragmentationTable = new List<MeasureType>();
-                {
-                    foreach (var f in sil.FragmentationTables)
-                    {
-                        this.FragmentationTable.Add(new MeasureType(f));
-                    }
-                }
+                this.FragmentationTable = new List<MeasureType>(sil.FragmentationTables.Count);
+                this.FragmentationTable.AddRange(sil.FragmentationTables, f => new MeasureType(f));
             }
             if (sil.SpectrumIdentificationResults != null && sil.SpectrumIdentificationResults.Count > 0)
             {
-                this.SpectrumIdentificationResult = new List<SpectrumIdentificationResultType>();
-                foreach (var sir in sil.SpectrumIdentificationResults)
-                {
-                    this.SpectrumIdentificationResult.Add(new SpectrumIdentificationResultType(sir));
-                }
+                this.SpectrumIdentificationResult = new List<SpectrumIdentificationResultType>(sil.SpectrumIdentificationResults.Count);
+                this.SpectrumIdentificationResult.AddRange(sil.SpectrumIdentificationResults, sir => new SpectrumIdentificationResultType(sir));
             }
         }
 
@@ -841,11 +816,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (pdh.PeptideHypotheses != null && pdh.PeptideHypotheses.Count > 0)
             {
-                this.PeptideHypothesis = new List<PeptideHypothesisType>();
-                foreach (var ph in pdh.PeptideHypotheses)
-                {
-                    this.PeptideHypothesis.Add(new PeptideHypothesisType(ph));
-                }
+                this.PeptideHypothesis = new List<PeptideHypothesisType>(pdh.PeptideHypotheses.Count);
+                this.PeptideHypothesis.AddRange(pdh.PeptideHypotheses, ph => new PeptideHypothesisType(ph));
             }
         }
 
@@ -895,11 +867,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.ProteinDetectionHypothesis = null;
             if (pag.ProteinDetectionHypotheses != null && pag.ProteinDetectionHypotheses.Count > 0)
             {
-                this.ProteinDetectionHypothesis = new List<ProteinDetectionHypothesisType>();
-                foreach (var pdh in pag.ProteinDetectionHypotheses)
-                {
-                    this.ProteinDetectionHypothesis.Add(new ProteinDetectionHypothesisType(pdh));
-                }
+                this.ProteinDetectionHypothesis = new List<ProteinDetectionHypothesisType>(pag.ProteinDetectionHypotheses.Count);
+                this.ProteinDetectionHypothesis.AddRange(pag.ProteinDetectionHypotheses, pdh => new ProteinDetectionHypothesisType(pdh));
             }
         }
 
@@ -934,11 +903,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.ProteinAmbiguityGroup = null;
             if (pdl.ProteinAmbiguityGroups != null && pdl.ProteinAmbiguityGroups.Count > 0)
             {
-                this.ProteinAmbiguityGroup = new List<ProteinAmbiguityGroupType>();
-                foreach (var pag in pdl.ProteinAmbiguityGroups)
-                {
-                    this.ProteinAmbiguityGroup.Add(new ProteinAmbiguityGroupType(pag));
-                }
+                this.ProteinAmbiguityGroup = new List<ProteinAmbiguityGroupType>(pdl.ProteinAmbiguityGroups.Count);
+                this.ProteinAmbiguityGroup.AddRange(pdl.ProteinAmbiguityGroups, pag => new ProteinAmbiguityGroupType(pag));
             }
         }
 
@@ -989,19 +955,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.Fragmentation = null;
             if (sii.PeptideEvidences != null && sii.PeptideEvidences.Count > 0)
             {
-                this.PeptideEvidenceRef = new List<PeptideEvidenceRefType>();
-                foreach (var per in sii.PeptideEvidences)
-                {
-                    this.PeptideEvidenceRef.Add(new PeptideEvidenceRefType(per));
-                }
+                this.PeptideEvidenceRef = new List<PeptideEvidenceRefType>(sii.PeptideEvidences.Count);
+                this.PeptideEvidenceRef.AddRange(sii.PeptideEvidences, per => new PeptideEvidenceRefType(per));
             }
             if (sii.Fragmentations != null && sii.Fragmentations.Count > 0)
             {
-                this.Fragmentation = new List<IonTypeType>();
-                foreach (var f in sii.Fragmentations)
-                {
-                    this.Fragmentation.Add(new IonTypeType(f));
-                }
+                this.Fragmentation = new List<IonTypeType>(sii.Fragmentations.Count);
+                this.Fragmentation.AddRange(sii.Fragmentations, f => new IonTypeType(f));
             }
         }
 
@@ -1112,11 +1072,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SpectrumIdentificationItem = null;
             if (sir.SpectrumIdentificationItems != null && sir.SpectrumIdentificationItems.Count > 0)
             {
-                this.SpectrumIdentificationItem = new List<SpectrumIdentificationItemType>();
-                foreach (var sii in sir.SpectrumIdentificationItems)
-                {
-                    this.SpectrumIdentificationItem.Add(new SpectrumIdentificationItemType(sii));
-                }
+                this.SpectrumIdentificationItem = new List<SpectrumIdentificationItemType>(sir.SpectrumIdentificationItems.Count);
+                this.SpectrumIdentificationItem.AddRange(sir.SpectrumIdentificationItems, sii => new SpectrumIdentificationItemType(sii));
             }
         }
 
@@ -1476,19 +1433,13 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (mt.Residues != null && mt.Residues.Count > 0)
             {
-                this.Residue = new List<ResidueType>();
-                foreach (var r in mt.Residues)
-                {
-                    this.Residue.Add(new ResidueType(r));
-                }
+                this.Residue = new List<ResidueType>(mt.Residues.Count);
+                this.Residue.AddRange(mt.Residues, r => new ResidueType(r));
             }
             if (mt.AmbiguousResidues != null && mt.AmbiguousResidues.Count > 0)
             {
-                this.AmbiguousResidue = new List<AmbiguousResidueType>();
-                foreach (var ar in mt.AmbiguousResidues)
-                {
-                    this.AmbiguousResidue.Add(new AmbiguousResidueType(ar));
-                }
+                this.AmbiguousResidue = new List<AmbiguousResidueType>(mt.AmbiguousResidues.Count);
+                this.AmbiguousResidue.AddRange(mt.AmbiguousResidues, ar => new AmbiguousResidueType(ar));
             }
             if (mt.MsLevels != null && mt.MsLevels.Count > 0)
             {
@@ -1687,11 +1638,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
             if (sip.ModificationParams != null && sip.ModificationParams.Count > 0)
             {
-                this.ModificationParams = new List<SearchModificationType>();
-                foreach (var mp in sip.ModificationParams)
-                {
-                    this.ModificationParams.Add(new SearchModificationType(mp));
-                }
+                this.ModificationParams = new List<SearchModificationType>(sip.ModificationParams.Count);
+                this.ModificationParams.AddRange(sip.ModificationParams, mp => new SearchModificationType(mp));
             }
             if (sip.Enzymes != null && sip.Enzymes.Enzymes.Count > 0)
             {
@@ -1699,27 +1647,18 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
             if (sip.MassTables != null && sip.MassTables.Count > 0)
             {
-                this.MassTable = new List<MassTableType>();
-                foreach (var mt in sip.MassTables)
-                {
-                    this.MassTable.Add(new MassTableType(mt));
-                }
+                this.MassTable = new List<MassTableType>(sip.MassTables.Count);
+                this.MassTable.AddRange(sip.MassTables, mt => new MassTableType(mt));
             }
             if (sip.FragmentTolerances != null && sip.FragmentTolerances.Count > 0)
             {
-                this.FragmentTolerance = new List<CVParamType>();
-                foreach (var ft in sip.FragmentTolerances)
-                {
-                    this.FragmentTolerance.Add(new CVParamType(ft));
-                }
+                this.FragmentTolerance = new List<CVParamType>(sip.FragmentTolerances.Count);
+                this.FragmentTolerance.AddRange(sip.FragmentTolerances, ft => new CVParamType(ft));
             }
             if (sip.ParentTolerances != null && sip.ParentTolerances.Count > 0)
             {
-                this.ParentTolerance = new List<CVParamType>();
-                foreach (var pt in sip.ParentTolerances)
-                {
-                    this.ParentTolerance.Add(new CVParamType(pt));
-                }
+                this.ParentTolerance = new List<CVParamType>(sip.ParentTolerances.Count);
+                this.ParentTolerance.AddRange(sip.ParentTolerances, pt => new CVParamType(pt));
             }
             if (sip.Threshold != null)
             {
@@ -1727,11 +1666,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             }
             if (sip.DatabaseFilters != null && sip.DatabaseFilters.Count > 0)
             {
-                this.DatabaseFilters = new List<FilterType>();
-                foreach (var df in sip.DatabaseFilters)
-                {
-                    this.DatabaseFilters.Add(new FilterType(df));
-                }
+                this.DatabaseFilters = new List<FilterType>(sip.DatabaseFilters.Count);
+                this.DatabaseFilters.AddRange(sip.DatabaseFilters, df => new FilterType(df));
             }
             if (sip.DatabaseTranslation != null)
             {
@@ -1825,11 +1761,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SpecificityRules = null;
             if (sm.SpecificityRules != null && sm.SpecificityRules.Count > 0)
             {
-                this.SpecificityRules = new List<SpecificityRulesType>();
-                foreach (var sr in sm.SpecificityRules)
-                {
-                    this.SpecificityRules.Add(new SpecificityRulesType(sr));
-                }
+                this.SpecificityRules = new List<SpecificityRulesType>(sm.SpecificityRules.Count);
+                this.SpecificityRules.AddRange(sm.SpecificityRules, sr => new SpecificityRulesType(sr));
             }
         }
 
@@ -1876,11 +1809,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.Enzyme = null;
             if (el.Enzymes != null && el.Enzymes.Count > 0)
             {
-                this.Enzyme = new List<EnzymeType>();
-                foreach (var e in el.Enzymes)
-                {
-                    this.Enzyme.Add(new EnzymeType(e));
-                }
+                this.Enzyme = new List<EnzymeType>(el.Enzymes.Count);
+                this.Enzyme.AddRange(el.Enzymes, e => new EnzymeType(e));
             }
         }
 
@@ -1961,11 +1891,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (dt.TranslationTables != null && dt.TranslationTables.Count > 0)
             {
-                this.TranslationTable = new List<TranslationTableType>();
-                foreach (var t in dt.TranslationTables)
-                {
-                    this.TranslationTable.Add(new TranslationTableType(t));
-                }
+                this.TranslationTable = new List<TranslationTableType>(dt.TranslationTables.Count);
+                this.TranslationTable.AddRange(dt.TranslationTables, t => new TranslationTableType(t));
             }
             if (dt.Frames != null && dt.Frames.Count > 0)
             {
@@ -2026,11 +1953,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.InputSpectrumIdentifications = null;
             if (pd.InputSpectrumIdentifications != null && pd.InputSpectrumIdentifications.Count > 0)
             {
-                this.InputSpectrumIdentifications = new List<InputSpectrumIdentificationsType>();
-                foreach (var isi in pd.InputSpectrumIdentifications)
-                {
-                    this.InputSpectrumIdentifications.Add(new InputSpectrumIdentificationsType(isi));
-                }
+                this.InputSpectrumIdentifications = new List<InputSpectrumIdentificationsType>(pd.InputSpectrumIdentifications.Count);
+                this.InputSpectrumIdentifications.AddRange(pd.InputSpectrumIdentifications, isi => new InputSpectrumIdentificationsType(isi));
             }
         }
 
@@ -2089,19 +2013,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SearchDatabaseRef = null;
             if (si.InputSpectra != null && si.InputSpectra.Count > 0)
             {
-                this.InputSpectra = new List<InputSpectraType>();
-                foreach (var ispec in si.InputSpectra)
-                {
-                    this.InputSpectra.Add(new InputSpectraType(ispec));
-                }
+                this.InputSpectra = new List<InputSpectraType>(si.InputSpectra.Count);
+                this.InputSpectra.AddRange(si.InputSpectra, ispec => new InputSpectraType(ispec));
             }
             if (si.SearchDatabases != null && si.SearchDatabases.Count > 0)
             {
-                this.SearchDatabaseRef = new List<SearchDatabaseRefType>();
-                foreach (var sdr in si.SearchDatabases)
-                {
-                    this.SearchDatabaseRef.Add(new SearchDatabaseRefType(sdr));
-                }
+                this.SearchDatabaseRef = new List<SearchDatabaseRefType>(si.SearchDatabases.Count);
+                this.SearchDatabaseRef.AddRange(si.SearchDatabases, sdr => new SearchDatabaseRefType(sdr));
             }
         }
 
@@ -2288,19 +2206,13 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (p.Modifications != null && p.Modifications.Count > 0)
             {
-                this.Modification = new List<ModificationType>();
-                foreach (var m in p.Modifications)
-                {
-                    this.Modification.Add(new ModificationType(m));
-                }
+                this.Modification = new List<ModificationType>(p.Modifications.Count);
+                this.Modification.AddRange(p.Modifications, m => new ModificationType(m));
             }
             if (p.SubstitutionModifications != null && p.SubstitutionModifications.Count > 0)
             {
-                this.SubstitutionModification = new List<SubstitutionModificationType>();
-                foreach (var sm in p.SubstitutionModifications)
-                {
-                    this.SubstitutionModification.Add(new SubstitutionModificationType(sm));
-                }
+                this.SubstitutionModification = new List<SubstitutionModificationType>(p.SubstitutionModifications.Count);
+                this.SubstitutionModification.AddRange(p.SubstitutionModifications, sm => new SubstitutionModificationType(sm));
             }
         }
 
@@ -2542,19 +2454,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SubSample = null;
             if (si.ContactRoles != null && si.ContactRoles.Count > 0)
             {
-                this.ContactRole = new List<ContactRoleType>();
-                foreach (var cr in si.ContactRoles)
-                {
-                    this.ContactRole.Add(new ContactRoleType(cr));
-                }
+                this.ContactRole = new List<ContactRoleType>(si.ContactRoles.Count);
+                this.ContactRole.AddRange(si.ContactRoles, cr => new ContactRoleType(cr));
             }
             if (si.SubSamples != null && si.SubSamples.Count > 0)
             {
-                this.SubSample = new List<SubSampleType>();
-                foreach (var ss in si.SubSamples)
-                {
-                    this.SubSample.Add(new SubSampleType(ss));
-                }
+                this.SubSample = new List<SubSampleType>(si.SubSamples.Count);
+                this.SubSample.AddRange(si.SubSamples, ss => new SubSampleType(ss));
             }
         }
 
@@ -2745,11 +2651,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.Affiliation = null;
             if (pi.Affiliations != null && pi.Affiliations.Count > 0)
             {
-                this.Affiliation = new List<AffiliationType>();
-                foreach (var a in pi.Affiliations)
-                {
-                    this.Affiliation.Add(new AffiliationType(a));
-                }
+                this.Affiliation = new List<AffiliationType>(pi.Affiliations.Count);
+                this.Affiliation.AddRange(pi.Affiliations, a => new AffiliationType(a));
             }
         }
 
@@ -2896,27 +2799,18 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (ii.SourceFiles != null && ii.SourceFiles.Count > 0)
             {
-                this.SourceFile = new List<SourceFileType>();
-                foreach (var sf in ii.SourceFiles)
-                {
-                    this.SourceFile.Add(new SourceFileType(sf));
-                }
+                this.SourceFile = new List<SourceFileType>(ii.SourceFiles.Count);
+                this.SourceFile.AddRange(ii.SourceFiles, sf => new SourceFileType(sf));
             }
             if (ii.SearchDatabases != null && ii.SearchDatabases.Count > 0)
             {
-                this.SearchDatabase = new List<SearchDatabaseType>();
-                foreach (var sd in ii.SearchDatabases)
-                {
-                    this.SearchDatabase.Add(new SearchDatabaseType(sd));
-                }
+                this.SearchDatabase = new List<SearchDatabaseType>(ii.SearchDatabases.Count);
+                this.SearchDatabase.AddRange(ii.SearchDatabases, sd => new SearchDatabaseType(sd));
             }
             if (ii.SpectraDataList != null && ii.SpectraDataList.Count > 0)
             {
-                this.SpectraData = new List<SpectraDataType>();
-                foreach (var sd in ii.SpectraDataList)
-                {
-                    this.SpectraData.Add(new SpectraDataType(sd));
-                }
+                this.SpectraData = new List<SpectraDataType>(ii.SpectraDataList.Count);
+                this.SpectraData.AddRange(ii.SpectraDataList, sd => new SpectraDataType(sd));
             }
         }
 
@@ -2981,11 +2875,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (apc.SpectrumIdentificationProtocols != null && apc.SpectrumIdentificationProtocols.Count > 0)
             {
-                this.SpectrumIdentificationProtocol = new List<SpectrumIdentificationProtocolType>();
-                foreach (var sip in apc.SpectrumIdentificationProtocols)
-                {
-                    this.SpectrumIdentificationProtocol.Add(new SpectrumIdentificationProtocolType(sip));
-                }
+                this.SpectrumIdentificationProtocol = new List<SpectrumIdentificationProtocolType>(apc.SpectrumIdentificationProtocols.Count);
+                this.SpectrumIdentificationProtocol.AddRange(apc.SpectrumIdentificationProtocols, sip => new SpectrumIdentificationProtocolType(sip));
             }
             if (apc.ProteinDetectionProtocol != null)
             {
@@ -3019,11 +2910,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (ac.SpectrumIdentifications != null && ac.SpectrumIdentifications.Count > 0)
             {
-                this.SpectrumIdentification = new List<SpectrumIdentificationType>();
-                foreach (var si in ac.SpectrumIdentifications)
-                {
-                    this.SpectrumIdentification.Add(new SpectrumIdentificationType(si));
-                }
+                this.SpectrumIdentification = new List<SpectrumIdentificationType>(ac.SpectrumIdentifications.Count);
+                this.SpectrumIdentification.AddRange(ac.SpectrumIdentifications, si => new SpectrumIdentificationType(si));
             }
             if (ac.ProteinDetection != null)
             {
@@ -3058,27 +2946,18 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             if (sc.DBSequences != null && sc.DBSequences.Count > 0)
             {
-                this.DBSequence = new List<DBSequenceType>();
-                foreach (var dbs in sc.DBSequences)
-                {
-                    this.DBSequence.Add(new DBSequenceType(dbs));
-                }
+                this.DBSequence = new List<DBSequenceType>(sc.DBSequences.Count);
+                this.DBSequence.AddRange(sc.DBSequences, dbs => new DBSequenceType(dbs));
             }
             if (sc.Peptides != null && sc.Peptides.Count > 0)
             {
-                this.Peptide = new List<PeptideType>();
-                foreach (var p in sc.Peptides)
-                {
-                    this.Peptide.Add(new PeptideType(p));
-                }
+                this.Peptide = new List<PeptideType>(sc.Peptides.Count);
+                this.Peptide.AddRange(sc.Peptides, p => new PeptideType(p));
             }
             if (sc.PeptideEvidences != null && sc.PeptideEvidences.Count > 0)
             {
-                this.PeptideEvidence = new List<PeptideEvidenceType>();
-                foreach (var pe in sc.PeptideEvidences)
-                {
-                    this.PeptideEvidence.Add(new PeptideEvidenceType(pe));
-                }
+                this.PeptideEvidence = new List<PeptideEvidenceType>(sc.PeptideEvidences.Count);
+                this.PeptideEvidence.AddRange(sc.PeptideEvidences, pe => new PeptideEvidenceType(pe));
             }
         }
 
