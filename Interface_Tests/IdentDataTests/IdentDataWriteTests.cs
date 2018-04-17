@@ -28,7 +28,7 @@ namespace Interface_Tests.IdentDataTests
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
+        // Use TestInitialize to run code before running each test
         // [TestInitialize()]
         // public void MyTestInitialize() { }
         //
@@ -53,9 +53,9 @@ namespace Interface_Tests.IdentDataTests
         /// <remarks>
         /// cv id="MS" fullName="Proteomics Standards Initiative Mass Spectrometry Ontology" version="4.0.2"
         ///    uri="https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo"
-        /// cv id = "UNIMOD" fullName="UNIMOD" version="2016:09:23 13:49" 
+        /// cv id = "UNIMOD" fullName="UNIMOD" version="2016:09:23 13:49"
         ///    uri="http://www.unimod.org/obo/unimod.obo"
-        /// cv id = "UO" fullName="Unit Ontology" version="releases/2016-05-13" 
+        /// cv id = "UO" fullName="Unit Ontology" version="releases/2016-05-13"
         ///    uri="http://www.berkeleybop.org/ontologies/uo/uo.obo"
         /// </remarks>
         [Test]

@@ -27,7 +27,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
+        // Use TestInitialize to run code before running each test
         // [TestInitialize()]
         // public void MyTestInitialize() { }
         //
@@ -50,11 +50,11 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         /// <param name="expectedPeptides"></param>
         /// <param name="expectedSeqs"></param>
         /// <remarks>
-        /// cv id="PSI-MS" fullName="PSI-MS" version="3.30.0" 
+        /// cv id="PSI-MS" fullName="PSI-MS" version="3.30.0"
         ///    uri="http://psidev.cvs.sourceforge.net/viewvc/*checkout*/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo"
-        /// cv id="UNIMOD" fullName="UNIMOD" 
+        /// cv id="UNIMOD" fullName="UNIMOD"
         ///    uri="http://www.unimod.org/obo/unimod.obo"
-        /// cv id="UO" fullName="UNIT-ONTOLOGY" 
+        /// cv id="UO" fullName="UNIT-ONTOLOGY"
         ///    uri="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/unit.obo"
         /// </remarks>
         [Test]

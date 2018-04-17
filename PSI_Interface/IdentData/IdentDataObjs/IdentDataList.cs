@@ -135,12 +135,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        internal void CascadeProperties()
+        internal void CascadeProperties(bool force = false)
         {
             foreach (T item in this)
             {
                 item.IdentData = this._identData;
-                item.CascadeProperties();
+                if (force)
+                {
+                    item.CascadeProperties();
+                }
             }
         }
 

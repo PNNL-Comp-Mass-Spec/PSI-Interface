@@ -29,13 +29,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     this._identData = value;
                     if (this._identData != null)
                     {
-                        //this.CascadeProperties();
+                        this.CascadeProperties();
                     }
                 }
             }
         }
 
-        internal void CascadeProperties()
+        internal void CascadeProperties(bool force = false)
         {
             if (this._identData == null)
             {
@@ -57,7 +57,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     {
                         var value = ((IdentDataInternalTypeAbstract)(prop.GetValue(this)));
                         value.IdentData = this._identData;
-                        value.CascadeProperties();
+                        if (force)
+                        {
+                            value.CascadeProperties();
+                        }
                     }
                     if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(IdentDataList<>))
                     {
@@ -66,16 +69,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
                                 BindingFlags.FlattenHierarchy);
                         identDataProp.SetValue(propValue, this._identData);
-                        var cascadeMethod = propValue.GetType()
-                            .GetMethod("CascadeProperties",
-                                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
-                                BindingFlags.FlattenHierarchy);
-                        cascadeMethod.Invoke(propValue, null);
-                        //if (propValue is IdentDataList<IdentDataInternalTypeAbstract>)
-                        //{
-                        //    ((IdentDataList<IdentDataInternalTypeAbstract>) (prop.GetValue(this))).IdentData =
-                        //        this._identData;
-                        //}
+                        if (force)
+                        {
+                            var cascadeMethod = propValue.GetType()
+                                .GetMethod("CascadeProperties",
+                                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
+                                    BindingFlags.FlattenHierarchy);
+                            cascadeMethod.Invoke(propValue, new object[] { force });
+                        }
                     }
                 }
             }
