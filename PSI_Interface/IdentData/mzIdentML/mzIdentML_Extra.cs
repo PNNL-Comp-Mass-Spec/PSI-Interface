@@ -1466,11 +1466,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 1, max 1
         //public ParamType FilterType
 
-        /// <remarks>All sequences fulfilling the specifed criteria are included.</remarks>
+        /// <remarks>All sequences fulfilling the specified criteria are included.</remarks>
         /// min 0, max 1
         //public ParamListType Include
 
-        /// <remarks>All sequences fulfilling the specifed criteria are excluded.</remarks>
+        /// <remarks>All sequences fulfilling the specified criteria are excluded.</remarks>
         /// min 0, max 1
         //public ParamListType Exclude*/
     }
@@ -1790,8 +1790,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the
     /// modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification
     /// of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and
-    /// this will be checked by the semantic validator within a given tolerance window), there is a â€œunknown
-    /// modificationâ€? CV term that must be used instead. A neutral loss should be defined as an additional CVParam
+    /// this will be checked by the semantic validator within a given tolerance window), there is a unknown
+    /// modification CV term that must be used instead. A neutral loss should be defined as an additional CVParam
     /// within Modification. If more complex information should be given about neutral losses (such as presence/absence
     /// on particular product ions), this can additionally be encoded within the FragmentationArray.</remarks>
     public partial class ModificationType : ICVParamGroup

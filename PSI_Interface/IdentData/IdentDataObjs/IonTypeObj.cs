@@ -81,7 +81,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
         /// <summary>
-        /// mzIdentML 1.2 addition: In case more information about the ions annotation has to be conveyed, that has no fit in FragmentArray. Note: It is suggested that the value attribute takes the form of a list of the same size as FragmentArray values. However, there is no formal encoding and it cannot be expeceted that other software will process or impart that information properly.
+        /// mzIdentML 1.2 addition: In case more information about the ions annotation has to be conveyed, that has no fit in FragmentArray.
+        /// Note: It is suggested that the value attribute takes the form of a list of the same size as FragmentArray values.
+        /// However, there is no formal encoding and it cannot be expected that other software will process or impart that information properly.
         /// </summary>
         /// <remarks>min 0, max n (mzIdentML 1.2)</remarks>
         public IdentDataList<UserParamObj> UserParams
@@ -98,7 +100,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>The type of ion identified.</remarks>
-        /// <remarks>(mzIdentML 1.2 add) In the case of neutral losses, one term should report the ion type, a second term should report the neutral loss - note: this is a change in practice from mzIdentML 1.1.</remarks>
+        /// <remarks>
+        /// (mzIdentML 1.2 add) In the case of neutral losses, one term should report the ion type, a second term should report the neutral loss;
+        /// Note: this is a change in practice from mzIdentML 1.1.
+        /// </remarks>
         /// <remarks>min 1, max 1 (mzIdentML 1.1)</remarks>
         /// <remarks>min 1, max n (mzIdentML 1.2)</remarks>
         public IdentDataList<CVParamObj> CVParams
@@ -121,7 +126,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         ///     ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be
         ///     distinguished, all positions should be given.
         /// </remarks>
-        /// <remarks>(mzIdentML 1.2 add) For precursor ions, including neutral losses, the index value MUST be 0. For any other ions not related to the position within the peptide sequence e.g. quantification reporter ions, the index value MUST be 0.</remarks>
+        /// <remarks>
+        /// (mzIdentML 1.2 add) For precursor ions, including neutral losses, the index value MUST be 0.
+        /// For any other ions not related to the position within the peptide sequence
+        /// e.g. quantification reporter ions, the index value MUST be 0.
+        /// </remarks>
         /// Optional Attribute
         /// listOfIntegers: string, space-separated integers
         public List<string> Index { get; set; }

@@ -91,7 +91,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>min 1, max unbounded // mzIdentML 1.1</remarks>
-        /// <remarks>min 0, max unbounded // mzIdentML 1.2 (0 only allowed if AddtionalSearchParams contains cvParam "De novo search")</remarks>
+        /// <remarks>min 0, max unbounded // mzIdentML 1.2 (0 only allowed if AdditionalSearchParams contains cvParam "De novo search")</remarks>
         public IdentDataList<PeptideEvidenceRefObj> PeptideEvidences
         {
             get => _peptideEvidences;
@@ -143,7 +143,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         /// <remarks>
         ///     The calculated isoelectric point of the (poly)peptide, with relevant modifications included.
-        ///     Do not supply this value if the PI cannot be calcuated properly.
+        ///     Do not supply this value if the PI cannot be calculated properly.
         /// </remarks>
         /// Optional Attribute
         /// float

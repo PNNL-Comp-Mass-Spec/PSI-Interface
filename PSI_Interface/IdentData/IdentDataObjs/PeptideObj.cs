@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs

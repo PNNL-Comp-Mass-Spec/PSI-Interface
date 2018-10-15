@@ -7,14 +7,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     ///     MzIdentML SampleType : Containers AnalysisSampleCollectionType
     /// </summary>
     /// <remarks>
-    ///     A description of the sample analysed by mass spectrometry using CVParams or UserParams.
-    ///     If a composite sample has been analysed, a parent sample should be defined, which references subsamples.
+    ///     A description of the sample analyzed by mass spectrometry using CVParams or UserParams.
+    ///     If a composite sample has been analyzed, a parent sample should be defined, which references subsamples.
     ///     This represents any kind of substance used in an experimental workflow, such as whole organisms, cells,
     ///     DNA, solutions, compounds and experimental substances (gels, arrays etc.).
     /// </remarks>
     /// <remarks>
-    ///     AnalysisSampleCollectionType: The samples analysed can optionally be recorded using CV terms for descriptions.
-    ///     If a composite sample has been analysed, the subsample association can be used to build a hierarchical description.
+    ///     AnalysisSampleCollectionType: The samples analyzed can optionally be recorded using CV terms for descriptions.
+    ///     If a composite sample has been analyzed, the subsample association can be used to build a hierarchical description.
     /// </remarks>
     /// <remarks>AnalysisSampleCollectionType: child element Sample of type SampleType, min 1, max unbounded</remarks>
     /// <remarks>CVParams/UserParams: The characteristics of a Material.</remarks>

@@ -256,7 +256,7 @@ namespace PSI_Interface.IdentData
             /// </summary>
             /// <remarks>
             /// There may be multiple peptide evidences associated with a single result. This means
-            /// that there are multiple occurences of the specified peptide in the protein database
+            /// that there are multiple occurrences of the specified peptide in the protein database
             /// that was used by the search, in the same protein or in multiple proteins.
             /// </remarks>
             public List<PeptideEvidence> PepEvidence { get; }
@@ -678,7 +678,7 @@ namespace PSI_Interface.IdentData
             {
                 get
                 {
-                    // if movenext has previously been called, return the current item
+                    // if MoveNext has previously been called, return the current item
                     if (identEnumerator.Current != null)
                     {
                         yield return identEnumerator.Current;
@@ -714,7 +714,7 @@ namespace PSI_Interface.IdentData
         ///   Database Information holds the length of the peptide and the protein description
         ///   Peptide Evidence holds the pre, post, start and end for the peptide for Tryptic End calculations.
         /// The element that holds the most information is the Spectrum ID Item, which has the calculated mz,
-        /// experimental mz, charge state, MSGF raw score, Denovo score, MSGF SpecEValue, MSGF EValue,
+        /// experimental mz, charge state, MSGF raw score, DeNovo score, MSGF SpecEValue, MSGF EValue,
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
         /// </remarks>
@@ -766,7 +766,7 @@ namespace PSI_Interface.IdentData
         ///   Database Information holds the length of the peptide and the protein description
         ///   Peptide Evidence holds the pre, post, start and end for the peptide for Tryptic End calculations.
         /// The element that holds the most information is the Spectrum ID Item, which has the calculated mz,
-        /// experimental mz, charge state, MSGF raw score, Denovo score, MSGF SpecEValue, MSGF EValue,
+        /// experimental mz, charge state, MSGF raw score, DeNovo score, MSGF SpecEValue, MSGF EValue,
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
         /// </remarks>
@@ -1589,7 +1589,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        /// Handle child nodes of SeachDatabase element
+        /// Handle child nodes of SearchDatabase element
         /// Called by ReadDataCollection (xml hierarchy)
         /// Currently we are only working with the SpectraData child elements
         /// </summary>

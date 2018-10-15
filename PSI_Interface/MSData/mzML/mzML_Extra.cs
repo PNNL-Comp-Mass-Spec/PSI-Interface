@@ -1,4 +1,5 @@
-﻿//
+﻿
+//
 // Data translation code from MSData to mzML.
 //
 
@@ -1088,7 +1089,7 @@ namespace PSI_Interface.MSData.mzML
         /// min 1, max unbounded
         //public SoftwareType[] software
 
-        /// <remarks>The number of softwares defined in this mzML file.</remarks>
+        /// <remarks>The number of software items defined in this mzML file.</remarks>
         /// Required Attribute
         /// non-negative integer
         //public string count*/

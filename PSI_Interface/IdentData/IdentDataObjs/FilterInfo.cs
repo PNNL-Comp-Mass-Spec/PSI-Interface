@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>All sequences fulfilling the specifed criteria are included.</remarks>
+        /// <remarks>All sequences fulfilling the specified criteria are included.</remarks>
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj Include
         {
@@ -75,7 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>All sequences fulfilling the specifed criteria are excluded.</remarks>
+        /// <remarks>All sequences fulfilling the specified criteria are excluded.</remarks>
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj Exclude
         {

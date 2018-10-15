@@ -105,7 +105,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         /// <remarks>
         ///     Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="".
-        ///     If for any reason it is unknown (e.g. denovo), pre="?" should be used.
+        ///     If for any reason it is unknown (e.g. DeNovo), pre="?" should be used.
         /// </remarks>
         /// Optional Attribute
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
@@ -113,7 +113,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         /// <remarks>
         ///     Post flanking residue. If the peptide is C-terminal, post="-" and not post="". If for any reason it is unknown
-        ///     (e.g. denovo), post="?" should be used.
+        ///     (e.g. DeNovo), post="?" should be used.
         /// </remarks>
         /// Optional Attribute
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"

@@ -64,7 +64,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set => _value = value;
         }
 
-        /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>
+        /// <remarks>The data type of the parameter, where appropriate (e.g.: xsd:float).</remarks>
         /// Optional Attribute
         /// string
         public string Type { get; set; }

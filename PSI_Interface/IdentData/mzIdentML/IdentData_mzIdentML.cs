@@ -329,12 +329,17 @@ namespace PSI_Interface.IdentData.mzIdentML
         /*/// min 0, max unbounded
         //public List<FragmentArrayType> FragmentArray
 
-        /// <remarks>In case more information about the ions annotation has to be conveyed, that has no fit in FragmentArray. Note: It is suggested that the value attribute takes the form of a list of the same size as FragmentArray values. However, there is no formal encoding and it cannot be expeceted that other software will process or impart that information properly.</remarks>
+        /// <remarks>
+        /// In case more information about the ions annotation has to be conveyed, that has no fit in FragmentArray.
+        /// Note: It is suggested that the value attribute takes the form of a list of the same size as FragmentArray values.
+        /// However, there is no formal encoding and it cannot be expected that other software will process or impart that information properly.
+        /// </remarks>
         /// min 0, max unbounded
         //public List<UserParamType> userParam // mzIdentML 1.2
 
         /// <remarks>The type of ion identified.</remarks>
-        /// <remarks>(mzIdentML 1.2 add) In the case of neutral losses, one term should report the ion type, a second term should report the neutral loss - note: this is a change in practice from mzIdentML 1.1.</remarks>
+        /// <remarks>(mzIdentML 1.2 add) In the case of neutral losses, one term should report the ion type, a second term should report the neutral loss
+        /// Note: this is a change in practice from mzIdentML 1.1.</remarks>
         /// min 1, max 1
         //public CVParamType CVParam // mzIdentML 1.1
         //public List<CVParamType> CVParam // mzIdentML 1.2
@@ -1863,11 +1868,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 1, max 1
         //public ParamType FilterType
 
-        /// <remarks>All sequences fulfilling the specifed criteria are included.</remarks>
+        /// <remarks>All sequences fulfilling the specified criteria are included.</remarks>
         /// min 0, max 1
         //public ParamListType Include
 
-        /// <remarks>All sequences fulfilling the specifed criteria are excluded.</remarks>
+        /// <remarks>All sequences fulfilling the specified criteria are excluded.</remarks>
         /// min 0, max 1
         //public ParamListType Exclude*/
     }
@@ -2241,8 +2246,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the
     /// modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification
     /// of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and
-    /// this will be checked by the semantic validator within a given tolerance window), there is a â€œunknown
-    /// modificationâ€? CV term that must be used instead. A neutral loss should be defined as an additional CVParam
+    /// this will be checked by the semantic validator within a given tolerance window), there is a unknown
+    /// modification CV term that must be used instead. A neutral loss should be defined as an additional CVParam
     /// within Modification. If more complex information should be given about neutral losses (such as presence/absence
     /// on particular product ions), this can additionally be encoded within the FragmentationArray.</remarks>
     public partial class ModificationType : ICVParamGroup
@@ -2819,7 +2824,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// min 0, max unbounded
         //public List<SearchDatabaseType> SearchDatabase
 
-        /// min 1, max unbounde
+        /// min 1, max unbounded
         //public List<SpectraDataType> SpectraData*/
     }
 
