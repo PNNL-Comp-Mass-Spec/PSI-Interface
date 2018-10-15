@@ -140,12 +140,14 @@ namespace PSI_Interface.IdentData.mzIdentML
             //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://psidev.info/psi/pi/mzIdentML/1.1")]
             var xmlOverrides = new XmlAttributeOverrides();
             var xmlTypeNsOverride = new XmlAttributes();
-            var xmlTypeNs = new XmlTypeAttribute() { Namespace = namespaceUrl };
+            var xmlTypeNs = new XmlTypeAttribute { Namespace = namespaceUrl };
             xmlTypeNsOverride.XmlType = xmlTypeNs;
 
-            var xmlRootOverrides = new XmlAttributes();
-            xmlRootOverrides.XmlType = xmlTypeNs;
-            var xmlRootOverride = new XmlRootAttribute()
+            var xmlRootOverrides = new XmlAttributes {
+                XmlType = xmlTypeNs
+            };
+
+            var xmlRootOverride = new XmlRootAttribute
             {
                 ElementName = "MzIdentML",
                 Namespace = namespaceUrl,

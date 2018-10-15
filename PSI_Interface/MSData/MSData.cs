@@ -6,11 +6,11 @@ using System.IO;
  * TODO: Fix count reporting - no "setting" capability, but report list/array size
  * TODO: Some structure cleanup
  * TODO: Configuration for linking CVRefs, ReferenceableParamGroupRefs, InstrumentConfigurations, Etc.
- * 
+ *
  * NOTE: this is the primary interface, since there are many checks and like that cannot be managed properly in the serialization class.
  *       they may be combined in the future once everything is figured out, but for now it will be easier to copy things over from mzML when reading and over to mzML when writing.
- * 
- * 
+ *
+ *
  ********************************************************************************************************************************/
 using PSI_Interface.CV;
 
@@ -19,8 +19,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML mzMLType
     /// </summary>
-    /// <remarks>This is the root element for the Proteomics Standards Initiative (PSI) mzML schema, which 
-    /// is intended to capture the use of a mass spectrometer, the data generated, and 
+    /// <remarks>This is the root element for the Proteomics Standards Initiative (PSI) mzML schema, which
+    /// is intended to capture the use of a mass spectrometer, the data generated, and
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
@@ -34,7 +34,7 @@ namespace PSI_Interface.MSData
         private MSDataList<InstrumentConfigurationInfo> _instrumentConfigurationList;
         private MSDataList<DataProcessingInfo> _dataProcessingList;
         private Run _run;
-        
+
         /// min 1, max 1
         public MSDataList<CVInfo> CVList // TODO: enforce quantity
         {
@@ -272,9 +272,9 @@ namespace PSI_Interface.MSData
     {
         private MSDataList<ProcessingMethodInfo> _processingMethods;
 
-        /// <remarks>Description of the default peak processing method. 
-        /// This element describes the base method used in the generation of a particular mzML file. 
-        /// Variable methods should be described in the appropriate acquisition section - if 
+        /// <remarks>Description of the default peak processing method.
+        /// This element describes the base method used in the generation of a particular mzML file.
+        /// Variable methods should be described in the appropriate acquisition section - if
         /// no acquisition-specific details are found, then this information serves as the default.</remarks>
         /// min 1, max unbounded
         public MSDataList<ProcessingMethodInfo> ProcessingMethods // TODO: enforce quantity
@@ -611,8 +611,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML UserParamType
     /// </summary>
-    /// <remarks>Uncontrolled user parameters (essentially allowing free text). 
-    /// Before using these, one should verify whether there is an appropriate 
+    /// <remarks>Uncontrolled user parameters (essentially allowing free text).
+    /// Before using these, one should verify whether there is an appropriate
     /// CV term available, and if so, use the CV term instead</remarks>
     public partial class UserParam
     {
@@ -941,7 +941,7 @@ namespace PSI_Interface.MSData
         private List<BinaryDataArrayType> binaryDataArrayField;
         private string countField;
 
-        /// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays. 
+        /// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays.
         /// Default data arrays must not have the attributes 'arrayLength' and 'dataProcessingRef'.</remarks>
         /// min 2, max unbounded
         public BinaryDataArrayType[] binaryDataArray
@@ -964,11 +964,11 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML BinaryDataArrayType
     /// </summary>
-    /// <remarks>The structure into which encoded binary data goes. Byte ordering is always little endian (Intel style). 
+    /// <remarks>The structure into which encoded binary data goes. Byte ordering is always little endian (Intel style).
     /// Computers using a different endian style must convert to/from little endian when writing/reading mzML</remarks>
     public partial class BinaryDataArray : ParamGroup
     {
-        //CV Rules: 
+        //CV Rules:
         //MUST supply a *child* term of MS:1000572 (binary data compression type) only once
         //  e.g.: MS:1000574 (zlib compression)
         //  e.g.: MS:1000576 (no compression)
@@ -1184,9 +1184,9 @@ namespace PSI_Interface.MSData
             set { this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, this._arrayLength, this._isCompressed); }
         }
 
-        /// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType. 
-        /// The two default arrays (m/z and intensity) should NEVER use this override option, and should 
-        /// therefore adhere to the 'defaultArrayLength' defined in SpectrumType. Parsing software can thus 
+        /// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType.
+        /// The two default arrays (m/z and intensity) should NEVER use this override option, and should
+        /// therefore adhere to the 'defaultArrayLength' defined in SpectrumType. Parsing software can thus
         /// safely choose to ignore arrays of lengths different from the one defined in the 'defaultArrayLength' SpectrumType element.</remarks>
         /// Optional Attribute
         /// non-negative integer
@@ -1321,8 +1321,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>This attribute MUST reference the 'id' of the default data processing for the spectrum list. 
-        /// If an acquisition does not reference any data processing, it implicitly refers to this data processing. 
+        /// <remarks>This attribute MUST reference the 'id' of the default data processing for the spectrum list.
+        /// If an acquisition does not reference any data processing, it implicitly refers to this data processing.
         /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
         /// Required Attribute
         /// IDREF
@@ -1332,7 +1332,7 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML SpectrumType
     /// </summary>
-    /// <remarks>The structure that captures the generation of a peak list (including the underlying acquisitions). 
+    /// <remarks>The structure that captures the generation of a peak list (including the underlying acquisitions).
     /// Also describes some of the parameters for the mass spectrometer for a given acquisition (or list of acquisitions).</remarks>
     public partial class Spectrum : ParamGroup
     {
@@ -1404,8 +1404,8 @@ namespace PSI_Interface.MSData
         /// non-negative integer
         public string Index { get; set; } // TODO: enforce requirement, 0-n contiguous values in spectrumList
 
-        /// <remarks>The native identifier for a spectrum. For unmerged native spectra or spectra from older open file formats, 
-        /// the format of the identifier is defined in the PSI-MS CV and referred to in the mzML header. 
+        /// <remarks>The native identifier for a spectrum. For unmerged native spectra or spectra from older open file formats,
+        /// the format of the identifier is defined in the PSI-MS CV and referred to in the mzML header.
         /// External documents may use this identifier together with the mzML filename or accession to reference a particular spectrum.</remarks>
         /// Required Attribute
         /// Regex: "\S+=\S+( \S+=\S+)*"
@@ -1533,7 +1533,7 @@ namespace PSI_Interface.MSData
         private ChromatogramList _chromatogramList;
         private System.DateTime _startTimeStampField;
 
-        /// <remarks>All mass spectra and the acquisitions underlying them are described and attached here. 
+        /// <remarks>All mass spectra and the acquisitions underlying them are described and attached here.
         /// Subsidiary data arrays are also both described and attached here.</remarks>
         /// min 0, max 1
         public SpectrumList SpectrumList
@@ -1569,13 +1569,13 @@ namespace PSI_Interface.MSData
         /// ID
         public string Id { get; set; } // TODO: enforce uniqueness
 
-        /// <remarks>This attribute must reference the 'id' of the default instrument configuration. 
+        /// <remarks>This attribute must reference the 'id' of the default instrument configuration.
         /// If a scan does not reference an instrument configuration, it implicitly refers to this configuration.</remarks>
         /// Required Attribute
         /// IDREF
         public string DefaultInstrumentConfigurationRef { get; set; } // TODO: enforce requirement, validity
 
-        /// <remarks>This attribute can optionally reference the 'id' of the default source file. 
+        /// <remarks>This attribute can optionally reference the 'id' of the default source file.
         /// If a spectrum or scan does not reference a source file and this attribute is set, then it implicitly refers to this source file.</remarks>
         /// Optional Attribute
         /// IDREF
@@ -1626,8 +1626,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>This attribute MUST reference the 'id' of the default data processing for the chromatogram list. 
-        /// If an acquisition does not reference any data processing, it implicitly refers to this data processing. 
+        /// <remarks>This attribute MUST reference the 'id' of the default data processing for the chromatogram list.
+        /// If an acquisition does not reference any data processing, it implicitly refers to this data processing.
         /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
         /// Required Attribute
         /// IDREF
@@ -1939,10 +1939,10 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML InstrumentConfigurationListType
     /// </summary>
-    /// <remarks>List and descriptions of instrument configurations. 
-    /// At least one instrument configuration must be specified, even if it is 
-    /// only to specify that the instrument is unknown. In that case, 
-    /// the "instrument model" term is used to indicate the unknown 
+    /// <remarks>List and descriptions of instrument configurations.
+    /// At least one instrument configuration must be specified, even if it is
+    /// only to specify that the instrument is unknown. In that case,
+    /// the "instrument model" term is used to indicate the unknown
     /// instrument in the instrumentConfiguration.</remarks>
     public class InstrumentConfigurationListType
     {
@@ -1970,9 +1970,9 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML InstrumentConfigurationType
     /// </summary>
-    /// <remarks>Description of a particular hardware configuration of a mass spectrometer. 
-    /// Each configuration must have one (and only one) of the three different components used for an analysis. 
-    /// For hybrid instruments, such as an LTQ-FT, there must be one configuration for each permutation of 
+    /// <remarks>Description of a particular hardware configuration of a mass spectrometer.
+    /// Each configuration must have one (and only one) of the three different components used for an analysis.
+    /// For hybrid instruments, such as an LTQ-FT, there must be one configuration for each permutation of
     /// the components that is used in the document. For software configuration, use a ReferenceableParamGroup element</remarks>
     public partial class InstrumentConfigurationInfo : ParamGroup
     {
@@ -2078,8 +2078,8 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class Component : ParamGroup
     {
-        /// <remarks>This attribute must be used to indicate the order in which the components 
-        /// are encountered from source to detector (e.g., in a Q-TOF, the quadrupole would 
+        /// <remarks>This attribute must be used to indicate the order in which the components
+        /// are encountered from source to detector (e.g., in a Q-TOF, the quadrupole would
         /// have the lower order number, and the TOF the higher number of the two).</remarks>
         /// Required Attribute
         /// integer
@@ -2089,8 +2089,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML SourceComponentType
     /// </summary>
-    /// <remarks>This element must be used to describe a Source Component Type. 
-    /// This is a PRIDE3-specific modification of the core MzML schema that does not 
+    /// <remarks>This element must be used to describe a Source Component Type.
+    /// This is a PRIDE3-specific modification of the core MzML schema that does not
     /// have any impact on the base schema validation.</remarks>
     public partial class SourceComponent : Component
     {
@@ -2099,8 +2099,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML AnalyzerComponentType
     /// </summary>
-    /// <remarks>This element must be used to describe an Analyzer Component Type. 
-    /// This is a PRIDE3-specific modification of the core MzML schema that does not 
+    /// <remarks>This element must be used to describe an Analyzer Component Type.
+    /// This is a PRIDE3-specific modification of the core MzML schema that does not
     /// have any impact on the base schema validation.</remarks>
     public partial class AnalyzerComponent : Component
     {
@@ -2109,8 +2109,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML DetectorComponentType
     /// </summary>
-    /// <remarks>This element must be used to describe a Detector Component Type. 
-    /// This is a PRIDE3-specific modification of the core MzML schema that does not 
+    /// <remarks>This element must be used to describe a Detector Component Type.
+    /// This is a PRIDE3-specific modification of the core MzML schema that does not
     /// have any impact on the base schema validation.</remarks>
     public partial class DetectorComponent : Component
     {
@@ -2233,8 +2233,8 @@ namespace PSI_Interface.MSData
         private MSDataList<SourceFileInfo> _sourceFileList;
         private MSDataList<ParamGroup> _contact;
 
-        /// <remarks>This summarizes the different types of spectra that can be expected in the file. 
-        /// This is expected to aid processing software in skipping files that do not contain appropriate 
+        /// <remarks>This summarizes the different types of spectra that can be expected in the file.
+        /// This is expected to aid processing software in skipping files that do not contain appropriate
         /// spectrum types for it. It should also describe the nativeID format used in the file by referring to an appropriate CV term.</remarks>
         /// min 1, max 1
         public ParamGroup FileContentInfo // TODO: enforce quantity

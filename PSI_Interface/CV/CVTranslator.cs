@@ -159,7 +159,7 @@ namespace PSI_Interface.CV
             return newCvRef;
         }
 
-        private string ConvertCVRef(string cvRef, Dictionary<string, string> map)
+        private string ConvertCVRef(string cvRef, IReadOnlyDictionary<string, string> map)
         {
             if (string.IsNullOrWhiteSpace(cvRef))
             {

@@ -4,11 +4,11 @@
  * TODO: Fix count reporting - no "setting" capability, but report list/array size
  * TODO: Some structure cleanup
  * TODO: Configuration for linking CVRefs, ReferenceableParamGroupRefs, InstrumentConfigurations, Etc.
- * 
+ *
  * NOTE: this is the primary interface, since there are many checks and like that cannot be managed properly in the serialization class.
  *       they may be combined in the future once everything is figured out, but for now it will be easier to copy things over from mzML when reading and over to mzML when writing.
- * 
- * 
+ *
+ *
  ********************************************************************************************************************************/
 
 using System.Collections.Generic;
@@ -19,8 +19,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML mzMLType
     /// </summary>
-    /// <remarks>This is the root element for the Proteomics Standards Initiative (PSI) mzML schema, which 
-    /// is intended to capture the use of a mass spectrometer, the data generated, and 
+    /// <remarks>This is the root element for the Proteomics Standards Initiative (PSI) mzML schema, which
+    /// is intended to capture the use of a mass spectrometer, the data generated, and
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
@@ -280,8 +280,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML UserParamType
     /// </summary>
-    /// <remarks>Uncontrolled user parameters (essentially allowing free text). 
-    /// Before using these, one should verify whether there is an appropriate 
+    /// <remarks>Uncontrolled user parameters (essentially allowing free text).
+    /// Before using these, one should verify whether there is an appropriate
     /// CV term available, and if so, use the CV term instead</remarks>
     public partial class UserParam : ParamBase
     {
@@ -407,7 +407,7 @@ namespace PSI_Interface.MSData
         private List<BinaryDataArrayType> binaryDataArrayField;
         private string countField;
 
-        /// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays. 
+        /// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays.
         /// Default data arrays must not have the attributes 'arrayLength' and 'dataProcessingRef'.</remarks>
         /// min 2, max unbounded
         public BinaryDataArrayType[] binaryDataArray
@@ -430,7 +430,7 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML BinaryDataArrayType
     /// </summary>
-    /// <remarks>The structure into which encoded binary data goes. Byte ordering is always little endian (Intel style). 
+    /// <remarks>The structure into which encoded binary data goes. Byte ordering is always little endian (Intel style).
     /// Computers using a different endian style must convert to/from little endian when writing/reading mzML</remarks>
     public partial class BinaryDataArray : ParamGroup
     {
@@ -530,7 +530,7 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML SpectrumType
     /// </summary>
-    /// <remarks>The structure that captures the generation of a peak list (including the underlying acquisitions). 
+    /// <remarks>The structure that captures the generation of a peak list (including the underlying acquisitions).
     /// Also describes some of the parameters for the mass spectrometer for a given acquisition (or list of acquisitions).</remarks>
     public partial class Spectrum : ParamGroup
     {
@@ -817,10 +817,10 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML InstrumentConfigurationListType
     /// </summary>
-    /// <remarks>List and descriptions of instrument configurations. 
-    /// At least one instrument configuration must be specified, even if it is 
-    /// only to specify that the instrument is unknown. In that case, 
-    /// the "instrument model" term is used to indicate the unknown 
+    /// <remarks>List and descriptions of instrument configurations.
+    /// At least one instrument configuration must be specified, even if it is
+    /// only to specify that the instrument is unknown. In that case,
+    /// the "instrument model" term is used to indicate the unknown
     /// instrument in the instrumentConfiguration.</remarks>
     public class InstrumentConfigurationListType
     {
@@ -848,9 +848,9 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML InstrumentConfigurationType
     /// </summary>
-    /// <remarks>Description of a particular hardware configuration of a mass spectrometer. 
-    /// Each configuration must have one (and only one) of the three different components used for an analysis. 
-    /// For hybrid instruments, such as an LTQ-FT, there must be one configuration for each permutation of 
+    /// <remarks>Description of a particular hardware configuration of a mass spectrometer.
+    /// Each configuration must have one (and only one) of the three different components used for an analysis.
+    /// For hybrid instruments, such as an LTQ-FT, there must be one configuration for each permutation of
     /// the components that is used in the document. For software configuration, use a ReferenceableParamGroup element</remarks>
     public partial class InstrumentConfigurationInfo : ParamGroup
     {
@@ -900,8 +900,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML SourceComponentType
     /// </summary>
-    /// <remarks>This element must be used to describe a Source Component Type. 
-    /// This is a PRIDE3-specific modification of the core MzML schema that does not 
+    /// <remarks>This element must be used to describe a Source Component Type.
+    /// This is a PRIDE3-specific modification of the core MzML schema that does not
     /// have any impact on the base schema validation.</remarks>
     public partial class SourceComponent : Component
     {
@@ -915,8 +915,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML AnalyzerComponentType
     /// </summary>
-    /// <remarks>This element must be used to describe an Analyzer Component Type. 
-    /// This is a PRIDE3-specific modification of the core MzML schema that does not 
+    /// <remarks>This element must be used to describe an Analyzer Component Type.
+    /// This is a PRIDE3-specific modification of the core MzML schema that does not
     /// have any impact on the base schema validation.</remarks>
     public partial class AnalyzerComponent : Component
     {
@@ -930,8 +930,8 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML DetectorComponentType
     /// </summary>
-    /// <remarks>This element must be used to describe a Detector Component Type. 
-    /// This is a PRIDE3-specific modification of the core MzML schema that does not 
+    /// <remarks>This element must be used to describe a Detector Component Type.
+    /// This is a PRIDE3-specific modification of the core MzML schema that does not
     /// have any impact on the base schema validation.</remarks>
     public partial class DetectorComponent : Component
     {
