@@ -44,7 +44,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public InputsObj Inputs
         {
-            get { return _inputs; }
+            get => _inputs;
             set
             {
                 _inputs = value;
@@ -56,7 +56,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public AnalysisDataObj AnalysisData
         {
-            get { return _analysisData; }
+            get => _analysisData;
             set
             {
                 _analysisData = value;

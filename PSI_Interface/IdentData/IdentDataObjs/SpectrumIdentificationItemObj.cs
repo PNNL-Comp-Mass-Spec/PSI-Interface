@@ -94,7 +94,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded // mzIdentML 1.2 (0 only allowed if AddtionalSearchParams contains cvParam "De novo search")</remarks>
         public IdentDataList<PeptideEvidenceRefObj> PeptideEvidences
         {
-            get { return _peptideEvidences; }
+            get => _peptideEvidences;
             set
             {
                 _peptideEvidences = value;
@@ -106,7 +106,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public IdentDataList<IonTypeObj> Fragmentations
         {
-            get { return _fragmentations; }
+            get => _fragmentations;
             set
             {
                 _fragmentations = value;
@@ -130,7 +130,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// double
         public double CalculatedMassToCharge
         {
-            get { return _calculatedMassToCharge; }
+            get => _calculatedMassToCharge;
             set
             {
                 _calculatedMassToCharge = value;
@@ -149,7 +149,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// float
         public float CalculatedPI
         {
-            get { return _calculatedPI; }
+            get => _calculatedPI;
             set
             {
                 _calculatedPI = value;
@@ -186,7 +186,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public PeptideObj Peptide
         {
-            get { return _peptide; }
+            get => _peptide;
             set
             {
                 _peptide = value;
@@ -245,7 +245,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public MassTableObj MassTable
         {
-            get { return _massTable; }
+            get => _massTable;
             set
             {
                 _massTable = value;
@@ -285,7 +285,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Optional Attribute
         public SampleObj Sample
         {
-            get { return _sample; }
+            get => _sample;
             set
             {
                 _sample = value;

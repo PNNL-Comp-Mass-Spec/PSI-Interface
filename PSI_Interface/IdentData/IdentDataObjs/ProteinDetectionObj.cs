@@ -50,7 +50,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<InputSpectrumIdentificationsObj> InputSpectrumIdentifications
         {
-            get { return _inputSpectrumIdentifications; }
+            get => _inputSpectrumIdentifications;
             set
             {
                 _inputSpectrumIdentifications = value;
@@ -83,7 +83,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public ProteinDetectionListObj ProteinDetectionList
         {
-            get { return _proteinDetectionList; }
+            get => _proteinDetectionList;
             set
             {
                 _proteinDetectionList = value;
@@ -119,7 +119,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public ProteinDetectionProtocolObj ProteinDetectionProtocol
         {
-            get { return _proteinDetectionProtocol; }
+            get => _proteinDetectionProtocol;
             set
             {
                 _proteinDetectionProtocol = value;

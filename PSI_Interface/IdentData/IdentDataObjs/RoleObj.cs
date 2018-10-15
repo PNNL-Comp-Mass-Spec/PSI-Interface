@@ -37,7 +37,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {
-            get { return _cvParam; }
+            get => _cvParam;
             set
             {
                 _cvParam = value;

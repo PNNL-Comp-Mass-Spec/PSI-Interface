@@ -131,7 +131,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// integer
         public int Start
         {
-            get { return _start; }
+            get => _start;
             set
             {
                 _start = value;
@@ -150,7 +150,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// integer
         public int End
         {
-            get { return _end; }
+            get => _end;
             set
             {
                 _end = value;
@@ -185,7 +185,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public TranslationTableObj TranslationTable
         {
-            get { return _translationTable; }
+            get => _translationTable;
             set
             {
                 _translationTable = value;
@@ -202,7 +202,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// "Allowed Frames", int: -3, -2, -1, 1, 2, 3
         public int Frame
         {
-            get { return _frame; }
+            get => _frame;
             set
             {
                 _frame = value;
@@ -237,7 +237,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public PeptideObj Peptide
         {
-            get { return _peptide; }
+            get => _peptide;
             set
             {
                 _peptide = value;
@@ -273,7 +273,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public DbSequenceObj DBSequence
         {
-            get { return _dBSequence; }
+            get => _dBSequence;
             set
             {
                 _dBSequence = value;

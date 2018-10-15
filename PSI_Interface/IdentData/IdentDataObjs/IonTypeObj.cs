@@ -70,7 +70,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<FragmentArrayObj> FragmentArrays
         {
-            get { return _fragmentArrays; }
+            get => _fragmentArrays;
             set
             {
                 _fragmentArrays = value;
@@ -86,7 +86,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max n (mzIdentML 1.2)</remarks>
         public IdentDataList<UserParamObj> UserParams
         {
-            get { return _userParams; }
+            get => _userParams;
             set
             {
                 _userParams = value;
@@ -103,7 +103,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max n (mzIdentML 1.2)</remarks>
         public IdentDataList<CVParamObj> CVParams
         {
-            get { return _cvParams; }
+            get => _cvParams;
             set
             {
                 _cvParams = value;

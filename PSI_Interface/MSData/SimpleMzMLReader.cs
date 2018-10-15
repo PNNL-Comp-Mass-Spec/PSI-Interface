@@ -83,20 +83,20 @@ namespace PSI_Interface.MSData
 
             public virtual string CVRef
             {
-                get { return string.Empty; }
-                set { _cvRef = string.Empty; }
+                get => string.Empty;
+                set => _cvRef = string.Empty;
             }
 
             public virtual string Accession
             {
-                get { return string.Empty; }
-                set { _accession = string.Empty; }
+                get => string.Empty;
+                set => _accession = string.Empty;
             }
 
             public virtual string Type
             {
-                get { return string.Empty; }
-                set { _type = string.Empty; }
+                get => string.Empty;
+                set => _type = string.Empty;
             }
 
             protected Param()
@@ -116,14 +116,14 @@ namespace PSI_Interface.MSData
         {
             public override string CVRef      // Required
             {
-                get { return _cvRef; }
-                set { _cvRef = value; }
+                get => _cvRef;
+                set => _cvRef = value;
             }
 
             public override string Accession  // Required
             {
-                get { return _accession; }
-                set { _accession = value; }
+                get => _accession;
+                set => _accession = value;
             }
 
             public CVParam()
@@ -136,8 +136,8 @@ namespace PSI_Interface.MSData
         {
             public override string Type       // Optional
             {
-                get { return _type; }
-                set { _type = value; }
+                get => _type;
+                set => _type = value;
             }
 
             public UserParam()
@@ -181,7 +181,7 @@ namespace PSI_Interface.MSData
                 Unknown,
             }
             private readonly List<IndexItem> _offsets = new List<IndexItem>();
-            public List<IndexItem> Offsets { get { return _offsets; } }
+            public List<IndexItem> Offsets => _offsets;
             public readonly Dictionary<string, long> OffsetsMapNative = new Dictionary<string, long>();
             public readonly Dictionary<long, long> OffsetsMapInt = new Dictionary<long, long>();
             public readonly Dictionary<long, string> IdToNativeMap = new Dictionary<long, string>();
@@ -543,7 +543,7 @@ namespace PSI_Interface.MSData
 
             if (!_isGzipped || _randomAccess) // can't reset the position on a gzipped file...
             {
-                // perform a read to perform encoding autodetection
+                // perform a read to perform encoding auto detection
                 _fileReader.ReadLine();
                 _encoding = _fileReader.CurrentEncoding;
                 // Reset to beginning of file.

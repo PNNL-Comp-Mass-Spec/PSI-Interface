@@ -40,7 +40,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public ParentOrganizationObj Parent
         {
-            get { return _parent; }
+            get => _parent;
             set
             {
                 _parent = value;

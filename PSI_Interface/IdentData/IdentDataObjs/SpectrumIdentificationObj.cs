@@ -61,7 +61,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<InputSpectraRefObj> InputSpectra
         {
-            get { return _inputSpectra; }
+            get => _inputSpectra;
             set
             {
                 _inputSpectra = value;
@@ -73,7 +73,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SearchDatabaseRefObj> SearchDatabases
         {
-            get { return _searchDatabases; }
+            get => _searchDatabases;
             set
             {
                 _searchDatabases = value;
@@ -106,7 +106,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SpectrumIdentificationProtocolObj SpectrumIdentificationProtocol
         {
-            get { return _spectrumIdentificationProtocol; }
+            get => _spectrumIdentificationProtocol;
             set
             {
                 _spectrumIdentificationProtocol = value;
@@ -142,7 +142,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SpectrumIdentificationListObj SpectrumIdentificationList
         {
-            get { return _spectrumIdentificationList; }
+            get => _spectrumIdentificationList;
             set
             {
                 _spectrumIdentificationList = value;

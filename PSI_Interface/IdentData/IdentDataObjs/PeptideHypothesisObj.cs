@@ -46,7 +46,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationItemRefObj> SpectrumIdentificationItems
         {
-            get { return _spectrumIdentificationItems; }
+            get => _spectrumIdentificationItems;
             set
             {
                 _spectrumIdentificationItems = value;
@@ -85,7 +85,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public PeptideEvidenceObj PeptideEvidence
         {
-            get { return _peptideEvidence; }
+            get => _peptideEvidence;
             set
             {
                 _peptideEvidence = value;

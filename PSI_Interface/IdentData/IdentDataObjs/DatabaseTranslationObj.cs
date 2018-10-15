@@ -44,7 +44,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<TranslationTableObj> TranslationTables
         {
-            get { return _translationTables; }
+            get => _translationTables;
             set
             {
                 _translationTables = value;

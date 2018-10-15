@@ -106,7 +106,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public ParamObj SearchType
         {
-            get { return _searchType; }
+            get => _searchType;
             set
             {
                 _searchType = value;
@@ -119,7 +119,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj AdditionalSearchParams
         {
-            get { return _additionalSearchParams; }
+            get => _additionalSearchParams;
             set
             {
                 _additionalSearchParams = value;
@@ -132,7 +132,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         // Original ModificationParamsType
         public IdentDataList<SearchModificationObj> ModificationParams
         {
-            get { return _modificationParams; }
+            get => _modificationParams;
             set
             {
                 _modificationParams = value;
@@ -144,7 +144,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public EnzymeListObj Enzymes
         {
-            get { return _enzymes; }
+            get => _enzymes;
             set
             {
                 _enzymes = value;
@@ -156,7 +156,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<MassTableObj> MassTables
         {
-            get { return _massTables; }
+            get => _massTables;
             set
             {
                 _massTables = value;
@@ -169,7 +169,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         // Original ToleranceType
         public IdentDataList<CVParamObj> FragmentTolerances
         {
-            get { return _fragmentTolerances; }
+            get => _fragmentTolerances;
             set
             {
                 _fragmentTolerances = value;
@@ -182,7 +182,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         // Original ToleranceType
         public IdentDataList<CVParamObj> ParentTolerances
         {
-            get { return _parentTolerances; }
+            get => _parentTolerances;
             set
             {
                 _parentTolerances = value;
@@ -198,7 +198,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public ParamListObj Threshold
         {
-            get { return _threshold; }
+            get => _threshold;
             set
             {
                 _threshold = value;
@@ -211,7 +211,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         // Original DatabaseFiltersType
         public IdentDataList<FilterInfo> DatabaseFilters
         {
-            get { return _databaseFilters; }
+            get => _databaseFilters;
             set
             {
                 _databaseFilters = value;
@@ -223,7 +223,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public DatabaseTranslationObj DatabaseTranslation
         {
-            get { return _databaseTranslation; }
+            get => _databaseTranslation;
             set
             {
                 _databaseTranslation = value;
@@ -256,7 +256,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public AnalysisSoftwareObj AnalysisSoftware
         {
-            get { return _analysisSoftware; }
+            get => _analysisSoftware;
             set
             {
                 _analysisSoftware = value;

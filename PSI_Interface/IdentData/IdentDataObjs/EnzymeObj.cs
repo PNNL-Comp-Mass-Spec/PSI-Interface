@@ -71,7 +71,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj EnzymeName
         {
-            get { return _enzymeName; }
+            get => _enzymeName;
             set
             {
                 _enzymeName = value;
@@ -99,7 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// boolean
         public bool SemiSpecific
         {
-            get { return _semiSpecific; }
+            get => _semiSpecific;
             set
             {
                 _semiSpecific = value;
@@ -118,7 +118,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// integer
         public int MissedCleavages
         {
-            get { return _missedCleavages; }
+            get => _missedCleavages;
             set
             {
                 _missedCleavages = value;
@@ -134,7 +134,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// integer >= 1
         public int MinDistance
         {
-            get { return _minDistance; }
+            get => _minDistance;
             set
             {
                 _minDistance = value;

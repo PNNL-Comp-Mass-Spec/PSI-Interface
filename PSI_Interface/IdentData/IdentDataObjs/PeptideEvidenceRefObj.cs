@@ -67,7 +67,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public PeptideEvidenceObj PeptideEvidence
         {
-            get { return _peptideEvidence; }
+            get => _peptideEvidence;
             set
             {
                 _peptideEvidence = value;

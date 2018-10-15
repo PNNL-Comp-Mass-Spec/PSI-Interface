@@ -20,10 +20,7 @@ namespace PSI_Interface.MSData
 
         internal MSData MsData
         {
-            get
-            {
-                return _msData;
-            }
+            get => _msData;
             set
             {
                 if (!ReferenceEquals(_msData, value))

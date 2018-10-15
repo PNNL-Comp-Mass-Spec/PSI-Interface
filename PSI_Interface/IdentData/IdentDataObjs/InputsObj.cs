@@ -59,7 +59,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SourceFileInfo> SourceFiles
         {
-            get { return _sourceFiles; }
+            get => _sourceFiles;
             set
             {
                 _sourceFiles = value;
@@ -71,7 +71,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SearchDatabaseInfo> SearchDatabases
         {
-            get { return _searchDatabases; }
+            get => _searchDatabases;
             set
             {
                 _searchDatabases = value;
@@ -83,7 +83,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectraDataObj> SpectraDataList
         {
-            get { return _spectraDataList; }
+            get => _spectraDataList;
             set
             {
                 _spectraDataList = value;

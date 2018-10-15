@@ -59,8 +59,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public string Id
         {
-            get { return this._id; }
-            set { this._id = value; }
+            get => this._id;
+            set => this._id = value;
         }
 
         /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
@@ -68,14 +68,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public string Name
         {
-            get { return this._name; }
-            set { this._name = value; }
+            get => this._name;
+            set => this._name = value;
         }
 
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<PeptideHypothesisObj> PeptideHypotheses
         {
-            get { return this._peptideHypotheses; }
+            get => this._peptideHypotheses;
             set
             {
                 this._peptideHypotheses = value;
@@ -122,7 +122,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public DbSequenceObj DBSequence
         {
-            get { return this._dBSequence; }
+            get => this._dBSequence;
             set
             {
                 this._dBSequence = value;
@@ -140,8 +140,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// boolean
         public bool PassThreshold
         {
-            get { return this._passThreshold; }
-            set { this._passThreshold = value; }
+            get => this._passThreshold;
+            set => this._passThreshold = value;
         }
 
         #region Object Equality

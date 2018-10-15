@@ -50,7 +50,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<AffiliationObj> Affiliations
         {
-            get { return _affiliations; }
+            get => _affiliations;
             set
             {
                 _affiliations = value;

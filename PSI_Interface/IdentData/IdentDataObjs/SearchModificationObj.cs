@@ -58,7 +58,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SpecificityRulesListObj> SpecificityRules
         {
-            get { return _specificityRules; }
+            get => _specificityRules;
             set
             {
                 _specificityRules = value;

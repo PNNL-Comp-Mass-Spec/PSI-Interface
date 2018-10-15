@@ -60,7 +60,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public OrganizationObj Organization
         {
-            get { return _organization; }
+            get => _organization;
             set
             {
                 _organization = value;

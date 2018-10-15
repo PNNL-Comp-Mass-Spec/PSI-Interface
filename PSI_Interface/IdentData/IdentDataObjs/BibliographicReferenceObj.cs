@@ -79,7 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// integer
         public int Year
         {
-            get { return _year; }
+            get => _year;
             set
             {
                 _year = value;

@@ -66,7 +66,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ContactRoleObj> ContactRoles
         {
-            get { return _contactRoles; }
+            get => _contactRoles;
             set
             {
                 _contactRoles = value;
@@ -78,7 +78,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SubSampleObj> SubSamples
         {
-            get { return _subSamples; }
+            get => _subSamples;
             set
             {
                 _subSamples = value;

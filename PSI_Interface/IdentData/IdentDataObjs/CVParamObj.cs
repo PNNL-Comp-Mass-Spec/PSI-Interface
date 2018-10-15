@@ -71,16 +71,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public string CVRef
         {
-            get
-            {
-                //return this._cvRef;
-                return IdentData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[Cvid].CVRef);
-            }
-            set
-            {
-                _cvRef = IdentData.CvTranslator.ConvertFileCVRef(value);
-                //this._cvRef = value;
-            }
+            get => IdentData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[Cvid].CVRef);
+            set => _cvRef = IdentData.CvTranslator.ConvertFileCVRef(value);
         }
 
         /// <remarks>The accession or ID number of this CV term in the source CV.</remarks>
@@ -88,11 +80,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public string Accession
         {
-            get
-            {
-                return CV.CV.TermData[Cvid].Id;
-                //return this._accession;
-            }
+            get => CV.CV.TermData[Cvid].Id;
             set
             {
                 //this._accession = value;
@@ -136,8 +124,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public override string Value
         {
-            get { return _value; }
-            set { _value = value; }
+            get => _value;
+            set => _value = value;
         }
         #endregion
 

@@ -77,7 +77,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public MeasureObj Measure
         {
-            get { return _measure; }
+            get => _measure;
             set
             {
                 _measure = value;

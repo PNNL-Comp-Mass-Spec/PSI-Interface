@@ -120,7 +120,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public IdentDataObj IdentData
         {
-            get { return _identData; }
+            get => _identData;
             set
             {
                 if (!ReferenceEquals(this._identData, value))

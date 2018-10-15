@@ -77,7 +77,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public ParamObj DatabaseName
         {
-            get { return _databaseName; }
+            get => _databaseName;
             set
             {
                 _databaseName = value;
@@ -99,7 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// dateTime
         public DateTime ReleaseDate
         {
-            get { return _releaseDate; }
+            get => _releaseDate;
             set
             {
                 _releaseDate = value;
@@ -115,7 +115,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// long
         public long NumDatabaseSequences
         {
-            get { return _numDatabaseSequences; }
+            get => _numDatabaseSequences;
             set
             {
                 _numDatabaseSequences = value;
@@ -131,7 +131,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// long
         public long NumResidues
         {
-            get { return _numResidues; }
+            get => _numResidues;
             set
             {
                 _numResidues = value;
@@ -167,7 +167,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1 (mzIdentML 1.2)</remarks>
         public FileFormatInfo FileFormat
         {
-            get { return _fileFormat; }
+            get => _fileFormat;
             set
             {
                 _fileFormat = value;

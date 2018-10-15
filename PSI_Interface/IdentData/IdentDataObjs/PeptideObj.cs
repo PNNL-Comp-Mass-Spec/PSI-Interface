@@ -76,7 +76,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ModificationObj> Modifications
         {
-            get { return _modifications; }
+            get => _modifications;
             set
             {
                 _modifications = value;
@@ -88,7 +88,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<SubstitutionModificationObj> SubstitutionModifications
         {
-            get { return _substitutionModifications; }
+            get => _substitutionModifications;
             set
             {
                 _substitutionModifications = value;

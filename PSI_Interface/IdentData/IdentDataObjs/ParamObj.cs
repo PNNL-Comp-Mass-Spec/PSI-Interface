@@ -48,7 +48,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public ParamBaseObj Item
         {
-            get { return _item; }
+            get => _item;
             set
             {
                 _item = value;

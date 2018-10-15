@@ -64,7 +64,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SearchDatabaseInfo SearchDatabase
         {
-            get { return _searchDatabase; }
+            get => _searchDatabase;
             set
             {
                 _searchDatabase = value;

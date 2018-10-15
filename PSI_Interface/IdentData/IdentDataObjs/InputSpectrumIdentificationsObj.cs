@@ -58,7 +58,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SpectrumIdentificationListObj SpectrumIdentificationList
         {
-            get { return _spectrumIdentificationList; }
+            get => _spectrumIdentificationList;
             set
             {
                 _spectrumIdentificationList = value;

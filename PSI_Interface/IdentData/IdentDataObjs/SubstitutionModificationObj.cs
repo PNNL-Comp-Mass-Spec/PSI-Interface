@@ -66,7 +66,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// integer
         public int Location
         {
-            get { return _location; }
+            get => _location;
             set
             {
                 _location = value;
@@ -85,7 +85,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// double
         public double AvgMassDelta
         {
-            get { return _avgMassDelta; }
+            get => _avgMassDelta;
             set
             {
                 _avgMassDelta = value;
@@ -104,7 +104,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// double
         public double MonoisotopicMassDelta
         {
-            get { return _monoisotopicMassDelta; }
+            get => _monoisotopicMassDelta;
             set
             {
                 _monoisotopicMassDelta = value;

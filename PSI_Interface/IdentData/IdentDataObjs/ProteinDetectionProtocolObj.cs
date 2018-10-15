@@ -53,7 +53,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj AnalysisParams
         {
-            get { return _analysisParams; }
+            get => _analysisParams;
             set
             {
                 _analysisParams = value;
@@ -69,7 +69,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public ParamListObj Threshold
         {
-            get { return _threshold; }
+            get => _threshold;
             set
             {
                 _threshold = value;
@@ -102,7 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public AnalysisSoftwareObj AnalysisSoftware
         {
-            get { return _analysisSoftware; }
+            get => _analysisSoftware;
             set
             {
                 _analysisSoftware = value;

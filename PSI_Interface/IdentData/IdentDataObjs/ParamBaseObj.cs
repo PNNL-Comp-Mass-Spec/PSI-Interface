@@ -78,7 +78,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public CV.CV.CVID UnitCvid
         {
-            get { return _unitCvid; }
+            get => _unitCvid;
             set
             {
                 _unitCvid = value;

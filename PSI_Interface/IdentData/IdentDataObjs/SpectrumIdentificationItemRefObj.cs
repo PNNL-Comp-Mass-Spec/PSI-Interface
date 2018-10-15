@@ -69,7 +69,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SpectrumIdentificationItemObj SpectrumIdentificationItem
         {
-            get { return _spectrumIdentificationItem; }
+            get => _spectrumIdentificationItem;
             set
             {
                 _spectrumIdentificationItem = value;

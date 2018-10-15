@@ -51,7 +51,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public MSData MsData
         {
-            get { return _msData; }
+            get => _msData;
             set
             {
                 if (!ReferenceEquals(_msData, value))
@@ -70,7 +70,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public int DefaultArrayLength
         {
-            get { return _defaultArrayLength; }
+            get => _defaultArrayLength;
             set
             {
                 _defaultArrayLength = value;

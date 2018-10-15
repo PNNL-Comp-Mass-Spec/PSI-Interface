@@ -69,7 +69,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1 (mzIdentML 1.2)</remarks>
         public FileFormatInfo FileFormat
         {
-            get { return _fileFormat; }
+            get => _fileFormat;
             set
             {
                 _fileFormat = value;

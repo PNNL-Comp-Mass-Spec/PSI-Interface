@@ -45,7 +45,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<EnzymeObj> Enzymes
         {
-            get { return _enzymes; }
+            get => _enzymes;
             set
             {
                 _enzymes = value;
@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// boolean
         public bool Independent
         {
-            get { return _independent; }
+            get => _independent;
             set
             {
                 _independent = value;

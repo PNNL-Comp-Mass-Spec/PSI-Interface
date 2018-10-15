@@ -42,7 +42,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public IdentDataList<UserParamObj> UserParams
         {
-            get { return _userParams; }
+            get => _userParams;
             set
             {
                 _userParams = value;

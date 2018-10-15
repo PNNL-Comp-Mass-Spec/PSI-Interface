@@ -64,7 +64,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SpectraDataObj SpectraData
         {
-            get { return _spectraData; }
+            get => _spectraData;
             set
             {
                 _spectraData = value;

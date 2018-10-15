@@ -58,7 +58,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SampleObj Sample
         {
-            get { return _sample; }
+            get => _sample;
             set
             {
                 _sample = value;

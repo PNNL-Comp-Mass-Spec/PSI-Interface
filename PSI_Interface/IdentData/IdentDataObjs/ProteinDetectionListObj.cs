@@ -45,7 +45,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ProteinAmbiguityGroupObj> ProteinAmbiguityGroups
         {
-            get { return _proteinAmbiguityGroups; }
+            get => _proteinAmbiguityGroups;
             set
             {
                 _proteinAmbiguityGroups = value;

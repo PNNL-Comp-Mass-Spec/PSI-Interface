@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         internal IdentDataObj IdentData
         {
-            get { return this._identData; }
+            get => this._identData;
             set
             {
                 if (!ReferenceEquals(this._identData, value))

@@ -48,7 +48,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public RoleObj Role
         {
-            get { return _role; }
+            get => _role;
             set
             {
                 _role = value;
@@ -81,7 +81,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public AbstractContactObj Contact
         {
-            get { return _contact; }
+            get => _contact;
             set
             {
                 _contact = value;

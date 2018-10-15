@@ -54,7 +54,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<ParamBaseObj> Items
         {
-            get { return _items; }
+            get => _items;
             set
             {
                 _items = value;

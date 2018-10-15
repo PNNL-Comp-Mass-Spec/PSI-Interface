@@ -48,7 +48,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<ProteinDetectionHypothesisObj> ProteinDetectionHypotheses
         {
-            get { return _proteinDetectionHypotheses; }
+            get => _proteinDetectionHypotheses;
             set
             {
                 _proteinDetectionHypotheses = value;

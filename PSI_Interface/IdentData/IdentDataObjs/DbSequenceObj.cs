@@ -102,7 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SearchDatabaseInfo SearchDatabase
         {
-            get { return _searchDatabase; }
+            get => _searchDatabase;
             set
             {
                 _searchDatabase = value;
@@ -119,7 +119,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// integer
         public int Length
         {
-            get { return _length; }
+            get => _length;
             set
             {
                 _length = value;

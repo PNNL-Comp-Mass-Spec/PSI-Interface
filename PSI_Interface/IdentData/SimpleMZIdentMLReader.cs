@@ -312,8 +312,8 @@ namespace PSI_Interface.IdentData
             [Obsolete("Use IsSpectrumIdNotTheScanNumber")]
             public bool IsDtaSpectrum
             {
-                get { return IsSpectrumIdNotTheScanNumber; }
-                set { IsSpectrumIdNotTheScanNumber = value; }
+                get => IsSpectrumIdNotTheScanNumber;
+                set => IsSpectrumIdNotTheScanNumber = value;
             }
 
             /// <summary>
@@ -324,10 +324,7 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Scan number, as specified in the mzid using a CVParam (if available)
             /// </summary>
-            public int ScanNumCVParam
-            {
-                get { return scanNum; }
-            }
+            public int ScanNumCVParam => scanNum;
 
             private int scanNum = -1;
 
@@ -346,7 +343,7 @@ namespace PSI_Interface.IdentData
                     }
                     return scanNum;
                 }
-                set { scanNum = value; }
+                set => scanNum = value;
             }
 
             /// <summary>
@@ -480,10 +477,7 @@ namespace PSI_Interface.IdentData
             /// should be given the location 0. Modification to the C-terminus should be given as peptide length + 1.
             /// If the modification location is unknown e.g. for PMF data, this attribute should be omitted.
             /// (See mzIdentML specification, version 1.1.0)</remarks>
-            public List<KeyValuePair<int, Modification>> Mods
-            {
-                get { return mods; }
-            }
+            public List<KeyValuePair<int, Modification>> Mods => mods;
 
             /// <summary>
             /// Peptide sequence with numeric mods but without a prefix or suffix residue

@@ -53,7 +53,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max 1</remarks>
         public ParamObj FilterType
         {
-            get { return _filterType; }
+            get => _filterType;
             set
             {
                 _filterType = value;
@@ -66,7 +66,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj Include
         {
-            get { return _include; }
+            get => _include;
             set
             {
                 _include = value;
@@ -79,7 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj Exclude
         {
-            get { return _exclude; }
+            get => _exclude;
             set
             {
                 _exclude = value;

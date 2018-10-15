@@ -38,7 +38,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public MSDataList<CVInfo> CVList // TODO: enforce quantity
         {
-            get { return this._cvList; }
+            get => this._cvList;
             set
             {
                 this._cvList = value;
@@ -57,7 +57,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public FileDescription FileDescription // TODO: enforce quantity
         {
-            get { return this._fileDescription; }
+            get => this._fileDescription;
             set
             {
                 this._fileDescription = value;
@@ -71,7 +71,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<ReferenceableParamGroup> ReferenceableParamGroupList
         {
-            get { return this._referenceableParamGroupList; }
+            get => this._referenceableParamGroupList;
             set
             {
                 this._referenceableParamGroupList = value;
@@ -85,7 +85,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<SampleInfo> SampleList
         {
-            get { return this._sampleList; }
+            get => this._sampleList;
             set
             {
                 this._sampleList = value;
@@ -99,7 +99,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public MSDataList<SoftwareInfo> SoftwareList // TODO: enforce quantity
         {
-            get { return this._softwareList; }
+            get => this._softwareList;
             set
             {
                 this._softwareList = value;
@@ -113,7 +113,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<ScanSettingsInfo> ScanSettingsList
         {
-            get { return this._scanSettingsList; }
+            get => this._scanSettingsList;
             set
             {
                 this._scanSettingsList = value;
@@ -127,7 +127,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public MSDataList<InstrumentConfigurationInfo> InstrumentConfigurationList // TODO: enforce quantity
         {
-            get { return this._instrumentConfigurationList; }
+            get => this._instrumentConfigurationList;
             set
             {
                 this._instrumentConfigurationList = value;
@@ -141,7 +141,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public MSDataList<DataProcessingInfo> DataProcessingList // TODO: enforce quantity
         {
-            get { return this._dataProcessingList; }
+            get => this._dataProcessingList;
             set
             {
                 this._dataProcessingList = value;
@@ -155,7 +155,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public Run Run // TODO: enforce quantity
         {
-            get { return this._run; }
+            get => this._run;
             set
             {
                 this._run = value;
@@ -279,7 +279,7 @@ namespace PSI_Interface.MSData
         /// min 1, max unbounded
         public MSDataList<ProcessingMethodInfo> ProcessingMethods // TODO: enforce quantity
         {
-            get { return this._processingMethods; }
+            get => this._processingMethods;
             set
             {
                 this._processingMethods = value;
@@ -325,7 +325,7 @@ namespace PSI_Interface.MSData
         /// min 0, max unbounded
         public MSDataList<ReferenceableParamGroupRef> ReferenceableParamGroupRefs
         {
-            get { return this._referenceableParamGroupRefs; }
+            get => this._referenceableParamGroupRefs;
             set
             {
                 this._referenceableParamGroupRefs = value;
@@ -344,7 +344,7 @@ namespace PSI_Interface.MSData
         /// min 0, max unbounded
         public MSDataList<CVParam> CVParams
         {
-            get { return this._cVParams; }
+            get => this._cVParams;
             set
             {
                 this._cVParams = value;
@@ -358,7 +358,7 @@ namespace PSI_Interface.MSData
         /// min 0, max unbounded
         public MSDataList<UserParam> UserParams
         {
-            get { return this._userParams; }
+            get => this._userParams;
             set
             {
                 this._userParams = value;
@@ -408,7 +408,7 @@ namespace PSI_Interface.MSData
         /// min 0, max unbounded
         public MSDataList<CVParam> CVParams
         {
-            get { return this._cVParams; }
+            get => this._cVParams;
             set
             {
                 this._cVParams = value;
@@ -422,7 +422,7 @@ namespace PSI_Interface.MSData
         /// min 0, max unbounded
         public MSDataList<UserParam> UserParams
         {
-            get { return this._userParams; }
+            get => this._userParams;
             set
             {
                 this._userParams = value;
@@ -484,19 +484,8 @@ namespace PSI_Interface.MSData
         /// IDREF
         internal string CVRef
         {
-            get
-            {
-                //return this.Accession.Split(new[] { ':' })[0];
-                return this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.Cvid].CVRef);
-                //return this._cvRef;
-                //return this._CVRef.Id;
-            }
-            set
-            {
-                this._cvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
-                // have to set up a dictionary or something similar...
-                //CVRef = cvs[value];
-            }
+            get => this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.Cvid].CVRef);
+            set => this._cvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
         }
 
         /// <remarks>The accession number of the referred-to term in the named resource (e.g.: MS:000012).</remarks>
@@ -504,11 +493,8 @@ namespace PSI_Interface.MSData
         /// string
         internal string Accession
         {
-            get
-            {
-                return CV.CV.TermData[this.Cvid].Id;
-                //return this._accession;
-            } // TODO: change this return to a value mapped from the cvid
+            get => CV.CV.TermData[this.Cvid].Id;
+            // TODO: change this return to a value mapped from the cvid
             set
             {
                 //this._accession = value;
@@ -529,23 +515,15 @@ namespace PSI_Interface.MSData
         /// <remarks>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</remarks>
         /// Required Attribute
         /// string
-        internal string Name
-        {
-            get
-            {
-                return CV.CV.TermData[this.Cvid].Name;
-                //return this._name;
-            } // TODO: change this return to a value mapped from the cvid
-            //set { this._name = value; } // TODO: remove this when accession to cvid mapping is complete
-        }
+        internal string Name => CV.CV.TermData[this.Cvid].Name;
 
         /// <remarks>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</remarks>
         /// Optional Attribute
         /// string
         public string Value
         {
-            get { return this._value; }
-            set { this._value = value; }
+            get => this._value;
+            set => this._value = value;
         } // TODO: Perform validation of the value according to CVID/UnitCVID?
 
         /*/// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
@@ -719,7 +697,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public CV.CV.CVID UnitCvid
         {
-            get { return this._unitCvid; }
+            get => this._unitCvid;
             set
             {
                 this._unitCvid = value;
@@ -846,7 +824,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public ParamGroup IsolationWindow
         {
-            get { return this._isolationWindow; }
+            get => this._isolationWindow;
             set
             {
                 this._isolationWindow = value;
@@ -862,7 +840,7 @@ namespace PSI_Interface.MSData
         //public SelectedIonListType selectedIonList
         public MSDataList<ParamGroup> SelectedIonList
         {
-            get { return this._selectedIonList; }
+            get => this._selectedIonList;
             set
             {
                 this._selectedIonList = value;
@@ -877,7 +855,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public ParamGroup Activation
         {
-            get { return this._activation; }
+            get => this._activation;
             set
             {
                 this._activation = value;
@@ -1063,8 +1041,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public double[] Data
         {
-            get { return this._data; }
-            set { this._data = value; }
+            get => this._data;
+            set => this._data = value;
         }
 
         /// <summary>
@@ -1072,7 +1050,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ArrayType DataType
         {
-            get { return this._dataType; }
+            get => this._dataType;
             set
             {
                 this._dataType = value;
@@ -1100,7 +1078,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public int DataWidth
         {
-            get { return this._dataWidth; }
+            get => this._dataWidth;
             set
             {
                 if (value != 4 && value != 8)
@@ -1141,7 +1119,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public bool IsCompressed
         {
-            get { return this._isCompressed; }
+            get => this._isCompressed;
             set
             {
                 this._isCompressed = value;
@@ -1171,17 +1149,14 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Length of the data array
         /// </summary>
-        public int DataLength
-        {
-            get { return this._data.Length; }
-        }
+        public int DataLength => this._data.Length;
 
         /// <summary>The actual base64 encoded binary data. The byte order is always 'little endian'.</summary>
         /// base64Binary
         public byte[] Binary
         {
-            get { return Base64Conversion.EncodeBytes(this._data, this._dataWidth, this._isCompressed); }
-            set { this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, this._arrayLength, this._isCompressed); }
+            get => Base64Conversion.EncodeBytes(this._data, this._dataWidth, this._isCompressed);
+            set => this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, this._arrayLength, this._isCompressed);
         }
 
         /// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType.
@@ -1192,8 +1167,10 @@ namespace PSI_Interface.MSData
         /// non-negative integer
         public int ArrayLength // TODO: enforce appropriate usage
         {
-            get { return this._data.Length; } // Return value solely based upon present data
-            private set { this._arrayLength = value; } // Allow setting from other constructors.
+            get => this._data.Length;
+            // Return value solely based upon present data
+            private set => this._arrayLength = value;
+            // Allow setting from other constructors.
         }
 
         /// <remarks>This optional attribute may reference the 'id' attribute of the appropriate dataProcessing.</remarks>
@@ -1213,7 +1190,7 @@ namespace PSI_Interface.MSData
         /// min 1, max unbounded
         public MSDataList<Scan> Scan // TODO: enforce quantity
         {
-            get { return this._scan; }
+            get => this._scan;
             set
             {
                 this._scan = value;
@@ -1238,7 +1215,7 @@ namespace PSI_Interface.MSData
         //public ScanWindowListType scanWindowList
         public MSDataList<ParamGroup> ScanWindowList
         {
-            get { return this._scanWindowList; }
+            get => this._scanWindowList;
             set
             {
                 this._scanWindowList = value;
@@ -1310,7 +1287,7 @@ namespace PSI_Interface.MSData
         /// min 0, max unbounded
         public MSDataList<Spectrum> Spectra
         {
-            get { return this._spectra; }
+            get => this._spectra;
             set
             {
                 this._spectra = value;
@@ -1345,7 +1322,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public ScanList ScanList
         {
-            get { return this._scanList; }
+            get => this._scanList;
             set
             {
                 this._scanList = value;
@@ -1359,7 +1336,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<Precursor> PrecursorList
         {
-            get { return this._precursorList; }
+            get => this._precursorList;
             set
             {
                 this._precursorList = value;
@@ -1373,7 +1350,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<Product> ProductList
         {
-            get { return this._productList; }
+            get => this._productList;
             set
             {
                 this._productList = value;
@@ -1387,7 +1364,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<BinaryDataArray> BinaryDataArrayList
         {
-            get { return this._binaryDataArrayList; }
+            get => this._binaryDataArrayList;
             set
             {
                 this._binaryDataArrayList = value;
@@ -1511,7 +1488,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public ParamGroup IsolationWindow
         {
-            get { return this._isolationWindow; }
+            get => this._isolationWindow;
             set
             {
                 this._isolationWindow = value;
@@ -1538,7 +1515,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public SpectrumList SpectrumList
         {
-            get { return this._spectrumList; }
+            get => this._spectrumList;
             set
             {
                 this._spectrumList = value;
@@ -1553,7 +1530,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public ChromatogramList ChromatogramList
         {
-            get { return this._chromatogramList; }
+            get => this._chromatogramList;
             set
             {
                 this._chromatogramList = value;
@@ -1591,7 +1568,7 @@ namespace PSI_Interface.MSData
         /// DateTime
         public System.DateTime StartTimeStamp
         {
-            get { return this._startTimeStampField; }
+            get => this._startTimeStampField;
             set
             {
                 this._startTimeStampField = value;
@@ -1615,7 +1592,7 @@ namespace PSI_Interface.MSData
         /// min 1, max unbounded
         public MSDataList<Chromatogram> Chromatograms // TODO: enforce quantity
         {
-            get { return this._chromatograms; }
+            get => this._chromatograms;
             set
             {
                 this._chromatograms = value;
@@ -1648,7 +1625,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public Precursor Precursor
         {
-            get { return this._precursor; }
+            get => this._precursor;
             set
             {
                 this._precursor = value;
@@ -1662,7 +1639,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public Product Product
         {
-            get { return this._product; }
+            get => this._product;
             set
             {
                 this._product = value;
@@ -1676,7 +1653,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public MSDataList<BinaryDataArray> BinaryDataArrayList // TODO: enforce requirement
         {
-            get { return this._binaryDataArrayList; }
+            get => this._binaryDataArrayList;
             set
             {
                 this._binaryDataArrayList = value;
@@ -1789,7 +1766,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<SourceFileRef> SourceFileRefList
         {
-            get { return this._sourceFileRefList; }
+            get => this._sourceFileRefList;
             set
             {
                 this._sourceFileRefList = value;
@@ -1805,7 +1782,7 @@ namespace PSI_Interface.MSData
         //public TargetListType targetList
         public MSDataList<ParamGroup> TargetList
         {
-            get { return this._targetList; }
+            get => this._targetList;
             set
             {
                 this._targetList = value;
@@ -1982,7 +1959,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public ComponentList ComponentList
         {
-            get { return this._componentList; }
+            get => this._componentList;
             set
             {
                 this._componentList = value;
@@ -1996,7 +1973,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public SoftwareRef SoftwareRef
         {
-            get { return this._softwareRef; }
+            get => this._softwareRef;
             set
             {
                 this._softwareRef = value;
@@ -2031,7 +2008,7 @@ namespace PSI_Interface.MSData
         /// min 1, max unbounded
         public MSDataList<SourceComponent> Sources // TODO: enforce quantity
         {
-            get { return this._source; }
+            get => this._source;
             set
             {
                 this._source = value;
@@ -2046,7 +2023,7 @@ namespace PSI_Interface.MSData
         /// min 1, max unbounded
         public MSDataList<AnalyzerComponent> Analyzers // TODO: enforce quantity
         {
-            get { return this._analyzer; }
+            get => this._analyzer;
             set
             {
                 this._analyzer = value;
@@ -2061,7 +2038,7 @@ namespace PSI_Interface.MSData
         /// min 1, max unbounded
         public MSDataList<DetectorComponent> Detectors //TODO: enforce quantity
         {
-            get { return this._detector; }
+            get => this._detector;
             set
             {
                 this._detector = value;
@@ -2239,7 +2216,7 @@ namespace PSI_Interface.MSData
         /// min 1, max 1
         public ParamGroup FileContentInfo // TODO: enforce quantity
         {
-            get { return this._fileContent; }
+            get => this._fileContent;
             set
             {
                 this._fileContent = value;
@@ -2253,7 +2230,7 @@ namespace PSI_Interface.MSData
         /// min 0, max 1
         public MSDataList<SourceFileInfo> SourceFileList
         {
-            get { return this._sourceFileList; }
+            get => this._sourceFileList;
             set
             {
                 this._sourceFileList = value;
@@ -2267,7 +2244,7 @@ namespace PSI_Interface.MSData
         /// min 0, max unbounded
         public MSDataList<ParamGroup> ContactInfo
         {
-            get { return this._contact; }
+            get => this._contact;
             set
             {
                 this._contact = value;

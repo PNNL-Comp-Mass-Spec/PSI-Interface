@@ -194,7 +194,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 1, max 1</remarks>
         public IdentDataList<CVInfo> CVList
         {
-            get { return _cvList; }
+            get => _cvList;
             set
             {
                 _cvList = value;
@@ -213,7 +213,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 0, max 1</remarks>
         public IdentDataList<AnalysisSoftwareObj> AnalysisSoftwareList
         {
-            get { return _analysisSoftwareList; }
+            get => _analysisSoftwareList;
             set
             {
                 _analysisSoftwareList = value;
@@ -228,7 +228,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 0, max 1</remarks>
         public ProviderObj Provider
         {
-            get { return _provider; }
+            get => _provider;
             set
             {
                 _provider = value;
@@ -242,7 +242,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 0, max 1</remarks>
         public IdentDataList<AbstractContactObj> AuditCollection
         {
-            get { return _auditCollection; }
+            get => _auditCollection;
             set
             {
                 _auditCollection = value;
@@ -256,7 +256,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 0, max 1</remarks>
         public IdentDataList<SampleObj> AnalysisSampleCollection
         {
-            get { return _analysisSampleCollection; }
+            get => _analysisSampleCollection;
             set
             {
                 _analysisSampleCollection = value;
@@ -270,7 +270,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 0, max 1</remarks>
         public SequenceCollectionObj SequenceCollection
         {
-            get { return _sequenceCollection; }
+            get => _sequenceCollection;
             set
             {
                 _sequenceCollection = value;
@@ -284,7 +284,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 1, max 1</remarks>
         public AnalysisCollectionObj AnalysisCollection
         {
-            get { return _analysisCollection; }
+            get => _analysisCollection;
             set
             {
                 _analysisCollection = value;
@@ -298,7 +298,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 1, max 1</remarks>
         public AnalysisProtocolCollectionObj AnalysisProtocolCollection
         {
-            get { return _analysisProtocolCollection; }
+            get => _analysisProtocolCollection;
             set
             {
                 _analysisProtocolCollection = value;
@@ -312,7 +312,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 1, max 1</remarks>
         public DataCollectionObj DataCollection
         {
-            get { return _dataCollection; }
+            get => _dataCollection;
             set
             {
                 _dataCollection = value;
@@ -327,7 +327,7 @@ namespace PSI_Interface.IdentData
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<BibliographicReferenceObj> BibliographicReferences
         {
-            get { return _bibliographicReferences; }
+            get => _bibliographicReferences;
             set
             {
                 _bibliographicReferences = value;
@@ -343,7 +343,7 @@ namespace PSI_Interface.IdentData
         /// dataTime
         public DateTime CreationDate
         {
-            get { return _creationDate; }
+            get => _creationDate;
             set
             {
                 _creationDate = value;

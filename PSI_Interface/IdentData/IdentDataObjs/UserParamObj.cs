@@ -51,8 +51,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public override string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set => _name = value;
         }
 
         /// <remarks>The user-entered value of the parameter.</remarks>
@@ -60,8 +60,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public override string Value
         {
-            get { return _value; }
-            set { _value = value; }
+            get => _value;
+            set => _value = value;
         }
 
         /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>

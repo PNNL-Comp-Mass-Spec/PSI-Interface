@@ -57,7 +57,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max 1</remarks>
         public IdentDataList<MeasureObj> FragmentationTables
         {
-            get { return _fragmentationTables; }
+            get => _fragmentationTables;
             set
             {
                 _fragmentationTables = value;
@@ -69,7 +69,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationResultObj> SpectrumIdentificationResults
         {
-            get { return _spectrumIdentificationResults; }
+            get => _spectrumIdentificationResults;
             set
             {
                 _spectrumIdentificationResults = value;
@@ -86,7 +86,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// long
         public long NumSequencesSearched
         {
-            get { return _numSequencesSearched; }
+            get => _numSequencesSearched;
             set
             {
                 _numSequencesSearched = value;

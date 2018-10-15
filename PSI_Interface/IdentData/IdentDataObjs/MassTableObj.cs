@@ -60,7 +60,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ResidueObj> Residues
         {
-            get { return _residues; }
+            get => _residues;
             set
             {
                 _residues = value;
@@ -72,7 +72,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<AmbiguousResidueObj> AmbiguousResidues
         {
-            get { return _ambiguousResidues; }
+            get => _ambiguousResidues;
             set
             {
                 _ambiguousResidues = value;

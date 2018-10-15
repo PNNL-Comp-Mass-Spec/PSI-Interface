@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<SpectrumIdentificationItemObj> SpectrumIdentificationItems
         {
-            get { return _spectrumIdentificationItems; }
+            get => _spectrumIdentificationItems;
             set
             {
                 _spectrumIdentificationItems = value;
@@ -103,7 +103,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// string
         public SpectraDataObj SpectraData
         {
-            get { return _spectraData; }
+            get => _spectraData;
             set
             {
                 _spectraData = value;

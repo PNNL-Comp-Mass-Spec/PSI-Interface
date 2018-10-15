@@ -44,7 +44,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// datetime
         public DateTime ActivityDate
         {
-            get { return _activityDate; }
+            get => _activityDate;
             set
             {
                 _activityDate = value;

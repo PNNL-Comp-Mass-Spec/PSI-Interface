@@ -42,7 +42,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public IdentDataList<CVParamObj> CVParams
         {
-            get { return _cvParams; }
+            get => _cvParams;
             set
             {
                 _cvParams = value;
