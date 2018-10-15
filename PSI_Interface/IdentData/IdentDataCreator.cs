@@ -90,7 +90,7 @@ namespace PSI_Interface.IdentData
             identData.AnalysisCollection.SpectrumIdentifications.Add(analysisCollection);
 
             specList.SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>();
-            var dbseqList = new List<DbSequenceObj>();
+            var dbSeqList = new List<DbSequenceObj>();
             var peptideList = new List<PeptideObj>();
             var pepEvList = new List<PeptideEvidenceObj>();
             foreach (var result in identificationResults.Values)
@@ -104,7 +104,7 @@ namespace PSI_Interface.IdentData
                     }
                     foreach (var pepEv in sii.PeptideEvidences)
                     {
-                        dbseqList.Add(pepEv.PeptideEvidence.DBSequence);
+                        dbSeqList.Add(pepEv.PeptideEvidence.DBSequence);
                         pepEvList.Add(pepEv.PeptideEvidence);
                     }
                 }
@@ -112,28 +112,27 @@ namespace PSI_Interface.IdentData
 
 
 
-            // TODO: Deduplicate the peptide and dbsequence lists
+            // TODO: Deduplicate the peptide and dbSequence lists
 
             var dbSeqCounter = 1L;
             var peptideCounter = 1L;
 
             var dbSeqDeDup = new Dictionary<string, DbSequenceObj>();
 
-            foreach (var dbseq in dbseqList)
+            foreach (var dbSeq in dbSeqList)
             {
-                DbSequenceObj matched;
-                if (dbSeqDeDup.TryGetValue(dbseq.Accession, out matched))
+                if (dbSeqDeDup.TryGetValue(dbSeq.Accession, out var matched))
                 {
                     //System.Console.WriteLine("Dropped duplicate DBSequence!");
-                    dbseq.Id = matched.Id;
+                    dbSeq.Id = matched.Id;
                 }
                 else
                 {
-                    dbseq.Id = "DBSeq" + dbSeqCounter++;
-                    dbSeqDeDup.Add(dbseq.Accession, dbseq);
+                    dbSeq.Id = "DBSeq" + dbSeqCounter++;
+                    dbSeqDeDup.Add(dbSeq.Accession, dbSeq);
                 }
             }
-            //identData.SequenceCollection.DBSequences.AddRange(dbseqList);
+            //identData.SequenceCollection.DBSequences.AddRange(dbSeqList);
             identData.SequenceCollection.DBSequences.AddRange(dbSeqDeDup.Values);
 
             var pepDeDup = new Dictionary<string, Dictionary<string, PeptideObj>>();
