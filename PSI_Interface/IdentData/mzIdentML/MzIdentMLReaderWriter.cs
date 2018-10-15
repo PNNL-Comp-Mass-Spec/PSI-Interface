@@ -100,22 +100,25 @@ namespace PSI_Interface.IdentData.mzIdentML
             using (var reader = new StreamReader(CreateReader(filePath, 8192)))
             {
                 var count = 0;
-                string line = "";
                 var nsKey = "http://psidev.info/psi/pi/mzIdentML/";
-                while ((line = reader.ReadLine()) != null && count < 20)
+                while (!reader.EndOfStream && count < 20)
                 {
-                    if (line.ToLower().Contains(nsKey.ToLower()))
-                    {
-                        var index = line.ToLower().IndexOf(nsKey.ToLower());
-                        var keyEnd = index + nsKey.Length;
-                        var maxCount = Math.Min(10, line.Length - keyEnd);
-                        var focus = line.Substring(index + nsKey.Length, maxCount);
-                        var split = focus.Split(' ', '"');
-
-                        return split[0];
-                    }
-
+                    var line = reader.ReadLine();
                     count++;
+
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
+
+                    var index = line.IndexOf(nsKey, StringComparison.OrdinalIgnoreCase);
+                    if (index < 0)
+                        continue;
+
+                    var keyEnd = index + nsKey.Length;
+                    var maxCount = Math.Min(10, line.Length - keyEnd);
+                    var focus = line.Substring(index + nsKey.Length, maxCount);
+                    var split = focus.Split(' ', '"');
+
+                    return split[0];
                 }
             }
 
