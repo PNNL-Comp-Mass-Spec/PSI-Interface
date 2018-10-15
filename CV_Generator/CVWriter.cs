@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -67,6 +68,7 @@ namespace CV_Generator
             var termDataFileName = filenameBase + "_termData.cs";
             var relationshipsFileName = filenameBase + "_relationships.cs";
 
+            Console.WriteLine("Writing data to " + metadataFileName);
             using (var file = new StreamWriter(new FileStream(metadataFileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
@@ -83,6 +85,7 @@ namespace CV_Generator
                 file.WriteLine(NamespaceClose());
             }
 
+            Console.WriteLine("Writing data to " + enumFileName);
             using (var file = new StreamWriter(new FileStream(enumFileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
@@ -96,6 +99,7 @@ namespace CV_Generator
                 file.WriteLine(NamespaceClose());
             }
 
+            Console.WriteLine("Writing data to " + termDataFileName);
             using (var file = new StreamWriter(new FileStream(termDataFileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
@@ -110,6 +114,7 @@ namespace CV_Generator
                 file.WriteLine(NamespaceClose());
             }
 
+            Console.WriteLine("Writing data to " + relationshipsFileName);
             using (var file = new StreamWriter(new FileStream(relationshipsFileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";

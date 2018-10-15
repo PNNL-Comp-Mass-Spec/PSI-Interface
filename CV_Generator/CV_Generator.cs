@@ -8,8 +8,11 @@ namespace CV_Generator
         public static void Main(string[] args)
         {
             var cvCreator = new CVWriter();
-            //cvCreator.WriteSingleFile("CV_generated.cs");
+            Console.WriteLine();
             cvCreator.WriteFileSet("CV");
+            Console.WriteLine();
+            Console.WriteLine("Processing complete");
+            System.Threading.Thread.Sleep(1500);
         }
     }
 }

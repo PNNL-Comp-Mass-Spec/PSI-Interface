@@ -14,6 +14,8 @@ namespace CV_Generator
 
         public void Read(string url)
         {
+            Console.WriteLine("Downloading data from " + url);
+
             var fileData = (new WebClient()).DownloadString(url);
             FileData = new OBO_File(url);
             using (var reader = new StringReader(fileData))
