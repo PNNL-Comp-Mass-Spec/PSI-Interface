@@ -36,31 +36,6 @@ namespace CV_Generator
             _allObo.AddRange(_psiMsImports);
         }
 
-        public void WriteSingleFile(string filename)
-        {
-            using (var file = new StreamWriter(new FileStream(filename, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
-            {
-                file.NewLine = "\n";
-                file.WriteLine(Header());
-                file.WriteLine(UsingAndNamespace());
-                // Write main class open...
-                file.WriteLine(ClassOpen());
-                file.WriteLine(CVInfoList("        "));
-                file.WriteLine();
-                PopulateTermDict();
-                file.WriteLine(GenerateRelationOtherTypesEnum("        "));
-                file.WriteLine();
-                file.WriteLine(GenerateCVEnum("        "));
-                file.WriteLine();
-                file.WriteLine(GenerateTermInfoObject("        "));
-                file.WriteLine();
-                file.WriteLine(RelationsIsAEnum("        "));
-                // Write main class close...
-                file.WriteLine(ClassClose());
-                file.WriteLine(NamespaceClose());
-            }
-        }
-
         public void WriteFileSet(string filenameBase)
         {
             var metadataFileName = filenameBase + "_metadata.cs";
@@ -324,23 +299,6 @@ namespace CV_Generator
             AppendLine(enumData, indent + "public enum CVID : int");
             AppendLine(enumData, indent + "{");
 
-            /*foreach (var term in _cvEnumData.Values)
-            {
-                if (!string.IsNullOrWhiteSpace(term.Def))
-                {
-                    enumData += indent + "    /// " + EscapeXmlEntities("summary", term.DefShort) + "\n";
-                }
-                else
-                {
-                    enumData += indent + "    /// <summary>Description not provided</summary>\n";
-                }
-                var idValue = term.Id.Split(':')[1];
-                if (term.EnumName.Equals("CVID_Unknown"))
-                {
-                    idValue = "-1";
-                }
-                enumData += indent + "    " + term.EnumName + " = " + idValue + ",\n\n";
-            }*/
             foreach (var cv in _cvMapData)
             {
                 foreach (var term in cv.Value.Values)
@@ -444,14 +402,7 @@ namespace CV_Generator
 
             subFunctions.Add(functionPartName + functionCounter);
             functionCounter++;
-            /*foreach (var term in _cvEnumData.Values)
-            {
-                dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
-                            term.EnumName + ", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
-                //TermData as list
-                //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
-                //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
-            }*/
+
             var counter = 0;
             var skipBreak = true;
             foreach (var cv in _cvMapData)
@@ -470,12 +421,6 @@ namespace CV_Generator
                     skipBreak = false;
                     counter++;
 
-                    dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
-                                term.EnumName + ", @\"" + cv.Key + "\", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" +
-                                term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
-                    //TermData as list
-                    //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
-                    //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
                     AppendLine(dictData, indent + "    TermData.Add(" +
                                         "CVID." + term.EnumName + ", new TermInfo(" +
                                         "CVID." + term.EnumName + ", " +
