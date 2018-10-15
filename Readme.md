@@ -97,10 +97,12 @@ Several runtime options exist:
 Written by Bryson Gibbons for the Department of Energy (PNNL, Richland, WA) \
 Copyright 2017, Battelle Memorial Institute.  All Rights Reserved. \
 E-mail: proteomics@pnnl.gov \
-Website: https://panomics.pnl.gov/ or https://omics.pnl.gov
+Website: https://omics.pnl.gov/ or https://panomics.pnnl.gov/
 
 ## License
 
-Licensed under the Apache License, Version 2.0; you may not use this file except
-in compliance with the License.  You may obtain a copy of the License at
-http://www.apache.org/licenses/LICENSE-2.0
+The PSI Interface is licensed under the 2-Clause BSD License; 
+you may not use this file except in compliance with the License.  You may obtain 
+a copy of the License at https://opensource.org/licenses/BSD-2-Clause
+
+Copyright 2018 Battelle Memorial Institute
