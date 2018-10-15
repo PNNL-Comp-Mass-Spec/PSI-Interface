@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using CV_Generator.OBO_Objects;
 
@@ -162,29 +162,53 @@ namespace CV_Generator
             return "}";
         }
 
-        private string CVInfoList(string indent)
+        /// <summary>
+        /// Append a line with only \n and not \r\n
+        /// </summary>
+        /// <param name="sb"></param>
+        private static void AppendLine(StringBuilder sb)
         {
-            var values = indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>\n" +
-                            indent + "public static void PopulateCVInfoList()\n" +
-                            indent + "{\n";
+            sb.Append("\n");
+        }
+
+        /// <summary>
+        /// Append a line with only \n and not \r\n
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="newLine"></param>
+        private static void AppendLine(StringBuilder sb, string newLine)
+        {
+            sb.Append(newLine + "\n");
+        }
+
+        private StringBuilder CVInfoList(string indent)
+        {
+            var values = new StringBuilder();
+            AppendLine(values, indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>");
+            AppendLine(values, indent + "public static void PopulateCVInfoList()");
+            AppendLine(values, indent + "{");
+
             foreach (var cv in _allObo)
             {
-                values += indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));\n";
+                AppendLine(values, indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
                 foreach (var ns in cv.AdditionalNamespaces)
                 {
-                    values += indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));\n";
+                    AppendLine(values, indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
                 }
             }
-            values += indent + "}";
+            values.Append(indent + "}");
             return values;
         }
 
         private const string RelationsOtherTypesEnumName = "RelationsOtherTypes";
 
-        private string GenerateRelationOtherTypesEnum(string indent)
+        private StringBuilder GenerateRelationOtherTypesEnum(string indent)
         {
-            var enumData = indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>\n";
-            enumData += indent + "public enum " + RelationsOtherTypesEnumName + " : int\n" + indent + "{\n";
+            var enumData = new StringBuilder();
+            AppendLine(enumData, indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>");
+            AppendLine(enumData, indent + "public enum " + RelationsOtherTypesEnumName + " : int");
+            AppendLine(enumData, indent + "{");
+
             var dict = new Dictionary<string, OBO_Typedef>();
             var unknownDef = new OBO_Typedef {
                 Def = "Unknown term relationship"
@@ -207,19 +231,22 @@ namespace CV_Generator
             {
                 if (!string.IsNullOrWhiteSpace(item.Value.Def))
                 {
-                    enumData += indent + "    /// " + EscapeXmlEntities("summary", item.Value.DefShort) + "\n";
+                    AppendLine(enumData, indent + "    /// " + EscapeXmlEntities("summary", item.Value.DefShort));
                 }
                 else
                 {
-                    enumData += indent + "    /// <summary>Description not provided</summary>\n";
+                    AppendLine(enumData, indent + "    /// <summary>Description not provided</summary>");
                 }
                 if (!string.IsNullOrWhiteSpace(item.Value.Comment))
                 {
-                    enumData += indent + "    /// " + EscapeXmlEntities("remarks", item.Value.Comment) + "\n";
+                    AppendLine(enumData, indent + "    /// " + EscapeXmlEntities("remarks", item.Value.Comment));
                 }
-                enumData += indent + "    " + item.Key + ",\n\n";
+                AppendLine(enumData, indent + "    " + item.Key + ",");
+                AppendLine(enumData);
             }
-            return enumData + indent + "}";
+
+            enumData.Append(indent + "}");
+            return enumData;
         }
 
         private readonly Dictionary<string, OBO_Term> _cvEnumData = new Dictionary<string, OBO_Term>();
@@ -278,17 +305,19 @@ namespace CV_Generator
             }
         }
 
-        private string GenerateCVEnum(string indent)
+        private StringBuilder GenerateCVEnum(string indent)
         {
             if (_cvEnumData.Count == 0)
             {
                 PopulateCVEnumData();
             }
 
-            var enumData = indent + "/// <summary>\n" + indent +
-                              "/// A full enumeration of the Controlled Vocabularies PSI-MS, UNIMOD, and the vocabularies they depend on\n" +
-                              indent + "/// </summary>\n" +
-                              indent + "public enum CVID : int\n" + indent + "{\n";
+            var enumData = new StringBuilder();
+            AppendLine(enumData, indent + "/// <summary>");
+            AppendLine(enumData, indent + "/// A full enumeration of the Controlled Vocabularies PSI-MS, UNIMOD, and the vocabularies they depend on");
+            AppendLine(enumData, indent + "/// </summary>");
+            AppendLine(enumData, indent + "public enum CVID : int");
+            AppendLine(enumData, indent + "{");
 
             /*foreach (var term in _cvEnumData.Values)
             {
@@ -334,16 +363,19 @@ namespace CV_Generator
                     }
                     if (!string.IsNullOrWhiteSpace(term.Def))
                     {
-                        enumData += indent + "    /// " + EscapeXmlEntities("summary", term.DefShort) + "\n";
+                        AppendLine(enumData, indent + "    /// " + EscapeXmlEntities("summary", term.DefShort));
                     }
                     else
                     {
-                        enumData += indent + "    /// <summary>Description not provided</summary>\n";
+                        AppendLine(enumData, indent +  "    /// <summary>Description not provided</summary>");
                     }
-                    enumData += indent + "    " + term.EnumName + " = " + idValue + ",\n\n";
+                    AppendLine(enumData, indent + "    " + term.EnumName + " = " + idValue + ",");
+                    AppendLine(enumData);
                 }
             }
-            return enumData + indent + "}";
+
+            enumData.Append(indent + "}");
+            return enumData;
         }
 
         private string EscapeXmlEntities(string tagName, string toEscape)
@@ -351,38 +383,38 @@ namespace CV_Generator
             return new XElement(tagName, toEscape).ToString(SaveOptions.DisableFormatting);
         }
 
-        private string GenerateTermInfoObject(string indent)
+        private StringBuilder GenerateTermInfoObject(string indent)
         {
             if (_cvEnumData.Count == 0)
             {
                 PopulateCVEnumData();
             }
 
-            var dictData = indent + "/// <summary>Populate the CV Term data objects</summary>\n" +
-                              indent + "private static void PopulateTermData()\n" + indent + "{\n";
-            /*foreach (var term in _cvEnumData.Values)
-            {
-                dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
-                            term.EnumName + ", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
-                //TermData as list
-                //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
-                //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
-            }*/
+            var dictData = new StringBuilder();
+            AppendLine(dictData, indent + "/// <summary>Populate the CV Term data objects</summary>");
+            AppendLine(dictData, indent + "private static void PopulateTermData()");
+            AppendLine(dictData, indent + "{");
+
             foreach (var cv in _cvMapData)
             {
                 foreach (var term in cv.Value.Values)
                 {
-                    dictData += indent + "    TermData.Add(" + "CVID." + term.EnumName + ", new TermInfo(" + "CVID." +
-                                term.EnumName + ", @\"" + cv.Key + "\", @\"" + term.Id + "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
-                    //TermData as list
-                    //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
-                    //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
+                    AppendLine(dictData, indent + "    TermData.Add(" +
+                                        "CVID." + term.EnumName + ", new TermInfo(" +
+                                        "CVID." + term.EnumName + ", " +
+                                        "@\"" + cv.Key + "\", " +
+                                        "@\"" + term.Id + "\", " +
+                                        "@\"" + term.Name + "\", " +
+                                        "@\"" + term.DefShort + "\", " +
+                                        term.IsObsolete.ToString().ToLower() + "));");
                 }
             }
-            return dictData + indent + "}";
+
+            AppendLine(dictData, indent + "}");
+            return dictData;
         }
 
-        private string GenerateTermInfoObjectSplit(string indent)
+        private StringBuilder GenerateTermInfoObjectSplit(string indent)
         {
             if (_cvEnumData.Count == 0)
             {
@@ -400,8 +432,11 @@ namespace CV_Generator
             var subFunctions = new List<string>();
             var functionCounter = 1;
 
-            var dictData = commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                functionStartFirst + functionPartName + functionCounter + functionStartRest;
+            var dictData  = new StringBuilder();
+
+            dictData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
+                            functionStartFirst + functionPartName + functionCounter + functionStartRest);
+
             subFunctions.Add(functionPartName + functionCounter);
             functionCounter++;
             /*foreach (var term in _cvEnumData.Values)
@@ -420,9 +455,10 @@ namespace CV_Generator
                 {
                     if (counter % 1000 == 0 && !skipBreak)
                     {
-                        dictData += functionEnd + "\n\n";
-                        dictData += commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                            functionStartFirst + functionPartName + functionCounter + functionStartRest;
+                        AppendLine(dictData, functionEnd);
+                        AppendLine(dictData);
+                        dictData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
+                                        functionStartFirst + functionPartName + functionCounter + functionStartRest);
                         subFunctions.Add(functionPartName + functionCounter);
                         functionCounter++;
                     }
@@ -435,18 +471,27 @@ namespace CV_Generator
                     //TermData as list
                     //dictData += indent + "    TermData.Add(new TermInfo(" + "CVID." + term.EnumName + ", @\"" + term.Id +
                     //            "\", @\"" + term.Name + "\", @\"" + term.DefShort + "\", " + term.IsObsolete.ToString().ToLower() + "));\n";
+                    AppendLine(dictData, indent + "    TermData.Add(" +
+                                        "CVID." + term.EnumName + ", new TermInfo(" +
+                                        "CVID." + term.EnumName + ", " +
+                                        "@\"" + cv.Key + "\", " +
+                                        "@\"" + term.Id + "\", " +
+                                        "@\"" + term.Name + "\", " +
+                                        "@\"" + term.DefShort + "\", " +
+                                        term.IsObsolete.ToString().ToLower() + "));");
                 }
             }
 
-            dictData += functionEnd + "\n\n";
-            dictData += commentStart + commentEnd + functionStartFirst + functionName + functionStartRest;
+            AppendLine(dictData, functionEnd);
+            AppendLine(dictData);
+            dictData.Append(commentStart + commentEnd + functionStartFirst + functionName + functionStartRest);
 
             foreach (var part in subFunctions)
             {
-                dictData += indent + "    " + part + "();\n";
+                AppendLine(dictData, indent + "    " + part + "();");
             }
 
-            dictData += functionEnd;
+            dictData.Append(functionEnd);
             return dictData;
         }
 
@@ -469,7 +514,7 @@ namespace CV_Generator
             _bigTermDictPopulated = true;
         }
 
-        private string RelationsIsAEnum(string indent)
+        private StringBuilder RelationsIsAEnum(string indent)
         {
             var items = new Dictionary<string, List<string>>();
             foreach (var obo in _allObo)
@@ -495,22 +540,28 @@ namespace CV_Generator
                 }
             }
 
-            var fillData = indent + "/// <summary>Populate the relationships between CV terms</summary>\n" +
-                              indent + "private static void FillRelationsIsA()\n" + indent + "{\n";
+            var fillData = new StringBuilder();
+
+            AppendLine(fillData, indent + "/// <summary>Populate the relationships between CV terms</summary>");
+            AppendLine(fillData, indent + "private static void FillRelationsIsA()");
+            AppendLine(fillData, indent + "{");
+
             foreach (var item in items)
             {
                 //RelationsIsA.Add("name", new List<string> { "ref", "ref2", });
-                fillData += indent + "    RelationsIsA.Add(" + "CVID." + item.Key + ", new List<CVID> { ";
+                fillData.Append(indent + "    RelationsIsA.Add(" + "CVID." + item.Key + ", new List<CVID> { ");
                 foreach (var map in item.Value)
                 {
-                    fillData += "CVID." + map + ", ";
+                    fillData.Append("CVID." + map + ", ");
                 }
-                fillData += "});\n";
+                AppendLine(fillData, "});");
             }
-            return fillData + indent + "}";
+
+            fillData.Append(indent + "}");
+            return fillData;
         }
 
-        private string RelationsIsAEnumSplit(string indent)
+        private StringBuilder RelationsIsAEnumSplit(string indent)
         {
             var items = new Dictionary<string, List<string>>();
             foreach (var obo in _allObo)
@@ -547,8 +598,9 @@ namespace CV_Generator
             var subFunctions = new List<string>();
             var functionCounter = 1;
 
-            var fillData = commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                functionStartFirst + functionPartName + functionCounter + functionStartRest;
+            var fillData = new StringBuilder();
+            fillData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
+                            functionStartFirst + functionPartName + functionCounter + functionStartRest);
             subFunctions.Add(functionPartName + functionCounter);
             functionCounter++;
 
@@ -558,9 +610,10 @@ namespace CV_Generator
             {
                 if (counter % 1000 == 0 && !skipBreak)
                 {
-                    fillData += functionEnd + "\n\n";
-                    fillData += commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                        functionStartFirst + functionPartName + functionCounter + functionStartRest;
+                    AppendLine(fillData, functionEnd);
+                    AppendLine(fillData);
+                    fillData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
+                                    functionStartFirst + functionPartName + functionCounter + functionStartRest);
                     subFunctions.Add(functionPartName + functionCounter);
                     functionCounter++;
                 }
@@ -568,23 +621,24 @@ namespace CV_Generator
                 counter++;
 
                 //RelationsIsA.Add("name", new List<string> { "ref", "ref2", });
-                fillData += indent + "    RelationsIsA.Add(" + "CVID." + item.Key + ", new List<CVID> { ";
+                fillData.Append(indent + "    RelationsIsA.Add(" + "CVID." + item.Key + ", new List<CVID> { ");
                 foreach (var map in item.Value)
                 {
-                    fillData += "CVID." + map + ", ";
+                    fillData.Append("CVID." + map + ", ");
                 }
-                fillData += "});\n";
+                AppendLine(fillData, "});");
             }
 
-            fillData += functionEnd + "\n\n";
-            fillData += commentStart + commentEnd + functionStartFirst + functionName + functionStartRest;
+            AppendLine(fillData, functionEnd);
+            AppendLine(fillData);
+            fillData.Append(commentStart + commentEnd + functionStartFirst + functionName + functionStartRest);
 
             foreach (var part in subFunctions)
             {
-                fillData += indent + "    " + part + "();\n";
+                AppendLine(fillData, indent + "    " + part + "();");
             }
 
-            fillData += functionEnd;
+            fillData.Append(functionEnd);
             return fillData;
         }
     }
