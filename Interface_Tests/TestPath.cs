@@ -7,7 +7,7 @@ namespace Interface_Tests
     {
         static TestPath()
         {
-            // Exteneral test directory
+            // External test directory
             ExtTestDataDirectory = @"\\proto-2\UnitTest_Files\PSI_Interface";
 
             // The Execution directory
@@ -27,6 +27,11 @@ namespace Interface_Tests
             // Local test directory
             TestDirectory = System.IO.Path.GetDirectoryName(dirFinder);
 
+            if (string.IsNullOrEmpty(TestDirectory))
+            {
+                throw new Exception("Path.GetDirectoryName returned null for path " + dirFinder);
+            }
+
             // Local test\TestData directory
             TestDataDirectory = System.IO.Path.Combine(TestDirectory, "TestData");
 
@@ -42,12 +47,12 @@ namespace Interface_Tests
             */
         }
 
-        public static string ExtTestDataDirectory { get; private set; }
+        public static string ExtTestDataDirectory { get; }
 
-        public static string TestDirectory { get; private set; }
+        public static string TestDirectory { get; }
 
-        public static string TestDataDirectory { get; private set; }
+        public static string TestDataDirectory { get; }
 
-        public static string ProjectDirectory { get; private set; }
+        public static string ProjectDirectory { get; }
     }
 }
