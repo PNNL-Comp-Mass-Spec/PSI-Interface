@@ -65,12 +65,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public PeptideEvidenceObj(DbSequenceObj dbSeq, PeptideObj peptide, int start, int end,
             string pre, string post, bool isDecoy = false) : this()
         {
-            if (dbSeq == null)
-                throw new ArgumentNullException("dbSeq", "Argument cannot be null.");
-            if (peptide == null)
-                throw new ArgumentNullException("peptide", "Argument cannot be null.");
-            DBSequence = dbSeq;
-            Peptide = peptide;
+            DBSequence = dbSeq ?? throw new ArgumentNullException(nameof(dbSeq), "Argument cannot be null.");
+            Peptide = peptide ?? throw new ArgumentNullException(nameof(peptide), "Argument cannot be null.");
             Start = start;
             End = end;
             IsDecoy = isDecoy;

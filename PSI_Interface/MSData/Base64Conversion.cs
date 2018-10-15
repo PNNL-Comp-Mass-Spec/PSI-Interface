@@ -122,8 +122,7 @@ namespace PSI_Interface.MSData
             //byte[] bytes = Convert.FromBase64String(encoded);
             if (compress)
             {
-                int finalSize;
-                bytes = Zlib.CompressZLib(bytes, out finalSize);
+                bytes = Zlib.CompressZLib(bytes, out _);
             }
             return bytes;
         }

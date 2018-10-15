@@ -193,10 +193,10 @@ namespace PSI_Interface.IdentData
         private string softwareCvAccession = string.Empty;
         private string softwareName = string.Empty;
         private string softwareVersion = string.Empty;
-        private bool isSpectrumIdNotAScanNum = false;
+        private bool isSpectrumIdNotAScanNum;
         private CancellationToken cancellationToken = default(CancellationToken);
-        private readonly bool dropDuplicates = false;
-        private readonly Action<string> errorReportAction = null;
+        private readonly bool dropDuplicates;
+        private readonly Action<string> errorReportAction;
         private readonly List<SearchModification> searchModifications = new List<SearchModification>();
 
         /// <summary>
@@ -259,12 +259,12 @@ namespace PSI_Interface.IdentData
             /// that there are multiple occurences of the specified peptide in the protein database
             /// that was used by the search, in the same protein or in multiple proteins.
             /// </remarks>
-            public List<PeptideEvidence> PepEvidence { get; private set; }
+            public List<PeptideEvidence> PepEvidence { get; }
 
             /// <summary>
             /// Dictionary of all CVParams provided with this search result
             /// </summary>
-            public Dictionary<string, string> AllParamsDict { get; private set; }
+            public Dictionary<string, string> AllParamsDict { get; }
 
             /// <summary>
             /// Count of Peptide evidences associated with this result
@@ -335,9 +335,8 @@ namespace PSI_Interface.IdentData
             {
                 get
                 {
-                    int num;
                     // Do not parse the SpectrumID for DTA file search results - the index is the DTA file index, not the spectrum index
-                    if (!IsSpectrumIdNotTheScanNumber && !string.IsNullOrWhiteSpace(NativeId) && NativeIdConversion.TryGetScanNumberInt(NativeId, out num))
+                    if (!IsSpectrumIdNotTheScanNumber && !string.IsNullOrWhiteSpace(NativeId) && NativeIdConversion.TryGetScanNumberInt(NativeId, out var num))
                     {
                         return num;
                     }
@@ -605,7 +604,7 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Path to the mzid file
             /// </summary>
-            public string DatasetFile { get; private set; }
+            public string DatasetFile { get; }
 
             /// <summary>
             /// Name of the spectrum file used for the search
@@ -669,7 +668,7 @@ namespace PSI_Interface.IdentData
                 xmlDataReader = dataReader;
             }
 
-            private readonly XmlReader xmlDataReader = null;
+            private readonly XmlReader xmlDataReader;
             private readonly IEnumerator<SpectrumIdItem> identEnumerator;
 
             /// <summary>
@@ -1078,8 +1077,8 @@ namespace PSI_Interface.IdentData
         private void ReadDbSequence(XmlReader reader)
         {
             reader.MoveToContent();
-            string id = reader.GetAttribute("id");
-            string dbId = reader.GetAttribute("searchDatabase_ref");
+            var id = reader.GetAttribute("id");
+            var dbId = reader.GetAttribute("searchDatabase_ref");
             if (id != null)
             {
                 var dbSeq = new DatabaseSequence
@@ -1118,7 +1117,7 @@ namespace PSI_Interface.IdentData
         private void ReadPeptide(XmlReader reader)
         {
             reader.MoveToContent();
-            string id = reader.GetAttribute("id");
+            var id = reader.GetAttribute("id");
             if (id != null)
             {
                 var pepRef = new PeptideRef();
@@ -1181,10 +1180,14 @@ namespace PSI_Interface.IdentData
                 Pre = reader.GetAttribute("pre"),
                 End = Convert.ToInt32(reader.GetAttribute("end")),
                 Start = Convert.ToInt32(reader.GetAttribute("start")),
+                // ReSharper disable once AssignNullToNotNullAttribute
                 PeptideRef = m_peptides[reader.GetAttribute("peptide_ref")],
+                // ReSharper disable once AssignNullToNotNullAttribute
                 DbSeq = m_database[reader.GetAttribute("dBSequence_ref")]
             };
             var id = reader.GetAttribute("id");
+
+            // ReSharper disable once AssignNullToNotNullAttribute
             if (m_evidences.ContainsKey(id))
             {
                 if (!dropDuplicates)
@@ -1392,9 +1395,12 @@ namespace PSI_Interface.IdentData
                         // Schema requirements: one to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         var accession = reader.GetAttribute("accession");
-                        if (accession.ToLower().Contains("unimod") || accession.Equals("MS:1001460"))
+                        if (accession != null)
                         {
-                            modSetting.Name = reader.GetAttribute("name");
+                            if (accession.IndexOf("unimod", StringComparison.OrdinalIgnoreCase) >= 0 || accession.Equals("MS:1001460"))
+                            {
+                                modSetting.Name = reader.GetAttribute("name");
+                            }
                         }
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
@@ -1447,17 +1453,20 @@ namespace PSI_Interface.IdentData
                         // Schema requirements: one to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         var accession = reader.GetAttribute("accession");
-                        if (accession.Equals("MS:1001189") || accession.Equals("MS:1002057"))
+                        if (accession != null)
                         {
-                            // Modification Specificity Peptide-N-Term: MS:1001189
-                            // Modification Specificity Protein-N-Term: MS:1002057
-                            modSetting.IsNTerm = true;
-                        }
-                        else if (accession.Equals("MS:1001190") || accession.Equals("MS:1002058"))
-                        {
-                            // Modification Specificity Peptide-C-Term: MS:1001190
-                            // Modification Specificity Protein-C-Term: MS:1002058
-                            modSetting.IsCTerm = true;
+                            if (accession.Equals("MS:1001189") || accession.Equals("MS:1002057"))
+                            {
+                                // Modification Specificity Peptide-N-Term: MS:1001189
+                                // Modification Specificity Protein-N-Term: MS:1002057
+                                modSetting.IsNTerm = true;
+                            }
+                            else if (accession.Equals("MS:1001190") || accession.Equals("MS:1002058"))
+                            {
+                                // Modification Specificity Peptide-C-Term: MS:1001190
+                                // Modification Specificity Protein-C-Term: MS:1002058
+                                modSetting.IsCTerm = true;
+                            }
                         }
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
@@ -1614,7 +1623,11 @@ namespace PSI_Interface.IdentData
                         if (reader.GetAttribute("accession") == "MS:1001283")
                         {
                             var regexString = reader.GetAttribute("value");
+
+                            // ReSharper disable once AssignNullToNotNullAttribute
                             var regex = new Regex(regexString, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                            // ReSharper disable once AssignNullToNotNullAttribute
                             m_decoyDbAccessionRegex.Add(id, regex);
                         }
                         reader.Read(); // Consume the cvParam element (no child nodes)
@@ -1715,7 +1728,7 @@ namespace PSI_Interface.IdentData
 
             reader.MoveToContent();
             var nativeId = reader.GetAttribute("spectrumID");
-            int scanNum = -1;
+            var scanNum = -1;
             reader.ReadStartElement("SpectrumIdentificationResult"); // Throws exception if we are not at the "SpectrumIdentificationResult" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -1774,6 +1787,7 @@ namespace PSI_Interface.IdentData
                 SpecItemId = reader.GetAttribute("id"),
                 PassThreshold = Convert.ToBoolean(reader.GetAttribute("passThreshold")),
                 Rank = Convert.ToInt32(reader.GetAttribute("rank")),
+                // ReSharper disable once AssignNullToNotNullAttribute
                 Peptide = m_peptides[reader.GetAttribute("peptide_ref")],
                 CalMz = Convert.ToDouble(reader.GetAttribute("calculatedMassToCharge")),
                 ExperimentalMz =
@@ -1785,6 +1799,7 @@ namespace PSI_Interface.IdentData
             reader.ReadToDescendant("PeptideEvidenceRef");
             while (reader.Name == "PeptideEvidenceRef")
             {
+                // ReSharper disable once AssignNullToNotNullAttribute
                 specItem.PepEvidence.Add(m_evidences[reader.GetAttribute("peptideEvidence_ref")]);
                 reader.Read();
                 if (reader.NodeType == XmlNodeType.EndElement)
@@ -1796,6 +1811,7 @@ namespace PSI_Interface.IdentData
             // Parse all of the cvParam/userParam fields
             while (reader.Name == "cvParam" || reader.Name == "userParam")
             {
+                // ReSharper disable once AssignNullToNotNullAttribute
                 specItem.AllParamsDict.Add(reader.GetAttribute("name"), reader.GetAttribute("value"));
                 switch (reader.GetAttribute("name"))
                 {

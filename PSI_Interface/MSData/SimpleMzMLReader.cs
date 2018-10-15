@@ -84,18 +84,21 @@ namespace PSI_Interface.MSData
             public virtual string CVRef
             {
                 get => string.Empty;
+                // ReSharper disable once ValueParameterNotUsed
                 set => _cvRef = string.Empty;
             }
 
             public virtual string Accession
             {
                 get => string.Empty;
+                // ReSharper disable once ValueParameterNotUsed
                 set => _accession = string.Empty;
             }
 
             public virtual string Type
             {
                 get => string.Empty;
+                // ReSharper disable once ValueParameterNotUsed
                 set => _type = string.Empty;
             }
 
@@ -383,13 +386,13 @@ namespace PSI_Interface.MSData
             /// <param name="mzs">array of mzs</param>
             /// <param name="intensities">array of intensities</param>
             /// <param name="scanNum">spectrum scan number</param>
-            public SimpleSpectrum(double[] mzs, double[] intensities, int scanNum)
+            public SimpleSpectrum(IReadOnlyList<double> mzs, IReadOnlyList<double> intensities, int scanNum)
             {
                 ScanNumber = scanNum;
                 //Mzs = mzs;
                 //Intensities = intensities;
-                Peaks = new Peak[mzs.Length];
-                for (var i = 0; i < mzs.Length; i++)
+                Peaks = new Peak[mzs.Count];
+                for (var i = 0; i < mzs.Count; i++)
                 {
                     Peaks[i] = new Peak() { Mz = mzs[i], Intensity = intensities[i] };
                 }
@@ -464,7 +467,7 @@ namespace PSI_Interface.MSData
             /// <param name="mzs">array of mzs</param>
             /// <param name="intensities">array of intensities</param>
             /// <param name="scanNum">spectrum scan number</param>
-            public SimpleProductSpectrum(double[] mzs, double[] intensities, int scanNum)
+            public SimpleProductSpectrum(IReadOnlyList<double> mzs, IReadOnlyList<double> intensities, int scanNum)
                 : base(mzs, intensities, scanNum)
             {
             }
@@ -501,10 +504,7 @@ namespace PSI_Interface.MSData
 
         private void ConfigureFileHandles()
         {
-            if (_file != null)
-            {
-                _file.Dispose();
-            }
+            _file?.Dispose();
 
             var sourceFile = new FileInfo(_filePath);
             if (!sourceFile.Exists)
@@ -755,18 +755,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public void Close()
         {
-            if (_xmlReaderForYield != null)
-            {
-                _xmlReaderForYield.Dispose();
-            }
-            if (_fileReader != null)
-            {
-                _fileReader.Dispose();
-            }
-            if (_file != null)
-            {
-                _file.Dispose();
-            }
+            _xmlReaderForYield?.Dispose();
+            _fileReader?.Dispose();
+            _file?.Dispose();
         }
 
         /// <summary>
@@ -1873,8 +1864,7 @@ namespace PSI_Interface.MSData
                 scanNum = (int)(_artificialScanNum++);
                 // Interpret the NativeID (if the format has an interpreter) and use it instead of the artificial number.
                 // TODO: Better handling than the artificial ID for other nativeIDs (ones currently not supported)
-                int num;
-                if (NativeIdConversion.TryGetScanNumberInt(nativeId, out num))
+                if (NativeIdConversion.TryGetScanNumberInt(nativeId, out var num))
                 {
                     scanNum = num;
                 }
@@ -2165,7 +2155,7 @@ namespace PSI_Interface.MSData
                         // Schema requirements: zero to one instances of this element
                         // Very comparable to mzML_1.1.0's scanList. Use it.
                         scans.AddRange(ReadScanList(reader.ReadSubtree()));
-                        reader.ReadEndElement(); // "acquisitionList" mustt have child nodes
+                        reader.ReadEndElement(); // "acquisitionList" must have child nodes
                         break;
                     case "precursorList":
                         // Schema requirements: zero to one instances of this element
@@ -2194,7 +2184,7 @@ namespace PSI_Interface.MSData
         private List<ScanData> ReadScanList(XmlReader reader)
         {
             reader.MoveToContent();
-            var count = Convert.ToInt32(reader.GetAttribute("count"));
+            // var count = Convert.ToInt32(reader.GetAttribute("count"));
             var scans = new List<ScanData>();
             if (_version == MzML_Version.mzML1_0_0)
             {
@@ -2380,7 +2370,7 @@ namespace PSI_Interface.MSData
         private List<Precursor> ReadPrecursorList(XmlReader reader)
         {
             reader.MoveToContent();
-            var count = Convert.ToInt32(reader.GetAttribute("count"));
+            // var count = Convert.ToInt32(reader.GetAttribute("count"));
             var precursors = new List<Precursor>();
             reader.ReadStartElement("precursorList"); // Throws exception if we are not at the "precursorList" tag.
             while (reader.ReadState == ReadState.Interactive)
@@ -2737,7 +2727,7 @@ namespace PSI_Interface.MSData
         private List<BinaryDataArray> ReadBinaryDataArrayList(XmlReader reader, int defaultArrayLength)
         {
             reader.MoveToContent();
-            var bdArrays = Convert.ToInt32(reader.GetAttribute("count"));
+            // var bdArrays = Convert.ToInt32(reader.GetAttribute("count"));
             var bdaList = new List<BinaryDataArray>();
             reader.ReadStartElement("binaryDataArrayList"); // Throws exception if we are not at the "binaryDataArrayList" tag.
             while (reader.ReadState == ReadState.Interactive)
@@ -2778,7 +2768,7 @@ namespace PSI_Interface.MSData
             var bda = new BinaryDataArray {
                 ArrayLength = defaultLength
             };
-            var encLength = Convert.ToInt32(reader.GetAttribute("encodedLength"));
+            // var encLength = Convert.ToInt32(reader.GetAttribute("encodedLength"));
             var arrLength = Convert.ToInt32(reader.GetAttribute("arrayLength")); // Override the default; if non-existent, should get 0
             if (arrLength > 0)
             {
@@ -2908,7 +2898,7 @@ namespace PSI_Interface.MSData
                             dataSize = 4;
                         }
                         var bytes = Convert.FromBase64String(reader.ReadElementContentAsString()); // Consumes the start and end elements.
-                        //var bytesread = reader.ReadContentAsBase64(bytes, 0, dataSize);
+                        //var bytesRead = reader.ReadContentAsBase64(bytes, 0, dataSize);
                         if (compressed)
                         {
                             bytes = DecompressZLib(bytes, bda.ArrayLength * dataSize);

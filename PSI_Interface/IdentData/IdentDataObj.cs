@@ -128,7 +128,7 @@ namespace PSI_Interface.IdentData
                 _sequenceCollection = new SequenceCollectionObj(mzid.SequenceCollection, this);
             }
             // AnalysisData referenced by SpectrumIdentification, InputSpectrumIdentifications, ProteinDetection, references Peptides, PeptideEvidence, SampleInfo, MassTable,
-            if (mzid.DataCollection != null)
+            if (mzid.DataCollection != null && _dataCollection != null)
             {
                 _dataCollection.AnalysisData = new AnalysisDataObj(mzid.DataCollection.AnalysisData, this);
             }
@@ -375,6 +375,7 @@ namespace PSI_Interface.IdentData
             CVList = new IdentDataList<CVInfo>(CV.CV.CVInfoList.Count);
             foreach (var cv in CV.CV.CVInfoList)
             {
+                // ReSharper disable once StringLiteralTypo
                 if (cv.Id.ToLower() == "pato")
                 {
                     continue;
@@ -396,46 +397,16 @@ namespace PSI_Interface.IdentData
         /// </summary>
         internal void CascadeProperties()
         {
-            if (Provider != null)
-            {
-                Provider.CascadeProperties();
-            }
-            if (SequenceCollection != null)
-            {
-                SequenceCollection.CascadeProperties();
-            }
-            if (AnalysisCollection != null)
-            {
-                AnalysisCollection.CascadeProperties();
-            }
-            if (AnalysisProtocolCollection != null)
-            {
-                AnalysisProtocolCollection.CascadeProperties();
-            }
-            if (DataCollection != null)
-            {
-                DataCollection.CascadeProperties();
-            }
-            if (CVList != null)
-            {
-                CVList.CascadeProperties();
-            }
-            if (AnalysisSoftwareList != null)
-            {
-                AnalysisSoftwareList.CascadeProperties();
-            }
-            if (AuditCollection != null)
-            {
-                AuditCollection.CascadeProperties();
-            }
-            if (AnalysisSampleCollection != null)
-            {
-                AnalysisSampleCollection.CascadeProperties();
-            }
-            if (BibliographicReferences != null)
-            {
-                BibliographicReferences.CascadeProperties();
-            }
+            Provider?.CascadeProperties();
+            SequenceCollection?.CascadeProperties();
+            AnalysisCollection?.CascadeProperties();
+            AnalysisProtocolCollection?.CascadeProperties();
+            DataCollection?.CascadeProperties();
+            CVList?.CascadeProperties();
+            AnalysisSoftwareList?.CascadeProperties();
+            AuditCollection?.CascadeProperties();
+            AnalysisSampleCollection?.CascadeProperties();
+            BibliographicReferences?.CascadeProperties();
         }
 
         /// <summary>
@@ -682,8 +653,7 @@ namespace PSI_Interface.IdentData
                 {
                     foreach (var item in result)
                     {
-                        var o = item as OrganizationObj;
-                        if (o != null)
+                        if (item is OrganizationObj o)
                         {
                             return o;
                         }

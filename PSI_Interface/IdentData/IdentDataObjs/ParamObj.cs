@@ -30,16 +30,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             _item = null;
 
-            if (p.Item != null)
+            switch (p.Item)
             {
-                if (p.Item is CVParamType)
-                {
-                    _item = new CVParamObj(p.Item as CVParamType, IdentData);
-                }
-                else if (p.Item is UserParamType)
-                {
-                    _item = new UserParamObj(p.Item as UserParamType, IdentData);
-                }
+                case null:
+                    return;
+                case CVParamType cvParam:
+                    _item = new CVParamObj(cvParam, IdentData);
+                    break;
+                case UserParamType userParam:
+                    _item = new UserParamObj(userParam, IdentData);
+                    break;
             }
         }
         #endregion
