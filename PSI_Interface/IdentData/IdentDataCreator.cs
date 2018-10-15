@@ -140,11 +140,9 @@ namespace PSI_Interface.IdentData
             foreach (var pep in peptideList)
             {
                 var modKey = PepModConcat(pep);
-                Dictionary<string, PeptideObj> similar;
-                if (pepDeDup.TryGetValue(pep.PeptideSequence, out similar))
+                if (pepDeDup.TryGetValue(pep.PeptideSequence, out var similar))
                 {
-                    PeptideObj other;
-                    if (similar.TryGetValue(modKey, out other))
+                    if (similar.TryGetValue(modKey, out var other))
                     {
                         //System.Console.WriteLine("Dropped duplicate Peptide!");
                         pep.Id = other.Id;
@@ -269,7 +267,7 @@ namespace PSI_Interface.IdentData
         ///    CVID.MS_translation_table_description
         ///    CVID.MS_decoy_DB_details
         ///    CVID.MS_number_of_decoy_sequences
-        /// 
+        ///
         ///    CVID.MS_decoy_DB_type_reverse
         ///    CVID.MS_decoy_DB_type_randomized
         ///    CVID.MS_DB_composition_target_decoy
@@ -364,7 +362,7 @@ namespace PSI_Interface.IdentData
         /// </summary>
         /// <param name="analysisSoftwareInfo">The object returned by <see cref="AddAnalysisSoftware"/></param>
         /// <param name="name">The name of the set of settings</param>
-        /// <param name="searchType">The type of search performed: 
+        /// <param name="searchType">The type of search performed:
         ///     CVID.MS_de_novo_search
         ///     CVID.MS_spectral_library_search
         ///     CVID.MS_spectral_library_search
@@ -434,8 +432,7 @@ namespace PSI_Interface.IdentData
         /// <returns>Object: Must populate PeptideEvidences and Peptide, as well as add score information to CVParams and UserParams</returns>
         public SpectrumIdentificationItemObj AddSpectrumIdentification(SpectraDataObj spectraSource, string nativeId, double retentionTimeMinutes, double expMz, int charge, int rank = 1, double calcMz = double.NaN)
         {
-            SpectrumIdentificationResultObj specResult;
-            if (!identificationResults.TryGetValue(nativeId, out specResult))
+            if (!identificationResults.TryGetValue(nativeId, out var specResult))
             {
                 specResult = new SpectrumIdentificationResultObj()
                 {

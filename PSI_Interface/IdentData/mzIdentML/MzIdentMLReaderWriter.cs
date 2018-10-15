@@ -23,7 +23,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             XmlSerializer serializer;
             if (detectedVersion.StartsWith("1.2"))
             {
-                var overrides = GetMzIdentMl12Overrides(out var ns, out var xsdUrl);
+                var overrides = GetMzIdentMl12Overrides(out _, out _);
                 serializer = new XmlSerializer(typeof(MzIdentMLType), overrides);
             }
             else
