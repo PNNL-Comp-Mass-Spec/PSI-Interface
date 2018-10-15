@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML BibliographicReferenceType
+    /// MzIdentML BibliographicReferenceType
     /// </summary>
     /// <remarks>Represents bibliographic references.</remarks>
     public class BibliographicReferenceObj : IdentDataInternalTypeAbstract, IIdentifiableType, IEquatable<BibliographicReferenceObj>
@@ -12,7 +12,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private int _year;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public BibliographicReferenceObj()
         {
@@ -32,7 +32,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="br"></param>
         /// <param name="idata"></param>
@@ -116,8 +116,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string DOI { get; set; }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -131,7 +131,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -144,7 +144,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -163,7 +163,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

@@ -4,18 +4,18 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML TranslationTableType
+    /// MzIdentML TranslationTableType
     /// </summary>
     /// <remarks>The table used to translate codons into nucleic acids e.g. by reference to the NCBI translation table.</remarks>
     /// <remarks>
-    ///     The details specifying this translation table are captured as cvParams, e.g. translation table, translation
-    ///     start codons and translation table description (see specification document and mapping file)
-    ///     min 0, max unbounded
+    /// The details specifying this translation table are captured as cvParams, e.g. translation table, translation
+    /// start codons and translation table description (see specification document and mapping file)
+    /// min 0, max unbounded
     /// </remarks>
     public class TranslationTableObj : CVParamGroupObj, IIdentifiableType, IEquatable<TranslationTableObj>
     {
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="tt"></param>
         /// <param name="idata"></param>
@@ -27,7 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public TranslationTableObj()
         {
@@ -36,8 +36,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -51,7 +51,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -64,7 +64,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -81,7 +81,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

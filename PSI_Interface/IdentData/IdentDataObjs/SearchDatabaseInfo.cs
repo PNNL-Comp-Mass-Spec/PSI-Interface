@@ -5,12 +5,12 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SearchDatabaseType
+    /// MzIdentML SearchDatabaseType
     /// </summary>
     /// <remarks>
-    ///     A database for searching mass spectra. Examples include a set of amino acid sequence entries,
-    ///     nucleotide databases (e.g. 6 frame translated) (mzIdentML 1.2),
-    ///     or annotated spectra libraries.
+    /// A database for searching mass spectra. Examples include a set of amino acid sequence entries,
+    /// nucleotide databases (e.g. 6 frame translated) (mzIdentML 1.2),
+    /// or annotated spectra libraries.
     /// </remarks>
     public class SearchDatabaseInfo : CVParamGroupObj, IExternalDataType, IEquatable<SearchDatabaseInfo>
     {
@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private DateTime _releaseDate;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SearchDatabaseInfo()
         {
@@ -42,7 +42,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="sd"></param>
         /// <param name="idata"></param>
@@ -71,8 +71,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     The database name may be given as a cvParam if it maps exactly to one of the release databases listed in the
-        ///     CV, otherwise a userParam should be used.
+        /// The database name may be given as a cvParam if it maps exactly to one of the release databases listed in the
+        /// CV, otherwise a userParam should be used.
         /// </remarks>
         /// <remarks>min 1, max 1</remarks>
         public ParamObj DatabaseName
@@ -92,8 +92,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string Version { get; set; }
 
         /// <remarks>
-        ///     The date and time the database was released to the public; omit this attribute when the date and time are
-        ///     unknown or not applicable (e.g. custom databases).
+        /// The date and time the database was released to the public; omit this attribute when the date and time are
+        /// unknown or not applicable (e.g. custom databases).
         /// </remarks>
         /// Optional Attribute
         /// dateTime
@@ -144,8 +144,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool NumResiduesSpecified { get; private set; }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -157,8 +157,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string Name { get; set; }
 
         /// <remarks>
-        ///     A URI to access documentation and tools to interpret the external format of the ExternalData instance.
-        ///     For example, XML Schema or static libraries (APIs) to access binary formats.
+        /// A URI to access documentation and tools to interpret the external format of the ExternalData instance.
+        /// For example, XML Schema or static libraries (APIs) to access binary formats.
         /// </remarks>
         /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation { get; set; }
@@ -184,7 +184,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -197,7 +197,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -219,7 +219,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

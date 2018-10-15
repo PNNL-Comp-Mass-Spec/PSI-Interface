@@ -4,19 +4,19 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML OrganizationType
+    /// MzIdentML OrganizationType
     /// </summary>
     /// <remarks>
-    ///     Organizations are entities like companies, universities, government agencies.
-    ///     Any additional information such as the address, email etc. should be supplied either as CV parameters or as user
-    ///     parameters.
+    /// Organizations are entities like companies, universities, government agencies.
+    /// Any additional information such as the address, email etc. should be supplied either as CV parameters or as user
+    /// parameters.
     /// </remarks>
     public class OrganizationObj : AbstractContactObj, IEquatable<OrganizationObj>
     {
         private ParentOrganizationObj _parent;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public OrganizationObj()
         {
@@ -24,7 +24,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="o"></param>
         /// <param name="idata"></param>
@@ -52,7 +52,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -65,7 +65,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -83,7 +83,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

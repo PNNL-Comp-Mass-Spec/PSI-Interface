@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SearchDatabaseRefType
+    /// MzIdentML SearchDatabaseRefType
     /// </summary>
     /// <remarks>One of the search databases used.</remarks>
     public class SearchDatabaseRefObj : IdentDataInternalTypeAbstract, IEquatable<SearchDatabaseRefObj>
@@ -14,7 +14,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Constructors
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SearchDatabaseRefObj()
         {
@@ -24,7 +24,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="sdr"></param>
         /// <param name="idata"></param>
@@ -79,7 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Object Equality
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -102,7 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -117,7 +117,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

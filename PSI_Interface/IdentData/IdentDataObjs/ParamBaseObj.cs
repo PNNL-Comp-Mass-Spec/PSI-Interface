@@ -3,7 +3,7 @@ using System;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML AbstractParamType; Used instead of: ParamType, ParamGroup, ParamListType
+    /// MzIdentML AbstractParamType; Used instead of: ParamType, ParamGroup, ParamListType
     /// </summary>
     /// <remarks>Abstract entity allowing either cvParam or userParam to be referenced in other schemas.</remarks>
     /// <remarks>PramGroup: A choice of either a cvParam or userParam.</remarks>
@@ -19,7 +19,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Constructors
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         protected ParamBaseObj()
         {
@@ -44,7 +44,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }*/
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="idata"></param>
         protected ParamBaseObj(IdentDataObj idata)
@@ -74,7 +74,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public abstract string Value { get; set; }
 
         /// <summary>
-        ///     CV term for unit enum identifier
+        /// CV term for unit enum identifier
         /// </summary>
         public CV.CV.CVID UnitCvid
         {
@@ -134,8 +134,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this
-        ///     file.
+        /// If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this
+        /// file.
         /// </remarks>
         /// Optional Attribute
         /// string
@@ -163,7 +163,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Object Equality
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -186,7 +186,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -201,7 +201,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

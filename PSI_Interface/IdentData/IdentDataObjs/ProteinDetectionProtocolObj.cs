@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML ProteinDetectionProtocolType
+    /// MzIdentML ProteinDetectionProtocolType
     /// </summary>
     /// <remarks>The parameters and settings of a ProteinDetection process.</remarks>
     public class ProteinDetectionProtocolObj : IdentDataInternalTypeAbstract, IIdentifiableType, IEquatable<ProteinDetectionProtocolObj>
@@ -15,7 +15,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private ParamListObj _threshold;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public ProteinDetectionProtocolObj()
         {
@@ -29,7 +29,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="pdp"></param>
         /// <param name="idata"></param>
@@ -63,8 +63,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     The threshold(s) applied to determine that a result is significant.
-        ///     If multiple terms are used it is assumed that all conditions are satisfied by the passing results.
+        /// The threshold(s) applied to determine that a result is significant.
+        /// If multiple terms are used it is assumed that all conditions are satisfied by the passing results.
         /// </remarks>
         /// <remarks>min 1, max 1</remarks>
         public ParamListObj Threshold
@@ -115,8 +115,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -130,7 +130,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -143,7 +143,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -161,7 +161,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

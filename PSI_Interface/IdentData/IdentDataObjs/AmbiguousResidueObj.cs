@@ -4,17 +4,17 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML AmbiguousResidueType
+    /// MzIdentML AmbiguousResidueType
     /// </summary>
     /// <remarks>
-    ///     Ambiguous residues e.g. X can be specified by the Code attribute and a set of parameters
-    ///     for example giving the different masses that will be used in the search.
+    /// Ambiguous residues e.g. X can be specified by the Code attribute and a set of parameters
+    /// for example giving the different masses that will be used in the search.
     /// </remarks>
     /// <remarks>CVParams and UserParams: Parameters for capturing e.g. "alternate single letter codes"</remarks>
     public class AmbiguousResidueObj : ParamGroupObj, IEquatable<AmbiguousResidueObj>
     {
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public AmbiguousResidueObj()
         {
@@ -22,7 +22,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="ar"></param>
         /// <param name="idata"></param>
@@ -40,7 +40,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -55,7 +55,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -79,7 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

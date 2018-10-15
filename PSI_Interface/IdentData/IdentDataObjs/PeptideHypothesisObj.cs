@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML PeptideHypothesisType
+    /// MzIdentML PeptideHypothesisType
     /// </summary>
     /// <remarks>Peptide evidence on which this ProteinHypothesis is based by reference to a PeptideEvidence element.</remarks>
     public class PeptideHypothesisObj : IdentDataInternalTypeAbstract, IEquatable<PeptideHypothesisObj>
@@ -15,7 +15,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private IdentDataList<SpectrumIdentificationItemRefObj> _spectrumIdentificationItems;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public PeptideHypothesisObj()
         {
@@ -26,7 +26,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="ph"></param>
         /// <param name="idata"></param>
@@ -99,7 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Object Equality
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -123,7 +123,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -138,7 +138,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

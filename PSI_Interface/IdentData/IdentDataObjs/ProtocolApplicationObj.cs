@@ -4,18 +4,18 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML ProtocolApplicationType
+    /// MzIdentML ProtocolApplicationType
     /// </summary>
     /// <remarks>
-    ///     The use of a protocol with the requisite Parameters and ParameterValues.
-    ///     ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both) as output.
+    /// The use of a protocol with the requisite Parameters and ParameterValues.
+    /// ProtocolApplications can take Material or Data (or both) as input and produce Material or Data (or both) as output.
     /// </remarks>
     public abstract class ProtocolApplicationObj : IdentDataInternalTypeAbstract, IIdentifiableType, IEquatable<ProtocolApplicationObj>
     {
         private DateTime _activityDate;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         protected ProtocolApplicationObj()
         {
@@ -26,7 +26,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="pa"></param>
         /// <param name="idata"></param>
@@ -56,8 +56,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool ActivityDateSpecified { get; private set; }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -71,7 +71,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -84,7 +84,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -101,7 +101,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

@@ -363,20 +363,20 @@ namespace PSI_Interface.IdentData
         /// <param name="analysisSoftwareInfo">The object returned by <see cref="AddAnalysisSoftware"/></param>
         /// <param name="name">The name of the set of settings</param>
         /// <param name="searchType">The type of search performed:
-        ///     CVID.MS_de_novo_search
-        ///     CVID.MS_spectral_library_search
-        ///     CVID.MS_spectral_library_search
-        ///     CVID.MS_pmf_search
-        ///     CVID.MS_tag_search
-        ///     CVID.MS_ms_ms_search
-        ///     CVID.MS_combined_pmf___ms_ms_search
-        ///     CVID.MS_special_processing
-        ///     CVID.MS_peptide_level_scoring
-        ///     CVID.MS_modification_localization_scoring
-        ///     CVID.MS_consensus_scoring
-        ///     CVID.MS_sample_pre_fractionation
-        ///     CVID.MS_cross_linking_search
-        ///     CVID.MS_no_special_processing
+        /// CVID.MS_de_novo_search
+        /// CVID.MS_spectral_library_search
+        /// CVID.MS_spectral_library_search
+        /// CVID.MS_pmf_search
+        /// CVID.MS_tag_search
+        /// CVID.MS_ms_ms_search
+        /// CVID.MS_combined_pmf___ms_ms_search
+        /// CVID.MS_special_processing
+        /// CVID.MS_peptide_level_scoring
+        /// CVID.MS_modification_localization_scoring
+        /// CVID.MS_consensus_scoring
+        /// CVID.MS_sample_pre_fractionation
+        /// CVID.MS_cross_linking_search
+        /// CVID.MS_no_special_processing
         /// </param>
         /// <returns>An object that needs multiple items set - add CV/User params to AdditionalSearchParams, ModificationParams, Enzymes, FragmentTolerances, ParentTolerances, and Threshold</returns>
         public SpectrumIdentificationProtocolObj AddAnalysisSettings(AnalysisSoftwareObj analysisSoftwareInfo, string name, CV.CV.CVID searchType)

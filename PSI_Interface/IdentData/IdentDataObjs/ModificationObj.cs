@@ -6,17 +6,17 @@ using PSI_Interface.Utils;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML ModificationType
+    /// MzIdentML ModificationType
     /// </summary>
     /// <remarks>
-    ///     A molecule modification specification. If n modifications have been found on a peptide, there should
-    ///     be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the
-    ///     modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification
-    ///     of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and
-    ///     this will be checked by the semantic validator within a given tolerance window), there is an unknown
-    ///     modification CV term that must be used instead. A neutral loss should be defined as an additional CVParam
-    ///     within Modification. If more complex information should be given about neutral losses (such as presence/absence
-    ///     on particular product ions), this can additionally be encoded within the FragmentationArray.
+    /// A molecule modification specification. If n modifications have been found on a peptide, there should
+    /// be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the
+    /// modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification
+    /// of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and
+    /// this will be checked by the semantic validator within a given tolerance window), there is an unknown
+    /// modification CV term that must be used instead. A neutral loss should be defined as an additional CVParam
+    /// within Modification. If more complex information should be given about neutral losses (such as presence/absence
+    /// on particular product ions), this can additionally be encoded within the FragmentationArray.
     /// </remarks>
     /// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary. min 1, max unbounded</remarks>
     /// <remarks>(mzIdentML 1.2) If AdditionalSearchParams contains MS:1002491 (modification localization scoring), must add cvParam MS:1002491 (modification index) with a within-peptide unique identifier</remarks>
@@ -29,7 +29,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private double _monoisotopicMassDelta;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public ModificationObj()
         {
@@ -44,16 +44,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create a modification with the specified values
+        /// Create a modification with the specified values
         /// </summary>
         /// <param name="unimodCv">CV term for the modification, if available; otherwise, use CVID.MS_unknown_modification</param>
         /// <param name="modificationName">
-        ///     Name of the modification, if a CV term for the modification is not available or unknown.
-        ///     If this matches an Unimod modification name, the Unimod CV term will be used.
+        /// Name of the modification, if a CV term for the modification is not available or unknown.
+        /// If this matches an Unimod modification name, the Unimod CV term will be used.
         /// </param>
         /// <param name="location">
-        ///     location of the modification, using '0' for N-term and length+1 for C-term, and otherwise
-        ///     1-based indexing
+        /// location of the modification, using '0' for N-term and length+1 for C-term, and otherwise
+        /// 1-based indexing
         /// </param>
         /// <param name="monoMassDelta">monoisotopic mass delta</param>
         /// <returns></returns>
@@ -83,7 +83,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="m"></param>
         /// <param name="idata"></param>
@@ -104,10 +104,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     Location of the modification within the peptide - position in peptide sequence, counted from
-        ///     the N-terminus residue, starting at position 1. Specific modifications to the N-terminus should be
-        ///     given the location 0. Modification to the C-terminus should be given as peptide length + 1. If the
-        ///     modification location is unknown e.g. for PMF data, this attribute should be omitted.
+        /// Location of the modification within the peptide - position in peptide sequence, counted from
+        /// the N-terminus residue, starting at position 1. Specific modifications to the N-terminus should be
+        /// given the location 0. Modification to the C-terminus should be given as peptide length + 1. If the
+        /// modification location is unknown e.g. for PMF data, this attribute should be omitted.
         /// </remarks>
         /// Optional Attribute
         /// integer
@@ -125,9 +125,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool LocationSpecified { get; private set; }
 
         /// <remarks>
-        ///     Specification of the residue (amino acid) on which the modification occurs. If multiple values
-        ///     are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of
-        ///     the residues listed. Multiple residues would usually only be specified for PMF data.
+        /// Specification of the residue (amino acid) on which the modification occurs. If multiple values
+        /// are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of
+        /// the residues listed. Multiple residues would usually only be specified for PMF data.
         /// </remarks>
         /// Optional Attribute
         /// listOfChars, string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
@@ -186,7 +186,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -199,7 +199,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -218,7 +218,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

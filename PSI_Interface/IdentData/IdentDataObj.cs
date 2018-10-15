@@ -7,11 +7,11 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData
 {
     /// <summary>
-    ///     MzIdentML MzIdentMLType
+    /// MzIdentML MzIdentMLType
     /// </summary>
     /// <remarks>
-    ///     The upper-most hierarchy level of mzIdentML with sub-containers for example describing software,
-    ///     protocols and search results (spectrum identifications or protein detection results).
+    /// The upper-most hierarchy level of mzIdentML with sub-containers for example describing software,
+    /// protocols and search results (spectrum identifications or protein detection results).
     /// </remarks>
     public class IdentDataObj : IIdentifiableType, IEquatable<IdentDataObj>
     {
@@ -34,8 +34,8 @@ namespace PSI_Interface.IdentData
         #region Constructors
 
         /// <summary>
-        ///     Create an IdentDataObj directly from an MzIdentMLType object - fully cascades for the entire contents of
-        ///     MzIdentMLType
+        /// Create an IdentDataObj directly from an MzIdentMLType object - fully cascades for the entire contents of
+        /// MzIdentMLType
         /// </summary>
         /// <param name="mzid"></param>
         public IdentDataObj(MzIdentMLType mzid)
@@ -145,7 +145,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Constructor - basic initialization
+        /// Constructor - basic initialization
         /// </summary>
         /// <param name="createTranslator">If the default CV list should be used for the file</param>
         public IdentDataObj(bool createTranslator = true)
@@ -179,8 +179,8 @@ namespace PSI_Interface.IdentData
         #region Properties
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -357,8 +357,8 @@ namespace PSI_Interface.IdentData
         protected internal bool CreationDateSpecified { get; private set; }
 
         /// <remarks>
-        ///     The version of the schema this instance document refers to, in the format x.y.z.
-        ///     Changes to z should not affect prevent instance documents from validating.
+        /// The version of the schema this instance document refers to, in the format x.y.z.
+        /// Changes to z should not affect prevent instance documents from validating.
         /// </remarks>
         /// Required Attribute
         /// string, regex: "(1\.1\.\d+)"
@@ -393,7 +393,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Cascade the identData reference throughout the entire set of objects.
+        /// Cascade the identData reference throughout the entire set of objects.
         /// </summary>
         internal void CascadeProperties()
         {
@@ -410,7 +410,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Rebuild some of the internal lists using object references
+        /// Rebuild some of the internal lists using object references
         /// </summary>
         public void RebuildLists()
         {
@@ -428,7 +428,7 @@ namespace PSI_Interface.IdentData
         #region Functions for resolving references
 
         /// <summary>
-        ///     Find the <see cref="SpectrumIdentificationItemObj" /> that matches id
+        /// Find the <see cref="SpectrumIdentificationItemObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -460,7 +460,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="DbSequenceObj" /> that matches id
+        /// Find the <see cref="DbSequenceObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -482,7 +482,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="PeptideObj" /> that matches id
+        /// Find the <see cref="PeptideObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -504,7 +504,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="PeptideEvidenceObj" /> that matches id
+        /// Find the <see cref="PeptideEvidenceObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -526,7 +526,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="MeasureObj" /> that matches id
+        /// Find the <see cref="MeasureObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -555,7 +555,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="MassTableObj" /> that matches id
+        /// Find the <see cref="MassTableObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -584,7 +584,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="SampleObj" /> that matches id
+        /// Find the <see cref="SampleObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -610,7 +610,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="AnalysisSoftwareObj" /> that matches id
+        /// Find the <see cref="AnalysisSoftwareObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -636,7 +636,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="OrganizationObj" /> that matches id
+        /// Find the <see cref="OrganizationObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -668,7 +668,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="AbstractContactObj" /> that matches id
+        /// Find the <see cref="AbstractContactObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -694,7 +694,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="SearchDatabaseInfo" /> that matches id
+        /// Find the <see cref="SearchDatabaseInfo" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -720,7 +720,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="SpectraDataObj" /> that matches id
+        /// Find the <see cref="SpectraDataObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -746,7 +746,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="SpectrumIdentificationListObj" /> that matches id
+        /// Find the <see cref="SpectrumIdentificationListObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -773,7 +773,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="SpectrumIdentificationProtocolObj" /> that matches id
+        /// Find the <see cref="SpectrumIdentificationProtocolObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -800,7 +800,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="ProteinDetectionProtocolObj" /> that matches id
+        /// Find the <see cref="ProteinDetectionProtocolObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -825,7 +825,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="ProteinDetectionListObj" /> that matches id
+        /// Find the <see cref="ProteinDetectionListObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -850,7 +850,7 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        ///     Find the <see cref="TranslationTableObj" /> that matches id
+        /// Find the <see cref="TranslationTableObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

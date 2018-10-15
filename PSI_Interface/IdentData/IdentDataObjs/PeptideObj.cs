@@ -4,11 +4,11 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML PeptideType
+    /// MzIdentML PeptideType
     /// </summary>
     /// <remarks>
-    ///     One (poly)peptide (a sequence with modifications). The combination of Peptide sequence and modifications must
-    ///     be unique in the file.
+    /// One (poly)peptide (a sequence with modifications). The combination of Peptide sequence and modifications must
+    /// be unique in the file.
     /// </remarks>
     /// <remarks>CVParams/UserParams: Additional descriptors of this peptide sequence</remarks>
     public class PeptideObj : ParamGroupObj, IIdentifiableType, IEquatable<PeptideObj>
@@ -17,7 +17,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private IdentDataList<SubstitutionModificationObj> _substitutionModifications;
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="p"></param>
         /// <param name="idata"></param>
@@ -43,7 +43,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public PeptideObj()
         {
@@ -56,7 +56,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create a peptide with the specified sequence
+        /// Create a peptide with the specified sequence
         /// </summary>
         /// <param name="sequence"></param>
         /// <returns>A plain peptide with not modifications (must be added)</returns>
@@ -66,8 +66,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     The amino acid sequence of the (poly)peptide. If a substitution modification has been found, the original
-        ///     sequence should be reported.
+        /// The amino acid sequence of the (poly)peptide. If a substitution modification has been found, the original
+        /// sequence should be reported.
         /// </remarks>
         /// <remarks>min 1, max 1</remarks>
         public string PeptideSequence { get; set; }
@@ -97,8 +97,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -112,7 +112,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -125,7 +125,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -145,7 +145,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

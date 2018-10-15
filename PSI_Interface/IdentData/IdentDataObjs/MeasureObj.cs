@@ -4,12 +4,12 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML MeasureType; list form is FragmentationTableType
+    /// MzIdentML MeasureType; list form is FragmentationTableType
     /// </summary>
     /// <remarks>References to CV terms defining the measures about product ions to be reported in SpectrumIdentificationItem</remarks>
     /// <remarks>
-    ///     FragmentationTableType: Contains the types of measures that will be reported in generic arrays
-    ///     for each SpectrumIdentificationItem e.g. product ion m/z, product ion intensity, product ion m/z error
+    /// FragmentationTableType: Contains the types of measures that will be reported in generic arrays
+    /// for each SpectrumIdentificationItem e.g. product ion m/z, product ion intensity, product ion m/z error
     /// </remarks>
     /// <remarks>FragmentationTableType: child element Measure of type MeasureType, min 1, max unbounded</remarks>
     /// <remarks>CVParams: min 1, max unbounded</remarks>
@@ -18,7 +18,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         //private IdentDataList<CVParamType> _cvParams;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public MeasureObj()
         {
@@ -27,7 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="m"></param>
         /// <param name="idata"></param>
@@ -39,8 +39,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -54,7 +54,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -67,7 +67,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -84,7 +84,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

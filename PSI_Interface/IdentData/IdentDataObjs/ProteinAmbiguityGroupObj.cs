@@ -4,11 +4,11 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML ProteinAmbiguityGroupType
+    /// MzIdentML ProteinAmbiguityGroupType
     /// </summary>
     /// <remarks>
-    ///     A set of logically related results from a protein detection, for example to represent conflicting assignments
-    ///     of peptides to proteins.
+    /// A set of logically related results from a protein detection, for example to represent conflicting assignments
+    /// of peptides to proteins.
     /// </remarks>
     /// <remarks>CVParams/UserParams: Scores or parameters associated with the ProteinAmbiguityGroup.</remarks>
     public class ProteinAmbiguityGroupObj : ParamGroupObj, IIdentifiableType, IEquatable<ProteinAmbiguityGroupObj>
@@ -16,7 +16,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private IdentDataList<ProteinDetectionHypothesisObj> _proteinDetectionHypotheses;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public ProteinAmbiguityGroupObj()
         {
@@ -27,7 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="pag"></param>
         /// <param name="idata"></param>
@@ -58,8 +58,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -73,7 +73,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -86,7 +86,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -104,7 +104,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

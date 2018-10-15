@@ -35,7 +35,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>A reference to the child sample.</remarks>
-        /// Required  Attribute
+        /// Required Attribute
         /// string
         protected internal string SampleRef
         {
@@ -54,7 +54,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>A reference to the child sample.</remarks>
-        /// Required  Attribute
+        /// Required Attribute
         /// string
         public SampleObj Sample
         {

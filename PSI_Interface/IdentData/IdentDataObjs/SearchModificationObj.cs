@@ -4,27 +4,27 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SearchModificationType: Container ModificationParamsType
+    /// MzIdentML SearchModificationType: Container ModificationParamsType
     /// </summary>
     /// <remarks>
-    ///     Specification of a search modification as parameter for a spectra search. Contains the name of the
-    ///     modification, the mass, the specificity and whether it is a static modification.
+    /// Specification of a search modification as parameter for a spectra search. Contains the name of the
+    /// modification, the mass, the specificity and whether it is a static modification.
     /// </remarks>
     /// <remarks>
-    ///     ModificationParamsType: The specification of static/variable modifications (e.g. Oxidation of Methionine) that
-    ///     are to be considered in the spectra search.
+    /// ModificationParamsType: The specification of static/variable modifications (e.g. Oxidation of Methionine) that
+    /// are to be considered in the spectra search.
     /// </remarks>
     /// <remarks>ModificationParamsType: child element SearchModification, of type SearchModificationType, min 1, max unbounded</remarks>
     /// <remarks>
-    ///     CVParams: The modification is uniquely identified by references to external CVs such as UNIMOD, see
-    ///     specification document and mapping file for more details. min 1, max unbounded
+    /// CVParams: The modification is uniquely identified by references to external CVs such as UNIMOD, see
+    /// specification document and mapping file for more details. min 1, max unbounded
     /// </remarks>
     public class SearchModificationObj : CVParamGroupObj, IEquatable<SearchModificationObj>
     {
         private IdentDataList<SpecificityRulesListObj> _specificityRules;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SearchModificationObj()
         {
@@ -36,7 +36,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="sm"></param>
         /// <param name="idata"></param>
@@ -78,9 +78,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public float MassDelta { get; set; }
 
         /// <remarks>
-        ///     The residue(s) searched with the specified modification. For N or C terminal modifications that can occur
-        ///     on any residue, the . character should be used to specify any, otherwise the list of amino acids should be
-        ///     provided.
+        /// The residue(s) searched with the specified modification. For N or C terminal modifications that can occur
+        /// on any residue, the . character should be used to specify any, otherwise the list of amino acids should be
+        /// provided.
         /// </remarks>
         /// Required Attribute
         /// listOfCharsOrAny: string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."
@@ -89,7 +89,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -102,7 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -121,7 +121,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

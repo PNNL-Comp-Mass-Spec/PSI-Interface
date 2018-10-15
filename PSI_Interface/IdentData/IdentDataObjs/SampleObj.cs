@@ -4,17 +4,17 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SampleType : Containers AnalysisSampleCollectionType
+    /// MzIdentML SampleType : Containers AnalysisSampleCollectionType
     /// </summary>
     /// <remarks>
-    ///     A description of the sample analyzed by mass spectrometry using CVParams or UserParams.
-    ///     If a composite sample has been analyzed, a parent sample should be defined, which references subsamples.
-    ///     This represents any kind of substance used in an experimental workflow, such as whole organisms, cells,
-    ///     DNA, solutions, compounds and experimental substances (gels, arrays etc.).
+    /// A description of the sample analyzed by mass spectrometry using CVParams or UserParams.
+    /// If a composite sample has been analyzed, a parent sample should be defined, which references subsamples.
+    /// This represents any kind of substance used in an experimental workflow, such as whole organisms, cells,
+    /// DNA, solutions, compounds and experimental substances (gels, arrays etc.).
     /// </remarks>
     /// <remarks>
-    ///     AnalysisSampleCollectionType: The samples analyzed can optionally be recorded using CV terms for descriptions.
-    ///     If a composite sample has been analyzed, the subsample association can be used to build a hierarchical description.
+    /// AnalysisSampleCollectionType: The samples analyzed can optionally be recorded using CV terms for descriptions.
+    /// If a composite sample has been analyzed, the subsample association can be used to build a hierarchical description.
     /// </remarks>
     /// <remarks>AnalysisSampleCollectionType: child element Sample of type SampleType, min 1, max unbounded</remarks>
     /// <remarks>CVParams/UserParams: The characteristics of a Material.</remarks>
@@ -24,7 +24,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private IdentDataList<SubSampleObj> _subSamples;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SampleObj()
         {
@@ -36,7 +36,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="s"></param>
         /// <param name="idata"></param>
@@ -60,8 +60,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     Contact details for the Material. The association to ContactRole could specify, for example, the creator or
-        ///     provider of the Material.
+        /// Contact details for the Material. The association to ContactRole could specify, for example, the creator or
+        /// provider of the Material.
         /// </remarks>
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ContactRoleObj> ContactRoles
@@ -88,7 +88,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -107,8 +107,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -120,7 +120,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string Name { get; set; }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -133,7 +133,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

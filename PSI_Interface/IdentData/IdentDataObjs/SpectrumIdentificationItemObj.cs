@@ -4,16 +4,16 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SpectrumIdentificationItemType
+    /// MzIdentML SpectrumIdentificationItemType
     /// </summary>
     /// <remarks>
-    ///     An identification of a single (poly)peptide, resulting from querying an input spectra, along with
-    ///     the set of confidence values for that identification. PeptideEvidence elements should be given for all
-    ///     mappings of the corresponding Peptide sequence within protein sequences.
+    /// An identification of a single (poly)peptide, resulting from querying an input spectra, along with
+    /// the set of confidence values for that identification. PeptideEvidence elements should be given for all
+    /// mappings of the corresponding Peptide sequence within protein sequences.
     /// </remarks>
     /// <remarks>
-    ///     CVParams/UserParams: Scores or attributes associated with the SpectrumIdentificationItem e.g. e-value,
-    ///     p-value, score.
+    /// CVParams/UserParams: Scores or attributes associated with the SpectrumIdentificationItem e.g. e-value,
+    /// p-value, score.
     /// </remarks>
     public class SpectrumIdentificationItemObj : ParamGroupObj, IIdentifiableType, IEquatable<SpectrumIdentificationItemObj>
     {
@@ -30,7 +30,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private string _sampleRef;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SpectrumIdentificationItemObj()
         {
@@ -56,7 +56,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="sii"></param>
         /// <param name="idata"></param>
@@ -142,8 +142,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool CalculatedMassToChargeSpecified { get; private set; }
 
         /// <remarks>
-        ///     The calculated isoelectric point of the (poly)peptide, with relevant modifications included.
-        ///     Do not supply this value if the PI cannot be calculated properly.
+        /// The calculated isoelectric point of the (poly)peptide, with relevant modifications included.
+        /// Do not supply this value if the PI cannot be calculated properly.
         /// </remarks>
         /// Optional Attribute
         /// float
@@ -199,25 +199,25 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     For an MS/MS result set, this is the rank of the identification quality as scored by the search engine.
-        ///     1 is the top rank. If multiple identifications have the same top score, they should all be assigned rank =1.
-        ///     For PMF data, the rank attribute may be meaningless and values of rank = 0 should be given.
+        /// For an MS/MS result set, this is the rank of the identification quality as scored by the search engine.
+        /// 1 is the top rank. If multiple identifications have the same top score, they should all be assigned rank =1.
+        /// For PMF data, the rank attribute may be meaningless and values of rank = 0 should be given.
         /// </remarks>
         /// Required Attribute
         /// integer
         public int Rank { get; set; }
 
         /// <remarks>
-        ///     Set to true if the producers of the file has deemed that the identification has passed a given threshold
-        ///     or been validated as correct. If no such threshold has been set, value of true should be given for all results.
+        /// Set to true if the producers of the file has deemed that the identification has passed a given threshold
+        /// or been validated as correct. If no such threshold has been set, value of true should be given for all results.
         /// </remarks>
         /// Required Attribute
         /// boolean
         public bool PassThreshold { get; set; }
 
         /// <remarks>
-        ///     A reference should be given to the MassTable used to calculate the sequenceMass only if more than one
-        ///     MassTable has been given.
+        /// A reference should be given to the MassTable used to calculate the sequenceMass only if more than one
+        /// MassTable has been given.
         /// </remarks>
         /// Optional Attribute
         /// string
@@ -238,8 +238,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     A reference should be given to the MassTable used to calculate the sequenceMass only if more than one
-        ///     MassTable has been given.
+        /// A reference should be given to the MassTable used to calculate the sequenceMass only if more than one
+        /// MassTable has been given.
         /// </remarks>
         /// Optional Attribute
         /// string
@@ -258,8 +258,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     A reference should be provided to link the SpectrumIdentificationItem to a Sample
-        ///     if more than one sample has been described in the AnalysisSampleCollection.
+        /// A reference should be provided to link the SpectrumIdentificationItem to a Sample
+        /// if more than one sample has been described in the AnalysisSampleCollection.
         /// </remarks>
         /// Optional Attribute
         protected internal string SampleRef
@@ -279,8 +279,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     A reference should be provided to link the SpectrumIdentificationItem to a Sample
-        ///     if more than one sample has been described in the AnalysisSampleCollection.
+        /// A reference should be provided to link the SpectrumIdentificationItem to a Sample
+        /// if more than one sample has been described in the AnalysisSampleCollection.
         /// </remarks>
         /// Optional Attribute
         public SampleObj Sample
@@ -298,8 +298,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -311,7 +311,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string Name { get; set; }
 
         /// <summary>
-        ///     Adds a PeptideEvidence object to the PeptideEvidence Reference List
+        /// Adds a PeptideEvidence object to the PeptideEvidence Reference List
         /// </summary>
         /// <param name="pepEv"></param>
         public void AddPeptideEvidence(PeptideEvidenceObj pepEv)
@@ -320,7 +320,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Get the SpecEValue of this identification
+        /// Get the SpecEValue of this identification
         /// </summary>
         /// <returns></returns>
         public double GetSpecEValue()
@@ -331,7 +331,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -344,7 +344,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -369,7 +369,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

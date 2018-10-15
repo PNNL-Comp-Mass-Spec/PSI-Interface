@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML InputSpectrumIdentificationsType
+    /// MzIdentML InputSpectrumIdentificationsType
     /// </summary>
     /// <remarks>The lists of spectrum identifications that are input to the protein detection process.</remarks>
     public class InputSpectrumIdentificationsObj : IdentDataInternalTypeAbstract, IEquatable<InputSpectrumIdentificationsObj>
@@ -14,7 +14,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private string _spectrumIdentificationListRef;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public InputSpectrumIdentificationsObj()
         {
@@ -24,7 +24,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="isi"></param>
         /// <param name="idata"></param>
@@ -73,7 +73,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -86,7 +86,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -103,7 +103,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

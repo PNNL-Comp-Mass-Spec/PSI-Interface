@@ -4,13 +4,13 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML CVParamType; Container types: ToleranceType
+    /// MzIdentML CVParamType; Container types: ToleranceType
     /// </summary>
     /// <remarks>A single entry from an ontology or a controlled vocabulary.</remarks>
     /// <remarks>ToleranceType: The tolerance of the search given as a plus and minus value with units.</remarks>
     /// <remarks>
-    ///     ToleranceType: child element cvParam of type CVParamType, min 1, max unbounded "CV terms capturing the
-    ///     tolerance plus and minus values."
+    /// ToleranceType: child element cvParam of type CVParamType, min 1, max unbounded "CV terms capturing the
+    /// tolerance plus and minus values."
     /// </remarks>
     public class CVParamObj : ParamBaseObj, IEquatable<CVParamObj>
     {
@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Constructors
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         /// <param name="cvid"></param>
         /// <param name="value"></param>
@@ -36,7 +36,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="cvp"></param>
         /// <param name="idata"></param>
@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Properties
         /// <summary>
-        ///     CV term enum
+        /// CV term enum
         /// </summary>
         public CV.CV.CVID Cvid { get; set; }
 
@@ -130,7 +130,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         /// <summary>
-        ///     Convert the value of the CVParam to type T
+        /// Convert the value of the CVParam to type T
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -141,7 +141,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Object Equality
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -165,7 +165,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -180,7 +180,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

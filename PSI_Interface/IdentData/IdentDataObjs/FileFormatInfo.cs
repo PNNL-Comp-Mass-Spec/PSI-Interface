@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML FileFormatType
+    /// MzIdentML FileFormatType
     /// </summary>
     /// <remarks>The format of the ExternalData file, for example "tiff" for image files.</remarks>
     public class FileFormatInfo : IdentDataInternalTypeAbstract, IEquatable<FileFormatInfo>
@@ -12,7 +12,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private CVParamObj _cvParam;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public FileFormatInfo()
         {
@@ -20,7 +20,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="ff"></param>
         /// <param name="idata"></param>
@@ -49,7 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -79,7 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

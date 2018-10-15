@@ -6,7 +6,7 @@ using PSI_Interface.Utils;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML MassTableType
+    /// MzIdentML MassTableType
     /// </summary>
     /// <remarks>The masses of residues used in the search.</remarks>
     /// <remarks>CVParams/UserParams: Additional parameters or descriptors for the MassTable.</remarks>
@@ -17,7 +17,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private IdentDataList<ResidueObj> _residues;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public MassTableObj()
         {
@@ -30,7 +30,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="mt"></param>
         /// <param name="idata"></param>
@@ -87,8 +87,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public List<string> MsLevels { get; set; }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -102,7 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -115,7 +115,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -135,7 +135,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

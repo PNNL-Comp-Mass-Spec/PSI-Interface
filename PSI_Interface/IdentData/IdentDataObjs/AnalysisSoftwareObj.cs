@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML AnalysisSoftwareType : Containers AnalysisSoftwareListType
+    /// MzIdentML AnalysisSoftwareType : Containers AnalysisSoftwareListType
     /// </summary>
     /// <remarks>The software used for performing the analyses.</remarks>
     /// <remarks>AnalysisSoftwareListType: The software packages used to perform the analyses.</remarks>
@@ -15,7 +15,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private ParamObj _softwareName;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public AnalysisSoftwareObj()
         {
@@ -30,7 +30,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="asi"></param>
         /// <param name="idata"></param>
@@ -79,8 +79,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     Any customizations to the software, such as alternative scoring mechanisms implemented, should be documented
-        ///     here as free text.
+        /// Any customizations to the software, such as alternative scoring mechanisms implemented, should be documented
+        /// here as free text.
         /// </remarks>
         /// <remarks>min 0, max 1</remarks>
         public string Customizations { get; set; }
@@ -96,8 +96,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string URI { get; set; }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -111,7 +111,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -124,7 +124,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -143,7 +143,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

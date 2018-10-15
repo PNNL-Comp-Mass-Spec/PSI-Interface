@@ -4,12 +4,12 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML ContactRoleType
+    /// MzIdentML ContactRoleType
     /// </summary>
     /// <remarks>
-    ///     The role that a Contact plays in an organization or with respect to the associating class.
-    ///     A Contact may have several Roles within scope, and as such, associations to ContactRole
-    ///     allow the use of a Contact in a certain manner. Examples might include a provider, or a data analyst.
+    /// The role that a Contact plays in an organization or with respect to the associating class.
+    /// A Contact may have several Roles within scope, and as such, associations to ContactRole
+    /// allow the use of a Contact in a certain manner. Examples might include a provider, or a data analyst.
     /// </remarks>
     public class ContactRoleObj : IdentDataInternalTypeAbstract, IEquatable<ContactRoleObj>
     {
@@ -19,7 +19,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private RoleObj _role;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public ContactRoleObj()
         {
@@ -30,7 +30,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="cr"></param>
         /// <param name="idata"></param>
@@ -96,7 +96,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -109,7 +109,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -126,7 +126,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

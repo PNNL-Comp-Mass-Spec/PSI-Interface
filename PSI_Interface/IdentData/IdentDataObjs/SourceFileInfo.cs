@@ -5,7 +5,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SourceFileType
+    /// MzIdentML SourceFileType
     /// </summary>
     /// <remarks>A file from which this mzIdentML instance was created.</remarks>
     /// <remarks>CVParams/UserParams: Any additional parameters description the source file.</remarks>
@@ -14,7 +14,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private FileFormatInfo _fileFormat;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SourceFileInfo()
         {
@@ -27,7 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="sf"></param>
         /// <param name="idata"></param>
@@ -46,8 +46,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -59,8 +59,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string Name { get; set; }
 
         /// <remarks>
-        ///     A URI to access documentation and tools to interpret the external format of the ExternalData instance.
-        ///     For example, XML Schema or static libraries (APIs) to access binary formats.
+        /// A URI to access documentation and tools to interpret the external format of the ExternalData instance.
+        /// For example, XML Schema or static libraries (APIs) to access binary formats.
         /// </remarks>
         /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation { get; set; }
@@ -86,7 +86,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -99,7 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -118,7 +118,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

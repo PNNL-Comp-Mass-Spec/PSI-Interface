@@ -4,11 +4,11 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML PeptideEvidenceType
+    /// MzIdentML PeptideEvidenceType
     /// </summary>
     /// <remarks>
-    ///     PeptideEvidence links a specific Peptide element to a specific position in a DBSequence.
-    ///     There must only be one PeptideEvidence item per Peptide-to-DBSequence-position.
+    /// PeptideEvidence links a specific Peptide element to a specific position in a DBSequence.
+    /// There must only be one PeptideEvidence item per Peptide-to-DBSequence-position.
     /// </remarks>
     /// <remarks>CVParams/UserParams: Additional parameters or descriptors for the PeptideEvidence.</remarks>
     public class PeptideEvidenceObj : ParamGroupObj, IIdentifiableType, IEquatable<PeptideEvidenceObj>
@@ -27,7 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private string _translationTableRef;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public PeptideEvidenceObj()
         {
@@ -52,7 +52,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create a peptide evidence with the specified values
+        /// Create a peptide evidence with the specified values
         /// </summary>
         /// <param name="dbSeq">Valid <see cref="DbSequenceObj" /> object, not null</param>
         /// <param name="peptide">Valid <see cref="PeptideObj" /> object, not null</param>
@@ -75,7 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="pe"></param>
         /// <param name="idata"></param>
@@ -104,24 +104,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public bool IsDecoy { get; set; }
 
         /// <remarks>
-        ///     Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="".
-        ///     If for any reason it is unknown (e.g. DeNovo), pre="?" should be used.
+        /// Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="".
+        /// If for any reason it is unknown (e.g. DeNovo), pre="?" should be used.
         /// </remarks>
         /// Optional Attribute
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
         public string Pre { get; set; }
 
         /// <remarks>
-        ///     Post flanking residue. If the peptide is C-terminal, post="-" and not post="". If for any reason it is unknown
-        ///     (e.g. DeNovo), post="?" should be used.
+        /// Post flanking residue. If the peptide is C-terminal, post="-" and not post="". If for any reason it is unknown
+        /// (e.g. DeNovo), post="?" should be used.
         /// </remarks>
         /// Optional Attribute
         /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
         public string Post { get; set; }
 
         /// <remarks>
-        ///     Start position of the peptide inside the protein sequence, where the first amino acid of the
-        ///     protein sequence is position 1. Must be provided unless this is a de novo search.
+        /// Start position of the peptide inside the protein sequence, where the first amino acid of the
+        /// protein sequence is position 1. Must be provided unless this is a de novo search.
         /// </remarks>
         /// Optional Attribute
         /// integer
@@ -139,8 +139,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool StartSpecified { get; private set; }
 
         /// <remarks>
-        ///     The index position of the last amino acid of the peptide inside the protein sequence, where the first
-        ///     amino acid of the protein sequence is position 1. Must be provided unless this is a de novo search.
+        /// The index position of the last amino acid of the peptide inside the protein sequence, where the first
+        /// amino acid of the protein sequence is position 1. Must be provided unless this is a de novo search.
         /// </remarks>
         /// Optional Attribute
         /// integer
@@ -282,8 +282,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -297,7 +297,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -310,7 +310,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -330,7 +330,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

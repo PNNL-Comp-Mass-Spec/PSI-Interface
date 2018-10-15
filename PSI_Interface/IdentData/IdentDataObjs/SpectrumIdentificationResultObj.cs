@@ -5,17 +5,17 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SpectrumIdentificationResultType
+    /// MzIdentML SpectrumIdentificationResultType
     /// </summary>
     /// <remarks>
-    ///     All identifications made from searching one spectrum. For PMF data, all peptide identifications
-    ///     will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked
-    ///     SpectrumIdentificationItems corresponding to possible different peptide IDs.
+    /// All identifications made from searching one spectrum. For PMF data, all peptide identifications
+    /// will be listed underneath as SpectrumIdentificationItems. For MS/MS data, there will be ranked
+    /// SpectrumIdentificationItems corresponding to possible different peptide IDs.
     /// </remarks>
     /// <remarks>
-    ///     CVParams/UserParams: Scores or parameters associated with the SpectrumIdentificationResult
-    ///     (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide
-    ///     sequences within the parent tolerance for this spectrum.
+    /// CVParams/UserParams: Scores or parameters associated with the SpectrumIdentificationResult
+    /// (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide
+    /// sequences within the parent tolerance for this spectrum.
     /// </remarks>
     public class SpectrumIdentificationResultObj : ParamGroupObj, IIdentifiableType, IEquatable<SpectrumIdentificationResultObj>
     {
@@ -25,7 +25,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private IdentDataList<SpectrumIdentificationItemObj> _spectrumIdentificationItems;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SpectrumIdentificationResultObj()
         {
@@ -39,7 +39,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="sir"></param>
         /// <param name="idata"></param>
@@ -72,8 +72,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     The locally unique id for the spectrum in the spectra data set specified by SpectraData_ref.
-        ///     External guidelines are provided on the use of consistent identifiers for spectra in different external formats.
+        /// The locally unique id for the spectrum in the spectra data set specified by SpectraData_ref.
+        /// External guidelines are provided on the use of consistent identifiers for spectra in different external formats.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -116,8 +116,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -129,7 +129,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string Name { get; set; }
 
         /// <summary>
-        ///     Sort the SpectrumIdentificationItems by rank, ascending
+        /// Sort the SpectrumIdentificationItems by rank, ascending
         /// </summary>
         public void Sort()
         {
@@ -137,7 +137,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     The lowest specEvalue in the SpectrumIdentificationItems
+        /// The lowest specEvalue in the SpectrumIdentificationItems
         /// </summary>
         /// <returns></returns>
         public double BestSpecEVal()
@@ -146,8 +146,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Changes the rank so that items are ranked by specEValue, ascending
-        ///     Also re-writes the ids
+        /// Changes the rank so that items are ranked by specEValue, ascending
+        /// Also re-writes the ids
         /// </summary>
         public void ReRankBySpecEValue()
         {
@@ -163,7 +163,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Remove all SpectrumIdentificationItems that have a specEValue greater than the best specEValue in the list.
+        /// Remove all SpectrumIdentificationItems that have a specEValue greater than the best specEValue in the list.
         /// </summary>
         public void RemoveMatchesNotBestSpecEValue()
         {
@@ -174,7 +174,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -187,7 +187,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -207,7 +207,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

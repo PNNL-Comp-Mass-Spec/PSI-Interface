@@ -4,11 +4,11 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML FilterType : Containers DatabaseFiltersType
+    /// MzIdentML FilterType : Containers DatabaseFiltersType
     /// </summary>
     /// <remarks>
-    ///     Filters applied to the search database. The filter must include at least one of Include and Exclude.
-    ///     If both are used, it is assumed that inclusion is performed first.
+    /// Filters applied to the search database. The filter must include at least one of Include and Exclude.
+    /// If both are used, it is assumed that inclusion is performed first.
     /// </remarks>
     /// <remarks>DatabaseFiltersType: The specification of filters applied to the database searched.</remarks>
     /// <remarks>DatabaseFiltersType: child element Filter, of type FilterType, min 1, max unbounded</remarks>
@@ -20,7 +20,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private ParamListObj _include;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public FilterInfo()
         {
@@ -30,7 +30,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="f"></param>
         /// <param name="idata"></param>
@@ -91,7 +91,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -104,7 +104,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -122,7 +122,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

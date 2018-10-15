@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML UserParamType
+    /// MzIdentML UserParamType
     /// </summary>
     /// <remarks>A single user-defined parameter.</remarks>
     public class UserParamObj : ParamBaseObj, IEquatable<UserParamObj>
@@ -15,7 +15,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Constructors
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public UserParamObj()
         {
@@ -25,7 +25,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="up"></param>
         /// <param name="idata"></param>
@@ -74,7 +74,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -98,7 +98,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -113,7 +113,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

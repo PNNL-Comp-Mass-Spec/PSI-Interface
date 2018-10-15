@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML ParamType
+    /// MzIdentML ParamType
     /// </summary>
     /// <remarks>Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
     public class ParamObj : IdentDataInternalTypeAbstract, IEquatable<ParamObj>
@@ -13,7 +13,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Constructors
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public ParamObj()
         {
@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="p"></param>
         /// <param name="idata"></param>
@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Object Equality
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -85,7 +85,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -100,7 +100,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

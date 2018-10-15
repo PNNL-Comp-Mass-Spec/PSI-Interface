@@ -6,13 +6,13 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML IonTypeType: list form is FragmentationType
+    /// MzIdentML IonTypeType: list form is FragmentationType
     /// </summary>
     /// <remarks>
-    ///     IonType defines the index of fragmentation ions being reported, importing a CV term for the type of ion e.g. b ion.
-    ///     Example: if b3 b7 b8 and b10 have been identified, the index attribute will contain 3 7 8 10, and the corresponding
-    ///     values
-    ///     will be reported in parallel arrays below
+    /// IonType defines the index of fragmentation ions being reported, importing a CV term for the type of ion e.g. b ion.
+    /// Example: if b3 b7 b8 and b10 have been identified, the index attribute will contain 3 7 8 10, and the corresponding
+    /// values
+    /// will be reported in parallel arrays below
     /// </remarks>
     /// <remarks>FragmentationType: The product ions identified in this result.</remarks>
     /// <remarks>FragmentationType: child element IonType, of type IonTypeType, min 1, max unbounded</remarks>
@@ -24,7 +24,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private IdentDataList<FragmentArrayObj> _fragmentArrays;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public IonTypeObj()
         {
@@ -37,7 +37,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="it"></param>
         /// <param name="idata"></param>
@@ -120,11 +120,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <remarks>
-        ///     The index of ions identified as integers, following standard notation for a-c, x-z e.g. if b3 b5 and b6 have
-        ///     been identified, the index would store "3 5 6". For internal ions, the index contains pairs defining the start and
-        ///     end point - see specification document for examples. For immonium ions, the index is the position of the identified
-        ///     ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be
-        ///     distinguished, all positions should be given.
+        /// The index of ions identified as integers, following standard notation for a-c, x-z e.g. if b3 b5 and b6 have
+        /// been identified, the index would store "3 5 6". For internal ions, the index contains pairs defining the start and
+        /// end point - see specification document for examples. For immonium ions, the index is the position of the identified
+        /// ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be
+        /// distinguished, all positions should be given.
         /// </remarks>
         /// <remarks>
         /// (mzIdentML 1.2 add) For precursor ions, including neutral losses, the index value MUST be 0.
@@ -143,7 +143,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -158,7 +158,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -182,7 +182,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

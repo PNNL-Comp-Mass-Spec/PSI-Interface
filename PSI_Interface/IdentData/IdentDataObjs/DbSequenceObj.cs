@@ -4,12 +4,12 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML DBSequenceType
+    /// MzIdentML DBSequenceType
     /// </summary>
     /// <remarks>
-    ///     A database sequence from the specified SearchDatabase (nucleic acid or amino acid).
-    ///     If the sequence is nucleic acid, the source nucleic acid sequence should be given in
-    ///     the seq attribute rather than a translated sequence.
+    /// A database sequence from the specified SearchDatabase (nucleic acid or amino acid).
+    /// If the sequence is nucleic acid, the source nucleic acid sequence should be given in
+    /// the seq attribute rather than a translated sequence.
     /// </remarks>
     /// <remarks>CVParams/UserParams: Additional descriptors for the sequence, such as taxon, description line etc.</remarks>
     public class DbSequenceObj : ParamGroupObj, IIdentifiableType, IEquatable<DbSequenceObj>
@@ -19,7 +19,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private string _searchDatabaseRef;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public DbSequenceObj()
         {
@@ -35,7 +35,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Creates a db sequence object with the specified values
+        /// Creates a db sequence object with the specified values
         /// </summary>
         /// <param name="searchDb">Valid <see cref="SearchDatabaseInfo" /> object, not null</param>
         /// <param name="length">length of the protein</param>
@@ -53,7 +53,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="dbs"></param>
         /// <param name="idata"></param>
@@ -131,8 +131,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool LengthSpecified { get; private set; }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -146,7 +146,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -159,7 +159,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -178,7 +178,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

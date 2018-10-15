@@ -4,11 +4,11 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML EnzymeType
+    /// MzIdentML EnzymeType
     /// </summary>
     /// <remarks>
-    ///     The details of an individual cleavage enzyme should be provided by giving a regular expression
-    ///     or a CV term if a "standard" enzyme cleavage has been performed.
+    /// The details of an individual cleavage enzyme should be provided by giving a regular expression
+    /// or a CV term if a "standard" enzyme cleavage has been performed.
     /// </remarks>
     public class EnzymeObj : IdentDataInternalTypeAbstract, IIdentifiableType, IEquatable<EnzymeObj>
     {
@@ -18,7 +18,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private bool _semiSpecific;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public EnzymeObj()
         {
@@ -38,7 +38,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="e"></param>
         /// <param name="idata"></param>
@@ -91,9 +91,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string CTermGain { get; set; }
 
         /// <remarks>
-        ///     Set to true if the enzyme cleaves semi-specifically (i.e. one terminus must cleave
-        ///     according to the rules, the other can cleave at any residue), false if the enzyme cleavage
-        ///     is assumed to be specific to both termini (accepting for any missed cleavages).
+        /// Set to true if the enzyme cleaves semi-specifically (i.e. one terminus must cleave
+        /// according to the rules, the other can cleave at any residue), false if the enzyme cleavage
+        /// is assumed to be specific to both termini (accepting for any missed cleavages).
         /// </remarks>
         /// Optional Attribute
         /// boolean
@@ -111,8 +111,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool SemiSpecificSpecified { get; private set; }
 
         /// <remarks>
-        ///     The number of missed cleavage sites allowed by the search. The attribute must be provided if an enzyme has
-        ///     been used.
+        /// The number of missed cleavage sites allowed by the search. The attribute must be provided if an enzyme has
+        /// been used.
         /// </remarks>
         /// Optional Attribute
         /// integer
@@ -146,8 +146,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool MinDistanceSpecified { get; private set; }
 
         /// <remarks>
-        ///     An identifier is an unambiguous string that is unique within the scope
-        ///     (i.e. a document, a set of related documents, or a repository) of its use.
+        /// An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.
         /// </remarks>
         /// Required Attribute
         /// string
@@ -161,7 +161,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -174,7 +174,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -194,7 +194,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

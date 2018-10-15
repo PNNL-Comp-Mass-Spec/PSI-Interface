@@ -2063,7 +2063,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         }
 
         /*/// <remarks>A reference to the child sample.</remarks>
-        /// Required  Attribute
+        /// Required Attribute
         /// string
         //public string SampleRef*/
     }

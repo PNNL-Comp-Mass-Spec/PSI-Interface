@@ -4,11 +4,11 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML PeptideEvidenceRefType
+    /// MzIdentML PeptideEvidenceRefType
     /// </summary>
     /// <remarks>
-    ///     Reference to the PeptideEvidence element identified. If a specific sequence can be assigned to multiple
-    ///     proteins and or positions in a protein all possible PeptideEvidence elements should be referenced here.
+    /// Reference to the PeptideEvidence element identified. If a specific sequence can be assigned to multiple
+    /// proteins and or positions in a protein all possible PeptideEvidence elements should be referenced here.
     /// </remarks>
     public class PeptideEvidenceRefObj : IdentDataInternalTypeAbstract, IEquatable<PeptideEvidenceRefObj>
     {
@@ -17,7 +17,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Constructors
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public PeptideEvidenceRefObj(PeptideEvidenceObj pepEv = null)
         {
@@ -27,7 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="per"></param>
         /// <param name="idata"></param>
@@ -82,7 +82,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Object Equality
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -106,7 +106,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -121,7 +121,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

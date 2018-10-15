@@ -4,18 +4,18 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML PersonType
+    /// MzIdentML PersonType
     /// </summary>
     /// <remarks>
-    ///     A person's name and contact details. Any additional information such as the address,
-    ///     contact email etc. should be supplied using CV parameters or user parameters.
+    /// A person's name and contact details. Any additional information such as the address,
+    /// contact email etc. should be supplied using CV parameters or user parameters.
     /// </remarks>
     public class PersonObj : AbstractContactObj, IEquatable<PersonObj>
     {
         private IdentDataList<AffiliationObj> _affiliations;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public PersonObj()
         {
@@ -27,7 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="p"></param>
         /// <param name="idata"></param>
@@ -74,7 +74,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -87,7 +87,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -106,7 +106,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
