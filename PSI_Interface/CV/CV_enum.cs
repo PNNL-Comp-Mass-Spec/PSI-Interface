@@ -8569,152 +8569,209 @@ namespace PSI_Interface.CV
             /// <summary>Lipid qualitative/quantitative analysis software for identification and quantitation of complex lipid molecular species.</summary>
             MS_LipidQA = 1002980,
 
-            /// <summary>PSI Extended FASTA Format Controlled Vocabulary term.</summary>
+            /// <summary>The Proline software suite for mass spectrometry based proteomics.</summary>
+            MS_Proline = 1002981,
+
+            /// <summary>PepNovo tool for de novo peptide sequencing.</summary>
+            MS_PepNovo = 1002982,
+
+            /// <summary>pNovo tool for de novo peptide sequencing and identification using HCD spectra.</summary>
+            MS_pNovo = 1002983,
+
+            /// <summary>Novor real-time peptide de novo sequencing software tool.</summary>
+            MS_Novor = 1002984,
+
+            /// <summary>Digestion of proteins separated by gel electrophoresis for mass spectrometric characterization of proteins and proteomes.</summary>
+            MS_in_gel_digestion = 1002985,
+
+            /// <summary>Digestion of proteins in solution for mass spectrometric characterization of proteins and proteomes.</summary>
+            MS_in_solution_digestion = 1002986,
+
+            /// <summary>IdentiPy.</summary>
+            MS_IdentiPy = 1002987,
+
+            /// <summary>The IdentiPy result 'RHNS'.</summary>
+            MS_IdentiPy_RHNS = 1002988,
+
+            /// <summary>The IdentiPy result 'hyperscore'.</summary>
+            MS_IdentiPy_hyperscore = 1002989,
+
+            /// <summary>ms_deisotope, a library for deisotoping and charge state deconvolution of mass spectra.</summary>
+            MS_ms_deisotope = 1002990,
+
+            /// <summary>python-psims, a library for generating mzML and mzIdentML.</summary>
+            MS_python_psims = 1002991,
+
+            /// <summary>Posterior error probability of the best identified peptide of the Andromeda search engine.</summary>
+            MS_Andromeda_PEP = 1002995,
+
+            /// <summary>Peak list file format of the Andromeda search engine.</summary>
+            MS_Andromeda_apl_file_format = 1002996,
+
+            /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 400000001,
 
-            /// <summary>CV term that may appear in a PEFF File Header Section.</summary>
-            PEFF_File_Header_Section_term = 400000002,
+            /// <summary>CV term that may appear in a PEFF file header section.</summary>
+            PEFF_PEFF_file_header_section_term = 400000002,
 
-            /// <summary>CV term that may appear in a PEFF Individual Entry Section.</summary>
-            PEFF_Individual_Sequence_Entries_Section_term = 400000003,
+            /// <summary>CV term that may appear in a description line of a PEFF file individual sequence entry.</summary>
+            PEFF_PEFF_file_sequence_entry_term = 400000003,
 
-            /// <summary>Sequence Database Name.</summary>
+            /// <summary>PEFF keyword for the sequence database name.</summary>
             PEFF_DbName = 400000008,
 
-            /// <summary>Sequence Database Prefix.</summary>
+            /// <summary>PEFF keyword for the sequence database prefix.</summary>
             PEFF_Prefix = 400000009,
 
-            /// <summary>Sequence Database Short description.</summary>
+            /// <summary>PEFF keyword for the sequence database short description.</summary>
             PEFF_DbDescription = 400000010,
 
-            /// <summary>Specifies whether the Sequence Database is a Decoy.</summary>
+            /// <summary>PEFF keyword for the specifying whether the sequence database is a decoy database.</summary>
             PEFF_Decoy = 400000011,
 
-            /// <summary>Source of the database file.</summary>
+            /// <summary>PEFF keyword for the source of the database file.</summary>
             PEFF_DbSource = 400000012,
 
-            /// <summary>Database version (release date) according to database provider.</summary>
+            /// <summary>PEFF keyword for the database version (release date) according to database provider.</summary>
             PEFF_DbVersion = 400000013,
 
-            /// <summary>Database date (release or file date of the source) according to database provider.</summary>
+            /// <summary>OBSOLETE PEFF keyword for the database date (release or file date of the source) according to database provider.</summary>
             PEFF_DbDate_OBSOLETE = 400000014,
 
-            /// <summary>Number of sequence entries in the database.</summary>
+            /// <summary>PEFF keyword for the sumber of sequence entries in the database.</summary>
             PEFF_NumberOfEntries = 400000015,
 
-            /// <summary>Description of the conversion from original format to this current one.</summary>
+            /// <summary>PEFF keyword for the description of the conversion from original format to this current one.</summary>
             PEFF_Conversion = 400000016,
 
-            /// <summary>Molecular type of the sequences.</summary>
+            /// <summary>PEFF keyword for the molecular type of the sequences.</summary>
             PEFF_SequenceType = 400000017,
 
-            /// <summary>Db specific information (not included in the current list of allowed keys).</summary>
+            /// <summary>PEFF keyword for database specific keywords not included in the current controlled vocabulary.</summary>
             PEFF_SpecificKey = 400000018,
 
-            /// <summary>PEFF specific values for a defined key.</summary>
+            /// <summary>PEFF keyword for the specific values for a custom key.</summary>
             PEFF_SpecificValue = 400000019,
 
-            /// <summary>Short Description of the PEFF.</summary>
+            /// <summary>PEFF keyword for the short description of the PEFF file.</summary>
             PEFF_DatabaseDescription = 400000020,
 
-            /// <summary>PEFF file general comment.</summary>
+            /// <summary>PEFF keyword for a general comment.</summary>
             PEFF_GeneralComment = 400000021,
 
-            /// <summary>Proteoform database flag.</summary>
+            /// <summary>PEFF keyword that when set to 'true' indicates that the database contains complete proteoforms.</summary>
             PEFF_ProteoformDb = 400000022,
 
-            /// <summary>A tag (short string) used to categorize a sequence annotation (variant or modification).</summary>
-            PEFF_CustomTag = 400000023,
+            /// <summary>PEFF keyword for the short tag (abbreviation) and longer definition used to annotate a sequence annotation (such as variant or modification) in the OptionalTag location.</summary>
+            PEFF_OptionalTagDef = 400000023,
 
-            /// <summary>Sequence Database unique identifier.</summary>
-            PEFF_DbUniqueId = 400001001,
+            /// <summary>PEFF keyword that when set to 'true' indicates that entries in the database have identifiers for each annotation.</summary>
+            PEFF_HasAnnotationIdentifiers = 400000024,
 
-            /// <summary>Protein Name, description.</summary>
+            /// <summary>OBSOLETE Sequence database unique identifier.</summary>
+            PEFF_DbUniqueId_OBSOLETE = 400001001,
+
+            /// <summary>PEFF keyword for the protein full name.</summary>
             PEFF_PName = 400001002,
 
-            /// <summary>NCBI taxonomy identifier.</summary>
+            /// <summary>PEFF keyword for the NCBI taxonomy identifier.</summary>
             PEFF_NcbiTaxId = 400001003,
 
-            /// <summary>Taxonomy name (latin or common name).</summary>
+            /// <summary>PEFF keyword for the taxonomy name (latin or common name).</summary>
             PEFF_TaxName = 400001004,
 
-            /// <summary>Gene name.</summary>
+            /// <summary>PEFF keyword for the gene name.</summary>
             PEFF_GName = 400001005,
 
-            /// <summary>Sequence length.</summary>
+            /// <summary>PEFF keyword for the sequence length.</summary>
             PEFF_Length = 400001006,
 
-            /// <summary>Sequence version.</summary>
+            /// <summary>PEFF keyword for the sequence version.</summary>
             PEFF_SV = 400001007,
 
-            /// <summary>Entry version.</summary>
+            /// <summary>PEFF keyword for the entry version.</summary>
             PEFF_EV = 400001008,
 
-            /// <summary>Protein Evidence; A UniprotKB code.</summary>
+            /// <summary>PEFF keyword for the Protein Evidence; A UniProtKB code 1-5.</summary>
             PEFF_PE = 400001009,
 
-            /// <summary>Processed Molecule.</summary>
+            /// <summary>PEFF keyword for information on how the full length original protein sequence can be processed into shorter components such as signal peptides and chains.</summary>
             PEFF_Processed = 400001010,
 
-            /// <summary>DEPRECATED in favor of VariantSimple and VariantComplex. Former definition: Sequence variation (substitution, insertion, deletion).</summary>
-            PEFF_Variant = 400001011,
+            /// <summary>OBSOLETE Sequence variation (substitution, insertion, deletion).</summary>
+            PEFF_Variant_OBSOLETE = 400001011,
 
-            /// <summary>Modified residue with PSI-MOD identifier.</summary>
+            /// <summary>PEFF keyword for the modified residue with PSI-MOD identifier.</summary>
             PEFF_ModResPsi = 400001012,
 
-            /// <summary>Modified residue without PSI-MOD identifier.</summary>
+            /// <summary>PEFF keyword for the modified residue without aPSI-MOD or UniMod identifier.</summary>
             PEFF_ModRes = 400001013,
 
-            /// <summary>Alternative Accession Code.</summary>
+            /// <summary>PEFF keyword for the Alternative Accession Code.</summary>
             PEFF_AltAC = 400001014,
 
-            /// <summary>Sequence Status. Complete or Fragment.</summary>
+            /// <summary>PEFF keyword for the sequence status. Complete or Fragment.</summary>
             PEFF_SeqStatus = 400001015,
 
-            /// <summary>Entry associated comment.</summary>
+            /// <summary>PEFF keyword for the entry associated comment.</summary>
             PEFF_CC = 400001016,
 
-            /// <summary>Entry associated keyword(s).</summary>
+            /// <summary>PEFF keyword for the entry associated keyword(s).</summary>
             PEFF_KW = 400001017,
 
-            /// <summary>Gene Ontology code.</summary>
+            /// <summary>PEFF keyword for the Gene Ontology code.</summary>
             PEFF_GO = 400001018,
 
-            /// <summary>Cross-reference to an external resource.</summary>
+            /// <summary>PEFF keyword for the cross-reference to an external resource.</summary>
             PEFF_XRef = 400001019,
 
-            /// <summary>Sequence range of active processed polypeptide.</summary>
-            PEFF_Chain = 400001020,
+            /// <summary>Portion of a newly synthesized protein that contributes to a final structure after other components such as signal peptides are removed.</summary>
+            PEFF_mature_protein = 400001020,
 
-            /// <summary>Sequence range of signal peptide.</summary>
-            PEFF_Signal = 400001021,
+            /// <summary>Short peptide present at the N-terminus of a newly synthesized protein that is cleaved off and is not part of the final mature protein.</summary>
+            PEFF_signal_peptide = 400001021,
 
-            /// <summary>Sequence range of transit peptide.</summary>
-            PEFF_Transit = 400001022,
+            /// <summary>Short peptide present at the N-terminus of a newly synthesized protein that helps the protein through the membrane of its destination organelle.</summary>
+            PEFF_transit_peptide = 400001022,
 
-            /// <summary>Sequence conflict; a UniProtKB term.</summary>
+            /// <summary>PEFF keyword for the sequence conflict; a UniProtKB term.</summary>
             PEFF_Conflict = 400001023,
 
-            /// <summary>Sequence checksum in crc64.</summary>
+            /// <summary>PEFF keyword for the Sequence checksum in crc64.</summary>
             PEFF_Crc64 = 400001024,
 
-            /// <summary>Sequence range of a domain.</summary>
+            /// <summary>PEFF keyword for the sequence range of a domain.</summary>
             PEFF_Domain = 400001025,
 
-            /// <summary>UniProtKB specific Protein identifier ID; a UniProtKB term.</summary>
+            /// <summary>PEFF keyword for the UniProtKB specific Protein identifier ID; a UniProtKB term.</summary>
             PEFF_ID = 400001026,
 
-            /// <summary>Modified residue with Unimod identifier.</summary>
+            /// <summary>PEFF keyword for the modified residue with UniMod identifier.</summary>
             PEFF_ModResUnimod = 400001027,
 
-            /// <summary>Simple sequence variation of a single amino acid change. A change to a stop codon is permitted with a * symbol. More complex variations must be encoded with the VariantComplex term.</summary>
+            /// <summary>PEFF keyword for the simple sequence variation of a single amino acid change. A change to a stop codon is permitted with a * symbol. More complex variations must be encoded with the VariantComplex term.</summary>
             PEFF_VariantSimple = 400001028,
 
-            /// <summary>Simple sequence variation of a single amino acid change. A change to a stop codon is permitted with a * symbol. More complex variations must be encoded with the VariantComplex term.</summary>
+            /// <summary>PEFF keyword for a sequence variation that is more complex than a single amino acid change or change to a stop codon.</summary>
             PEFF_VariantComplex = 400001029,
 
+            /// <summary>PEFF keyword for the proteoforms of this protein, constructed as a set of annotation identifiers.</summary>
+            PEFF_Proteoform = 400001030,
+
+            /// <summary>PEFF keyword for the disulfide bonds in this protein, constructed as a sets of annotation identifiers of two half-cystine modifications.</summary>
+            PEFF_DisulfideBond = 400001031,
+
+            /// <summary>PEFF keyword describing the type of processing event being described.</summary>
+            PEFF_PEFF_molecule_processing_keyword = 400001032,
+
+            /// <summary>PEFF keyword for the individual protein entry comment. It is discouraged to put parsable information here. This is only for free-text commentary.</summary>
+            PEFF_Comment = 400001033,
+
+            /// <summary>Short peptide that is cleaved off a newly synthesized protein and generally immediately degraded in the process of protein maturation, and is not a signal peptide or transit peptide.</summary>
+            PEFF_maturation_peptide = 400001034,
+
             /// <summary>(</summary>
-            PEFF_regular_expression_for_PEFF_description_line = 401002001,
+            PEFF_regular_expression_for_each_VariantSimple_item = 401002001,
 
             /// <summary>(AA|NA|DNA|cDNA|RNA|RNAi|tRNA|rRNA|siRNA|mDNA|mRNA|snoRNA|ncRNA|EST|</summary>
             PEFF_regular_expression_for_PEFF_molecular_sequence_type = 401002002,
@@ -12977,7 +13034,7 @@ namespace PSI_Interface.CV
             UNIMOD_Delta_H_3_C_3_O_2_ = 100001926,
 
             /// <summary>Methylglyoxal-derived argpyrimidine.</summary>
-            UNIMOD_Delta_H_4_C_6_O_1_ = 100001927,
+            UNIMOD_Delta_H_4_C_5_O_1_ = 100001927,
 
             /// <summary>Crotonaldehyde-derived dimethyl-FDP-lysine.</summary>
             UNIMOD_Delta_H_10_C_8_O_1_ = 100001928,
@@ -13152,6 +13209,9 @@ namespace PSI_Interface.CV
 
             /// <summary>5-glutamyl serotonin.</summary>
             UNIMOD_serotonylation = 100001992,
+
+            /// <summary>Heavy tris(2,4,6-trimethoxyphenyl)phosphonium acetic acid N-hydroxysuccinimide ester derivative.</summary>
+            UNIMOD_TMPP_Ac_13C_9_ = 100001993,
 
             /// <summary>Description not provided</summary>
             PATO_obsolete_pato_OBSOLETE = 300000000,
@@ -19108,7 +19168,7 @@ namespace PSI_Interface.CV
             /// <summary>A shape inhering in a bearer by virtue of the bearer's being elongated and cylindrical.</summary>
             PATO_columnar = 300002063,
 
-            /// <summary>A shape quality inhering in a bearer by virtue of the bearer's delimited by a surface with holes.</summary>
+            /// <summary>A structure quality inhering in a bearer by virtue of the bearer's delimited by a surface with holes.</summary>
             PATO_fenestrated = 300002064,
 
             /// <summary>A shape quality inhering in a bearer by virtue of the bearer's being arranged like rays or radii; radiating from a common center.</summary>
@@ -19348,7 +19408,7 @@ namespace PSI_Interface.CV
             /// <summary>A radiopacity that is relatively low.</summary>
             PATO_decreased_radiopacity = 300002145,
 
-            /// <summary>A quality inhering in a bearer by virtue of the bearer's pathogenicity.</summary>
+            /// <summary>A quality inhering in a bearer by virtue of the severity of infectious disease caused by the bearer in a target organism.</summary>
             PATO_virulence = 300002146,
 
             /// <summary>A virulence that is relatively low.</summary>
@@ -20207,7 +20267,7 @@ namespace PSI_Interface.CV
             PATO_perpendicular_to = 300002434,
 
             /// <summary>A positional quality inhering in a bearer by virtue of the bearer touching another entity along a border or with a projecting part.</summary>
-            PATO_abut = 300002435,
+            PATO_abutting = 300002435,
 
             /// <summary>A positional quality inhering in a bearer by virtue of the bearer's position being displaced from a reference point.</summary>
             PATO_offset = 300002436,
@@ -20245,7 +20305,7 @@ namespace PSI_Interface.CV
             /// <summary>A shape quality inhering in a bearer by virtue of the bearer being divided into four parts.</summary>
             PATO_quadripartite = 300002447,
 
-            /// <summary>A quality inhering in a bearer by virtue of the bearer's bing aligned or positioned towards another entity.</summary>
+            /// <summary>A quality inhering in a bearer by virtue of the bearer's being aligned or positioned towards another entity.</summary>
             PATO_oriented_towards = 300002448,
 
             /// <summary>A spatial quality inhering in a bearer by virtue of the bearer's being located toward the rear and mid-line surface of an organism relative to another entity.</summary>
@@ -20754,6 +20814,21 @@ namespace PSI_Interface.CV
 
             /// <summary>A ventralized quality inhering in a bearer by virtue of the bearer's gross morphology containing what are normally ventral structures and missing some but not all of what are normally dorsal structures.</summary>
             PATO_partially_ventralized = 300030007,
+
+            /// <summary>An oriented quality inhering in a bearer by virtue of the bearer's being abnormally placed or arranged.</summary>
+            PATO_heterotaxic = 300040000,
+
+            /// <summary>Shaped like a ring</summary>
+            PATO_ring_shaped1 = 300040001,
+
+            /// <summary>A positional quality inhering in a bearer by virtue of some aspect of that bearer beginning from a position on another entity.</summary>
+            PATO_originates_from = 300040002,
+
+            /// <summary>The ability of a pathogen to produce an infectious disease or disorder in an another organism.</summary>
+            PATO_pathogenicity = 300040003,
+
+            /// <summary>A texture quality inhering in a bearer by virtue of the bearer's being covered or partially covered with hair that has increased thickness and softness.</summary>
+            PATO_plush = 300040004,
 
             /// <summary>A rate which is relatively normal.</summary>
             PATO_normal_rate = 300045000,
