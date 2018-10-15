@@ -39,7 +39,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (ph.SpectrumIdentificationItemRef != null && ph.SpectrumIdentificationItemRef.Count > 0)
             {
-                SpectrumIdentificationItems.AddRange(ph.SpectrumIdentificationItemRef, siir => new SpectrumIdentificationItemRefObj(siir, IdentData));
+                SpectrumIdentificationItems.AddRange(ph.SpectrumIdentificationItemRef, spectrumIdItemRef => new SpectrumIdentificationItemRefObj(spectrumIdItemRef, IdentData));
             }
         }
 

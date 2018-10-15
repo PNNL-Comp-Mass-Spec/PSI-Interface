@@ -72,11 +72,11 @@ namespace PSI_Interface.IdentData
                 SearchDatabases = new IdentDataList<SearchDatabaseRefObj>(),
             };
 
-            foreach (var ispec in identData.DataCollection.Inputs.SpectraDataList)
+            foreach (var inputSpectrum in identData.DataCollection.Inputs.SpectraDataList)
             {
                 analysisCollection.InputSpectra.Add(new InputSpectraRefObj()
                 {
-                    SpectraData = ispec
+                    SpectraData = inputSpectrum
                 });
             }
 

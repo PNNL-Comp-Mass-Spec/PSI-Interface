@@ -196,10 +196,10 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <summary>
         /// Constructor - create from corresponding IdentData type
         /// </summary>
-        /// <param name="siiri"></param>
-        public SpectrumIdentificationItemRefType(SpectrumIdentificationItemRefObj siiri)
+        /// <param name="spectrumIdItemRef"></param>
+        public SpectrumIdentificationItemRefType(SpectrumIdentificationItemRefObj spectrumIdItemRef)
         {
-            this.spectrumIdentificationItem_ref = siiri.SpectrumIdentificationItemRef;
+            this.spectrumIdentificationItem_ref = spectrumIdItemRef.SpectrumIdentificationItemRef;
         }
 
         /*/// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
@@ -226,7 +226,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             if (ph.SpectrumIdentificationItems != null && ph.SpectrumIdentificationItems.Count > 0)
             {
                 this.SpectrumIdentificationItemRef = new List<SpectrumIdentificationItemRefType>(ph.SpectrumIdentificationItems.Count);
-                this.SpectrumIdentificationItemRef.AddRange(ph.SpectrumIdentificationItems, siir => new SpectrumIdentificationItemRefType(siir));
+                this.SpectrumIdentificationItemRef.AddRange(ph.SpectrumIdentificationItems, spectrumIdItemRef => new SpectrumIdentificationItemRefType(spectrumIdItemRef));
             }
         }
 
@@ -1209,14 +1209,14 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <summary>
         /// Constructor - create from corresponding IdentData type
         /// </summary>
-        /// <param name="sidf"></param>
-        public SpectrumIDFormatType(SpectrumIDFormatObj sidf)
+        /// <param name="idFormatObject"></param>
+        public SpectrumIDFormatType(SpectrumIDFormatObj idFormatObject)
         {
             this.cvParam = null;
 
-            if (sidf.CVParam != null)
+            if (idFormatObject.CVParam != null)
             {
-                this.cvParam = new CVParamType(sidf.CVParam);
+                this.cvParam = new CVParamType(idFormatObject.CVParam);
             }
         }
 

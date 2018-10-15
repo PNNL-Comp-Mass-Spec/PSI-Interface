@@ -21,12 +21,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         ///     Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
-        /// <param name="siir"></param>
+        /// <param name="spectrumIdItemRef"></param>
         /// <param name="idata"></param>
-        public SpectrumIdentificationItemRefObj(SpectrumIdentificationItemRefType siir, IdentDataObj idata)
+        public SpectrumIdentificationItemRefObj(SpectrumIdentificationItemRefType spectrumIdItemRef, IdentDataObj idata)
             : base(idata)
         {
-            SpectrumIdentificationItemRef = siir.spectrumIdentificationItem_ref;
+            SpectrumIdentificationItemRef = spectrumIdItemRef.spectrumIdentificationItem_ref;
         }
 
         /// <summary>

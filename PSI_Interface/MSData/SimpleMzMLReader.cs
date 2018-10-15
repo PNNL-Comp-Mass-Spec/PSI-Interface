@@ -2077,18 +2077,18 @@ namespace PSI_Interface.MSData
                     ion = precursor.Ions[0];
                 }
 
-                var pspectrum = new SimpleProductSpectrum(mzs.Data, intensities.Data, scanNum) {
+                var productSpectrum = new SimpleProductSpectrum(mzs.Data, intensities.Data, scanNum) {
                     ActivationMethod = precursor.ActivationMethod
                 };
                 // Select mz value to use based on presence of a Thermo-specific user param.
                 // The user param has a slightly higher precision, if that matters.
                 var mz = Math.Abs(scan.MonoisotopicMz) < float.Epsilon ? ion.SelectedIonMz : scan.MonoisotopicMz;
-                pspectrum.MonoisotopicMz = mz;
-                pspectrum.Charge = ion.Charge;
-                pspectrum.IsolationWindowTargetMz = precursor.IsolationWindowTargetMz;
-                pspectrum.IsolationWindowLowerOffset = precursor.IsolationWindowLowerOffset;
-                pspectrum.IsolationWindowUpperOffset = precursor.IsolationWindowUpperOffset;
-                spectrum = pspectrum;
+                productSpectrum.MonoisotopicMz = mz;
+                productSpectrum.Charge = ion.Charge;
+                productSpectrum.IsolationWindowTargetMz = precursor.IsolationWindowTargetMz;
+                productSpectrum.IsolationWindowLowerOffset = precursor.IsolationWindowLowerOffset;
+                productSpectrum.IsolationWindowUpperOffset = precursor.IsolationWindowUpperOffset;
+                spectrum = productSpectrum;
             }
             else
             {

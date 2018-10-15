@@ -379,14 +379,14 @@ namespace PSI_Interface.IdentData
                 {
                     continue;
                 }
-                var newcv = new CVInfo
+                var newCV = new CVInfo
                 {
                     FullName = cv.Name,
                     Id = cv.Id,
                     URI = cv.URI,
                     Version = cv.Version
                 };
-                CVList.Add(newcv);
+                CVList.Add(newCV);
             }
             CvTranslator = new CVTranslator(CVList);
         }

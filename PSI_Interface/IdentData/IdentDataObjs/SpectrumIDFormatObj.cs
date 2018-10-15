@@ -22,15 +22,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         ///     Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
-        /// <param name="sidf"></param>
+        /// <param name="formatType"></param>
         /// <param name="idata"></param>
-        public SpectrumIDFormatObj(SpectrumIDFormatType sidf, IdentDataObj idata)
+        public SpectrumIDFormatObj(SpectrumIDFormatType formatType, IdentDataObj idata)
             : base(idata)
         {
             _cvParam = null;
 
-            if (sidf.cvParam != null)
-                _cvParam = new CVParamObj(sidf.cvParam, IdentData);
+            if (formatType.cvParam != null)
+                _cvParam = new CVParamObj(formatType.cvParam, IdentData);
         }
 
         /// <remarks>CV term capturing the type of identifier used.</remarks>
