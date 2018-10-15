@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SubstitutionModificationType
+    /// MzIdentML SubstitutionModificationType
     /// </summary>
     /// <remarks>A modification where one residue is substituted by another (amino acid change).</remarks>
     public class SubstitutionModificationObj : IdentDataInternalTypeAbstract, IEquatable<SubstitutionModificationObj>
@@ -14,7 +14,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private double _monoisotopicMassDelta;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SubstitutionModificationObj()
         {
@@ -29,7 +29,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="sm"></param>
         /// <param name="idata"></param>
@@ -57,10 +57,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public string ReplacementResidue { get; set; }
 
         /// <remarks>
-        ///     Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus
-        ///     residue, starting at position 1.
-        ///     Specific modifications to the N-terminus should be given the location 0.
-        ///     Modification to the C-terminus should be given as peptide length + 1.
+        /// Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus
+        /// residue, starting at position 1.
+        /// Specific modifications to the N-terminus should be given the location 0.
+        /// Modification to the C-terminus should be given as peptide length + 1.
         /// </remarks>
         /// Optional Attribute
         /// integer
@@ -78,8 +78,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool LocationSpecified { get; private set; }
 
         /// <remarks>
-        ///     Atomic mass delta considering the natural distribution of isotopes in Daltons.
-        ///     This should only be reported if the original amino acid is known i.e. it is not "X"
+        /// Atomic mass delta considering the natural distribution of isotopes in Daltons.
+        /// This should only be reported if the original amino acid is known i.e. it is not "X"
         /// </remarks>
         /// Optional Attribute
         /// double
@@ -97,8 +97,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         protected internal bool AvgMassDeltaSpecified { get; private set; }
 
         /// <remarks>
-        ///     Atomic mass delta when assuming only the most common isotope of elements in Daltons.
-        ///     This should only be reported if the original amino acid is known i.e. it is not "X"
+        /// Atomic mass delta when assuming only the most common isotope of elements in Daltons.
+        /// This should only be reported if the original amino acid is known i.e. it is not "X"
         /// </remarks>
         /// Optional Attribute
         /// double
@@ -118,7 +118,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -131,7 +131,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -150,7 +150,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

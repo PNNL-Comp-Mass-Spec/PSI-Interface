@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SubSampleType
+    /// MzIdentML SubSampleType
     /// </summary>
     /// <remarks>References to the individual component samples within a mixed parent sample.</remarks>
     public class SubSampleObj : IdentDataInternalTypeAbstract, IEquatable<SubSampleObj>
@@ -14,7 +14,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private string _sampleRef;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SubSampleObj()
         {
@@ -24,7 +24,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="ss"></param>
         /// <param name="idata"></param>
@@ -73,7 +73,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -86,7 +86,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -103,7 +103,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

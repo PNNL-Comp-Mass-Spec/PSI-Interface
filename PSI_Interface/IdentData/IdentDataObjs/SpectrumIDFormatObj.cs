@@ -4,7 +4,7 @@ using PSI_Interface.IdentData.mzIdentML;
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
     /// <summary>
-    ///     MzIdentML SpectrumIDFormatType
+    /// MzIdentML SpectrumIDFormatType
     /// </summary>
     /// <remarks>The format of the spectrum identifier within the source file</remarks>
     public class SpectrumIDFormatObj : IdentDataInternalTypeAbstract, IEquatable<SpectrumIDFormatObj>
@@ -12,7 +12,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private CVParamObj _cvParam;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public SpectrumIDFormatObj()
         {
@@ -20,7 +20,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Create an object using the contents of the corresponding MzIdentML object
+        /// Create an object using the contents of the corresponding MzIdentML object
         /// </summary>
         /// <param name="formatType"></param>
         /// <param name="idata"></param>
@@ -49,7 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Object Equality
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object equality
+        /// Object equality
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
@@ -79,7 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        ///     Object hash code
+        /// Object hash code
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

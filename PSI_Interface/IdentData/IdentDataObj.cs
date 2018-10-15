@@ -368,7 +368,7 @@ namespace PSI_Interface.IdentData
 
         #region Utility Functions
         /// <summary>
-        ///     Set the default CV lists for CV term reference and mapping
+        /// Set the default CV lists for CV term reference and mapping
         /// </summary>
         public void DefaultCV()
         {
