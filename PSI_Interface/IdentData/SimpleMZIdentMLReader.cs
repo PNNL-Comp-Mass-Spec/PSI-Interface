@@ -346,6 +346,11 @@ namespace PSI_Interface.IdentData
             }
 
             /// <summary>
+            /// Scan time (elution time / retention time) in minutes
+            /// </summary>
+            public double ScanTimeMinutes { get; set; }
+
+            /// <summary>
             /// Spectrum native id (if mzid contains this information)
             /// </summary>
             public string NativeId { get; set; }
@@ -734,7 +739,7 @@ namespace PSI_Interface.IdentData
             }
 
             var results = new SimpleMZIdentMLData(sourceFile.FullName);
-            var xSettings = new XmlReaderSettings {IgnoreWhitespace = true};
+            var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
             using (var reader = XmlReader.Create(new StreamReader(file, System.Text.Encoding.UTF8, true, 65536), xSettings))
             {
                 // Read in the file
@@ -1729,6 +1734,8 @@ namespace PSI_Interface.IdentData
             reader.MoveToContent();
             var nativeId = reader.GetAttribute("spectrumID");
             var scanNum = -1;
+            var scanTimeMinutes = 0d;
+
             reader.ReadStartElement("SpectrumIdentificationResult"); // Throws exception if we are not at the "SpectrumIdentificationResult" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -1752,6 +1759,31 @@ namespace PSI_Interface.IdentData
                         {
                             scanNum = Convert.ToInt32(reader.GetAttribute("value"));
                         }
+                        else if (reader.GetAttribute("accession") == "MS:1000016")
+                        {
+                            // Parse out the scan time
+                            double.TryParse(reader.GetAttribute("value"), out var scanTime);
+
+                            // Determine the units
+                            var unitAccession = reader.GetAttribute("unitAccession");
+
+                            if (unitAccession == "UO:0000031")
+                            {
+                                // Minutes
+                                scanTimeMinutes = scanTime;
+                            }
+                            else if (unitAccession == "UO:0000010")
+                            {
+                                // Seconds
+                                scanTimeMinutes = scanTime / 60;
+                            }
+                            else
+                            {
+                                // Unrecognized units
+                                scanTimeMinutes = scanTime;
+                            }
+                        }
+
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
                     case "userParam":
@@ -1767,6 +1799,7 @@ namespace PSI_Interface.IdentData
             {
                 item.ScanNum = scanNum;
                 item.NativeId = nativeId;
+                item.ScanTimeMinutes = scanTimeMinutes;
                 yield return item;
             }
             reader.Dispose();
