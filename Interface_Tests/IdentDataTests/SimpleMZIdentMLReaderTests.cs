@@ -15,6 +15,7 @@ namespace Interface_Tests.IdentDataTests
         [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid.gz        ", 11443, 12172, 8898, 4361)]
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid       ", 15510 ,16486, 13519, 4912)]
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz    ", 15510, 16486, 13519, 4912)]
+        [TestCase(@"MzIdentML\QC_Shew_17_02_Frac-06_11Oct18_Tiger_18-08-04_msgfplus.mzid    ", 296, 327, 272, 264)]
         [TestCase(@"MzIdentML\Cj_media_DOC_R2_23Feb15_Arwen_14-12-03_NoResults_msgfplus.mzid", 0, 0, 0, 0)]
         public void ReadFile(string path, int expectedNativeIDs, int expectedResults, int expectedPeptides, int expectedProteinSeqs)
         {
@@ -56,8 +57,8 @@ namespace Interface_Tests.IdentDataTests
             }
 
             Console.WriteLine();
-            Console.WriteLine("Spectrum Identification Results: {0,6:N0}", specResults);
             Console.WriteLine("Native IDs: {0,6:N0}", spectrumIDs.Count);
+            Console.WriteLine("Spectrum Identification Results: {0,6:N0}", specResults);
             Console.WriteLine("Unique Peptides: {0,6:N0}", peptides.Count);
             Console.WriteLine("Unique Protein Sequences: {0,6:N0}", proteinSeqs.Count);
 
