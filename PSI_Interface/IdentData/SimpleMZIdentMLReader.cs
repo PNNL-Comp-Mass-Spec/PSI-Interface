@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData
         public class DuplicateKeyException : Exception
         {
             /// <summary>
-            /// default constructor
+            /// Default constructor
             /// </summary>
             public DuplicateKeyException() : base() { }
 
