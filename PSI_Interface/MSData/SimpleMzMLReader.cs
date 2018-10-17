@@ -316,7 +316,7 @@ namespace PSI_Interface.MSData
 
             public BinaryDataArray()
             {
-                Data = null;
+                Data = new double[0];
                 Precision = Precision.Precision32;
                 ArrayType = ArrayType.m_z_array;
                 ArrayLength = 0;
@@ -389,8 +389,12 @@ namespace PSI_Interface.MSData
             public SimpleSpectrum(IReadOnlyList<double> mzs, IReadOnlyList<double> intensities, int scanNum)
             {
                 ScanNumber = scanNum;
-                //Mzs = mzs;
-                //Intensities = intensities;
+                if (mzs == null || mzs.Count == 0)
+                {
+                    Peaks = new Peak[0];
+                    return;
+                }
+
                 Peaks = new Peak[mzs.Count];
                 for (var i = 0; i < mzs.Count; i++)
                 {
@@ -406,7 +410,7 @@ namespace PSI_Interface.MSData
             public SimpleSpectrum(Peak[] peaks, int scanNum)
             {
                 ScanNumber = scanNum;
-                Peaks = peaks;
+                Peaks = peaks ?? new Peak[0];
             }
         }
 
