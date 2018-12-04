@@ -1963,6 +1963,10 @@ namespace PSI_Interface.MSData
                                 // name="MSn spectrum"
                                 is_ms_ms = true;
                                 break;
+                            case "MS:1000583":
+                                // name="SRM spectrum"
+                                is_ms_ms = true;
+                                break;
                             case "MS:1000285":
                                 // name="total ion current"
                                 tic = Convert.ToDouble(reader.GetAttribute("value"));
