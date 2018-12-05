@@ -54,6 +54,7 @@ namespace PSI_Interface.MSData
         {
             public double MonoisotopicMz;
             public double StartTime;
+            public List<ScanWindowData> ScanWindows;
 
             public ScanData()
             {
@@ -366,6 +367,11 @@ namespace PSI_Interface.MSData
             }
 
             /// <summary>
+            /// Scan window information
+            /// </summary>
+            public List<ScanWindowData> ScanWindows { get; } = new List<ScanWindowData>(1);
+
+            /// <summary>
             /// Array of peak data
             /// </summary>
             public Peak[] Peaks { get; private set; }
@@ -487,6 +493,33 @@ namespace PSI_Interface.MSData
             }
         }
 
+        /// <summary>
+        /// Scan Window information
+        /// </summary>
+        public class ScanWindowData
+        {
+            /// <summary>
+            /// Lower Limit
+            /// </summary>
+            public double LowerLimit { get; }
+
+            /// <summary>
+            /// Upper Limit
+            /// </summary>
+            public double UpperLimit { get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="lowerLimit"></param>
+            /// <param name="upperLimit"></param>
+            public ScanWindowData(double lowerLimit, double upperLimit)
+            {
+                LowerLimit = lowerLimit;
+                UpperLimit = upperLimit;
+            }
+        }
+
         #region Constructor
         /// <summary>
         /// Initialize a MzMlReader object
@@ -569,6 +602,7 @@ namespace PSI_Interface.MSData
                 if (!_haveMetaData)
                 {
                     var tempBool = _reduceMemoryUsage; // Set a flag to avoid reading the entire file before returning.
+                    _reduceMemoryUsage = true;
                     ReadMzMl(); // Read the index and metadata so that the offsets get populated
                     // The number of spectra is an attribute in the spectrumList tag
                     _reduceMemoryUsage = tempBool;
@@ -2097,6 +2131,7 @@ namespace PSI_Interface.MSData
             spectrum.NativeId = nativeId;
             spectrum.TotalIonCurrent = tic;
             spectrum.Centroided = centroided;
+            spectrum.ScanWindows.AddRange(scan.ScanWindows);
 
             return spectrum;
         }
@@ -2356,9 +2391,8 @@ namespace PSI_Interface.MSData
                         break;
                     case "scanWindowList":
                         // Schema requirements: zero to one instances of this element
-                        //ReadScanList(reader.ReadSubtree());
-                        //reader.ReadEndElement(); // "scanWindowList" must have child nodes
-                        reader.Skip();
+                        scan.ScanWindows = ReadScanWindowList(reader.ReadSubtree());
+                        reader.ReadEndElement(); // "scanWindowList" must have child nodes
                         break;
                     default:
                         reader.Skip();
@@ -2367,6 +2401,103 @@ namespace PSI_Interface.MSData
             }
             reader.Dispose();
             return scan;
+        }
+
+        /// <summary>
+        /// Handle a scanWindowList element and child nodes
+        /// Called by ReadScan (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single scanWindowList element</param>
+        /// <returns></returns>
+        private List<ScanWindowData> ReadScanWindowList(XmlReader reader)
+        {
+            var scanWindows = new List<ScanWindowData>();
+            reader.MoveToContent();
+            reader.ReadStartElement("scanWindowList"); // Throws exception if we are not at the "scanWindowList" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+
+                switch (reader.Name)
+                {
+                    case "scanWindow":
+                        // Schema requirements: one to many instances of this element
+                        scanWindows.Add(ReadScanWindow(reader.ReadSubtree()));
+                        reader.ReadEndElement(); // "scanWindow" must have child nodes
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+            return scanWindows;
+        }
+
+        /// <summary>
+        /// Handle a single scanWindow element and child nodes
+        /// Called by ReadScanWindowList (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single scanWindow element</param>
+        /// <returns></returns>
+        private ScanWindowData ReadScanWindow(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("scanWindow"); // Throws exception if we are not at the "scanWindow" tag.
+            var lowerLimit = 0.0;
+            var upperLimit = 0.0;
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+
+                switch (reader.Name)
+                {
+                    case "referenceableParamGroupRef":
+                        // Schema requirements: zero to many instances of this element
+                        reader.Skip();
+                        break;
+                    case "cvParam":
+                        // Schema requirements: zero to many instances of this element
+                        /* MAY supply a* child*term of MS:1000549(selection window attribute) one or more times
+                         * e.g.: MS: 1000500(scan window upper limit)
+                         * e.g.: MS: 1000501(scan window lower limit)
+                         * MUST supply term MS:1000500(scan window upper limit)  only once
+                         * MUST supply term MS:1000501(scan window lower limit)  only once
+                         */
+                        switch (reader.GetAttribute("accession"))
+                        {
+                            case "MS:1000501":
+                                // name="scan window lower limit"
+                                lowerLimit = Convert.ToDouble(reader.GetAttribute("value"));
+                                break;
+                            case "MS:1000500":
+                                // name="scan window upper limit"
+                                upperLimit = Convert.ToDouble(reader.GetAttribute("value"));
+                                break;
+                        }
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    case "userParam":
+                        // Schema requirements: zero to many instances of this element
+                        reader.Skip();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+            return new ScanWindowData(lowerLimit, upperLimit);
         }
 
         /// <summary>
