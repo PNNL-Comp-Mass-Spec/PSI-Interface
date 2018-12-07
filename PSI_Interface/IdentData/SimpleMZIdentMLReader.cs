@@ -1414,7 +1414,15 @@ namespace PSI_Interface.IdentData
                             if (accession.IndexOf("unimod", StringComparison.OrdinalIgnoreCase) >= 0 || accession.Equals("MS:1001460"))
                             {
                                 modSetting.Name = reader.GetAttribute("name");
+                                var value = reader.GetAttribute("value");
+                                // MS-GF+ stores a modification name given in the mods file as the value for "unknown modification"
+                                // Read it and use it, instead of the less useful "unknown modification"
+                                if (accession.Equals("MS:1001460") && !string.IsNullOrWhiteSpace(value))
+                                {
+                                    modSetting.Name = value;
+                                }
                             }
+                            // TODO: neutral losses are also defined here, so make sure to read those appropriately...
                         }
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
