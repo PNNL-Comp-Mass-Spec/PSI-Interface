@@ -1136,17 +1136,26 @@ namespace PSI_Interface.IdentData
                     {
                         Mass = Convert.ToDouble(reader.GetAttribute("monoisotopicMassDelta"))
                     };
-                    var mods = new KeyValuePair<int, Modification>(Convert.ToInt32(reader.GetAttribute("location")),
-                                                                                                mod);
+                    var mods = new KeyValuePair<int, Modification>(Convert.ToInt32(reader.GetAttribute("location")), mod);
                     // Read down to get the name of the modification, then add the modification to the peptide reference
                     reader.ReadToDescendant("cvParam"); // The cvParam child node is required
 
                     mod.Name = reader.GetAttribute("name");
+                    var modAcc = reader.GetAttribute("accession");
+                    var modVal = reader.GetAttribute("value");
+                    if ("MS:1001460".Equals(modAcc) && !string.IsNullOrWhiteSpace(modVal))
+                    {
+                        // MS-GF+ stores a modification name given in the mods file as the value for "unknown modification"
+                        // Read it and use it, instead of the less useful "unknown modification"
+                        mod.Name = modVal;
+                    }
+                    // TODO: neutral losses are also defined here, so make sure to read those appropriately...
                     pepRef.ModsAdd(mods.Key, mods.Value);
 
                     // There could theoretically exist more than one cvParam element. Clear them out.
                     while (reader.ReadToNextSibling("cvParam"))
                     {
+                        // TODO: A neutral loss may be defined here.
                         // This is supposed to be empty. The loop condition does everything that needs to happen
                     }
                     reader.ReadEndElement(); // Consume EndElement for Modification

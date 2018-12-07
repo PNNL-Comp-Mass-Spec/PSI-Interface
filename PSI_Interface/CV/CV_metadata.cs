@@ -11,10 +11,10 @@ namespace PSI_Interface.CV
         /// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.17"));
-            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.17"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2018:08:13 13:42"));
-            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://ontologies.berkeleybop.org/pato.obo", "releases/2018-08-14"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.21"));
+            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.21"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2018:10:25 09:32"));
+            CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://ontologies.berkeleybop.org/pato.obo", "releases/2018-11-12"));
             CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://ontologies.berkeleybop.org/uo.obo", "releases/2018-03-24"));
         }
 
