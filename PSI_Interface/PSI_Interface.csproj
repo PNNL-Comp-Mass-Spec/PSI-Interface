@@ -16,7 +16,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <RepositoryUrl>https://github.com/PNNL-Comp-Mass-Spec/PSI-Interface</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageLicenseUrl>https://opensource.org/licenses/ECL-2.0</PackageLicenseUrl>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/PNNL-Comp-Mass-Spec/PSI-Interface</PackageProjectUrl>
     <Copyright>Copyright @ PNNL 2017</Copyright>
     <Title>PSI Interface</Title>
