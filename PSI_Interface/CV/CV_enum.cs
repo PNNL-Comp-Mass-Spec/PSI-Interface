@@ -2845,8 +2845,8 @@ namespace PSI_Interface.CV
             /// <summary>URI, from where the search database was originally downloaded.</summary>
             MS_database_original_uri = 1001015,
 
-            /// <summary>OBSOLETE: Use attribute in mzIdentML instead. Version of the search database.</summary>
-            MS_database_version_OBSOLETE = 1001016,
+            /// <summary>Version of the search database. In mzIdentML use the attribute instead.</summary>
+            MS_database_version = 1001016,
 
             /// <summary>OBSOLETE: Use attribute in mzIdentML instead. Release date of the search database.</summary>
             MS_database_release_date_OBSOLETE = 1001017,
@@ -8074,8 +8074,8 @@ namespace PSI_Interface.CV
             /// <summary>Ion mobility measurement for an ion or spectrum of ions as measured in an ion mobility mass spectrometer. This might refer to the central value of a bin into which all ions within a narrow range of mobilities have been aggregated.</summary>
             MS_inverse_reduced_ion_mobility = 1002815,
 
-            /// <summary>Array of drift times or inverse reduced ion mobilities, averaged from a matrix of binned m/z and ion mobility values, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
-            MS_mean_inverse_reduced_ion_mobility_array = 1002816,
+            /// <summary>Array of drift times, averaged from a matrix of binned m/z and ion mobility values, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_mean_ion_mobility_array = 1002816,
 
             /// <summary>Bruker TDF raw file format.</summary>
             MS_Bruker_TDF_format = 1002817,
@@ -8629,6 +8629,51 @@ namespace PSI_Interface.CV
             /// <summary>Shimadzu Scientific Instruments LCMS-2020.</summary>
             MS_LCMS_2020 = 1003003,
 
+            /// <summary>Bruker Daltonics' maXis II.</summary>
+            MS_maXis_II = 1003004,
+
+            /// <summary>Bruker Daltonics' timsTOF Pro.</summary>
+            MS_timsTOF_Pro = 1003005,
+
+            /// <summary>Array of inverse reduced ion mobilities, averaged from a matrix of binned m/z and ion mobility values, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_mean_inverse_reduced_ion_mobility_array = 1003006,
+
+            /// <summary>Array of raw drift times.</summary>
+            MS_raw_ion_mobility_array = 1003007,
+
+            /// <summary>Array of raw inverse reduced ion mobilities.</summary>
+            MS_raw_inverse_reduced_ion_mobility_array = 1003008,
+
+            /// <summary>Shimadzu Biotech LCD file format.</summary>
+            MS_Shimadzu_Biotech_LCD_format = 1003009,
+
+            /// <summary>Software for lipidome-specific prediction and identification of oxidized phospholipids from LC-MS datasets.</summary>
+            MS_LPPtiger = 1003010,
+
+            /// <summary>Sequence-tag-based search engine pFind.</summary>
+            MS_pFind = 1003011,
+
+            /// <summary>Kernel mass spectral dot product scoring function.</summary>
+            MS_KSDP_score = 1003012,
+
+            /// <summary>i3-tms search engine and data-analysis software.</summary>
+            MS_i3tms = 1003013,
+
+            /// <summary>A database search-based peptide identification tool.</summary>
+            MS_MSFragger = 1003014,
+
+            /// <summary>A peptide which is shared between protein groups and assigned to the protein group with the largest number of identified peptides.</summary>
+            MS_razor_peptide = 1003015,
+
+            /// <summary>Fraction of peptide evidence attributable to a protein or a set of indistinguishable proteins.</summary>
+            MS_ProteinProphet_peptide_weight = 1003016,
+
+            /// <summary>Fraction of peptide evidence attributable to a group of proteins.</summary>
+            MS_ProteinProphet_peptide_group_weight = 1003017,
+
+            /// <summary>General proteomics processing toolkit for shotgun proteomics.</summary>
+            MS_Philosopher = 1003018,
+
             /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 400000001,
 
@@ -8791,8 +8836,11 @@ namespace PSI_Interface.CV
             /// <summary>Short peptide that is cleaved off a newly synthesized protein and generally immediately degraded in the process of protein maturation, and is not a signal peptide or transit peptide.</summary>
             PEFF_propeptide = 400001034,
 
+            /// <summary>N-terminal methionine residue of a protein that can be co-translationally cleaved.</summary>
+            PEFF_initiator_methionine = 400001035,
+
             /// <summary>(</summary>
-            PEFF_regular_expression_for_each_VariantSimple_item = 401002001,
+            PEFF_regular_expression_for_a_value_in_a_key_value_pair_of_a_PEFF_description_line_describing_one_sequence_position_followed_by_one_PEFF_term_name_and_one_optional_comment = 401002001,
 
             /// <summary>(AA|NA|DNA|cDNA|RNA|RNAi|tRNA|rRNA|siRNA|mDNA|mRNA|snoRNA|ncRNA|EST|</summary>
             PEFF_regular_expression_for_PEFF_molecular_sequence_type = 401002002,
@@ -22287,6 +22335,30 @@ namespace PSI_Interface.CV
 
             /// <summary>An imperial gravitational unit which is equivalent to a mass that accelerates by 1ft/sÂ² when a force of one pound (lbf) is exerted on it.</summary>
             UO_slug = 200010039,
+
+            /// <summary>A metric teaspoon is a unit of measurement of volume widely used in cooking recipes and pharmaceutic prescriptions. It equals a 5mL volume.</summary>
+            UO_teaspoon = 200010040,
+
+            /// <summary>A United States customary units teaspoon is a unit of measurement of volume widely used in cooking recipes and pharmaceutic prescriptions in America. It equals a 4.93 mL volume.</summary>
+            UO_united_states_customary_teaspoon = 200010041,
+
+            /// <summary>A metric tablespoon is a unit of measurement of volume widely used in cooking recipes and pharmaceutic prescriptions. It equals a 15mL volume.</summary>
+            UO_tablespoon = 200010042,
+
+            /// <summary>An Australian metric tablespoon is a unit of measurement of volume used in Australia for cooking recipes and pharmaceutic prescriptions. It equals a 20mL volume.</summary>
+            UO_australian_metric_tablespoon = 200010043,
+
+            /// <summary>A United States customary units tablespoon is a unit of measurement of volume widely used in cooking recipes and pharmaceutic prescriptions in America. It equals a 14.79 mL volume.</summary>
+            UO_united_states_customary_tablespoon = 200010044,
+
+            /// <summary>A metric cup is a unit of measurement of volume widely used in cooking recipes and pharmaceutic prescriptions. It equals a 250mL volume.</summary>
+            UO_metric_cup = 200010045,
+
+            /// <summary>A United States customary units cup is a unit of measurement of volume widely used in cooking recipes and pharmaceutic prescriptions in America. It equals a 236.59 mL volume.</summary>
+            UO_united_states_customary_cup = 200010046,
+
+            /// <summary>A United States FDA cup is a unit of measurement of volume used by the US Federal Department of Agriculture as a nutritional serving measure. It equals a 240 mL volume.</summary>
+            UO_united_states_fda_cup = 200010047,
 
         }
     }
