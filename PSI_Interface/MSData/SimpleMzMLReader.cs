@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using PSI_Interface.CV;
 
 namespace PSI_Interface.MSData
 {
@@ -33,6 +34,8 @@ namespace PSI_Interface.MSData
         private readonly XmlReaderSettings _xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
         private Encoding _encoding;
         private readonly List<SimpleSpectrum> _spectra = new List<SimpleSpectrum>();
+        private readonly List<SimpleChromatogram> _chromatograms = new List<SimpleChromatogram>();
+        private CVTranslator cvTranslator = new CVTranslator();
         #endregion
 
         #region Internal Objects
@@ -50,103 +53,14 @@ namespace PSI_Interface.MSData
         /// </summary>
         private MzML_Version _version;
 
-        private class ScanData
+        private class ScanData : ParamData
         {
-            public double MonoisotopicMz;
             public double StartTime;
             public List<ScanWindowData> ScanWindows;
 
             public ScanData()
             {
-                MonoisotopicMz = 0.0;
                 StartTime = 0.0;
-            }
-        }
-
-        private enum ParamType
-        {
-            cvParam,
-            userParam
-        }
-
-        private abstract class Param
-        {
-            protected ParamType ParamType { get; set; }
-            public string Name;          // Required
-            public string Value;         // Optional
-            public string UnitCVRef;     // Optional
-            public string UnitAccession; // Optional
-            public string UnitName;      // Optional
-
-            protected string _cvRef;
-            protected string _accession;
-            protected string _type;
-
-            public virtual string CVRef
-            {
-                get => string.Empty;
-                // ReSharper disable once ValueParameterNotUsed
-                set => _cvRef = string.Empty;
-            }
-
-            public virtual string Accession
-            {
-                get => string.Empty;
-                // ReSharper disable once ValueParameterNotUsed
-                set => _accession = string.Empty;
-            }
-
-            public virtual string Type
-            {
-                get => string.Empty;
-                // ReSharper disable once ValueParameterNotUsed
-                set => _type = string.Empty;
-            }
-
-            protected Param()
-            {
-                Name = string.Empty;
-                Value = string.Empty;
-                UnitAccession = string.Empty;
-                UnitCVRef = string.Empty;
-                UnitName = string.Empty;
-                _cvRef = string.Empty;
-                _accession = string.Empty;
-                _type = string.Empty;
-            }
-        }
-
-        private class CVParam : Param
-        {
-            public override string CVRef      // Required
-            {
-                get => _cvRef;
-                set => _cvRef = value;
-            }
-
-            public override string Accession  // Required
-            {
-                get => _accession;
-                set => _accession = value;
-            }
-
-            public CVParam()
-            {
-                ParamType = ParamType.cvParam;
-            }
-        }
-
-        private class UserParam : Param
-        {
-            public override string Type       // Optional
-            {
-                get => _type;
-                set => _type = value;
-            }
-
-            public UserParam()
-            {
-                ParamType = ParamType.userParam;
             }
         }
 
@@ -244,39 +158,7 @@ namespace PSI_Interface.MSData
             }
         }
 
-        private readonly Dictionary<string, List<Param>> _referenceableParamGroups = new Dictionary<string, List<Param>>();
-
-        private class SelectedIon
-        {
-            public double SelectedIonMz;
-            public int Charge;
-            public int OldCharge;
-
-            public SelectedIon()
-            {
-                SelectedIonMz = 0.0;
-                Charge = 0;
-                OldCharge = 0;
-            }
-        }
-
-        private class Precursor
-        {
-            public List<SelectedIon> Ions;
-            public double IsolationWindowTargetMz;
-            public double IsolationWindowLowerOffset;
-            public double IsolationWindowUpperOffset;
-            public string ActivationMethod;
-
-            public Precursor()
-            {
-                Ions = new List<SelectedIon>();
-                IsolationWindowTargetMz = 0.0;
-                IsolationWindowLowerOffset = 0.0;
-                IsolationWindowUpperOffset = 0.0;
-                ActivationMethod = "Unknown";
-            }
-        }
+        private readonly Dictionary<string, ParamData> _referenceableParamGroups = new Dictionary<string, ParamData>();
 
         private enum Precision
         {
@@ -325,25 +207,188 @@ namespace PSI_Interface.MSData
         }
         #endregion
 
+        #region Public Interface Objects
+
+        /// <summary>
+        /// Container for a CVParam
+        /// </summary>
+        public class CVParamData
+        {
+            /// <summary>
+            /// CVParam definition
+            /// </summary>
+            public CV.CV.TermInfo TermInfo { get; }
+
+            /// <summary>
+            /// CVParam value
+            /// </summary>
+            public string Value { get; }
+
+            /// <summary>
+            /// The units for this CVParam
+            /// </summary>
+            public CV.CV.TermInfo UnitInfo {get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="termInfo"></param>
+            /// <param name="value"></param>
+            /// <param name="unitInfo"></param>
+            public CVParamData(CV.CV.TermInfo termInfo, string value, CV.CV.TermInfo unitInfo)
+            {
+                TermInfo = termInfo;
+                Value = value;
+                UnitInfo = unitInfo;
+            }
+        }
+
+        /// <summary>
+        /// Container for a UserParam
+        /// </summary>
+        public class UserParamData
+        {
+            /// <summary>
+            /// UserParam Name
+            /// </summary>
+            public string Name { get; }
+
+            /// <summary>
+            /// UserParam value
+            /// </summary>
+            public string Value { get; }
+
+            /// <summary>
+            /// UserParam value datatype
+            /// </summary>
+            public string DataType { get; }
+
+            /// <summary>
+            /// The units for this CVParam
+            /// </summary>
+            public CV.CV.TermInfo UnitInfo { get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="name"></param>
+            /// <param name="value"></param>
+            /// <param name="dataType"></param>
+            /// <param name="unitInfo"></param>
+            public UserParamData(string name, string value, string dataType, CV.CV.TermInfo unitInfo)
+            {
+                Name = name;
+                Value = value;
+                DataType = dataType;
+                UnitInfo = unitInfo;
+            }
+        }
+
+        /// <summary>
+        /// Container for CVParams and UserParams
+        /// </summary>
+        public class ParamData
+        {
+            private readonly List<CVParamData> cvParams = new List<CVParamData>();
+            private readonly List<UserParamData> userParams = new List<UserParamData>();
+
+            /// <summary>
+            /// Collection of CVParams
+            /// </summary>
+            public IReadOnlyList<CVParamData> CVParams => cvParams;
+
+            /// <summary>
+            /// Collection of UserParams
+            /// </summary>
+            public IReadOnlyList<UserParamData> UserParams => userParams;
+
+            /// <summary>
+            /// Add a CVParamData object
+            /// </summary>
+            /// <param name="cvParam"></param>
+            public void AddParam(CVParamData cvParam)
+            {
+                cvParams.Add(cvParam);
+            }
+
+            /// <summary>
+            /// Add a UserParamData object
+            /// </summary>
+            /// <param name="userParam"></param>
+            public void AddParam(UserParamData userParam)
+            {
+                userParams.Add(userParam);
+            }
+
+            /// <summary>
+            /// Add a CVParamData object
+            /// </summary>
+            /// <param name="cvParamsToAdd"></param>
+            public void AddParams(IEnumerable<CVParamData> cvParamsToAdd)
+            {
+                cvParams.AddRange(cvParamsToAdd);
+            }
+
+            /// <summary>
+            /// Add a UserParamData object
+            /// </summary>
+            /// <param name="userParamsToAdd"></param>
+            public void AddParams(IEnumerable<UserParamData> userParamsToAdd)
+            {
+                userParams.AddRange(userParamsToAdd);
+            }
+
+            /// <summary>
+            /// Default constructor
+            /// </summary>
+            public ParamData()
+            {
+            }
+
+            /// <summary>
+            /// Create new instance with supplied CVParams/UserParams
+            /// </summary>
+            /// <param name="cvParamsList"></param>
+            /// <param name="userParamsList"></param>
+            public ParamData(IReadOnlyList<CVParamData> cvParamsList, IReadOnlyList<UserParamData> userParamsList)
+            {
+                if (cvParamsList != null)
+                {
+                    cvParams = cvParamsList.ToList();
+                }
+
+                if (userParamsList != null)
+                {
+                    userParams = userParamsList.ToList();
+                }
+            }
+        }
+
         /// <summary>
         /// Spectrum: Data used for a spectrum
         /// </summary>
-        public class SimpleSpectrum
+        public class SimpleSpectrum : ParamData
         {
             /// <summary>
             /// Spectrum scan number
             /// </summary>
-            public int ScanNumber { get; private set; }
+            public int ScanNumber { get; }
 
             /// <summary>
             /// Spectrum native id
             /// </summary>
-            public string NativeId { get; set; }
+            public string NativeId { get; }
 
             /// <summary>
             /// Elution time (scan start time)
             /// </summary>
-            public double ElutionTime { get; set; }
+            [Obsolete("Use ScanStartTime", true)]
+            public double ElutionTime => ScanStartTime;
+
+            /// <summary>
+            /// Scan start time, in minutes
+            /// </summary>
+            public double ScanStartTime { get; }
 
             /// <summary>
             /// MS level
@@ -369,12 +414,12 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// Scan window information
             /// </summary>
-            public List<ScanWindowData> ScanWindows { get; } = new List<ScanWindowData>(1);
+            public IReadOnlyList<ScanWindowData> ScanWindows { get; }
 
             /// <summary>
             /// Array of peak data
             /// </summary>
-            public Peak[] Peaks { get; private set; }
+            public Peak[] Peaks { get; }
 
             /// <summary>
             /// Total Ion Current
@@ -387,14 +432,43 @@ namespace PSI_Interface.MSData
             public bool Centroided { get; set; }
 
             /// <summary>
+            /// The list of precursors for this spectrum
+            /// </summary>
+            public IReadOnlyList<Precursor> Precursors { get; }
+
+            /// <summary>
+            /// Get the separately-determined monoisotopic m/z for Thermo MSn scans
+            /// </summary>
+            /// <returns></returns>
+            public double GetThermoMonoisotopicMz()
+            {
+                foreach (var userParam in UserParams)
+                {
+                    if (userParam.Name == "[Thermo Trailer Extra]Monoisotopic M/Z:")
+                    {
+                        return Convert.ToDouble(userParam.Value);
+                    }
+                }
+
+                return 0;
+            }
+
+            /// <summary>
             /// Constructor
             /// </summary>
             /// <param name="mzs">array of mzs</param>
             /// <param name="intensities">array of intensities</param>
             /// <param name="scanNum">spectrum scan number</param>
-            public SimpleSpectrum(IReadOnlyList<double> mzs, IReadOnlyList<double> intensities, int scanNum)
+            /// <param name="nativeId">spectrum native ID</param>
+            /// <param name="scanStartTime">scan start time, minutes</param>
+            /// <param name="cvParams"></param>
+            /// <param name="userParams"></param>
+            /// <param name="precursors"></param>
+            /// <param name="scanWindows"></param>
+            public SimpleSpectrum(IReadOnlyList<double> mzs, IReadOnlyList<double> intensities, int scanNum, string nativeId, double scanStartTime, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams, IReadOnlyList<Precursor> precursors, IReadOnlyList<ScanWindowData> scanWindows) : base(cvParams, userParams)
             {
                 ScanNumber = scanNum;
+                NativeId = nativeId;
                 if (mzs == null || mzs.Count == 0)
                 {
                     Peaks = new Peak[0];
@@ -404,19 +478,35 @@ namespace PSI_Interface.MSData
                 Peaks = new Peak[mzs.Count];
                 for (var i = 0; i < mzs.Count; i++)
                 {
-                    Peaks[i] = new Peak() { Mz = mzs[i], Intensity = intensities[i] };
+                    Peaks[i] = new Peak(mzs[i], intensities[i]);
                 }
-            }
 
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            /// <param name="peaks">array of peaks</param>
-            /// <param name="scanNum">spectrum scan number</param>
-            public SimpleSpectrum(Peak[] peaks, int scanNum)
-            {
-                ScanNumber = scanNum;
-                Peaks = peaks ?? new Peak[0];
+                Precursors = precursors;
+                ScanWindows = scanWindows;
+
+                // Spectrum-level cvParams
+                foreach (var cvParam in CVParams)
+                {
+                    switch (cvParam.TermInfo.Id)
+                    {
+                        case "MS:1000127":
+                            // name="centroid spectrum"
+                            Centroided = true;
+                            break;
+                        case "MS:1000128":
+                            // name="profile spectrum"
+                            Centroided = false;
+                            break;
+                        case "MS:1000511":
+                            // name="ms level"
+                            MsLevel = Convert.ToInt32(cvParam.Value);
+                            break;
+                        case "MS:1000285":
+                            // name="total ion current"
+                            TotalIonCurrent = Convert.ToDouble(cvParam.Value);
+                            break;
+                    }
+                }
             }
         }
 
@@ -428,68 +518,128 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// Peak m/z
             /// </summary>
-            public double Mz { get; set; }
+            public double Mz { get; }
 
             /// <summary>
             /// Peak intensity
             /// </summary>
-            public double Intensity { get; set; }
+            public double Intensity { get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="mz"></param>
+            /// <param name="intensity"></param>
+            public Peak(double mz, double intensity)
+            {
+                Mz = mz;
+                Intensity = intensity;
+            }
         }
 
         /// <summary>
-        /// Product spectrum: all the information of a spectrum, but with extra data for product spectra
+        /// Information for a single precursor
         /// </summary>
-        public class SimpleProductSpectrum : SimpleSpectrum
+        public class Precursor : ParamData
         {
             /// <summary>
             /// Dissociation activation method
             /// </summary>
-            public string ActivationMethod { get; set; }
+            public string ActivationMethod { get; }
 
             /// <summary>
-            /// Monoisotopic m/z
+            /// List of selected ions for this precursor
             /// </summary>
-            public double MonoisotopicMz { get; set; }
+            public IReadOnlyList<SelectedIon> SelectedIons { get; }
 
             /// <summary>
-            /// Charge
+            /// Isolation Window information
             /// </summary>
-            public int Charge { get; set; }
+            public IsolationWindow IsolationWindow { get; }
 
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="selectedIons"></param>
+            /// <param name="isolationWindow"></param>
+            /// <param name="activationMethod"></param>
+            /// <param name="cvParams"></param>
+            /// <param name="userParams"></param>
+            public Precursor(IReadOnlyList<SelectedIon> selectedIons, IsolationWindow isolationWindow, string activationMethod, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams) : base(cvParams, userParams)
+            {
+                SelectedIons = selectedIons;
+                IsolationWindow = isolationWindow;
+                ActivationMethod = activationMethod;
+            }
+        }
+
+        /// <summary>
+        /// Data for a single selected ion
+        /// </summary>
+        public class SelectedIon : ParamData
+        {
+            /// <summary>
+            /// Selected Ion m/z
+            /// </summary>
+            public double SelectedIonMz { get; }
+
+            /// <summary>
+            /// Selected Ion charge
+            /// </summary>
+            public int Charge { get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="selectedIonMz"></param>
+            /// <param name="charge"></param>
+            /// <param name="cvParams"></param>
+            /// <param name="userParams"></param>
+            public SelectedIon(double selectedIonMz, int charge, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams) : base(cvParams, userParams)
+            {
+                SelectedIonMz = selectedIonMz;
+                Charge = charge;
+            }
+        }
+
+        /// <summary>
+        /// Isolation Window data
+        /// </summary>
+        public class IsolationWindow : ParamData
+        {
             /// <summary>
             /// Isolation Windows Target Mz
             /// </summary>
-            public double IsolationWindowTargetMz { get; set; }
+            public double TargetMz { get; }
 
             /// <summary>
             /// Isolation Window Lower Offset
             /// </summary>
-            public double IsolationWindowLowerOffset { get; set; }
+            public double LowerOffset { get; }
 
             /// <summary>
             /// Isolation Window Upper Offset
             /// </summary>
-            public double IsolationWindowUpperOffset { get; set; }
+            public double UpperOffset { get; }
 
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="mzs">array of mzs</param>
-            /// <param name="intensities">array of intensities</param>
-            /// <param name="scanNum">spectrum scan number</param>
-            public SimpleProductSpectrum(IReadOnlyList<double> mzs, IReadOnlyList<double> intensities, int scanNum)
-                : base(mzs, intensities, scanNum)
+            /// <param name="targetMz"></param>
+            /// <param name="lowerOffset"></param>
+            /// <param name="upperOffset"></param>
+            /// <param name="cvParams"></param>
+            /// <param name="userParams"></param>
+            public IsolationWindow(double targetMz, double lowerOffset, double upperOffset, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams) : base(cvParams, userParams)
             {
+                TargetMz = targetMz;
+                LowerOffset = lowerOffset;
+                UpperOffset = upperOffset;
             }
 
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            /// <param name="peaks">array of peaks</param>
-            /// <param name="scanNum">spectrum scan number</param>
-            public SimpleProductSpectrum(Peak[] peaks, int scanNum)
-                : base(peaks, scanNum)
+            internal IsolationWindow()
             {
+
             }
         }
 
@@ -519,6 +669,113 @@ namespace PSI_Interface.MSData
                 UpperLimit = upperLimit;
             }
         }
+
+        /// <summary>
+        /// Chromatogram: Data used for a Chromatogram
+        /// </summary>
+        public class SimpleChromatogram : ParamData
+        {
+            /// <summary>
+            /// Chromatogram index number
+            /// </summary>
+            public int Index { get; }
+
+            /// <summary>
+            /// Chromatogram id
+            /// </summary>
+            public string Id { get; }
+
+            /// <summary>
+            /// Array of time values
+            /// </summary>
+            public double[] Times
+            {
+                get { return Peaks.Select(x => x.Time).ToArray(); }
+            }
+
+            /// <summary>
+            /// Array of intensity values
+            /// </summary>
+            public double[] Intensities
+            {
+                get { return Peaks.Select(x => x.Intensity).ToArray(); }
+            }
+
+            /// <summary>
+            /// Array of peak data
+            /// </summary>
+            public ChromatogramPeak[] Peaks { get; }
+
+            /// <summary>
+            /// The precursor for this chromatogram
+            /// </summary>
+            public Precursor Precursor { get; }
+
+            /// <summary>
+            /// The product for this chromatogram
+            /// </summary>
+            public IsolationWindow Product { get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="times">array of mzs</param>
+            /// <param name="intensities">array of intensities</param>
+            /// <param name="index">spectrum scan number</param>
+            /// <param name="id">Id (in mzML file) for the chromatogram</param>
+            /// <param name="cvParams"></param>
+            /// <param name="userParams"></param>
+            /// <param name="precursor"></param>
+            /// <param name="product"></param>
+            public SimpleChromatogram(IReadOnlyList<double> times, IReadOnlyList<double> intensities, int index, string id, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams, Precursor precursor, IsolationWindow product) : base(cvParams, userParams)
+            {
+                Index = index;
+                Id = id;
+                if (times == null || times.Count == 0)
+                {
+                    Peaks = new ChromatogramPeak[0];
+                    return;
+                }
+
+                Peaks = new ChromatogramPeak[times.Count];
+                for (var i = 0; i < times.Count; i++)
+                {
+                    Peaks[i] = new ChromatogramPeak(times[i], intensities[i]);
+                }
+
+                Precursor = precursor;
+                Product = product;
+            }
+        }
+
+        /// <summary>
+        /// Chromatogram Peak data
+        /// </summary>
+        public struct ChromatogramPeak
+        {
+            /// <summary>
+            /// Peak time
+            /// </summary>
+            public double Time { get; }
+
+            /// <summary>
+            /// Peak intensity
+            /// </summary>
+            public double Intensity { get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="time"></param>
+            /// <param name="intensity"></param>
+            public ChromatogramPeak(double time, double intensity)
+            {
+                Time = time;
+                Intensity = intensity;
+            }
+        }
+
+        #endregion
 
         #region Constructor
         /// <summary>
@@ -1278,7 +1535,8 @@ namespace PSI_Interface.MSData
                 {
                     case "cvList":
                         // Schema requirements: one instance of this element
-                        reader.Skip();
+                        ReadCVList(reader.ReadSubtree());
+                        reader.ReadEndElement(); // "cvList" must have child nodes
                         break;
                     case "fileDescription":
                         // Schema requirements: one instance of this element
@@ -1414,6 +1672,40 @@ namespace PSI_Interface.MSData
 
         #region Metadata tag readers
         /// <summary>
+        /// Handle the child nodes of the cvList element
+        /// Called by ReadMzML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single "cvList" element</param>
+        private void ReadCVList(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("cvList"); // Throws exception if we are not at the "cvList" tag.
+            var cvs = new List<CV.CV.CVInfo>();
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "cv":
+                        // Schema requirements: one to many instances of this element
+                        cvs.Add(new CV.CV.CVInfo(reader.GetAttribute("id"), reader.GetAttribute("name"), reader.GetAttribute("URI"), reader.GetAttribute("version")));
+                        reader.Skip();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            cvTranslator = new CVTranslator(cvs);
+            reader.Dispose();
+        }
+
+        /// <summary>
         /// Handle the child nodes of the fileDescription element
         /// Called by ReadMzML (xml hierarchy)
         /// </summary>
@@ -1477,6 +1769,7 @@ namespace PSI_Interface.MSData
                     var innerReader = reader.ReadSubtree();
                     innerReader.MoveToContent();
                     innerReader.ReadStartElement("sourceFile"); // Throws exception if we are not at the "sourceFile" tag.
+                    var cvParams = new List<CVParamData>();
                     while (innerReader.ReadState == ReadState.Interactive)
                     {
                         // Handle exiting out properly at EndElement tags
@@ -1489,142 +1782,17 @@ namespace PSI_Interface.MSData
                         {
                             case "referenceableParamGroupRef":
                                 // Schema requirements: zero to many instances of this element
-                                innerReader.Skip();
+                                var reference = innerReader.GetAttribute("ref");
+                                if (!string.IsNullOrWhiteSpace(reference) &&
+                                    _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                                {
+                                    cvParams.AddRange(paramGroup.CVParams);
+                                }
+                                innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                 break;
                             case "cvParam":
                                 // Schema requirements: zero to many instances of this element
-                                /* MUST supply a *child* term of MS:1000767 (native spectrum identifier format) only once
-                                 *   e.g.: MS:1000768 (Thermo nativeID format)
-                                 *   e.g.: MS:1000769 (Waters nativeID format)
-                                 *   e.g.: MS:1000770 (WIFF nativeID format)
-                                 *   e.g.: MS:1000771 (Bruker/Agilent YEP nativeID format)
-                                 *   e.g.: MS:1000772 (Bruker BAF nativeID format)
-                                 *   e.g.: MS:1000773 (Bruker FID nativeID format)
-                                 *   e.g.: MS:1000774 (multiple peak list nativeID format)
-                                 *   e.g.: MS:1000775 (single peak list nativeID format)
-                                 *   e.g.: MS:1000776 (scan number only nativeID format)
-                                 *   e.g.: MS:1000777 (spectrum identifier nativeID format)
-                                 *   e.g.: MS:1000823 "Bruker U2 nativeID format"
-                                 *   e.g.: MS:1000824 "no nativeID format"
-                                 *   e.g.: MS:1000929 "Shimadzu Biotech nativeID format"
-                                 *   e.g.: MS:1001480 "AB SCIEX TOF/TOF nativeID format"
-                                 *   e.g.: MS:1001508 "Agilent MassHunter nativeID format"
-                                 *   e.g.: MS:1001526 "spectrum from database integer nativeID format"
-                                 *   e.g.: MS:1001528 "Mascot query number"
-                                 *   e.g.: MS:1001531 "spectrum from ProteinScape database nativeID format"
-                                 *   e.g.: MS:1001532 "spectrum from database string nativeID format"
-                                 *   e.g.: MS:1001559 "AB SCIEX TOF/TOF T2D nativeID format"
-                                 *   e.g.: MS:1001562 "Scaffold nativeID format"
-                                 *   e.g.: MS:1002303 "Bruker Container nativeID format"
-                                 *   et al.
-                                 * MUST supply a *child* term of MS:1000561 (data file checksum type) one or more times
-                                 *   e.g.: MS:1000568 (MD5)
-                                 *   e.g.: MS:1000569 (SHA-1)
-                                 * MUST supply a *child* term of MS:1000560 (mass spectrometer file format) only once
-                                 *   e.g.: MS:1000526 (Waters raw file)             1.0.0: (MassLynx raw format)
-                                 *   e.g.: MS:1000562 (ABI WIFF file)               1.0.0: (wiff file)
-                                 *   e.g.: MS:1000563 (Thermo RAW file)             1.0.0: (Xcalibur RAW file)
-                                 *   e.g.: MS:1000564 (PSI mzData file)             1.0.0: (mzData file)
-                                 *   e.g.: MS:1000565 (Micromass PKL file)          1.0.0: (pkl file)
-                                 *   e.g.: MS:1000566 (ISB mzXML file)              1.0.0: (mzXML file)
-                                 *   e.g.: MS:1000567 (Bruker/Agilent YEP file)     1.0.0: (yep file)
-                                 *   e.g.: MS:1000584 (mzML file)
-                                 *   e.g.: MS:1000613 (DTA file)                    1.0.0: (dta file)
-                                 *   e.g.: MS:1000614 (ProteinLynx Global Server mass spectrum XML file)
-                                 *   e.g.: MS:1000740 "parameter file"
-                                 *   e.g.: MS:1000742 "Bioworks SRF format"
-                                 *   e.g.: MS:1000815 "Bruker BAF format"
-                                 *   e.g.: MS:1000816 "Bruker U2 format"
-                                 *   e.g.: MS:1000825 "Bruker FID format"
-                                 *   e.g.: MS:1000930 "Shimadzu Biotech database entity"
-                                 *   e.g.: MS:1001062 "Mascot MGF format"
-                                 *   e.g.: MS:1001245 "PerSeptive PKS format"
-                                 *   e.g.: MS:1001246 "Sciex API III format"
-                                 *   e.g.: MS:1001247 "Bruker XML format"
-                                 *   e.g.: MS:1001369 "text format"
-                                 *   e.g.: MS:1001463 "Phenyx XML format"
-                                 *   e.g.: MS:1001481 "AB SCIEX TOF/TOF database"
-                                 *   e.g.: MS:1001509 "Agilent MassHunter format"
-                                 *   e.g.: MS:1001527 "Proteinscape spectra"
-                                 *   e.g.: MS:1001560 "AB SCIEX TOF/TOF T2D format"
-                                 *   e.g.: MS:1001881 "mz5 format"
-                                 *   e.g.: MS:1002302 "Bruker Container format"
-                                 *   e.g.: MS:1002385 "SCiLS Lab format"
-                                 *   e.g.: MS:1002441 "Andi-MS format"
-                                 *   et al.
-                                 */
-                                switch (innerReader.GetAttribute("accession"))
-                                {
-                                    case "MS:1000768":
-                                        // name="Thermo nativeID format"
-                                        _instrument = Instrument.Thermo_RAW_format;
-                                        break;
-                                    case "MS:1000769":
-                                        // name="Waters nativeID format"
-                                        _instrument = Instrument.Waters_raw_format;
-                                        break;
-                                    case "MS:1000770":
-                                        // name="WIFF nativeID format"
-                                        _instrument = Instrument.ABI_WIFF_format;
-                                        break;
-                                    case "MS:1000771":
-                                        // name="Bruker/Agilent YEP nativeID format"
-                                        break;
-                                    case "MS:1000772":
-                                        // name="Bruker BAF nativeID format"
-                                        break;
-                                    case "MS:1000773":
-                                        // name="Bruker FID nativeID format"
-                                        break;
-                                    case "MS:1000774":
-                                        // name="multiple peak list nativeID format"
-                                        break;
-                                    case "MS:1000775":
-                                        // name="single peak list nativeID format"
-                                        break;
-                                    case "MS:1000776":
-                                        // name="scan number only nativeID format"
-                                        break;
-                                    case "MS:1000777":
-                                        // name="spectrum identifier nativeID format"
-                                        break;
-                                    case "MS:1000823":
-                                        // name="Bruker U2 nativeID format"
-                                        break;
-                                    case "MS:1000824":
-                                        // name="no nativeID format"
-                                        break;
-                                    case "MS:1000929":
-                                        // name="Shimadzu Biotech nativeID format"
-                                        break;
-                                    case "MS:1001480":
-                                        // name="AB SCIEX TOF/TOF nativeID format"
-                                        break;
-                                    case "MS:1001508":
-                                        // name="Agilent MassHunter nativeID format"
-                                        break;
-                                    case "MS:1001526":
-                                        // name="spectrum from database integer nativeID format"
-                                        break;
-                                    case "MS:1001528":
-                                        // name="Mascot query number"
-                                        break;
-                                    case "MS:1001531":
-                                        // name="spectrum from ProteinScape database nativeID format"
-                                        break;
-                                    case "MS:1001532":
-                                        // name="spectrum from database string nativeID format"
-                                        break;
-                                    case "MS:1001559":
-                                        // name="AB SCIEX TOF/TOF T2D nativeID format"
-                                        break;
-                                    case "MS:1001562":
-                                        // name="Scaffold nativeID format"
-                                        break;
-                                    case "MS:1002303":
-                                        // name="Bruker Container nativeID format"
-                                        break;
-                                }
+                                cvParams.Add(ReadCvParam(innerReader.ReadSubtree()));
                                 innerReader.Read(); // Consume the cvParam element (no child nodes)
                                 break;
                             case "userParam":
@@ -1638,6 +1806,142 @@ namespace PSI_Interface.MSData
                     }
                     innerReader.Dispose();
                     reader.Read();
+
+                    foreach (var cvParam in cvParams)
+                    {
+                        /* MUST supply a *child* term of MS:1000767 (native spectrum identifier format) only once
+                         *   e.g.: MS:1000768 (Thermo nativeID format)
+                         *   e.g.: MS:1000769 (Waters nativeID format)
+                         *   e.g.: MS:1000770 (WIFF nativeID format)
+                         *   e.g.: MS:1000771 (Bruker/Agilent YEP nativeID format)
+                         *   e.g.: MS:1000772 (Bruker BAF nativeID format)
+                         *   e.g.: MS:1000773 (Bruker FID nativeID format)
+                         *   e.g.: MS:1000774 (multiple peak list nativeID format)
+                         *   e.g.: MS:1000775 (single peak list nativeID format)
+                         *   e.g.: MS:1000776 (scan number only nativeID format)
+                         *   e.g.: MS:1000777 (spectrum identifier nativeID format)
+                         *   e.g.: MS:1000823 "Bruker U2 nativeID format"
+                         *   e.g.: MS:1000824 "no nativeID format"
+                         *   e.g.: MS:1000929 "Shimadzu Biotech nativeID format"
+                         *   e.g.: MS:1001480 "AB SCIEX TOF/TOF nativeID format"
+                         *   e.g.: MS:1001508 "Agilent MassHunter nativeID format"
+                         *   e.g.: MS:1001526 "spectrum from database integer nativeID format"
+                         *   e.g.: MS:1001528 "Mascot query number"
+                         *   e.g.: MS:1001531 "spectrum from ProteinScape database nativeID format"
+                         *   e.g.: MS:1001532 "spectrum from database string nativeID format"
+                         *   e.g.: MS:1001559 "AB SCIEX TOF/TOF T2D nativeID format"
+                         *   e.g.: MS:1001562 "Scaffold nativeID format"
+                         *   e.g.: MS:1002303 "Bruker Container nativeID format"
+                         *   et al.
+                         * MUST supply a *child* term of MS:1000561 (data file checksum type) one or more times
+                         *   e.g.: MS:1000568 (MD5)
+                         *   e.g.: MS:1000569 (SHA-1)
+                         * MUST supply a *child* term of MS:1000560 (mass spectrometer file format) only once
+                         *   e.g.: MS:1000526 (Waters raw file)             1.0.0: (MassLynx raw format)
+                         *   e.g.: MS:1000562 (ABI WIFF file)               1.0.0: (wiff file)
+                         *   e.g.: MS:1000563 (Thermo RAW file)             1.0.0: (Xcalibur RAW file)
+                         *   e.g.: MS:1000564 (PSI mzData file)             1.0.0: (mzData file)
+                         *   e.g.: MS:1000565 (Micromass PKL file)          1.0.0: (pkl file)
+                         *   e.g.: MS:1000566 (ISB mzXML file)              1.0.0: (mzXML file)
+                         *   e.g.: MS:1000567 (Bruker/Agilent YEP file)     1.0.0: (yep file)
+                         *   e.g.: MS:1000584 (mzML file)
+                         *   e.g.: MS:1000613 (DTA file)                    1.0.0: (dta file)
+                         *   e.g.: MS:1000614 (ProteinLynx Global Server mass spectrum XML file)
+                         *   e.g.: MS:1000740 "parameter file"
+                         *   e.g.: MS:1000742 "Bioworks SRF format"
+                         *   e.g.: MS:1000815 "Bruker BAF format"
+                         *   e.g.: MS:1000816 "Bruker U2 format"
+                         *   e.g.: MS:1000825 "Bruker FID format"
+                         *   e.g.: MS:1000930 "Shimadzu Biotech database entity"
+                         *   e.g.: MS:1001062 "Mascot MGF format"
+                         *   e.g.: MS:1001245 "PerSeptive PKS format"
+                         *   e.g.: MS:1001246 "Sciex API III format"
+                         *   e.g.: MS:1001247 "Bruker XML format"
+                         *   e.g.: MS:1001369 "text format"
+                         *   e.g.: MS:1001463 "Phenyx XML format"
+                         *   e.g.: MS:1001481 "AB SCIEX TOF/TOF database"
+                         *   e.g.: MS:1001509 "Agilent MassHunter format"
+                         *   e.g.: MS:1001527 "Proteinscape spectra"
+                         *   e.g.: MS:1001560 "AB SCIEX TOF/TOF T2D format"
+                         *   e.g.: MS:1001881 "mz5 format"
+                         *   e.g.: MS:1002302 "Bruker Container format"
+                         *   e.g.: MS:1002385 "SCiLS Lab format"
+                         *   e.g.: MS:1002441 "Andi-MS format"
+                         *   et al.
+                         */
+                        switch (cvParam.TermInfo.Id)
+                        {
+                            case "MS:1000768":
+                                // name="Thermo nativeID format"
+                                _instrument = Instrument.Thermo_RAW_format;
+                                break;
+                            case "MS:1000769":
+                                // name="Waters nativeID format"
+                                _instrument = Instrument.Waters_raw_format;
+                                break;
+                            case "MS:1000770":
+                                // name="WIFF nativeID format"
+                                _instrument = Instrument.ABI_WIFF_format;
+                                break;
+                            case "MS:1000771":
+                                // name="Bruker/Agilent YEP nativeID format"
+                                break;
+                            case "MS:1000772":
+                                // name="Bruker BAF nativeID format"
+                                break;
+                            case "MS:1000773":
+                                // name="Bruker FID nativeID format"
+                                break;
+                            case "MS:1000774":
+                                // name="multiple peak list nativeID format"
+                                break;
+                            case "MS:1000775":
+                                // name="single peak list nativeID format"
+                                break;
+                            case "MS:1000776":
+                                // name="scan number only nativeID format"
+                                break;
+                            case "MS:1000777":
+                                // name="spectrum identifier nativeID format"
+                                break;
+                            case "MS:1000823":
+                                // name="Bruker U2 nativeID format"
+                                break;
+                            case "MS:1000824":
+                                // name="no nativeID format"
+                                break;
+                            case "MS:1000929":
+                                // name="Shimadzu Biotech nativeID format"
+                                break;
+                            case "MS:1001480":
+                                // name="AB SCIEX TOF/TOF nativeID format"
+                                break;
+                            case "MS:1001508":
+                                // name="Agilent MassHunter nativeID format"
+                                break;
+                            case "MS:1001526":
+                                // name="spectrum from database integer nativeID format"
+                                break;
+                            case "MS:1001528":
+                                // name="Mascot query number"
+                                break;
+                            case "MS:1001531":
+                                // name="spectrum from ProteinScape database nativeID format"
+                                break;
+                            case "MS:1001532":
+                                // name="spectrum from database string nativeID format"
+                                break;
+                            case "MS:1001559":
+                                // name="AB SCIEX TOF/TOF T2D nativeID format"
+                                break;
+                            case "MS:1001562":
+                                // name="Scaffold nativeID format"
+                                break;
+                            case "MS:1002303":
+                                // name="Bruker Container nativeID format"
+                                break;
+                        }
+                    }
                 }
                 else
                 {
@@ -1670,7 +1974,7 @@ namespace PSI_Interface.MSData
                 {
                     // Schema requirements: one to many instances of this element
                     var id = reader.GetAttribute("id");
-                    var paramList = new List<Param>();
+                    var paramGroup = new ParamData();
                     var innerReader = reader.ReadSubtree();
                     innerReader.MoveToContent();
                     innerReader.ReadStartElement("referenceableParamGroup"); // Throws exception if we are not at the "sourceFile" tag.
@@ -1686,12 +1990,12 @@ namespace PSI_Interface.MSData
                         {
                             case "cvParam":
                                 // Schema requirements: zero to many instances of this element
-                                paramList.Add(ReadCvParam(innerReader.ReadSubtree()));
+                                paramGroup.AddParam(ReadCvParam(innerReader.ReadSubtree()));
                                 innerReader.Read(); // Consume the cvParam element (no child nodes)
                                 break;
                             case "userParam":
                                 // Schema requirements: zero to many instances of this element
-                                paramList.Add(ReadUserParam(innerReader.ReadSubtree()));
+                                paramGroup.AddParam(ReadUserParam(innerReader.ReadSubtree()));
                                 innerReader.Read(); // Consume the userParam element (no child nodes)
                                 break;
                             default:
@@ -1702,7 +2006,7 @@ namespace PSI_Interface.MSData
                     innerReader.Dispose();
                     reader.Read();
                     if (id != null)
-                        _referenceableParamGroups.Add(id, paramList);
+                        _referenceableParamGroups.Add(id, paramGroup);
                 }
                 else
                 {
@@ -1716,43 +2020,66 @@ namespace PSI_Interface.MSData
         /// Handle the cvParam element
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single "cvParam" element</param>
-        private CVParam ReadCvParam(XmlReader reader)
+        private CVParamData ReadCvParam(XmlReader reader)
         {
             reader.MoveToContent();
-            var cvParam = new CVParam
-            {
-                Accession = reader.GetAttribute("accession"),
-                CVRef = reader.GetAttribute("cvRef"),
-                Name = reader.GetAttribute("name"),
-                Value = reader.GetAttribute("value"),
-                UnitAccession = reader.GetAttribute("unitAccession"),
-                UnitCVRef = reader.GetAttribute("unitCVRef"),
-                UnitName = reader.GetAttribute("unitName")
-            };
+
+            var value = reader.GetAttribute("value");
+            var cvRef = cvTranslator.ConvertFileCVRef(reader.GetAttribute("cvRef"));
+            var accession = reader.GetAttribute("accession");
+            var unitAccession = reader.GetAttribute("unitAccession");
+            var unitCvRef = reader.GetAttribute("unitCVRef");
 
             reader.Dispose();
-            return cvParam;
+
+            CV.CV.TermInfo termInfo = null;
+            CV.CV.TermInfo unitInfo = null;
+
+            if (string.IsNullOrWhiteSpace(unitCvRef) && !string.IsNullOrWhiteSpace(unitAccession))
+            {
+                unitCvRef = unitAccession.Split(':')[0];
+            }
+
+            if (!string.IsNullOrWhiteSpace(unitCvRef) && !string.IsNullOrWhiteSpace(unitAccession) && CV.CV.TermAccessionLookup[unitCvRef].TryGetValue(unitAccession, out var unitCvid))
+            {
+                unitInfo = CV.CV.TermData[unitCvid];
+            }
+
+            if (!string.IsNullOrWhiteSpace(cvRef) && !string.IsNullOrWhiteSpace(accession) && CV.CV.TermAccessionLookup[cvRef].TryGetValue(accession, out var cvid))
+            {
+                termInfo = CV.CV.TermData[cvid];
+            }
+
+            return new CVParamData(termInfo, value, unitInfo);
         }
 
         /// <summary>
         /// Handle the userParam element
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single "userParam" element</param>
-        private UserParam ReadUserParam(XmlReader reader)
+        private UserParamData ReadUserParam(XmlReader reader)
         {
             reader.MoveToContent();
-            var userParam = new UserParam
+            var name = reader.GetAttribute("name");
+            var value = reader.GetAttribute("value");
+            var type = reader.GetAttribute("type");
+            CV.CV.TermInfo unitInfo = null;
+
+            var unitAccession = reader.GetAttribute("unitAccession");
+            var unitCvRef = reader.GetAttribute("unitCVRef");
+
+            if (string.IsNullOrWhiteSpace(unitCvRef) && !string.IsNullOrWhiteSpace(unitAccession))
             {
-                Name = reader.GetAttribute("name"),
-                Type = reader.GetAttribute("type"),
-                Value = reader.GetAttribute("value"),
-                UnitAccession = reader.GetAttribute("unitAccession"),
-                UnitCVRef = reader.GetAttribute("unitCVRef"),
-                UnitName = reader.GetAttribute("unitName")
-            };
+                unitCvRef = unitAccession.Split(':')[0];
+            }
+
+            if (!string.IsNullOrWhiteSpace(unitCvRef) && !string.IsNullOrWhiteSpace(unitAccession) && CV.CV.TermAccessionLookup[unitCvRef].TryGetValue(unitAccession, out var unitCvid))
+            {
+                unitInfo = CV.CV.TermData[unitCvid];
+            }
 
             reader.Dispose();
-            return userParam;
+            return new UserParamData(name, value, type, unitInfo);
         }
         #endregion
 
@@ -1869,6 +2196,59 @@ namespace PSI_Interface.MSData
             }
             reader.Dispose();
         }
+
+        /// <summary>
+        /// Handle the child nodes of a chromatogramList element
+        /// Called by ReadRunData (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single chromatogramList element</param>
+        private void ReadChromatogramList(XmlReader reader)
+        {
+            reader.MoveToContent();
+            _numSpectra = Convert.ToInt64(reader.GetAttribute("count"));
+            if (_randomAccess)
+            {
+                // randomAccess: We only read to this point for the count of spectra.
+                // We only want to read for offsets if we weren't able to get valid offsets from an index
+                //reader.Dispose(); // Closing can be slow for a subtree...
+                if (!_haveIndex)
+                {
+                    ReadRunForOffsets();
+                }
+                return;
+            }
+            reader.ReadStartElement("chromatogramList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
+            if (_reduceMemoryUsage)
+            {
+                // Kill the read, we are at the first spectrum
+                _xmlReaderForYield = reader;
+                // If in the "ReadAllSpectra" call stack, we don't want the reader closed - we still need the subtree
+                return;
+            }
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                if (reader.Name == "chromatogram")
+                {
+                    // Schema requirements: one to many instances of this element
+                    // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                    _chromatograms.Add(ReadChromatogram(reader.ReadSubtree(), true));
+                    // "chromatogram" must have child node(s)
+                    // Read the EndElement
+                    reader.ReadEndElement();
+                }
+                else
+                {
+                    reader.Skip();
+                }
+            }
+            reader.Dispose();
+        }
         #endregion
 
         #region Spectrum Tag
@@ -1910,13 +2290,10 @@ namespace PSI_Interface.MSData
 
             var defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
             reader.ReadStartElement("spectrum"); // Throws exception if we are not at the "spectrum" tag.
-            var is_ms_ms = false;
-            var msLevel = 0;
-            var centroided = false;
-            double tic = 0;
-            var precursors = new List<Precursor>();
+            var precursors = new List<Precursor>(0);
             var scans = new List<ScanData>();
             var bdas = new List<BinaryDataArray>();
+            var specParams = new ParamData();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -1925,21 +2302,24 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
-                /////////////////////////////////////////////////////////////////////////////////////
-                //
-                // MS1 Spectra: only need Spectrum data: scanNum, MSLevel, ElutionTime, mzArray, IntensityArray
-                //
-                // MS2 Spectra: use ProductSpectrum; adds ActivationMethod and IsolationWindow
-                //
-                /////////////////////////////////////////////////////////////////////////////////////
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
-                        reader.Skip();
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            specParams.AddParams(paramGroup.CVParams);
+                            specParams.AddParams(paramGroup.UserParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
+                        specParams.AddParam(ReadCvParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+
                         /* MAY supply a *child* term of MS:1000465 (scan polarity) only once
                          *   e.g.: MS:1000129 (negative scan)
                          *   e.g.: MS:1000130 (positive scan)
@@ -1975,46 +2355,15 @@ namespace PSI_Interface.MSData
                          *   e.g.: MS:1000796 (spectrum title)
                          *   et al.
                          */
-                        switch (reader.GetAttribute("accession"))
-                        {
-                            case "MS:1000127":
-                                // name="centroid spectrum"
-                                centroided = true;
-                                break;
-                            case "MS:1000128":
-                                // name="profile spectrum"
-                                centroided = false;
-                                break;
-                            case "MS:1000511":
-                                // name="ms level"
-                                msLevel = Convert.ToInt32(reader.GetAttribute("value"));
-                                break;
-                            case "MS:1000579":
-                                // name="MS1 spectrum"
-                                is_ms_ms = false;
-                                break;
-                            case "MS:1000580":
-                                // name="MSn spectrum"
-                                is_ms_ms = true;
-                                break;
-                            case "MS:1000583":
-                                // name="SRM spectrum"
-                                is_ms_ms = true;
-                                break;
-                            case "MS:1000285":
-                                // name="total ion current"
-                                tic = Convert.ToDouble(reader.GetAttribute("value"));
-                                break;
-                        }
-                        reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
-                        reader.Skip();
+                        specParams.AddParam(ReadUserParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the userParam element (no child nodes)
                         break;
                     case "spectrumDescription": // mzML_1.0.0 compatibility
                         // Schema requirements: one instance of this element
-                        ReadSpectrumDescription(reader.ReadSubtree(), ref scans, ref precursors, out centroided);
+                        specParams.AddParams(ReadSpectrumDescription(reader.ReadSubtree(), ref scans, ref precursors));
                         reader.ReadEndElement(); // "spectrumDescription" must have child nodes
                         break;
                     case "scanList":
@@ -2049,9 +2398,9 @@ namespace PSI_Interface.MSData
                 }
             }
             reader.Dispose();
+
             // Process the spectrum data
             var scan = new ScanData();
-            SimpleSpectrum spectrum;
             var mzs = new BinaryDataArray();
             var intensities = new BinaryDataArray();
             foreach (var bda in bdas)
@@ -2066,7 +2415,24 @@ namespace PSI_Interface.MSData
                 }
             }
 
-            /*if (!centroided && includePeaks)
+            /*
+            var centroided = false;
+            foreach (var cvParam in specParams.CVParams)
+            {
+                switch (cvParam.TermInfo.Id)
+                {
+                    case "MS:1000127":
+                        // name="centroid spectrum"
+                        centroided = true;
+                        break;
+                    case "MS:1000128":
+                        // name="profile spectrum"
+                        centroided = false;
+                        break;
+                }
+            }
+
+            if (!centroided && includePeaks)
             {
                 // Centroid spectrum
                 // ProteoWizard
@@ -2085,74 +2451,35 @@ namespace PSI_Interface.MSData
                 // TODO: Should do something else to appropriately handle combinations...
                 scan = scans[0];
             }
+            specParams.AddParams(scan.CVParams);
+            specParams.AddParams(scan.UserParams);
 
-            if (is_ms_ms)
-            {
-                var precursor = new Precursor();
-                if (precursors.Count == 1)
-                {
-                    precursor = precursors[0];
-                }
-                else if (precursors.Count > 1)
-                {
-                    // TODO: Should do something else to appropriately handle multiple precursors...
-                    precursor = precursors[0];
-                }
-                var ion = new SelectedIon();
-                if (precursor.Ions.Count == 1)
-                {
-                    ion = precursor.Ions[0];
-                }
-                else if (precursor.Ions.Count > 1)
-                {
-                    // TODO: Should do something else to appropriately handle multiple selected ions...
-                    ion = precursor.Ions[0];
-                }
-
-                var productSpectrum = new SimpleProductSpectrum(mzs.Data, intensities.Data, scanNum) {
-                    ActivationMethod = precursor.ActivationMethod
-                };
-                // Select mz value to use based on presence of a Thermo-specific user param.
-                // The user param has a slightly higher precision, if that matters.
-                var mz = Math.Abs(scan.MonoisotopicMz) < float.Epsilon ? ion.SelectedIonMz : scan.MonoisotopicMz;
-                productSpectrum.MonoisotopicMz = mz;
-                productSpectrum.Charge = ion.Charge;
-                productSpectrum.IsolationWindowTargetMz = precursor.IsolationWindowTargetMz;
-                productSpectrum.IsolationWindowLowerOffset = precursor.IsolationWindowLowerOffset;
-                productSpectrum.IsolationWindowUpperOffset = precursor.IsolationWindowUpperOffset;
-                spectrum = productSpectrum;
-            }
-            else
-            {
-                spectrum = new SimpleSpectrum(mzs.Data, intensities.Data, scanNum);
-            }
-            spectrum.MsLevel = msLevel;
-            spectrum.ElutionTime = scan.StartTime;
-            spectrum.NativeId = nativeId;
-            spectrum.TotalIonCurrent = tic;
-            spectrum.Centroided = centroided;
-            spectrum.ScanWindows.AddRange(scan.ScanWindows);
+            var spectrum = new SimpleSpectrum(mzs.Data, intensities.Data, scanNum, nativeId, scan.StartTime, specParams.CVParams, specParams.UserParams, precursors, scan.ScanWindows);
 
             return spectrum;
         }
         #endregion
 
-        #region Spectrum internal Tags
+        #region Chromatogram Tag
         /// <summary>
-        /// mzML_1.0.0 compatibility
-        /// Handle a single spectrumDescription element and child nodes
-        /// Called by ReadSpectrumList (xml hierarchy)
+        /// Handle a single chromatogram element and child nodes
+        /// Called by ReadChromatogramList (xml hierarchy)
         /// </summary>
-        /// <param name="reader">XmlReader that is only valid for the scope of the single spectrum element</param>
-        /// <param name="scans"></param>
-        /// <param name="precursors"></param>
-        /// <param name="centroided"></param>
-        private void ReadSpectrumDescription(XmlReader reader, ref List<ScanData> scans, ref List<Precursor> precursors, out bool centroided)
+        /// <param name="reader">XmlReader that is only valid for the scope of the single chromatogram element</param>
+        /// <param name="includePeaks">Whether to read binary data arrays</param>
+        private SimpleChromatogram ReadChromatogram(XmlReader reader, bool includePeaks = true)
         {
             reader.MoveToContent();
-            // This is correct for Thermo files converted by msConvert, but need to implement for others as well
-            reader.ReadStartElement("spectrumDescription"); // Throws exception if we are not at the "spectrumDescription" tag.
-            centroided = false;
+            var index = Convert.ToInt32(reader.GetAttribute("index"));
+            //Console.WriteLine("Reading chromatogram indexed by " + index);
+            var chromatogramId = reader.GetAttribute("id");
+
+            var defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
+            reader.ReadStartElement("chromatogram"); // Throws exception if we are not at the "chromatogram" tag.
+            var bdas = new List<BinaryDataArray>();
+            var chromParams = new ParamData();
+            Precursor precursor = null;
+            IsolationWindow product = null;
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2165,10 +2492,115 @@ namespace PSI_Interface.MSData
                 {
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
-                        reader.Skip();
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            chromParams.AddParams(paramGroup.CVParams);
+                            chromParams.AddParams(paramGroup.UserParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
+                        chromParams.AddParam(ReadCvParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    case "userParam":
+                        // Schema requirements: zero to many instances of this element
+                        chromParams.AddParam(ReadUserParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the userParam element (no child nodes)
+                        break;
+                    case "precursor":
+                        // Schema requirements: zero to one instances of this element
+                        precursor = ReadPrecursor(reader.ReadSubtree());
+                        reader.ReadEndElement(); // "precursor" must have child nodes
+                        break;
+                    case "product":
+                        // Schema requirements: zero to one instances of this element
+                        product = ReadProduct(reader.ReadSubtree());
+                        reader.Read(); // "product" may have child nodes
+                        break;
+                    case "binaryDataArrayList":
+                        // Schema requirements: zero to one instances of this element
+                        if (includePeaks)
+                        {
+                            bdas.AddRange(ReadBinaryDataArrayList(reader.ReadSubtree(), defaultArraySize));
+                            reader.ReadEndElement(); // "binaryDataArrayList" must have child nodes
+                        }
+                        else
+                        {
+                            reader.Skip();
+                        }
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+
+            // Process the chromatogram data
+            var times = new BinaryDataArray();
+            var intensities = new BinaryDataArray();
+            foreach (var bda in bdas)
+            {
+                if (bda.ArrayType == ArrayType.time_array)
+                {
+                    times = bda;
+                }
+                else if (bda.ArrayType == ArrayType.intensity_array)
+                {
+                    intensities = bda;
+                }
+            }
+
+            return new SimpleChromatogram(times.Data, intensities.Data, index, chromatogramId, chromParams.CVParams, chromParams.UserParams, precursor, product);
+        }
+        #endregion
+
+        #region Spectrum internal Tags
+
+        /// <summary>
+        /// mzML_1.0.0 compatibility
+        /// Handle a single spectrumDescription element and child nodes
+        /// Called by ReadSpectrumList (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single spectrum element</param>
+        /// <param name="scans"></param>
+        /// <param name="precursors"></param>
+        /// <returns></returns>
+        private List<CVParamData> ReadSpectrumDescription(XmlReader reader, ref List<ScanData> scans, ref List<Precursor> precursors)
+        {
+            reader.MoveToContent();
+            // This is correct for Thermo files converted by msConvert, but need to implement for others as well
+            reader.ReadStartElement("spectrumDescription"); // Throws exception if we are not at the "spectrumDescription" tag.
+            var cvParams = new List<CVParamData>();
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "referenceableParamGroupRef":
+                        // Schema requirements: zero to many instances of this element
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            cvParams.AddRange(paramGroup.CVParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
+                        break;
+                    case "cvParam":
+                        // Schema requirements: zero to many instances of this element
+                        cvParams.Add(ReadCvParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+
                         /* MUST supply a *child* term of MS:1000525 (spectrum representation) only once
                          *   e.g.: MS:1000127 (centroid mass spectrum)
                          *   e.g.: MS:1000128 (profile mass spectrum)
@@ -2181,14 +2613,6 @@ namespace PSI_Interface.MSData
                          *   e.g.: MS:1000618 (highest wavelength value)
                          *   e.g.: MS:1000619 (lowest wavelength value)
                          */
-                        switch (reader.GetAttribute("accession"))
-                        {
-                            case "MS:1000127":
-                                // name="centroid spectrum"
-                                centroided = true;
-                                break;
-                        }
-                        reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
@@ -2215,7 +2639,9 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
+
             reader.Dispose();
+            return cvParams;
         }
 
         /// <summary>
@@ -2332,61 +2758,23 @@ namespace PSI_Interface.MSData
                 {
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
-                        reader.Skip();
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            scan.AddParams(paramGroup.CVParams);
+                            scan.AddParams(paramGroup.UserParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
-                        /* MAY supply a *child* term of MS:1000503 (scan attribute) one or more times
-                         *   e.g.: MS:1000011 (mass resolution)
-                         *   e.g.: MS:1000015 (scan rate)
-                         *   e.g.: MS:1000016 (scan start time)
-                         *   e.g.: MS:1000502 (dwell time)
-                         *   e.g.: MS:1000512 (filter string)
-                         *   e.g.: MS:1000616 (preset scan configuration)
-                         *   e.g.: MS:1000800 (mass resolving power)
-                         *   e.g.: MS:1000803 (analyzer scan offset)
-                         *   e.g.: MS:1000826 (elution time)
-                         *   e.g.: MS:1000880 (interchannel delay)
-                         * MAY supply a *child* term of MS:1000018 (scan direction) only once
-                         *   e.g.: MS:1000092 (decreasing m/z scan)
-                         *   e.g.: MS:1000093 (increasing m/z scan)
-                         * MAY supply a *child* term of MS:1000019 (scan law) only once
-                         *   e.g.: MS:1000094 (exponential)
-                         *   e.g.: MS:1000095 (linear)
-                         *   e.g.: MS:1000096 (quadratic)
-                         */
-                        switch (reader.GetAttribute("accession"))
-                        {
-                            case "MS:1000016":
-                                // name="scan start time"
-                                var time = Convert.ToDouble(reader.GetAttribute("value"));
-                                var isSeconds = reader.GetAttribute("unitName") == "second";
-                                // Should only see "second" and "minute"
-                                scan.StartTime = isSeconds ? time / 60.0 : time;
-                                //scan.StartTime = Convert.ToDouble(reader.GetAttribute("value"));
-                                break;
-                            case "MS:1000512":
-                                // name="filter string"
-                                break;
-                            case "MS:1000616":
-                                // name="preset scan configuration"
-                                break;
-                            case "MS:1000927":
-                                // name="ion injection time"
-                                break;
-                            case "MS:1000826":
-                                // name="elution time"
-                                //startTime = Convert.ToDouble(reader.GetAttribute("value"));
-                                break;
-                        }
+                        scan.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
-                        if (reader.GetAttribute("name") == "[Thermo Trailer Extra]Monoisotopic M/Z:")
-                        {
-                            scan.MonoisotopicMz = Convert.ToDouble(reader.GetAttribute("value"));
-                        }
+                        scan.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the userParam element (no child nodes)
                         break;
                     case "scanWindowList":
@@ -2400,6 +2788,54 @@ namespace PSI_Interface.MSData
                 }
             }
             reader.Dispose();
+
+            foreach (var cvParam in scan.CVParams)
+            {
+                /* MAY supply a *child* term of MS:1000503 (scan attribute) one or more times
+                 *   e.g.: MS:1000011 (mass resolution)
+                 *   e.g.: MS:1000015 (scan rate)
+                 *   e.g.: MS:1000016 (scan start time)
+                 *   e.g.: MS:1000502 (dwell time)
+                 *   e.g.: MS:1000512 (filter string)
+                 *   e.g.: MS:1000616 (preset scan configuration)
+                 *   e.g.: MS:1000800 (mass resolving power)
+                 *   e.g.: MS:1000803 (analyzer scan offset)
+                 *   e.g.: MS:1000826 (elution time)
+                 *   e.g.: MS:1000880 (interchannel delay)
+                 * MAY supply a *child* term of MS:1000018 (scan direction) only once
+                 *   e.g.: MS:1000092 (decreasing m/z scan)
+                 *   e.g.: MS:1000093 (increasing m/z scan)
+                 * MAY supply a *child* term of MS:1000019 (scan law) only once
+                 *   e.g.: MS:1000094 (exponential)
+                 *   e.g.: MS:1000095 (linear)
+                 *   e.g.: MS:1000096 (quadratic)
+                 */
+                switch (cvParam.TermInfo.Id)
+                {
+                    case "MS:1000016":
+                        // name="scan start time"
+                        var time = Convert.ToDouble(cvParam.Value);
+                        var isSeconds = cvParam.UnitInfo.Name == "second";
+                        // Should only see "second" and "minute"
+                        scan.StartTime = isSeconds ? time / 60.0 : time;
+                        //scan.StartTime = Convert.ToDouble(reader.GetAttribute("value"));
+                        break;
+                    case "MS:1000512":
+                        // name="filter string"
+                        break;
+                    case "MS:1000616":
+                        // name="preset scan configuration"
+                        break;
+                    case "MS:1000927":
+                        // name="ion injection time"
+                        break;
+                    case "MS:1000826":
+                        // name="elution time"
+                        //startTime = Convert.ToDouble(reader.GetAttribute("value"));
+                        break;
+                }
+            }
+
             return scan;
         }
 
@@ -2449,8 +2885,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("scanWindow"); // Throws exception if we are not at the "scanWindow" tag.
-            var lowerLimit = 0.0;
-            var upperLimit = 0.0;
+            var cvParams = new List<CVParamData>();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2464,27 +2899,17 @@ namespace PSI_Interface.MSData
                 {
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
-                        reader.Skip();
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            cvParams.AddRange(paramGroup.CVParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
-                        /* MAY supply a* child*term of MS:1000549(selection window attribute) one or more times
-                         * e.g.: MS: 1000500(scan window upper limit)
-                         * e.g.: MS: 1000501(scan window lower limit)
-                         * MUST supply term MS:1000500(scan window upper limit)  only once
-                         * MUST supply term MS:1000501(scan window lower limit)  only once
-                         */
-                        switch (reader.GetAttribute("accession"))
-                        {
-                            case "MS:1000501":
-                                // name="scan window lower limit"
-                                lowerLimit = Convert.ToDouble(reader.GetAttribute("value"));
-                                break;
-                            case "MS:1000500":
-                                // name="scan window upper limit"
-                                upperLimit = Convert.ToDouble(reader.GetAttribute("value"));
-                                break;
-                        }
+                        cvParams.Add(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
                     case "userParam":
@@ -2497,6 +2922,30 @@ namespace PSI_Interface.MSData
                 }
             }
             reader.Dispose();
+
+            var lowerLimit = 0.0;
+            var upperLimit = 0.0;
+            foreach (var cvParam in cvParams)
+            {
+                /* MAY supply a* child*term of MS:1000549(selection window attribute) one or more times
+                 * e.g.: MS: 1000500(scan window upper limit)
+                 * e.g.: MS: 1000501(scan window lower limit)
+                 * MUST supply term MS:1000500(scan window upper limit)  only once
+                 * MUST supply term MS:1000501(scan window lower limit)  only once
+                 */
+                switch (cvParam.TermInfo.Id)
+                {
+                    case "MS:1000501":
+                        // name="scan window lower limit"
+                        lowerLimit = Convert.ToDouble(cvParam.Value);
+                        break;
+                    case "MS:1000500":
+                        // name="scan window upper limit"
+                        upperLimit = Convert.ToDouble(cvParam.Value);
+                        break;
+                }
+            }
+
             return new ScanWindowData(lowerLimit, upperLimit);
         }
 
@@ -2547,7 +2996,10 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("precursor"); // Throws exception if we are not at the "precursor" tag.
-            var precursor = new Precursor();
+            IsolationWindow isolationWindow = null;
+            var selectedIons = new List<SelectedIon>();
+            var activation = "";
+            var pd = new ParamData();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2557,69 +3009,18 @@ namespace PSI_Interface.MSData
                     continue;
                 }
 
-                XmlReader innerReader;
                 switch (reader.Name)
                 {
                     case "isolationWindow":
                         // Schema requirements: zero to one instances of this element
-                        innerReader = reader.ReadSubtree();
-                        innerReader.MoveToContent();
-                        innerReader.ReadStartElement("isolationWindow"); // Throws exception if we are not at the "selectedIon" tag.
-                        while (innerReader.ReadState == ReadState.Interactive)
-                        {
-                            // Handle exiting out properly at EndElement tags
-                            if (innerReader.NodeType != XmlNodeType.Element)
-                            {
-                                innerReader.Read();
-                                continue;
-                            }
-                            switch (innerReader.Name)
-                            {
-                                case "referenceableParamGroupRef":
-                                    // Schema requirements: zero to many instances of this element
-                                    innerReader.Skip();
-                                    break;
-                                case "cvParam":
-                                    // Schema requirements: zero to many instances of this element
-                                    /* MUST supply a *child* term of MS:1000792 (isolation window attribute) one or more times
-                                     *   e.g.: MS:1000827 (isolation window target m/z)
-                                     *   e.g.: MS:1000828 (isolation window lower offset)
-                                     *   e.g.: MS:1000829 (isolation window upper offset)
-                                     */
-                                    switch (innerReader.GetAttribute("accession"))
-                                    {
-                                        case "MS:1000827":
-                                            // name="isolation window target m/z"
-                                            precursor.IsolationWindowTargetMz = Convert.ToDouble(innerReader.GetAttribute("value"));
-                                            break;
-                                        case "MS:1000828":
-                                            // name="isolation window lower offset"
-                                            precursor.IsolationWindowLowerOffset = Convert.ToDouble(innerReader.GetAttribute("value"));
-                                            break;
-                                        case "MS:1000829":
-                                            // name="isolation window upper offset"
-                                            precursor.IsolationWindowUpperOffset = Convert.ToDouble(innerReader.GetAttribute("value"));
-                                            break;
-                                    }
-                                    innerReader.Read(); // Consume the cvParam element (no child nodes)
-                                    break;
-                                case "userParam":
-                                    // Schema requirements: zero to many instances of this element
-                                    innerReader.Skip();
-                                    break;
-                                default:
-                                    innerReader.Skip();
-                                    break;
-                            }
-                        }
-                        innerReader.Dispose();
-                        reader.Read(); // "selectedIon" might not have child nodes
-                        // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
+                        isolationWindow = ReadIsolationWindow(reader.ReadSubtree());
+                        reader.Read(); // "isolationWindow" might not have child nodes
+                        // We will either consume the EndElement, or the same element that was passed to ReadIsolationWindow (in case of no child nodes)
                         break;
                     case "selectedIonList":
                         // Schema requirements: zero to one instances of this element
                         // mzML_1.0.0: one instance of this element
-                        precursor.Ions = ReadSelectedIonList(reader.ReadSubtree());
+                        selectedIons.AddRange(ReadSelectedIonList(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "selectedIonList" must have child nodes
                         break;
                     case "activation":
@@ -2627,9 +3028,10 @@ namespace PSI_Interface.MSData
                         //var activationMethods = new List<ActivationMethod>();
                         var supplementalActivation = "";
                         //var supplementalCollisionEnergy = 0d;
-                        innerReader = reader.ReadSubtree();
+                        var innerReader = reader.ReadSubtree();
                         innerReader.MoveToContent();
                         innerReader.ReadStartElement("activation"); // Throws exception if we are not at the "activation" tag.
+                        var pga = new ParamData();
                         while (innerReader.ReadState == ReadState.Interactive)
                         {
                             // Handle exiting out properly at EndElement tags
@@ -2642,96 +3044,24 @@ namespace PSI_Interface.MSData
                             {
                                 case "referenceableParamGroupRef":
                                     // Schema requirements: zero to many instances of this element
-                                    innerReader.Skip();
+                                    var reference = innerReader.GetAttribute("ref");
+                                    if (!string.IsNullOrWhiteSpace(reference) &&
+                                        _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                                    {
+                                        pga.AddParams(paramGroup.CVParams);
+                                        pga.AddParams(paramGroup.UserParams);
+                                    }
+                                    innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                     break;
                                 case "cvParam":
                                     // Schema requirements: zero to many instances of this element
-                                    /* MAY supply a *child* term of MS:1000510 (precursor activation attribute) one or more times
-                                     *   e.g.: MS:1000045 (collision energy)
-                                     *   e.g.: MS:1000138 (percent collision energy)
-                                     *   e.g.: MS:1000245 (charge stripping)
-                                     *   e.g.: MS:1000412 (buffer gas)
-                                     *   e.g.: MS:1000419 (collision gas)
-                                     *   e.g.: MS:1000509 (activation energy)
-                                     *   e.g.: MS:1000869 (collision gas pressure)
-                                     * MUST supply term MS:1000044 (dissociation method) or any of its children one or more times
-                                     *   e.g.: MS:1000133 (collision-induced dissociation)
-                                     *   e.g.: MS:1000134 (plasma desorption)
-                                     *   e.g.: MS:1000135 (post-source decay)
-                                     *   e.g.: MS:1000136 (surface-induced dissociation)
-                                     *   e.g.: MS:1000242 (blackbody infrared radiative dissociation)
-                                     *   e.g.: MS:1000250 (electron capture dissociation)
-                                     *   e.g.: MS:1000262 (infrared multiphoton dissociation)
-                                     *   e.g.: MS:1000282 (sustained off-resonance irradiation)
-                                     *   e.g.: MS:1000422 (high-energy collision-induced dissociation)
-                                     *   e.g.: MS:1000433 (low-energy collision-induced dissociation)
-                                     *   et al.
-                                     *
-                                     *   e.g.: MS:1000133 "collision-induced dissociation"
-                                     *   e.g.: MS:1000134 "plasma desorption"
-                                     *   e.g.: MS:1000135 "post-source decay"
-                                     *   e.g.: MS:1000136 "surface-induced dissociation"
-                                     *   e.g.: MS:1000242 "blackbody infrared radiative dissociation"
-                                     *   e.g.: MS:1000250 "electron capture dissociation"
-                                     *   e.g.: MS:1000262 "infrared multiphoton dissociation"
-                                     *   e.g.: MS:1000282 "sustained off-resonance irradiation"
-                                     *   e.g.: MS:1000422 "beam-type collision-induced dissociation"
-                                     *   e.g.: MS:1000433 "low-energy collision-induced dissociation"
-                                     *   e.g.: MS:1000435 "photodissociation"
-                                     *   e.g.: MS:1000598 "electron transfer dissociation"
-                                     *   e.g.: MS:1000599 "pulsed q dissociation"
-                                     *   e.g.: MS:1001880 "in-source collision-induced dissociation"
-                                     *   e.g.: MS:1002000 "LIFT"
-                                     *   e.g.: MS:1002472 "trap-type collision-induced dissociation"
-                                     */
-                                    // TODO: Should probably change this to store a CVID instead.
-                                    switch (innerReader.GetAttribute("accession"))
-                                    {
-                                        case "MS:1000133": // name="collision-induced dissociation"
-                                        case "MS:1000134": // name="plasma desorption"
-                                        case "MS:1000135": // name="post-source decay"
-                                        case "MS:1000136": // name="surface-induced dissociation"
-                                        case "MS:1000242": // name="blackbody infrared radiative dissociation"
-                                        case "MS:1000250": // name="electron capture dissociation"
-                                        case "MS:1000262": // name="infrared multiphoton dissociation"
-                                        case "MS:1000282": // name="sustained off-resonance irradiation"
-                                        case "MS:1000422":
-                                            // name="beam-type collision-induced dissociation", "high-energy collision-induced dissociation"
-                                        case "MS:1000433": // name="low-energy collision-induced dissociation"
-                                        case "MS:1000435": // name="photodissociation"
-                                        case "MS:1000598": // name="electron transfer dissociation"
-                                        case "MS:1000599": // name="pulsed q dissociation"
-                                        case "MS:1001880": // name="in-source collision-induced dissociation"
-                                        case "MS:1002000": // name="LIFT"
-                                        case "MS:1002472": // name="trap-type collision-induced dissociation"
-                                        case "MS:1002631": // name="Electron-Transfer/Higher-Energy Collision Dissociation (EThcD)"
-                                            var actName = innerReader.GetAttribute("name");
-                                            if (string.IsNullOrWhiteSpace(precursor.ActivationMethod))
-                                            {
-                                                precursor.ActivationMethod = actName;
-                                            }
-                                            else
-                                            {
-                                                precursor.ActivationMethod += ", " + actName;
-                                            }
-                                            break;
-                                        case "MS:1002678": // name="supplemental beam-type collision-induced dissociation"
-                                        case "MS:1002679": // name="supplemental collision-induced dissociation"
-                                            supplementalActivation = innerReader.GetAttribute("name");
-                                            break;
-                                        case "MS:1000045":
-                                            // name="collision energy"
-                                            //energy = Convert.ToDouble(innerReader.GetAttribute("value"));
-                                            break;
-                                        case "MS:1002680": // name="supplemental collision energy"
-                                            //supplementalCollisionEnergy = Convert.ToDouble(innerReader.GetAttribute("value"));
-                                            break;
-                                    }
+                                    pga.AddParam(ReadCvParam(innerReader.ReadSubtree()));
                                     innerReader.Read(); // Consume the cvParam element (no child nodes)
                                     break;
                                 case "userParam":
                                     // Schema requirements: zero to many instances of this element
-                                    innerReader.Skip();
+                                    pga.AddParam(ReadUserParam(innerReader.ReadSubtree()));
+                                    innerReader.Read(); // Consume the userParam element (no child nodes)
                                     break;
                                 default:
                                     innerReader.Skip();
@@ -2741,19 +3071,99 @@ namespace PSI_Interface.MSData
                         innerReader.Dispose();
                         reader.Read(); // "selectedIon" might not have child nodes
 
-                        if (!string.IsNullOrWhiteSpace(supplementalActivation))
+                        foreach (var cvParam in pga.CVParams)
                         {
-                            precursor.ActivationMethod = ", " + supplementalActivation;
+                            /* MAY supply a *child* term of MS:1000510 (precursor activation attribute) one or more times
+                             *   e.g.: MS:1000045 (collision energy)
+                             *   e.g.: MS:1000138 (percent collision energy)
+                             *   e.g.: MS:1000245 (charge stripping)
+                             *   e.g.: MS:1000412 (buffer gas)
+                             *   e.g.: MS:1000419 (collision gas)
+                             *   e.g.: MS:1000509 (activation energy)
+                             *   e.g.: MS:1000869 (collision gas pressure)
+                             * MUST supply term MS:1000044 (dissociation method) or any of its children one or more times
+                             *   e.g.: MS:1000133 (collision-induced dissociation)
+                             *   e.g.: MS:1000134 (plasma desorption)
+                             *   e.g.: MS:1000135 (post-source decay)
+                             *   e.g.: MS:1000136 (surface-induced dissociation)
+                             *   e.g.: MS:1000242 (blackbody infrared radiative dissociation)
+                             *   e.g.: MS:1000250 (electron capture dissociation)
+                             *   e.g.: MS:1000262 (infrared multiphoton dissociation)
+                             *   e.g.: MS:1000282 (sustained off-resonance irradiation)
+                             *   e.g.: MS:1000422 (high-energy collision-induced dissociation)
+                             *   e.g.: MS:1000433 (low-energy collision-induced dissociation)
+                             *   et al.
+                             *
+                             *   e.g.: MS:1000133 "collision-induced dissociation"
+                             *   e.g.: MS:1000134 "plasma desorption"
+                             *   e.g.: MS:1000135 "post-source decay"
+                             *   e.g.: MS:1000136 "surface-induced dissociation"
+                             *   e.g.: MS:1000242 "blackbody infrared radiative dissociation"
+                             *   e.g.: MS:1000250 "electron capture dissociation"
+                             *   e.g.: MS:1000262 "infrared multiphoton dissociation"
+                             *   e.g.: MS:1000282 "sustained off-resonance irradiation"
+                             *   e.g.: MS:1000422 "beam-type collision-induced dissociation"
+                             *   e.g.: MS:1000433 "low-energy collision-induced dissociation"
+                             *   e.g.: MS:1000435 "photodissociation"
+                             *   e.g.: MS:1000598 "electron transfer dissociation"
+                             *   e.g.: MS:1000599 "pulsed q dissociation"
+                             *   e.g.: MS:1001880 "in-source collision-induced dissociation"
+                             *   e.g.: MS:1002000 "LIFT"
+                             *   e.g.: MS:1002472 "trap-type collision-induced dissociation"
+                             */
+                            // TODO: Should probably change this to store a CVID instead.
+                            switch (cvParam.TermInfo.Id)
+                            {
+                                case "MS:1000133": // name="collision-induced dissociation"
+                                case "MS:1000134": // name="plasma desorption"
+                                case "MS:1000135": // name="post-source decay"
+                                case "MS:1000136": // name="surface-induced dissociation"
+                                case "MS:1000242": // name="blackbody infrared radiative dissociation"
+                                case "MS:1000250": // name="electron capture dissociation"
+                                case "MS:1000262": // name="infrared multiphoton dissociation"
+                                case "MS:1000282": // name="sustained off-resonance irradiation"
+                                case "MS:1000422":
+                                // name="beam-type collision-induced dissociation", "high-energy collision-induced dissociation"
+                                case "MS:1000433": // name="low-energy collision-induced dissociation"
+                                case "MS:1000435": // name="photodissociation"
+                                case "MS:1000598": // name="electron transfer dissociation"
+                                case "MS:1000599": // name="pulsed q dissociation"
+                                case "MS:1001880": // name="in-source collision-induced dissociation"
+                                case "MS:1002000": // name="LIFT"
+                                case "MS:1002472": // name="trap-type collision-induced dissociation"
+                                case "MS:1002631": // name="Electron-Transfer/Higher-Energy Collision Dissociation (EThcD)"
+                                    var actName = cvParam.TermInfo.Name;
+                                    if (string.IsNullOrWhiteSpace(activation))
+                                    {
+                                        activation = actName;
+                                    }
+                                    else
+                                    {
+                                        activation += ", " + actName;
+                                    }
+                                    break;
+                                case "MS:1002678": // name="supplemental beam-type collision-induced dissociation"
+                                case "MS:1002679": // name="supplemental collision-induced dissociation"
+                                    supplementalActivation = cvParam.TermInfo.Name;
+                                    break;
+                                case "MS:1000045":
+                                    // name="collision energy"
+                                    //energy = Convert.ToDouble(innerReader.GetAttribute("value"));
+                                    break;
+                                case "MS:1002680": // name="supplemental collision energy"
+                                                   //supplementalCollisionEnergy = Convert.ToDouble(innerReader.GetAttribute("value"));
+                                    break;
+                            }
                         }
 
-                        /*if (activationMethods.Count > 1 && activationMethods.Contains(ActivationMethod.ETD))
+                        pd.AddParams(pga.CVParams);
+                        pd.AddParams(pga.UserParams);
+
+                        if (!string.IsNullOrWhiteSpace(supplementalActivation))
                         {
-                            precursor.Activation = ActivationMethod.ETD;
+                            activation = ", " + supplementalActivation;
                         }
-                        else if (activationMethods.Count > 0)
-                        {
-                            precursor.Activation = activationMethods[0];
-                        }*/
+
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         break;
                     default:
@@ -2762,7 +3172,126 @@ namespace PSI_Interface.MSData
                 }
             }
             reader.Dispose();
-            return precursor;
+            return new Precursor(selectedIons, isolationWindow, activation, pd.CVParams, pd.UserParams);
+        }
+
+        /// <summary>
+        /// Handle a single precursor element and child nodes
+        /// Called by ReadPrecursorList (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single precursor element</param>
+        /// <returns></returns>
+        private IsolationWindow ReadProduct(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("precursor"); // Throws exception if we are not at the "precursor" tag.
+            var isolationWindow = new IsolationWindow();
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+
+                switch (reader.Name)
+                {
+                    case "isolationWindow":
+                        // Schema requirements: zero to one instances of this element
+                        isolationWindow = ReadIsolationWindow(reader.ReadSubtree());
+                        reader.Read(); // "IsolationWindow" might not have child nodes
+                        // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+            return isolationWindow;
+        }
+
+        /// <summary>
+        /// Handle a single isolationWindow element and child nodes
+        /// Called by ReadPrecursor or ReadProduct (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single isolationWindow element</param>
+        /// <returns></returns>
+        private IsolationWindow ReadIsolationWindow(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("isolationWindow"); // Throws exception if we are not at the "isolationWindow" tag.
+            var pgiw = new ParamData();
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+
+                switch (reader.Name)
+                {
+                    case "referenceableParamGroupRef":
+                        // Schema requirements: zero to many instances of this element
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            pgiw.AddParams(paramGroup.CVParams);
+                            pgiw.AddParams(paramGroup.UserParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
+                        break;
+                    case "cvParam":
+                        // Schema requirements: zero to many instances of this element
+                        pgiw.AddParam(ReadCvParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    case "userParam":
+                        // Schema requirements: zero to many instances of this element
+                        pgiw.AddParam(ReadUserParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the userParam element (no child nodes)
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+
+            reader.Dispose();
+
+            var targetMz = 0.0;
+            var lowerOffset = 0.0;
+            var upperOffset = 0.0;
+            foreach (var cvParam in pgiw.CVParams)
+            {
+                /* MUST supply a *child* term of MS:1000792 (isolation window attribute) one or more times
+                 *   e.g.: MS:1000827 (isolation window target m/z)
+                 *   e.g.: MS:1000828 (isolation window lower offset)
+                 *   e.g.: MS:1000829 (isolation window upper offset)
+                 */
+                switch (cvParam.TermInfo.Id)
+                {
+                    case "MS:1000827":
+                        // name="isolation window target m/z"
+                        targetMz = Convert.ToDouble(cvParam.Value);
+                        break;
+                    case "MS:1000828":
+                        // name="isolation window lower offset"
+                        lowerOffset = Convert.ToDouble(cvParam.Value);
+                        break;
+                    case "MS:1000829":
+                        // name="isolation window upper offset"
+                        upperOffset = Convert.ToDouble(cvParam.Value);
+                        break;
+                }
+            }
+
+            var isolationWindow = new IsolationWindow(targetMz, lowerOffset, upperOffset, pgiw.CVParams, pgiw.UserParams);
+            return isolationWindow;
         }
 
         /// <summary>
@@ -2790,7 +3319,7 @@ namespace PSI_Interface.MSData
                 {
                     case "selectedIon":
                         // Schema requirements: one to many instances of this element
-                        var ion = new SelectedIon();
+                        var pd = new ParamData();
                         var innerReader = reader.ReadSubtree();
                         innerReader.MoveToContent();
                         innerReader.ReadStartElement("selectedIon"); // Throws exception if we are not at the "selectedIon" tag.
@@ -2806,35 +3335,23 @@ namespace PSI_Interface.MSData
                             {
                                 case "referenceableParamGroupRef":
                                     // Schema requirements: zero to many instances of this element
-                                    innerReader.Skip();
+                                    var reference = innerReader.GetAttribute("ref");
+                                    if (!string.IsNullOrWhiteSpace(reference) &&
+                                        _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                                    {
+                                        pd.AddParams(paramGroup.CVParams);
+                                        pd.AddParams(paramGroup.UserParams);
+                                    }
+                                    innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                     break;
                                 case "cvParam":
                                     // Schema requirements: zero to many instances of this element
-                                    /* MUST supply a *child* term of MS:1000455 (ion selection attribute) one or more times
-                                     *   e.g.: MS:1000041 (charge state)
-                                     *   e.g.: MS:1000042 (intensity)
-                                     *   e.g.: MS:1000633 (possible charge state)
-                                     *   e.g.: MS:1000744 (selected ion m/z)
-                                     */
-                                    switch (innerReader.GetAttribute("accession"))
-                                    {
-                                        case "MS:1000041":
-                                            // name="charge state"
-                                            ion.Charge = (int)Convert.ToDouble(innerReader.GetAttribute("value"));
-                                            break;
-                                        case "MS:1000744":
-                                            // name="selected ion m/z"
-                                            ion.SelectedIonMz = Convert.ToDouble(innerReader.GetAttribute("value"));
-                                            break;
-                                    }
+                                    pd.AddParam(ReadCvParam(innerReader.ReadSubtree()));
                                     innerReader.Read(); // Consume the cvParam element (no child nodes)
                                     break;
                                 case "userParam":
                                     // Schema requirements: zero to many instances of this element
-                                    if (innerReader.GetAttribute("name") == "old charge state")
-                                    {
-                                        ion.OldCharge = (int) Convert.ToDouble(innerReader.GetAttribute("value"));
-                                    }
+                                    pd.AddParam(ReadUserParam(innerReader.ReadSubtree()));
                                     innerReader.Read();
                                     break;
                                 default:
@@ -2843,7 +3360,31 @@ namespace PSI_Interface.MSData
                             }
                         }
                         innerReader.Dispose();
-                        ions.Add(ion);
+
+                        var charge = 0;
+                        var selectedIon = 0.0;
+                        foreach (var cvParam in pd.CVParams)
+                        {
+                            /* MUST supply a *child* term of MS:1000455 (ion selection attribute) one or more times
+                             *   e.g.: MS:1000041 (charge state)
+                             *   e.g.: MS:1000042 (intensity)
+                             *   e.g.: MS:1000633 (possible charge state)
+                             *   e.g.: MS:1000744 (selected ion m/z)
+                             */
+                            switch (cvParam.TermInfo.Id)
+                            {
+                                case "MS:1000041":
+                                    // name="charge state"
+                                    charge = (int)Convert.ToDouble(cvParam.Value);
+                                    break;
+                                case "MS:1000744":
+                                    // name="selected ion m/z"
+                                    selectedIon = Convert.ToDouble(cvParam.Value);
+                                    break;
+                            }
+                        }
+
+                        ions.Add(new SelectedIon(selectedIon, charge, pd.CVParams, pd.UserParams));
                         reader.Read(); // "selectedIon" might not have child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         break;
@@ -2915,7 +3456,7 @@ namespace PSI_Interface.MSData
             }
             var compressed = false;
             reader.ReadStartElement("binaryDataArray"); // Throws exception if we are not at the "spectrum" tag.
-            var paramList = new List<Param>();
+            var paramGroup = new ParamData();
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2930,24 +3471,27 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var rpgRef = reader.GetAttribute("ref");
-                        if (rpgRef != null)
-                            paramList.AddRange(_referenceableParamGroups[rpgRef]);
+                        if (!string.IsNullOrWhiteSpace(rpgRef) && _referenceableParamGroups.TryGetValue(rpgRef, out var pg))
+                        {
+                            paramGroup.AddParams(pg.CVParams);
+                            paramGroup.AddParams(pg.UserParams);
+                        }
                         reader.Read();
                         break;
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
-                        paramList.Add(ReadCvParam(reader.ReadSubtree()));
+                        paramGroup.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
-                        paramList.Add(ReadUserParam(reader.ReadSubtree()));
+                        paramGroup.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read();
                         break;
                     case "binary":
                         // Schema requirements: zero to many instances of this element
                         // Process the ParamList first.
-                        foreach (var param in paramList)
+                        foreach (var param in paramGroup.CVParams)
                         {
                             /*
                              * MUST supply a *child* term of MS:1000572 (binary data compression type) only once
@@ -2968,7 +3512,7 @@ namespace PSI_Interface.MSData
                              *   e.g.: MS:1000521 (32-bit float)
                              *   e.g.: MS:1000523 (64-bit float)
                              */
-                            switch (param.Accession)
+                            switch (param.TermInfo.Id)
                             {
                                     // MUST supply a *child* term of MS:1000572 (binary data compression type) only once
                                 case "MS:1000574":

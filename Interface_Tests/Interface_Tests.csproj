@@ -51,6 +51,7 @@
     <Compile Include="IdentDataTests\mzIdentMLTests\mzIdentMLWriteTests.cs" />
     <Compile Include="MSDataTests\mzMLTests\mzMLReadTests.cs" />
     <Compile Include="MSDataTests\mzMLTests\mzMLWriteTests.cs" />
+    <Compile Include="MSDataTests\SimpleMzMLReaderTests.cs" />
     <Compile Include="TestPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
