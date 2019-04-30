@@ -19,11 +19,17 @@ namespace PSI_Interface.MSData
         private Stream _file;
         private StreamReader _fileReader;
         private XmlReader _xmlReaderForYield;
+        private XmlReader _xmlReaderForAfterYield;
         private bool _reduceMemoryUsage;
         private long _artificialScanNum = 1;
-        private long _numSpectra = -1;
+        private bool _numSpectraRead = false;
+        private long _numSpectra = 00;
+        private bool _numChromatogramsRead = false;
+        private long _numChromatograms = 0;
         private readonly IndexList _spectrumOffsets = new IndexList() { IndexType = IndexList.IndexListType.Spectrum };
         private readonly IndexList _chromatogramOffsets = new IndexList() { IndexType = IndexList.IndexListType.Chromatogram };
+        private bool _isReadingSpectra = false;
+        private bool _isReadingChromatograms = false;
         private long _indexListOffset;
         private bool _haveIndex;
         private bool _haveMetaData;
@@ -985,6 +991,25 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
+        /// The number of chromatograms in the file. NOTE: for non-random access readers, this is only populated after all spectra (if any) are read.
+        /// </summary>
+        public int NumChromatograms
+        {
+            get
+            {
+                if (!_haveMetaData)
+                {
+                    var tempBool = _reduceMemoryUsage; // Set a flag to avoid reading the entire file before returning.
+                    _reduceMemoryUsage = true;
+                    ReadMzMl(); // Read the index and metadata so that the offsets get populated
+                    // The number of spectra is an attribute in the spectrumList tag
+                    _reduceMemoryUsage = tempBool;
+                }
+                return (int)_numChromatograms;
+            }
+        }
+
+        /// <summary>
         /// Tries to convert the reader to random access mode
         /// </summary>
         /// <returns></returns>
@@ -1040,6 +1065,52 @@ namespace PSI_Interface.MSData
             }
             return ReadMassSpectrumRandom(index, includePeaks);
         }
+
+        /// <summary>
+        /// Returns all chromatograms.
+        /// Uses "yield return" to allow processing one chromatogram at a time if called from a foreach loop statement.
+        /// </summary>
+        /// <param name="includePeaks">true to include peak data</param>
+        /// <returns></returns>
+        public IEnumerable<SimpleChromatogram> ReadAllChromatograms(bool includePeaks = true)
+        {
+            if (!_randomAccess)
+            {
+                // Apparently the only way to effectively cascade yield return?
+                // If it works properly, it should be basically invisible
+                foreach (var chrom in ReadAllChromatogramsNonRandom(includePeaks))
+                {
+                    yield return chrom;
+                }
+            }
+            else
+            {
+                // Apparently the only way to effectively cascade yield return?
+                // If it works properly, it should be basically invisible
+                foreach (var chrom in ReadAllChromatogramsRandom(includePeaks))
+                {
+                    yield return chrom;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns a single chromatogram from the file
+        /// </summary>
+        /// <param name="index">index of chromatogram</param>
+        /// <param name="includePeaks">true to include peak data</param>
+        /// <returns></returns>
+        /// <remarks>If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the chromatogram.
+        /// If random access mode is off, this will cause the memory usage reducing mode to shut of, and all chromatograms will be read into memory.</remarks>
+        public SimpleChromatogram ReadChromatogram(int index, bool includePeaks = true)
+        {
+            // Proper functionality when not random access
+            if (!_randomAccess)
+            {
+                return ReadChromatogramNonRandom(index, includePeaks);
+            }
+            return ReadChromatogramRandom(index, includePeaks);
+        }
         #endregion
 
         #region Interface Helper Functions: Non-Random Access
@@ -1057,6 +1128,11 @@ namespace PSI_Interface.MSData
                 if (!_haveMetaData)
                 {
                     ReadMzMl();
+                }
+
+                if (!_isReadingSpectra)
+                {
+                    yield break;
                 }
 
                 while (_xmlReaderForYield.ReadState == ReadState.Interactive)
@@ -1081,6 +1157,10 @@ namespace PSI_Interface.MSData
                         _xmlReaderForYield.Skip();
                     }
                 }
+
+                _xmlReaderForYield.Dispose();
+                _isReadingSpectra = false;
+                TryReadChromatogramList();
             }
             else
             {
@@ -1110,6 +1190,82 @@ namespace PSI_Interface.MSData
                 ReadMzMl();
             }
             return _spectra[(int)index];
+        }
+
+        /// <summary>
+        /// Read all chromatograms in the file, not using random access
+        /// Uses "yield return" to use less memory when called from a "foreach" statement
+        /// </summary>
+        /// <param name="includePeaks">true to include peak data</param>
+        /// <returns></returns>
+        private IEnumerable<SimpleChromatogram> ReadAllChromatogramsNonRandom(bool includePeaks = true)
+        {
+            if (_reduceMemoryUsage)
+            {
+                if (!_haveMetaData)
+                {
+                    ReadMzMl();
+                }
+
+                if (!_isReadingChromatograms)
+                {
+                    yield break;
+                }
+
+                while (_xmlReaderForYield.ReadState == ReadState.Interactive)
+                {
+                    // Handle exiting out properly at EndElement tags
+                    if (_xmlReaderForYield.NodeType != XmlNodeType.Element)
+                    {
+                        _xmlReaderForYield.Read();
+                        continue;
+                    }
+                    if (_xmlReaderForYield.Name == "chromatogram")
+                    {
+                        // Schema requirements: one to many instances of this element
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        yield return ReadChromatogram(_xmlReaderForYield.ReadSubtree(), includePeaks);
+                        // "spectrum" might not have any child nodes
+                        // We will either consume the EndElement, or the same element that was passed to ReadChromatogram (in case of no child nodes)
+                        _xmlReaderForYield.Read();
+                    }
+                    else
+                    {
+                        _xmlReaderForYield.Skip();
+                    }
+                }
+
+                _isReadingChromatograms = false;
+                _xmlReaderForYield.Dispose();
+            }
+            else
+            {
+                if (!_allRead)
+                {
+                    ReadMzMl();
+                }
+                foreach (var chrom in _chromatograms)
+                {
+                    yield return chrom;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Read a single chromatogram and return it.
+        /// Causes all spectra in the file to be loaded into memory
+        /// </summary>
+        /// <param name="index">index of spectrum</param>
+        /// <param name="includePeaks">true to include peak data</param>
+        private SimpleChromatogram ReadChromatogramNonRandom(long index, bool includePeaks = true)
+        {
+            if (!_allRead)
+            {
+                _artificialScanNum = 1;
+                _reduceMemoryUsage = false; // They called this on a non-random access reader, now they suffer the consequences.
+                ReadMzMl();
+            }
+            return _chromatograms[(int)index];
         }
         #endregion
 
@@ -1158,6 +1314,51 @@ namespace PSI_Interface.MSData
                 return ReadSpectrum(reader.ReadSubtree(), includePeaks);
             }
         }
+
+        /// <summary>
+        /// Read all chromatograms in the file, using random access
+        /// Uses "yield return" to use less memory when called from a "foreach" statement
+        /// </summary>
+        /// <param name="includePeaks">true to include peak data</param>
+        /// <returns></returns>
+        private IEnumerable<SimpleChromatogram> ReadAllChromatogramsRandom(bool includePeaks = true)
+        {
+            if (!_haveIndex || !_haveMetaData)
+            {
+                ReadMzMl(); // Read the index and metadata so that the offsets get populated.
+            }
+            foreach (var chromIndex in _chromatogramOffsets.Offsets)
+            {
+                yield return ReadChromatogramRandom(chromIndex.IdNum, includePeaks);
+            }
+        }
+
+        /// <summary>
+        /// Read a single chromatogram and return it.
+        /// </summary>
+        /// <param name="index">index of chromatogram</param>
+        /// <param name="includePeaks">true to include peak data</param>
+        private SimpleChromatogram ReadChromatogramRandom(long index, bool includePeaks = true)
+        {
+            if (!_haveIndex || !_haveMetaData)
+            {
+                ReadMzMl();
+            }
+
+            if (!_chromatogramOffsets.OffsetsMapInt.ContainsKey(index))
+            {
+                return null;
+            }
+
+            _fileReader.DiscardBufferedData();
+            _fileReader.BaseStream.Position = _chromatogramOffsets.OffsetsMapInt[index];
+            // Not allowed for a GZipStream.....
+            using (var reader = XmlReader.Create(_fileReader, _xSettings))
+            {
+                reader.MoveToContent();
+                return ReadChromatogram(reader.ReadSubtree(), includePeaks);
+            }
+        }
         #endregion
 
         #region Cleanup functions
@@ -1167,6 +1368,7 @@ namespace PSI_Interface.MSData
         public void Close()
         {
             _xmlReaderForYield?.Dispose();
+            _xmlReaderForAfterYield?.Dispose();
             _fileReader?.Dispose();
             _file?.Dispose();
         }
@@ -1348,6 +1550,21 @@ namespace PSI_Interface.MSData
                 }
             }
             _haveIndex = isValid;
+
+            if (isValid)
+            {
+                if (!_numSpectraRead)
+                {
+                    _numSpectra = _spectrumOffsets.Offsets.Count;
+                    _numSpectraRead = true;
+                }
+
+                if (!_numChromatogramsRead)
+                {
+                    _numChromatograms = _chromatogramOffsets.Offsets.Count;
+                    _numChromatogramsRead = true;
+                }
+            }
         }
 
         /// <summary>
@@ -1431,6 +1648,19 @@ namespace PSI_Interface.MSData
                         searchPoint = end;
                     }
                 }
+
+                if (!_numSpectraRead)
+                {
+                    _numSpectra = _spectrumOffsets.Offsets.Count;
+                    _numSpectraRead = true;
+                }
+
+                if (!_numChromatogramsRead)
+                {
+                    _numChromatograms = _chromatogramOffsets.Offsets.Count;
+                    _numChromatogramsRead = true;
+                }
+
                 // Read through the entire file, searching for tags that start with "<s" or with "<c"
                 /*while (file.Position < file.Length)
                 {
@@ -2241,6 +2471,7 @@ namespace PSI_Interface.MSData
                         ReadSpectrumList(reader.ReadSubtree());
                         if (_randomAccess || _reduceMemoryUsage)
                         {
+                            _xmlReaderForAfterYield = reader;
                             // Don't worry about reading anything more, and closing the XmlReader will take more time than it is worth.
                             return;
                         }
@@ -2250,7 +2481,16 @@ namespace PSI_Interface.MSData
                         break;
                     case "chromatogramList":
                         // Schema requirements: zero to one instances of this element
-                        reader.Skip();
+                        // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
+                        ReadChromatogramList(reader.ReadSubtree());
+                        if (_randomAccess || _reduceMemoryUsage)
+                        {
+                            _xmlReaderForAfterYield = reader;
+                            // Don't worry about reading anything more, and closing the XmlReader will take more time than it is worth.
+                            return;
+                        }
+                        // "chromatogramList" must have child nodes
+                        reader.ReadEndElement();
                         break;
                     default:
                         reader.Skip();
@@ -2258,6 +2498,20 @@ namespace PSI_Interface.MSData
                 }
             }
             reader.Dispose();
+        }
+
+        private void TryReadChromatogramList()
+        {
+            if (_xmlReaderForAfterYield == null)
+            {
+                return;
+            }
+
+            _xmlReaderForAfterYield.ReadEndElement();
+            if (_xmlReaderForAfterYield.Name.Equals("chromatogramList"))
+            {
+                ReadChromatogramList(_xmlReaderForAfterYield.ReadSubtree());
+            }
         }
 
         /// <summary>
@@ -2269,6 +2523,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             _numSpectra = Convert.ToInt64(reader.GetAttribute("count"));
+            _numSpectraRead = true;
             if (_randomAccess)
             {
                 // randomAccess: We only read to this point for the count of spectra.
@@ -2285,6 +2540,8 @@ namespace PSI_Interface.MSData
             {
                 // Kill the read, we are at the first spectrum
                 _xmlReaderForYield = reader;
+                _isReadingSpectra = true;
+                _isReadingChromatograms = false;
                 // If in the "ReadAllSpectra" call stack, we don't want the reader closed - we still need the subtree
                 return;
             }
@@ -2322,6 +2579,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             _numChromatograms = Convert.ToInt64(reader.GetAttribute("count"));
+            _numChromatogramsRead = true;
             if (_randomAccess)
             {
                 // randomAccess: We only read to this point for the count of chromatograms.
@@ -2338,6 +2596,8 @@ namespace PSI_Interface.MSData
             {
                 // Kill the read, we are at the first chromatogram
                 _xmlReaderForYield = reader;
+                _isReadingSpectra = false;
+                _isReadingChromatograms = true;
                 // If in the "ReadAllChromatograms" call stack, we don't want the reader closed - we still need the subtree
                 return;
             }
