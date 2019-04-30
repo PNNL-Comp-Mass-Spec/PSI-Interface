@@ -516,21 +516,17 @@ namespace PSI_Interface.MSData
             {
                 ScanNumber = scanNum;
                 NativeId = nativeId;
-                if (mzs == null || mzs.Count == 0)
-                {
-                    Peaks = new Peak[0];
-                    return;
-                }
-
-                Peaks = new Peak[mzs.Count];
-                for (var i = 0; i < mzs.Count; i++)
-                {
-                    Peaks[i] = new Peak(mzs[i], intensities[i]);
-                }
-
                 Precursors = precursors;
                 ScanWindows = scanWindows;
                 ScanStartTime = scanStartTime;
+
+                var points = mzs?.Count ?? 0;
+                Peaks = new Peak[points];
+                for (var i = 0; i < points; i++)
+                {
+                    // ReSharper disable once PossibleNullReferenceException
+                    Peaks[i] = new Peak(mzs[i], intensities[i]);
+                }
 
                 // Spectrum-level cvParams
                 foreach (var cvParam in CVParams)
@@ -737,7 +733,7 @@ namespace PSI_Interface.MSData
             /// <returns></returns>
             public override string ToString()
             {
-                return $"Target: {TargetMz:F4} m/z (Window {LowerOffset:F3}-{UpperOffset:F3} m/z)";
+                return $"Target: {TargetMz:F4} m/z (Window {TargetMz - LowerOffset:F3}-{TargetMz + UpperOffset:F3} m/z)";
             }
         }
 
@@ -837,21 +833,16 @@ namespace PSI_Interface.MSData
             public SimpleChromatogram(IReadOnlyList<double> times, IReadOnlyList<double> intensities, int index, string id, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams, Precursor precursor, IsolationWindow product) : base(cvParams, userParams)
             {
                 Index = index;
-                Id = id;
-                if (times == null || times.Count == 0)
-                {
-                    Peaks = new ChromatogramPeak[0];
-                    return;
-                }
+                Id = id;Precursor = precursor;
+                Product = product;
 
-                Peaks = new ChromatogramPeak[times.Count];
-                for (var i = 0; i < times.Count; i++)
+                var points = times?.Count ?? 0;
+                Peaks = new ChromatogramPeak[points];
+                for (var i = 0; i < points; i++)
                 {
+                    // ReSharper disable once PossibleNullReferenceException
                     Peaks[i] = new ChromatogramPeak(times[i], intensities[i]);
                 }
-
-                Precursor = precursor;
-                Product = product;
             }
 
             /// <summary>
