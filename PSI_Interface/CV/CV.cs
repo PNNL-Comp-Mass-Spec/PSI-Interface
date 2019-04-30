@@ -157,6 +157,16 @@ namespace PSI_Interface.CV
             public bool IsObsolete { get; private set; }
 
             /// <summary>
+            /// Returns true if this term has an IsA relationship with parent
+            /// </summary>
+            /// <param name="parent"></param>
+            /// <returns></returns>
+            public bool IsA(CVID parent)
+            {
+                return CvidIsA(Cvid, parent);
+            }
+
+            /// <summary>
             /// Constructor
             /// </summary>
             /// <param name="pCVID">Term enum identifier</param>

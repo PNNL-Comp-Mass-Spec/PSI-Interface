@@ -367,6 +367,16 @@ namespace PSI_Interface.MSData
             }
 
             /// <summary>
+            /// Get all CVParams that hold an "IsA" relationship with parent
+            /// </summary>
+            /// <param name="parent"></param>
+            /// <returns></returns>
+            public IReadOnlyList<CVParamData> GetCVParamsChildOf(CV.CV.CVID parent)
+            {
+                return CVParams.Where(x => CV.CV.CvidIsA(x.TermInfo.Cvid, parent)).ToList();
+            }
+
+            /// <summary>
             /// Default constructor
             /// </summary>
             public ParamData()
