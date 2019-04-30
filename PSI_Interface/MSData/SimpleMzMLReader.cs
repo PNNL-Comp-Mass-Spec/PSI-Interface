@@ -241,6 +241,20 @@ namespace PSI_Interface.MSData
                 Value = value;
                 UnitInfo = unitInfo;
             }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                if (UnitInfo != null && UnitInfo.Cvid != CV.CV.CVID.CVID_Unknown)
+                {
+                    return $"{TermInfo.Id} = \"{Value}\" {UnitInfo.Name}, name \"{TermInfo.Name}\"";
+                }
+
+                return $"{TermInfo.Id} = \"{Value}\", name \"{TermInfo.Name}\"";
+            }
         }
 
         /// <summary>
@@ -281,6 +295,20 @@ namespace PSI_Interface.MSData
                 Value = value;
                 DataType = dataType;
                 UnitInfo = unitInfo;
+            }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                if (UnitInfo != null && UnitInfo.Cvid != CV.CV.CVID.CVID_Unknown)
+                {
+                    return $"{Name} = \"{Value}\" {UnitInfo.Name}";
+                }
+
+                return $"{Name} = \"{Value}\"";
             }
         }
 
@@ -454,6 +482,15 @@ namespace PSI_Interface.MSData
             }
 
             /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"Scan {ScanNumber}: MS{MsLevel}, \"{NativeId}\", {Peaks.Length} peaks";
+            }
+
+            /// <summary>
             /// Constructor
             /// </summary>
             /// <param name="mzs">array of mzs</param>
@@ -483,6 +520,7 @@ namespace PSI_Interface.MSData
 
                 Precursors = precursors;
                 ScanWindows = scanWindows;
+                ScanStartTime = scanStartTime;
 
                 // Spectrum-level cvParams
                 foreach (var cvParam in CVParams)
@@ -535,6 +573,15 @@ namespace PSI_Interface.MSData
                 Mz = mz;
                 Intensity = intensity;
             }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"{Mz:F4}: {Intensity:F2}";
+            }
         }
 
         /// <summary>
@@ -571,6 +618,25 @@ namespace PSI_Interface.MSData
                 IsolationWindow = isolationWindow;
                 ActivationMethod = activationMethod;
             }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                if (IsolationWindow != null && !IsolationWindow.TargetMz.Equals(0))
+                {
+                    return $"Precursor: {IsolationWindow.TargetMz:F4} m/z";
+                }
+
+                if (SelectedIons.Count > 0)
+                {
+                    return $"Precursor: {SelectedIons[0].SelectedIonMz:F4} m/z";
+                }
+
+                return $"Precursor Activation: {ActivationMethod}";
+            }
         }
 
         /// <summary>
@@ -599,6 +665,20 @@ namespace PSI_Interface.MSData
             {
                 SelectedIonMz = selectedIonMz;
                 Charge = charge;
+            }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                if (Charge != 0)
+                {
+                    return $"SelectedIon: {SelectedIonMz:F4} m/z, {Charge}";
+                }
+
+                return $"SelectedIon: {SelectedIonMz:F4} m/z";
             }
         }
 
@@ -639,7 +719,15 @@ namespace PSI_Interface.MSData
 
             internal IsolationWindow()
             {
+            }
 
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"Target: {TargetMz:F4} m/z (Window {LowerOffset:F3}-{UpperOffset:F3} m/z)";
             }
         }
 
@@ -667,6 +755,15 @@ namespace PSI_Interface.MSData
             {
                 LowerLimit = lowerLimit;
                 UpperLimit = upperLimit;
+            }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"ScanWindow: {LowerLimit:F2}-{UpperLimit:F2} m/z";
             }
         }
 
@@ -746,6 +843,15 @@ namespace PSI_Interface.MSData
                 Precursor = precursor;
                 Product = product;
             }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"Chromatogram {Index}: {Id}, {Peaks.Length} peaks";
+            }
         }
 
         /// <summary>
@@ -772,6 +878,15 @@ namespace PSI_Interface.MSData
             {
                 Time = time;
                 Intensity = intensity;
+            }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"{Time:F4}: {Intensity:F2}";
             }
         }
 
