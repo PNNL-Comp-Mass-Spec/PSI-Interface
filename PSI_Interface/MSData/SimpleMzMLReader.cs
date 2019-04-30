@@ -22,7 +22,7 @@ namespace PSI_Interface.MSData
         private bool _reduceMemoryUsage;
         private long _artificialScanNum = 1;
         private long _numSpectra = -1;
-        private readonly IndexList _spectrumOffsets = new IndexList() {IndexType = IndexList.IndexListType.Spectrum};
+        private readonly IndexList _spectrumOffsets = new IndexList() { IndexType = IndexList.IndexListType.Spectrum };
         private readonly IndexList _chromatogramOffsets = new IndexList() { IndexType = IndexList.IndexListType.Chromatogram };
         private long _indexListOffset;
         private bool _haveIndex;
@@ -2280,7 +2280,7 @@ namespace PSI_Interface.MSData
                 }
                 return;
             }
-            reader.ReadStartElement("spectrumList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
+            reader.ReadStartElement("spectrumList"); // Throws exception if we are not at the "spectrumList" tag.
             if (_reduceMemoryUsage)
             {
                 // Kill the read, we are at the first spectrum
@@ -2321,10 +2321,10 @@ namespace PSI_Interface.MSData
         private void ReadChromatogramList(XmlReader reader)
         {
             reader.MoveToContent();
-            _numSpectra = Convert.ToInt64(reader.GetAttribute("count"));
+            _numChromatograms = Convert.ToInt64(reader.GetAttribute("count"));
             if (_randomAccess)
             {
-                // randomAccess: We only read to this point for the count of spectra.
+                // randomAccess: We only read to this point for the count of chromatograms.
                 // We only want to read for offsets if we weren't able to get valid offsets from an index
                 //reader.Dispose(); // Closing can be slow for a subtree...
                 if (!_haveIndex)
@@ -2333,12 +2333,12 @@ namespace PSI_Interface.MSData
                 }
                 return;
             }
-            reader.ReadStartElement("chromatogramList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
+            reader.ReadStartElement("chromatogramList"); // Throws exception if we are not at the "chromatogramList" tag.
             if (_reduceMemoryUsage)
             {
-                // Kill the read, we are at the first spectrum
+                // Kill the read, we are at the first chromatogram
                 _xmlReaderForYield = reader;
-                // If in the "ReadAllSpectra" call stack, we don't want the reader closed - we still need the subtree
+                // If in the "ReadAllChromatograms" call stack, we don't want the reader closed - we still need the subtree
                 return;
             }
             while (reader.ReadState == ReadState.Interactive)
@@ -3292,15 +3292,15 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
-        /// Handle a single precursor element and child nodes
-        /// Called by ReadPrecursorList (xml hierarchy)
+        /// Handle a single product element and child nodes
+        /// Called by ReadChromatogram or (not implemented) ReadProductList (xml hierarchy)
         /// </summary>
-        /// <param name="reader">XmlReader that is only valid for the scope of the single precursor element</param>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single product element</param>
         /// <returns></returns>
         private IsolationWindow ReadProduct(XmlReader reader)
         {
             reader.MoveToContent();
-            reader.ReadStartElement("precursor"); // Throws exception if we are not at the "precursor" tag.
+            reader.ReadStartElement("product"); // Throws exception if we are not at the "product" tag.
             var isolationWindow = new IsolationWindow();
             while (reader.ReadState == ReadState.Interactive)
             {
