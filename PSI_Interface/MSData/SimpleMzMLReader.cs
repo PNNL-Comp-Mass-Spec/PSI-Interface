@@ -42,6 +42,11 @@ namespace PSI_Interface.MSData
         private readonly List<SimpleSpectrum> _spectra = new List<SimpleSpectrum>();
         private readonly List<SimpleChromatogram> _chromatograms = new List<SimpleChromatogram>();
         private CVTranslator cvTranslator = new CVTranslator();
+        private readonly ParamData sourceFileParams = new ParamData();
+        private readonly List<KeyValuePair<string, ParamData>> software = new List<KeyValuePair<string, ParamData>>(2);
+        private readonly List<InstrumentData> instrumentParams = new List<InstrumentData>(2);
+        private string startTimeStampString;
+        private DateTime startTimeStamp = DateTime.MinValue;
         #endregion
 
         #region Internal Objects
@@ -216,6 +221,73 @@ namespace PSI_Interface.MSData
         #region Public Interface Objects
 
         /// <summary>
+        /// Container for holding instrument data (like model and components)
+        /// </summary>
+        public class InstrumentData : ParamData
+        {
+            private readonly List<ComponentInfo> componentData = new List<ComponentInfo>();
+            /// <summary>
+            /// Information about the components in the instrument.
+            /// </summary>
+            public IReadOnlyList<ComponentInfo> ComponentData => componentData;
+
+            /// <summary>
+            /// Add a component item to the list of components
+            /// </summary>
+            /// <param name="component"></param>
+            public void AddComponent(ComponentInfo component)
+            {
+                componentData.Add(component);
+            }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"Config: {ComponentData.Count} components";
+            }
+        }
+
+        /// <summary>
+        /// Information about an instrument component
+        /// </summary>
+        public class ComponentInfo : ParamData
+        {
+            /// <summary>
+            /// Order in which this component occurs, from source to detector
+            /// </summary>
+            public int Order { get; }
+
+            /// <summary>
+            /// Type of component. One of: 'source', 'analyzer', 'detector'
+            /// </summary>
+            public string Type { get; }
+
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="order"></param>
+            /// <param name="type"></param>
+            /// <param name="cParams"></param>
+            public ComponentInfo(int order, string type, ParamData cParams) : base(cParams.CVParams, cParams.UserParams)
+            {
+                Order = order;
+                Type = type;
+            }
+
+            /// <summary>
+            /// ToString override
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return $"Component {Order}: {Type}";
+            }
+        }
+
+        /// <summary>
         /// Container for a CVParam
         /// </summary>
         public class CVParamData
@@ -370,6 +442,16 @@ namespace PSI_Interface.MSData
             public void AddParams(IEnumerable<UserParamData> userParamsToAdd)
             {
                 userParams.AddRange(userParamsToAdd);
+            }
+
+            /// <summary>
+            /// Add all params from another ParamData object
+            /// </summary>
+            /// <param name="other"></param>
+            public void AddParams(ParamData other)
+            {
+                cvParams.AddRange(other.CVParams);
+                userParams.AddRange(other.UserParams);
             }
 
             /// <summary>
@@ -967,9 +1049,119 @@ namespace PSI_Interface.MSData
                 _fileReader.BaseStream.Position = 0;
             }
         }
+
+        private void ReadMetaDataAndReset()
+        {
+            if (_haveMetaData)
+            {
+                return;
+            }
+
+            var tempBool = _reduceMemoryUsage; // Set a flag to avoid reading the entire file before returning.
+            _reduceMemoryUsage = true;
+            ReadMzMl(); // Read the index and metadata so that the offsets and metadata gets populated
+            _reduceMemoryUsage = tempBool;
+
+            if (!_randomAccess && !_reduceMemoryUsage)
+            {
+                if (_isGzipped)
+                {
+                    // can't reset the position on a gzipped file...
+                    // Reset the reader by reopening it
+                    ConfigureFileHandles();
+                }
+                else
+                {
+                    // Can reset by resetting the base reader
+                    _fileReader.DiscardBufferedData();
+                    _fileReader.BaseStream.Position = 0;
+                }
+            }
+        }
+
         #endregion
 
         #region Public interface functions
+
+        /// <summary>
+        /// Source file parameters, like NativeID format and source file format
+        /// </summary>
+        public ParamData SourceFileParams
+        {
+            get
+            {
+                if (!_haveMetaData)
+                {
+                    ReadMetaDataAndReset();
+                }
+
+                return sourceFileParams;
+            }
+        }
+
+        /// <summary>
+        /// Software used to create/process data in the mzML
+        /// </summary>
+        public List<KeyValuePair<string, ParamData>> Software
+        {
+            get
+            {
+                if (!_haveMetaData)
+                {
+                    ReadMetaDataAndReset();
+                }
+
+                return software;
+            }
+        }
+
+        /// <summary>
+        /// Instrument parameters, like Instrument model and serial number, and instrument configuration
+        /// </summary>
+        public IReadOnlyList<InstrumentData> InstrumentParams
+        {
+            get
+            {
+                if (!_haveMetaData)
+                {
+                    ReadMetaDataAndReset();
+                }
+
+                return instrumentParams;
+            }
+        }
+
+        /// <summary>
+        /// (If available) Start time of the run (string as contained in the mzML)
+        /// </summary>
+        public string StartTimeStampString
+        {
+            get
+            {
+                if (!_haveMetaData)
+                {
+                    ReadMetaDataAndReset();
+                }
+
+                return startTimeStampString;
+            }
+        }
+
+        /// <summary>
+        /// (If available) Start time of the run, or DateTime.MinValue
+        /// </summary>
+        public DateTime StartTimeStamp
+        {
+            get
+            {
+                if (!_haveMetaData)
+                {
+                    ReadMetaDataAndReset();
+                }
+
+                return startTimeStamp;
+            }
+        }
 
         /// <summary>
         /// The number of spectra in the file
@@ -980,11 +1172,7 @@ namespace PSI_Interface.MSData
             {
                 if (!_haveMetaData)
                 {
-                    var tempBool = _reduceMemoryUsage; // Set a flag to avoid reading the entire file before returning.
-                    _reduceMemoryUsage = true;
-                    ReadMzMl(); // Read the index and metadata so that the offsets get populated
-                    // The number of spectra is an attribute in the spectrumList tag
-                    _reduceMemoryUsage = tempBool;
+                    ReadMetaDataAndReset();
                 }
                 return (int)_numSpectra;
             }
@@ -999,11 +1187,7 @@ namespace PSI_Interface.MSData
             {
                 if (!_haveMetaData)
                 {
-                    var tempBool = _reduceMemoryUsage; // Set a flag to avoid reading the entire file before returning.
-                    _reduceMemoryUsage = true;
-                    ReadMzMl(); // Read the index and metadata so that the offsets get populated
-                    // The number of spectra is an attribute in the spectrumList tag
-                    _reduceMemoryUsage = tempBool;
+                    ReadMetaDataAndReset();
                 }
                 return (int)_numChromatograms;
             }
@@ -1914,7 +2098,15 @@ namespace PSI_Interface.MSData
                         break;
                     case "softwareList":
                         // Schema requirements: one instance of this element
-                        reader.Skip();
+                        if (!_randomAccess || (_randomAccess && !_haveMetaData))
+                        {
+                            ReadSoftwareList(reader.ReadSubtree());
+                            reader.ReadEndElement(); // "softwareList" must have child nodes
+                        }
+                        else
+                        {
+                            reader.Skip();
+                        }
                         break;
                     case "scanSettingsList":
                         // Schema requirements: zero to one instances of this element
@@ -1922,7 +2114,15 @@ namespace PSI_Interface.MSData
                         break;
                     case "instrumentConfigurationList":
                         // Schema requirements: one instance of this element
-                        reader.Skip();
+                        if (!_randomAccess || (_randomAccess && !_haveMetaData))
+                        {
+                            ReadInstrumentConfigurationList(reader.ReadSubtree());
+                            reader.ReadEndElement(); // "instrumentConfigurationList" must have child nodes
+                        }
+                        else
+                        {
+                            reader.Skip();
+                        }
                         break;
                     case "dataProcessingList":
                         // Schema requirements: one instance of this element
@@ -2072,7 +2272,9 @@ namespace PSI_Interface.MSData
                 {
                     case "fileContent":
                         // Schema requirements: one instance of this element
-                        reader.Skip();
+                        var pd = ReadParamContainer(reader.ReadSubtree(), "fileContent");
+                        sourceFileParams.AddParams(pd);
+                        reader.Read(); // "fileContent" might not have child nodes
                         break;
                     case "sourceFileList":
                         // Schema requirements: zero to one instances of this element
@@ -2089,6 +2291,56 @@ namespace PSI_Interface.MSData
                 }
             }
             reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle a single element with child nodes that can only be referenceableParamGroupRef, cvParam, or userParam, and no attributes
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single element</param>
+        /// <param name="expectedStartElement">Name of the element that should be read</param>
+        private ParamData ReadParamContainer(XmlReader reader, string expectedStartElement)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement(expectedStartElement); // Throws exception if we are not at the "expectedStartElement" tag.
+            var pd = new ParamData();
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "referenceableParamGroupRef":
+                        // Schema requirements: zero to many instances of this element
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            pd.AddParams(paramGroup.CVParams);
+                            pd.AddParams(paramGroup.UserParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
+                        break;
+                    case "cvParam":
+                        // Schema requirements: zero to many instances of this element
+                        pd.AddParam(ReadCvParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    case "userParam":
+                        // Schema requirements: zero to many instances of this element
+                        pd.AddParam(ReadUserParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the userParam element (no child nodes)
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+            return pd;
         }
 
         /// <summary>
@@ -2133,6 +2385,7 @@ namespace PSI_Interface.MSData
                                     _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                                 {
                                     cvParams.AddRange(paramGroup.CVParams);
+                                    sourceFileParams.AddParams(paramGroup.UserParams);
                                 }
                                 innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                 break;
@@ -2143,6 +2396,7 @@ namespace PSI_Interface.MSData
                                 break;
                             case "userParam":
                                 // Schema requirements: zero to many instances of this element
+                                sourceFileParams.AddParam(ReadUserParam(innerReader.ReadSubtree()));
                                 innerReader.Skip();
                                 break;
                             default:
@@ -2153,6 +2407,7 @@ namespace PSI_Interface.MSData
                     innerReader.Dispose();
                     reader.Read();
 
+                    sourceFileParams.AddParams(cvParams);
                     foreach (var cvParam in cvParams)
                     {
                         /* MUST supply a *child* term of MS:1000767 (native spectrum identifier format) only once
@@ -2320,43 +2575,176 @@ namespace PSI_Interface.MSData
                 {
                     // Schema requirements: one to many instances of this element
                     var id = reader.GetAttribute("id");
-                    var paramGroup = new ParamData();
-                    var innerReader = reader.ReadSubtree();
-                    innerReader.MoveToContent();
-                    innerReader.ReadStartElement("referenceableParamGroup"); // Throws exception if we are not at the "sourceFile" tag.
-                    while (innerReader.ReadState == ReadState.Interactive)
-                    {
-                        // Handle exiting out properly at EndElement tags
-                        if (innerReader.NodeType != XmlNodeType.Element)
-                        {
-                            innerReader.Read();
-                            continue;
-                        }
-                        switch (innerReader.Name)
-                        {
-                            case "cvParam":
-                                // Schema requirements: zero to many instances of this element
-                                paramGroup.AddParam(ReadCvParam(innerReader.ReadSubtree()));
-                                innerReader.Read(); // Consume the cvParam element (no child nodes)
-                                break;
-                            case "userParam":
-                                // Schema requirements: zero to many instances of this element
-                                paramGroup.AddParam(ReadUserParam(innerReader.ReadSubtree()));
-                                innerReader.Read(); // Consume the userParam element (no child nodes)
-                                break;
-                            default:
-                                innerReader.Skip();
-                                break;
-                        }
-                    }
-                    innerReader.Dispose();
-                    reader.Read();
+                    var paramData = ReadParamContainer(reader.ReadSubtree(), "referenceableParamGroup");
+                    reader.Read(); // No child nodes required in schema, but generally will read the end element because otherwise a 'referenceableParamGroup' is pointless
                     if (id != null)
-                        _referenceableParamGroups.Add(id, paramGroup);
+                        _referenceableParamGroups.Add(id, paramData);
                 }
                 else
                 {
                     reader.Read();
+                }
+            }
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle the child nodes of the softwareList element
+        /// Called by ReadMzML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single softwareList element</param>
+        private void ReadSoftwareList(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("softwareList"); // Throws exception if we are not at the "softwareList" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+
+                if (reader.Name.Equals("software"))
+                {
+                    var id = reader.GetAttribute("id"); // often a name
+                    var version = reader.GetAttribute("version"); // the software version
+                    var pd = ReadParamContainer(reader.ReadSubtree(), "software");
+                    software.Add(new KeyValuePair<string, ParamData>($"{id} version {version}", pd));
+                    reader.Read(); // can possibly not have any child nodes, usually will consume the end element
+                }
+                else
+                {
+                    reader.Skip();
+                }
+            }
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle the child nodes of the instrumentConfigurationList element
+        /// Called by ReadMzML (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single instrumentConfigurationList element</param>
+        private void ReadInstrumentConfigurationList(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("instrumentConfigurationList"); // Throws exception if we are not at the "instrumentConfigurationList" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                if (reader.Name.Equals("instrumentConfiguration"))
+                {
+                    var instData = ReadInstrumentConfiguration(reader.ReadSubtree());
+                    instrumentParams.Add(instData);
+                    reader.Read(); // can possibly not have any child nodes, usually will consume the end element
+                }
+                else
+                {
+                    reader.Skip();
+                }
+            }
+            reader.Dispose();
+        }
+
+        /// <summary>
+        /// Handle the child nodes of the instrumentConfiguration element
+        /// Called by ReadInstrumentConfigurationList (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single instrumentConfiguration element</param>
+        private InstrumentData ReadInstrumentConfiguration(XmlReader reader)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("instrumentConfiguration"); // Throws exception if we are not at the "instrumentConfiguration" tag.
+            var instData = new InstrumentData();
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "referenceableParamGroupRef":
+                        // Schema requirements: zero to many instances of this element
+                        var reference = reader.GetAttribute("ref");
+                        if (!string.IsNullOrWhiteSpace(reference) &&
+                            _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
+                        {
+                            instData.AddParams(paramGroup.CVParams);
+                            instData.AddParams(paramGroup.UserParams);
+                        }
+                        reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
+                        break;
+                    case "cvParam":
+                        // Schema requirements: zero to many instances of this element
+                        instData.AddParam(ReadCvParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the cvParam element (no child nodes)
+                        break;
+                    case "userParam":
+                        // Schema requirements: zero to many instances of this element
+                        instData.AddParam(ReadUserParam(reader.ReadSubtree()));
+                        reader.Read(); // Consume the userParam element (no child nodes)
+                        break;
+                    case "componentList":
+                        // Schema requirements: zero to one instance of this element
+                        ReadComponentList(reader.ReadSubtree(), instData);
+                        reader.ReadEndElement(); // Consume the componentList end element
+                        break;
+                    case "softwareRef":
+                        // Schema requirements: zero to one instance of this element
+                        reader.Skip();
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
+                }
+            }
+            reader.Dispose();
+            return instData;
+        }
+
+        /// <summary>
+        /// Handle the child nodes of the componentList element
+        /// Called by ReadInstrumentConfiguration (xml hierarchy)
+        /// </summary>
+        /// <param name="reader">XmlReader that is only valid for the scope of the single componentList element</param>
+        /// <param name="instData"></param>
+        private void ReadComponentList(XmlReader reader, InstrumentData instData)
+        {
+            reader.MoveToContent();
+            reader.ReadStartElement("componentList"); // Throws exception if we are not at the "componentList" tag.
+            while (reader.ReadState == ReadState.Interactive)
+            {
+                // Handle exiting out properly at EndElement tags
+                if (reader.NodeType != XmlNodeType.Element)
+                {
+                    reader.Read();
+                    continue;
+                }
+                switch (reader.Name)
+                {
+                    case "source":
+                    case "analyzer":
+                    case "detector":
+                        // Schema requirements: one to many instance of this element
+                        var order = Convert.ToInt32(reader.GetAttribute("order"));
+                        var name = reader.Name;
+                        var pd = ReadParamContainer(reader.ReadSubtree(), name);
+                        instData.AddComponent(new ComponentInfo(order, name, pd));
+                        reader.Read(); // Consume the end element
+                        break;
+                    default:
+                        reader.Skip();
+                        break;
                 }
             }
             reader.Dispose();
@@ -2438,6 +2826,12 @@ namespace PSI_Interface.MSData
         private void ReadRunData(XmlReader reader)
         {
             reader.MoveToContent();
+            startTimeStampString = reader.GetAttribute("startTimeStamp") ?? "";
+            if (DateTime.TryParse(startTimeStampString, out var dateTime))
+            {
+                startTimeStamp = dateTime;
+            }
+
             reader.ReadStartElement("run"); // Throws exception if we are not at the "run" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
