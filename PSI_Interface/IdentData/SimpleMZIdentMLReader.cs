@@ -1812,11 +1812,19 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
+
+            bool shouldParseNativeId = !isSpectrumIdNotAScanNum;
+            if (!shouldParseNativeId && scanNum < 0 && !string.IsNullOrWhiteSpace(nativeId) && NativeIdConversion.TryGetScanNumberInt(nativeId, out _))
+            {
+                shouldParseNativeId = true;
+            }
+
             foreach (var item in specRes)
             {
                 item.ScanNum = scanNum;
                 item.NativeId = nativeId;
                 item.ScanTimeMinutes = scanTimeMinutes;
+                item.IsSpectrumIdNotTheScanNumber = !shouldParseNativeId;
                 yield return item;
             }
             reader.Dispose();

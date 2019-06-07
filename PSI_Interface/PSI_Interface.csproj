@@ -6,7 +6,7 @@
     <AssemblyName>PSI_Interface</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>PSI_Interface</PackageId>
-    <Version>2.2.0</Version>
+    <Version>2.2.1</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <Description>Set of classes for reading and writing mzML and mzIdentML files, with classes that allow full access to all features of the formats, and classes designed to quickly read both formats.</Description>
