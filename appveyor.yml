@@ -13,7 +13,7 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: J2eVYVwYP1X927saxPMbXet/JpK0XEg0AAONlFwNSxV2bvEWlrcVMchspTxKK/AK
+    secure: kKfN1EBxjLIzLk5O0DiX9FGIFAJrf9uez0JH3hytS8q4js957dAJFi0jHny3K+y3
   skip_symbols: true
 notifications:
 - provider: Email
