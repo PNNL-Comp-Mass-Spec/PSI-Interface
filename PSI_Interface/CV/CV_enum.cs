@@ -139,7 +139,7 @@ namespace PSI_Interface.CV
             /// <summary>Three-character symbol m/z is used to denote the quantity formed by dividing the mass of an ion in unified atomic mass units by its charge number (regardless of sign). The symbol is written in italicized lower case letters with no spaces. Note 1: The term mass-to-charge-ratio is deprecated. Mass-to-charge ratio has been used for the abscissa of a mass spectrum, although the quantity measured is not the quotient of the ion's mass to its electric charge. The three-character symbol m/z is recommended for the quantity that is the independent variable in a mass spectrum Note 2: The proposed unit thomson (Th) is deprecated.</summary>
             MS_m_z = 1000040,
 
-            /// <summary>The charge state of the ion, single or multiple and positive or negatively charged.</summary>
+            /// <summary>Number of net charges, positive or negative, on an ion.</summary>
             MS_charge_state = 1000041,
 
             /// <summary>Intensity of ions as measured by the height or area of a peak in a mass spectrum.</summary>
@@ -688,8 +688,8 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE The sum of the protons and neutrons in an atom, molecule or ion.</summary>
             MS_mass_number_OBSOLETE = 1000223,
 
-            /// <summary>OBSOLETE The mass of one mole of a molecular substance (6.022 1415(10) x 10^23 molecules).</summary>
-            MS_molecular_mass_OBSOLETE = 1000224,
+            /// <summary>Mass of a molecule measured in unified atomic mass units (u or Da).</summary>
+            MS_molecular_mass = 1000224,
 
             /// <summary>OBSOLETE The mass of an ion or molecule calculated using the mass of the most abundant isotope of each element.</summary>
             MS_monoisotopic_mass_OBSOLETE = 1000225,
@@ -721,7 +721,7 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE In a mass spectrum, the observed mass divided by the difference between two masses that can be separated. The method by which delta m was obtained and the mass at which the measurement was made should be reported.</summary>
             MS_mass_resolving_power_OBSOLETE = 1000234,
 
-            /// <summary>Chromatogram obtained by plotting the total ion current detected in each of a series of mass spectra recorded as a function of retention time.</summary>
+            /// <summary>Representation of the total ion current detected in each of a series of mass spectra versus time.</summary>
             MS_total_ion_current_chromatogram = 1000235,
 
             /// <summary>The ratio of the number of ions leaving a region of a mass spectrometer to the number entering that region.</summary>
@@ -1339,7 +1339,7 @@ namespace PSI_Interface.CV
             /// <summary>Function or process of the mass spectrometer where it records a spectrum.</summary>
             MS_scan = 1000441,
 
-            /// <summary>A mass spectrum is an intensity vs m/z (mass-to-charge ratio) plot representing a chemical analysis.</summary>
+            /// <summary>Representation of intensity values corresponding to a range of measurement space.</summary>
             MS_spectrum = 1000442,
 
             /// <summary>Mass analyzer separates the ions according to their mass-to-charge ratio.</summary>
@@ -1504,13 +1504,13 @@ namespace PSI_Interface.CV
             /// <summary>Instrument properties that are associated with a value.</summary>
             MS_instrument_attribute = 1000496,
 
-            /// <summary>Special scan mode, where data with improved resolution is acquired. This is typically achieved by scanning a more narrow m/z window or scanning with a lower scan rate.</summary>
+            /// <summary>Special scan mode where data with improved resolution is acquired. This is typically achieved by scanning a more narrow m/z window or scanning with a lower scan rate.</summary>
             MS_zoom_scan = 1000497,
 
             /// <summary>OBSOLETE Feature of the ion trap mass spectrometer where MS data is acquired over a mass range.</summary>
             MS_full_scan_OBSOLETE = 1000498,
 
-            /// <summary>Spectrum properties that are associated with a value.</summary>
+            /// <summary>Nonphysical characteristic attributed to a spectrum.</summary>
             MS_spectrum_attribute = 1000499,
 
             /// <summary>The lower m/z bound of a mass spectrometer scan window.</summary>
@@ -1522,7 +1522,7 @@ namespace PSI_Interface.CV
             /// <summary>The time spent gathering data across a peak.</summary>
             MS_dwell_time = 1000502,
 
-            /// <summary>Scan properties that are associated with a value.</summary>
+            /// <summary>Nonphysical characteristic attributed to a spectrum acquisition scan.</summary>
             MS_scan_attribute = 1000503,
 
             /// <summary>M/z value of the signal of highest intensity in the mass spectrum.</summary>
@@ -1534,8 +1534,8 @@ namespace PSI_Interface.CV
             /// <summary>OBSOLETE Ion Role.</summary>
             MS_ion_role_OBSOLETE = 1000506,
 
-            /// <summary>OBSOLETE Ion properties that are associated with a value.</summary>
-            MS_ion_attribute_OBSOLETE = 1000507,
+            /// <summary>Nonphysical characteristic attributed to an ion.</summary>
+            MS_ion_property = 1000507,
 
             /// <summary>OBSOLETE Ion Type.</summary>
             MS_ion_chemical_type_OBSOLETE = 1000508,
@@ -1546,7 +1546,7 @@ namespace PSI_Interface.CV
             /// <summary>Precursor Activation Attribute.</summary>
             MS_precursor_activation_attribute = 1000510,
 
-            /// <summary>Stages of ms achieved in a multi stage mass spectrometry experiment.</summary>
+            /// <summary>Stage number achieved in a multi stage mass spectrometry acquisition.</summary>
             MS_ms_level = 1000511,
 
             /// <summary>A string unique to Thermo instrument describing instrument settings for the scan.</summary>
@@ -1744,8 +1744,8 @@ namespace PSI_Interface.CV
             /// <summary>No Compression.</summary>
             MS_no_compression = 1000576,
 
-            /// <summary>Describes the type of file and its content.</summary>
-            MS_raw_data_file = 1000577,
+            /// <summary>Data file from which an entity is sourced.</summary>
+            MS_source_data_file = 1000577,
 
             /// <summary>LCQ Fleet.</summary>
             MS_LCQ_Fleet = 1000578,
@@ -1888,16 +1888,16 @@ namespace PSI_Interface.CV
             /// <summary>Inductive detector.</summary>
             MS_inductive_detector = 1000624,
 
-            /// <summary>The representation of detector response versus time.</summary>
+            /// <summary>Representation of a chromatographic separation attribute measurement versus time.</summary>
             MS_chromatogram = 1000625,
 
-            /// <summary>Broad category or type of a chromatogram.</summary>
+            /// <summary>Type of chromatogram measurement being represented.</summary>
             MS_chromatogram_type = 1000626,
 
-            /// <summary>Chromatogram created by creating an array of the measurements of a specific single ion current at each time point.</summary>
+            /// <summary>Representation of an array of the measurements of a specific single ion current versus time.</summary>
             MS_selected_ion_current_chromatogram = 1000627,
 
-            /// <summary>Chromatogram created by creating an array of the most intense peaks at each time point.</summary>
+            /// <summary>Representation of an array of the most intense peaks versus time.</summary>
             MS_basepeak_chromatogram = 1000628,
 
             /// <summary>Threshold below which some action is taken.</summary>
@@ -2398,7 +2398,7 @@ namespace PSI_Interface.CV
             /// <summary>Use this term if only one scan was recorded or there is no information about scans available.</summary>
             MS_no_combination = 1000795,
 
-            /// <summary>A free-form text title describing a spectrum.</summary>
+            /// <summary>Free-form text title describing a spectrum, usually a series of key value pairs as used in an MGF file.</summary>
             MS_spectrum_title = 1000796,
 
             /// <summary>A list of scan numbers and or scan ranges associated with a peak list. If possible the list of scans should be converted to native spectrum identifiers instead of using this term.</summary>
@@ -2440,16 +2440,16 @@ namespace PSI_Interface.CV
             /// <summary>A free-form text title describing a chromatogram.</summary>
             MS_chromatogram_title = 1000809,
 
-            /// <summary>A plot of the relative abundance of a beam or other collection of ions as a function of the retention time.</summary>
-            MS_mass_chromatogram = 1000810,
+            /// <summary>Representation of the current of ions versus time.</summary>
+            MS_ion_current_chromatogram = 1000810,
 
-            /// <summary>The measurement of electromagnetic properties as a function of the retention time.</summary>
+            /// <summary>Representation of electromagnetic properties versus time.</summary>
             MS_electromagnetic_radiation_chromatogram = 1000811,
 
-            /// <summary>The measurement of light absorbed by the sample as a function of the retention time.</summary>
+            /// <summary>Representation of light absorbed by the sample versus time.</summary>
             MS_absorption_chromatogram = 1000812,
 
-            /// <summary>The measurement of light emitted by the sample as a function of the retention time.</summary>
+            /// <summary>Representation of light emitted by the sample versus time.</summary>
             MS_emission_chromatogram = 1000813,
 
             /// <summary>The number of counted events observed per second in one or a group of elements of a detector.</summary>
@@ -2584,14 +2584,14 @@ namespace PSI_Interface.CV
             /// <summary>Identier string that describes the sample fraction. This identifier should contain the fraction number(s) or similar information.</summary>
             MS_fraction_identifier = 1000858,
 
-            /// <summary>A molecules is a fundamental component of a chemical compound that is the smallest part of the compound that can participate in a chemical reaction.</summary>
+            /// <summary>Group of two or more atoms held together by chemical bonds.</summary>
             MS_molecule = 1000859,
 
-            /// <summary>A compound of low molecular weight that is composed of two or more amino acids.</summary>
+            /// <summary>A molecule of low molecular weight that is composed of two or more amino acid residues.</summary>
             MS_peptide = 1000860,
 
-            /// <summary>A describable property of a chemical compound.</summary>
-            MS_chemical_compound_attribute = 1000861,
+            /// <summary>A physical characteristic of a molecular entity.</summary>
+            MS_molecular_entity_property = 1000861,
 
             /// <summary>The pH of a solution at which a charged molecule does not migrate in an electric field.</summary>
             MS_isoelectric_point = 1000862,
@@ -2599,8 +2599,8 @@ namespace PSI_Interface.CV
             /// <summary>The pH of a solution at which a charged molecule would not migrate in an electric field, as predicted by a software algorithm.</summary>
             MS_predicted_isoelectric_point = 1000863,
 
-            /// <summary>A combination of symbols used to express the chemical composition of a compound.</summary>
-            MS_chemical_compound_formula = 1000864,
+            /// <summary>A combination of symbols used to express the chemical composition of a molecule.</summary>
+            MS_chemical_formula = 1000864,
 
             /// <summary>A chemical formula which expresses the proportions of the elements present in a substance.</summary>
             MS_empirical_formula = 1000865,
@@ -2612,7 +2612,7 @@ namespace PSI_Interface.CV
             MS_structural_formula = 1000867,
 
             /// <summary>The simplified molecular input line entry specification or SMILES is a specification for unambiguously describing the structure of a chemical compound using a short ASCII string.</summary>
-            MS_SMILES_string = 1000868,
+            MS_SMILES_formula = 1000868,
 
             /// <summary>The gas pressure of the collision gas used for collisional excitation.</summary>
             MS_collision_gas_pressure = 1000869,
@@ -2650,44 +2650,44 @@ namespace PSI_Interface.CV
             /// <summary>The duration of intervals between scanning, during which the instrument configuration is switched.</summary>
             MS_interchannel_delay = 1000880,
 
-            /// <summary>A substance formed by chemical union of two or more elements or ingredients in definite proportion by weight.</summary>
-            MS_chemical_compound = 1000881,
+            /// <summary>Constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer, etc., identifiable as a separately distinguishable entity.</summary>
+            MS_molecular_entity = 1000881,
 
-            /// <summary>A compound composed of one or more chains of amino acids in a specific order determined by the base sequence of nucleotides in the DNA coding for the protein.</summary>
+            /// <summary>A compound composed of one or more chains of amino acids in a specific order determined by the base sequence of nucleotides in the DNA of a gene.</summary>
             MS_protein = 1000882,
 
             /// <summary>A short name or symbol of a protein (e.g., HSF 1 or HSF1_HUMAN).</summary>
             MS_protein_short_name = 1000883,
 
-            /// <summary>An nonphysical attribute describing a specific protein.</summary>
+            /// <summary>An nonphysical characterstic attributed to a specific protein.</summary>
             MS_protein_attribute = 1000884,
 
-            /// <summary>Accession number for a specific protein in a database.</summary>
+            /// <summary>Identifier for a specific protein in a database.</summary>
             MS_protein_accession = 1000885,
 
             /// <summary>A long name describing the function of the protein.</summary>
             MS_protein_name = 1000886,
 
-            /// <summary>A nonphysical attribute that can be used to describe a peptide.</summary>
+            /// <summary>Nonphysical characteristic attributed to a peptide.</summary>
             MS_peptide_attribute = 1000887,
 
-            /// <summary>A sequence of letter symbols denoting the order of amino acids that compose the peptide, without encoding any amino acid mass modifications that might be present.</summary>
-            MS_unmodified_peptide_sequence = 1000888,
+            /// <summary>Sequence of letter symbols denoting the order of amino acids that compose the peptide, with any amino acid mass modifications that might be present having been stripped away.</summary>
+            MS_stripped_peptide_sequence = 1000888,
 
-            /// <summary>A sequence of letter symbols denoting the order of amino acids that compose the peptide plus the encoding any amino acid modifications that are present.</summary>
-            MS_modified_peptide_sequence = 1000889,
+            /// <summary>Sequence of letter symbols denoting the order of amino acid residues that compose the peptidoform including the encoding of any residue modifications that are present.</summary>
+            MS_peptidoform_sequence = 1000889,
 
             /// <summary>A state description of how a peptide might be isotopically or isobarically labelled.</summary>
-            MS_peptide_labeling_state = 1000890,
+            MS_peptidoform_labeling_state = 1000890,
 
             /// <summary>A peptide that has been created or labelled with some heavier-than-usual isotopes.</summary>
-            MS_heavy_labeled_peptide = 1000891,
+            MS_heavy_labeled_peptidoform = 1000891,
 
             /// <summary>A peptide that has not been labelled with heavier-than-usual isotopes. This is often referred to as \ light\  to distinguish from \ heavy\ .</summary>
-            MS_unlabeled_peptide = 1000892,
+            MS_unlabeled_peptidoform = 1000892,
 
             /// <summary>An arbitrary string label used to mark a set of peptides that belong together in a set, whereby the members are differentiated by different isotopic labels. For example, the heavy and light forms of the same peptide will both be assigned the same peptide group label.</summary>
-            MS_peptide_group_label = 1000893,
+            MS_peptidoform_group_label = 1000893,
 
             /// <summary>A time interval from the start of chromatography when an analyte exits a chromatographic column.</summary>
             MS_retention_time = 1000894,
@@ -3094,10 +3094,10 @@ namespace PSI_Interface.CV
             /// <summary>Description not provided</summary>
             MS_SEQUEST_Full = 1001111,
 
-            /// <summary>The residue preceding the first amino acid in the peptide sequence as it occurs in the protein. Use 'N-term' to denote if the peptide starts at the N terminus of the protein.</summary>
+            /// <summary>Residue preceding the first amino acid in the peptide sequence as it occurs in the protein. Use 'N-term' to denote if the peptide starts at the N terminus of the protein.</summary>
             MS_n_terminal_flanking_residue = 1001112,
 
-            /// <summary>The residue following the last amino acid in the peptide sequence as it occurs in the protein. Use 'C-term' to denote if the peptide ends at the C terminus of the protein.</summary>
+            /// <summary>Residue following the last amino acid in the peptide sequence as it occurs in the protein. Use 'C-term' to denote if the peptide ends at the C terminus of the protein.</summary>
             MS_c_terminal_flanking_residue = 1001113,
 
             /// <summary>OBSOLETE Retention time of the spectrum from the source file.</summary>
@@ -4096,13 +4096,13 @@ namespace PSI_Interface.CV
             /// <summary>The children of this term can be used to describe modifications.</summary>
             MS_peptide_modification_details = 1001471,
 
-            /// <summary>Chromatogram created by creating an array of the measurements of a selectively monitored ion at each time point.</summary>
+            /// <summary>Representation of an array of the measurements of a selectively monitored ion versus time.</summary>
             MS_selected_ion_monitoring_chromatogram = 1001472,
 
-            /// <summary>Chromatogram created by creating an array of the measurements of a selectively monitored reaction at each time point.</summary>
+            /// <summary>Representation of an array of the measurements of a selectively monitored reaction versus time.</summary>
             MS_selected_reaction_monitoring_chromatogram = 1001473,
 
-            /// <summary>OBSOLETE Chromatogram created by creating an array of the measurements of a series of monitored reactions at each time point.</summary>
+            /// <summary>OBSOLETE Representation of an array of the measurements of a series of monitored reactions versus time.</summary>
             MS_consecutive_reaction_monitoring_chromatogram_OBSOLETE = 1001474,
 
             /// <summary>Open Mass Spectrometry Search Algorithm was used to analyze the spectra.</summary>
@@ -8044,7 +8044,7 @@ namespace PSI_Interface.CV
             /// <summary>The 8800 Quadrupole ICP-MS system is a Agilent inductively couple plasma instrument combined with a Agilent quadrupole mass spectrometer.</summary>
             MS_8800_Triple_Quadrupole_ICP_MS = 1002805,
 
-            /// <summary>An atomic or molecular species having a net positive or negative electric charge.</summary>
+            /// <summary>Molecular entity having a net positive or negative electric charge.</summary>
             MS_ion = 1002806,
 
             /// <summary>Adduct ion with positive ionization.</summary>
@@ -8053,11 +8053,11 @@ namespace PSI_Interface.CV
             /// <summary>Adduct ion with negative ionization.</summary>
             MS_negative_mode_adduct_ion = 1002808,
 
-            /// <summary>Attribute describing an adduct formation.</summary>
+            /// <summary>Nonphysical characteristic attributed to an adduct ion.</summary>
             MS_adduct_ion_attribute = 1002809,
 
-            /// <summary>Mass of an adduct formation specified by the given value.</summary>
-            MS_adduct_ion_mass = 1002810,
+            /// <summary>Theoretical m/z of the X component in the adduct M+X or M-X. This term was formerly called 'adduct ion mass', but it is not really a mass. It corresponds to the column mislabelled as 'mass' at https://fiehnlab.ucdavis.edu/staff/kind/Metabolomics/MS-Adduct-Calculator.</summary>
+            MS_adduct_ion_X_m_z = 1002810,
 
             /// <summary>Isotope of the matrix molecule M of an adduct formation.</summary>
             MS_adduct_ion_isotope = 1002811,
@@ -8065,7 +8065,7 @@ namespace PSI_Interface.CV
             /// <summary>(\</summary>
             MS_Regular_expression_for_adduct_ion_formula = 1002812,
 
-            /// <summary>Adduct formation formula specified by the given value.</summary>
+            /// <summary>Adduct formation formula of the form M+X or M-X, as constrained by the provided regular expression.</summary>
             MS_adduct_ion_formula = 1002813,
 
             /// <summary>An electrical mobility unit that equals the speed</summary>
@@ -8086,10 +8086,10 @@ namespace PSI_Interface.CV
             /// <summary>Bruker TDF comma separated list of spectra that have been combined prior to searching or interpretation.</summary>
             MS_Bruker_TDF_nativeID_format__combined_spectra = 1002819,
 
-            /// <summary>M+H ion from positive ion mode (M in the property ionMass denotes the mass of the neutral molecule).</summary>
+            /// <summary>Adduct formed by protonation of a matrix molecule M, i.e. the addition of a matrix molecule M plus a proton.</summary>
             MS_M_H_ion = 1002820,
 
-            /// <summary>M-H ion from negative ion mode (M in the property ionMass denotes the mass of the neutral molecule).</summary>
+            /// <summary>Adduct formed by deprotonation of a matrix molecule M, i.e. the removal of a proton from a matrix molecule M.</summary>
             MS_M_H_ion1 = 1002821,
 
             /// <summary>File format developed by the OpenMS team.</summary>
@@ -8194,10 +8194,10 @@ namespace PSI_Interface.CV
             /// <summary>Dataset that has not been peer-reviewed by any means.</summary>
             MS_Non_peer_reviewed_dataset = 1002855,
 
-            /// <summary>The PX dataset is supported by and is available through the submission repository.</summary>
+            /// <summary>Dataset for which the identifications and/or spectra/traces are in formats that can be parsed by the hosting data repository such that internal references between identifications and spectra/traces are preserved and browsable at the repository. This is usually called a complete submission.</summary>
             MS_Supported_dataset_by_repository = 1002856,
 
-            /// <summary>The PX dataset is not fully supported by the submission repository.</summary>
+            /// <summary>Dataset for which the identifications and/or spectra/traces are in formats that cannot be parsed by the hosting data repository and thus internal references between identifications and spectra/traces are not browsable at the repository. This is usually called a partial submission.</summary>
             MS_Unsupported_dataset_by_repository = 1002857,
 
             /// <summary>A dataset which has an associated manuscript pending for publication.</summary>
@@ -8662,7 +8662,7 @@ namespace PSI_Interface.CV
             /// <summary>A database search-based peptide identification tool.</summary>
             MS_MSFragger = 1003014,
 
-            /// <summary>A peptide which is shared between protein groups and assigned to the protein group with the largest number of identified peptides.</summary>
+            /// <summary>Peptide that is shared between protein groups and assigned to the protein group with the largest number of identified peptides.</summary>
             MS_razor_peptide = 1003015,
 
             /// <summary>Fraction of peptide evidence attributable to a protein or a set of indistinguishable proteins.</summary>
@@ -8673,6 +8673,222 @@ namespace PSI_Interface.CV
 
             /// <summary>General proteomics processing toolkit for shotgun proteomics.</summary>
             MS_Philosopher = 1003018,
+
+            /// <summary>Representation of chromatographic pressure versus time.</summary>
+            MS_pressure_chromatogram = 1003019,
+
+            /// <summary>Representation of the chromatographic flow rate versus time.</summary>
+            MS_flow_rate_chromatogram = 1003020,
+
+            /// <summary>Post-translational modification which is assumed to be present at each instance of a residue type.</summary>
+            MS_Fixed_modification = 1003021,
+
+            /// <summary>Post-translational modification which may or may not be present at a residue type.</summary>
+            MS_Variable_modification = 1003022,
+
+            /// <summary>Cross-Linking MS search engine.</summary>
+            MS_OpenPepXL = 1003023,
+
+            /// <summary>The OpenPepXL score for a cross-link spectrum match.</summary>
+            MS_OpenPepXL_score = 1003024,
+
+            /// <summary>A named element that is an attribute in a proteomics standards file.</summary>
+            MS_named_element = 1003025,
+
+            /// <summary>A named element that is an attribute in a mzIdentML file.</summary>
+            MS_named_element_in_mzIdentML = 1003026,
+
+            /// <summary>A named element that is an attribute in a mzML file.</summary>
+            MS_named_element_in_mzML = 1003027,
+
+            /// <summary>Thermo Scientific Orbitrap Exploris 480 Quadrupole Orbitrap MS.</summary>
+            MS_Orbitrap_Exploris_480 = 1003028,
+
+            /// <summary>Thermo Scientific Orbitrap Eclipse mass spectrometer with Tribrid architecture consisting of quadrupole mass filter, linear ion trap and Orbitrap mass analyzers.</summary>
+            MS_Orbitrap_Eclipse = 1003029,
+
+            /// <summary>Minimum number of significant unique sequences required in a protein hit. The setting is only relevant if the protein grouping strategy is 'family clustering'.</summary>
+            MS_Mascot_MinNumSigUniqueSeqs = 1003030,
+
+            /// <summary>Main identifier of a CPTAC dataset.</summary>
+            MS_CPTAC_accession_number = 1003031,
+
+            /// <summary>The confidence code to describe the confidence of annotated compounds as defined by the MS-DIAL program.</summary>
+            MS_compound_identification_confidence_code_in_MS_DIAL = 1003032,
+
+            /// <summary>Non-inherent characteristic attributed to a molecular entity.</summary>
+            MS_molecular_entity_attribute = 1003033,
+
+            /// <summary>Smallest constituent unit of ordinary matter that constitutes a chemical element.</summary>
+            MS_atom = 1003034,
+
+            /// <summary>Low molecular weight (&lt; 900 daltons) organic compound that may regulate a biological process.</summary>
+            MS_small_molecule = 1003035,
+
+            /// <summary>Small molecule that is the intermediate end product of metabolism.</summary>
+            MS_metabolite = 1003036,
+
+            /// <summary>Nucleotide containing ribose as its pentose component.</summary>
+            MS_ribonucleotide = 1003037,
+
+            /// <summary>Monomer, or single unit, of DNA, or deoxyribonucleic acid.</summary>
+            MS_deoxyribonucleotide = 1003038,
+
+            /// <summary>Organic molecule that contains amine (-NH2) and carboxyl (-COOH) functional groups, along with a side chain (R group) that is specific to each amino acid.</summary>
+            MS_amino_acid = 1003039,
+
+            /// <summary>Simplest form of sugar and the most basic units of carbohydrate that cannot be further hydrolyzed to a simpler molecule.</summary>
+            MS_monosaccharide = 1003040,
+
+            /// <summary>Molecule composed of a chain of nucleotides.</summary>
+            MS_nucleic_acid = 1003041,
+
+            /// <summary>Polymeric carbohydrate molecules composed of long chains of monosaccharide units bound together by glycosidic linkages.</summary>
+            MS_polysaccharide = 1003042,
+
+            /// <summary>Number of amino acid residues in a peptide, commonly referred to as the peptide length.</summary>
+            MS_number_of_residues = 1003043,
+
+            /// <summary>Number of amino acid residue bonds that should have been cleaved by the cleavage agent used, but were not.</summary>
+            MS_number_of_missed_cleavages = 1003044,
+
+            /// <summary>Process of mapping a peptide sequence to a protein sequence.</summary>
+            MS_peptide_to_protein_mapping = 1003045,
+
+            /// <summary>Nonphysical characteristic attributed to the result of peptide-to-protein mapping.</summary>
+            MS_peptide_to_protein_mapping_attribute = 1003046,
+
+            /// <summary>Offset in number of residues from the n terminus of the protein at which the peptide begins. Use 1 when the first residue of the peptide sequence is the first residue of the protein sequence.</summary>
+            MS_protein_sequence_offset = 1003047,
+
+            /// <summary>Total number of termini that match standard rules for the cleavage agent, 2 when both termini match cleavage agent rules, 1 when only one terminus does, and 0 if neither terminus matches cleavage agent rules.</summary>
+            MS_number_of_enzymatic_termini = 1003048,
+
+            /// <summary>Peptide that contains zero or more mass modifications on the termini or side chains of its amino acid residues, and may be differentiated from other peptidoforms with the same peptide sequence but different mass modification configurations.</summary>
+            MS_peptidoform = 1003049,
+
+            /// <summary>Non-inherent characteristic attributed to a peptidoform.</summary>
+            MS_peptidoform_attribute = 1003050,
+
+            /// <summary>Peptidoform that has formed an adduct with an ion, thereby rendering it potentially detectable with a mass spectrometer. Commonly called a 'precursor' or 'precursor ion' or 'parent ion'.</summary>
+            MS_peptidoform_ion = 1003051,
+
+            /// <summary>Inherent or measurable characteristic of a peptidoform ion.</summary>
+            MS_peptidoform_ion_property = 1003052,
+
+            /// <summary>Mass-to-charge ratio of a peptidoform ion composed of the most common isotope of each atom computed from the putative knowledge of its molecular constituents.</summary>
+            MS_theoretical_monoisotopic_m_z = 1003053,
+
+            /// <summary>Mass-to-charge ratio of a peptidoform ion computed from the putative knowledge of its molecular constituents, averaged over the distribution of naturally occurring isotopes.</summary>
+            MS_theoretical_average_m_z = 1003054,
+
+            /// <summary>Product of a direct addition of two or more distinct molecules, resulting in a single reaction product containing all atoms of all components. The resultant is considered a distinct molecular species.</summary>
+            MS_adduct = 1003055,
+
+            /// <summary>Physical measurable characteristic of an adduct ion.</summary>
+            MS_adduct_ion_property = 1003056,
+
+            /// <summary>Ordinal number of the scan indicating its order of acquisition within a mass spectrometry acquisition run.</summary>
+            MS_scan_number = 1003057,
+
+            /// <summary>Inherent or measurable characteristic of a spectrum.</summary>
+            MS_spectrum_property = 1003058,
+
+            /// <summary>Number of peaks or features in a spectrum. For a peak-picked spectrum, this will correspond to the number of data points. For a non-peak-picked spectrum, this corresponds to the number of features discernable in the spectrum, which will be fewer than the number of data points.</summary>
+            MS_number_of_peaks = 1003059,
+
+            /// <summary>Number of data points in a spectrum. For a peak-picked spectrum, this will correspond to the number of peaks. For a non-peak-picked spectrum, this corresponds to the number of values in the data array, which are not all peaks.</summary>
+            MS_number_of_data_points = 1003060,
+
+            /// <summary>Label attached to a spectrum uniquely naming it within a collection of spectra, often in a spectral library. It is often a string combination of peptide sequence, charge, mass modifications, collision energy, but will obviously be different for small molecules or unidentified spectra. It must be unique within a collection.</summary>
+            MS_spectrum_name = 1003061,
+
+            /// <summary>Integer index value associated with a spectrum within a collection of spectra, often in a spectral library. By custom, index counters should begin with 0.</summary>
+            MS_spectrum_index = 1003062,
+
+            /// <summary>PSI universal spectrum identifier (USI) multipart key that uniquely identifies a spectrum available in a ProteomeXchange datasets or spectral library.</summary>
+            MS_universal_spectrum_identifier = 1003063,
+
+            /// <summary>Non-inherent characteristic attributed to spectrum aggregation.</summary>
+            MS_spectrum_aggregation_attribute = 1003064,
+
+            /// <summary>Categorization of a spectrum based on its type of aggregation (e.g., individual spectrum, consensus spectrum, best replicate spectrum, etc.).</summary>
+            MS_spectrum_aggregation_type = 1003065,
+
+            /// <summary>Spectrum that is not the result of some aggregation process.</summary>
+            MS_singleton_spectrum = 1003066,
+
+            /// <summary>Spectrum that is the result of merging several replicate spectra to form a spectrum that is more representative of its class and ideally less noisy that any of its source replicates.</summary>
+            MS_consensus_spectrum = 1003067,
+
+            /// <summary>Spectrum that is considered the most representative from a pool of replicate spectra.</summary>
+            MS_best_replicate_spectrum = 1003068,
+
+            /// <summary>Number of replicate spectra available for use during the aggregation process.</summary>
+            MS_number_of_replicate_spectra_available = 1003069,
+
+            /// <summary>Number of replicate spectra used during the aggregation process. This is generally applicable when there are many replicates available, but some are discarded as being low S/N, blended, or otherwise unsuitable, and the remaining set is then used for merging via a consensus algorithm.</summary>
+            MS_number_of_replicate_spectra_used = 1003070,
+
+            /// <summary>Non-inherent characteristic attributed to spectrum aggregation.</summary>
+            MS_spectrum_origin_attribute = 1003071,
+
+            /// <summary>Categorization of a spectrum based on its origin (e.g., observed spectrum, predicted spectrum, demultiplexed spectrum, etc.).</summary>
+            MS_spectrum_origin_type = 1003072,
+
+            /// <summary>Spectrum that originates from an analysis attempt of a single analyte species on an instrument.</summary>
+            MS_observed_spectrum = 1003073,
+
+            /// <summary>Spectrum that originates from a compututational algorithm that attempts to predict spectra.</summary>
+            MS_predicted_spectrum = 1003074,
+
+            /// <summary>Spectrum that originates from an attempted extraction of a single ion spieces from a multiplexed spectrum that contains multiple ion species.</summary>
+            MS_demultiplexed_spectrum = 1003075,
+
+            /// <summary>Spectrum provided in the form of plain numerical values without any information pertaining to the interpretation of features.</summary>
+            MS_uninterpreted_spectrum = 1003076,
+
+            /// <summary>Spectrum provided in a form where specific features of the spectrum are interpreted to provide putative explanations for some feature.</summary>
+            MS_interpreted_spectrum = 1003077,
+
+            /// <summary>Non-inherent characteristic attributed to an interpreted spectrum.</summary>
+            MS_interpreted_spectrum_attribute = 1003078,
+
+            /// <summary>Fraction of intensity summed from all unassigned peaks divided by the intensity summed from all peaks in the spectrum.</summary>
+            MS_total_unassigned_intensity_fraction = 1003079,
+
+            /// <summary>Fraction of intensity summed from unassigned peaks among the top 20 divided by the intensity summed from all top 20 peaks in the spectrum.</summary>
+            MS_top_20_peak_unassigned_intensity_fraction = 1003080,
+
+            /// <summary>Monoisotopic mass delta in Daltons of an amino acid residue modification whose atomic composition or molecular identity has not been determined. This term should not be used for modifications of known molecular identity such as those available in Unimod, RESID or PSI-MOD. This term MUST NOT be used inside the &lt;Modification&gt; element in mzIdentML.</summary>
+            MS_unidentified_modification_monoisotopic_mass_delta = 1003081,
+
+            /// <summary>Data processing software for untargeted metabolomics and lipidomics that supports multiple instruments and MS vendors.</summary>
+            MS_MS_DIAL = 1003082,
+
+            /// <summary>Data file that contains original data as generated by an instrument, although not necessarily in the original data format (i.e. an original raw file converted to a different format is still a raw data file).</summary>
+            MS_raw_data_file = 1003083,
+
+            /// <summary>File that contains data that has been substantially processed or transformed from what was originally acquired by an instrument.</summary>
+            MS_processed_data_file = 1003084,
+
+            /// <summary>Intensity of the precursor ion in the previous MSn-1 scan (prior in time to the referencing MSn scan). For an MS2 scan, this means the MS1 precursor intensity. It is unspecified on whether this is an apex (across m/z) intensity, integrated (across m/z) intensity, a centroided peak intensity of unknown origin, or even summed across several isotopes.</summary>
+            MS_previous_MSn_1_scan_precursor_intensity = 1003085,
+
+            /// <summary>Intensity of the precursor ion current as measured by its apex point over time and m/z. It is unspecified whether this is the intensity of the selected isotope or the most intense isotope.</summary>
+            MS_precursor_apex_intensity = 1003086,
+
+            /// <summary>Dataset for which the identifications and/or spectra/traces are in formats that can be parsed by the hosting data repository such that internal references between identifications and spectra/traces are preserved and browsable at the repository. However, some metadata is not properly described due to lack of CV terms or some auxiliary data, such as data used to create a spectral library or a sequence search database crucial to the analysis, is not available.</summary>
+            MS_supported_by_repository_but_incomplete_data_and_or_metadata = 1003087,
+
+            /// <summary>Compression using truncation and zlib.</summary>
+            MS_truncation_and_zlib_compression = 1003088,
+
+            /// <summary>Compression using truncation, delta prediction and zlib.</summary>
+            MS_truncation__delta_prediction_and_zlib_compression = 1003089,
+
+            /// <summary>Compression using truncation, linear prediction and zlib.</summary>
+            MS_truncation__linear_prediction_and_zlib_compression = 1003090,
 
             /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 400000001,
@@ -9325,7 +9541,7 @@ namespace PSI_Interface.CV
             /// <summary>Sulfonation of N-terminus.</summary>
             UNIMOD_CAF = 100000272,
 
-            /// <summary>S-nitrosylation.</summary>
+            /// <summary>Nitrosylation.</summary>
             UNIMOD_Nitrosyl = 100000275,
 
             /// <summary>Aminoethylbenzenesulfonylation.</summary>
@@ -12965,7 +13181,7 @@ namespace PSI_Interface.CV
             UNIMOD_Gluratylation = 100001848,
 
             /// <summary>2-hydroxyisobutyrylation.</summary>
-            UNIMOD_2_hydroxyisobutyrylation = 100001849,
+            UNIMOD_hydroxyisobutyryl = 100001849,
 
             /// <summary>S-Methyl Methyl phosphorothioate.</summary>
             UNIMOD_MeMePhosphorothioate = 100001868,
@@ -13285,8 +13501,29 @@ namespace PSI_Interface.CV
             /// <summary>DST crosslinker cleaved by sodium periodate.</summary>
             UNIMOD_Xlink_DST_56_ = 100001999,
 
-            /// <summary>Lys conjugation to carbobenzoxy-L-glutaminyl-glycine.</summary>
+            /// <summary>Carbobenzoxy-L-glutaminyl-glycine.</summary>
             UNIMOD_ZQG = 100002001,
+
+            /// <summary>O-Dichloroethylphosphate.</summary>
+            UNIMOD_Haloxon = 100002006,
+
+            /// <summary>S-methyl amino phosphinate.</summary>
+            UNIMOD_Methamidophos_S = 100002007,
+
+            /// <summary>O-methyl amino phosphinate.</summary>
+            UNIMOD_Methamidophos_O = 100002008,
+
+            /// <summary>Loss of O2; nitro photochemical decomposition.</summary>
+            UNIMOD_Nitrene = 100002014,
+
+            /// <summary>Super Heavy Tandem Mass Tag.</summary>
+            UNIMOD_shTMT = 100002015,
+
+            /// <summary>TMTpro 16plex Tandem Mass Tag.</summary>
+            UNIMOD_TMTpro = 100002016,
+
+            /// <summary>Native TMTpro Tandem Mass Tag.</summary>
+            UNIMOD_TMTpro_zero = 100002017,
 
             /// <summary>Description not provided</summary>
             PATO_obsolete_pato_OBSOLETE = 300000000,
@@ -17851,7 +18088,7 @@ namespace PSI_Interface.CV
             /// <summary>A permeability which is relatively low.</summary>
             PATO_decreased_permeability = 300001578,
 
-            /// <summary>A physical quality inhering in a bearer by virtue of the bearer's disposition to shrink or contract.</summary>
+            /// <summary>A physical quality that is the ability to contract or shrink.</summary>
             PATO_contractility = 300001579,
 
             /// <summary>A contractility which is relatively high.</summary>
@@ -19358,7 +19595,7 @@ namespace PSI_Interface.CV
             PATO_infiltrative = 300002103,
 
             /// <summary>A compositional quality inhering in an bearer by virtue of the bearer's infiltration by leukocytes, local edema and accumulation of plasma proteins.</summary>
-            PATO_inflammatory = 300002104,
+            PATO_inflamed = 300002104,
 
             /// <summary>A structural quality inhering in a bearer by virtue of the bearer's exhibiting excessive discharge of blood from the blood vessels.</summary>
             PATO_hemorrhagic = 300002105,
@@ -20758,6 +20995,18 @@ namespace PSI_Interface.CV
             /// <summary>A structural quality inhering in the bearer by virtue of the bearer consisting of multiple structures lacking any physical connection to each other.</summary>
             PATO_disconnected = 300010001,
 
+            /// <summary>The velocity of spatial propagation of a process. Examples include the velocity of propagation of an action potential along an axon.</summary>
+            PATO_propagation_velocity = 300010002,
+
+            /// <summary>A propagation velocity that is higher than normal.</summary>
+            PATO_increased_propagation_velocity = 300010003,
+
+            /// <summary>A propagation velocity that is lower than normal.</summary>
+            PATO_decreased_propagation_velocity = 300010004,
+
+            /// <summary>A physical quality of a process that is its spatial distribution.  For example, bone mineralization follows stereotypical spatial distribution patterns during development, which may be altered in some phenotypes.</summary>
+            PATO_spatial_distribution_of_a_process = 300010005,
+
             /// <summary>Absence due to a degenerative process.</summary>
             PATO_absence_due_to_degeneration = 300015001,
 
@@ -20905,6 +21154,9 @@ namespace PSI_Interface.CV
             /// <summary>A texture quality inhering in a bearer by virtue of the bearer's being covered or partially covered with hair that has increased thickness and softness.</summary>
             PATO_plush = 300040004,
 
+            /// <summary>An orientation quality inhering in a bearer by virtue of the bearer having a position that is directed posteroventrally.</summary>
+            PATO_posteroventral_orientation = 300040005,
+
             /// <summary>A shape quality inhering in a bearer by virtue of the bearer's having a shape like a crown.</summary>
             PATO_crown_like = 300040006,
 
@@ -20940,6 +21192,15 @@ namespace PSI_Interface.CV
 
             /// <summary>A growth quality of occurrent in which the growth of an organism, structure or group of organisms is abnormal.</summary>
             PATO_dysplastic_growth = 300040017,
+
+            /// <summary>Fibrosis is the formation of excess fibrous connective tissue in an organ or tissue in a reparative or reactive process.</summary>
+            PATO_fibrotic = 300040019,
+
+            /// <summary>Female quality of being incapable to reproduce because of functional loss of the ovaries and/or uterus from surgical removal.</summary>
+            PATO_spayed_female = 300040020,
+
+            /// <summary>A structural quality which is held by a bearer where a localized pathological or traumatic structural change, damage, deformity, or discontinuity of tissue, organ, or body part is present.</summary>
+            PATO_lesioned = 300040025,
 
             /// <summary>A rate which is relatively normal.</summary>
             PATO_normal_rate = 300045000,
@@ -21225,6 +21486,27 @@ namespace PSI_Interface.CV
 
             /// <summary>West is one of the four cardinal directions or points of the compass. It is the opposite direction from east.</summary>
             PATO_west = 300045094,
+
+            /// <summary>The number of repeated events per unit time, occurring in a repeating series. (e.g. the number of heart beats occurring over 1 minute)</summary>
+            PATO_rate_of_occurence = 300050000,
+
+            /// <summary>The rate of output of a continuous process. Example include: growth rate, cell migration rate, enzyme reaction rate.</summary>
+            PATO_rate_of_continuous_process = 300050001,
+
+            /// <summary>A spatial distribution of a process in which the process occupies a smaller length, area, or volume than the reference process. For example, heterochromatin may form over a shorter length of a chromosome in a mutant than in wild type.</summary>
+            PATO_decreased_spatial_extent_of_a_process = 300055001,
+
+            /// <summary>A spatial distribution of a process in which the process occupies a greater length, area, or volume than the reference process. For example, heterochromatin may form over a shorter length of a chromosome in a mutant than in wild type.</summary>
+            PATO_increased_spatial_extent_of_a_process = 300055002,
+
+            /// <summary>A quality inhering in a bearer by virtue of the bearer's being present in one sex and absent from the other in members of the same species.</summary>
+            PATO_sex_specific = 300060001,
+
+            /// <summary>A quality inhering in a bearer by virtue of the bearer's being present in males and absent from females in members of the same species.</summary>
+            PATO_male_specific = 300060002,
+
+            /// <summary>A quality inhering in a bearer by virtue of the bearer's being present in females and absent from males in members of the same species.</summary>
+            PATO_female_specific = 300060003,
 
             /// <summary>A unit of measurement is a standardized quantity of a physical quality.</summary>
             UO_unit = 200000000,

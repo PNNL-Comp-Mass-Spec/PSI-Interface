@@ -51,7 +51,7 @@ namespace Interface_Tests.IdentDataTests
                 spec.AddPeptideEvidence(pepEv);
 
                 spec.CVParams.Add(new CVParamObj(){Cvid = CV.CVID.MS_monoisotopic_mass_OBSOLETE, Value = result.Mass.ToString(CultureInfo.InvariantCulture), UnitCvid = CV.CVID.MS_m_z,});
-                spec.CVParams.Add(new CVParamObj(){Cvid = CV.CVID.MS_chemical_compound_formula, Value = result.Composition,});
+                spec.CVParams.Add(new CVParamObj(){Cvid = CV.CVID.MS_chemical_formula, Value = result.Composition,});
                 spec.CVParams.Add(new CVParamObj(){Cvid = CV.CVID.MS_number_of_matched_peaks, Value = result.NumMatchedFragments.ToString(),});
                 spec.CVParams.Add(new CVParamObj(){Cvid = CV.CVID.MS_SEQUEST_probability, Value = result.Probability.ToString(CultureInfo.InvariantCulture),});
                 spec.CVParams.Add(new CVParamObj() { Cvid = CV.CVID.MS_MS_GF_SpecEValue, Value = result.SpecEValue.ToString(CultureInfo.InvariantCulture), });
