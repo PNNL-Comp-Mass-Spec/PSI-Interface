@@ -9,7 +9,7 @@ namespace PSI_Interface.CV
     public static partial class CV
     {
         /// <summary>Populate the CV Term data objects, breakdown part 1</summary>
-        private static void PopulateTermDataPart1()
+        private static void PopulateTermData_MS_Part1()
         {
             TermData.Add(CVID.CVID_Unknown, new TermInfo(CVID.CVID_Unknown, @"??", @"??:0000000", @"CVID_Unknown", @"CVID_Unknown", false));
             TermData.Add(CVID.MS_Proteomics_Standards_Initiative_Mass_Spectrometry_Vocabularies, new TermInfo(CVID.MS_Proteomics_Standards_Initiative_Mass_Spectrometry_Vocabularies, @"MS", @"MS:0000000", @"Proteomics Standards Initiative Mass Spectrometry Vocabularies", @"Proteomics Standards Initiative Mass Spectrometry Vocabularies.", false));
@@ -1014,7 +1014,7 @@ namespace PSI_Interface.CV
         }
 
         /// <summary>Populate the CV Term data objects, breakdown part 2</summary>
-        private static void PopulateTermDataPart2()
+        private static void PopulateTermData_MS_Part2()
         {
             TermData.Add(CVID.MS_protein_level_identification_attribute, new TermInfo(CVID.MS_protein_level_identification_attribute, @"MS", @"MS:1001085", @"protein-level identification attribute", @"Protein level information.", false));
             TermData.Add(CVID.MS_SEQUEST_sort_by_XCorr, new TermInfo(CVID.MS_SEQUEST_sort_by_XCorr, @"MS", @"MS:1001086", @"SEQUEST:sort by XCorr", @"Sort order of SEQUEST search results by the correlation score.", false));
@@ -2019,7 +2019,7 @@ namespace PSI_Interface.CV
         }
 
         /// <summary>Populate the CV Term data objects, breakdown part 3</summary>
-        private static void PopulateTermDataPart3()
+        private static void PopulateTermData_MS_Part3()
         {
             TermData.Add(CVID.MS_peptide_consensus_attribute, new TermInfo(CVID.MS_peptide_consensus_attribute, @"MS", @"MS:1002116", @"peptide consensus attribute", @"Attribute describing a peptide consensus.", false));
             TermData.Add(CVID.MS_small_molecule_list_attribute, new TermInfo(CVID.MS_small_molecule_list_attribute, @"MS", @"MS:1002117", @"small molecule list attribute", @"Attribute describing a small molecule list.", false));
@@ -2977,9 +2977,19 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.MS_previous_MSn_1_scan_precursor_intensity, new TermInfo(CVID.MS_previous_MSn_1_scan_precursor_intensity, @"MS", @"MS:1003085", @"previous MSn-1 scan precursor intensity", @"Intensity of the precursor ion in the previous MSn-1 scan (prior in time to the referencing MSn scan). For an MS2 scan, this means the MS1 precursor intensity. It is unspecified on whether this is an apex (across m/z) intensity, integrated (across m/z) intensity, a centroided peak intensity of unknown origin, or even summed across several isotopes.", false));
             TermData.Add(CVID.MS_precursor_apex_intensity, new TermInfo(CVID.MS_precursor_apex_intensity, @"MS", @"MS:1003086", @"precursor apex intensity", @"Intensity of the precursor ion current as measured by its apex point over time and m/z. It is unspecified whether this is the intensity of the selected isotope or the most intense isotope.", false));
             TermData.Add(CVID.MS_supported_by_repository_but_incomplete_data_and_or_metadata, new TermInfo(CVID.MS_supported_by_repository_but_incomplete_data_and_or_metadata, @"MS", @"MS:1003087", @"supported by repository but incomplete data and/or metadata", @"Dataset for which the identifications and/or spectra/traces are in formats that can be parsed by the hosting data repository such that internal references between identifications and spectra/traces are preserved and browsable at the repository. However, some metadata is not properly described due to lack of CV terms or some auxiliary data, such as data used to create a spectral library or a sequence search database crucial to the analysis, is not available.", false));
-            TermData.Add(CVID.MS_truncation_and_zlib_compression, new TermInfo(CVID.MS_truncation_and_zlib_compression, @"MS", @"MS:1003088", @"truncation and zlib compression", @"Compression using truncation and zlib.", false));
-            TermData.Add(CVID.MS_truncation__delta_prediction_and_zlib_compression, new TermInfo(CVID.MS_truncation__delta_prediction_and_zlib_compression, @"MS", @"MS:1003089", @"truncation, delta prediction and zlib compression", @"Compression using truncation, delta prediction and zlib.", false));
-            TermData.Add(CVID.MS_truncation__linear_prediction_and_zlib_compression, new TermInfo(CVID.MS_truncation__linear_prediction_and_zlib_compression, @"MS", @"MS:1003090", @"truncation, linear prediction and zlib compression", @"Compression using truncation, linear prediction and zlib.", false));
+            TermData.Add(CVID.MS_truncation_and_zlib_compression, new TermInfo(CVID.MS_truncation_and_zlib_compression, @"MS", @"MS:1003088", @"truncation and zlib compression", @"Data array compression using mantissa bit truncation followed by zlib compression.", false));
+            TermData.Add(CVID.MS_truncation__delta_prediction_and_zlib_compression, new TermInfo(CVID.MS_truncation__delta_prediction_and_zlib_compression, @"MS", @"MS:1003089", @"truncation, delta prediction and zlib compression", @"Data array compression using mantissa bit truncation, delta prediction and zlib compression.", false));
+            TermData.Add(CVID.MS_truncation__linear_prediction_and_zlib_compression, new TermInfo(CVID.MS_truncation__linear_prediction_and_zlib_compression, @"MS", @"MS:1003090", @"truncation, linear prediction and zlib compression", @"Data array compression using mantissa bit truncation, linear prediction and zlib compression.", false));
+            TermData.Add(CVID.MS_binary_data_compression_parameter, new TermInfo(CVID.MS_binary_data_compression_parameter, @"MS", @"MS:1003091", @"binary data compression parameter", @"Settable parameter for a binary data compression event.", false));
+            TermData.Add(CVID.MS_number_of_mantissa_bits_truncated, new TermInfo(CVID.MS_number_of_mantissa_bits_truncated, @"MS", @"MS:1003092", @"number of mantissa bits truncated", @"Number of extraneous mantissa bits truncated to improve subsequent compression.", false));
+            TermData.Add(CVID.MS_Lys_N, new TermInfo(CVID.MS_Lys_N, @"MS", @"MS:1003093", @"Lys-N", @"Metalloendopeptidase found in the mushroom Grifola frondosa that cleaves proteins on the amino side of lysine residues.", false));
+            TermData.Add(CVID.MS_Orbitrap_Exploris_240, new TermInfo(CVID.MS_Orbitrap_Exploris_240, @"MS", @"MS:1003094", @"Orbitrap Exploris 240", @"Thermo Scientific Orbitrap Exploris 240 Quadrupole Orbitrap MS.", false));
+            TermData.Add(CVID.MS_Orbitrap_Exploris_120, new TermInfo(CVID.MS_Orbitrap_Exploris_120, @"MS", @"MS:1003095", @"Orbitrap Exploris 120", @"Thermo Scientific Orbitrap Exploris 120 Quadrupole Orbitrap MS.", false));
+        }
+
+        /// <summary>Populate the CV Term data objects, breakdown part 1</summary>
+        private static void PopulateTermData_PEFF_Part1()
+        {
             TermData.Add(CVID.PEFF_PEFF_CV_term, new TermInfo(CVID.PEFF_PEFF_CV_term, @"MS", @"PEFF:0000001", @"PEFF CV term", @"PSI Extended FASTA Format controlled vocabulary term.", false));
             TermData.Add(CVID.PEFF_PEFF_file_header_section_term, new TermInfo(CVID.PEFF_PEFF_file_header_section_term, @"MS", @"PEFF:0000002", @"PEFF file header section term", @"CV term that may appear in a PEFF file header section.", false));
             TermData.Add(CVID.PEFF_PEFF_file_sequence_entry_term, new TermInfo(CVID.PEFF_PEFF_file_sequence_entry_term, @"MS", @"PEFF:0000003", @"PEFF file sequence entry term", @"CV term that may appear in a description line of a PEFF file individual sequence entry.", false));
@@ -3021,11 +3031,6 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PEFF_XRef, new TermInfo(CVID.PEFF_XRef, @"MS", @"PEFF:0001019", @"XRef", @"PEFF keyword for the cross-reference to an external resource.", false));
             TermData.Add(CVID.PEFF_mature_protein, new TermInfo(CVID.PEFF_mature_protein, @"MS", @"PEFF:0001020", @"mature protein", @"Portion of a newly synthesized protein that contributes to a final structure after other components such as signal peptides are removed.", false));
             TermData.Add(CVID.PEFF_signal_peptide, new TermInfo(CVID.PEFF_signal_peptide, @"MS", @"PEFF:0001021", @"signal peptide", @"Short peptide present at the N-terminus of a newly synthesized protein that is cleaved off and is not part of the final mature protein.", false));
-        }
-
-        /// <summary>Populate the CV Term data objects, breakdown part 4</summary>
-        private static void PopulateTermDataPart4()
-        {
             TermData.Add(CVID.PEFF_transit_peptide, new TermInfo(CVID.PEFF_transit_peptide, @"MS", @"PEFF:0001022", @"transit peptide", @"Short peptide present at the N-terminus of a newly synthesized protein that helps the protein through the membrane of its destination organelle.", false));
             TermData.Add(CVID.PEFF_Conflict, new TermInfo(CVID.PEFF_Conflict, @"MS", @"PEFF:0001023", @"Conflict", @"PEFF keyword for the sequence conflict; a UniProtKB term.", false));
             TermData.Add(CVID.PEFF_Crc64, new TermInfo(CVID.PEFF_Crc64, @"MS", @"PEFF:0001024", @"Crc64", @"PEFF keyword for the Sequence checksum in crc64.", false));
@@ -3043,6 +3048,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PEFF_regular_expression_for_a_value_in_a_key_value_pair_of_a_PEFF_description_line_describing_one_sequence_position_followed_by_one_PEFF_term_name_and_one_optional_comment, new TermInfo(CVID.PEFF_regular_expression_for_a_value_in_a_key_value_pair_of_a_PEFF_description_line_describing_one_sequence_position_followed_by_one_PEFF_term_name_and_one_optional_comment, @"MS", @"PEFF:1002001", @"regular expression for a value in a key-value pair of a PEFF description line describing one sequence position followed by one PEFF term name and one optional comment", @"(", false));
             TermData.Add(CVID.PEFF_regular_expression_for_PEFF_molecular_sequence_type, new TermInfo(CVID.PEFF_regular_expression_for_PEFF_molecular_sequence_type, @"MS", @"PEFF:1002002", @"regular expression for PEFF molecular sequence type", @"(AA|NA|DNA|cDNA|RNA|RNAi|tRNA|rRNA|siRNA|mDNA|mRNA|snoRNA|ncRNA|EST|", false));
             TermData.Add(CVID.PEFF_regular_expression_for_PEFF_sequence_status, new TermInfo(CVID.PEFF_regular_expression_for_PEFF_sequence_status, @"MS", @"PEFF:1002003", @"regular expression for PEFF sequence status", @"(Complete|Fragment|", false));
+        }
+
+        /// <summary>Populate the CV Term data objects, breakdown part 1</summary>
+        private static void PopulateTermData_UNIMOD_Part1()
+        {
             TermData.Add(CVID.UNIMOD_unimod_root_node, new TermInfo(CVID.UNIMOD_unimod_root_node, @"UNIMOD", @"UNIMOD:0", @"unimod root node", @"The root node of the unimod modifications ontology.", false));
             TermData.Add(CVID.UNIMOD_Acetyl, new TermInfo(CVID.UNIMOD_Acetyl, @"UNIMOD", @"UNIMOD:1", @"Acetyl", @"Acetylation.", false));
             TermData.Add(CVID.UNIMOD_Amidated, new TermInfo(CVID.UNIMOD_Amidated, @"UNIMOD", @"UNIMOD:2", @"Amidated", @"Amidation.", false));
@@ -4026,11 +4036,6 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Dap_DSP, new TermInfo(CVID.UNIMOD_Dap_DSP, @"UNIMOD", @"UNIMOD:1399", @"Dap-DSP", @"Diaminopimelic acid-DSP monolinked.", false));
             TermData.Add(CVID.UNIMOD_MurNAc, new TermInfo(CVID.UNIMOD_MurNAc, @"UNIMOD", @"UNIMOD:1400", @"MurNAc", @"N-Acetylmuramic acid.", false));
             TermData.Add(CVID.UNIMOD_Label_2H_7_15N_4_, new TermInfo(CVID.UNIMOD_Label_2H_7_15N_4_, @"UNIMOD", @"UNIMOD:1402", @"Label:2H(7)15N(4)", @"Label:2H(7)15N(4).", false));
-        }
-
-        /// <summary>Populate the CV Term data objects, breakdown part 5</summary>
-        private static void PopulateTermDataPart5()
-        {
             TermData.Add(CVID.UNIMOD_Label_2H_6_15N_1_, new TermInfo(CVID.UNIMOD_Label_2H_6_15N_1_, @"UNIMOD", @"UNIMOD:1403", @"Label:2H(6)15N(1)", @"Label:2H(6)15N(1).", false));
             TermData.Add(CVID.UNIMOD_EEEDVIEVYQEQTGG, new TermInfo(CVID.UNIMOD_EEEDVIEVYQEQTGG, @"UNIMOD", @"UNIMOD:1405", @"EEEDVIEVYQEQTGG", @"Sumoylation by SUMO-1 after Cyanogen bromide (CNBr) cleavage.", false));
             TermData.Add(CVID.UNIMOD_EDEDTIDVFQQQTGG, new TermInfo(CVID.UNIMOD_EDEDTIDVFQQQTGG, @"UNIMOD", @"UNIMOD:1406", @"EDEDTIDVFQQQTGG", @"Sumoylation by SUMO-2/3 after Cyanogen bromide (CNBr) cleavage.", false));
@@ -4048,6 +4053,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_Pentose, new TermInfo(CVID.UNIMOD_Pentose, @"UNIMOD", @"UNIMOD:1425", @"Pentose", @"Pentose.", false));
             TermData.Add(CVID.UNIMOD_Hex_1_Pent_1_, new TermInfo(CVID.UNIMOD_Hex_1_Pent_1_, @"UNIMOD", @"UNIMOD:1426", @"Hex(1)Pent(1)", @"Hex Pent.", false));
             TermData.Add(CVID.UNIMOD_Hex_1_HexA_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexA_1_, @"UNIMOD", @"UNIMOD:1427", @"Hex(1)HexA(1)", @"Hex HexA.", false));
+        }
+
+        /// <summary>Populate the CV Term data objects, breakdown part 2</summary>
+        private static void PopulateTermData_UNIMOD_Part2()
+        {
             TermData.Add(CVID.UNIMOD_Hex_1_Pent_2_, new TermInfo(CVID.UNIMOD_Hex_1_Pent_2_, @"UNIMOD", @"UNIMOD:1428", @"Hex(1)Pent(2)", @"Hex Pent(2).", false));
             TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Phos_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_Phos_1_, @"UNIMOD", @"UNIMOD:1429", @"Hex(1)HexNAc(1)Phos(1)", @"Hex HexNAc Phos.", false));
             TermData.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, new TermInfo(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, @"UNIMOD", @"UNIMOD:1430", @"Hex(1)HexNAc(1)Sulf(1)", @"Hex HexNAc Sulf.", false));
@@ -4535,6 +4545,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.UNIMOD_shTMT, new TermInfo(CVID.UNIMOD_shTMT, @"UNIMOD", @"UNIMOD:2015", @"shTMT", @"Super Heavy Tandem Mass Tag.", false));
             TermData.Add(CVID.UNIMOD_TMTpro, new TermInfo(CVID.UNIMOD_TMTpro, @"UNIMOD", @"UNIMOD:2016", @"TMTpro", @"TMTpro 16plex Tandem Mass Tag.", false));
             TermData.Add(CVID.UNIMOD_TMTpro_zero, new TermInfo(CVID.UNIMOD_TMTpro_zero, @"UNIMOD", @"UNIMOD:2017", @"TMTpro_zero", @"Native TMTpro Tandem Mass Tag.", false));
+        }
+
+        /// <summary>Populate the CV Term data objects, breakdown part 1</summary>
+        private static void PopulateTermData_PATO_Part1()
+        {
             TermData.Add(CVID.PATO_obsolete_pato_OBSOLETE, new TermInfo(CVID.PATO_obsolete_pato_OBSOLETE, @"PATO", @"PATO:0000000", @"obsolete pato", @"", true));
             TermData.Add(CVID.PATO_quality, new TermInfo(CVID.PATO_quality, @"PATO", @"PATO:0000001", @"quality", @"A dependent entity that inheres in a bearer by virtue of how the bearer is related to other entities", false));
             TermData.Add(CVID.PATO_obsolete_value_OBSOLETE, new TermInfo(CVID.PATO_obsolete_value_OBSOLETE, @"PATO", @"PATO:0000002", @"obsolete value", @"", true));
@@ -5031,11 +5046,6 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_obsolete_absolute_disease_sensitivity_value_OBSOLETE, new TermInfo(CVID.PATO_obsolete_absolute_disease_sensitivity_value_OBSOLETE, @"PATO", @"PATO:0000511", @"obsolete absolute disease sensitivity value", @"", true));
             TermData.Add(CVID.PATO_obsolete_relative_disease_sensitivity_value_OBSOLETE, new TermInfo(CVID.PATO_obsolete_relative_disease_sensitivity_value_OBSOLETE, @"PATO", @"PATO:0000512", @"obsolete relative disease sensitivity value", @"", true));
             TermData.Add(CVID.PATO_insensitive_toward, new TermInfo(CVID.PATO_insensitive_toward, @"PATO", @"PATO:0000513", @"insensitive toward", @"A quality inhering in a bearer by virtue of the bearer's lacking sensitivity toward an external stimulus.", false));
-        }
-
-        /// <summary>Populate the CV Term data objects, breakdown part 6</summary>
-        private static void PopulateTermDataPart6()
-        {
             TermData.Add(CVID.PATO_obsolete_intolerant_value_OBSOLETE, new TermInfo(CVID.PATO_obsolete_intolerant_value_OBSOLETE, @"PATO", @"PATO:0000514", @"obsolete intolerant value", @"", true));
             TermData.Add(CVID.PATO_tolerant_to, new TermInfo(CVID.PATO_tolerant_to, @"PATO", @"PATO:0000515", @"tolerant to", @"A resistance quality inhering in a bearer by virtue of its disposition to endure or being insensitive to a stimulus.", false));
             TermData.Add(CVID.PATO_sensitive_toward, new TermInfo(CVID.PATO_sensitive_toward, @"PATO", @"PATO:0000516", @"sensitive toward", @"A quality inhering in a bearer by virtue of the bearer's having sensitivity toward an external stimulus.", false));
@@ -5540,6 +5550,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_efficiency, new TermInfo(CVID.PATO_efficiency, @"PATO", @"PATO:0001029", @"efficiency", @"A physical quality inhering in a bearer by virtue of ratio of the bearer's output to the bearer's input.", false));
             TermData.Add(CVID.PATO_flux, new TermInfo(CVID.PATO_flux, @"PATO", @"PATO:0001030", @"flux", @"A physical quality that exists by virtue of the rate of flow of the bearer across a given surface.", false));
             TermData.Add(CVID.PATO_elasticity, new TermInfo(CVID.PATO_elasticity, @"PATO", @"PATO:0001031", @"elasticity", @"A physical quality inhering in a bearer by virtue of the bearer's disposition to recover its size and shape after deformation in any way.", false));
+        }
+
+        /// <summary>Populate the CV Term data objects, breakdown part 2</summary>
+        private static void PopulateTermData_PATO_Part2()
+        {
             TermData.Add(CVID.PATO_obsolete_stiffness_OBSOLETE, new TermInfo(CVID.PATO_obsolete_stiffness_OBSOLETE, @"PATO", @"PATO:0001033", @"obsolete stiffness", @"", true));
             TermData.Add(CVID.PATO_strain, new TermInfo(CVID.PATO_strain, @"PATO", @"PATO:0001034", @"strain", @"A physical quality inhering in a bearer by virtue of the relative change in the bearer's length or the bearer's volume when being stretched or squashed.", false));
             TermData.Add(CVID.PATO_force, new TermInfo(CVID.PATO_force, @"PATO", @"PATO:0001035", @"force", @"A physical quality inhering in a bearer by virtue of the bearer's rate of change of momentum.", false));
@@ -6036,11 +6051,6 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_flexible, new TermInfo(CVID.PATO_flexible, @"PATO", @"PATO:0001544", @"flexible", @"A physical quality inhering in a bearer by virtue of the bearer's ability of being turned, bowed, or twisted without breaking.", false));
             TermData.Add(CVID.PATO_inflexible, new TermInfo(CVID.PATO_inflexible, @"PATO", @"PATO:0001545", @"inflexible", @"A physical quality inhering in a bearer by virtue of the bearer's inability of being turned, bowed, or twisted without breaking.", false));
             TermData.Add(CVID.PATO_quality_of_a_solid, new TermInfo(CVID.PATO_quality_of_a_solid, @"PATO", @"PATO:0001546", @"quality of a solid", @"A physical quality inhering in a bearer by virtue of the bearer's exhibiting the physical characteristics of an entity characterized by particles arranged such that their shape and volume are relatively stable.", false));
-        }
-
-        /// <summary>Populate the CV Term data objects, breakdown part 7</summary>
-        private static void PopulateTermDataPart7()
-        {
             TermData.Add(CVID.PATO_quality_of_a_gas, new TermInfo(CVID.PATO_quality_of_a_gas, @"PATO", @"PATO:0001547", @"quality of a gas", @"A physical quality inhering in a bearer by virtue of the bearer's exhibiting the physical characteristics of an entity consisting of particles that have neither a defined volume nor defined shape.", false));
             TermData.Add(CVID.PATO_quality_of_a_liquid, new TermInfo(CVID.PATO_quality_of_a_liquid, @"PATO", @"PATO:0001548", @"quality of a liquid", @"A physical quality inhering in an entity exhibiting the physical characteristics of an amorphous (non-crystalline) form of matter between a gas and a solid that has a definite volume, but no definite shape.", false));
             TermData.Add(CVID.PATO_increased_sensitivity_toward, new TermInfo(CVID.PATO_increased_sensitivity_toward, @"PATO", @"PATO:0001549", @"increased sensitivity toward", @"A sensitivity toward an external stimulus which is higher than normal/average.", false));
@@ -6545,6 +6555,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_movement_behavioral_quality, new TermInfo(CVID.PATO_movement_behavioral_quality, @"PATO", @"PATO:0002076", @"movement behavioral quality", @"A behavioral quality inhering in a bearer by virtue of the bearer's movement.", false));
             TermData.Add(CVID.PATO_stacked, new TermInfo(CVID.PATO_stacked, @"PATO", @"PATO:0002077", @"stacked", @"A spatial quality inhering in a bearer by virtue of the bearer's being positioned with multiple entities of the same type above and below.", false));
             TermData.Add(CVID.PATO_hollow, new TermInfo(CVID.PATO_hollow, @"PATO", @"PATO:0002078", @"hollow", @"A quality inhering in a bearer by virtue of the bearer's having an empty space or cavity within.", false));
+        }
+
+        /// <summary>Populate the CV Term data objects, breakdown part 3</summary>
+        private static void PopulateTermData_PATO_Part3()
+        {
             TermData.Add(CVID.PATO_broken_into_two_pieces, new TermInfo(CVID.PATO_broken_into_two_pieces, @"PATO", @"PATO:0002080", @"broken into two pieces", @"A broken quality inhering in a bearer by virtue of the bearer's being seperated into two contiguous wholes.", false));
             TermData.Add(CVID.PATO_shattered, new TermInfo(CVID.PATO_shattered, @"PATO", @"PATO:0002081", @"shattered", @"A broken quality inhering in a bearer by virtue of the bearer's being broken into multiple contiguous wholes.", false));
             TermData.Add(CVID.PATO_partially_broken, new TermInfo(CVID.PATO_partially_broken, @"PATO", @"PATO:0002082", @"partially broken", @"A broken quality inhering in a bearer by virtue of the bearer's being still one contiguous whole but structurally damaged such that in danger of become two or more.", false));
@@ -7041,11 +7056,6 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_spatial_distribution_of_a_process, new TermInfo(CVID.PATO_spatial_distribution_of_a_process, @"PATO", @"PATO:0010005", @"spatial distribution of a process", @"A physical quality of a process that is its spatial distribution.  For example, bone mineralization follows stereotypical spatial distribution patterns during development, which may be altered in some phenotypes.", false));
             TermData.Add(CVID.PATO_absence_due_to_degeneration, new TermInfo(CVID.PATO_absence_due_to_degeneration, @"PATO", @"PATO:0015001", @"absence due to degeneration", @"Absence due to a degenerative process.", false));
             TermData.Add(CVID.PATO_process_efficacy, new TermInfo(CVID.PATO_process_efficacy, @"PATO", @"PATO:0015002", @"process efficacy", @"The ability of a process to produce its output.", false));
-        }
-
-        /// <summary>Populate the CV Term data objects, breakdown part 8</summary>
-        private static void PopulateTermDataPart8()
-        {
             TermData.Add(CVID.PATO_decreased_efficacy, new TermInfo(CVID.PATO_decreased_efficacy, @"PATO", @"PATO:0015003", @"decreased efficacy", @"A decrease in the ability of a process to produce its output.", false));
             TermData.Add(CVID.PATO_increased_efficacy, new TermInfo(CVID.PATO_increased_efficacy, @"PATO", @"PATO:0015004", @"increased efficacy", @"A increase in the ability of a process to produce its output.", false));
             TermData.Add(CVID.PATO_tendrilous, new TermInfo(CVID.PATO_tendrilous, @"PATO", @"PATO:0015005", @"tendrilous", @"Slender and spirally coiled.", false));
@@ -7211,6 +7221,11 @@ namespace PSI_Interface.CV
             TermData.Add(CVID.PATO_sex_specific, new TermInfo(CVID.PATO_sex_specific, @"PATO", @"PATO:0060001", @"sex-specific", @"A quality inhering in a bearer by virtue of the bearer's being present in one sex and absent from the other in members of the same species.", false));
             TermData.Add(CVID.PATO_male_specific, new TermInfo(CVID.PATO_male_specific, @"PATO", @"PATO:0060002", @"male-specific", @"A quality inhering in a bearer by virtue of the bearer's being present in males and absent from females in members of the same species.", false));
             TermData.Add(CVID.PATO_female_specific, new TermInfo(CVID.PATO_female_specific, @"PATO", @"PATO:0060003", @"female-specific", @"A quality inhering in a bearer by virtue of the bearer's being present in females and absent from males in members of the same species.", false));
+        }
+
+        /// <summary>Populate the CV Term data objects, breakdown part 1</summary>
+        private static void PopulateTermData_UO_Part1()
+        {
             TermData.Add(CVID.UO_unit, new TermInfo(CVID.UO_unit, @"UO", @"UO:0000000", @"unit", @"A unit of measurement is a standardized quantity of a physical quality.", false));
             TermData.Add(CVID.UO_length_unit, new TermInfo(CVID.UO_length_unit, @"UO", @"UO:0000001", @"length unit", @"A unit which is a standard measure of the distance between two points.", false));
             TermData.Add(CVID.UO_mass_unit, new TermInfo(CVID.UO_mass_unit, @"UO", @"UO:0000002", @"mass unit", @"A unit which is a standard measure of the amount of matter/energy of a physical object.", false));
@@ -7594,14 +7609,16 @@ namespace PSI_Interface.CV
         /// <summary>Populate the CV Term data objects</summary>
         private static void PopulateTermData()
         {
-            PopulateTermDataPart1();
-            PopulateTermDataPart2();
-            PopulateTermDataPart3();
-            PopulateTermDataPart4();
-            PopulateTermDataPart5();
-            PopulateTermDataPart6();
-            PopulateTermDataPart7();
-            PopulateTermDataPart8();
+            PopulateTermData_MS_Part1();
+            PopulateTermData_MS_Part2();
+            PopulateTermData_MS_Part3();
+            PopulateTermData_PEFF_Part1();
+            PopulateTermData_UNIMOD_Part1();
+            PopulateTermData_UNIMOD_Part2();
+            PopulateTermData_PATO_Part1();
+            PopulateTermData_PATO_Part2();
+            PopulateTermData_PATO_Part3();
+            PopulateTermData_UO_Part1();
         }
     }
 }

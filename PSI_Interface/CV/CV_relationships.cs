@@ -11,7 +11,7 @@ namespace PSI_Interface.CV
     public static partial class CV
     {
         /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>
-        private static void FillRelationsIsAPart1()
+        private static void FillRelationsIsA_MS_Part1()
         {
             RelationsIsA.Add(CVID.MS_sample_number, new List<CVID> { CVID.MS_sample_attribute, });
             RelationsIsA.Add(CVID.MS_sample_name, new List<CVID> { CVID.MS_sample_attribute, });
@@ -1016,7 +1016,7 @@ namespace PSI_Interface.CV
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 2</summary>
-        private static void FillRelationsIsAPart2()
+        private static void FillRelationsIsA_MS_Part2()
         {
             RelationsIsA.Add(CVID.MS_frag__z_2_ion, new List<CVID> { CVID.MS_fragmentation_ion_type, });
             RelationsIsA.Add(CVID.MS_text_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
@@ -2021,7 +2021,7 @@ namespace PSI_Interface.CV
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 3</summary>
-        private static void FillRelationsIsAPart3()
+        private static void FillRelationsIsA_MS_Part3()
         {
             RelationsIsA.Add(CVID.MS_non_leading_protein, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
             RelationsIsA.Add(CVID.MS_group_representative, new List<CVID> { CVID.MS_protein_group_or_subset_relationship, });
@@ -2682,6 +2682,15 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_truncation_and_zlib_compression, new List<CVID> { CVID.MS_binary_data_compression_type, });
             RelationsIsA.Add(CVID.MS_truncation__delta_prediction_and_zlib_compression, new List<CVID> { CVID.MS_binary_data_compression_type, });
             RelationsIsA.Add(CVID.MS_truncation__linear_prediction_and_zlib_compression, new List<CVID> { CVID.MS_binary_data_compression_type, });
+            RelationsIsA.Add(CVID.MS_number_of_mantissa_bits_truncated, new List<CVID> { CVID.MS_binary_data_compression_parameter, });
+            RelationsIsA.Add(CVID.MS_Lys_N, new List<CVID> { CVID.MS_cleavage_agent_name, });
+            RelationsIsA.Add(CVID.MS_Orbitrap_Exploris_240, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Orbitrap_Exploris_120, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>
+        private static void FillRelationsIsA_PEFF_Part1()
+        {
             RelationsIsA.Add(CVID.PEFF_PEFF_file_header_section_term, new List<CVID> { CVID.PEFF_PEFF_CV_term, });
             RelationsIsA.Add(CVID.PEFF_PEFF_file_sequence_entry_term, new List<CVID> { CVID.PEFF_PEFF_CV_term, });
             RelationsIsA.Add(CVID.PEFF_DbName, new List<CVID> { CVID.PEFF_PEFF_file_header_section_term, });
@@ -2739,6 +2748,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PEFF_regular_expression_for_a_value_in_a_key_value_pair_of_a_PEFF_description_line_describing_one_sequence_position_followed_by_one_PEFF_term_name_and_one_optional_comment, new List<CVID> { CVID.MS_regular_expression, });
             RelationsIsA.Add(CVID.PEFF_regular_expression_for_PEFF_molecular_sequence_type, new List<CVID> { CVID.MS_regular_expression, });
             RelationsIsA.Add(CVID.PEFF_regular_expression_for_PEFF_sequence_status, new List<CVID> { CVID.MS_regular_expression, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>
+        private static void FillRelationsIsA_UNIMOD_Part1()
+        {
             RelationsIsA.Add(CVID.UNIMOD_Acetyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Amidated, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3023,11 +3037,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_MicrocinC7, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Cyano, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Diironsubcluster, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-        }
-
-        /// <summary>Populate the relationships between CV terms, breakdown part 4</summary>
-        private static void FillRelationsIsAPart4()
-        {
             RelationsIsA.Add(CVID.UNIMOD_Amidino, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_FMN, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_FMNC, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3744,6 +3753,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_Pent_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexA_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_Pent_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 2</summary>
+        private static void FillRelationsIsA_UNIMOD_Part2()
+        {
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -4028,11 +4042,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_dHex_2_Hex_2_HexNAc_3_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_dHex_3_Hex_3_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_8_Phos_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-        }
-
-        /// <summary>Populate the relationships between CV terms, breakdown part 5</summary>
-        private static void FillRelationsIsAPart5()
-        {
             RelationsIsA.Add(CVID.UNIMOD_dHex_1_Hex_2_HexNAc_2_NeuAc_2_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_2_HexNAc_3_NeuGc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_dHex_4_Hex_2_HexNAc_2_Kdn_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -4235,6 +4244,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_shTMT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_TMTpro, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_TMTpro_zero, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>
+        private static void FillRelationsIsA_PATO_Part1()
+        {
             RelationsIsA.Add(CVID.PATO_mobility, new List<CVID> { CVID.PATO_physical_quality, });
             RelationsIsA.Add(CVID.PATO_speed, new List<CVID> { CVID.PATO_movement_quality, });
             RelationsIsA.Add(CVID.PATO_age, new List<CVID> { CVID.PATO_time, });
@@ -5033,11 +5047,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_radiation_exposure, new List<CVID> { CVID.PATO_radiation_quality, });
             RelationsIsA.Add(CVID.PATO_radiation_absorbed_dose, new List<CVID> { CVID.PATO_radiation_exposure, });
             RelationsIsA.Add(CVID.PATO_radiation_equivalent_dose, new List<CVID> { CVID.PATO_radiation_exposure, });
-        }
-
-        /// <summary>Populate the relationships between CV terms, breakdown part 6</summary>
-        private static void FillRelationsIsAPart6()
-        {
             RelationsIsA.Add(CVID.PATO_radiation_effective_dose, new List<CVID> { CVID.PATO_radiation_exposure, });
             RelationsIsA.Add(CVID.PATO_invaginated, new List<CVID> { CVID.PATO_concave, });
             RelationsIsA.Add(CVID.PATO_paedomorphic_growth, new List<CVID> { CVID.PATO_heterochronic_growth, });
@@ -5240,6 +5249,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_variability_of_size, new List<CVID> { CVID.PATO_variability, });
             RelationsIsA.Add(CVID.PATO_decreased_variability_of_size, new List<CVID> { CVID.PATO_variability_of_size, CVID.PATO_decreased_process_quality, CVID.PATO_decreased_object_quality, });
             RelationsIsA.Add(CVID.PATO_increased_variability_of_size, new List<CVID> { CVID.PATO_variability_of_size, CVID.PATO_increased_process_quality, CVID.PATO_increased_object_quality, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 2</summary>
+        private static void FillRelationsIsA_PATO_Part2()
+        {
             RelationsIsA.Add(CVID.PATO_defasciculated, new List<CVID> { CVID.PATO_fasciculation, });
             RelationsIsA.Add(CVID.PATO_interdigitated, new List<CVID> { CVID.PATO_shape, });
             RelationsIsA.Add(CVID.PATO_in_contact_with, new List<CVID> { CVID.PATO_structure, });
@@ -6008,6 +6022,11 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.PATO_sex_specific, new List<CVID> { CVID.PATO_sexually_dimorphic, });
             RelationsIsA.Add(CVID.PATO_male_specific, new List<CVID> { CVID.PATO_sex_specific, });
             RelationsIsA.Add(CVID.PATO_female_specific, new List<CVID> { CVID.PATO_sex_specific, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>
+        private static void FillRelationsIsA_UO_Part1()
+        {
             RelationsIsA.Add(CVID.UO_length_unit, new List<CVID> { CVID.UO_unit, });
             RelationsIsA.Add(CVID.UO_mass_unit, new List<CVID> { CVID.UO_unit, });
             RelationsIsA.Add(CVID.UO_time_unit, new List<CVID> { CVID.UO_unit, });
@@ -6038,11 +6057,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UO_millisecond, new List<CVID> { CVID.UO_time_unit, });
             RelationsIsA.Add(CVID.UO_microsecond, new List<CVID> { CVID.UO_time_unit, });
             RelationsIsA.Add(CVID.UO_picosecond, new List<CVID> { CVID.UO_time_unit, });
-        }
-
-        /// <summary>Populate the relationships between CV terms, breakdown part 7</summary>
-        private static void FillRelationsIsAPart7()
-        {
             RelationsIsA.Add(CVID.UO_minute, new List<CVID> { CVID.UO_time_unit, });
             RelationsIsA.Add(CVID.UO_hour, new List<CVID> { CVID.UO_time_unit, });
             RelationsIsA.Add(CVID.UO_day, new List<CVID> { CVID.UO_time_unit, });
@@ -6394,13 +6408,15 @@ namespace PSI_Interface.CV
         /// <summary>Populate the relationships between CV terms</summary>
         private static void FillRelationsIsA()
         {
-            FillRelationsIsAPart1();
-            FillRelationsIsAPart2();
-            FillRelationsIsAPart3();
-            FillRelationsIsAPart4();
-            FillRelationsIsAPart5();
-            FillRelationsIsAPart6();
-            FillRelationsIsAPart7();
+            FillRelationsIsA_MS_Part1();
+            FillRelationsIsA_MS_Part2();
+            FillRelationsIsA_MS_Part3();
+            FillRelationsIsA_PEFF_Part1();
+            FillRelationsIsA_UNIMOD_Part1();
+            FillRelationsIsA_UNIMOD_Part2();
+            FillRelationsIsA_PATO_Part1();
+            FillRelationsIsA_PATO_Part2();
+            FillRelationsIsA_UO_Part1();
         }
     }
 }

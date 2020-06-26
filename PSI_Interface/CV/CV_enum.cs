@@ -8881,14 +8881,29 @@ namespace PSI_Interface.CV
             /// <summary>Dataset for which the identifications and/or spectra/traces are in formats that can be parsed by the hosting data repository such that internal references between identifications and spectra/traces are preserved and browsable at the repository. However, some metadata is not properly described due to lack of CV terms or some auxiliary data, such as data used to create a spectral library or a sequence search database crucial to the analysis, is not available.</summary>
             MS_supported_by_repository_but_incomplete_data_and_or_metadata = 1003087,
 
-            /// <summary>Compression using truncation and zlib.</summary>
+            /// <summary>Data array compression using mantissa bit truncation followed by zlib compression.</summary>
             MS_truncation_and_zlib_compression = 1003088,
 
-            /// <summary>Compression using truncation, delta prediction and zlib.</summary>
+            /// <summary>Data array compression using mantissa bit truncation, delta prediction and zlib compression.</summary>
             MS_truncation__delta_prediction_and_zlib_compression = 1003089,
 
-            /// <summary>Compression using truncation, linear prediction and zlib.</summary>
+            /// <summary>Data array compression using mantissa bit truncation, linear prediction and zlib compression.</summary>
             MS_truncation__linear_prediction_and_zlib_compression = 1003090,
+
+            /// <summary>Settable parameter for a binary data compression event.</summary>
+            MS_binary_data_compression_parameter = 1003091,
+
+            /// <summary>Number of extraneous mantissa bits truncated to improve subsequent compression.</summary>
+            MS_number_of_mantissa_bits_truncated = 1003092,
+
+            /// <summary>Metalloendopeptidase found in the mushroom Grifola frondosa that cleaves proteins on the amino side of lysine residues.</summary>
+            MS_Lys_N = 1003093,
+
+            /// <summary>Thermo Scientific Orbitrap Exploris 240 Quadrupole Orbitrap MS.</summary>
+            MS_Orbitrap_Exploris_240 = 1003094,
+
+            /// <summary>Thermo Scientific Orbitrap Exploris 120 Quadrupole Orbitrap MS.</summary>
+            MS_Orbitrap_Exploris_120 = 1003095,
 
             /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 400000001,
