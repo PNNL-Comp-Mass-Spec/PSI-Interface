@@ -385,7 +385,7 @@ namespace CV_Generator
             }
 
             var functionName = "PopulateTermData";
-            var functionPartName = functionName + "Part";
+            var functionPart = "Part";
             var commentStart = indent + "/// <summary>Populate the CV Term data objects";
             var commentEnd = "</summary>\n";
             var functionPartCommentInsert = ", breakdown part ";
@@ -396,29 +396,38 @@ namespace CV_Generator
             var functionCounter = 1;
 
             var dictData  = new StringBuilder();
-
-            dictData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                            functionStartFirst + functionPartName + functionCounter + functionStartRest);
-
-            subFunctions.Add(functionPartName + functionCounter);
-            functionCounter++;
+            var lastNamespace = "";
 
             var counter = 0;
-            var skipBreak = true;
+            var first = true;
             foreach (var cv in _cvMapData)
             {
                 foreach (var term in cv.Value.Values)
                 {
-                    if (counter % 1000 == 0 && !skipBreak)
+                    if (counter % 1000 == 0 || !lastNamespace.Equals(term.Id_Namespace, StringComparison.OrdinalIgnoreCase) || first)
                     {
-                        AppendLine(dictData, functionEnd);
-                        AppendLine(dictData);
+                        if (!first)
+                        {
+                            AppendLine(dictData, functionEnd);
+                            AppendLine(dictData);
+                        }
+
+                        if (!lastNamespace.Equals(term.Id_Namespace) || string.IsNullOrWhiteSpace(lastNamespace))
+                        {
+                            counter = 0;
+                            functionCounter = 1;
+                            lastNamespace = term.Id_Namespace;
+                            if (lastNamespace.Equals("??") || string.IsNullOrWhiteSpace(lastNamespace))
+                                lastNamespace = "MS";
+                        }
+
+                        var currentFunctionName = $"{functionName}_{lastNamespace}_{functionPart}{functionCounter}";
                         dictData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                                        functionStartFirst + functionPartName + functionCounter + functionStartRest);
-                        subFunctions.Add(functionPartName + functionCounter);
+                                        functionStartFirst + currentFunctionName + functionStartRest);
+                        subFunctions.Add(currentFunctionName);
                         functionCounter++;
+                        first = false;
                     }
-                    skipBreak = false;
                     counter++;
 
                     AppendLine(dictData, indent + "    TermData.Add(" +
@@ -513,32 +522,34 @@ namespace CV_Generator
 
         private StringBuilder RelationsIsAEnumSplit(string indent)
         {
-            var items = new Dictionary<string, List<string>>();
+            // Use a list to maintain order
+            var items = new List<KeyValuePair<OBO_Term, List<string>>>();
             foreach (var obo in _allObo)
             {
                 foreach (var term in obo.Terms.Values)
                 {
                     if (term.IsA.Count > 0)
                     {
-                        items.Add(term.EnumName, new List<string>());
+                        var isAList = new List<string>();
                         foreach (var rel in term.IsA)
                         {
                             var rel2 = rel.Trim().Split(' ')[0];
                             if (_bigTermDict.ContainsKey(rel2))
                             {
-                                items[term.EnumName].Add(_bigTermDict[rel2].EnumName);
+                                isAList.Add(_bigTermDict[rel2].EnumName);
                             }
                         }
-                        if (items[term.EnumName].Count <= 0)
+
+                        if (isAList.Count >= 0)
                         {
-                            items.Remove(term.EnumName);
+                            items.Add(new KeyValuePair<OBO_Term, List<string>>(term, isAList));
                         }
                     }
                 }
             }
 
             var functionName = "FillRelationsIsA";
-            var functionPartName = functionName + "Part";
+            var functionPart = "Part";
             var commentStart = indent + "/// <summary>Populate the relationships between CV terms";
             var commentEnd = "</summary>\n";
             var functionPartCommentInsert = ", breakdown part ";
@@ -549,29 +560,38 @@ namespace CV_Generator
             var functionCounter = 1;
 
             var fillData = new StringBuilder();
-            fillData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                            functionStartFirst + functionPartName + functionCounter + functionStartRest);
-            subFunctions.Add(functionPartName + functionCounter);
-            functionCounter++;
+            var lastNamespace = "";
 
             var counter = 0;
-            var skipBreak = true;
+            var first = true;
             foreach (var item in items)
             {
-                if (counter % 1000 == 0 && !skipBreak)
+                if (counter % 1000 == 0 || !lastNamespace.Equals(item.Key.Id_Namespace, StringComparison.OrdinalIgnoreCase) || first)
                 {
-                    AppendLine(fillData, functionEnd);
-                    AppendLine(fillData);
+                    if (!first)
+                    {
+                        AppendLine(fillData, functionEnd);
+                        AppendLine(fillData);
+                    }
+
+                    if (!lastNamespace.Equals(item.Key.Id_Namespace))
+                    {
+                        counter = 0;
+                        functionCounter = 1;
+                        lastNamespace = item.Key.Id_Namespace;
+                    }
+
+                    var currentFunctionName = $"{functionName}_{lastNamespace}_{functionPart}{functionCounter}";
                     fillData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                                    functionStartFirst + functionPartName + functionCounter + functionStartRest);
-                    subFunctions.Add(functionPartName + functionCounter);
+                                    functionStartFirst + currentFunctionName + functionStartRest);
+                    subFunctions.Add(currentFunctionName);
                     functionCounter++;
+                    first = false;
                 }
-                skipBreak = false;
                 counter++;
 
                 //RelationsIsA.Add("name", new List<string> { "ref", "ref2", });
-                fillData.Append(indent + "    RelationsIsA.Add(" + "CVID." + item.Key + ", new List<CVID> { ");
+                fillData.Append(indent + "    RelationsIsA.Add(" + "CVID." + item.Key.EnumName + ", new List<CVID> { ");
                 foreach (var map in item.Value)
                 {
                     fillData.Append("CVID." + map + ", ");
