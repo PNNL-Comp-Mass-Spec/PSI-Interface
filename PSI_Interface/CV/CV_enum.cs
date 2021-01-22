@@ -5401,7 +5401,7 @@ namespace PSI_Interface.CV
             /// <summary>Thermo Scientific second generation Velos.</summary>
             MS_Velos_Plus = 1001909,
 
-            /// <summary>Thermo Scientific second generation Velos and Orbitrap.</summary>
+            /// <summary>Thermo Scientific LTQ Orbitrap Elite, often just referred to as the Orbitrap Elite.</summary>
             MS_LTQ_Orbitrap_Elite = 1001910,
 
             /// <summary>Thermo Scientific Q Exactive.</summary>
@@ -8905,6 +8905,153 @@ namespace PSI_Interface.CV
             /// <summary>Thermo Scientific Orbitrap Exploris 120 Quadrupole Orbitrap MS.</summary>
             MS_Orbitrap_Exploris_120 = 1003095,
 
+            /// <summary>Thermo Scientific LTQ Orbitrap Velos Pro, often just referred to as the Orbitrap Velos Pro.</summary>
+            MS_LTQ_Orbitrap_Velos_Pro = 1003096,
+
+            /// <summary>The probability based MaxQuant protein group score.</summary>
+            MS_MaxQuant_protein_group_level_score = 1003097,
+
+            /// <summary>Peptide probability from Andromeda.</summary>
+            MS_Andromeda_peptide_PEP = 1003098,
+
+            /// <summary>Peptide probability from MaxQuant-DIA algorithm.</summary>
+            MS_MaxQuant_DIA_peptide_PEP = 1003099,
+
+            /// <summary>PSM evidence score from MaxQuant-DIA algorithm.</summary>
+            MS_MaxQuant_DIA_score = 1003100,
+
+            /// <summary>PSM evidence PEP probability from MaxQuant-DIA algorithm.</summary>
+            MS_MaxQuant_DIA_PEP = 1003101,
+
+            /// <summary>Term for a comment field withing the NIST msp file format</summary>
+            MS_NIST_msp_comment = 1003102,
+
+            /// <summary>Interpretation format used for annotating individual spectrum ion peaks.</summary>
+            MS_ion_interpretation_format = 1003103,
+
+            /// <summary>Interpretation format designed primarily for peptides, with allowances for generic chemical formulas and other miscellaneous named ions.</summary>
+            MS_peptide_ion_interpretation_format = 1003104,
+
+            /// <summary>Interpretation format designed specifically for cross-linked peptide ion peaks.</summary>
+            MS_cross_linked_peptide_ion_interpretation_format = 1003105,
+
+            /// <summary>Interpretation format designed specifically for glycan ion peaks.</summary>
+            MS_glycan_ion_interpretation_format = 1003106,
+
+            /// <summary>Interpretation format designed specifically for lipid ion peaks.</summary>
+            MS_lipid_ion_interpretation_format = 1003107,
+
+            /// <summary>PatternLab for Proteomics is an integrated computational environment for analyzing shotgun proteomic data.</summary>
+            MS_PatternLab = 1003108,
+
+            /// <summary>Identifying cross-linked peptides in complex protein mixtures</summary>
+            MS_SIM_XL = 1003109,
+
+            /// <summary>SIM-XL identification search engine score</summary>
+            MS_SIM_XL_score = 1003110,
+
+            /// <summary>Quantification of cross-linked peptides in complex protein mixtures</summary>
+            MS_QUIN_XL = 1003111,
+
+            /// <summary>Thermo Scientific Orbitrap ID-X mass spectrometer with Tribrid architecture consisting of quadrupole mass filter, linear ion trap and Orbitrap mass analyzers.</summary>
+            MS_Orbitrap_ID_X = 1003112,
+
+            /// <summary>The OpenMS ConsesusID tool posterior error probability</summary>
+            MS_OpenMS_ConsensusID_PEP = 1003113,
+
+            /// <summary>The score of the best PSM selected by the underlying identification tool</summary>
+            MS_OpenMS_Best_PSM_Score = 1003114,
+
+            /// <summary>The OpenMS Target-decoy q-values at PSM level</summary>
+            MS_OpenMS_Target_decoy_PSM_q_value = 1003115,
+
+            /// <summary>The OpenMS Target-decoy q-values at peptide sequence level</summary>
+            MS_OpenMS_Target_decoy_peptide_q_value = 1003116,
+
+            /// <summary>The OpenMS Target-decoy q-values at protein level</summary>
+            MS_OpenMS_Target_decoy_protein_q_value = 1003117,
+
+            /// <summary>A Method for Efficient High-Confidence Protein Inference. The tool is part of the OpenMS framework</summary>
+            MS_EPIFANY = 1003118,
+
+            /// <summary>Protein Posterior probability calculated by EPIFANY protein inference algorithm</summary>
+            MS_EPIFANY_Protein_posterior_probability = 1003119,
+
+            /// <summary>The data type LFQ intensity produced by OpenMS.</summary>
+            MS_OpenMS_LFQ_intensity = 1003120,
+
+            /// <summary>The data type LFQ spectral count produced by OpenMS.</summary>
+            MS_OpenMS_LFQ_spectral_count = 1003121,
+
+            /// <summary>Bruker Daltonics' rapiflex: MALDI TOF/TOF.</summary>
+            MS_rapifleX = 1003122,
+
+            /// <summary>Bruker Daltonics timsTOF series</summary>
+            MS_Bruker_Daltonics_timsTOF_series = 1003123,
+
+            /// <summary>Bruker Daltonics' timsTOF fleX</summary>
+            MS_timsTOF_fleX = 1003124,
+
+            /// <summary>ProSight spectrum-level Q-value.</summary>
+            MS_ProSight_spectral_Q_value = 1003125,
+
+            /// <summary>ProSight spectrum-level P-score.</summary>
+            MS_ProSight_spectral_P_score = 1003126,
+
+            /// <summary>ProSight spectrum-level E-value.</summary>
+            MS_ProSight_spectral_E_value = 1003127,
+
+            /// <summary>ProSight spectrum-level C-score.</summary>
+            MS_ProSight_spectral_C_score = 1003128,
+
+            /// <summary>Estimation of the Q-value for proteoforms.</summary>
+            MS_proteoform_level_Q_value = 1003129,
+
+            /// <summary>ProSight proteoform-level Q-value.</summary>
+            MS_ProSight_proteoform_Q_value = 1003130,
+
+            /// <summary>Isoform level information.</summary>
+            MS_isoform_level_identification_attribute = 1003131,
+
+            /// <summary>Identification confidence metric for a isoform.</summary>
+            MS_isoform_level_identification_statistic = 1003132,
+
+            /// <summary>Estimation of the Q-value for isoforms.</summary>
+            MS_isoform_level_Q_value = 1003133,
+
+            /// <summary>ProSight isoform-level Q-value.</summary>
+            MS_ProSight_isoform_Q_value = 1003134,
+
+            /// <summary>ProSight protein-level Q-value.</summary>
+            MS_ProSight_protein_Q_value = 1003135,
+
+            /// <summary>Search engine input parameters specific to ProSight.</summary>
+            MS_ProSight_input_parameter = 1003136,
+
+            /// <summary>Search engine input parameters specific to TDPortal.</summary>
+            MS_TDPortal_input_parameter = 1003137,
+
+            /// <summary>If true, runs delta m mode in ProSight.</summary>
+            MS_ProSight_Run_delta_m_mode = 1003138,
+
+            /// <summary>If true, runs Subsequence Search mode in ProSight.</summary>
+            MS_ProSight_Run_Subsequence_Search_mode = 1003139,
+
+            /// <summary>If true, runs Annotated Proteoform Search mode in ProSight.</summary>
+            MS_ProSight_Run_Annotated_Proteoform_Search_mode = 1003140,
+
+            /// <summary>ProSight: Database search engine for top-down proteomics.</summary>
+            MS_ProSight = 1003141,
+
+            /// <summary>TDPortal: Database search engine for top-down proteomics.</summary>
+            MS_TDPortal = 1003142,
+
+            /// <summary>A data array of mass values.</summary>
+            MS_mass_array = 1003143,
+
+            /// <summary>SCIEX Triple Quad 7500.</summary>
+            MS_Triple_Quad_7500 = 1003144,
+
             /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 400000001,
 
@@ -11815,7 +11962,7 @@ namespace PSI_Interface.CV
             /// <summary>13C3 label for SILAC.</summary>
             UNIMOD_Label_13C_3_ = 100001296,
 
-            /// <summary>13C3 15N1 label for SILAC.</summary>
+            /// <summary>SILAC or AQUA label.</summary>
             UNIMOD_Label_13C_3_15N_1_ = 100001297,
 
             /// <summary>13C4 15N1 label for SILAC.</summary>
@@ -11980,7 +12127,7 @@ namespace PSI_Interface.CV
             /// <summary>Methionine oxidation to homocysteic acid.</summary>
             UNIMOD_Homocysteic_acid = 100001384,
 
-            /// <summary>Conversion of carboxylic acid to hydroxamic acid.</summary>
+            /// <summary>ADP-ribosylation followed by conversion to hydroxamic acid via hydroxylamine.</summary>
             UNIMOD_Hydroxamic_acid = 100001385,
 
             /// <summary>3-phosphoglyceryl.</summary>
@@ -13539,6 +13686,15 @@ namespace PSI_Interface.CV
 
             /// <summary>Native TMTpro Tandem Mass Tag.</summary>
             UNIMOD_TMTpro_zero = 100002017,
+
+            /// <summary>Glycosylation with KDO.</summary>
+            UNIMOD_Kdo = 100002022,
+
+            /// <summary>Andrographolide with the loss of H2O.</summary>
+            UNIMOD_Andro_H2O = 100002025,
+
+            /// <summary>Photo-induced histidine adduct.</summary>
+            UNIMOD_His_O_2_ = 100002027,
 
             /// <summary>Description not provided</summary>
             PATO_obsolete_pato_OBSOLETE = 300000000,

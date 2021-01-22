@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSI_Interface", "PSI_Interface\PSI_Interface.csproj", "{96F29CF8-7B30-471C-BCAB-C15C87D7DBB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSI_Interface", "PSI_Interface\PSI_Interface.csproj", "{96F29CF8-7B30-471C-BCAB-C15C87D7DBB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV_Generator", "CV_Generator\CV_Generator.csproj", "{DE900D24-6F59-4095-91AA-2807530AFA05}"
 EndProject
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27D73D9A-E1EF-4F03-A6BE-6A3A64DC2800}
 	EndGlobalSection
 EndGlobal
