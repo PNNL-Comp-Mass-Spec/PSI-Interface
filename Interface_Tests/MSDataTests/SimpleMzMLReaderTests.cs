@@ -36,7 +36,7 @@ namespace Interface_Tests.MSDataTests
                 {
                     if (specCount < 100 || specCount >= expectedSpectra - 100)
                     {
-                        Console.WriteLine("Spectrum {0}, NativeID {1} has {2:N0} data points", spec.ScanNumber, spec.NativeId, spec.Peaks.Length);
+                        Console.WriteLine("Spectrum {0,4}, NativeID {1,-45} has {2:N0} data points", spec.ScanNumber, spec.NativeId, spec.Peaks.Length);
                     }
                     else if (specCount == 100)
                     {
@@ -81,7 +81,7 @@ namespace Interface_Tests.MSDataTests
                 }
 
                 Assert.AreEqual(expectedSpectra, reader.NumSpectra);
-                var stepSize = Math.Max(1, (int)(expectedSpectra / 100));
+                var stepSize = Math.Max(1, (expectedSpectra / 100));
 
                 // Note: calling .ReadMassSpectrum with scanNumber = 1 returns the first spectrum in the file, regardless of its actual scan number
                 var scanNumber = 1;
@@ -90,9 +90,9 @@ namespace Interface_Tests.MSDataTests
                     var spec = reader.ReadMassSpectrum(scanNumber, includePeaks);
 
                     if (includePeaks)
-                        Console.WriteLine("Spectrum {0}, NativeID {1}, scan {2} has {3:N0} data points", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber, spec.Peaks.Length);
+                        Console.WriteLine("Spectrum {0,4}, NativeID {1,-45}, scan {2,4} has {3:N0} data points", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber, spec.Peaks.Length);
                     else
-                        Console.WriteLine("Spectrum {0}, NativeID {1}, scan {2} (peaks not loaded)", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber);
+                        Console.WriteLine("Spectrum {0,4}, NativeID {1,-45}, scan {2,4} (peaks not loaded)", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber);
 
                     scanNumber += stepSize;
                 }
@@ -145,9 +145,11 @@ namespace Interface_Tests.MSDataTests
                     }
 
                     if (includePeaks)
-                        Console.WriteLine("Spectrum {0}, NativeID {1}, scan {2} has {3:N0} data points", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber, spec.Peaks.Length);
+                        Console.WriteLine("Spectrum {0,4}, NativeID {1,-45}, scan {2,4} has {3:N0} data points", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber, spec.Peaks.Length);
                     else
-                        Console.WriteLine("Spectrum {0}, NativeID {1}, scan {2} (peaks not loaded)", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber);
+                        Console.WriteLine("Spectrum {0,4}, NativeID {1,-45}, scan {2,4} (peaks not loaded)", spec.ScanNumber, spec.NativeId, spec.NativeIdScanNumber);
+
+                    Assert.AreEqual(scanNumber, spec.NativeIdScanNumber);
                 }
             }
         }
@@ -209,13 +211,13 @@ namespace Interface_Tests.MSDataTests
                 }
 
                 Assert.AreEqual(expectedChromatograms, reader.NumChromatograms);
-                var stepSize = Math.Max(1, (int)(expectedChromatograms / 100));
+                var stepSize = Math.Max(1, (expectedChromatograms / 100));
 
                 var chromatogramNumber = 1;
                 while (chromatogramNumber <= expectedChromatograms)
                 {
                     var chrom = reader.ReadChromatogram(chromatogramNumber);
-                    Console.WriteLine("Chromatogram {0}, NativeID {1} has {2:N0} data points", chrom.Index, chrom.Id, chrom.Intensities.Length);
+                    Console.WriteLine("Chromatogram {0,2}, NativeID {1,-35} has {2:N0} data points", chrom.Index, chrom.Id, chrom.Intensities.Length);
 
                     chromatogramNumber += stepSize;
                 }
@@ -256,7 +258,7 @@ namespace Interface_Tests.MSDataTests
                 {
                     if (specCount < 100 || specCount >= expectedSpectra - 100)
                     {
-                        Console.WriteLine("Spectrum {0}, NativeID {1} has {2:N0} data points", spec.ScanNumber, spec.NativeId, spec.Peaks.Length);
+                        Console.WriteLine("Spectrum {0,4}, NativeID {1,-45} has {2:N0} data points", spec.ScanNumber, spec.NativeId, spec.Peaks.Length);
                     }
                     else if (specCount == 100)
                     {
@@ -277,7 +279,7 @@ namespace Interface_Tests.MSDataTests
                     }
                     else
                     {
-                        Console.WriteLine("Chromatogram {0}, NativeID {1} has {2:N0} data points", chrom.Index, chrom.Id, chrom.Intensities.Length);
+                        Console.WriteLine("Chromatogram {0}, NativeID {1,-45} has {2:N0} data points", chrom.Index, chrom.Id, chrom.Intensities.Length);
                     }
 
                     chromCount++;
@@ -321,7 +323,7 @@ namespace Interface_Tests.MSDataTests
                     }
                     else
                     {
-                        Console.WriteLine("Chromatogram {0}, NativeID {1} has {2:N0} data points", chrom.Index, chrom.Id, chrom.Intensities.Length);
+                        Console.WriteLine("Chromatogram {0}, NativeID {1,-45} has {2:N0} data points", chrom.Index, chrom.Id, chrom.Intensities.Length);
                     }
 
                     chromCount++;
