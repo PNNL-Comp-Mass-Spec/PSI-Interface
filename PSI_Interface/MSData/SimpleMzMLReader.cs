@@ -1032,7 +1032,7 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Chromatogram Peak data
         /// </summary>
-        public struct ChromatogramPeak
+        public readonly struct ChromatogramPeak
         {
             /// <summary>
             /// Peak time
