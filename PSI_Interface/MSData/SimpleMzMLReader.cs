@@ -1330,6 +1330,26 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
+        /// Retrieve the spectrum for the specific scan number
+        /// While <see cref="ReadMassSpectrum"/> expects a 1-based scan index, this method expects actual scan numbers
+        /// If the reader was not instantiated with randomAccess = true, this method calls TryMakeRandomAccessCapable
+        /// </summary>
+        /// <param name="scanNumber"></param>
+        /// <param name="includePeaks"></param>
+        public SimpleSpectrum GetSpectrumForScan(int scanNumber, bool includePeaks = true)
+        {
+            if (!_randomAccess)
+            {
+                TryMakeRandomAccessCapable();
+            }
+
+            if (!_spectrumOffsets.ActualScanToIdMap.TryGetValue(scanNumber, out var artificialScanNumber))
+                return null;
+
+            return ReadMassSpectrumRandom(artificialScanNumber, includePeaks);
+        }
+
+        /// <summary>
         /// Returns all mass spectra.
         /// Uses "yield return" to allow processing one spectra at a time if called from a foreach loop statement.
         /// </summary>
