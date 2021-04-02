@@ -140,6 +140,11 @@ namespace PSI_Interface.MSData
             public readonly Dictionary<long, string> IdToNativeMap = new Dictionary<long, string>();
             public readonly Dictionary<string, long> NativeToIdMap = new Dictionary<string, long>();
 
+            /// <summary>
+            /// Keys are actual scan numbers (e.g. 200 for NativeID "controllerType=0 controllerNumber=1 scan=200")
+            /// Values are the artificial scan number
+            /// </summary>
+            public readonly Dictionary<long, long> ActualScanToIdMap = new Dictionary<long, long>();
             public void AddOffset(string idRef, string offset)
             {
                 AddOffset(idRef, long.Parse(offset));
@@ -148,7 +153,19 @@ namespace PSI_Interface.MSData
             public void AddOffset(string idRef, long offset)
             {
                 var scanNum = _artificialScanNum++;
+
+                // Try to convert the NativeId to a scan number
+                // This is straightforward for Thermo datasets, but can be problematic for others
+                // * Waters .raw files have multiple functions (and spectra) per scan number, unless a filter is used to only select one function
+                // * Agilent datasets often have non-contiguous scan numbers (in NativeID)
+                // * UIMF datasets have multiple frames, and each frame has its own list of scans
+
+                if (NativeIdConversion.TryGetScanNumberLong(idRef, out var actualScanNumber))
                 {
+                    if (!ActualScanToIdMap.ContainsKey(actualScanNumber))
+                    {
+                        ActualScanToIdMap.Add(actualScanNumber, scanNum);
+                    }
                 }
 
                 var item = new IndexItem(idRef, offset, scanNum);
