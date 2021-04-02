@@ -29,7 +29,7 @@ namespace PSI_Interface.MSData
         private XmlReader _xmlReaderForYield;
         private XmlReader _xmlReaderForAfterYield;
         private bool _reduceMemoryUsage;
-        private long _artificialScanNum = 1;
+        //private long _artificialScanNum = 1;
         private bool _numSpectraRead = false;
         private long _numSpectra = 0;
         private bool _numChromatogramsRead = false;
@@ -90,8 +90,21 @@ namespace PSI_Interface.MSData
             {
                 public readonly string Ref;
                 public readonly long Offset;
+
+                /// <summary>
+                /// Scan number (1-based) or Chromatogram number (1-based)
+                /// </summary>
+                /// <remarks>
+                /// Even if the first scan in a file has scan number = 200, the value stored here will be 1
+                /// </remarks>
                 public readonly long IdNum;
 
+                /// <summary>
+                /// Constructor
+                /// </summary>
+                /// <param name="idRef">NativeID, e.g. controllerType=0 controllerNumber=1 scan=1</param>
+                /// <param name="offset">Byte offset</param>
+                /// <param name="idNum">Scan number (1-based) or Chromatogram number (1-based)</param>
                 public IndexItem(string idRef, long offset, long idNum)
                 {
                     Ref = idRef;
@@ -135,10 +148,7 @@ namespace PSI_Interface.MSData
             public void AddOffset(string idRef, long offset)
             {
                 var scanNum = _artificialScanNum++;
-                long num;
-                if (NativeIdConversion.TryGetScanNumberLong(idRef, out num))
                 {
-                    scanNum = num;
                 }
 
                 var item = new IndexItem(idRef, offset, scanNum);
@@ -528,8 +538,12 @@ namespace PSI_Interface.MSData
         public class SimpleSpectrum : ParamData
         {
             /// <summary>
-            /// Spectrum scan number
+            /// Spectrum scan number (1-based)
             /// </summary>
+            /// <remarks>
+            /// The first spectrum in the file will have ScanNumber = 1,
+            /// even if the scan number defined by the NativeID is different
+            /// </remarks>
             public int ScanNumber { get; }
 
             /// <summary>
@@ -1314,19 +1328,36 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
+        /// <para>
         /// Returns a single spectrum from the file
+        /// </para>
+        /// <para>
+        /// If Random access is disabled, this method calls method ReadMassSpectrumNonRandom
+        /// That will cause all spectra in the file to be loaded into memory
+        /// </para>
         /// </summary>
-        /// <param name="index">index of spectrum</param>
-        /// <param name="includePeaks">true to include peak data</param>
-        /// <returns></returns>
-        /// <remarks>If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the spectrum.
-        /// If random access mode is off, this will cause the memory usage reducing mode to shut of, and all spectra will be read into memory.</remarks>
+        /// <param name="index">
+        /// 1-based index of the spectrum in the file
+        /// Using index = 1 will return the first spectrum in the file, regardless of its actual scan number
+        /// To obtain the data for a specific scan number, first open the file with randomAccess enabled, then use <see cref="GetSpectrumForScan"/>
+        /// </param>
+        /// <param name="includePeaks">true to include peak data (ignored if _randomAccess is false)</param>
+        /// <returns>Mass spectrum</returns>
+        /// <remarks>
+        /// <para>
+        /// To enable random access, either set randomAccess to true when instantiating the SimpleMzMLReader class, or call TryMakeRandomAccessCapable
+        /// </para>
+        /// <para>
+        /// If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the spectrum.
+        /// If random access mode is off, this will cause the memory usage reducing mode to shut off, and all spectra will be read into memory.
+        /// </para>
+        /// </remarks>
         public SimpleSpectrum ReadMassSpectrum(int index, bool includePeaks = true)
         {
-            // Proper functionality when not random access
             if (!_randomAccess)
             {
-                return ReadMassSpectrumNonRandom(index, includePeaks);
+                // Proper functionality when not random access
+                return ReadMassSpectrumNonRandom(index);
             }
             return ReadMassSpectrumRandom(index, includePeaks);
         }
@@ -1350,17 +1381,19 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Returns a single chromatogram from the file
         /// </summary>
-        /// <param name="index">index of chromatogram</param>
-        /// <param name="includePeaks">true to include peak data</param>
+        /// <param name="index">1-based index of the chromatogram in the file</param>
+        /// <param name="includePeaks">true to include peak data (ignored if _randomAccess is false)</param>
         /// <returns></returns>
-        /// <remarks>If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the chromatogram.
-        /// If random access mode is off, this will cause the memory usage reducing mode to shut of, and all chromatograms will be read into memory.</remarks>
+        /// <remarks>
+        /// If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the chromatogram.
+        /// If random access mode is off, this will cause the memory usage reducing mode to shut of, and all chromatograms will be read into memory.
+        /// </remarks>
         public SimpleChromatogram ReadChromatogram(int index, bool includePeaks = true)
         {
-            // Proper functionality when not random access
             if (!_randomAccess)
             {
-                return ReadChromatogramNonRandom(index, includePeaks);
+                // Proper functionality when not random access
+                return ReadChromatogramNonRandom(index);
             }
             return ReadChromatogramRandom(index, includePeaks);
         }
@@ -1377,7 +1410,7 @@ namespace PSI_Interface.MSData
         {
             if (_reduceMemoryUsage)
             {
-                _artificialScanNum = 1;
+                //_artificialScanNum = 1;
                 if (!_haveMetaData)
                 {
                     ReadMzMl();
@@ -1432,17 +1465,27 @@ namespace PSI_Interface.MSData
         /// Read a single mass spectrum and return it.
         /// Causes all spectra in the file to be loaded into memory
         /// </summary>
-        /// <param name="index">index of spectrum</param>
-        /// <param name="includePeaks">true to include peak data</param>
-        private SimpleSpectrum ReadMassSpectrumNonRandom(long index, bool includePeaks = true)
+        /// <param name="index">
+        /// 1-based index of the spectrum in the file
+        /// Using index = 1 will return the first spectrum in the file, regardless of its actual scan number
+        /// To obtain the data for a specific scan number, first open the file with randomAccess enabled, then use <see cref="GetSpectrumForScan"/>
+        /// </param>
+        private SimpleSpectrum ReadMassSpectrumNonRandom(int index)
         {
             if (!_allRead)
             {
-                _artificialScanNum = 1;
+                //_artificialScanNum = 1;
                 _reduceMemoryUsage = false; // They called this on a non-random access reader, now they suffer the consequences.
                 ReadMzMl();
             }
-            return _spectra[(int)index];
+
+            if (index == 0)
+            {
+                Console.WriteLine("Warning: the index argument for method ReadMassSpectrumNonRandom is 1-based");
+                return null;
+            }
+
+            return _spectra[index - 1];
         }
 
         /// <summary>
@@ -1508,17 +1551,23 @@ namespace PSI_Interface.MSData
         /// Read a single chromatogram and return it.
         /// Causes all spectra in the file to be loaded into memory
         /// </summary>
-        /// <param name="index">index of spectrum</param>
-        /// <param name="includePeaks">true to include peak data</param>
-        private SimpleChromatogram ReadChromatogramNonRandom(long index, bool includePeaks = true)
+        /// <param name="index">1-based index of the chromatogram in the file</param>
+        private SimpleChromatogram ReadChromatogramNonRandom(int index)
         {
             if (!_allRead)
             {
-                _artificialScanNum = 1;
+                //_artificialScanNum = 1;
                 _reduceMemoryUsage = false; // They called this on a non-random access reader, now they suffer the consequences.
                 ReadMzMl();
             }
-            return _chromatograms[(int)index];
+
+            if (index == 0)
+            {
+                Console.WriteLine("Warning: the index argument for method ReadChromatogramNonRandom is 1-based");
+                return null;
+            }
+
+            return _chromatograms[index - 1];
         }
         #endregion
 
@@ -1544,7 +1593,11 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Read a single mass spectrum and return it.
         /// </summary>
-        /// <param name="index">index of spectrum</param>
+        /// <param name="index">
+        /// 1-based index of the spectrum in the file
+        /// Using index = 1 will return the first spectrum in the file, regardless of its actual scan number
+        /// To obtain the data for a specific scan number, first open the file with randomAccess enabled, then use <see cref="GetSpectrumForScan"/>
+        /// </param>
         /// <param name="includePeaks">true to include peak data</param>
         private SimpleSpectrum ReadMassSpectrumRandom(long index, bool includePeaks = true)
         {
@@ -1589,7 +1642,7 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Read a single chromatogram and return it.
         /// </summary>
-        /// <param name="index">index of chromatogram</param>
+        /// <param name="index">1-based index of the chromatogram in the file</param>
         /// <param name="includePeaks">true to include peak data</param>
         private SimpleChromatogram ReadChromatogramRandom(long index, bool includePeaks = true)
         {
@@ -3144,22 +3197,37 @@ namespace PSI_Interface.MSData
                 nativeId = reader.GetAttribute("nativeID"); // Native ID in mzML_1.0.0
             }
 
-            int scanNum;
+            if (string.IsNullOrWhiteSpace(nativeId))
+            {
+                throw new Exception("nativeID is empty for spectrum index " + index);
+            }
+
+            // Use the index (0-based) as a "scan number" (the first spectrum in the file typically has scan number = 1)
+            // It's the only reliable way to have the scan number be contiguous and have no duplicates
+            var scanNum = Convert.ToInt32(index) + 1;
+
+            // Converting the NativeId to a scan number is nice and all, but also problematic:
+            // * Waters .raw files have multiple functions (and spectra) per scan number, unless a filter is used to only select one function
+            // * Agilent datasets often have non-contiguous scan numbers (in NativeID)
+            // * UIMF datasets have multiple frames, and each frame has its own list of scans
+            // * Other examples undoubtedly exist
+            // Better to just rely on the "index + 1" as a 1-based index
             // If a random access reader, there is already a scan number stored, based on the order of the index. Use it instead.
-            if (_randomAccess && nativeId != null && _spectrumOffsets.NativeToIdMap.ContainsKey(nativeId))
-            {
-                scanNum = (int) (_spectrumOffsets.NativeToIdMap[nativeId]);
-            }
-            else
-            {
-                scanNum = (int)(_artificialScanNum++);
-                // Interpret the NativeID (if the format has an interpreter) and use it instead of the artificial number.
-                // TODO: Better handling than the artificial ID for other nativeIDs (ones currently not supported)
-                if (NativeIdConversion.TryGetScanNumberInt(nativeId, out var num))
-                {
-                    scanNum = num;
-                }
-            }
+            //if (_randomAccess)
+            //{
+            //    scanNum = (int)(_spectrumOffsets.NativeToIdMap[nativeId]);
+            //}
+            //else
+            //{
+            //    //scanNum = (int)(_artificialScanNum++);
+            //    scanNum = Convert.ToInt32(index) + 1;
+            //    // Interpret the NativeID (if the format has an interpreter) and use it instead of the artificial number.
+            //    // TODO: Better handling than the artificial ID for other nativeIDs (ones currently not supported)
+            //    if (NativeIdConversion.TryGetScanNumberInt(nativeId, out var num))
+            //    {
+            //        scanNum = num;
+            //    }
+            //}
 
             var defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
             reader.ReadStartElement("spectrum"); // Throws exception if we are not at the "spectrum" tag.
