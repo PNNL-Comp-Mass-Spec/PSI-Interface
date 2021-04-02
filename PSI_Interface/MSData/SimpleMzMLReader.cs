@@ -1364,6 +1364,20 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
+        /// Read the file-level metadata from the mzML file, without reading any spectra
+        /// </summary>
+        private void RequireMetadata()
+        {
+            if (!_haveMetaData)
+            {
+                var tempBool = _reduceMemoryUsage; // Set a flag to avoid reading the entire file before returning.
+                ReadMzMl(); // Read the index and metadata so that the offsets get populated
+                            // The number of spectra is an attribute in the spectrumList tag
+                _reduceMemoryUsage = tempBool;
+            }
+        }
+
+        /// <summary>
         /// Returns all mass spectra.
         /// Uses "yield return" to allow processing one spectra at a time if called from a foreach loop statement.
         /// </summary>
