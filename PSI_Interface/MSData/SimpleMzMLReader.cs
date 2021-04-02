@@ -1809,7 +1809,7 @@ namespace PSI_Interface.MSData
         {
             var stream = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1);
             var testPos = stream.Length;
-            //stream.Position = testPos; // 300 bytes from the end of the file - should be enough
+
             var streamReader = new StreamReader(stream, Encoding.UTF8, true, 65536);
             streamReader.DiscardBufferedData();
             var haveOffset = false;
@@ -1835,7 +1835,6 @@ namespace PSI_Interface.MSData
                         var rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
                         stringBuffer = stringBuffer.Substring(0, endOfString);
                         stream.Seek(-rewindBy, SeekOrigin.Current);
-                        //file.Position = bufEnd - rewindBy;
                     }
 
                     var found = stringBuffer.IndexOf("<indexListOffset", StringComparison.OrdinalIgnoreCase);
@@ -1882,7 +1881,6 @@ namespace PSI_Interface.MSData
                             var rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
                             stringBuffer = stringBuffer.Substring(0, endOfString);
                             stream.Seek(-rewindBy, SeekOrigin.Current);
-                            //file.Position = bufEnd - rewindBy;
                         }
 
                         var found = stringBuffer.IndexOf("<indexList ", StringComparison.OrdinalIgnoreCase);
@@ -2004,7 +2002,6 @@ namespace PSI_Interface.MSData
                         var rewindBy = _encoding.GetByteCount(stringBuffer.Substring(endOfString));
                         stringBuffer = stringBuffer.Substring(0, endOfString);
                         file.Seek(-rewindBy, SeekOrigin.Current);
-                        //file.Position = bufEnd - rewindBy;
                     }
 
                     var searchPoint = 0;
@@ -3414,35 +3411,12 @@ namespace PSI_Interface.MSData
                 {
                     mzs = dataArray;
                 }
-            /*
-            var centroided = false;
-            foreach (var cvParam in specParams.CVParams)
-            {
-                switch (cvParam.TermInfo.Id)
                 else if (dataArray.ArrayType == ArrayType.intensity_array)
                 {
-                    case "MS:1000127":
-                        // name="centroid spectrum"
-                        centroided = true;
-                        break;
-                    case "MS:1000128":
-                        // name="profile spectrum"
-                        centroided = false;
-                        break;
                     intensities = dataArray;
                 }
             }
 
-            if (!centroided && includePeaks)
-            {
-                // Centroid spectrum
-                // ProteoWizard
-                var centroider = new Centroider(mzs.Data, intensities.Data);
-                double[] centroidedMzs, centroidedIntensities;
-                centroider.GetCentroidedData(out centroidedMzs, out centroidedIntensities);
-                mzs.Data = centroidedMzs;
-                intensities.Data = centroidedIntensities;
-            }*/
             if (scans.Count == 1)
             {
                 scan = scans[0];
