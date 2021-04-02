@@ -146,7 +146,7 @@ namespace PSI_Interface.MSData
                 Offsets.Add(item);
             }
 
-            private void AddMapForOffset(IndexItem offset)
+            private void AddMapForOffset(IndexItem item)
             {
                 if (IndexType == IndexListType.Chromatogram)
                 {
@@ -156,15 +156,15 @@ namespace PSI_Interface.MSData
 
                 // This won't be sufficient until there is a valid parser for all forms of NativeID.
                 // Using artificial scan number for now.
-                OffsetsMapInt.Add(offset.IdNum, offset.Offset);
-                IdToNativeMap.Add(offset.IdNum, offset.Ref);
                 NativeToIdMap.Add(offset.Ref, offset.IdNum);
+                OffsetsMapInt.Add(item.IdNum, item.Offset);
+                IdToNativeMap.Add(item.IdNum, item.Ref);
                 /*if (IndexType == IndexListType.Spectrum)
                 {
-                    long id = Int64.Parse(offset.Ref.Substring(offset.Ref.LastIndexOfAny(new char[] {'=', 'F'}) + 1));
-                    OffsetsMapInt.Add(id, offset.Offset);
-                    IdNativeMap.Add(id, offset.Ref);
-                    offset.IdNum = id;
+                    long id = Int64.Parse(item.Ref.Substring(item.Ref.LastIndexOfAny(new char[] {'=', 'F'}) + 1));
+                    OffsetsMapInt.Add(id, item.Offset);
+                    IdNativeMap.Add(id, item.Ref);
+                    item.IdNum = id;
                 }*/
             }
 
@@ -1039,22 +1039,22 @@ namespace PSI_Interface.MSData
             if (sourceFile.Name.Trim().EndsWith(".mzML.gz", StringComparison.OrdinalIgnoreCase))
             {
                 _isGzipped = true;
-                var file = new GZipStream(_file, CompressionMode.Decompress);
+                var zipStreamFile = new GZipStream(_file, CompressionMode.Decompress);
                 if (!_randomAccess)
                 {
-                    _file = file;
+                    _file = zipStreamFile;
                 }
                 else
                 {
                     // Unzip the file to the temp path
                     _unzippedFilePath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(sourceFile.Name));
                     using (_file)
-                    using (file)
+                    using (zipStreamFile)
                     using (
                         var tempFile = new FileStream(_unzippedFilePath, FileMode.Create, FileAccess.ReadWrite,
                             FileShare.None, 65536))
                     {
-                        file.CopyTo(tempFile/*, 65536*/);
+                        zipStreamFile.CopyTo(tempFile/*, 65536*/);
                     }
                     _file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
                 }
@@ -1857,12 +1857,12 @@ namespace PSI_Interface.MSData
                         // Grab everything between '<' and the next '>'
                         var builder = stringBuffer.Substring(searchPoint + 1, end - 1 - (searchPoint + 1));
                         // Get the ID of the tag
-                        var attribName = "id";
+                        var attributeName = "id";
                         if (_version == MzML_Version.mzML1_0_0)
                         {
-                            attribName = "nativeID";
+                            attributeName = "nativeID";
                         }
-                        var idIndex = builder.IndexOf(attribName + "=\"", StringComparison.OrdinalIgnoreCase);
+                        var idIndex = builder.IndexOf(attributeName + "=\"", StringComparison.OrdinalIgnoreCase);
                         var idOpenQuote = builder.IndexOf("\"", idIndex, StringComparison.OrdinalIgnoreCase);
                         var idCloseQuote = builder.IndexOf("\"", idOpenQuote + 1, StringComparison.OrdinalIgnoreCase);
                         var length = idCloseQuote - idOpenQuote - 1;
@@ -3109,7 +3109,7 @@ namespace PSI_Interface.MSData
             reader.ReadStartElement("spectrum"); // Throws exception if we are not at the "spectrum" tag.
             var precursors = new List<Precursor>();
             var scans = new List<ScanData>();
-            var bdas = new List<BinaryDataArray>();
+            var binaryData = new List<BinaryDataArray>();
             var specParams = new ParamData();
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -3201,7 +3201,7 @@ namespace PSI_Interface.MSData
                         // Schema requirements: zero to one instances of this element
                         if (includePeaks)
                         {
-                            bdas.AddRange(ReadBinaryDataArrayList(reader.ReadSubtree(), defaultArraySize));
+                            binaryData.AddRange(ReadBinaryDataArrayList(reader.ReadSubtree(), defaultArraySize));
                             reader.ReadEndElement(); // "binaryDataArrayList" must have child nodes
                         }
                         else
@@ -3217,26 +3217,20 @@ namespace PSI_Interface.MSData
             reader.Dispose();
 
             // Process the spectrum data
-            var scan = new ScanData();
             var mzs = new BinaryDataArray();
             var intensities = new BinaryDataArray();
-            foreach (var bda in bdas)
+            foreach (var dataArray in binaryData)
             {
-                if (bda.ArrayType == ArrayType.m_z_array)
+                if (dataArray.ArrayType == ArrayType.m_z_array)
                 {
-                    mzs = bda;
+                    mzs = dataArray;
                 }
-                else if (bda.ArrayType == ArrayType.intensity_array)
-                {
-                    intensities = bda;
-                }
-            }
-
             /*
             var centroided = false;
             foreach (var cvParam in specParams.CVParams)
             {
                 switch (cvParam.TermInfo.Id)
+                else if (dataArray.ArrayType == ArrayType.intensity_array)
                 {
                     case "MS:1000127":
                         // name="centroid spectrum"
@@ -3246,6 +3240,7 @@ namespace PSI_Interface.MSData
                         // name="profile spectrum"
                         centroided = false;
                         break;
+                    intensities = dataArray;
                 }
             }
 
@@ -3293,7 +3288,7 @@ namespace PSI_Interface.MSData
 
             var defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
             reader.ReadStartElement("chromatogram"); // Throws exception if we are not at the "chromatogram" tag.
-            var bdas = new List<BinaryDataArray>();
+            var binaryData = new List<BinaryDataArray>();
             var chromParams = new ParamData();
             Precursor precursor = null;
             IsolationWindow product = null;
@@ -3342,7 +3337,7 @@ namespace PSI_Interface.MSData
                         // Schema requirements: zero to one instances of this element
                         if (includePeaks)
                         {
-                            bdas.AddRange(ReadBinaryDataArrayList(reader.ReadSubtree(), defaultArraySize));
+                            binaryData.AddRange(ReadBinaryDataArrayList(reader.ReadSubtree(), defaultArraySize));
                             reader.ReadEndElement(); // "binaryDataArrayList" must have child nodes
                         }
                         else
@@ -3360,15 +3355,15 @@ namespace PSI_Interface.MSData
             // Process the chromatogram data
             var times = new BinaryDataArray();
             var intensities = new BinaryDataArray();
-            foreach (var bda in bdas)
+            foreach (var dataArray in binaryData)
             {
-                if (bda.ArrayType == ArrayType.time_array)
+                if (dataArray.ArrayType == ArrayType.time_array)
                 {
-                    times = bda;
+                    times = dataArray;
                 }
-                else if (bda.ArrayType == ArrayType.intensity_array)
+                else if (dataArray.ArrayType == ArrayType.intensity_array)
                 {
-                    intensities = bda;
+                    intensities = dataArray;
                 }
             }
 
@@ -4224,8 +4219,8 @@ namespace PSI_Interface.MSData
         private List<BinaryDataArray> ReadBinaryDataArrayList(XmlReader reader, int defaultArrayLength)
         {
             reader.MoveToContent();
-            // var bdArrays = Convert.ToInt32(reader.GetAttribute("count"));
-            var bdaList = new List<BinaryDataArray>();
+            // var binaryDataArrays = Convert.ToInt32(reader.GetAttribute("count"));
+            var binaryData = new List<BinaryDataArray>();
             reader.ReadStartElement("binaryDataArrayList"); // Throws exception if we are not at the "binaryDataArrayList" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -4240,7 +4235,7 @@ namespace PSI_Interface.MSData
                 {
                     case "binaryDataArray":
                         // Schema requirements: two to many instances of this element
-                        bdaList.Add(ReadBinaryDataArray(reader.ReadSubtree(), defaultArrayLength));
+                        binaryData.Add(ReadBinaryDataArray(reader.ReadSubtree(), defaultArrayLength));
                         reader.ReadEndElement(); // "SpectrumIdentificationItem" must have child nodes
                         break;
                     default:
@@ -4249,7 +4244,7 @@ namespace PSI_Interface.MSData
                 }
             }
             reader.Dispose();
-            return bdaList;
+            return binaryData;
         }
 
         /// <summary>
