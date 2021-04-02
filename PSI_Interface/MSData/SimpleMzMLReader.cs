@@ -103,7 +103,7 @@ namespace PSI_Interface.MSData
             public void Clear()
             {
                 _artificialScanNum = 1;
-                _offsets.Clear();
+                Offsets.Clear();
                 OffsetsMapInt.Clear();
                 OffsetsMapNative.Clear();
                 IdToNativeMap.Clear();
@@ -117,8 +117,11 @@ namespace PSI_Interface.MSData
                 Chromatogram,
                 Unknown,
             }
-            private readonly List<IndexItem> _offsets = new List<IndexItem>();
-            public List<IndexItem> Offsets => _offsets;
+
+            /// <summary>
+            /// Spectrum offset info, in the order that it was read from the .mzML file
+            /// </summary>
+            public List<IndexItem> Offsets { get; } = new List<IndexItem>();
             public readonly Dictionary<string, long> OffsetsMapNative = new Dictionary<string, long>();
             public readonly Dictionary<long, long> OffsetsMapInt = new Dictionary<long, long>();
             public readonly Dictionary<long, string> IdToNativeMap = new Dictionary<long, string>();
@@ -137,9 +140,10 @@ namespace PSI_Interface.MSData
                 {
                     scanNum = num;
                 }
+
                 var item = new IndexItem(idRef, offset, scanNum);
                 AddMapForOffset(item);
-                _offsets.Add(item);
+                Offsets.Add(item);
             }
 
             private void AddMapForOffset(IndexItem offset)
@@ -170,7 +174,7 @@ namespace PSI_Interface.MSData
                 OffsetsMapInt.Clear();
                 IdToNativeMap.Clear();
                 NativeToIdMap.Clear();
-                foreach (var offset in _offsets)
+                foreach (var offset in Offsets)
                 {
                     AddMapForOffset(offset);
                 }
