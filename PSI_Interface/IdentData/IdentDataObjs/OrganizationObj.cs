@@ -37,7 +37,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _parent = new ParentOrganizationObj(o.Parent, IdentData);
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public ParentOrganizationObj Parent
         {
             get => _parent;

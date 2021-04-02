@@ -14,6 +14,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// </remarks>
     public class SearchDatabaseInfo : CVParamGroupObj, IExternalDataType, IEquatable<SearchDatabaseInfo>
     {
+        // Ignore Spelling: mzIdentML
         private ParamObj _databaseName;
         private FileFormatInfo _fileFormat;
         private long _numDatabaseSequences;
@@ -70,10 +71,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _fileFormat = new FileFormatInfo(sd.FileFormat, IdentData);
         }
 
-        /// <remarks>
+        /// <summary>
         /// The database name may be given as a cvParam if it maps exactly to one of the release databases listed in the
         /// CV, otherwise a userParam should be used.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 1, max 1</remarks>
         public ParamObj DatabaseName
         {
@@ -86,17 +87,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The version of the database.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of the database.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Version { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// The date and time the database was released to the public; omit this attribute when the date and time are
         /// unknown or not applicable (e.g. custom databases).
-        /// </remarks>
-        /// Optional Attribute
-        /// dateTime
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public DateTime ReleaseDate
         {
             get => _releaseDate;
@@ -107,12 +106,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Release Date has been defined
+        /// </summary>
         protected internal bool ReleaseDateSpecified { get; private set; }
 
-        /// <remarks>The total number of sequences in the database.</remarks>
-        /// Optional Attribute
-        /// long
+        /// <summary>The total number of sequences in the database.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public long NumDatabaseSequences
         {
             get => _numDatabaseSequences;
@@ -123,12 +123,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Num Database Sequences has been defined
+        /// </summary>
         protected internal bool NumDatabaseSequencesSpecified { get; private set; }
 
-        /// <remarks>The number of residues in the database.</remarks>
-        /// Optional Attribute
-        /// long
+        /// <summary>The number of residues in the database.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public long NumResidues
         {
             get => _numResidues;
@@ -139,31 +140,30 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks></remarks>
-        /// Attribute Existence
+        /// <summary>
+        /// True if NumResidues has been defined
+        /// </summary>
         protected internal bool NumResiduesSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation { get; set; }
 
-        /// <remarks>min 0, max 1 (mzIdentML 1.1)</remarks>
+        /// <summary>min 0, max 1 (mzIdentML 1.1)</summary>
         /// <remarks>min 1, max 1 (mzIdentML 1.2)</remarks>
         public FileFormatInfo FileFormat
         {
@@ -176,9 +176,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The location of the data file.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The location of the data file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Location { get; set; }
 
         #region Object Equality

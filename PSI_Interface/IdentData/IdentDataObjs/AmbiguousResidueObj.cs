@@ -32,9 +32,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Code = ar.code;
         }
 
-        /// <remarks>The single letter code of the ambiguous residue e.g. X.</remarks>
-        /// Required Attribute
-        /// chars, string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
+        /// <summary>The single letter code of the ambiguous residue e.g. X.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
         public string Code { get; set; }
 
         #region Object Equality

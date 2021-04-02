@@ -47,7 +47,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <summary>min 1, max unbounded</summary>
         public IdentDataList<InputSpectrumIdentificationsObj> InputSpectrumIdentifications
         {
             get => _inputSpectrumIdentifications;
@@ -59,9 +59,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the ProteinDetectionList in the DataCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the ProteinDetectionList in the DataCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string ProteinDetectionListRef
         {
             get
@@ -78,9 +77,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the ProteinDetectionList in the DataCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the ProteinDetectionList in the DataCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         public ProteinDetectionListObj ProteinDetectionList
         {
             get => _proteinDetectionList;
@@ -95,9 +93,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the detection protocol used for this ProteinDetection.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the detection protocol used for this ProteinDetection.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string ProteinDetectionProtocolRef
         {
             get
@@ -114,9 +111,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the detection protocol used for this ProteinDetection.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the detection protocol used for this ProteinDetection.</summary>
+        /// <remarks>Required Attribute</remarks>
         public ProteinDetectionProtocolObj ProteinDetectionProtocol
         {
             get => _proteinDetectionProtocol;

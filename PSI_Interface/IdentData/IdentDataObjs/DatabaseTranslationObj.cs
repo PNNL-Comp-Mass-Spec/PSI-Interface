@@ -11,6 +11,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// <remarks>A specification of how a nucleic acid sequence database was translated for searching.</remarks>
     public class DatabaseTranslationObj : IdentDataInternalTypeAbstract, IEquatable<DatabaseTranslationObj>
     {
+        // Ignore Spelling: MzIdentML
+
         private IdentDataList<TranslationTableObj> _translationTables;
 
         /// <summary>
@@ -41,6 +43,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 Frames = new List<int>(dt.frames);
         }
 
+
+        /// <summary>
+        /// Translation tables
+        /// </summary>
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<TranslationTableObj> TranslationTables
         {
@@ -53,9 +59,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The frames in which the nucleic acid sequence has been translated as a space separated IdentDataList</remarks>
-        /// Optional Attribute
-        /// listOfAllowedFrames: space-separated string, valid values -3, -2, -1, 1, 2, 3
+        /// <summary>The frames in which the nucleic acid sequence has been translated as a space separated IdentDataList</summary>
+        /// <returns>List of allowed frames: -3, -2, -1, 1, 2, 3</returns>
+        /// <remarks>Optional Attribute</remarks>
         public List<int> Frames { get; set; }
 
         #region Object Equality

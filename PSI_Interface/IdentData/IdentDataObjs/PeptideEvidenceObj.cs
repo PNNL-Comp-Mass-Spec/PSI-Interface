@@ -98,33 +98,31 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Name = pe.name;
         }
 
-        /// <remarks>Set to true if the peptide is matched to a decoy sequence.</remarks>
-        /// Optional Attribute
-        /// boolean, default false
+        /// <summary>Set to true if the peptide is matched to a decoy sequence.</summary>
+        /// <remarks>Optional Attribute, defaults to false</remarks>
         public bool IsDecoy { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="".
         /// If for any reason it is unknown (e.g. DeNovo), pre="?" should be used.
-        /// </remarks>
-        /// Optional Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /// </summary>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
+        /// <remarks>Optional Attribute</remarks>
         public string Pre { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// Post flanking residue. If the peptide is C-terminal, post="-" and not post="". If for any reason it is unknown
         /// (e.g. DeNovo), post="?" should be used.
-        /// </remarks>
-        /// Optional Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /// </summary>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
+        /// <remarks>Optional Attribute</remarks>
         public string Post { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// Start position of the peptide inside the protein sequence, where the first amino acid of the
         /// protein sequence is position 1. Must be provided unless this is a de novo search.
-        /// </remarks>
-        /// Optional Attribute
-        /// integer
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public int Start
         {
             get => _start;
@@ -135,15 +133,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Start has been defined
+        /// </summary>
         protected internal bool StartSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// The index position of the last amino acid of the peptide inside the protein sequence, where the first
         /// amino acid of the protein sequence is position 1. Must be provided unless this is a de novo search.
-        /// </remarks>
-        /// Optional Attribute
-        /// integer
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public int End
         {
             get => _end;
@@ -154,12 +153,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if End has been defined
+        /// </summary>
         protected internal bool EndSpecified { get; private set; }
 
-        /// <remarks>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</summary>
+        /// <remarks>Optional Attribute</remarks>
         protected internal string TranslationTableRef
         {
             get
@@ -176,9 +176,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</summary>
+        /// <remarks>Optional Attribute</remarks>
         public TranslationTableObj TranslationTable
         {
             get => _translationTable;
@@ -193,8 +192,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The translation frame of this sequence if this is PeptideEvidence derived from nucleic acid sequence</remarks>
-        /// Optional Attribute
+        /// <summary>The translation frame of this sequence if this is PeptideEvidence derived from nucleic acid sequence</summary>
+        /// <remarks>Optional Attribute</remarks>
         /// "Allowed Frames", int: -3, -2, -1, 1, 2, 3
         public int Frame
         {
@@ -206,12 +205,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Frame has been defined
+        /// </summary>
         protected internal bool FrameSpecified { get; private set; }
 
-        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the identified (poly)peptide sequence in the Peptide element.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string PeptideRef
         {
             get
@@ -228,9 +228,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the identified (poly)peptide sequence in the Peptide element.</summary>
+        /// <remarks>Required Attribute</remarks>
         public PeptideObj Peptide
         {
             get => _peptide;
@@ -245,9 +244,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the protein sequence in which the specified peptide has been linked.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the protein sequence in which the specified peptide has been linked.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string DBSequenceRef
         {
             get
@@ -264,9 +262,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the protein sequence in which the specified peptide has been linked.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the protein sequence in which the specified peptide has been linked.</summary>
+        /// <remarks>Required Attribute</remarks>
         public DbSequenceObj DBSequence
         {
             get => _dBSequence;
@@ -281,17 +278,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

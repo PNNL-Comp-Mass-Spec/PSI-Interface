@@ -33,7 +33,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _cvParam = new CVParamObj(ff.cvParam, IdentData);
         }
 
-        /// <remarks>cvParam capturing file formats</remarks>
+        /// <summary>cvParam capturing file formats</summary>
         /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {

@@ -46,27 +46,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         #region Properties
 
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The name of the parameter.</summary>
+        /// <remarks>Required Attribute</remarks>
         public override string Name
         {
             get => _name;
             set => _name = value;
         }
 
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The user-entered value of the parameter.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public override string Value
         {
             get => _value;
             set => _value = value;
         }
 
-        /// <remarks>The data type of the parameter, where appropriate (e.g.: xsd:float).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The data type of the parameter, where appropriate (e.g.: xsd:float).</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Type { get; set; }
 
         #endregion

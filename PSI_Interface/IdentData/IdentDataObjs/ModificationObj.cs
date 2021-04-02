@@ -22,6 +22,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// <remarks>(mzIdentML 1.2) If AdditionalSearchParams contains MS:1002491 (modification localization scoring), must add cvParam MS:1002491 (modification index) with a within-peptide unique identifier</remarks>
     public class ModificationObj : CVParamGroupObj, IEquatable<ModificationObj>
     {
+        // Ignore Spelling: validator, cvParams, mzIdent, Unimod
+
         private double _avgMassDelta;
 
         //private IdentDataList<CVParamType> _cvParams;
@@ -103,14 +105,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 Residues = new List<string>(m.residues);
         }
 
-        /// <remarks>
+        /// <summary>
         /// Location of the modification within the peptide - position in peptide sequence, counted from
         /// the N-terminus residue, starting at position 1. Specific modifications to the N-terminus should be
         /// given the location 0. Modification to the C-terminus should be given as peptide length + 1. If the
         /// modification location is unknown e.g. for PMF data, this attribute should be omitted.
-        /// </remarks>
-        /// Optional Attribute
-        /// integer
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public int Location
         {
             get => _location;
@@ -121,21 +122,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if the location has been defined
+        /// </summary>
         protected internal bool LocationSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// Specification of the residue (amino acid) on which the modification occurs. If multiple values
         /// are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of
         /// the residues listed. Multiple residues would usually only be specified for PMF data.
-        /// </remarks>
-        /// Optional Attribute
-        /// listOfChars, string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
+        /// </summary>
+        /// <returns>listOfChars, string, space-separated RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
+        /// <remarks>Optional Attribute</remarks>
         public List<string> Residues { get; set; }
 
-        /// <remarks>Atomic mass delta considering the natural distribution of isotopes in Daltons.</remarks>
-        /// Optional Attribute
-        /// double
+        /// <summary>
+        /// Atomic mass delta considering the natural distribution of isotopes in Daltons.
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public double AvgMassDelta
         {
             get => _avgMassDelta;
@@ -146,12 +150,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if the average mass delta has been defined
+        /// </summary>
         protected internal bool AvgMassDeltaSpecified { get; private set; }
 
-        /// <remarks>Atomic mass delta when assuming only the most common isotope of elements in Daltons.</remarks>
-        /// Optional Attribute
-        /// double
+        /// <summary>
+        /// Atomic mass delta when assuming only the most common isotope of elements in Daltons.
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public double MonoisotopicMassDelta
         {
             get => _monoisotopicMassDelta;
@@ -162,14 +169,18 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if the monoisotopic mass delta has been defined
+        /// </summary>
         protected internal bool MonoisotopicMassDeltaSpecified { get; private set; }
 
         private CV.CV.CVID SearchForUnimodMod(string modName)
         {
-            if (modName.ToLower().StartsWith("unimod"))
+            if (modName.StartsWith("unimod", StringComparison.OrdinalIgnoreCase))
                 modName = modName.Remove(0, 6);
+
             var nameSearch = modName.ToLower().TrimStart('_');
+
             // First search for the name in the lookup
             if (!CV.CV.TermNameLookup["UNIMOD"].TryGetValue(nameSearch, out var result))
             {

@@ -75,46 +75,44 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max 1
+        /*
+        /// <remarks>min 1, max 1</remarks>
         //public CVListType cvList
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public FileDescriptionType fileDescription
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public ReferenceableParamGroupListType referenceableParamGroupList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public SampleListType sampleList
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public SoftwareListType softwareList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public ScanSettingsListType scanSettingsList
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public InstrumentConfigurationListType instrumentConfigurationList
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public DataProcessingListType dataProcessingList
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public RunType run
 
-        /// <remarks>An optional accession number for the mzML document used for storage, e.g. in PRIDE.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional accession number for the mzML document used for storage, e.g. in PRIDE.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string accession
 
-        /// <remarks>An optional id for the mzML document used for referencing from external files. It is recommended to use LSIDs when possible.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional id for the mzML document used for referencing from external files. It is recommended to use LSIDs when possible.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string id
 
-        /// <remarks>The version of this mzML document.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The version of this mzML document.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string version*/
     }
 
@@ -143,12 +141,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public CVType[] cv
 
-        /// <remarks>The number of CV definitions in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of CV definitions in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -170,24 +168,22 @@ namespace PSI_Interface.MSData.mzML
             this.uRIField = cv.URI;
         }
 
-        /*/// <remarks>The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description (e.g., from the cvLabel attribute, in CVParamType elements).</remarks>
-        /// Required Attribute
+        /*
+        /// <remarks>The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description (e.g., from the cvLabel attribute, in CVParamType elements).</remarks>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id
 
-        /// <remarks>The usual name for the resource (e.g. The PSI-MS Controlled Vocabulary).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The usual name for the resource (e.g. The PSI-MS Controlled Vocabulary).</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string fullName
 
-        /// <remarks>The version of the CV from which the referred-to terms are drawn.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of the CV from which the referred-to terms are drawn.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string version
 
-        /// <remarks>The URI for the resource.</remarks>
-        /// Required Attribute
-        /// anyURI
+        /// <summary>The URI for the resource.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string URI*/
     }
 
@@ -216,12 +212,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public DataProcessingType[] dataProcessing
 
-        /// <remarks>The number of DataProcessingTypes in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of DataProcessingTypes in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -252,15 +248,17 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>Description of the default peak processing method.
+        /*
+        /// <summary>Description of the default peak processing method.
         /// This element describes the base method used in the generation of a particular mzML file.
         /// Variable methods should be described in the appropriate acquisition section - if
-        /// no acquisition-specific details are found, then this information serves as the default.</remarks>
-        /// min 1, max unbounded
+        /// no acquisition-specific details are found, then this information serves as the default.
+        /// </summary>
+        /// <remarks>min 1, max unbounded</remarks>
         //public ProcessingMethodType[] processingMethod
 
-        /// <remarks>A unique identifier for this data processing that is unique across all DataProcessingTypes.</remarks>
-        /// Required Attribute
+        /// <summary>A unique identifier for this data processing that is unique across all DataProcessingTypes.</summary>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id*/
     }
@@ -280,14 +278,14 @@ namespace PSI_Interface.MSData.mzML
             this.softwareRefField = process.SoftwareRef;
         }
 
-        /*/// <remarks>This attributes allows a series of consecutive steps to be placed in the correct order.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /*
+        /// <summary>This attributes allows a series of consecutive steps to be placed in the correct order.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string order
 
-        /// <remarks>This attribute must reference the 'id' of the appropriate SoftwareType.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <summary>This attribute must reference the 'id' of the appropriate SoftwareType.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string softwareRef*/
     }
 
@@ -334,13 +332,14 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 0, max unbounded
+        /*
+        /// <remarks>min 0, max unbounded</remarks>
         //public ReferenceableParamGroupRefType[] referenceableParamGroupRef
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public CVParamType[] cvParam
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public UserParamType[] userParam*/
     }
 
@@ -369,12 +368,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public ReferenceableParamGroupType[] referenceableParamGroup
 
-        /// <remarks>The number of ParamGroups defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of ParamGroups defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -414,14 +413,15 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 0, max unbounded
+        /*
+        /// <remarks>min 0, max unbounded</remarks>
         //public CVParamType[] cvParam
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public UserParamType[] userParam
 
-        /// <remarks>The identifier with which to reference this ReferenceableParamGroup.</remarks>
-        /// Required Attribute
+        /// <summary>The identifier with which to reference this ReferenceableParamGroup.</summary>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id*/
     }
@@ -441,9 +441,10 @@ namespace PSI_Interface.MSData.mzML
             this.@refField = rpgr.Ref;
         }
 
-        /*/// <remarks>Reference to the id attribute in a referenceableParamGroup.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /*
+        /// <remarks>Reference to the id attribute in a referenceableParamGroup.</remarks>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string @ref*/
     }
 
@@ -468,39 +469,35 @@ namespace PSI_Interface.MSData.mzML
             this.unitNameField = cvp.UnitName;
         }
 
-        /*/// <remarks>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /*
+        /// <remarks>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</remarks>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string cvRef
 
-        /// <remarks>The accession number of the referred-to term in the named resource (e.g.: MS:000012).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The accession number of the referred-to term in the named resource (e.g.: MS:000012).</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string accession
 
-        /// <remarks>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string name
 
-        /// <remarks>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string value
 
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string unitCvRef
 
-        /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string unitAccession
 
-        /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string unitName*/
     }
 
@@ -526,34 +523,30 @@ namespace PSI_Interface.MSData.mzML
             this.unitCvRefField = up.UnitCVRef;
         }
 
-        /*/// <remarks>The name for the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>The name for the parameter.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string name
 
-        /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The datatype of the parameter, where appropriate (e.g.: xsd:float).</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string type
 
-        /// <remarks>The value for the parameter, where appropriate.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The value for the parameter, where appropriate.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string value
 
-        /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string unitAccession
 
-        /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string unitName
 
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string unitCvRef*/
     }
 
@@ -582,12 +575,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public Precursor[] precursor
 
-        /// <remarks>The number of precursor isolations in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of precursor isolations in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -626,31 +619,30 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public ParamGroupType isolationWindow
 
-        /// <remarks>A list of ions that were selected.</remarks>
-        /// min 0, max 1
+        /// <summary>A list of ions that were selected.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public SelectedIonListType selectedIonList
 
-        /// <remarks>The type and energy level used for activation.</remarks>
-        /// min 1, max 1
+        /// <summary>The type and energy level used for activation.</summary>
+        /// <remarks>min 1, max 1</remarks>
         //public ParamGroupType activation
 
-        /// <remarks>For precursor spectra that are local to this document, this attribute must be used to reference the 'id' attribute of the spectrum corresponding to the precursor spectrum.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For precursor spectra that are local to this document, this attribute must be used to reference the 'id' attribute of the spectrum corresponding to the precursor spectrum.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string spectrumRef
 
-        /// <remarks>For precursor spectra that are external to this document, this attribute must reference the 'id' attribute of a sourceFile representing that external document.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>For precursor spectra that are external to this document, this attribute must reference the 'id' attribute of a sourceFile representing that external document.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string sourceFileRef
 
-        /// <remarks>For precursor spectra that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For precursor spectra that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string externalSpectrumID*/
     }
 
@@ -679,12 +671,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public ParamGroupType[] selectedIon
 
-        /// <remarks>The number of selected precursor ions defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of selected precursor ions defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -713,14 +705,14 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays.
+        /*
+        /// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays.
         /// Default data arrays must not have the attributes 'arrayLength' and 'dataProcessingRef'.</remarks>
-        /// min 2, max unbounded
+        /// <remarks>min 2, max unbounded</remarks>
         //public BinaryDataArrayType[] binaryDataArray
 
-        /// <remarks>The number of binary data arrays defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of binary data arrays defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -751,26 +743,24 @@ namespace PSI_Interface.MSData.mzML
             this.encodedLengthField = Convert.ToBase64String(binary).Length.ToString();
         }
 
-        /*/// <remarks>The actual base64 encoded binary data. The byte order is always 'little endian'.</remarks>
-        /// base64Binary
+        /*
+        /// <summary>The actual base64 encoded binary data. The byte order is always 'little endian'.</summary>
         //public byte[] binary
 
-        /// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType.
+        /// <summary>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType.
         /// The two default arrays (m/z and intensity) should NEVER use this override option, and should
         /// therefore adhere to the 'defaultArrayLength' defined in SpectrumType. Parsing software can thus
-        /// safely choose to ignore arrays of lengths different from the one defined in the 'defaultArrayLength' SpectrumType element.</remarks>
-        /// Optional Attribute
-        /// non-negative integer
+        /// safely choose to ignore arrays of lengths different from the one defined in the 'defaultArrayLength' SpectrumType element.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string arrayLength
 
-        /// <remarks>This optional attribute may reference the 'id' attribute of the appropriate dataProcessing.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This optional attribute may reference the 'id' attribute of the appropriate dataProcessing.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string dataProcessingRef
 
-        /// <remarks>The encoded length of the binary data array.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The encoded length of the binary data array.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string encodedLength*/
     }
 
@@ -799,12 +789,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public ScanType[] scan
 
-        /// <remarks>the number of scans defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>the number of scans defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -834,28 +824,27 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>Container for a list of scan windows.</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>Container for a list of scan windows.</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public ScanWindowListType scanWindowList
 
-        /// <remarks>For scans that are local to this document, this attribute can be used to reference the 'id' attribute of the spectrum corresponding to the scan.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For scans that are local to this document, this attribute can be used to reference the 'id' attribute of the spectrum corresponding to the scan.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string spectrumRef
 
-        /// <remarks>If this attribute is set, it must reference the 'id' attribute of a sourceFile representing the external document containing the spectrum referred to by 'externalSpectrumID'.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>If this attribute is set, it must reference the 'id' attribute of a sourceFile representing the external document containing the spectrum referred to by 'externalSpectrumID'.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string sourceFileRef
 
-        /// <remarks>For scans that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For scans that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string externalSpectrumID
 
-        /// <remarks>This attribute can optionally reference the 'id' attribute of the appropriate instrument configuration.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' attribute of the appropriate instrument configuration.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string instrumentConfigurationRef*/
     }
 
@@ -884,13 +873,13 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>A range of m/z values over which the instrument scans and acquires a spectrum.</remarks>
-        /// min 1, max unbounded
+        /*
+        /// <remarks>A range of m/z values over which the instrument scans and acquires a spectrum.</remarks>
+        /// <remarks>min 1, max unbounded</remarks>
         //public ParamGroupType[] scanWindow
 
-        /// <remarks>The number of scan windows defined in this list.</remarks>
-        /// Required Attribute
-        /// int
+        /// <summary>The number of scan windows defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public int count*/
     }
 
@@ -921,19 +910,19 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 0, max unbounded
+        /*
+        /// <remarks>min 0, max unbounded</remarks>
         //public SpectrumType[] spectrum
 
-        /// <remarks>The number of spectra defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of spectra defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count
 
         /// <remarks>This attribute MUST reference the 'id' of the default data processing for the spectrum list.
         /// If an acquisition does not reference any data processing, it implicitly refers to this data processing.
         /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string defaultDataProcessingRef*/
     }
 
@@ -981,48 +970,46 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 0, max 1
+        /*
+        /// <remarks>min 0, max 1</remarks>
         //public ScanListType scanList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public PrecursorListType PrecursorList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public ProductListType ProductList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public BinaryDataArrayListType BinaryDataArrayList
 
-        /// <remarks>The zero-based, consecutive index of  the spectrum in the SpectrumList.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The zero-based, consecutive index of  the spectrum in the SpectrumList.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string index
 
-        /// <remarks>The native identifier for a spectrum. For unmerged native spectra or spectra from older open file formats,
+        /// <summary>The native identifier for a spectrum. For unmerged native spectra or spectra from older open file formats,
         /// the format of the identifier is defined in the PSI-MS CV and referred to in the mzML header.
-        /// External documents may use this identifier together with the mzML filename or accession to reference a particular spectrum.</remarks>
-        /// Required Attribute
-        /// Regex: "\S+=\S+( \S+=\S+)*"
+        /// External documents may use this identifier together with the mzML filename or accession to reference a particular spectrum.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>Regex: "\S+=\S+( \S+=\S+)*"</returns>
         //public string id
 
-        /// <remarks>The identifier for the spot from which this spectrum was derived, if a MALDI or similar run.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The identifier for the spot from which this spectrum was derived, if a MALDI or similar run.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string spotID
 
-        /// <remarks>Default length of binary data arrays contained in this element.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>Default length of binary data arrays contained in this element.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public int defaultArrayLength
 
-        /// <remarks>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string dataProcessingRef
 
-        /// <remarks>This attribute can optionally reference the 'id' of the appropriate sourceFile.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' of the appropriate sourceFile.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string sourceFileRef*/
     }
 
@@ -1051,12 +1038,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public ProductType[] product
 
-        /// <remarks>The number of product isolations in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of product isolations in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1081,8 +1068,9 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public ParamGroupType isolationWindow*/
     }
 
@@ -1119,40 +1107,40 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>All mass spectra and the acquisitions underlying them are described and attached here.
+        /*
+        /// <remarks>All mass spectra and the acquisitions underlying them are described and attached here.
         /// Subsidiary data arrays are also both described and attached here.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public SpectrumListType spectrumList
 
-        /// <remarks>All chromatograms for this run.</remarks>
-        /// min 0, max 1
+        /// <summary>All chromatograms for this run.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public ChromatogramListType chromatogramList
 
-        /// <remarks>A unique identifier for this run.</remarks>
-        /// Required Attribute
+        /// <summary>A unique identifier for this run.</summary>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id
 
         /// <remarks>This attribute must reference the 'id' of the default instrument configuration.
         /// If a scan does not reference an instrument configuration, it implicitly refers to this configuration.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string defaultInstrumentConfigurationRef
 
         /// <remarks>This attribute can optionally reference the 'id' of the default source file.
         /// If a spectrum or scan does not reference a source file and this attribute is set, then it implicitly refers to this source file.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string defaultSourceFileRef
 
-        /// <remarks>This attribute must reference the 'id' of the appropriate sample.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute must reference the 'id' of the appropriate sample.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string sampleRef
 
-        /// <remarks>The optional start timestamp of the run, in UT.</remarks>
-        /// Optional Attribute
-        /// DateTime
+        /// <summary>The optional start timestamp of the run, in UT.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public System.DateTime startTimeStamp
 
         /// "Ignored" Attribute - only used to signify existence of valid value in startTimeStamp
@@ -1186,20 +1174,21 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks></remarks>
-        /// min 1, max unbounded
+        /*
+        /// <remarks></remarks>
+        /// <remarks>min 1, max unbounded</remarks>
         //public ChromatogramType[] chromatogram
 
-        /// <remarks>The number of chromatograms defined in this mzML file.</remarks>
-        /// Required Attribute
+        /// <summary>The number of chromatograms defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         /// Non-negative integer
         //public string count
 
         /// <remarks>This attribute MUST reference the 'id' of the default data processing for the chromatogram list.
         /// If an acquisition does not reference any data processing, it implicitly refers to this data processing.
         /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string defaultDataProcessingRef*/
     }
 
@@ -1239,33 +1228,31 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 0, max 1
+        /*
+        /// <remarks>min 0, max 1</remarks>
         //public Precursor precursor
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public ProductType product
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public BinaryDataArrayListType BinaryDataArrayList
 
-        /// <remarks>The zero-based index for this chromatogram in the chromatogram List</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The zero-based index for this chromatogram in the chromatogram List</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string index
 
-        /// <remarks>A unique identifier for this chromatogram</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A unique identifier for this chromatogram</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string id
 
-        /// <remarks>Default length of binary data arrays contained in this element.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>Default length of binary data arrays contained in this element.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public int defaultArrayLength
 
-        /// <remarks>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string dataProcessingRef*/
     }
 
@@ -1294,12 +1281,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public ScanSettingsType[] scanSettings
 
-        /// <remarks>The number of AcquisitionType elements in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of AcquisitionType elements in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1331,16 +1318,17 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>List with the source files containing the acquisition settings.</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>List with the source files containing the acquisition settings.</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public SourceFileRefListType sourceFileRefList
 
-        /// <remarks>Target list (or 'inclusion list') configured prior to the run.</remarks>
-        /// min 0, max 1
+        /// <summary>Target list (or 'inclusion list') configured prior to the run.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public TargetListType targetList
 
-        /// <remarks>A unique identifier for this acquisition setting.</remarks>
-        /// Required Attribute
+        /// <summary>A unique identifier for this acquisition setting.</summary>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id*/
     }
@@ -1369,13 +1357,13 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>Reference to a previously defined sourceFile.</remarks>
-        /// min 0, max unbounded
+        /*
+        /// <remarks>Reference to a previously defined sourceFile.</remarks>
+        /// <remarks>min 0, max unbounded</remarks>
         //public SourceFileRefType[] sourceFileRef
 
-        /// <remarks>This number of source files referenced in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>This number of source files referenced in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1394,9 +1382,10 @@ namespace PSI_Interface.MSData.mzML
             this.@refField = sfr.Ref;
         }
 
-        /*/// <remarks>This attribute must reference the 'id' of the appropriate sourceFile.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /*
+        /// <remarks>This attribute must reference the 'id' of the appropriate sourceFile.</remarks>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string @ref*/
     }
 
@@ -1425,12 +1414,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public ParamGroupType[] target
 
-        /// <remarks>The number of TargetType elements in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of TargetType elements in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1459,13 +1448,13 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>A piece of software.</remarks>
-        /// min 1, max unbounded
+        /*
+        /// <remarks>A piece of software.</remarks>
+        /// <remarks>min 1, max unbounded</remarks>
         //public SoftwareType[] software
 
-        /// <remarks>The number of softwares defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of softwares defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1485,14 +1474,14 @@ namespace PSI_Interface.MSData.mzML
             this.versionField = software.Version;
         }
 
-        /*/// <remarks>An identifier for this software that is unique across all SoftwareTypes.</remarks>
-        /// Required Attribute
+        /*
+        /// <remarks>An identifier for this software that is unique across all SoftwareTypes.</remarks>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id
 
-        /// <remarks>The software version.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The software version.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string version*/
     }
 
@@ -1525,12 +1514,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public InstrumentConfigurationType[] instrumentConfiguration
 
-        /// <remarks>The number of instrument configurations present in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of instrument configurations present in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1566,19 +1555,20 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 0, max 1
+        /*
+        /// <remarks>min 0, max 1</remarks>
         //public ComponentListType componentList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public SoftwareRefType softwareRef
 
-        /// <remarks>An identifier for this instrument configuration.</remarks>
-        /// Required Attribute
+        /// <summary>An identifier for this instrument configuration.</summary>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id
 
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>Optional Attribute</summary>
+        /// <returns>IDREF</returns>
         //public string scanSettingsRef*/
     }
 
@@ -1625,21 +1615,21 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>A source component.</remarks>
-        /// min 1, max unbounded
+        /*
+        /// <remarks>A source component.</remarks>
+        /// <remarks>min 1, max unbounded</remarks>
         //public SourceComponentType[] source
 
-        /// <remarks>A mass analyzer (or mass filter) component.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A mass analyzer (or mass filter) component.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         //public AnalyzerComponentType[] analyzer
 
-        /// <remarks>A detector component.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A detector component.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         //public DetectorComponentType[] detector
 
-        /// <remarks>The number of components in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of components in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1657,11 +1647,11 @@ namespace PSI_Interface.MSData.mzML
             this.orderField = comp.Order;
         }
 
-        /*/// <remarks>This attribute must be used to indicate the order in which the components
+        /*
+        /// <summary>This attribute must be used to indicate the order in which the components
         /// are encountered from source to detector (e.g., in a Q-TOF, the quadrupole would
-        /// have the lower order number, and the TOF the higher number of the two).</remarks>
-        /// Required Attribute
-        /// integer
+        /// have the lower order number, and the TOF the higher number of the two).</summary>
+        /// <remarks>Required Attribute</remarks>
         //public int order*/
     }
 
@@ -1728,9 +1718,10 @@ namespace PSI_Interface.MSData.mzML
             this.@refField = sr.Ref;
         }
 
-        /*/// <remarks>This attribute must be used to reference the 'id' attribute of a software element.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /*
+        /// <remarks>This attribute must be used to reference the 'id' attribute of a software element.</remarks>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         //public string @ref*/
     }
 
@@ -1759,12 +1750,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public SampleType[] sample
 
-        /// <remarks>The number of Samples defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of Samples defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1784,14 +1775,14 @@ namespace PSI_Interface.MSData.mzML
             this.nameField = sample.Name;
         }
 
-        /*/// <remarks>A unique identifier across the samples with which to reference this sample description.</remarks>
-        /// Required Attribute
+        /*
+        /// <remarks>A unique identifier across the samples with which to reference this sample description.</remarks>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id
 
-        /// <remarks>An optional name for the sample description, mostly intended as a quick mnemonic.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional name for the sample description, mostly intended as a quick mnemonic.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string name*/
     }
 
@@ -1820,12 +1811,12 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public SourceFileType[] sourceFile
 
-        /// <remarks>Number of source files used in generating the instance document.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>Number of source files used in generating the instance document.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string count*/
     }
 
@@ -1846,19 +1837,18 @@ namespace PSI_Interface.MSData.mzML
             this.locationField = sf.Location;
         }
 
-        /*/// <remarks>An identifier for this file.</remarks>
-        /// Required Attribute
+        /*
+        /// <remarks>An identifier for this file.</remarks>
+        /// <remarks>Required Attribute</remarks>
         /// ID
         //public string id
 
-        /// <remarks>Name of the source file, without reference to location (either URI or local path).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>Name of the source file, without reference to location (either URI or local path).</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string name
 
-        /// <remarks>URI-formatted location where the file was retrieved.</remarks>
-        /// Required Attribute
-        /// anyURI
+        /// <summary>URI-formatted location where the file was retrieved.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string location*/
     }
 
@@ -1897,16 +1887,17 @@ namespace PSI_Interface.MSData.mzML
             }
         }
 
-        /*/// <remarks>This summarizes the different types of spectra that can be expected in the file.
+        /*
+        /// <summary>This summarizes the different types of spectra that can be expected in the file.
         /// This is expected to aid processing software in skipping files that do not contain appropriate
-        /// spectrum types for it. It should also describe the nativeID format used in the file by referring to an appropriate CV term.</remarks>
-        /// min 1, max 1
+        /// spectrum types for it. It should also describe the nativeID format used in the file by referring to an appropriate CV term.</summary>
+        /// <remarks>min 1, max 1</remarks>
         //public ParamGroupType fileContent
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public SourceFileListType sourceFileList
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public ParamGroupType[] contact*/
     }
 }

@@ -39,24 +39,20 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
-        /// <remarks>The full name of the CV.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The full name of the CV.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string FullName { get; set; }
 
-        /// <remarks>The version of the CV.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of the CV.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Version { get; set; }
 
-        /// <remarks>The URI of the source CV.</remarks>
-        /// Required Attribute
-        /// anyURI
+        /// <summary>The URI of the source CV.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string URI { get; set; }
 
-        /// <remarks>The unique identifier of this cv within the document to be referenced by cvParam elements.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The unique identifier of this cv within the document to be referenced by cvParam elements.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
         #endregion
 

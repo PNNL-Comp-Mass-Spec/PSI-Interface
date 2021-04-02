@@ -90,7 +90,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded // mzIdentML 1.1</remarks>
+        /// <summary>min 1, max unbounded // mzIdentML 1.1</summary>
         /// <remarks>min 0, max unbounded // mzIdentML 1.2 (0 only allowed if AdditionalSearchParams contains cvParam "De novo search")</remarks>
         public IdentDataList<PeptideEvidenceRefObj> PeptideEvidences
         {
@@ -103,7 +103,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public IdentDataList<IonTypeObj> Fragmentations
         {
             get => _fragmentations;
@@ -115,19 +115,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The charge state of the identified peptide.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>The charge state of the identified peptide.</summary>
+        /// <remarks>Required Attribute</remarks>
         public int ChargeState { get; set; }
 
-        /// <remarks>The mass-to-charge value measured in the experiment in Daltons / charge.</remarks>
-        /// Required Attribute
-        /// double
+        /// <summary>The mass-to-charge value measured in the experiment in Daltons / charge.</summary>
+        /// <remarks>Required Attribute</remarks>
         public double ExperimentalMassToCharge { get; set; }
 
-        /// <remarks>The theoretical mass-to-charge value calculated for the peptide in Daltons / charge.</remarks>
-        /// Optional Attribute
-        /// double
+        /// <summary>The theoretical mass-to-charge value calculated for the peptide in Daltons / charge.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public double CalculatedMassToCharge
         {
             get => _calculatedMassToCharge;
@@ -138,15 +135,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Calculated mass to charge has been defined
+        /// </summary>
         protected internal bool CalculatedMassToChargeSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// The calculated isoelectric point of the (poly)peptide, with relevant modifications included.
-        /// Do not supply this value if the PI cannot be calculated properly.
-        /// </remarks>
-        /// Optional Attribute
-        /// float
+        /// Do not supply this value if the pI cannot be calculated properly.
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public float CalculatedPI
         {
             get => _calculatedPI;
@@ -157,13 +155,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Calculated pI has been defined
+        /// </summary>
         protected internal bool CalculatedPISpecified { get; private set; }
 
-        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Optional Attribute // mzIdentML 1.1
-        /// Required Attribute // mzIdentML 1.2
-        /// string
+        /// <summary>A reference to the identified (poly)peptide sequence in the Peptide element.</summary>
+        /// <remarks>Optional Attribute</remarks> // mzIdentML 1.1
+        /// <remarks>Required Attribute</remarks> // mzIdentML 1.2
         protected internal string PeptideRef
         {
             get
@@ -180,10 +179,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Optional Attribute // mzIdentML 1.1
-        /// Required Attribute // mzIdentML 1.2
-        /// string
+        /// <summary>A reference to the identified (poly)peptide sequence in the Peptide element.</summary>
+        /// <remarks>Optional Attribute</remarks> // mzIdentML 1.1
+        /// <remarks>Required Attribute</remarks> // mzIdentML 1.2
         public PeptideObj Peptide
         {
             get => _peptide;
@@ -198,29 +196,26 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// For an MS/MS result set, this is the rank of the identification quality as scored by the search engine.
         /// 1 is the top rank. If multiple identifications have the same top score, they should all be assigned rank =1.
         /// For PMF data, the rank attribute may be meaningless and values of rank = 0 should be given.
-        /// </remarks>
-        /// Required Attribute
-        /// integer
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public int Rank { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// Set to true if the producers of the file has deemed that the identification has passed a given threshold
         /// or been validated as correct. If no such threshold has been set, value of true should be given for all results.
-        /// </remarks>
-        /// Required Attribute
-        /// boolean
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public bool PassThreshold { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// A reference should be given to the MassTable used to calculate the sequenceMass only if more than one
         /// MassTable has been given.
-        /// </remarks>
-        /// Optional Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         protected internal string MassTableRef
         {
             get
@@ -237,12 +232,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// A reference should be given to the MassTable used to calculate the sequenceMass only if more than one
         /// MassTable has been given.
-        /// </remarks>
-        /// Optional Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public MassTableObj MassTable
         {
             get => _massTable;
@@ -257,11 +251,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// A reference should be provided to link the SpectrumIdentificationItem to a Sample
         /// if more than one sample has been described in the AnalysisSampleCollection.
-        /// </remarks>
-        /// Optional Attribute
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         protected internal string SampleRef
         {
             get
@@ -278,11 +272,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// A reference should be provided to link the SpectrumIdentificationItem to a Sample
         /// if more than one sample has been described in the AnalysisSampleCollection.
-        /// </remarks>
-        /// Optional Attribute
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public SampleObj Sample
         {
             get => _sample;
@@ -297,17 +291,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         /// <summary>

@@ -32,9 +32,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
-        /// <remarks>A reference to the organization this contact belongs to.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the organization this contact belongs to.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string OrganizationRef
         {
             get
@@ -55,9 +54,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the organization this contact belongs to.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the organization this contact belongs to.</summary>
+        /// <remarks>Required Attribute</remarks>
         public OrganizationObj Organization
         {
             get => _organization;

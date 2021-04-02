@@ -41,9 +41,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
-        /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the SpectrumIdentificationItem element(s).</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string SpectrumIdentificationItemRef
         {
             get
@@ -64,9 +63,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the SpectrumIdentificationItem element(s).</summary>
+        /// <remarks>Required Attribute</remarks>
         public SpectrumIdentificationItemObj SpectrumIdentificationItem
         {
             get => _spectrumIdentificationItem;

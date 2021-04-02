@@ -53,26 +53,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         private string _id;
         private string _name;
 
-        /// <remarks>An identifier is an unambiguous string that is unique within the scope
-        /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>An identifier is an unambiguous string that is unique within the scope
+        /// (i.e. a document, a set of related documents, or a repository) of its use.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id
         {
             get => this._id;
             set => this._id = value;
         }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name
         {
             get => this._name;
             set => this._name = value;
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <summary>min 1, max unbounded</summary>
         public IdentDataList<PeptideHypothesisObj> PeptideHypotheses
         {
             get => this._peptideHypotheses;
@@ -86,13 +84,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the corresponding DBSequence entry.
+        /// <summary>A reference to the corresponding DBSequence entry.
         /// (mzIdentML 1.1) This optional and redundant, because the PeptideEvidence elements referenced from here also map to the DBSequence.
         /// (mzIdentML 1.2) Note - this attribute was optional in mzIdentML 1.1 but is now mandatory in mzIdentML 1.2. Consuming software should assume that the DBSequence entry referenced here is the definitive identifier for the protein.
-        /// </remarks>
+        /// </summary>
+        /// <remarks>
         /// Optional Attribute (mzIdentML 1.1)
         /// Required Attribute (mzIdentML 1.2)
-        /// string
+        /// </remarks>
         protected internal string DBSequenceRef
         {
             get
@@ -113,13 +112,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the corresponding DBSequence entry.
+        /// <summary>A reference to the corresponding DBSequence entry.
         /// (mzIdentML 1.1) This optional and redundant, because the PeptideEvidence elements referenced from here also map to the DBSequence.
         /// (mzIdentML 1.2) Note - this attribute was optional in mzIdentML 1.1 but is now mandatory in mzIdentML 1.2. Consuming software should assume that the DBSequence entry referenced here is the definitive identifier for the protein.
-        /// </remarks>
+        /// </summary>
+        /// <remarks>
         /// Optional Attribute (mzIdentML 1.1)
         /// Required Attribute (mzIdentML 1.2)
-        /// string
+        /// </remarks>
         public DbSequenceObj DBSequence
         {
             get => this._dBSequence;
@@ -134,10 +134,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given
-        /// threshold or been validated as correct. If no such threshold has been set, value of true should be given for all results.</remarks>
-        /// Required Attribute
-        /// boolean
+        /// <summary>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given
+        /// threshold or been validated as correct. If no such threshold has been set, value of true should be given for all results.</summary>
+        /// <remarks>Required Attribute</remarks>
         public bool PassThreshold
         {
             get => this._passThreshold;

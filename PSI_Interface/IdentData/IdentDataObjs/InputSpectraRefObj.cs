@@ -36,9 +36,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
-        /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the SpectraData element which locates the input spectra to an external file.</summary>
+        /// <remarks>Optional Attribute</remarks>
         protected internal string SpectraDataRef
         {
             get
@@ -59,9 +58,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the SpectraData element which locates the input spectra to an external file.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public SpectraDataObj SpectraData
         {
             get => _spectraData;

@@ -122,16 +122,15 @@ namespace PSI_Interface.MSData
     {
         private List<CVType> cvs;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public CVType[] cv
         {
             get { return cvs.ToArray(); }
             set { cvs = value.ToList(); } // TODO: recreate the CVTranslator when setting... (Add a hook that runs whenever it is modified?)
         }
 
-        /// <remarks>The number of CV definitions in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of CV definitions in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return cvs.Count.ToString(); }
@@ -173,16 +172,15 @@ namespace PSI_Interface.MSData
         private List<DataProcessingType> dataProcessingField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public DataProcessingType[] dataProcessing
         {
             get { return dataProcessingField.ToArray(); }
             set { dataProcessingField = value.ToList(); }
         }
 
-        /// <remarks>The number of DataProcessingTypes in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of DataProcessingTypes in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -292,16 +290,15 @@ namespace PSI_Interface.MSData
         private List<ReferenceableParamGroupType> referenceableParamGroupField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ReferenceableParamGroupType[] referenceableParamGroup
         {
             get { return referenceableParamGroupField.ToArray(); }
             set { referenceableParamGroupField = value.ToList(); }
         }
 
-        /// <remarks>The number of ParamGroups defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of ParamGroups defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -449,16 +446,15 @@ namespace PSI_Interface.MSData
         private List<Precursor> precursorField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public Precursor[] precursor
         {
             get { return precursorField.ToArray(); }
             set { precursorField = value.ToList(); }
         }
 
-        /// <remarks>The number of precursor isolations in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of precursor isolations in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -518,16 +514,15 @@ namespace PSI_Interface.MSData
         private List<ParamGroupType> selectedIonField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ParamGroupType[] selectedIon
         {
             get { return selectedIonField.ToArray(); }
             set { selectedIonField = value.ToList(); }
         }
 
-        /// <remarks>The number of selected precursor ions defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of selected precursor ions defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -547,16 +542,15 @@ namespace PSI_Interface.MSData
 
         /// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays.
         /// Default data arrays must not have the attributes 'arrayLength' and 'dataProcessingRef'.</remarks>
-        /// min 2, max unbounded
+        /// <remarks>min 2, max unbounded</remarks>
         public BinaryDataArrayType[] binaryDataArray
         {
             get { return binaryDataArrayField.ToArray(); }
             set { binaryDataArrayField = value.ToList(); }
         }
 
-        /// <remarks>The number of binary data arrays defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of binary data arrays defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -703,17 +697,16 @@ namespace PSI_Interface.MSData
         private List<ParamGroupType> scanWindowField;
         private int countField;
 
-        /// <remarks>A range of m/z values over which the instrument scans and acquires a spectrum.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A range of m/z values over which the instrument scans and acquires a spectrum.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public ParamGroupType[] scanWindow
         {
             get { return scanWindowField.ToArray(); }
             set { scanWindowField = value.ToList(); }
         }
 
-        /// <remarks>The number of scan windows defined in this list.</remarks>
-        /// Required Attribute
-        /// int
+        /// <summary>The number of scan windows defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public int count
         {
             get { return countField; }
@@ -810,16 +803,15 @@ namespace PSI_Interface.MSData
         private List<ProductType> productField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ProductType[] product
         {
             get { return productField.ToArray(); }
             set { productField = value.ToList(); }
         }
 
-        /// <remarks>The number of product isolations in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of product isolations in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -968,16 +960,15 @@ namespace PSI_Interface.MSData
         private List<ScanSettingsType> scanSettingsField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ScanSettingsType[] scanSettings
         {
             get { return scanSettingsField.ToArray(); }
             set { scanSettingsField = value.ToList(); }
         }
 
-        /// <remarks>The number of AcquisitionType elements in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of AcquisitionType elements in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1033,17 +1024,16 @@ namespace PSI_Interface.MSData
         private List<SourceFileRefType> sourceFileRefField;
         private string countField;
 
-        /// <remarks>Reference to a previously defined sourceFile.</remarks>
-        /// min 0, max unbounded
+        /// <summary>Reference to a previously defined sourceFile.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public SourceFileRefType[] sourceFileRef
         {
             get { return sourceFileRefField.ToArray(); }
             set { sourceFileRefField = value.ToList(); }
         }
 
-        /// <remarks>This number of source files referenced in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>This number of source files referenced in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1080,16 +1070,15 @@ namespace PSI_Interface.MSData
         private List<ParamGroupType> targetField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ParamGroupType[] target
         {
             get { return targetField.ToArray(); }
             set { targetField = value.ToList(); }
         }
 
-        /// <remarks>The number of TargetType elements in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of TargetType elements in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1107,17 +1096,16 @@ namespace PSI_Interface.MSData
         private List<SoftwareType> softwareField;
         private string countField;
 
-        /// <remarks>A piece of software.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A piece of software.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public SoftwareType[] software
         {
             get { return softwareField.ToArray(); }
             set { softwareField = value.ToList(); }
         }
 
-        /// <remarks>The number of softwares defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of softwares defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1159,16 +1147,15 @@ namespace PSI_Interface.MSData
         private List<InstrumentConfigurationType> instrumentConfigurationField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public InstrumentConfigurationType[] instrumentConfiguration
         {
             get { return instrumentConfigurationField.ToArray(); }
             set { instrumentConfigurationField = value.ToList(); }
         }
 
-        /// <remarks>The number of instrument configurations present in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of instrument configurations present in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1356,16 +1343,15 @@ namespace PSI_Interface.MSData
         private List<SampleType> sampleField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public SampleType[] sample
         {
             get { return sampleField.ToArray(); }
             set { sampleField = value.ToList(); }
         }
 
-        /// <remarks>The number of Samples defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of Samples defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1403,16 +1389,15 @@ namespace PSI_Interface.MSData
         private List<SourceFileType> sourceFileField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public SourceFileType[] sourceFile
         {
             get { return sourceFileField.ToArray(); }
             set { sourceFileField = value.ToList(); }
         }
 
-        /// <remarks>Number of source files used in generating the instance document.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>Number of source files used in generating the instance document.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }

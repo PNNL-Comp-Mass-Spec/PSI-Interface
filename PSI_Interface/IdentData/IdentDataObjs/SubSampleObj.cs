@@ -34,9 +34,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             SampleRef = ss.sample_ref;
         }
 
-        /// <remarks>A reference to the child sample.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the child sample.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string SampleRef
         {
             get
@@ -53,9 +52,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the child sample.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the child sample.</summary>
+        /// <remarks>Required Attribute</remarks>
         public SampleObj Sample
         {
             get => _sample;

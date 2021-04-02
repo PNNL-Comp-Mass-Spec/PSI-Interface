@@ -33,7 +33,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _cvParam = new CVParamObj(formatType.cvParam, IdentData);
         }
 
-        /// <remarks>CV term capturing the type of identifier used.</remarks>
+        /// <summary>CV term capturing the type of identifier used.</summary>
         /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {

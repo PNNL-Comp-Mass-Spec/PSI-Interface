@@ -56,7 +56,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 MsLevels = new List<string>(mt.msLevel);
         }
 
-        /// <remarks>The specification of a single residue within the mass table.</remarks>
+        /// <summary>The specification of a single residue within the mass table.</summary>
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ResidueObj> Residues
         {
@@ -69,7 +69,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<AmbiguousResidueObj> AmbiguousResidues
         {
             get => _ambiguousResidues;
@@ -81,22 +81,19 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The MS spectrum that the MassTable refers to e.g. "1" for MS1 "2" for MS2 or "1 2" for MS1 or MS2.</remarks>
-        /// Required Attribute
-        /// integer(s), space separated
+        /// <summary>The MS spectrum that the MassTable refers to e.g. "1" for MS1 "2" for MS2 or "1 2" for MS1 or MS2.</summary>
+        /// <remarks>Required Attribute</remarks>
         public List<string> MsLevels { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

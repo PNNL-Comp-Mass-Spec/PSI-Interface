@@ -42,7 +42,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <summary>min 1, max unbounded</summary>
         public IdentDataList<EnzymeObj> Enzymes
         {
             get => _enzymes;
@@ -54,12 +54,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// If there are multiple enzymes specified, this attribute is set to true if cleavage with different enzymes is
         /// performed independently.
-        /// </remarks>
-        /// Optional Attribute
-        /// boolean
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public bool Independent
         {
             get => _independent;
@@ -70,7 +69,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Independent has been defined
+        /// </summary>
         protected internal bool IndependentSpecified { get; private set; }
 
         #region Object Equality

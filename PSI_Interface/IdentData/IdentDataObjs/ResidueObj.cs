@@ -29,14 +29,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Mass = r.mass;
         }
 
-        /// <remarks>The single letter code for the residue.</remarks>
-        /// Required Attribute
-        /// chars, string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
+        /// <summary>The single letter code for the residue.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
         public string Code { get; set; }
 
-        /// <remarks>The residue mass in Daltons (not including any fixed modifications).</remarks>
-        /// Required Attribute
-        /// float
+        /// <summary>The residue mass in Daltons (not including any fixed modifications).</summary>
+        /// <remarks>Required Attribute</remarks>
         public float Mass { get; set; }
 
         #region Object Equality

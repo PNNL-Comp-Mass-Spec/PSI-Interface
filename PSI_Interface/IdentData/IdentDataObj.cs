@@ -178,20 +178,18 @@ namespace PSI_Interface.IdentData
 
         #region Properties
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public IdentDataList<CVInfo> CVList
         {
             get => _cvList;
@@ -210,7 +208,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public IdentDataList<AnalysisSoftwareObj> AnalysisSoftwareList
         {
             get => _analysisSoftwareList;
@@ -224,7 +222,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>The Provider of the mzIdentML record in terms of the contact and software.</remarks>
+        /// <summary>The Provider of the mzIdentML record in terms of the contact and software.</summary>
         /// <remarks>min 0, max 1</remarks>
         public ProviderObj Provider
         {
@@ -239,7 +237,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public IdentDataList<AbstractContactObj> AuditCollection
         {
             get => _auditCollection;
@@ -253,7 +251,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public IdentDataList<SampleObj> AnalysisSampleCollection
         {
             get => _analysisSampleCollection;
@@ -267,7 +265,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public SequenceCollectionObj SequenceCollection
         {
             get => _sequenceCollection;
@@ -281,7 +279,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public AnalysisCollectionObj AnalysisCollection
         {
             get => _analysisCollection;
@@ -295,7 +293,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public AnalysisProtocolCollectionObj AnalysisProtocolCollection
         {
             get => _analysisProtocolCollection;
@@ -309,7 +307,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public DataCollectionObj DataCollection
         {
             get => _dataCollection;
@@ -323,7 +321,7 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>Any bibliographic references associated with the file</remarks>
+        /// <summary>Any bibliographic references associated with the file</summary>
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<BibliographicReferenceObj> BibliographicReferences
         {
@@ -338,9 +336,8 @@ namespace PSI_Interface.IdentData
             }
         }
 
-        /// <remarks>The date on which the file was produced.</remarks>
-        /// Optional Attribute
-        /// dataTime
+        /// <summary>The date on which the file was produced.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public DateTime CreationDate
         {
             get => _creationDate;
@@ -352,16 +349,16 @@ namespace PSI_Interface.IdentData
         }
 
         /// <summary>
-        /// Attribute Existence - true if CreationDate has bee set.
+        /// True if Creation Date has been defined
         /// </summary>
         protected internal bool CreationDateSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// The version of the schema this instance document refers to, in the format x.y.z.
         /// Changes to z should not affect prevent instance documents from validating.
-        /// </remarks>
-        /// Required Attribute
-        /// string, regex: "(1\.1\.\d+)"
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "(1\.1\.\d+)"</returns>
         public string Version { get; set; }
 
 #endregion

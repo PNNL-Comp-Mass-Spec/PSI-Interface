@@ -41,7 +41,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _analysisData = new AnalysisDataObj(dc.AnalysisData, IdentData);
         }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public InputsObj Inputs
         {
             get => _inputs;
@@ -53,7 +53,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public AnalysisDataObj AnalysisData
         {
             get => _analysisData;

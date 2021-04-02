@@ -34,9 +34,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             SpectrumIdentificationListRef = isi.spectrumIdentificationList_ref;
         }
 
-        /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the list of spectrum identifications that were input to the process.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string SpectrumIdentificationListRef
         {
             get
@@ -53,9 +52,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the list of spectrum identifications that were input to the process.</summary>
+        /// <remarks>Required Attribute</remarks>
         public SpectrumIdentificationListObj SpectrumIdentificationList
         {
             get => _spectrumIdentificationList;

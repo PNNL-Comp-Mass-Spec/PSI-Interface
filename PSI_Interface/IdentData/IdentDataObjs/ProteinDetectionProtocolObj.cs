@@ -49,7 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _threshold = new ParamListObj(pdp.Threshold, IdentData);
         }
 
-        /// <remarks>The parameters and settings for the protein detection given as CV terms.</remarks>
+        /// <summary>The parameters and settings for the protein detection given as CV terms.</summary>
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj AnalysisParams
         {
@@ -62,10 +62,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// The threshold(s) applied to determine that a result is significant.
         /// If multiple terms are used it is assumed that all conditions are satisfied by the passing results.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 1, max 1</remarks>
         public ParamListObj Threshold
         {
@@ -78,9 +78,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The protein detection software used, given as a reference to the SoftwareCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The protein detection software used, given as a reference to the SoftwareCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string AnalysisSoftwareRef
         {
             get
@@ -97,9 +96,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The protein detection software used, given as a reference to the SoftwareCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The protein detection software used, given as a reference to the SoftwareCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         public AnalysisSoftwareObj AnalysisSoftware
         {
             get => _analysisSoftware;
@@ -114,17 +112,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

@@ -67,7 +67,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<FragmentArrayObj> FragmentArrays
         {
             get => _fragmentArrays;
@@ -99,7 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The type of ion identified.</remarks>
+        /// <summary>The type of ion identified.</summary>
         /// <remarks>
         /// (mzIdentML 1.2 add) In the case of neutral losses, one term should report the ion type, a second term should report the neutral loss;
         /// Note: this is a change in practice from mzIdentML 1.1.
@@ -119,25 +119,25 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
+        /// <para>
         /// The index of ions identified as integers, following standard notation for a-c, x-z e.g. if b3 b5 and b6 have
         /// been identified, the index would store "3 5 6". For internal ions, the index contains pairs defining the start and
         /// end point - see specification document for examples. For immonium ions, the index is the position of the identified
         /// ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be
         /// distinguished, all positions should be given.
-        /// </remarks>
-        /// <remarks>
+        /// </para>
+        /// <para>
         /// (mzIdentML 1.2 add) For precursor ions, including neutral losses, the index value MUST be 0.
         /// For any other ions not related to the position within the peptide sequence
         /// e.g. quantification reporter ions, the index value MUST be 0.
-        /// </remarks>
-        /// Optional Attribute
-        /// listOfIntegers: string, space-separated integers
+        /// </para>
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public List<string> Index { get; set; }
 
-        /// <remarks>The charge of the identified fragmentation ions.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>The charge of the identified fragmentation ions.</summary>
+        /// <remarks>Required Attribute</remarks>
         public int Charge { get; set; }
 
         #region Object Equality

@@ -39,9 +39,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
-        /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the PeptideEvidenceItem element(s).</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string PeptideEvidenceRef
         {
             get
@@ -62,9 +61,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the PeptideEvidenceItem element(s).</summary>
+        /// <remarks>Required Attribute</remarks>
         public PeptideEvidenceObj PeptideEvidence
         {
             get => _peptideEvidence;

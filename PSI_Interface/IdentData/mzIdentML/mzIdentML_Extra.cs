@@ -36,41 +36,41 @@ namespace PSI_Interface.IdentData.mzIdentML
         [XmlAttribute("schemaLocation", Namespace = "http://www.w3.org/2001/XMLSchema-instance")]
         public string xsiSchemaLocation = "http://psidev.info/psi/pi/mzIdentML/1.1 http://www.psidev.info/files/mzIdentML1.1.0.xsd";
 
-        /*/// min 1, max 1
+        /*
+        /// <remarks>min 1, max 1</remarks>
         //public IdentDataList<CVInfo> CVList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public IdentDataList<AnalysisSoftwareInfo> AnalysisSoftwareList
 
-        /// <remarks>The Provider of the mzIdentML record in terms of the contact and software.</remarks>
-        /// min 0, max 1
+        /// <summary>The Provider of the mzIdentML record in terms of the contact and software.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public ProviderInfo Provider
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public IdentDataList<AbstractContactType> AuditCollection
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public IdentDataList<SampleType> AnalysisSampleCollection
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public SequenceCollection SequenceCollection
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public AnalysisCollection AnalysisCollection
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public AnalysisProtocolCollection AnalysisProtocolCollection
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public DataCollection DataCollection
 
-        /// <remarks>Any bibliographic references associated with the file</remarks>
-        /// min 0, max unbounded
+        /// <summary>Any bibliographic references associated with the file</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<BibliographicReferenceType> BibliographicReferences
 
-        /// <remarks>The date on which the file was produced.</remarks>
-        /// Optional Attribute
-        /// dataTime
+        /// <summary>The date on which the file was produced.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public System.DateTime CreationDate
 
         /// Attribute Existence
@@ -78,8 +78,8 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         /// <remarks>The version of the schema this instance document refers to, in the format x.y.z.
         /// Changes to z should not affect prevent instance documents from validating.</remarks>
-        /// Required Attribute
-        /// string, regex: "(1\.1\.\d+)"
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "(1\.1\.\d+)"</returns>
         //public string Version*/
     }
 
@@ -103,24 +103,21 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.id = null;
         }
 
-        /*/// <remarks>The full name of the CV.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>The full name of the CV.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string FullName
 
-        /// <remarks>The version of the CV.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of the CV.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Version
 
-        /// <remarks>The URI of the source CV.</remarks>
-        /// Required Attribute
-        /// anyURI
+        /// <summary>The URI of the source CV.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string URI
 
-        /// <remarks>The unique identifier of this cv within the document to be referenced by cvParam elements.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The unique identifier of this cv within the document to be referenced by cvParam elements.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Id*/
     }
 
@@ -140,9 +137,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.spectrumIdentificationItem_ref = null;
         }
 
-        /*/// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the SpectrumIdentificationItem element(s).</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string SpectrumIdentificationItemRef*/
     }
 
@@ -161,12 +158,12 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.peptideEvidence_ref = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SpectrumIdentificationItemRefType> SpectrumIdentificationItemRef
 
-        /// <remarks>A reference to the PeptideEvidence element on which this hypothesis is based.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the PeptideEvidence element on which this hypothesis is based.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string PeptideEvidenceRef*/
     }
 
@@ -185,14 +182,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.measure_ref = null;
         }
 
-        /*/// <remarks>The values of this particular measure, corresponding to the index defined in ion type</remarks>
-        /// Required Attribute
-        /// listOfFloats: string, space-separated floats
+        /*
+        /// <summary>The values of this particular measure, corresponding to the index defined in ion type</summary>
+        /// <remarks>Required Attribute</remarks>
         //public List<float> Values
 
-        /// <remarks>A reference to the Measure defined in the FragmentationTable</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the Measure defined in the FragmentationTable</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string MeasureRef*/
     }
 
@@ -217,21 +213,20 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.charge = 0;
         }
 
-        /*/// min 0, max unbounded
+        /*
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<FragmentArrayType> FragmentArray
 
-        /// <remarks>The type of ion identified.</remarks>
-        /// min 1, max 1
+        /// <summary>The type of ion identified.</summary>
+        /// <remarks>min 1, max 1</remarks>
         //public CVParamType CVParam
 
-        /// <remarks>The index of ions identified as integers, following standard notation for a-c, x-z e.g. if b3 b5 and b6 have been identified, the index would store "3 5 6". For internal ions, the index contains pairs defining the start and end point - see specification document for examples. For immonium ions, the index is the position of the identified ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be distinguished, all positions should be given.</remarks>
-        /// Optional Attribute
-        /// listOfIntegers: string, space-separated integers
+        /// <summary>The index of ions identified as integers, following standard notation for a-c, x-z e.g. if b3 b5 and b6 have been identified, the index would store "3 5 6". For internal ions, the index contains pairs defining the start and end point - see specification document for examples. For immonium ions, the index is the position of the identified ion within the peptide sequence - if the peptide contains the same amino acid in multiple positions that cannot be distinguished, all positions should be given.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public List<string> Index
 
-        /// <remarks>The charge of the identified fragmentation ions.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>The charge of the identified fragmentation ions.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public int Charge*/
     }
 
@@ -257,24 +252,21 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.unitName = null;
         }
 
-        /*/// <remarks>A reference to the cv element from which this term originates.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the cv element from which this term originates.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string CVRef
 
-        /// <remarks>The accession or ID number of this CV term in the source CV.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The accession or ID number of this CV term in the source CV.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Accession
 
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The name of the parameter.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public override string Name
 
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The user-entered value of the parameter.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public override string Value*/
     }
 
@@ -296,31 +288,26 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.unitCvRef = null;
         }
 
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The name of the parameter.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public abstract string Name
 
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The user-entered value of the parameter.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public abstract string Value
 
         //public CV.CV.CVID UnitCvid
 
-        /// <remarks>An accession number identifying the unit within the OBO foundry Unit CV.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An accession number identifying the unit within the OBO foundry Unit CV.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string UnitAccession
 
-        /// <remarks>The name of the unit.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The name of the unit.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string UnitName
 
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this file.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this file.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string UnitCvRef
     }*/
 
@@ -343,19 +330,17 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.type = null;
         }
 
-        /*/// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>The name of the parameter.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public override string Name
 
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The user-entered value of the parameter.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public override string Value
 
-        /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The datatype of the parameter, where appropriate (e.g.: xsd:float).</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Type*/
     }
 
@@ -373,7 +358,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.Item = null;
         }
 
-        /*/// min 1, max 1
+        /*
+        /// <remarks>min 1, max 1</remarks>
         //public ParamBase Item*/
     }
 
@@ -391,7 +377,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.Items = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<ParamBase> Items*/
     }
 
@@ -410,9 +397,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.peptideEvidence_ref = null;
         }
 
-        /*/// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the PeptideEvidenceItem element(s).</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string PeptideEvidenceRef*/
     }
 
@@ -431,10 +418,11 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.ProteinDetectionList = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SpectrumIdentificationListType> SpectrumIdentificationList
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public ProteinDetectionListType ProteinDetectionList*/
     }
 
@@ -457,23 +445,23 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.numSequencesSearchedSpecified = false;
         }
 
-        /*/// min 0, max 1
+        /*
+        /// <remarks>min 0, max 1</remarks>
         //public List<MeasureType> FragmentationTable
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SpectrumIdentificationResultType> SpectrumIdentificationResult
 
-        /// <remarks>___ParamGroup___:Scores or output parameters associated with the SpectrumIdentificationList.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___:Scores or output parameters associated with the SpectrumIdentificationList.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>The number of database sequences searched against. This value should be provided unless a de novo search has been performed.</remarks>
-        /// Optional Attribute
-        /// long
+        /// <summary>The number of database sequences searched against. This value should be provided unless a de novo search has been performed.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public long NumSequencesSearched
 
         /// Attribute Existence
@@ -497,7 +485,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.cvParam = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<CVParamType> CVParams*/
     }
 
@@ -517,15 +506,14 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.name = null;
         }
 
-        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope
+        /*
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
-        /// Required Attribute
-        /// string
+        /// <remarks>Required Attribute</remarks>
         //public string Id
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Name*/
     }
 
@@ -553,57 +541,48 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.doi = null;
         }
 
-        /*/// <remarks>The names of the authors of the reference.</remarks>
-        /// Optional Attribute
-        /// string
+        /*
+        /// <remarks>The names of the authors of the reference.</remarks>
+        /// <remarks>Optional Attribute</remarks>
         //public string Authors
 
-        /// <remarks>The name of the journal, book etc.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The name of the journal, book etc.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Publication
 
-        /// <remarks>The publisher of the publication.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The publisher of the publication.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Publisher
 
-        /// <remarks>The editor(s) of the reference.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The editor(s) of the reference.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Editor
 
-        /// <remarks>The year of publication.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <summary>The year of publication.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public int Year
 
         /// Attribute Existence
         //public bool YearSpecified
 
-        /// <remarks>The volume name or number.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The volume name or number.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Volume
 
-        /// <remarks>The issue name or number.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The issue name or number.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Issue
 
-        /// <remarks>The page numbers.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The page numbers.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Pages
 
-        /// <remarks>The title of the BibliographicReference.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The title of the BibliographicReference.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Title
 
-        /// <remarks>The DOI of the referenced publication.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The DOI of the referenced publication.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string DOI*/
     }
 
@@ -625,27 +604,26 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.passThreshold = false;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<PeptideHypothesisType> PeptideHypothesis
 
-        /// <remarks>___ParamGroup___:Scores or parameters associated with this ProteinDetectionHypothesis e.g. p-value</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___:Scores or parameters associated with this ProteinDetectionHypothesis e.g. p-value</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence
-        /// elements referenced from here also map to the DBSequence.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the corresponding DBSequence entry. This optional and redundant, because the PeptideEvidence
+        /// elements referenced from here also map to the DBSequence.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string DBSequenceRef
 
-        /// <remarks>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given
-        /// threshold or been validated as correct. If no such threshold has been set, value of true should be given for all results.</remarks>
-        /// Required Attribute
-        /// boolean
+        /// <summary>Set to true if the producers of the file has deemed that the ProteinDetectionHypothesis has passed a given
+        /// threshold or been validated as correct. If no such threshold has been set, value of true should be given for all results.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public bool PassThreshold*/
     }
 
@@ -665,15 +643,16 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.userParam = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<ProteinDetectionHypothesisType> ProteinDetectionHypothesis
 
-        /// <remarks>___ParamGroup___:Scores or parameters associated with the ProteinAmbiguityGroup.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___:Scores or parameters associated with the ProteinAmbiguityGroup.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams*/
     }
 
@@ -693,15 +672,16 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.userParam = null;
         }
 
-        /*/// min 0, max unbounded
+        /*
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<ProteinAmbiguityGroupType> ProteinAmbiguityGroup
 
-        /// <remarks>___ParamGroup___:Scores or output parameters associated with the whole ProteinDetectionList</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___:Scores or output parameters associated with the whole ProteinDetectionList</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams*/
     }
 
@@ -735,44 +715,40 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.sample_ref = null;
         }
 
-        /*/// <remarks>An identifier is an unambiguous string that is unique within the scope
+        /*
+        /// <remarks>An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.</remarks>
-        /// Required Attribute
-        /// string
+        /// <remarks>Required Attribute</remarks>
         //public string Id
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Name
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<PeptideEvidenceRefType> PeptideEvidenceRef
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public List<IonTypeType> Fragmentation
 
-        /// <remarks>___ParamGroup___:Scores or attributes associated with the SpectrumIdentificationItem e.g. e-value, p-value, score.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___:Scores or attributes associated with the SpectrumIdentificationItem e.g. e-value, p-value, score.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>The charge state of the identified peptide.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>The charge state of the identified peptide.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public int ChargeState
 
-        /// <remarks>The mass-to-charge value measured in the experiment in Daltons / charge.</remarks>
-        /// Required Attribute
-        /// double
+        /// <summary>The mass-to-charge value measured in the experiment in Daltons / charge.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public double ExperimentalMassToCharge
 
-        /// <remarks>The theoretical mass-to-charge value calculated for the peptide in Daltons / charge.</remarks>
-        /// Optional Attribute
-        /// double
+        /// <summary>The theoretical mass-to-charge value calculated for the peptide in Daltons / charge.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public double CalculatedMassToCharge
 
         /// Attribute Existence
@@ -780,39 +756,34 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         /// <remarks>The calculated isoelectric point of the (poly)peptide, with relevant modifications included.
         /// Do not supply this value if the PI cannot be calcuated properly.</remarks>
-        /// Optional Attribute
-        /// float
+        /// <remarks>Optional Attribute</remarks>
         //public float CalculatedPI
 
         /// Attribute Existence
         //public bool CalculatedPISpecified
 
-        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the identified (poly)peptide sequence in the Peptide element.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string PeptideRef
 
-        /// <remarks>For an MS/MS result set, this is the rank of the identification quality as scored by the search engine.
+        /// <summary>For an MS/MS result set, this is the rank of the identification quality as scored by the search engine.
         /// 1 is the top rank. If multiple identifications have the same top score, they should all be assigned rank =1.
-        /// For PMF data, the rank attribute may be meaningless and values of rank = 0 should be given.</remarks>
-        /// Required Attribute
-        /// integer
+        /// For PMF data, the rank attribute may be meaningless and values of rank = 0 should be given.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public int Rank
 
-        /// <remarks>Set to true if the producers of the file has deemed that the identification has passed a given threshold
-        /// or been validated as correct. If no such threshold has been set, value of true should be given for all results.</remarks>
-        /// Required Attribute
-        /// boolean
+        /// <summary>Set to true if the producers of the file has deemed that the identification has passed a given threshold
+        /// or been validated as correct. If no such threshold has been set, value of true should be given for all results.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public bool PassThreshold
 
-        /// <remarks>A reference should be given to the MassTable used to calculate the sequenceMass only if more than one MassTable has been given.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference should be given to the MassTable used to calculate the sequenceMass only if more than one MassTable has been given.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string MassTableRef
 
-        /// <remarks>A reference should be provided to link the SpectrumIdentificationItem to a Sample
-        /// if more than one sample has been described in the AnalysisSampleCollection.</remarks>
-        /// Optional Attribute
+        /// <summary>A reference should be provided to link the SpectrumIdentificationItem to a Sample
+        /// if more than one sample has been described in the AnalysisSampleCollection.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string SampleRef*/
     }
 
@@ -836,28 +807,27 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.spectraData_ref = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SpectrumIdentificationItemType> SpectrumIdentificationItems
 
-        /// <remarks>___ParamGroup___: Scores or parameters associated with the SpectrumIdentificationResult
+        /// <summary>___ParamGroup___: Scores or parameters associated with the SpectrumIdentificationResult
         /// (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide
-        /// sequences within the parent tolerance for this spectrum.</remarks>
-        /// min 0, max unbounded
+        /// sequences within the parent tolerance for this spectrum.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>The locally unique id for the spectrum in the spectra data set specified by SpectraData_ref.
-        /// External guidelines are provided on the use of consistent identifiers for spectra in different external formats.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The locally unique id for the spectrum in the spectra data set specified by SpectraData_ref.
+        /// External guidelines are provided on the use of consistent identifiers for spectra in different external formats.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string SpectrumID
 
-        /// <remarks>A reference to a spectra data set (e.g. a spectra file).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to a spectra data set (e.g. a spectra file).</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string SpectraDataRef*/
     }
 
@@ -877,17 +847,17 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.location = null;
         }
 
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
+        /*
+        /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public string ExternalFormatDocumentation
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public FileFormatType FileFormat
 
-        /// <remarks>The location of the data file.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The location of the data file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Location*/
     }
 
@@ -905,9 +875,10 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.cvParam = null;
         }
 
-        /*/// <remarks>cvParam capturing file formats</remarks>
-        /// Optional Attribute
-        /// min 1, max 1
+        /*
+        /// <remarks>cvParam capturing file formats</remarks>
+        /// <remarks>Optional Attribute</remarks>
+        /// <remarks>min 1, max 1</remarks>
         //public CVParamType CVParam*/
     }
 
@@ -925,20 +896,20 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SpectrumIDFormat = null;
         }
 
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
+        /*
+        /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public string ExternalFormatDocumentation
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public FileFormatType FileFormat
 
-        /// <remarks>The location of the data file.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The location of the data file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Location
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public SpectrumIDFormatType SpectrumIDFormat*/
     }
 
@@ -956,8 +927,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.cvParam = null;
         }
 
-        /*/// <remarks>CV term capturing the type of identifier used.</remarks>
-        /// min 1, max 1
+        /*
+        /// <remarks>CV term capturing the type of identifier used.</remarks>
+        /// <remarks>min 1, max 1</remarks>
         //public CVParamType CVParams*/
     }
 
@@ -976,25 +948,25 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.userParam = null;
         }
 
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
+        /*
+        /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public string ExternalFormatDocumentation
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public FileFormatType FileFormat
 
-        /// <remarks>The location of the data file.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The location of the data file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Location
 
-        /// <remarks>___ParamGroup___:Any additional parameters description the source file.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___:Any additional parameters description the source file.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams*/
     }
 
@@ -1020,50 +992,46 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.numResiduesSpecified = false;
         }
 
-        /*/// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
+        /*
+        /// <remarks>A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.</remarks>
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public string ExternalFormatDocumentation
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public FileFormatType FileFormat
 
-        /// <remarks>The location of the data file.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The location of the data file.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Location
 
-        /// <remarks>The database name may be given as a cvParam if it maps exactly to one of the release databases listed in the CV, otherwise a userParam should be used.</remarks>
-        /// min 1, max 1
+        /// <summary>The database name may be given as a cvParam if it maps exactly to one of the release databases listed in the CV, otherwise a userParam should be used.</summary>
+        /// <remarks>min 1, max 1</remarks>
         //public ParamType DatabaseName
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>The version of the database.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of the database.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Version
 
-        /// <remarks>The date and time the database was released to the public; omit this attribute when the date and time are unknown or not applicable (e.g. custom databases).</remarks>
-        /// Optional Attribute
-        /// dateTime
+        /// <summary>The date and time the database was released to the public; omit this attribute when the date and time are unknown or not applicable (e.g. custom databases).</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public System.DateTime ReleaseDate
 
         /// Attribute Existence
         //public bool ReleaseDateSpecified
 
-        /// <remarks>The total number of sequences in the database.</remarks>
-        /// Optional Attribute
-        /// long
+        /// <summary>The total number of sequences in the database.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public long NumDatabaseSequences
 
         /// Attribute Existence
         //public bool NumDatabaseSequencesSpecified
 
-        /// <remarks>The number of residues in the database.</remarks>
-        /// Optional Attribute
-        /// long
+        /// <summary>The number of residues in the database.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public long NumResidues
 
         /// <remarks></remarks>
@@ -1087,18 +1055,18 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.analysisSoftware_ref = null;
         }
 
-        /*/// <remarks>The parameters and settings for the protein detection given as CV terms.</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>The parameters and settings for the protein detection given as CV terms.</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public ParamListType AnalysisParams
 
         /// <remarks>The threshold(s) applied to determine that a result is significant.
         /// If multiple terms are used it is assumed that all conditions are satisfied by the passing results.</remarks>
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public ParamListType Threshold
 
-        /// <remarks>The protein detection software used, given as a reference to the SoftwareCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The protein detection software used, given as a reference to the SoftwareCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string AnalysisSoftwareRef*/
     }
 
@@ -1116,9 +1084,10 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.cvParam = null;
         }
 
-        /*/// <remarks>The details specifying this translation table are captured as cvParams, e.g. translation table, translation
-        /// start codons and translation table description (see specification document and mapping file)</remarks>
-        /// min 0, max unbounded
+        /*
+        /// <summary>The details specifying this translation table are captured as cvParams, e.g. translation table, translation
+        /// start codons and translation table description (see specification document and mapping file)</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams*/
     }
 
@@ -1140,23 +1109,24 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.msLevel = null;
         }
 
-        /*/// <remarks>The specification of a single residue within the mass table.</remarks>
-        /// min 0, max unbounded
+        /*
+        /// <remarks>The specification of a single residue within the mass table.</remarks>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<ResidueType> Residue
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<AmbiguousResidueType> AmbiguousResidue
 
-        /// <remarks>___ParamGroup___: Additional parameters or descriptors for the MassTable.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___: Additional parameters or descriptors for the MassTable.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>The MS spectrum that the MassTable refers to e.g. "1" for MS1 "2" for MS2 or "1 2" for MS1 or MS2.</remarks>
-        /// Required Attribute
+        /// <summary>The MS spectrum that the MassTable refers to e.g. "1" for MS1 "2" for MS2 or "1 2" for MS1 or MS2.</summary>
+        /// <remarks>Required Attribute</remarks>
         /// integer(s), space separated
         //public List<string> MsLevel*/
     }
@@ -1175,14 +1145,14 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.mass = -1;
         }
 
-        /*/// <remarks>The single letter code for the residue.</remarks>
-        /// Required Attribute
-        /// chars, string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
+        /*
+        /// <summary>The single letter code for the residue.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
         //public string Code
 
-        /// <remarks>The residue mass in Daltons (not including any fixed modifications).</remarks>
-        /// Required Attribute
-        /// float
+        /// <summary>The residue mass in Daltons (not including any fixed modifications).</summary>
+        /// <remarks>Required Attribute</remarks>
         //public float Mass*/
     }
 
@@ -1203,17 +1173,18 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.code = null;
         }
 
-        /*/// <remarks>___ParamGroup___: Parameters for capturing e.g. "alternate single letter codes"</remarks>
-        /// min 0, max unbounded
+        /*
+        /// <summary>___ParamGroup___: Parameters for capturing e.g. "alternate single letter codes"</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>The single letter code of the ambiguous residue e.g. X.</remarks>
-        /// Required Attribute
-        /// chars, string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
+        /// <summary>The single letter code of the ambiguous residue e.g. X.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
         //public string Code*/
     }
 
@@ -1241,45 +1212,44 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.minDistanceSpecified = false;
         }
 
-        /*/// <remarks>Regular expression for specifying the enzyme cleavage site.</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>Regular expression for specifying the enzyme cleavage site.</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public string SiteRegexp
 
-        /// <remarks>The name of the enzyme from a CV.</remarks>
-        /// min 0, max 1
+        /// <summary>The name of the enzyme from a CV.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public ParamListType EnzymeName
 
-        /// <remarks>Element formula gained at NTerm.</remarks>
-        /// Optional Attribute
-        /// string, regex: "[A-Za-z0-9 ]+"
+        /// <summary>Element formula gained at NTerm.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[A-Za-z0-9 ]+"</returns>
         //public string NTermGain
 
-        /// <remarks>Element formula gained at CTerm.</remarks>
-        /// Optional Attribute
-        /// string, regex: "[A-Za-z0-9 ]+"
+        /// <summary>Element formula gained at CTerm.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[A-Za-z0-9 ]+"</returns>
         //public string CTermGain
 
-        /// <remarks>Set to true if the enzyme cleaves semi-specifically (i.e. one terminus must cleave
+        /// <summary>Set to true if the enzyme cleaves semi-specifically (i.e. one terminus must cleave
         /// according to the rules, the other can cleave at any residue), false if the enzyme cleavage
-        /// is assumed to be specific to both termini (accepting for any missed cleavages).</remarks>
-        /// Optional Attribute
-        /// boolean
+        /// is assumed to be specific to both termini (accepting for any missed cleavages).</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public bool SemiSpecific
 
         /// Attribute Existence
         //public bool SemiSpecificSpecified
 
-        /// <remarks>The number of missed cleavage sites allowed by the search. The attribute must be provided if an enzyme has been used.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <summary>The number of missed cleavage sites allowed by the search. The attribute must be provided if an enzyme has been used.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public int MissedCleavages
 
         /// Attribute Existence
         //public bool MissedCleavagesSpecified
 
-        /// <remarks>Minimal distance for another cleavage (minimum: 1).</remarks>
-        /// Optional Attribute
-        /// integer >= 1
+        /// <summary>Minimal distance for another cleavage (minimum: 1).</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>integer, greater than or equal to 1</returns>
         //public int MinDistance
 
         /// Attribute Existence
@@ -1310,42 +1280,42 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.analysisSoftware_ref = null;
         }
 
-        /*/// <remarks>The type of search performed e.g. PMF, Tag searches, MS-MS</remarks>
-        /// min 1, max 1
+        /*
+        /// <remarks>The type of search performed e.g. PMF, Tag searches, MS-MS</remarks>
+        /// <remarks>min 1, max 1</remarks>
         //public ParamType SearchType
 
-        /// <remarks>The search parameters other than the modifications searched.</remarks>
-        /// min 0, max 1
+        /// <summary>The search parameters other than the modifications searched.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public ParamListType AdditionalSearchParams
 
-        /// min 0, max 1 : Original ModificationParamsType
+        /// <remarks>min 0, max 1 : Original ModificationParamsType</remarks>
         //public List<SearchModificationType> ModificationParams
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public EnzymesType Enzymes
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<MassTableType> MassTable
 
-        /// min 0, max 1 : Original ToleranceType
+        /// <remarks>min 0, max 1 : Original ToleranceType</remarks>
         //public List<CVParamType> FragmentTolerance
 
-        /// min 0, max 1 : Original ToleranceType
+        /// <remarks>min 0, max 1 : Original ToleranceType</remarks>
         //public List<CVParamType> ParentTolerance
 
-        /// <remarks>The threshold(s) applied to determine that a result is significant. If multiple terms are used it is assumed that all conditions are satisfied by the passing results.</remarks>
-        /// min 1, max 1
+        /// <summary>The threshold(s) applied to determine that a result is significant. If multiple terms are used it is assumed that all conditions are satisfied by the passing results.</summary>
+        /// <remarks>min 1, max 1</remarks>
         //public ParamListType Threshold
 
-        /// min 0, max 1 : Original DatabaseFiltersType
+        /// <remarks>min 0, max 1 : Original DatabaseFiltersType</remarks>
         //public List<FilterInfo> DatabaseFilters
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public DatabaseTranslationType DatabaseTranslation
 
-        /// <remarks>The search algorithm used, given as a reference to the SoftwareCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The search algorithm used, given as a reference to the SoftwareCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string AnalysisSoftwareRef*/
     }
 
@@ -1365,7 +1335,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.cvParam = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<CVParamType> CVParams*/
     }
 
@@ -1390,28 +1361,27 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.residues = null;
         }
 
-        /*/// min 0, max unbounded
+        /*
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<SpecificityRulesType> SpecificityRules
 
-        /// <remarks>The modification is uniquely identified by references to external CVs such as UNIMOD, see
-        /// specification document and mapping file for more details.</remarks>
-        /// min 1, max unbounded
+        /// <summary>The modification is uniquely identified by references to external CVs such as UNIMOD, see
+        /// specification document and mapping file for more details.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>True, if the modification is static (i.e. occurs always).</remarks>
-        /// Required Attribute
-        /// boolean
+        /// <summary>True, if the modification is static (i.e. occurs always).</summary>
+        /// <remarks>Required Attribute</remarks>
         //public bool FixedMod
 
-        /// <remarks>The mass delta of the searched modification in Daltons.</remarks>
-        /// Required Attribute
-        /// float
+        /// <summary>The mass delta of the searched modification in Daltons.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public float MassDelta
 
-        /// <remarks>The residue(s) searched with the specified modification. For N or C terminal modifications that can occur
-        /// on any residue, the . character should be used to specify any, otherwise the list of amino acids should be provided.</remarks>
-        /// Required Attribute
-        /// listOfCharsOrAny: string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."
+        /// <summary>The residue(s) searched with the specified modification. For N or C terminal modifications that can occur
+        /// on any residue, the . character should be used to specify any, otherwise the list of amino acids should be provided.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."</returns>
         //public string Residues*/
     }
 
@@ -1431,12 +1401,12 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.independentSpecified = false;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<EnzymeType> Enzyme
 
-        /// <remarks>If there are multiple enzymes specified, this attribute is set to true if cleavage with different enzymes is performed independently.</remarks>
-        /// Optional Attribute
-        /// boolean
+        /// <summary>If there are multiple enzymes specified, this attribute is set to true if cleavage with different enzymes is performed independently.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public bool Independent
 
         /// Attribute Existence
@@ -1462,16 +1432,17 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.Exclude = null;
         }
 
-        /*/// <remarks>The type of filter e.g. database taxonomy filter, pi filter, mw filter</remarks>
-        /// min 1, max 1
+        /*
+        /// <remarks>The type of filter e.g. database taxonomy filter, pi filter, mw filter</remarks>
+        /// <remarks>min 1, max 1</remarks>
         //public ParamType FilterType
 
-        /// <remarks>All sequences fulfilling the specified criteria are included.</remarks>
-        /// min 0, max 1
+        /// <summary>All sequences fulfilling the specified criteria are included.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public ParamListType Include
 
-        /// <remarks>All sequences fulfilling the specified criteria are excluded.</remarks>
-        /// min 0, max 1
+        /// <summary>All sequences fulfilling the specified criteria are excluded.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public ParamListType Exclude*/
     }
 
@@ -1490,12 +1461,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.frames = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<TranslationTableType> TranslationTable
 
-        /// <remarks>The frames in which the nucleic acid sequence has been translated as a space separated List</remarks>
-        /// Optional Attribute
-        /// listOfAllowedFrames: space-separated string, valid values -3, -2, -1, 1, 2, 3
+        /// <summary>The frames in which the nucleic acid sequence has been translated as a space separated List</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>List of allowed frames: -3, -2, -1, 1, 2, 3</returns>
         //public List<int> Frames*/
     }
 
@@ -1515,9 +1487,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.activityDateSpecified = false;
         }
 
-        /*/// <remarks>When the protocol was applied.</remarks>
-        /// Optional Attribute
-        /// datetime
+        /*
+        /// <remarks>When the protocol was applied.</remarks>
+        /// <remarks>Optional Attribute</remarks>
         //public System.DateTime ActivityDate
 
         /// Attribute Existence
@@ -1540,17 +1512,16 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.proteinDetectionProtocol_ref = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<InputSpectrumIdentificationsType> InputSpectrumIdentifications
 
-        /// <remarks>A reference to the ProteinDetectionList in the DataCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the ProteinDetectionList in the DataCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string ProteinDetectionListRef
 
-        /// <remarks>A reference to the detection protocol used for this ProteinDetection.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the detection protocol used for this ProteinDetection.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string ProteinDetectionProtocolRef*/
     }
 
@@ -1568,9 +1539,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.spectrumIdentificationList_ref = null;
         }
 
-        /*/// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the list of spectrum identifications that were input to the process.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string SpectrumIdentificationListRef*/
     }
 
@@ -1592,21 +1563,20 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.spectrumIdentificationList_ref = null;
         }
 
-        /*/// <remarks>One of the spectra data sets used.</remarks>
-        /// min 1, max unbounded
+        /*
+        /// <remarks>One of the spectra data sets used.</remarks>
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<InputSpectraType> InputSpectra
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SearchDatabaseRefType> SearchDatabaseRef
 
-        /// <remarks>A reference to the search protocol used for this SpectrumIdentification.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the search protocol used for this SpectrumIdentification.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string SpectrumIdentificationProtocolRef
 
-        /// <remarks>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string SpectrumIdentificationListRef*/
     }
 
@@ -1624,9 +1594,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.spectraData_ref = null;
         }
 
-        /*/// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
-        /// Optional Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the SpectraData element which locates the input spectra to an external file.</remarks>
+        /// <remarks>Optional Attribute</remarks>
         //public string SpectraDataRef*/
     }
 
@@ -1644,9 +1614,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.searchDatabase_ref = null;
         }
 
-        /*/// <remarks>A reference to the database searched.</remarks>
-        /// Optional Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the database searched.</remarks>
+        /// <remarks>Optional Attribute</remarks>
         //public string SearchDatabaseRef*/
     }
 
@@ -1678,36 +1648,35 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.dBSequence_ref = null;
         }
 
-        /*//public PeptideEvidenceType()
+        /*
+        //public PeptideEvidenceType()
 
-        /// <remarks>___ParamGroup___: Additional parameters or descriptors for the PeptideEvidence.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___: Additional parameters or descriptors for the PeptideEvidence.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>Set to true if the peptide is matched to a decoy sequence.</remarks>
-        /// Optional Attribute
-        /// boolean, default false
+        /// <summary>Set to true if the peptide is matched to a decoy sequence.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public bool IsDecoy
 
         /// <remarks>Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="".
         /// If for any reason it is unknown (e.g. denovo), pre="?" should be used.</remarks>
-        /// Optional Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
         //public string Pre
 
-        /// <remarks>Post flanking residue. If the peptide is C-terminal, post="-" and not post="". If for any reason it is unknown (e.g. denovo), post="?" should be used.</remarks>
-        /// Optional Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /// <summary>Post flanking residue. If the peptide is C-terminal, post="-" and not post="". If for any reason it is unknown (e.g. denovo), post="?" should be used.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         //public string Post
 
         /// <remarks>Start position of the peptide inside the protein sequence, where the first amino acid of the
         /// protein sequence is position 1. Must be provided unless this is a de novo search.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <remarks>Optional Attribute</remarks>
         //public int Start
 
         /// Attribute Existence
@@ -1715,34 +1684,30 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         /// <remarks>The index position of the last amino acid of the peptide inside the protein sequence, where the first
         /// amino acid of the protein sequence is position 1. Must be provided unless this is a de novo search.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <remarks>Optional Attribute</remarks>
         //public int End
 
         /// Attribute Existence
         //public bool EndSpecified
 
-        /// <remarks>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the translation table used if this is PeptideEvidence derived from nucleic acid sequence</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string TranslationTable_ref
 
-        /// <remarks>The translation frame of this sequence if this is PeptideEvidence derived from nucleic acid sequence</remarks>
-        /// Optional Attribute
+        /// <summary>The translation frame of this sequence if this is PeptideEvidence derived from nucleic acid sequence</summary>
+        /// <remarks>Optional Attribute</remarks>
         /// "Allowed Frames", int: -3, -2, -1, 1, 2, 3
         //public int Frame
 
         /// Attribute Existence
         //public bool FrameSpecified
 
-        /// <remarks>A reference to the identified (poly)peptide sequence in the Peptide element.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the identified (poly)peptide sequence in the Peptide element.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string PeptideRef
 
-        /// <remarks>A reference to the protein sequence in which the specified peptide has been linked.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the protein sequence in which the specified peptide has been linked.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string DBSequenceRef*/
     }
 
@@ -1764,22 +1729,23 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.userParam = null;
         }
 
-        /*/// <remarks>The amino acid sequence of the (poly)peptide. If a substitution modification has been found, the original sequence should be reported.</remarks>
-        /// min 1, max 1
+        /*
+        /// <remarks>The amino acid sequence of the (poly)peptide. If a substitution modification has been found, the original sequence should be reported.</remarks>
+        /// <remarks>min 1, max 1</remarks>
         //public string PeptideSequence
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<ModificationType> Modification
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<SubstitutionModificationType> SubstitutionModification
 
-        /// <remarks>___ParamGroup___: Additional descriptors of this peptide sequence</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___: Additional descriptors of this peptide sequence</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams*/
     }
 
@@ -1811,16 +1777,16 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.monoisotopicMassDeltaSpecified = false;
         }
 
-        /*/// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary.</remarks>
-        /// min 1, max unbounded
+        /*
+        /// <remarks>CV terms capturing the modification, sourced from an appropriate controlled vocabulary.</remarks>
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
         /// <remarks>Location of the modification within the peptide - position in peptide sequence, counted from
         /// the N-terminus residue, starting at position 1. Specific modifications to the N-terminus should be
         /// given the location 0. Modification to the C-terminus should be given as peptide length + 1. If the
         /// modification location is unknown e.g. for PMF data, this attribute should be omitted.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <remarks>Optional Attribute</remarks>
         //public int Location
 
         /// Attribute Existence
@@ -1829,21 +1795,19 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <remarks>Specification of the residue (amino acid) on which the modification occurs. If multiple values
         /// are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of
         /// the residues listed. Multiple residues would usually only be specified for PMF data.</remarks>
-        /// Optional Attribute
-        /// listOfChars, string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
         //public List<string> Residues
 
-        /// <remarks>Atomic mass delta considering the natural distribution of isotopes in Daltons.</remarks>
-        /// Optional Attribute
-        /// double
+        /// <summary>Atomic mass delta considering the natural distribution of isotopes in Daltons.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public double AvgMassDelta
 
         /// Attribute Existence
         //public bool AvgMassDeltaSpecified
 
-        /// <remarks>Atomic mass delta when assuming only the most common isotope of elements in Daltons.</remarks>
-        /// Optional Attribute
-        /// double
+        /// <summary>Atomic mass delta when assuming only the most common isotope of elements in Daltons.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public double MonoisotopicMassDelta
 
         /// Attribute Existence
@@ -1871,21 +1835,21 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.monoisotopicMassDeltaSpecified = false;
         }
 
-        /*/// <remarks>The original residue before replacement.</remarks>
-        /// Required Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /*
+        /// <remarks>The original residue before replacement.</remarks>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         //public string OriginalResidue
 
-        /// <remarks>The residue that replaced the originalResidue.</remarks>
-        /// Required Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /// <summary>The residue that replaced the originalResidue.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         //public string ReplacementResidue
 
         /// <remarks>Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus residue, starting at position 1.
         /// Specific modifications to the N-terminus should be given the location 0.
         /// Modification to the C-terminus should be given as peptide length + 1.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <remarks>Optional Attribute</remarks>
         //public int Location
 
         /// Attribute Existence
@@ -1893,8 +1857,7 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         /// <remarks>Atomic mass delta considering the natural distribution of isotopes in Daltons.
         /// This should only be reported if the original amino acid is known i.e. it is not "X"</remarks>
-        /// Optional Attribute
-        /// double
+        /// <remarks>Optional Attribute</remarks>
         //public double AvgMassDelta
 
         /// Attribute Existence
@@ -1902,8 +1865,7 @@ namespace PSI_Interface.IdentData.mzIdentML
 
         /// <remarks>Atomic mass delta when assuming only the most common isotope of elements in Daltons.
         /// This should only be reported if the original amino acid is known i.e. it is not "X"</remarks>
-        /// Optional Attribute
-        /// double
+        /// <remarks>Optional Attribute</remarks>
         //public double MonoisotopicMassDelta
 
         /// Attribute Existence
@@ -1932,31 +1894,30 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.lengthSpecified = false;
         }
 
-        /*/// <remarks>The actual sequence of amino acids or nucleic acid.</remarks>
-        /// min 0, max 1
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"
+        /*
+        /// <remarks>The actual sequence of amino acids or nucleic acid.</remarks>
+        /// <remarks>min 0, max 1</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"</returns>
         //public string Seq
 
-        /// <remarks>___ParamGroup___: Additional descriptors for the sequence, such as taxon, description line etc.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___: Additional descriptors for the sequence, such as taxon, description line etc.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams
 
-        /// <remarks>The unique accession of this sequence.</remarks>
-        /// Required Attribute
+        /// <summary>The unique accession of this sequence.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string Accession
 
-        /// <remarks>The source database of this sequence.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The source database of this sequence.</summary>
+        /// <remarks>Required Attribute</remarks>
         //public string SearchDatabase_ref
 
-        /// <remarks>The length of the sequence as a number of bases or residues.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <summary>The length of the sequence as a number of bases or residues.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public int Length
 
         /// Attribute Existence
@@ -1987,19 +1948,20 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.userParam = null;
         }
 
-        /*/// <remarks>Contact details for the Material. The association to ContactRole could specify, for example, the creator or provider of the Material.</remarks>
-        /// min 0, max unbounded
+        /*
+        /// <remarks>Contact details for the Material. The association to ContactRole could specify, for example, the creator or provider of the Material.</remarks>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<ContactRoleType> ContactRoles
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<SubSampleType> SubSamples
 
-        /// <remarks>___ParamGroup___: The characteristics of a Material.</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___: The characteristics of a Material.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams*/
     }
 
@@ -2023,9 +1985,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         // min 1, max 1
         //public RoleType Role
 
-        /*/// <remarks>When a ContactRole is used, it specifies which Contact the role is associated with.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>When a ContactRole is used, it specifies which Contact the role is associated with.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string contact_ref*/
     }
 
@@ -2043,8 +2005,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.cvParam = null;
         }
 
-        /*/// <remarks>CV term for contact roles, such as software provider.</remarks>
-        /// min 1, max 1
+        /*
+        /// <remarks>CV term for contact roles, such as software provider.</remarks>
+        /// <remarks>min 1, max 1</remarks>
         //public CVParamType CVParam*/
     }
 
@@ -2062,9 +2025,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.sample_ref = null;
         }
 
-        /*/// <remarks>A reference to the child sample.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the child sample.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string SampleRef*/
     }
 
@@ -2085,12 +2048,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.userParam = null;
         }
 
-        /*/// <remarks>___ParamGroup___: Attributes of this contact such as address, email, telephone etc.</remarks>
-        /// min 0, max unbounded
+        /*
+        /// <remarks>___ParamGroup___: Attributes of this contact such as address, email, telephone etc.</remarks>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
 
-        /// <remarks>___ParamGroup___</remarks>
-        /// min 0, max unbounded
+        /// <summary>___ParamGroup___</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> UserParams*/
     }
 
@@ -2109,7 +2073,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.Parent = null;
         }
 
-        /*/// min 0, max 1
+        /*
+        /// <remarks>min 0, max 1</remarks>
         //public ParentOrganizationType Parent*/
     }
 
@@ -2127,9 +2092,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.organization_ref = null;
         }
 
-        /*/// <remarks>A reference to the organization this contact belongs to.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>A reference to the organization this contact belongs to.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string organizationRef*/
     }
 
@@ -2151,20 +2116,21 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.midInitials = null;
         }
 
-        /*/// <remarks>The organization a person belongs to.</remarks>
-        /// min 0, max unbounded
+        /*
+        /// <remarks>The organization a person belongs to.</remarks>
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<AffiliationInfo> Affiliation
 
-        /// <remarks>The Person's last/family name.</remarks>
-        /// Optional Attribute
+        /// <summary>The Person's last/family name.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string LastName
 
-        /// <remarks>The Person's first name.</remarks>
-        /// Optional Attribute
+        /// <summary>The Person's first name.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string FirstName
 
-        /// <remarks>The Person's middle initial.</remarks>
-        /// Optional Attribute
+        /// <summary>The Person's middle initial.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string MidInitials*/
     }
 
@@ -2181,9 +2147,9 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.organization_ref = null;
         }
 
-        /*/// <remarks>>A reference to the organization this contact belongs to.</remarks>
-        /// Required Attribute
-        /// string
+        /*
+        /// <remarks>>A reference to the organization this contact belongs to.</remarks>
+        /// <remarks>Required Attribute</remarks>
         //public string OrganizationRef*/
     }
 
@@ -2202,13 +2168,13 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.analysisSoftware_ref = null;
         }
 
-        /*/// <remarks>The Contact that provided the document instance.</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>The Contact that provided the document instance.</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public ContactRoleType ContactRole
 
-        /// <remarks>The Software that produced the document instance.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The Software that produced the document instance.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string AnalysisSoftwareRef*/
     }
 
@@ -2233,26 +2199,25 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.uri = null;
         }
 
-        /*/// <remarks>The contact details of the organisation or person that produced the software</remarks>
-        /// min 0, max 1
+        /*
+        /// <remarks>The contact details of the organisation or person that produced the software</remarks>
+        /// <remarks>min 0, max 1</remarks>
         //public ContactRoleType ContactRole
 
-        /// <remarks>The name of the analysis software package, sourced from a CV if available.</remarks>
-        /// min 1, max 1
+        /// <summary>The name of the analysis software package, sourced from a CV if available.</summary>
+        /// <remarks>min 1, max 1</remarks>
         //public ParamType SoftwareName
 
-        /// <remarks>Any customizations to the software, such as alternative scoring mechanisms implemented, should be documented here as free text.</remarks>
-        /// min 0, max 1
+        /// <summary>Any customizations to the software, such as alternative scoring mechanisms implemented, should be documented here as free text.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public string Customizations
 
-        /// <remarks>The version of Software used.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of Software used.</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string Version
 
-        /// <remarks>URI of the analysis software e.g. manufacturer's website</remarks>
-        /// Optional Attribute
-        /// anyURI
+        /// <summary>URI of the analysis software e.g. manufacturer's website</summary>
+        /// <remarks>Optional Attribute</remarks>
         //public string URI*/
     }
 
@@ -2272,13 +2237,14 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.SpectraData = null;
         }
 
-        /*/// min 0, max unbounded
+        /*
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<SourceFileType> SourceFile
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<SearchDatabaseType> SearchDatabase
 
-        /// min 1, max unbounde
+        /// <remarks>min 1, max unbounde</remarks>
         //public List<SpectraDataType> SpectraData*/
     }
 
@@ -2297,10 +2263,11 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.AnalysisData = null;
         }
 
-        /*/// min 1, max 1
+        /*
+        /// <remarks>min 1, max 1</remarks>
         //public InputsInfo Inputs
 
-        /// min 1, max 1
+        /// <remarks>min 1, max 1</remarks>
         //public AnalysisDataType AnalysisData*/
     }
 
@@ -2319,10 +2286,11 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.ProteinDetectionProtocol = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SpectrumIdentificationProtocolType> SpectrumIdentificationProtocol
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public ProteinDetectionProtocolType ProteinDetectionProtocol*/
     }
 
@@ -2342,10 +2310,11 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.ProteinDetection = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SpectrumIdentificationType> SpectrumIdentification
 
-        /// min 0, max 1
+        /// <remarks>min 0, max 1</remarks>
         //public ProteinDetectionType ProteinDetection*/
     }
 
@@ -2366,13 +2335,14 @@ namespace PSI_Interface.IdentData.mzIdentML
             this.PeptideEvidence = null;
         }
 
-        /*/// min 1, max unbounded
+        /*
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<DBSequenceType> DBSequences
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<PeptideType> Peptides
 
-        /// min 0, max unbounded
+        /// <remarks>min 0, max unbounded</remarks>
         //public List<PeptideEvidenceType> PeptideEvidences*/
     }
 }

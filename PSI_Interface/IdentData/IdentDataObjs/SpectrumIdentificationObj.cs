@@ -57,7 +57,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>One of the spectra data sets used.</remarks>
+        /// <summary>One of the spectra data sets used.</summary>
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<InputSpectraRefObj> InputSpectra
         {
@@ -70,7 +70,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <summary>min 1, max unbounded</summary>
         public IdentDataList<SearchDatabaseRefObj> SearchDatabases
         {
             get => _searchDatabases;
@@ -82,9 +82,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the search protocol used for this SpectrumIdentification.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the search protocol used for this SpectrumIdentification.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string SpectrumIdentificationProtocolRef
         {
             get
@@ -101,9 +100,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the search protocol used for this SpectrumIdentification.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the search protocol used for this SpectrumIdentification.</summary>
+        /// <remarks>Required Attribute</remarks>
         public SpectrumIdentificationProtocolObj SpectrumIdentificationProtocol
         {
             get => _spectrumIdentificationProtocol;
@@ -118,9 +116,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string SpectrumIdentificationListRef
         {
             get
@@ -137,9 +134,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the SpectrumIdentificationList produced by this analysis in the DataCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         public SpectrumIdentificationListObj SpectrumIdentificationList
         {
             get => _spectrumIdentificationList;

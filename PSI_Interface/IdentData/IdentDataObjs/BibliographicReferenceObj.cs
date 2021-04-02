@@ -54,29 +54,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             DOI = br.doi;
         }
 
-        /// <remarks>The names of the authors of the reference.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The names of the authors of the reference.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Authors { get; set; }
 
-        /// <remarks>The name of the journal, book etc.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The name of the journal, book etc.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Publication { get; set; }
 
-        /// <remarks>The publisher of the publication.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The publisher of the publication.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Publisher { get; set; }
 
-        /// <remarks>The editor(s) of the reference.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The editor(s) of the reference.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Editor { get; set; }
 
-        /// <remarks>The year of publication.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <summary>The year of publication.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public int Year
         {
             get => _year;
@@ -87,45 +82,40 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Year has been defined
+        /// </summary>
         protected internal bool YearSpecified { get; private set; }
 
-        /// <remarks>The volume name or number.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The volume name or number.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Volume { get; set; }
 
-        /// <remarks>The issue name or number.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The issue name or number.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Issue { get; set; }
 
-        /// <remarks>The page numbers.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The page numbers.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Pages { get; set; }
 
-        /// <remarks>The title of the BibliographicReference.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The title of the BibliographicReference.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Title { get; set; }
 
-        /// <remarks>The DOI of the referenced publication.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The DOI of the referenced publication.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string DOI { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

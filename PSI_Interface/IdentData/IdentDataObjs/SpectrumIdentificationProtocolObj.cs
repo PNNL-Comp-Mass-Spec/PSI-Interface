@@ -102,7 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _databaseTranslation = new DatabaseTranslationObj(sip.DatabaseTranslation, IdentData);
         }
 
-        /// <remarks>The type of search performed e.g. PMF, Tag searches, MS-MS</remarks>
+        /// <summary>The type of search performed e.g. PMF, Tag searches, MS-MS</summary>
         /// <remarks>min 1, max 1</remarks>
         public ParamObj SearchType
         {
@@ -115,7 +115,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The search parameters other than the modifications searched.</remarks>
+        /// <summary>The search parameters other than the modifications searched.</summary>
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj AdditionalSearchParams
         {
@@ -128,7 +128,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         // Original ModificationParamsType
         public IdentDataList<SearchModificationObj> ModificationParams
         {
@@ -141,7 +141,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public EnzymeListObj Enzymes
         {
             get => _enzymes;
@@ -153,7 +153,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<MassTableObj> MassTables
         {
             get => _massTables;
@@ -165,7 +165,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         // Original ToleranceType
         public IdentDataList<CVParamObj> FragmentTolerances
         {
@@ -178,7 +178,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         // Original ToleranceType
         public IdentDataList<CVParamObj> ParentTolerances
         {
@@ -191,10 +191,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// The threshold(s) applied to determine that a result is significant. If multiple terms are used it is assumed
         /// that all conditions are satisfied by the passing results.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 1, max 1</remarks>
         public ParamListObj Threshold
         {
@@ -207,7 +207,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         // Original DatabaseFiltersType
         public IdentDataList<FilterInfo> DatabaseFilters
         {
@@ -220,7 +220,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public DatabaseTranslationObj DatabaseTranslation
         {
             get => _databaseTranslation;
@@ -232,9 +232,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The search algorithm used, given as a reference to the SoftwareCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The search algorithm used, given as a reference to the SoftwareCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string AnalysisSoftwareRef
         {
             get
@@ -251,9 +250,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The search algorithm used, given as a reference to the SoftwareCollection section.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The search algorithm used, given as a reference to the SoftwareCollection section.</summary>
+        /// <remarks>Required Attribute</remarks>
         public AnalysisSoftwareObj AnalysisSoftware
         {
             get => _analysisSoftware;
@@ -268,17 +266,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

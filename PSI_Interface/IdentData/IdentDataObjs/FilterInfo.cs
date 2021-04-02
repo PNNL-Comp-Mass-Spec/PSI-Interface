@@ -49,7 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _exclude = new ParamListObj(f.Exclude, IdentData);
         }
 
-        /// <remarks>The type of filter e.g. database taxonomy filter, pi filter, mw filter</remarks>
+        /// <summary>The type of filter e.g. database taxonomy filter, pi filter, mw filter</summary>
         /// <remarks>min 1, max 1</remarks>
         public ParamObj FilterType
         {
@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>All sequences fulfilling the specified criteria are included.</remarks>
+        /// <summary>All sequences fulfilling the specified criteria are included.</summary>
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj Include
         {
@@ -75,7 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>All sequences fulfilling the specified criteria are excluded.</remarks>
+        /// <summary>All sequences fulfilling the specified criteria are excluded.</summary>
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj Exclude
         {

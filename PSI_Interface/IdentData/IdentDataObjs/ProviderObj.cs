@@ -47,7 +47,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _contactRole = new ContactRoleObj(p.ContactRole, IdentData);
         }
 
-        /// <remarks>The Contact that provided the document instance.</remarks>
+        /// <summary>The Contact that provided the document instance.</summary>
         /// <remarks>min 0, max 1</remarks>
         public ContactRoleObj ContactRole
         {
@@ -60,9 +60,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The Software that produced the document instance.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The Software that produced the document instance.</summary>
+        /// <remarks>Optional Attribute</remarks>
         protected internal string AnalysisSoftwareRef
         {
             get
@@ -79,9 +78,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The Software that produced the document instance.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The Software that produced the document instance.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public AnalysisSoftwareObj AnalysisSoftware
         {
             get => _analysisSoftware;
@@ -96,17 +94,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

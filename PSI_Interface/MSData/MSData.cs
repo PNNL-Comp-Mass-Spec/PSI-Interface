@@ -24,6 +24,8 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
+        // Ignore Spelling: cv, cvid, cvs, endian, oboAcc, referenceable, xsd, zlib
+
         internal CVTranslator CvTranslator;// = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
         private MSDataList<CVInfo> _cvList;
         private FileDescription _fileDescription;
@@ -35,7 +37,8 @@ namespace PSI_Interface.MSData
         private MSDataList<DataProcessingInfo> _dataProcessingList;
         private Run _run;
 
-        /// min 1, max 1
+        /// <summary>MS Data List</summary>
+        /// <remarks>min 1, max 1</remarks>
         public MSDataList<CVInfo> CVList // TODO: enforce quantity
         {
             get => this._cvList;
@@ -54,7 +57,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 1, max 1
+        /// <summary>File Description</summary>
+        /// <remarks>min 1, max 1</remarks>
         public FileDescription FileDescription // TODO: enforce quantity
         {
             get => this._fileDescription;
@@ -68,7 +72,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Referenceable Param Group List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<ReferenceableParamGroup> ReferenceableParamGroupList
         {
             get => this._referenceableParamGroupList;
@@ -82,7 +87,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Sample List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<SampleInfo> SampleList
         {
             get => this._sampleList;
@@ -96,7 +102,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 1, max 1
+        /// <summary>Software List</summary>
+        /// <remarks>min 1, max 1</remarks>
         public MSDataList<SoftwareInfo> SoftwareList // TODO: enforce quantity
         {
             get => this._softwareList;
@@ -110,7 +117,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Scan Settings List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<ScanSettingsInfo> ScanSettingsList
         {
             get => this._scanSettingsList;
@@ -124,7 +132,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 1, max 1
+        /// <summary>Instrument Configuration List</summary>
+        /// <remarks>min 1, max 1</remarks>
         public MSDataList<InstrumentConfigurationInfo> InstrumentConfigurationList // TODO: enforce quantity
         {
             get => this._instrumentConfigurationList;
@@ -138,7 +147,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 1, max 1
+        /// <summary>Data Processing List</summary>
+        /// <remarks>min 1, max 1</remarks>
         public MSDataList<DataProcessingInfo> DataProcessingList // TODO: enforce quantity
         {
             get => this._dataProcessingList;
@@ -152,7 +162,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 1, max 1
+        /// <summary>Run Instance</summary>
+        /// <remarks>min 1, max 1</remarks>
         public Run Run // TODO: enforce quantity
         {
             get => this._run;
@@ -166,19 +177,16 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>An optional accession number for the mzML document used for storage, e.g. in PRIDE.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional accession number for the mzML document used for storage, e.g. in PRIDE.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Accession { get; set; } // TODO: what?
 
-        /// <remarks>An optional id for the mzML document used for referencing from external files. It is recommended to use LSIDs when possible.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional id for the mzML document used for referencing from external files. It is recommended to use LSIDs when possible.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Id { get; set; } // TODO: enforce validity?
 
-        /// <remarks>The version of this mzML document.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The version of this mzML document.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Version { get; set; } // TODO: Enforce requirement
     }
     /*
@@ -190,16 +198,15 @@ namespace PSI_Interface.MSData
     {
         private List<CVType> cvs;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public CVType[] cv
         {
             get { return cvs.ToArray(); }
             set { cvs = value.ToList(); } // TODO: recreate the CVTranslator when setting... (Add a hook that runs whenever it is modified?)
         }
 
-        /// <remarks>The number of CV definitions in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of CV definitions in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return cvs.Count.ToString(); }
@@ -217,24 +224,23 @@ namespace PSI_Interface.MSData
     /// <remarks>Information about an ontology or CV source and a short 'lookup' tag to refer to.</remarks>
     public partial class CVInfo
     {
-        /// <remarks>The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description (e.g., from the cvLabel attribute, in CVParamType elements).</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>
+        /// The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description
+        /// (e.g., from the cvLabel attribute, in CVParamType elements).
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce requirement, uniqueness among dataset
 
-        /// <remarks>The usual name for the resource (e.g. The PSI-MS Controlled Vocabulary).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The usual name for the resource (e.g. The PSI-MS Controlled Vocabulary).</summary>
+        /// <remarks>Required Attribute</remarks>
         public string FullName { get; set; } // TODO: enforce requirement
 
-        /// <remarks>The version of the CV from which the referred-to terms are drawn.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of the CV from which the referred-to terms are drawn.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Version { get; set; } // TODO: enforce requirement
 
-        /// <remarks>The URI for the resource.</remarks>
-        /// Required Attribute
-        /// anyURI
+        /// <summary>The URI for the resource.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string URI { get; set; } // TODO: enforce requirement
     }
     /*
@@ -247,16 +253,15 @@ namespace PSI_Interface.MSData
         private List<DataProcessingType> dataProcessingField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public DataProcessingType[] dataProcessing
         {
             get { return dataProcessingField.ToArray(); }
             set { dataProcessingField = value.ToList(); }
         }
 
-        /// <remarks>The number of DataProcessingTypes in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of DataProcessingTypes in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -272,11 +277,17 @@ namespace PSI_Interface.MSData
     {
         private MSDataList<ProcessingMethodInfo> _processingMethods;
 
-        /// <remarks>Description of the default peak processing method.
+        /// <summary>Description of the default peak processing method.</summary>
+        /// <remarks>
+        /// <para>
         /// This element describes the base method used in the generation of a particular mzML file.
         /// Variable methods should be described in the appropriate acquisition section - if
-        /// no acquisition-specific details are found, then this information serves as the default.</remarks>
-        /// min 1, max unbounded
+        /// no acquisition-specific details are found, then this information serves as the default.
+        /// </para>
+        /// <para>
+        /// <remarks>min 1, max unbounded</remarks>
+        /// </para>
+        /// </remarks>
         public MSDataList<ProcessingMethodInfo> ProcessingMethods // TODO: enforce quantity
         {
             get => this._processingMethods;
@@ -290,9 +301,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>A unique identifier for this data processing that is unique across all DataProcessingTypes.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>A unique identifier for this data processing that is unique across all DataProcessingTypes.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce requirement, uniqueness among DataProcessing in dataset
     }
 
@@ -301,14 +311,13 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class ProcessingMethodInfo : ParamGroup
     {
-        /// <remarks>This attributes allows a series of consecutive steps to be placed in the correct order.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>This attributes allows a series of consecutive steps to be placed in the correct order.</summary>
+        /// <remarks>Required Attribute</remarks>
         public uint Order { get; set; } // TODO: enforce requirement, 1 to n contiguous
 
-        /// <remarks>This attribute must reference the 'id' of the appropriate SoftwareType.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <summary>This attribute must reference the 'id' of the appropriate SoftwareType.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string SoftwareRef { get; set; } // TODO: enforce requirement, validity
     }
 
@@ -322,7 +331,8 @@ namespace PSI_Interface.MSData
         private MSDataList<CVParam> _cVParams;
         private MSDataList<UserParam> _userParams;
 
-        /// min 0, max unbounded
+        /// <summary>Referenceable Param Group Refs</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<ReferenceableParamGroupRef> ReferenceableParamGroupRefs
         {
             get => this._referenceableParamGroupRefs;
@@ -341,7 +351,8 @@ namespace PSI_Interface.MSData
         //  set { this._paramGroupRefs = value.ToList(); }
         //}
 
-        /// min 0, max unbounded
+        /// <summary>CV Params</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<CVParam> CVParams
         {
             get => this._cVParams;
@@ -355,7 +366,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max unbounded
+        /// <summary>User Params</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<UserParam> UserParams
         {
             get => this._userParams;
@@ -379,16 +391,15 @@ namespace PSI_Interface.MSData
         private List<ReferenceableParamGroupType> referenceableParamGroupField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ReferenceableParamGroupType[] referenceableParamGroup
         {
             get { return referenceableParamGroupField.ToArray(); }
             set { referenceableParamGroupField = value.ToList(); }
         }
 
-        /// <remarks>The number of ParamGroups defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of ParamGroups defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -405,7 +416,8 @@ namespace PSI_Interface.MSData
         private MSDataList<CVParam> _cVParams;
         private MSDataList<UserParam> _userParams;
 
-        /// min 0, max unbounded
+        /// <summary>CV Params</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<CVParam> CVParams
         {
             get => this._cVParams;
@@ -419,7 +431,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max unbounded
+        /// <summary>User Params</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<UserParam> UserParams
         {
             get => this._userParams;
@@ -433,9 +446,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>The identifier with which to reference this ReferenceableParamGroup.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>The identifier with which to reference this ReferenceableParamGroup.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce requirement, uniqueness
     }
 
@@ -445,9 +457,9 @@ namespace PSI_Interface.MSData
     /// <remarks>A reference to a previously defined ParamGroup, which is a reusable container of one or more cvParams.</remarks>
     public partial class ReferenceableParamGroupRef
     {
-        /// <remarks>Reference to the id attribute in a referenceableParamGroup.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <summary>Reference to the id attribute in a referenceableParamGroup.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string @Ref { get; set; } // TODO: enforce requirement, validity
     }
 
@@ -479,18 +491,17 @@ namespace PSI_Interface.MSData
         //[System.Xml.Serialization.XmlIgnore]
         //public CV.CV.CVID UnitCvid { get; set; }
 
-        /// <remarks>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <summary>A reference to the CV 'id' attribute as defined in the cvList in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         internal string CVRef
         {
             get => this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.Cvid].CVRef);
             set => this._cvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
         }
 
-        /// <remarks>The accession number of the referred-to term in the named resource (e.g.: MS:000012).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The accession number of the referred-to term in the named resource (e.g.: MS:000012).</summary>
+        /// <remarks>Required Attribute</remarks>
         internal string Accession
         {
             get => CV.CV.TermData[this.Cvid].Id;
@@ -512,23 +523,22 @@ namespace PSI_Interface.MSData
             } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }
 
-        /// <remarks>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</summary>
+        /// <remarks>Required Attribute</remarks>
         internal string Name => CV.CV.TermData[this.Cvid].Name;
 
-        /// <remarks>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Value
         {
             get => this._value;
             set => this._value = value;
         } // TODO: Perform validation of the value according to CVID/UnitCVID?
 
-        /*/// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /*
+        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         internal string UnitCVRef
         {
             get
@@ -546,9 +556,9 @@ namespace PSI_Interface.MSData
             }
         }*/
 
-        /*/// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
-        /// Optional Attribute
-        /// string
+        /*
+        /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
+        /// <remarks>Optional Attribute</remarks>
         internal string UnitAccession
         {
             get
@@ -572,9 +582,9 @@ namespace PSI_Interface.MSData
             } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }*/
 
-        /*/// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
-        /// Optional Attribute
-        /// string
+        /*
+        /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
+        /// <remarks>Optional Attribute</remarks>
         internal string UnitName
         {
             get
@@ -602,24 +612,21 @@ namespace PSI_Interface.MSData
 
         //public CV.CV.CVID UnitCvid { get; set; }
 
-        /// <remarks>The name for the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The name for the parameter.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
-        /// <remarks>The datatype of the parameter, where appropriate (e.g.: xsd:float).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The data type of the parameter, where appropriate (e.g.: xsd:float).</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Type { get; set; }
 
-        /// <remarks>The value for the parameter, where appropriate.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The value for the parameter, where appropriate.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Value { get; set; }
 
-        /*/// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
-        /// Optional Attribute
-        /// string
+        /*
+        /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
+        /// <remarks>Optional Attribute</remarks>
         internal string UnitAccession
         {
             get
@@ -643,9 +650,9 @@ namespace PSI_Interface.MSData
             }
         }*/
 
-        /*/// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
-        /// Optional Attribute
-        /// string
+        /*
+        /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
+        /// <remarks>Optional Attribute</remarks>
         internal string UnitName
         {
             get
@@ -656,9 +663,10 @@ namespace PSI_Interface.MSData
             //set { this._unitName = value; }
         }*/
 
-        /*/// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /*
+        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         internal string UnitCVRef
         {
             get
@@ -705,9 +713,9 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this mzML file.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         internal string UnitCVRef
         {
             get
@@ -733,9 +741,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional CV accession number for the unit term associated with the value, if any (e.g., 'UO:0000266' for 'electron volt').</summary>
+        /// <remarks>Optional Attribute</remarks>
         internal string UnitAccession
         {
             get
@@ -764,9 +771,8 @@ namespace PSI_Interface.MSData
             } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }
 
-        /// <remarks>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional CV name for the unit accession number, if any (e.g., 'electron volt' for 'UO:0000266' ).</summary>
+        /// <remarks>Optional Attribute</remarks>
         internal string UnitName
         {
             get
@@ -792,16 +798,15 @@ namespace PSI_Interface.MSData
         private List<Precursor> precursorField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public Precursor[] precursor
         {
             get { return precursorField.ToArray(); }
             set { precursorField = value.ToList(); }
         }
 
-        /// <remarks>The number of precursor isolations in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of precursor isolations in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -820,8 +825,8 @@ namespace PSI_Interface.MSData
         private MSDataList<ParamGroup> _selectedIonList;
         private ParamGroup _activation;
 
-        /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
-        /// min 0, max 1
+        /// <summary>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</summary>
+        /// <remarks>min 0, max 1</remarks>
         public ParamGroup IsolationWindow
         {
             get => this._isolationWindow;
@@ -835,8 +840,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>A list of ions that were selected.</remarks>
-        /// min 0, max 1
+        /// <summary>A list of ions that were selected.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public SelectedIonListType selectedIonList
         public MSDataList<ParamGroup> SelectedIonList
         {
@@ -851,8 +856,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>The type and energy level used for activation.</remarks>
-        /// min 1, max 1
+        /// <summary>The type and energy level used for activation.</summary>
+        /// <remarks>min 1, max 1</remarks>
         public ParamGroup Activation
         {
             get => this._activation;
@@ -866,19 +871,17 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>For precursor spectra that are local to this document, this attribute must be used to reference the 'id' attribute of the spectrum corresponding to the precursor spectrum.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For precursor spectra that are local to this document, this attribute must be used to reference the 'id' attribute of the spectrum corresponding to the precursor spectrum.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string SpectrumRef { get; set; } // TODO: enforce validity, proper usage
 
-        /// <remarks>For precursor spectra that are external to this document, this attribute must reference the 'id' attribute of a sourceFile representing that external document.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>For precursor spectra that are external to this document, this attribute must reference the 'id' attribute of a sourceFile representing that external document.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string SourceFileRef { get; set; } // TODO: enforce validity
 
-        /// <remarks>For precursor spectra that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For precursor spectra that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string ExternalSpectrumID { get; set; } // TODO: enforce validity
     }
 
@@ -892,16 +895,15 @@ namespace PSI_Interface.MSData
         private List<ParamGroupType> selectedIonField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ParamGroupType[] selectedIon
         {
             get { return selectedIonField.ToArray(); }
             set { selectedIonField = value.ToList(); }
         }
 
-        /// <remarks>The number of selected precursor ions defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of selected precursor ions defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -921,16 +923,15 @@ namespace PSI_Interface.MSData
 
         /// <remarks>Data point arrays for default data arrays (m/z, intensity, time) and meta data arrays.
         /// Default data arrays must not have the attributes 'arrayLength' and 'dataProcessingRef'.</remarks>
-        /// min 2, max unbounded
+        /// <remarks>min 2, max unbounded</remarks>
         public BinaryDataArrayType[] binaryDataArray
         {
             get { return binaryDataArrayField.ToArray(); }
             set { binaryDataArrayField = value.ToList(); }
         }
 
-        /// <remarks>The number of binary data arrays defined in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of binary data arrays defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1029,7 +1030,7 @@ namespace PSI_Interface.MSData
         };
 
         // Data values that are processed from the other data; some is converted, some is from the cvParams.
-        private int _arrayLength; // Only used for reading from mzML, so no external access. // TODO: is this superceded by bdaDefaultArrayLength?
+        private int _arrayLength; // Only used for reading from mzML, so no external access. // TODO: is this superseded by bdaDefaultArrayLength?
         private double[] _data;
         private ArrayType _dataType;
         private int _dataWidth;
@@ -1074,7 +1075,7 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
-        /// byte width of the data in the array - 4 bytes or 8 bytes
+        /// Byte width of the data in the array - 4 bytes or 8 bytes
         /// </summary>
         public int DataWidth
         {
@@ -1152,19 +1153,25 @@ namespace PSI_Interface.MSData
         public int DataLength => this._data.Length;
 
         /// <summary>The actual base64 encoded binary data. The byte order is always 'little endian'.</summary>
-        /// base64Binary
+        /// <returns>base64 encoded binary data</returns>
         public byte[] Binary
         {
             get => Base64Conversion.EncodeBytes(this._data, this._dataWidth, this._isCompressed);
             set => this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, this._arrayLength, this._isCompressed);
         }
 
-        /// <remarks>This optional attribute may override the 'defaultArrayLength' defined in SpectrumType.
+        /// <summary>
+        /// <para>
+        /// This optional attribute may override the 'defaultArrayLength' defined in SpectrumType.
+        /// </para>
+        /// <para>
         /// The two default arrays (m/z and intensity) should NEVER use this override option, and should
         /// therefore adhere to the 'defaultArrayLength' defined in SpectrumType. Parsing software can thus
-        /// safely choose to ignore arrays of lengths different from the one defined in the 'defaultArrayLength' SpectrumType element.</remarks>
-        /// Optional Attribute
-        /// non-negative integer
+        /// safely choose to ignore arrays of lengths different from the one defined in the 'defaultArrayLength' SpectrumType element.
+        /// </para>
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>non-negative integer</returns>
         public int ArrayLength // TODO: enforce appropriate usage
         {
             get => this._data.Length;
@@ -1173,9 +1180,9 @@ namespace PSI_Interface.MSData
             // Allow setting from other constructors.
         }
 
-        /// <remarks>This optional attribute may reference the 'id' attribute of the appropriate dataProcessing.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This optional attribute may reference the 'id' attribute of the appropriate dataProcessing.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string DataProcessingRef { get; set; } // TODO: enforce validity
     }
 
@@ -1187,7 +1194,8 @@ namespace PSI_Interface.MSData
     {
         private MSDataList<Scan> _scan;
 
-        /// min 1, max unbounded
+        /// <summary>List of Scans</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<Scan> Scan // TODO: enforce quantity
         {
             get => this._scan;
@@ -1210,8 +1218,8 @@ namespace PSI_Interface.MSData
     {
         private MSDataList<ParamGroup> _scanWindowList;
 
-        /// <remarks>Container for a list of scan windows.</remarks>
-        /// min 0, max 1
+        /// <summary>Container for a list of scan windows.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public ScanWindowListType scanWindowList
         public MSDataList<ParamGroup> ScanWindowList
         {
@@ -1226,24 +1234,22 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>For scans that are local to this document, this attribute can be used to reference the 'id' attribute of the spectrum corresponding to the scan.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For scans that are local to this document, this attribute can be used to reference the 'id' attribute of the spectrum corresponding to the scan.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string SpectrumRef { get; set; } // TODO: enforce validity
 
-        /// <remarks>If this attribute is set, it must reference the 'id' attribute of a sourceFile representing the external document containing the spectrum referred to by 'externalSpectrumID'.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>If this attribute is set, it must reference the 'id' attribute of a sourceFile representing the external document containing the spectrum referred to by 'externalSpectrumID'.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string SourceFileRef { get; set; } // TODO: enforce validity
 
-        /// <remarks>For scans that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>For scans that are external to this document, this string must correspond to the 'id' attribute of a spectrum in the external document indicated by 'sourceFileRef'.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string ExternalSpectrumID { get; set; } // TODO: enforce validity
 
-        /// <remarks>This attribute can optionally reference the 'id' attribute of the appropriate instrument configuration.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' attribute of the appropriate instrument configuration.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string InstrumentConfigurationRef { get; set; } // TODO: enforce validity
     }
 
@@ -1257,17 +1263,16 @@ namespace PSI_Interface.MSData
         private List<ParamGroupType> scanWindowField;
         private int countField;
 
-        /// <remarks>A range of m/z values over which the instrument scans and acquires a spectrum.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A range of m/z values over which the instrument scans and acquires a spectrum.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public ParamGroupType[] scanWindow
         {
             get { return scanWindowField.ToArray(); }
             set { scanWindowField = value.ToList(); }
         }
 
-        /// <remarks>The number of scan windows defined in this list.</remarks>
-        /// Required Attribute
-        /// int
+        /// <summary>The number of scan windows defined in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public int count
         {
             get { return countField; }
@@ -1284,7 +1289,8 @@ namespace PSI_Interface.MSData
     {
         private MSDataList<Spectrum> _spectra;
 
-        /// min 0, max unbounded
+        /// <summary>List of Spectra</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<Spectrum> Spectra
         {
             get => this._spectra;
@@ -1298,11 +1304,17 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>This attribute MUST reference the 'id' of the default data processing for the spectrum list.
+        /// <summary>This attribute MUST reference the 'id' of the default data processing for the spectrum list.</summary>
+        /// <remarks>
+        /// <para>
         /// If an acquisition does not reference any data processing, it implicitly refers to this data processing.
-        /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
+        /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".
+        /// </para>
+        /// <para>
         /// Required Attribute
-        /// IDREF
+        /// </para>
+        /// </remarks>
+        /// <returns>IDREF</returns>
         public string DefaultDataProcessingRef { get; set; } // TODO: enforce requirement, validity
     }
 
@@ -1319,7 +1331,8 @@ namespace PSI_Interface.MSData
         private MSDataList<BinaryDataArray> _binaryDataArrayList;
         private int _defaultArrayLength;
 
-        /// min 0, max 1
+        /// <summary>Scan List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public ScanList ScanList
         {
             get => this._scanList;
@@ -1333,7 +1346,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Precursor List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<Precursor> PrecursorList
         {
             get => this._precursorList;
@@ -1347,7 +1361,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Product List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<Product> ProductList
         {
             get => this._productList;
@@ -1361,7 +1376,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Binary Data Array List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<BinaryDataArray> BinaryDataArrayList
         {
             get => this._binaryDataArrayList;
@@ -1376,26 +1392,23 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>The zero-based, consecutive index of  the spectrum in the SpectrumList.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The zero-based, consecutive index of  the spectrum in the SpectrumList.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Index { get; set; } // TODO: enforce requirement, 0-n contiguous values in spectrumList
 
-        /// <remarks>The native identifier for a spectrum. For unmerged native spectra or spectra from older open file formats,
+        /// <summary>The native identifier for a spectrum. For unmerged native spectra or spectra from older open file formats,
         /// the format of the identifier is defined in the PSI-MS CV and referred to in the mzML header.
-        /// External documents may use this identifier together with the mzML filename or accession to reference a particular spectrum.</remarks>
-        /// Required Attribute
-        /// Regex: "\S+=\S+( \S+=\S+)*"
+        /// External documents may use this identifier together with the mzML filename or accession to reference a particular spectrum.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "\S+=\S+( \S+=\S+)*"</returns>
         public string Id { get; set; } // TODO: enforce consistency? (same style?)
 
-        /// <remarks>The identifier for the spot from which this spectrum was derived, if a MALDI or similar run.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The identifier for the spot from which this spectrum was derived, if a MALDI or similar run.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string SpotID { get; set; }
 
-        /// <remarks>Default length of binary data arrays contained in this element.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>Default length of binary data arrays contained in this element.</summary>
+        /// <remarks>Required Attribute</remarks>
         public int DefaultArrayLength
         {
             get
@@ -1437,14 +1450,14 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string DataProcessingRef { get; set; } // TODO: enforce validity
 
-        /// <remarks>This attribute can optionally reference the 'id' of the appropriate sourceFile.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' of the appropriate sourceFile.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string SourceFileRef { get; set; } // TODO: enforce validity
     }
 
@@ -1458,16 +1471,15 @@ namespace PSI_Interface.MSData
         private List<ProductType> productField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ProductType[] product
         {
             get { return productField.ToArray(); }
             set { productField = value.ToList(); }
         }
 
-        /// <remarks>The number of product isolations in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of product isolations in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1484,8 +1496,8 @@ namespace PSI_Interface.MSData
     {
         private ParamGroup _isolationWindow;
 
-        /// <remarks>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</remarks>
-        /// min 0, max 1
+        /// <summary>This element captures the isolation (or 'selection') window configured to isolate one or more ions.</summary>
+        /// <remarks>min 0, max 1</remarks>
         public ParamGroup IsolationWindow
         {
             get => this._isolationWindow;
@@ -1510,9 +1522,11 @@ namespace PSI_Interface.MSData
         private ChromatogramList _chromatogramList;
         private System.DateTime _startTimeStampField;
 
-        /// <remarks>All mass spectra and the acquisitions underlying them are described and attached here.
-        /// Subsidiary data arrays are also both described and attached here.</remarks>
-        /// min 0, max 1
+        /// <summary>
+        /// All mass spectra and the acquisitions underlying them are described and attached here.
+        /// Subsidiary data arrays are also both described and attached here.
+        /// </summary>
+        /// <remarks>min 0, max 1</remarks>
         public SpectrumList SpectrumList
         {
             get => this._spectrumList;
@@ -1526,8 +1540,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>All chromatograms for this run.</remarks>
-        /// min 0, max 1
+        /// <summary>All chromatograms for this run.</summary>
+        /// <remarks>min 0, max 1</remarks>
         public ChromatogramList ChromatogramList
         {
             get => this._chromatogramList;
@@ -1541,31 +1555,33 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>A unique identifier for this run.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>A unique identifier for this run.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce uniqueness
 
-        /// <remarks>This attribute must reference the 'id' of the default instrument configuration.
-        /// If a scan does not reference an instrument configuration, it implicitly refers to this configuration.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <summary>
+        /// This attribute must reference the 'id' of the default instrument configuration.
+        /// If a scan does not reference an instrument configuration, it implicitly refers to this configuration.
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string DefaultInstrumentConfigurationRef { get; set; } // TODO: enforce requirement, validity
 
-        /// <remarks>This attribute can optionally reference the 'id' of the default source file.
-        /// If a spectrum or scan does not reference a source file and this attribute is set, then it implicitly refers to this source file.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>
+        /// This attribute can optionally reference the 'id' of the default source file.
+        /// If a spectrum or scan does not reference a source file and this attribute is set, then it implicitly refers to this source file.
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string DefaultSourceFileRef { get; set; } // TODO: enforce validity
 
-        /// <remarks>This attribute must reference the 'id' of the appropriate sample.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute must reference the 'id' of the appropriate sample.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string SampleRef { get; set; } // TODO: enforce validity
 
-        /// <remarks>The optional start timestamp of the run, in UT.</remarks>
-        /// Optional Attribute
-        /// DateTime
+        /// <summary>The optional start timestamp of the run, in UT.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public System.DateTime StartTimeStamp
         {
             get => this._startTimeStampField;
@@ -1576,7 +1592,9 @@ namespace PSI_Interface.MSData
             }
         }
 
+        /// <summary>
         /// "Ignored" Attribute - only used to signify existence of valid value in startTimeStamp
+        /// </summary>
         public bool StartTimeStampSpecified { get; private set; }
     }
 
@@ -1588,8 +1606,8 @@ namespace PSI_Interface.MSData
     {
         private MSDataList<Chromatogram> _chromatograms;
 
-        /// <remarks></remarks>
-        /// min 1, max unbounded
+        /// <summary>Chromatograms</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<Chromatogram> Chromatograms // TODO: enforce quantity
         {
             get => this._chromatograms;
@@ -1603,11 +1621,13 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>This attribute MUST reference the 'id' of the default data processing for the chromatogram list.
+        /// <summary>
+        /// This attribute MUST reference the 'id' of the default data processing for the chromatogram list.
         /// If an acquisition does not reference any data processing, it implicitly refers to this data processing.
-        /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// This attribute is required because the minimum amount of data processing that any format will undergo is "conversion to mzML".
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string DefaultDataProcessingRef { get; set; } // TODO: enforce requirement, validity of reference in dataset
     }
 
@@ -1622,7 +1642,8 @@ namespace PSI_Interface.MSData
         private MSDataList<BinaryDataArray> _binaryDataArrayList;
         private int _defaultArrayLength;
 
-        /// min 0, max 1
+        /// <summary>Precursor</summary>
+        /// <remarks>min 0, max 1</remarks>
         public Precursor Precursor
         {
             get => this._precursor;
@@ -1636,7 +1657,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Product</summary>
+        /// <remarks>min 0, max 1</remarks>
         public Product Product
         {
             get => this._product;
@@ -1650,7 +1672,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 1, max 1
+        /// <summary>Binary Data Array List</summary>
+        /// <remarks>min 1, max 1</remarks>
         public MSDataList<BinaryDataArray> BinaryDataArrayList // TODO: enforce requirement
         {
             get => this._binaryDataArrayList;
@@ -1665,19 +1688,16 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>The zero-based index for this chromatogram in the chromatogram list</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The zero-based index for this chromatogram in the chromatogram list</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Index { get; set; } // TODO: enforce requirement, 0-n contiguous values in chromatogram list.
 
-        /// <remarks>A unique identifier for this chromatogram</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A unique identifier for this chromatogram</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce requirement
 
-        /// <remarks>Default length of binary data arrays contained in this element.</remarks>
-        /// Required Attribute
-        /// integer
+        /// <summary>Default length of binary data arrays contained in this element.</summary>
+        /// <remarks>Required Attribute</remarks>
         public int DefaultArrayLength
         {
             get
@@ -1719,9 +1739,9 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</remarks>
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>This attribute can optionally reference the 'id' of the appropriate dataProcessing.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string DataProcessingRef { get; set; }
     }
 
@@ -1735,16 +1755,15 @@ namespace PSI_Interface.MSData
         private List<ScanSettingsType> scanSettingsField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ScanSettingsType[] scanSettings
         {
             get { return scanSettingsField.ToArray(); }
             set { scanSettingsField = value.ToList(); }
         }
 
-        /// <remarks>The number of AcquisitionType elements in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of AcquisitionType elements in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1762,8 +1781,8 @@ namespace PSI_Interface.MSData
         private MSDataList<SourceFileRef> _sourceFileRefList;
         private MSDataList<ParamGroup> _targetList;
 
-        /// <remarks>List with the source files containing the acquisition settings.</remarks>
-        /// min 0, max 1
+        /// <summary>List with the source files containing the acquisition settings.</summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<SourceFileRef> SourceFileRefList
         {
             get => this._sourceFileRefList;
@@ -1777,8 +1796,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>Target list (or 'inclusion list') configured prior to the run.</remarks>
-        /// min 0, max 1
+        /// <summary>Target list (or 'inclusion list') configured prior to the run.</summary>
+        /// <remarks>min 0, max 1</remarks>
         //public TargetListType targetList
         public MSDataList<ParamGroup> TargetList
         {
@@ -1793,9 +1812,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>A unique identifier for this acquisition setting.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>A unique identifier for this acquisition setting.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: Enforce requirement
     }
 
@@ -1808,17 +1826,16 @@ namespace PSI_Interface.MSData
         private List<SourceFileRefType> sourceFileRefField;
         private string countField;
 
-        /// <remarks>Reference to a previously defined sourceFile.</remarks>
-        /// min 0, max unbounded
+        /// <summary>Reference to a previously defined sourceFile.</summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public SourceFileRefType[] sourceFileRef
         {
             get { return sourceFileRefField.ToArray(); }
             set { sourceFileRefField = value.ToList(); }
         }
 
-        /// <remarks>This number of source files referenced in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>This number of source files referenced in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1833,9 +1850,9 @@ namespace PSI_Interface.MSData
     /// <remarks></remarks>
     public partial class SourceFileRef
     {
-        /// <remarks>This attribute must reference the 'id' of the appropriate sourceFile.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <summary>This attribute must reference the 'id' of the appropriate sourceFile.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string @Ref { get; set; } // TODO: enforce requirement
     }
 
@@ -1849,16 +1866,15 @@ namespace PSI_Interface.MSData
         private List<ParamGroupType> targetField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public ParamGroupType[] target
         {
             get { return targetField.ToArray(); }
             set { targetField = value.ToList(); }
         }
 
-        /// <remarks>The number of TargetType elements in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of TargetType elements in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1876,17 +1892,16 @@ namespace PSI_Interface.MSData
         private List<SoftwareType> softwareField;
         private string countField;
 
-        /// <remarks>A piece of software.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A piece of software.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public SoftwareType[] software
         {
             get { return softwareField.ToArray(); }
             set { softwareField = value.ToList(); }
         }
 
-        /// <remarks>The number of softwares defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of softwares defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1901,14 +1916,12 @@ namespace PSI_Interface.MSData
     /// <remarks>Software information</remarks>
     public partial class SoftwareInfo : ParamGroup
     {
-        /// <remarks>An identifier for this software that is unique across all SoftwareTypes.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>An identifier for this software that is unique across all SoftwareTypes.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce requirement and uniqueness in dataset
 
-        /// <remarks>The software version.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The software version.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Version { get; set; } // TODO: enforce requirement
     }
 
@@ -1926,16 +1939,15 @@ namespace PSI_Interface.MSData
         private List<InstrumentConfigurationType> instrumentConfigurationField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public InstrumentConfigurationType[] instrumentConfiguration
         {
             get { return instrumentConfigurationField.ToArray(); }
             set { instrumentConfigurationField = value.ToList(); }
         }
 
-        /// <remarks>The number of instrument configurations present in this list.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of instrument configurations present in this list.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -1956,7 +1968,8 @@ namespace PSI_Interface.MSData
         private ComponentList _componentList;
         private SoftwareRef _softwareRef;
 
-        /// min 0, max 1
+        /// <summary>Component List</summary>
+        /// <remarks>min 0, max 1</remarks>
         public ComponentList ComponentList
         {
             get => this._componentList;
@@ -1970,7 +1983,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>Software Ref</summary>
+        /// <remarks>min 0, max 1</remarks>
         public SoftwareRef SoftwareRef
         {
             get => this._softwareRef;
@@ -1984,13 +1998,12 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>An identifier for this instrument configuration.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>An identifier for this instrument configuration.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce requirement
 
-        /// Optional Attribute
-        /// IDREF
+        /// <summary>Optional Attribute</summary>
+        /// <returns>IDREF</returns>
         public string ScanSettingsRef { get; set; }
     }
 
@@ -2004,8 +2017,8 @@ namespace PSI_Interface.MSData
         private MSDataList<AnalyzerComponent> _analyzer;
         private MSDataList<DetectorComponent> _detector;
 
-        /// <remarks>A source component.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A source component.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<SourceComponent> Sources // TODO: enforce quantity
         {
             get => this._source;
@@ -2019,8 +2032,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>A mass analyzer (or mass filter) component.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A mass analyzer (or mass filter) component.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<AnalyzerComponent> Analyzers // TODO: enforce quantity
         {
             get => this._analyzer;
@@ -2034,8 +2047,8 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// <remarks>A detector component.</remarks>
-        /// min 1, max unbounded
+        /// <summary>A detector component.</summary>
+        /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<DetectorComponent> Detectors //TODO: enforce quantity
         {
             get => this._detector;
@@ -2055,11 +2068,10 @@ namespace PSI_Interface.MSData
     /// </summary>
     public partial class Component : ParamGroup
     {
-        /// <remarks>This attribute must be used to indicate the order in which the components
+        /// <summary>This attribute must be used to indicate the order in which the components
         /// are encountered from source to detector (e.g., in a Q-TOF, the quadrupole would
-        /// have the lower order number, and the TOF the higher number of the two).</remarks>
-        /// Required Attribute
-        /// integer
+        /// have the lower order number, and the TOF the higher number of the two).</summary>
+        /// <remarks>Required Attribute</remarks>
         public int Order { get; set; } // TODO: restrict to ordering from 1 to n in dataset, no gaps.
     }
 
@@ -2099,9 +2111,9 @@ namespace PSI_Interface.MSData
     /// <remarks>Reference to a previously defined software element</remarks>
     public partial class SoftwareRef
     {
-        /// <remarks>This attribute must be used to reference the 'id' attribute of a software element.</remarks>
-        /// Required Attribute
-        /// IDREF
+        /// <summary>This attribute must be used to reference the 'id' attribute of a software element.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>IDREF</returns>
         public string @Ref { get; set; } // TODO: restrict to existing software element 'id' attribute // TODO: enforce required attribute (constructor?)
     }
 
@@ -2115,16 +2127,15 @@ namespace PSI_Interface.MSData
         private List<SampleType> sampleField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public SampleType[] sample
         {
             get { return sampleField.ToArray(); }
             set { sampleField = value.ToList(); }
         }
 
-        /// <remarks>The number of Samples defined in this mzML file.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>The number of Samples defined in this mzML file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -2139,14 +2150,12 @@ namespace PSI_Interface.MSData
     /// <remarks>Expansible description of the sample used to generate the dataset, named in sampleName.</remarks>
     public partial class SampleInfo : ParamGroup
     {
-        /// <remarks>A unique identifier across the samples with which to reference this sample description.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>A unique identifier across the samples with which to reference this sample description.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: restrict to unique in dataset // TODO: enforce required attribute (constructor?)
 
-        /// <remarks>An optional name for the sample description, mostly intended as a quick mnemonic.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An optional name for the sample description, mostly intended as a quick mnemonic.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Name { get; set; }
     }
 
@@ -2160,16 +2169,15 @@ namespace PSI_Interface.MSData
         private List<SourceFileType> sourceFileField;
         private string countField;
 
-        /// min 1, max unbounded
+        /// <remarks>min 1, max unbounded</remarks>
         public SourceFileType[] sourceFile
         {
             get { return sourceFileField.ToArray(); }
             set { sourceFileField = value.ToList(); }
         }
 
-        /// <remarks>Number of source files used in generating the instance document.</remarks>
-        /// Required Attribute
-        /// non-negative integer
+        /// <summary>Number of source files used in generating the instance document.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string count
         {
             get { return countField; }
@@ -2184,19 +2192,16 @@ namespace PSI_Interface.MSData
     /// <remarks>Description of the source file, including location and type.</remarks>
     public partial class SourceFileInfo : ParamGroup
     {
-        /// <remarks>An identifier for this file.</remarks>
-        /// Required Attribute
-        /// ID
+        /// <summary>An identifier for this file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; } // TODO: enforce required attribute
 
-        /// <remarks>Name of the source file, without reference to location (either URI or local path).</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>Name of the source file, without reference to location (either URI or local path).</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; } // TODO: enforce required attribute
 
-        /// <remarks>URI-formatted location where the file was retrieved.</remarks>
-        /// Required Attribute
-        /// anyURI
+        /// <summary>URI-formatted location where the file was retrieved.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Location { get; set; } // TODO: enforce required attribute
     }
 
@@ -2210,10 +2215,10 @@ namespace PSI_Interface.MSData
         private MSDataList<SourceFileInfo> _sourceFileList;
         private MSDataList<ParamGroup> _contact;
 
-        /// <remarks>This summarizes the different types of spectra that can be expected in the file.
+        /// <summary>This summarizes the different types of spectra that can be expected in the file.
         /// This is expected to aid processing software in skipping files that do not contain appropriate
-        /// spectrum types for it. It should also describe the nativeID format used in the file by referring to an appropriate CV term.</remarks>
-        /// min 1, max 1
+        /// spectrum types for it. It should also describe the nativeID format used in the file by referring to an appropriate CV term.</summary>
+        /// <remarks>min 1, max 1</remarks>
         public ParamGroup FileContentInfo // TODO: enforce quantity
         {
             get => this._fileContent;
@@ -2227,7 +2232,10 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max 1
+        /// <summary>
+        /// Source File List
+        /// </summary>
+        /// <remarks>min 0, max 1</remarks>
         public MSDataList<SourceFileInfo> SourceFileList
         {
             get => this._sourceFileList;
@@ -2241,7 +2249,10 @@ namespace PSI_Interface.MSData
             }
         }
 
-        /// min 0, max unbounded
+        /// <summary>
+        /// Contact info
+        /// </summary>
+        /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<ParamGroup> ContactInfo
         {
             get => this._contact;

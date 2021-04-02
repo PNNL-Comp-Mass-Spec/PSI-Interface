@@ -59,10 +59,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// Contact details for the Material. The association to ContactRole could specify, for example, the creator or
         /// provider of the Material.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<ContactRoleObj> ContactRoles
         {
@@ -75,7 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<SubSampleObj> SubSamples
         {
             get => _subSamples;
@@ -106,17 +106,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             return false;
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         /// <summary>

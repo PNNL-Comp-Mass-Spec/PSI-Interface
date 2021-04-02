@@ -14,6 +14,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// <remarks>CVParams/UserParams: Additional descriptors for the sequence, such as taxon, description line etc.</remarks>
     public class DbSequenceObj : ParamGroupObj, IIdentifiableType, IEquatable<DbSequenceObj>
     {
+        // Ignore Spelling: MzIdentML, taxon
+
         private int _length;
         private SearchDatabaseInfo _searchDatabase;
         private string _searchDatabaseRef;
@@ -35,13 +37,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        /// Creates a db sequence object with the specified values
+        /// Creates a DB sequence object with the specified values
         /// </summary>
         /// <param name="searchDb">Valid <see cref="SearchDatabaseInfo" /> object, not null</param>
         /// <param name="length">length of the protein</param>
         /// <param name="accession">protein identifier</param>
         /// <param name="description">description of the protein</param>
-        /// <returns></returns>
         public DbSequenceObj(SearchDatabaseInfo searchDb, int length, string accession, string description = "") : this()
         {
             Length = length;
@@ -69,18 +70,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             Accession = dbs.accession;
         }
 
-        /// <remarks>The actual sequence of amino acids or nucleic acid.</remarks>
+        /// <summary>The actual sequence of amino acids or nucleic acid.</summary>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"</returns>
         /// <remarks>min 0, max 1</remarks>
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"
         public string Seq { get; set; }
 
-        /// <remarks>The unique accession of this sequence.</remarks>
-        /// Required Attribute
+        /// <summary>The unique accession of this sequence.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Accession { get; set; }
 
-        /// <remarks>The source database of this sequence.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The source database of this sequence.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string SearchDatabaseRef
         {
             get
@@ -97,9 +97,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The source database of this sequence.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The source database of this sequence.</summary>
+        /// <remarks>Required Attribute</remarks>
         public SearchDatabaseInfo SearchDatabase
         {
             get => _searchDatabase;
@@ -114,9 +113,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The length of the sequence as a number of bases or residues.</remarks>
-        /// Optional Attribute
-        /// integer
+        /// <summary>The length of the sequence as a number of bases or residues.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public int Length
         {
             get => _length;
@@ -127,20 +125,20 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Length has been defined
+        /// </summary>
         protected internal bool LengthSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

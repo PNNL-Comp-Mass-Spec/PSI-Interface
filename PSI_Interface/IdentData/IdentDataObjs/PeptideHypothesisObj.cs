@@ -43,7 +43,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <summary>min 1, max unbounded</summary>
         public IdentDataList<SpectrumIdentificationItemRefObj> SpectrumIdentificationItems
         {
             get => _spectrumIdentificationItems;
@@ -57,9 +57,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the PeptideEvidence element on which this hypothesis is based.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the PeptideEvidence element on which this hypothesis is based.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string PeptideEvidenceRef
         {
             get
@@ -80,9 +79,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the PeptideEvidence element on which this hypothesis is based.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the PeptideEvidence element on which this hypothesis is based.</summary>
+        /// <remarks>Required Attribute</remarks>
         public PeptideEvidenceObj PeptideEvidence
         {
             get => _peptideEvidence;

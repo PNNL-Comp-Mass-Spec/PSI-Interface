@@ -46,7 +46,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The organization a person belongs to.</remarks>
+        /// <summary>The organization a person belongs to.</summary>
         /// <remarks>min 0, max unbounded</remarks>
         public IdentDataList<AffiliationObj> Affiliations
         {
@@ -59,16 +59,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The Person's last/family name.</remarks>
-        /// Optional Attribute
+        /// <summary>The Person's last/family name.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string LastName { get; set; }
 
-        /// <remarks>The Person's first name.</remarks>
-        /// Optional Attribute
+        /// <summary>The Person's first name.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string FirstName { get; set; }
 
-        /// <remarks>The Person's middle initial.</remarks>
-        /// Optional Attribute
+        /// <summary>The Person's middle initial.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string MidInitials { get; set; }
 
         #region Object Equality

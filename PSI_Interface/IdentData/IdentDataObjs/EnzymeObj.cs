@@ -63,11 +63,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _enzymeName = new ParamListObj(e.EnzymeName, IdentData);
         }
 
-        /// <remarks>Regular expression for specifying the enzyme cleavage site.</remarks>
+        /// <summary>Regular expression for specifying the enzyme cleavage site.</summary>
         /// <remarks>min 0, max 1</remarks>
         public string SiteRegexp { get; set; }
 
-        /// <remarks>The name of the enzyme from a CV.</remarks>
+        /// <summary>The name of the enzyme from a CV.</summary>
         /// <remarks>min 0, max 1</remarks>
         public ParamListObj EnzymeName
         {
@@ -80,23 +80,22 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>Element formula gained at NTerm.</remarks>
-        /// Optional Attribute
-        /// string, regex: "[A-Za-z0-9 ]+"
+        /// <summary>Element formula gained at NTerm.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[A-Za-z0-9 ]+"</returns>
         public string NTermGain { get; set; }
 
-        /// <remarks>Element formula gained at CTerm.</remarks>
-        /// Optional Attribute
-        /// string, regex: "[A-Za-z0-9 ]+"
+        /// <summary>Element formula gained at CTerm.</summary>
+        /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[A-Za-z0-9 ]+"</returns>
         public string CTermGain { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// Set to true if the enzyme cleaves semi-specifically (i.e. one terminus must cleave
         /// according to the rules, the other can cleave at any residue), false if the enzyme cleavage
         /// is assumed to be specific to both termini (accepting for any missed cleavages).
-        /// </remarks>
-        /// Optional Attribute
-        /// boolean
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public bool SemiSpecific
         {
             get => _semiSpecific;
@@ -107,15 +106,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Semi-specific has been defined
+        /// </summary>
         protected internal bool SemiSpecificSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// The number of missed cleavage sites allowed by the search. The attribute must be provided if an enzyme has
         /// been used.
-        /// </remarks>
-        /// Optional Attribute
-        /// integer
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public int MissedCleavages
         {
             get => _missedCleavages;
@@ -126,12 +126,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Missed Cleavages has been defined
+        /// </summary>
         protected internal bool MissedCleavagesSpecified { get; private set; }
 
-        /// <remarks>Minimal distance for another cleavage (minimum: 1).</remarks>
-        /// Optional Attribute
-        /// integer >= 1
+        /// <summary>Minimal distance for another cleavage (minimum: 1).</summary>
+        /// <remarks>Optional Attribute</remarks>
         public int MinDistance
         {
             get => _minDistance;
@@ -142,20 +143,20 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Minimal distance has been defined
+        /// </summary>
         protected internal bool MinDistanceSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

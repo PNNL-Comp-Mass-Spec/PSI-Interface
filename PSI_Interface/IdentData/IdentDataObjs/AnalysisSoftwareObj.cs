@@ -52,7 +52,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _softwareName = new ParamObj(asi.SoftwareName, IdentData);
         }
 
-        /// <remarks>The contact details of the organisation or person that produced the software</remarks>
+        /// <summary>The contact details of the organisation or person that produced the software</summary>
         /// <remarks>min 0, max 1</remarks>
         public ContactRoleObj ContactRole
         {
@@ -65,7 +65,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The name of the analysis software package, sourced from a CV if available.</remarks>
+        /// <summary>The name of the analysis software package, sourced from a CV if available.</summary>
         /// <remarks>min 1, max 1</remarks>
         public ParamObj SoftwareName
         {
@@ -78,34 +78,30 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// Any customizations to the software, such as alternative scoring mechanisms implemented, should be documented
         /// here as free text.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 0, max 1</remarks>
         public string Customizations { get; set; }
 
-        /// <remarks>The version of Software used.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The version of Software used.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string Version { get; set; }
 
-        /// <remarks>URI of the analysis software e.g. manufacturer's website</remarks>
-        /// Optional Attribute
-        /// anyURI
+        /// <summary>URI of the analysis software e.g. manufacturer's website</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string URI { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

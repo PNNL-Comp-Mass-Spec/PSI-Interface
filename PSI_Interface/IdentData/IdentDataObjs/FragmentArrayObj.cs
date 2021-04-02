@@ -44,14 +44,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The values of this particular measure, corresponding to the index defined in ion type</remarks>
-        /// Required Attribute
-        /// listOfFloats: string, space-separated floats
+        /// <summary>The values of this particular measure, corresponding to the index defined in ion type</summary>
+        /// <remarks>Required Attribute</remarks>
         public List<float> Values { get; set; }
 
-        /// <remarks>A reference to the Measure defined in the FragmentationTable</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the Measure defined in the FragmentationTable</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string MeasureRef
         {
             get
@@ -72,9 +70,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the Measure defined in the FragmentationTable</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the Measure defined in the FragmentationTable</summary>
+        /// <remarks>Required Attribute</remarks>
         public MeasureObj Measure
         {
             get => _measure;

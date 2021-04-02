@@ -36,9 +36,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
-        /// <remarks>A reference to the database searched.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the database searched.</summary>
+        /// <remarks>Optional Attribute</remarks>
         protected internal string SearchDatabaseRef
         {
             get
@@ -59,9 +58,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>A reference to the database searched.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>A reference to the database searched.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public SearchDatabaseInfo SearchDatabase
         {
             get => _searchDatabase;

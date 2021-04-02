@@ -45,7 +45,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _role = new RoleObj(cr.Role, IdentData);
         }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public RoleObj Role
         {
             get => _role;
@@ -57,9 +57,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>When a ContactRole is used, it specifies which Contact the role is associated with.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>When a ContactRole is used, it specifies which Contact the role is associated with.</summary>
+        /// <remarks>Required Attribute</remarks>
         protected internal string ContactRef
         {
             get
@@ -76,9 +75,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>When a ContactRole is used, it specifies which Contact the role is associated with.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>When a ContactRole is used, it specifies which Contact the role is associated with.</summary>
+        /// <remarks>Required Attribute</remarks>
         public AbstractContactObj Contact
         {
             get => _contact;

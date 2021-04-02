@@ -66,18 +66,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public CV.CV.CVID Cvid { get; set; }
 
-        /// <remarks>A reference to the cv element from which this term originates.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>A reference to the cv element from which this term originates.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string CVRef
         {
             get => IdentData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[Cvid].CVRef);
             set => _cvRef = IdentData.CvTranslator.ConvertFileCVRef(value);
         }
 
-        /// <remarks>The accession or ID number of this CV term in the source CV.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The accession or ID number of this CV term in the source CV.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Accession
         {
             get => CV.CV.TermData[Cvid].Id;
@@ -97,9 +95,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The name of the parameter.</summary>
+        /// <remarks>Required Attribute</remarks>
         public override string Name
         {
             get
@@ -119,9 +116,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             } // Only store name if the CVID is Unknown.
         }
 
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The user-entered value of the parameter.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public override string Value
         {
             get => _value;

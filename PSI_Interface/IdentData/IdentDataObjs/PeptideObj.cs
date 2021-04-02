@@ -65,14 +65,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             PeptideSequence = sequence;
         }
 
-        /// <remarks>
+        /// <summary>
         /// The amino acid sequence of the (poly)peptide. If a substitution modification has been found, the original
         /// sequence should be reported.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 1, max 1</remarks>
         public string PeptideSequence { get; set; }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<ModificationObj> Modifications
         {
             get => _modifications;
@@ -84,7 +84,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<SubstitutionModificationObj> SubstitutionModifications
         {
             get => _substitutionModifications;
@@ -96,17 +96,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
         #region Object Equality

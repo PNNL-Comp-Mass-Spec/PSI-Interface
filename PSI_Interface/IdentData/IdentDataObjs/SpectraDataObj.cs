@@ -50,7 +50,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _fileFormat = new FileFormatInfo(sd.FileFormat, IdentData);
         }
 
-        /// <remarks>min 1, max 1</remarks>
+        /// <summary>min 1, max 1</summary>
         public SpectrumIDFormatObj SpectrumIDFormat
         {
             get => _spectrumIDFormat;
@@ -62,27 +62,25 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>
+        /// <summary>
         /// An identifier is an unambiguous string that is unique within the scope
         /// (i.e. a document, a set of related documents, or a repository) of its use.
-        /// </remarks>
-        /// Required Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
         public string Id { get; set; }
 
-        /// <remarks>The potentially ambiguous common identifier, such as a human-readable name for the instance.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// A URI to access documentation and tools to interpret the external format of the ExternalData instance.
         /// For example, XML Schema or static libraries (APIs) to access binary formats.
-        /// </remarks>
+        /// </summary>
         /// <remarks>min 0, max 1</remarks>
         public string ExternalFormatDocumentation { get; set; }
 
-        /// <remarks>min 0, max 1 (mzIdentML 1.1)</remarks>
+        /// <summary>min 0, max 1 (mzIdentML 1.1)</summary>
         /// <remarks>min 1, max 1 (mzIdentML 1.2)</remarks>
         public FileFormatInfo FileFormat
         {
@@ -95,9 +93,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The location of the data file.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The location of the data file.</summary>
+        /// <remarks>Required Attribute</remarks>
         public string Location { get; set; }
 
         #region Object Equality

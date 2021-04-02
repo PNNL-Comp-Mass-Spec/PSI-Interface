@@ -46,24 +46,23 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             MonoisotopicMassDeltaSpecified = sm.monoisotopicMassDeltaSpecified;
         }
 
-        /// <remarks>The original residue before replacement.</remarks>
-        /// Required Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /// <summary>The original residue before replacement.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         public string OriginalResidue { get; set; }
 
-        /// <remarks>The residue that replaced the originalResidue.</remarks>
-        /// Required Attribute
-        /// string, regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"
+        /// <summary>The residue that replaced the originalResidue.</summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         public string ReplacementResidue { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// Location of the modification within the peptide - position in peptide sequence, counted from the N-terminus
         /// residue, starting at position 1.
         /// Specific modifications to the N-terminus should be given the location 0.
         /// Modification to the C-terminus should be given as peptide length + 1.
-        /// </remarks>
-        /// Optional Attribute
-        /// integer
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public int Location
         {
             get => _location;
@@ -74,15 +73,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if Location has been defined
+        /// </summary>
         protected internal bool LocationSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// Atomic mass delta considering the natural distribution of isotopes in Daltons.
         /// This should only be reported if the original amino acid is known i.e. it is not "X"
-        /// </remarks>
-        /// Optional Attribute
-        /// double
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public double AvgMassDelta
         {
             get => _avgMassDelta;
@@ -93,15 +93,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if average mass delta has been defined
+        /// </summary>
         protected internal bool AvgMassDeltaSpecified { get; private set; }
 
-        /// <remarks>
+        /// <summary>
         /// Atomic mass delta when assuming only the most common isotope of elements in Daltons.
         /// This should only be reported if the original amino acid is known i.e. it is not "X"
-        /// </remarks>
-        /// Optional Attribute
-        /// double
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public double MonoisotopicMassDelta
         {
             get => _monoisotopicMassDelta;
@@ -112,7 +113,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// Attribute Existence
+        /// <summary>
+        /// True if monoisotopic mass delta has been defined
+        /// </summary>
         protected internal bool MonoisotopicMassDeltaSpecified { get; private set; }
 
         #region Object Equality

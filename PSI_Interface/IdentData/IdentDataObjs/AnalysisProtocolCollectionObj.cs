@@ -48,7 +48,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded</remarks>
+        /// <summary>min 1, max unbounded</summary>
         public IdentDataList<SpectrumIdentificationProtocolObj> SpectrumIdentificationProtocols
         {
             get => _spectrumIdentificationProtocols;
@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max 1</remarks>
+        /// <summary>min 0, max 1</summary>
         public ProteinDetectionProtocolObj ProteinDetectionProtocol
         {
             get => _proteinDetectionProtocol;

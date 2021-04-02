@@ -55,7 +55,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<SpecificityRulesListObj> SpecificityRules
         {
             get => _specificityRules;
@@ -67,23 +67,21 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>True, if the modification is static (i.e. occurs always).</remarks>
-        /// Required Attribute
-        /// boolean
+        /// <summary>True, if the modification is static (i.e. occurs always).</summary>
+        /// <remarks>Required Attribute</remarks>
         public bool FixedMod { get; set; }
 
-        /// <remarks>The mass delta of the searched modification in Daltons.</remarks>
-        /// Required Attribute
-        /// float
+        /// <summary>The mass delta of the searched modification in Daltons.</summary>
+        /// <remarks>Required Attribute</remarks>
         public float MassDelta { get; set; }
 
-        /// <remarks>
+        /// <summary>
         /// The residue(s) searched with the specified modification. For N or C terminal modifications that can occur
         /// on any residue, the . character should be used to specify any, otherwise the list of amino acids should be
         /// provided.
-        /// </remarks>
-        /// Required Attribute
-        /// listOfCharsOrAny: string, space-separated regex: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."
+        /// </summary>
+        /// <remarks>Required Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}|."</returns>
         public string Residues { get; set; }
 
         #region Object Equality

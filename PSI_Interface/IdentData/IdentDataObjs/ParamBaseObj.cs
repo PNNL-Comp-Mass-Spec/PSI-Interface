@@ -63,14 +63,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #region Properties
         // Name and value are abstract properties, because name will be handled differently in CVParams, and value can also have restrictions based on the CVParam.
 
-        /// <remarks>The name of the parameter.</remarks>
-        /// Required Attribute
-        /// string
+        /// <summary>The name of the parameter.</summary>
+        /// <remarks>Required Attribute</remarks>
         public abstract string Name { get; set; }
 
-        /// <remarks>The user-entered value of the parameter.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The user-entered value of the parameter.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public abstract string Value { get; set; }
 
         /// <summary>
@@ -86,9 +84,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>An accession number identifying the unit within the OBO foundry Unit CV.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>An accession number identifying the unit within the OBO foundry Unit CV.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string UnitAccession
         {
             get
@@ -116,9 +113,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>The name of the unit.</remarks>
-        /// Optional Attribute
-        /// string
+        /// <summary>The name of the unit.</summary>
+        /// <remarks>Optional Attribute</remarks>
         public string UnitName
         {
             get
@@ -133,12 +129,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             //set { this._unitName = value; }
         }
 
-        /// <remarks>
+        /// <summary>
         /// If a unit term is referenced, this attribute must refer to the CV 'id' attribute defined in the cvList in this
         /// file.
-        /// </remarks>
-        /// Optional Attribute
-        /// string
+        /// </summary>
+        /// <remarks>Optional Attribute</remarks>
         public string UnitCvRef
         {
             get

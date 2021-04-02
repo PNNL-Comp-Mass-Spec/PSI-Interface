@@ -62,7 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 1, max unbounded (mzIdentML 1.1)</remarks>
+        /// <summary>min 1, max unbounded (mzIdentML 1.1)</summary>
         /// <remarks>min 0, max unbounded (mzIdentML 1.2, 0 only valid if additional search params contains "de novo search" cvParam)</remarks>
         public IdentDataList<DbSequenceObj> DBSequences
         {
@@ -75,7 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<PeptideObj> Peptides
         {
             get => _peptides;
@@ -87,7 +87,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
         }
 
-        /// <remarks>min 0, max unbounded</remarks>
+        /// <summary>min 0, max unbounded</summary>
         public IdentDataList<PeptideEvidenceObj> PeptideEvidences
         {
             get => _peptideEvidences;

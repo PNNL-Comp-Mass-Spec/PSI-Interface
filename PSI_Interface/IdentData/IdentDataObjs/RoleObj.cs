@@ -33,7 +33,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _cvParam = new CVParamObj(r.cvParam, IdentData);
         }
 
-        /// <remarks>CV term for contact roles, such as software provider.</remarks>
+        /// <summary>CV term for contact roles, such as software provider.</summary>
         /// <remarks>min 1, max 1</remarks>
         public CVParamObj CVParam
         {
