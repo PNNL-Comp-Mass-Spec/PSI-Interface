@@ -1413,6 +1413,11 @@ namespace PSI_Interface.MSData
                 TryMakeRandomAccessCapable();
             }
 
+            if (!_haveIndex || !_haveMetaData)
+            {
+                ReadMzMl();
+            }
+
             if (!_spectrumOffsets.ActualScanToIdMap.TryGetValue(scanNumber, out var artificialScanNumber))
                 return null;
 
