@@ -569,6 +569,20 @@ namespace PSI_Interface.MSData
             public string NativeId { get; }
 
             /// <summary>
+            /// Scan number tracked by the NativeID
+            /// </summary>
+            /// <remarks>Will return 0 if the NativeID does not contain a scan number</remarks>
+            public int NativeIdScanNumber
+            {
+                get
+                {
+                    if (NativeIdConversion.TryGetScanNumberInt(NativeId, out var actualScanNumber))
+                        return actualScanNumber;
+
+                    return 0;
+                }
+            }
+            /// <summary>
             /// Elution time (scan start time)
             /// </summary>
             [Obsolete("Use ScanStartTime", true)]
