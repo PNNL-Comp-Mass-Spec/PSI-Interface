@@ -1821,6 +1821,40 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
+        /// Read the Checksum from the indexed mzML data
+        /// </summary>
+        private void ReadChecksum()
+        {
+            using (var stream = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 1))
+            using (var streamReader = new StreamReader(stream, Encoding.UTF8, true, 65536))
+            {
+                try
+                {
+                    stream.Position = stream.Length - 500;
+                    streamReader.DiscardBufferedData();
+                    var data = streamReader.ReadToEnd();
+                    var pos = data.IndexOf("<fileChecksum", StringComparison.OrdinalIgnoreCase);
+                    if (pos >= 0)
+                    {
+                        data = data.Substring(pos);
+                        pos = data.IndexOf('>') + 1;
+                        data = data.Substring(pos);
+                        pos = data.IndexOf('<');
+                        data = data.Substring(0, pos);
+                        if (data.Length == 40)
+                        {
+                            _srcFileChecksum = data;
+                        }
+                    }
+                }
+                catch
+                {
+                    // Dropping errors - if this doesn't work, we'll just checksum the whole file.
+                }
+            }
+        }
+
+        /// <summary>
         /// Handle the child nodes of the run element
         /// Called by IndexMzMl (xml hierarchy)
         /// </summary>
@@ -2102,6 +2136,7 @@ namespace PSI_Interface.MSData
                     // run to the end of the file (using stream.position = stream.length) and jump backwards to read the index first, and then read the file for needed data
                     ReadIndexFromEnd();
                 }
+                ReadChecksum();
                 reader = reader.ReadSubtree();
                 reader.MoveToContent();
             }
@@ -2112,6 +2147,7 @@ namespace PSI_Interface.MSData
             {
                 _version = MzML_Version.mzML1_0_0;
             }
+            _fileFormatVersion = reader.GetAttribute("version");
             // Consume the mzML root tag
             // Throws exception if we are not at the "mzML" tag.
             // This is a critical error; we want to stop processing for this file if we encounter this error
