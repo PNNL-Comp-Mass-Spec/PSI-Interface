@@ -150,15 +150,35 @@ namespace PSI_Interface.MSData
             {
                 if (IndexType == IndexListType.Chromatogram)
                 {
-                    return;
+                    // Update the dictionaries, but only if the key is not yet defined
+                    AddMapForOffset(item, true);
                 }
-                OffsetsMapNative.Add(offset.Ref, offset.Offset);
+                else
+                {
+                    // Update the dictionaries
+                    // If a duplicate key exists an exception will be thrown
+                    AddMapForOffset(item, false);
+                }
+            }
+
+            private void AddMapForOffset(IndexItem item, bool skipDuplicateKeys)
+            {
+                if (!skipDuplicateKeys || !OffsetsMapNative.ContainsKey(item.Ref))
+                {
+                    OffsetsMapNative.Add(item.Ref, item.Offset);
+                }
 
                 // This won't be sufficient until there is a valid parser for all forms of NativeID.
                 // Using artificial scan number for now.
-                NativeToIdMap.Add(offset.Ref, offset.IdNum);
+
                 OffsetsMapInt.Add(item.IdNum, item.Offset);
                 IdToNativeMap.Add(item.IdNum, item.Ref);
+
+                if (!skipDuplicateKeys || !NativeToIdMap.ContainsKey(item.Ref))
+                {
+                    NativeToIdMap.Add(item.Ref, item.IdNum);
+                }
+
                 /*if (IndexType == IndexListType.Spectrum)
                 {
                     long id = Int64.Parse(item.Ref.Substring(item.Ref.LastIndexOfAny(new char[] {'=', 'F'}) + 1));
