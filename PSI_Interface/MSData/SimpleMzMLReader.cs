@@ -12,7 +12,7 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML Reader that supports reading a reduced amount of information from the file, as well as supporting reading in a random access manner
     /// </summary>
-    public sealed class SimpleMzMLReader: IDisposable
+    public sealed class SimpleMzMLReader : IDisposable
     {
         // Ignore Spelling: centroider, centroiding, chrom, cvParams, foreach, indexedmzML, multiphoton, Mzs, pos, struct, referenceable, xsi
         // Ignore Spelling: Biosystems, Biotech, Shimadzu, interchannel, photodissociation, readonly
@@ -31,7 +31,7 @@ namespace PSI_Interface.MSData
         private bool _reduceMemoryUsage;
         private long _artificialScanNum = 1;
         private bool _numSpectraRead = false;
-        private long _numSpectra = 00;
+        private long _numSpectra = 0;
         private bool _numChromatogramsRead = false;
         private long _numChromatograms = 0;
         private readonly IndexList _spectrumOffsets = new IndexList() { IndexType = IndexList.IndexListType.Spectrum };
@@ -126,7 +126,7 @@ namespace PSI_Interface.MSData
 
             public void AddOffset(string idRef, string offset)
             {
-                AddOffset(idRef, Int64.Parse(offset));
+                AddOffset(idRef, long.Parse(offset));
             }
 
             public void AddOffset(string idRef, long offset)
@@ -313,7 +313,7 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// The units for this CVParam
             /// </summary>
-            public CV.CV.TermInfo UnitInfo {get; }
+            public CV.CV.TermInfo UnitInfo { get; }
 
             /// <summary>
             /// Constructor
@@ -926,10 +926,19 @@ namespace PSI_Interface.MSData
             /// <param name="userParams"></param>
             /// <param name="precursor"></param>
             /// <param name="product"></param>
-            public SimpleChromatogram(IReadOnlyList<double> times, IReadOnlyList<double> intensities, int index, string id, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams, Precursor precursor, IsolationWindow product) : base(cvParams, userParams)
+            public SimpleChromatogram(
+                IReadOnlyList<double> times,
+                IReadOnlyList<double> intensities,
+                int index,
+                string id,
+                IReadOnlyList<CVParamData> cvParams,
+                IReadOnlyList<UserParamData> userParams,
+                Precursor precursor,
+                IsolationWindow product) : base(cvParams, userParams)
             {
                 Index = index;
-                Id = id;Precursor = precursor;
+                Id = id;
+                Precursor = precursor;
                 Product = product;
 
                 var points = times?.Count ?? 0;
@@ -1018,6 +1027,7 @@ namespace PSI_Interface.MSData
 
             // Set a very large read buffer, it does decrease the read times for uncompressed files.
             _file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
+
             /*****************************************************************************************************************************************************
              * TODO: Change how the file handles are used for safety purposes - open up each time, or what?
              *****************************************************************************************************************************************************/
@@ -1274,22 +1284,9 @@ namespace PSI_Interface.MSData
         {
             if (!_randomAccess)
             {
-                // Apparently the only way to effectively cascade yield return?
-                // If it works properly, it should be basically invisible
-                foreach (var spec in ReadAllSpectraNonRandom(includePeaks))
-                {
-                    yield return spec;
-                }
+                return ReadAllSpectraNonRandom(includePeaks);
             }
-            else
-            {
-                // Apparently the only way to effectively cascade yield return?
-                // If it works properly, it should be basically invisible
-                foreach (var spec in ReadAllSpectraRandom(includePeaks))
-                {
-                    yield return spec;
-                }
-            }
+            return ReadAllSpectraRandom(includePeaks);
         }
 
         /// <summary>
@@ -1320,22 +1317,10 @@ namespace PSI_Interface.MSData
         {
             if (!_randomAccess)
             {
-                // Apparently the only way to effectively cascade yield return?
-                // If it works properly, it should be basically invisible
-                foreach (var chrom in ReadAllChromatogramsNonRandom(includePeaks))
-                {
-                    yield return chrom;
-                }
+                return ReadAllChromatogramsNonRandom(includePeaks);
             }
-            else
-            {
-                // Apparently the only way to effectively cascade yield return?
-                // If it works properly, it should be basically invisible
-                foreach (var chrom in ReadAllChromatogramsRandom(includePeaks))
-                {
-                    yield return chrom;
-                }
-            }
+
+            return ReadAllChromatogramsRandom(includePeaks);
         }
 
         /// <summary>
@@ -1866,7 +1851,7 @@ namespace PSI_Interface.MSData
                         var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, searchPoint));
                         var end = stringBuffer.IndexOf('>', searchPoint + 1);
                         // Grab everything between '<' and the next '>'
-                        var builder = stringBuffer.Substring(searchPoint + 1, (end - 1) - (searchPoint + 1));
+                        var builder = stringBuffer.Substring(searchPoint + 1, end - 1 - (searchPoint + 1));
                         // Get the ID of the tag
                         var attribName = "id";
                         if (_version == MzML_Version.mzML1_0_0)
@@ -2019,16 +2004,13 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             var iType = reader.GetAttribute("name");
             var eType = IndexList.IndexListType.Unknown;
-            if (iType != null)
+            if (iType != null && string.Equals(iType, "spectrum", StringComparison.OrdinalIgnoreCase))
             {
-                if (iType.ToLower() == "spectrum")
-                {
-                    eType = IndexList.IndexListType.Spectrum;
-                }
-                else if (iType.ToLower() == "chromatogram")
-                {
-                    eType = IndexList.IndexListType.Chromatogram;
-                }
+                eType = IndexList.IndexListType.Spectrum;
+            }
+            else if (iType != null && string.Equals(iType, "chromatogram", StringComparison.OrdinalIgnoreCase))
+            {
+                eType = IndexList.IndexListType.Chromatogram;
             }
             reader.ReadStartElement("index"); // Throws exception if we are not at the "run" tag.
             while (reader.ReadState == ReadState.Interactive)
@@ -2102,7 +2084,7 @@ namespace PSI_Interface.MSData
             var schemaName = reader.GetAttribute("xsi:schemaLocation");
             // We automatically assume it uses the mzML_1.1.0 schema. Check for the old version.
             //if (!schemaName.Contains("mzML1.1.0.xsd"))
-            if (schemaName != null && schemaName.Contains("mzML1.0.0.xsd"))
+            if (schemaName?.Contains("mzML1.0.0.xsd") == true)
             {
                 _version = MzML_Version.mzML1_0_0;
             }
@@ -2413,6 +2395,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             //int count = Convert.ToInt32(reader.GetAttribute("count"));
             reader.ReadStartElement("sourceFileList"); // Throws exception if we are not at the "sourceFileList" tag.
+
             while (reader.ReadState == ReadState.Interactive && _instrument == Instrument.Unknown)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3011,7 +2994,7 @@ namespace PSI_Interface.MSData
                 {
                     // Schema requirements: zero to many instances of this element
                     // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                    _spectra.Add(ReadSpectrum(reader.ReadSubtree(), true));
+                    _spectra.Add(ReadSpectrum(reader.ReadSubtree()));
                     // "spectrum" might not have any child nodes
                     // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                     reader.Read();
@@ -3120,7 +3103,7 @@ namespace PSI_Interface.MSData
 
             var defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
             reader.ReadStartElement("spectrum"); // Throws exception if we are not at the "spectrum" tag.
-            var precursors = new List<Precursor>(0);
+            var precursors = new List<Precursor>();
             var scans = new List<ScanData>();
             var bdas = new List<BinaryDataArray>();
             var specParams = new ParamData();
@@ -4275,7 +4258,8 @@ namespace PSI_Interface.MSData
         private BinaryDataArray ReadBinaryDataArray(XmlReader reader, int defaultLength)
         {
             reader.MoveToContent();
-            var bda = new BinaryDataArray {
+            var bda = new BinaryDataArray
+            {
                 ArrayLength = defaultLength
             };
             // var encLength = Convert.ToInt32(reader.GetAttribute("encodedLength"));
@@ -4306,6 +4290,7 @@ namespace PSI_Interface.MSData
                             paramGroup.AddParams(pg.CVParams);
                             paramGroup.AddParams(pg.UserParams);
                         }
+
                         reader.Read();
                         break;
                     case "cvParam":
@@ -4344,7 +4329,7 @@ namespace PSI_Interface.MSData
                              */
                             switch (param.TermInfo.Id)
                             {
-                                    // MUST supply a *child* term of MS:1000572 (binary data compression type) only once
+                                // MUST supply a *child* term of MS:1000572 (binary data compression type) only once
                                 case "MS:1000574":
                                     //   e.g.: MS:1000574 (zlib compression)
                                     compressed = true;
@@ -4353,7 +4338,7 @@ namespace PSI_Interface.MSData
                                     //   e.g.: MS:1000576 (no compression)
                                     compressed = false;
                                     break;
-                                    // MUST supply a *child* term of MS:1000513 (binary data array) only once
+                                // MUST supply a *child* term of MS:1000513 (binary data array) only once
                                 case "MS:1000514":
                                     //   e.g.: MS:1000514 (m/z array)
                                     bda.ArrayType = ArrayType.m_z_array;
@@ -4394,7 +4379,7 @@ namespace PSI_Interface.MSData
                                     //   e.g.: MS:1000822 (temperature array)
                                     bda.ArrayType = ArrayType.temperature_array;
                                     break;
-                                    // MUST supply a *child* term of MS:1000518 (binary data type) only once
+                                // MUST supply a *child* term of MS:1000518 (binary data type) only once
                                 case "MS:1000521":
                                     //   e.g.: MS:1000521 (32-bit float)
                                     bda.Precision = Precision.Precision32;
