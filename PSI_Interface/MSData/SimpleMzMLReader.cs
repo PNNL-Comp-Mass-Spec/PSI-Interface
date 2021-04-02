@@ -2779,7 +2779,7 @@ namespace PSI_Interface.MSData
         {
             _referenceableParamGroups.Clear(); // In case of second read of file, clear out existing.
             reader.MoveToContent();
-            var count = Convert.ToInt32(reader.GetAttribute("count"));
+            // var count = Convert.ToInt32(reader.GetAttribute("count"));
             reader.ReadStartElement("referenceableParamGroupList"); // Throws exception if we are not at the "referenceableParamGroupList" tag.
             while (reader.ReadState == ReadState.Interactive)
             {
