@@ -4447,7 +4447,12 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var rpgRef = reader.GetAttribute("ref");
-                        if (!string.IsNullOrWhiteSpace(rpgRef) && _referenceableParamGroups.TryGetValue(rpgRef, out var pg))
+
+                        if (string.IsNullOrWhiteSpace(rpgRef))
+                        {
+                            Console.WriteLine("Encountered referenceableParamGroupRef with null or empty ref attribute");
+                        }
+                        else if (_referenceableParamGroups.TryGetValue(rpgRef, out var pg))
                         {
                             paramGroup.AddParams(pg.CVParams);
                             paramGroup.AddParams(pg.UserParams);
