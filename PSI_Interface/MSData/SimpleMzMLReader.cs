@@ -3417,6 +3417,7 @@ namespace PSI_Interface.MSData
                 }
             }
 
+            ScanData scan;
             if (scans.Count == 1)
             {
                 scan = scans[0];
@@ -3426,6 +3427,11 @@ namespace PSI_Interface.MSData
                 // TODO: Should do something else to appropriately handle combinations...
                 scan = scans[0];
             }
+            else
+            {
+                scan = new ScanData();
+            }
+
             specParams.AddParams(scan.CVParams);
             specParams.AddParams(scan.UserParams);
 
