@@ -20,6 +20,10 @@ namespace PSI_Interface.MSData
 
         #region Private Members
         private readonly string _filePath;
+        private string _srcFileChecksum = string.Empty;
+        private string _fileFormatVersion = string.Empty;
+        private CV.CV.CVID _nativeIdFormat = CV.CV.CVID.CVID_Unknown;
+        private CV.CV.CVID _nativeFormat = CV.CV.CVID.CVID_Unknown;
         private Stream _file;
         private StreamReader _fileReader;
         private XmlReader _xmlReaderForYield;
@@ -1197,15 +1201,67 @@ namespace PSI_Interface.MSData
             }
         }
 
+
         /// <summary>
-        /// Tries to convert the reader to random access mode
+        /// The NativeIdFormat stored/used by the source file - needed for tracking purposes.
+        /// Child term of PSI-MS term MS:1000767, native spectrum identifier format
         /// </summary>
-        /// <returns></returns>
+        public CV.CV.CVID NativeIdFormat
+        {
+            get
+            {
+                RequireMetadata();
+                return _nativeIdFormat;
+            }
+        }
+
+        /// <summary>
+        /// The Native Format of the source file - needed for tracking purposes.
+        /// Child term of PSI-MS term MS:1000560, mass spectrometer file format
+        /// </summary>
+        public CV.CV.CVID NativeFormat
+        {
+            get
+            {
+                RequireMetadata();
+                return _nativeFormat;
+            }
+        }
         public bool TryMakeRandomAccessCapable()
         {
             _randomAccess = true;
             ConfigureFileHandles(); // Reopen the files
             return true;
+        }
+
+        /// <summary>
+        /// Path to the file; is <see cref="string.Empty"/> if the reader is in-memory
+        /// </summary>
+        // ReSharper disable once ConvertToAutoPropertyWithPrivateSetter
+        public string FilePath => _unzippedFilePath;
+
+        /// <summary>
+        /// SHA-1 Checksum of the original input file (raw, mzML, .d folder, etc.)
+        /// </summary>
+        public string SrcFileChecksum
+        {
+            get
+            {
+                RequireMetadata();
+                return _srcFileChecksum;
+            }
+        }
+
+        /// <summary>
+        /// Version of the immediate prior input file (raw, mzML, .d folder, etc.)
+        /// </summary>
+        public string FileFormatVersion
+        {
+            get
+            {
+                RequireMetadata();
+                return _fileFormatVersion;
+            }
         }
 
         /// <summary>
