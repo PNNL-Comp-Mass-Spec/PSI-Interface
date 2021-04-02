@@ -83,12 +83,23 @@ namespace PSI_Interface.MSData
             }
         }
 
+        /// <summary>
+        /// This class tracks byte offsets for spectra and chromatograms
+        /// </summary>
         private class IndexList
         {
             private long _artificialScanNum = 1;
+
             public class IndexItem // A struct would be faster, but it can also be a pain since it is a value type
             {
+                /// <summary>
+                /// NativeID
+                /// </summary>
                 public readonly string Ref;
+
+                /// <summary>
+                /// Byte offset
+                /// </summary>
                 public readonly long Offset;
 
                 /// <summary>
@@ -135,9 +146,29 @@ namespace PSI_Interface.MSData
             /// Spectrum offset info, in the order that it was read from the .mzML file
             /// </summary>
             public List<IndexItem> Offsets { get; } = new List<IndexItem>();
+
+            /// <summary>
+            /// Keys in this dictionary are NativeID
+            /// Values are file offsets, in bytes
+            /// </summary>
             public readonly Dictionary<string, long> OffsetsMapNative = new Dictionary<string, long>();
+
+            /// <summary>
+            /// Keys in this dictionary are artificial scan number
+            /// Values are file offsets, in bytes
+            /// </summary>
             public readonly Dictionary<long, long> OffsetsMapInt = new Dictionary<long, long>();
+
+            /// <summary>
+            /// Keys are artificial scan number
+            /// Values are the NativeID
+            /// </summary>
             public readonly Dictionary<long, string> IdToNativeMap = new Dictionary<long, string>();
+
+            /// <summary>
+            /// Keys are NativeID
+            /// Values are artificial scan number
+            /// </summary>
             public readonly Dictionary<string, long> NativeToIdMap = new Dictionary<string, long>();
 
             /// <summary>
@@ -145,11 +176,22 @@ namespace PSI_Interface.MSData
             /// Values are the artificial scan number
             /// </summary>
             public readonly Dictionary<long, long> ActualScanToIdMap = new Dictionary<long, long>();
+
+            /// <summary>
+            /// Store the offset info in the dictionaries
+            /// </summary>
+            /// <param name="idRef">NativeID</param>
+            /// <param name="offset">Byte offset, as text</param>
             public void AddOffset(string idRef, string offset)
             {
                 AddOffset(idRef, long.Parse(offset));
             }
 
+            /// <summary>
+            /// Store the offset info in the dictionaries
+            /// </summary>
+            /// <param name="idRef">NativeID</param>
+            /// <param name="offset">Byte offset, as a long</param>
             public void AddOffset(string idRef, long offset)
             {
                 var scanNum = _artificialScanNum++;
@@ -410,7 +452,7 @@ namespace PSI_Interface.MSData
             public string Value { get; }
 
             /// <summary>
-            /// UserParam value datatype
+            /// UserParam value data type
             /// </summary>
             public string DataType { get; }
 
@@ -668,7 +710,7 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="mzs">array of mzs</param>
+            /// <param name="mzs">array of m/z values</param>
             /// <param name="intensities">array of intensities</param>
             /// <param name="scanNum">spectrum scan number</param>
             /// <param name="nativeId">spectrum native ID</param>
@@ -987,9 +1029,9 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="times">array of mzs</param>
+            /// <param name="times">array of m/z values</param>
             /// <param name="intensities">array of intensities</param>
-            /// <param name="index">spectrum scan number</param>
+            /// <param name="index">spectrum scan number ??</param>
             /// <param name="id">Id (in mzML file) for the chromatogram</param>
             /// <param name="cvParams"></param>
             /// <param name="userParams"></param>
@@ -1068,12 +1110,16 @@ namespace PSI_Interface.MSData
         #endregion
 
         #region Constructor
+
         /// <summary>
-        /// Initialize a MzMlReader object
+        /// Initialize a SimpleMzMLReader object
         /// </summary>
         /// <param name="filePath">Path to mzML file</param>
         /// <param name="randomAccess">If mzML reader should be configured for random access</param>
-        /// <param name="tryReducingMemoryUsage">If mzML reader should try to avoid reading all spectra into memory. This will reduce memory usage for a non-random access MzMLReader, as long as ReadMassSpectrum(int) isn't used.</param>
+        /// <param name="tryReducingMemoryUsage">
+        /// If mzML reader should try to avoid reading all spectra into memory.
+        /// This will reduce memory usage for a non-random access SimpleMzMLReader, as long as ReadMassSpectrum(int) isn't used.
+        /// </param>
         public SimpleMzMLReader(string filePath, bool randomAccess = false, bool tryReducingMemoryUsage = true)
         {
             _filePath = filePath;
@@ -1266,8 +1312,13 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
-        /// The number of chromatograms in the file. NOTE: for non-random access readers, this is only populated after all spectra (if any) are read.
+        /// The number of chromatograms in the file.
         /// </summary>
+        /// <remarks>
+        /// NOTE:
+        /// For non-random access readers, the number of chromatograms (as tracked by _numChromatograms)
+        /// will not get populated until after all the spectra (if any) have been read
+        /// </remarks>
         public int NumChromatograms
         {
             get
@@ -1306,6 +1357,11 @@ namespace PSI_Interface.MSData
                 return _nativeFormat;
             }
         }
+
+        /// <summary>
+        /// Re-opens the file using random access
+        /// </summary>
+        /// <returns>true if successful, exception if an error</returns>
         public bool TryMakeRandomAccessCapable()
         {
             _randomAccess = true;
@@ -1379,10 +1435,10 @@ namespace PSI_Interface.MSData
 
         /// <summary>
         /// Returns all mass spectra.
-        /// Uses "yield return" to allow processing one spectra at a time if called from a foreach loop statement.
+        /// ReadAllSpectraNonRandom and ReadAllSpectraRandom use "yield return" to allow processing one spectra at a time if called from a foreach loop statement.
         /// </summary>
         /// <param name="includePeaks">true to include peak data</param>
-        /// <returns></returns>
+        /// <returns>all spectra</returns>
         public IEnumerable<SimpleSpectrum> ReadAllSpectra(bool includePeaks = true)
         {
             if (!_randomAccess)
@@ -1734,7 +1790,7 @@ namespace PSI_Interface.MSData
 
         #region Cleanup functions
         /// <summary>
-        /// Close out the file handles
+        /// Close out the file handle and delete any temp files
         /// </summary>
         public void Close()
         {
@@ -1745,7 +1801,7 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
-        /// Delete any temp files
+        /// Delete unzipped file, if we had to unzip the file to read it.
         /// </summary>
         public void Cleanup()
         {
@@ -2132,7 +2188,7 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
-        /// Handle the child nodes of the indexedmzML element
+        /// Handle the child nodes of the indexed mzML element
         /// Called by IndexMzMl (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single "indexList" element</param>
@@ -2255,7 +2311,7 @@ namespace PSI_Interface.MSData
             if (reader.Name == "indexedmzML")
             {
                 indexReader = reader;
-                // Read to the mzML root tag, and ignore the extra indexedmzML data
+                // Read to the mzML root tag, and ignore the extra indexed mzML data
                 reader.ReadToDescendant("mzML");
                 if (_randomAccess && !_haveIndex)
                 {
@@ -2800,6 +2856,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 if (reader.Name == "referenceableParamGroup")
                 {
                     // Schema requirements: one to many instances of this element
@@ -3158,7 +3215,7 @@ namespace PSI_Interface.MSData
                 }
                 return;
             }
-            reader.ReadStartElement("spectrumList"); // Throws exception if we are not at the "spectrumList" tag.
+            reader.ReadStartElement("spectrumList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
             if (_reduceMemoryUsage)
             {
                 // Kill the read, we are at the first spectrum
@@ -4631,7 +4688,7 @@ namespace PSI_Interface.MSData
             var msCompressed = new MemoryStream(compressedBytes);
             // We must skip the first two bytes
             // See http://george.chiramattel.com/blog/2007/09/deflatestream-block-length-does-not-match.html
-            // EAT the zlib headers, the rest is a normal 'deflate'd stream
+            // Eat the zlib headers, the rest is a normal deflated stream
             msCompressed.ReadByte();
             msCompressed.ReadByte();
             //var msInflated = new MemoryStream((int)(msCompressed.Length * 2));
