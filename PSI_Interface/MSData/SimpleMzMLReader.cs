@@ -14,6 +14,10 @@ namespace PSI_Interface.MSData
     /// </summary>
     public sealed class SimpleMzMLReader: IDisposable
     {
+        // Ignore Spelling: centroider, centroiding, chrom, cvParams, foreach, indexedmzML, multiphoton, Mzs, pos, struct, referenceable, xsi
+        // Ignore Spelling: Biosystems, Biotech, Shimadzu, interchannel, photodissociation, readonly
+        // Ignore Spelling: Bioworks, dta, EThcD, PerSeptive, Phenyx, Proteinscape, pkl, wiff, Xcalibur
+
         #region Private Members
         private readonly string _filePath;
         private Stream _file;
