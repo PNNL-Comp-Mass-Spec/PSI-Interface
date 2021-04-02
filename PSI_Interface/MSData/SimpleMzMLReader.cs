@@ -1014,7 +1014,7 @@ namespace PSI_Interface.MSData
 
             var sourceFile = new FileInfo(_filePath);
             if (!sourceFile.Exists)
-                throw new FileNotFoundException(".mzID file not found", _filePath);
+                throw new FileNotFoundException(".mzML file not found", _filePath);
 
             // Set a very large read buffer, it does decrease the read times for uncompressed files.
             _file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
