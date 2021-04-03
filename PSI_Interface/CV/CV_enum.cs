@@ -6,6 +6,7 @@
 
 namespace PSI_Interface.CV
 {
+
     public static partial class CV
     {
         /// <summary>
@@ -1717,10 +1718,10 @@ namespace PSI_Interface.CV
             /// <summary>Bruker/Agilent YEP file format.</summary>
             MS_Bruker_Agilent_YEP_format = 1000567,
 
-            /// <summary>MD5 (Message-Digest algorithm 5) is a cryptographic hash function with a 128-bit hash value used to check the integrity of files.</summary>
+            /// <summary>MD5 (Message-Digest algorithm 5) is a (now deprecated) cryptographic hash function with a 128-bit hash value used to check the integrity of files.</summary>
             MS_MD5 = 1000568,
 
-            /// <summary>SHA-1 (Secure Hash Algorithm-1) is a cryptographic hash function designed by the National Security Agency (NSA) and published by the NIST as a U. S. government standard. It is also used to verify file integrity.</summary>
+            /// <summary>SHA-1 (Secure Hash Algorithm-1) is a cryptographic hash function designed by the National Security Agency (NSA). It is also used to verify file integrity. Since 2011 it has been deprecated by the NIST as a U. S. government standard.</summary>
             MS_SHA_1 = 1000569,
 
             /// <summary>Method used to combine the mass spectra.</summary>
@@ -6488,7 +6489,7 @@ namespace PSI_Interface.CV
             MS_detector_potential = 1002273,
 
             /// <summary>Waters quadrupole based SQ Detector 2.</summary>
-            MS_SQ_Detector_2_ = 1002274,
+            MS_SQ_Detector_2 = 1002274,
 
             /// <summary>Waters oa-ToF based Xevo G2-S Tof.</summary>
             MS_Xevo_G2_S_Tof = 1002275,
@@ -7205,7 +7206,7 @@ namespace PSI_Interface.CV
             MS_cross_linking_score = 1002512,
 
             /// <summary>The absolute abundance of protein in a cell.</summary>
-            MS_molecules_per_cell_ = 1002513,
+            MS_molecules_per_cell = 1002513,
 
             /// <summary>Absolute quantitation analysis.</summary>
             MS_absolute_quantitation_analysis = 1002514,
@@ -7304,7 +7305,7 @@ namespace PSI_Interface.CV
             MS_xi_score = 1002545,
 
             /// <summary>A software package to convert Skyline report to mzQuantML.</summary>
-            MS_Skyline_mzQuantML_converter_ = 1002546,
+            MS_Skyline_mzQuantML_converter = 1002546,
 
             /// <summary>A normalized spectral abundance factor (NSAF).</summary>
             MS_normalized_spectral_abundance_factor = 1002547,
@@ -9052,6 +9053,27 @@ namespace PSI_Interface.CV
             /// <summary>SCIEX Triple Quad 7500.</summary>
             MS_Triple_Quad_7500 = 1003144,
 
+            /// <summary>Cross-platform software to convert Thermo RAW files to a number of open formats.</summary>
+            MS_ThermoRawFileParser = 1003145,
+
+            /// <summary>Python module that helps handling various proteomics data analysis tasks.</summary>
+            MS_pyteomics = 1003146,
+
+            /// <summary>Probability that one mass modification has been correctly localized to a specific residue as computed by PTMProphet.</summary>
+            MS_PTMProphet_probability = 1003147,
+
+            /// <summary>PSM-specific average of the m best site probabilities over all potential sites where m is the number of modifications of a specific type, as computed by PTMProphet.</summary>
+            MS_PTMProphet_mean_best_probability = 1003148,
+
+            /// <summary>PTMProphet-computed PSM-specific normalized (0.0 â€“ 1.0) measure of information content across all modifications of a specific type.</summary>
+            MS_PTMProphet_normalized_information_content = 1003149,
+
+            /// <summary>PTMProphet-computed PSM-specific measure of information content per modification type ranging from 0 to m, where m is the number of modifications of a specific type.</summary>
+            MS_PTMProphet_information_content = 1003150,
+
+            /// <summary>SHA-256 (member of Secure Hash Algorithm-2 family) is a cryptographic hash function designed by the National Security Agency (NSA) and published by the NIST as a U. S. government standard. It is also used to verify file integrity.</summary>
+            MS_SHA_256 = 1003151,
+
             /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 400000001,
 
@@ -9496,7 +9518,7 @@ namespace PSI_Interface.CV
             /// <summary>Labeling reagent light form (N-term &amp; K).</summary>
             UNIMOD_Benzoyl = 100000136,
 
-            /// <summary>N-linked glycan core.</summary>
+            /// <summary>M5/Man5.</summary>
             UNIMOD_Hex_5_HexNAc_2_ = 100000137,
 
             /// <summary>5-dimethylaminonaphthalene-1-sulfonyl.</summary>
@@ -9559,7 +9581,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex2HexNAc2dHex1.</summary>
             UNIMOD_Hex_2_HexNAc_2_dHex_1_ = 100000158,
 
-            /// <summary>Hex3HexNAc2.</summary>
+            /// <summary>M3/Man3.</summary>
             UNIMOD_Hex_3_HexNAc_2_ = 100000159,
 
             /// <summary>Hex HexNAc NeuAc(2) ---OR--- Hex HexNAc(3) HexA.</summary>
@@ -9766,22 +9788,22 @@ namespace PSI_Interface.CV
             /// <summary>Cysteine mercaptoethanol.</summary>
             UNIMOD_DeStreak = 100000303,
 
-            /// <summary>Fucosylated biantennary (-2 galactose).</summary>
+            /// <summary>FA2/G0F.</summary>
             UNIMOD_dHex_1_Hex_3_HexNAc_4_ = 100000305,
 
-            /// <summary>DHex Hex(4) HexNAc(4) ---OR--- Hex(4) HexNAc(4) Pent Me.</summary>
+            /// <summary>FA2G1/G1F.</summary>
             UNIMOD_dHex_1_Hex_4_HexNAc_4_ = 100000307,
 
-            /// <summary>Fucosylated biantennary.</summary>
+            /// <summary>FA2G2/G2F.</summary>
             UNIMOD_dHex_1_Hex_5_HexNAc_4_ = 100000308,
 
-            /// <summary>Biantennary (-2 galactose).</summary>
+            /// <summary>A2/G0.</summary>
             UNIMOD_Hex_3_HexNAc_4_ = 100000309,
 
-            /// <summary>Biantennary (-1 galactose).</summary>
+            /// <summary>A2G1/G1.</summary>
             UNIMOD_Hex_4_HexNAc_4_ = 100000310,
 
-            /// <summary>Biantennary.</summary>
+            /// <summary>A2G2/G2.</summary>
             UNIMOD_Hex_5_HexNAc_4_ = 100000311,
 
             /// <summary>Cysteinylation.</summary>
@@ -10977,9 +10999,6 @@ namespace PSI_Interface.CV
 
             /// <summary>Methylmalonylation on Serine.</summary>
             UNIMOD_Methylmalonylation = 100000914,
-
-            /// <summary>Ethoxyformylation.</summary>
-            UNIMOD_Ethoxyformyl = 100000915,
 
             /// <summary>13C(4) 15N(2) Lysine glygly.</summary>
             UNIMOD_Label_13C_4_15N_2__GG = 100000923,
@@ -12184,16 +12203,16 @@ namespace PSI_Interface.CV
             /// <summary>Sumoylation by SUMO-2/3 after Cyanogen bromide (CNBr) cleavage.</summary>
             UNIMOD_EDEDTIDVFQQQTGG = 100001406,
 
-            /// <summary>Hex(5) HexNAc(4) NeuAc(2).</summary>
+            /// <summary>A2G2S2/G2S2.</summary>
             UNIMOD_Hex_5_HexNAc_4_NeuAc_2_ = 100001408,
 
-            /// <summary>Hex(5) HexNAc(4) NeuAc.</summary>
+            /// <summary>A2G2S1/G2S1.</summary>
             UNIMOD_Hex_5_HexNAc_4_NeuAc_1_ = 100001409,
 
-            /// <summary>DHex Hex(5) HexNAc(4) NeuAc.</summary>
+            /// <summary>FA2G2S1/G2FS1.</summary>
             UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_1_ = 100001410,
 
-            /// <summary>DHex Hex(5) HexNAc(4) NeuAc(2).</summary>
+            /// <summary>FA2G2S2/G2FS2.</summary>
             UNIMOD_dHex_1_Hex_5_HexNAc_4_NeuAc_2_ = 100001411,
 
             /// <summary>O3S1HexNAc1.</summary>
@@ -12337,7 +12356,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(3) HexNAc(4) Sulf.</summary>
             UNIMOD_Hex_3_HexNAc_4_Sulf_1_ = 100001464,
 
-            /// <summary>Hex(6) HexNAc(2).</summary>
+            /// <summary>M6/Man6.</summary>
             UNIMOD_Hex_6_HexNAc_2_ = 100001465,
 
             /// <summary>Hex(4) HexNAc(3) Pent.</summary>
@@ -12382,7 +12401,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(4) HexNAc(4) Sulf.</summary>
             UNIMOD_Hex_4_HexNAc_4_Sulf_1_ = 100001479,
 
-            /// <summary>Hex(7) HexNAc(2).</summary>
+            /// <summary>M7/Man7.</summary>
             UNIMOD_Hex_7_HexNAc_2_ = 100001480,
 
             /// <summary>DHex(2) Hex(4) HexNAc(3).</summary>
@@ -12454,7 +12473,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(5) HexNAc(4) Sulf.</summary>
             UNIMOD_Hex_5_HexNAc_4_Sulf_1_ = 100001503,
 
-            /// <summary>Hex(8) HexNAc(2).</summary>
+            /// <summary>M8/Man8.</summary>
             UNIMOD_Hex_8_HexNAc_2_ = 100001504,
 
             /// <summary>DHex Hex(3) HexNAc(4) Pent(2).</summary>
@@ -12535,7 +12554,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(3) HexNAc(6) Sulf(2).</summary>
             UNIMOD_Hex_3_HexNAc_6_Sulf_2_ = 100001530,
 
-            /// <summary>Hex(9) HexNAc(2).</summary>
+            /// <summary>M9/Man9.</summary>
             UNIMOD_Hex_9_HexNAc_2_ = 100001531,
 
             /// <summary>Hex(4) HexNAc(6).</summary>
@@ -12619,7 +12638,7 @@ namespace PSI_Interface.CV
             /// <summary>Hex(3) HexNAc(7) Sulf.</summary>
             UNIMOD_Hex_3_HexNAc_7_Sulf_1_ = 100001558,
 
-            /// <summary>Hex(6) HexNAc(5).</summary>
+            /// <summary>A3G3.</summary>
             UNIMOD_Hex_6_HexNAc_5_ = 100001559,
 
             /// <summary>Hex(5) HexNAc(4) NeuAc Sulf.</summary>
@@ -13216,7 +13235,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex(2) Hex(3) HexNAc(3).</summary>
             UNIMOD_dHex_2_Hex_3_HexNAc_3_ = 100001771,
 
-            /// <summary>Hex(3) HexNAc(5).</summary>
+            /// <summary>A3.</summary>
             UNIMOD_Hex_3_HexNAc_5_ = 100001772,
 
             /// <summary>Hex(4) HexNAc(3) NeuAc ---OR--- Hex(3) HexNAc(4) Kdn.</summary>
@@ -13228,7 +13247,7 @@ namespace PSI_Interface.CV
             /// <summary>DHex Hex(3) HexNAc(5).</summary>
             UNIMOD_dHex_1_Hex_3_HexNAc_5_ = 100001775,
 
-            /// <summary>Hex(3) HexNAc(6).</summary>
+            /// <summary>A4.</summary>
             UNIMOD_Hex_3_HexNAc_6_ = 100001776,
 
             /// <summary>Hex(4) HexNAc(4) NeuAc.</summary>
@@ -13695,6 +13714,39 @@ namespace PSI_Interface.CV
 
             /// <summary>Photo-induced histidine adduct.</summary>
             UNIMOD_His_O_2_ = 100002027,
+
+            /// <summary>A3G3S3.</summary>
+            UNIMOD_Hex_6_HexNAc_5_NeuAc_3_ = 100002028,
+
+            /// <summary>A4G4.</summary>
+            UNIMOD_Hex_7_HexNAc_6_ = 100002029,
+
+            /// <summary>Photo-induced Methionine Adduct.</summary>
+            UNIMOD_Met_O_2_ = 100002033,
+
+            /// <summary>Photo-induced Glycine Adduct.</summary>
+            UNIMOD_Gly_O_2_ = 100002034,
+
+            /// <summary>Photo-induced Proline adduct.</summary>
+            UNIMOD_Pro_O_2_ = 100002035,
+
+            /// <summary>Photo-induced Lysine adduct.</summary>
+            UNIMOD_Lys_O_2_ = 100002036,
+
+            /// <summary>Photo-induced Glutamate adduct.</summary>
+            UNIMOD_Glu_O_2_ = 100002037,
+
+            /// <summary>Addition of lophotoxin to tyrosine.</summary>
+            UNIMOD_LTX_Lophotoxin = 100002039,
+
+            /// <summary>MBS_233p24 plus peptide 1250p53.</summary>
+            UNIMOD_MBS_peptide = 100002040,
+
+            /// <summary>3-hydroxybenzyl phosphate.</summary>
+            UNIMOD_3_hydroxybenzyl_phosphate = 100002041,
+
+            /// <summary>Phenyl phosphate.</summary>
+            UNIMOD_phenyl_phosphate = 100002042,
 
             /// <summary>Description not provided</summary>
             PATO_obsolete_pato_OBSOLETE = 300000000,
