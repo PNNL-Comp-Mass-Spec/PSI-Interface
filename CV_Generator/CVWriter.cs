@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -88,7 +87,7 @@ namespace CV_Generator
             {
                 file.NewLine = "\n";
                 file.WriteLine(Header());
-                file.WriteLine(UsingAndNamespace(false));
+                file.WriteLine(UsingAndNamespace(false, true));
                 // Write main class open...
                 file.WriteLine(ClassOpen());
                 PopulateTermDict();
@@ -121,18 +120,27 @@ namespace CV_Generator
                    "// Any edits made will be lost when it is recreated.\n";
         }
 
-        private string UsingAndNamespace(bool needsGenericCollections = true)
+        private string UsingAndNamespace(bool needsGenericCollections = true, bool disableStringLiteralWarning = false)
         {
-            var genColl = "// Using statements:\n" +
-                          "using System.Collections.Generic;\n";
-            var namespaceDecl = "// ReSharper disable InconsistentNaming\n" +
-                        "\n" +
-                        "namespace PSI_Interface.CV\n{";
+            var headerText = new StringBuilder();
             if (needsGenericCollections)
             {
-                return genColl + namespaceDecl;
+                headerText.Append("// Using statements:\n");
+                headerText.Append("using System.Collections.Generic;\n");
             }
-            return namespaceDecl;
+
+            headerText.Append("// ReSharper disable InconsistentNaming\n");
+
+            if (disableStringLiteralWarning)
+            {
+                headerText.Append("#pragma warning disable RCS1192 // Unnecessary usage of verbatim string literal.\n");
+            }
+
+            headerText.Append("\n");
+            headerText.Append("namespace PSI_Interface.CV\n");
+            headerText.Append("{\n");
+
+            return headerText.ToString();
         }
 
         private string ClassOpen()
