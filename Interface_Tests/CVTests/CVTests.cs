@@ -73,7 +73,6 @@ namespace Interface_Tests.CVTests
 
                 WriteCVTerms(importedFile, oboFile);
             }
-
         }
 
         private void WriteCVTerms(FileInfo outFile, OBO_File fileData)

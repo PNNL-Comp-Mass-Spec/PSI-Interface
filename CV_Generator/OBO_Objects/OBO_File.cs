@@ -114,6 +114,5 @@ namespace CV_Generator.OBO_Objects
             Ids.Add(finalId, 0); // Add it to the dictionary
             return finalId;
         }
-
     }
 }

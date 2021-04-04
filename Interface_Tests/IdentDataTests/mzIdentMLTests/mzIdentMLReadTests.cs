@@ -78,7 +78,6 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
             Assert.AreEqual(expectedSpecItems, specItems, "Spectrum Identification Items");
             Assert.AreEqual(expectedPeptides, observedPeptides, "Unique Peptides");
             Assert.AreEqual(expectedSeqs, observeProteins, "Unique Protein Sequences");
-
         }
     }
 }

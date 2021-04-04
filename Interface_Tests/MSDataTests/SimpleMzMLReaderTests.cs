@@ -99,7 +99,6 @@ namespace Interface_Tests.MSDataTests
             }
         }
 
-
         /// <summary>
         /// Open the file with random access and obtain specific mass spectra by scan number
         /// </summary>

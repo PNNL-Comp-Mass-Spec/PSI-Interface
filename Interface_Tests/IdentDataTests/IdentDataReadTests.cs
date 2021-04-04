@@ -88,7 +88,6 @@ namespace Interface_Tests.IdentDataTests
             Assert.AreEqual(expectedSpecItems, specItems, "Native IDs");
             Assert.AreEqual(expectedPeptides, observedPeptides, "Unique Peptides");
             Assert.AreEqual(expectedSeqs, observeProteins, "Unique Protein Sequences");
-
         }
     }
 }

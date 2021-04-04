@@ -53,7 +53,6 @@ namespace Interface_Tests.IdentDataTests
 
                 if (specResults % 1000 == 0)
                     Console.WriteLine("{0,6:N0} / {1,6:N0}", specResults, resultCountTotal);
-
             }
 
             Console.WriteLine();
@@ -112,7 +111,6 @@ namespace Interface_Tests.IdentDataTests
 
                     if (specResults % 1000 == 0)
                         Console.WriteLine("{0,6:N0} / {1,6:N0}", specResults, resultCountTotal);
-
                 }
             }
 

@@ -62,7 +62,6 @@ namespace Interface_Tests.MSDataTests.mzMLTests
 
             Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count, "Spectrum Count");
             Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Count, "Array length");
-
         }
 
         [Test]
@@ -89,7 +88,6 @@ namespace Interface_Tests.MSDataTests.mzMLTests
 
             Assert.AreEqual(expectedSpectra.ToString(), mzMLData.run.spectrumList.count, "Spectrum Count");
             Assert.AreEqual(expectedSpectra, mzMLData.run.spectrumList.spectrum.Count, "Array length");
-
         }
     }
 }

@@ -59,7 +59,6 @@ namespace PSI_Interface.IdentData
             var specList = new SpectrumIdentificationListObj()
             {
                 Id = "SI_LIST_" + specListCounter++,
-
             };
             identData.DataCollection.AnalysisData.SpectrumIdentificationList.Add(specList);
 
@@ -109,8 +108,6 @@ namespace PSI_Interface.IdentData
                     }
                 }
             }
-
-
 
             // TODO: Deduplicate the peptide and dbSequence lists
 

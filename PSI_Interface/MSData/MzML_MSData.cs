@@ -70,7 +70,6 @@ namespace PSI_Interface.MSData
                 {
                     this.SampleList.Add(new SampleInfo(s, this));
                 }
-
             }
             if (mzML.softwareList != null && mzML.softwareList.software != null && mzML.softwareList.software.Count > 0)
             {

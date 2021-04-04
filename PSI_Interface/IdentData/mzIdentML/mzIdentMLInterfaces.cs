@@ -52,7 +52,6 @@ namespace PSI_Interface.IdentData.mzIdentML
                     target.cvParam.Add(new CVParamType(cvp));
                 }
             }
-
         }
     }
 }
