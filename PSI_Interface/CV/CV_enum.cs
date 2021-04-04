@@ -6,7 +6,6 @@
 
 namespace PSI_Interface.CV
 {
-
     public static partial class CV
     {
         /// <summary>

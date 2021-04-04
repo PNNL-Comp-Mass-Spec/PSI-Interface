@@ -138,7 +138,7 @@ namespace CV_Generator
 
             headerText.Append("\n");
             headerText.Append("namespace PSI_Interface.CV\n");
-            headerText.Append("{\n");
+            headerText.Append("{");
 
             return headerText.ToString();
         }

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 namespace PSI_Interface.CV
 {
-
     public static partial class CV
     {
         /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>
