@@ -153,9 +153,84 @@ namespace Interface_Tests.MSDataTests
             }
         }
 
+        /// <summary>
+        /// Retrieve spectra using the given artificial (1-based) scan number
+        /// Compare the actual scan numbers to expected values
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="artificialScanNumberList"></param>
+        /// <param name="expectedActualScanNumberList"></param>
+        [Test]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", "0,1,10,100,3200,6000,9293,10000", "0,1,10,100,3200,6000,9293,0")]
+        [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans1-200.mzML", "1,10,100,175,200,201,300", "1,10,100,175,200,0,0")]
+        [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", "1,50,95,101,102,200", "200,249,294,300,0,0")]
+        public void ReadMzMLCompareScanNumbers(string path, string artificialScanNumberList, string expectedActualScanNumberList)
+        {
+            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
+            if (!sourceFile.Exists)
+            {
+                Console.WriteLine("File not found: " + sourceFile.FullName);
+                return;
+            }
+
+            var artificialScanNumbers = ParseOrderedIntegerList(artificialScanNumberList);
+
+            var expectedActualScanNumbers = ParseOrderedIntegerList(expectedActualScanNumberList);
+
+            // Run the test twice, first with randomAccess disabled, then with randomAccess enabled
+            for (var i = 0; i < 2; i++)
+            {
+                var randomAccess = i > 0;
+
+                using (var reader = new SimpleMzMLReader(sourceFile.FullName, randomAccess, true))
+                {
+                    for (var j = 0; j < artificialScanNumbers.Count; j++)
+                    {
+                        var artificialScanNumber = artificialScanNumbers[j];
+                        var expectedScanNumber = expectedActualScanNumbers[j];
+
+                        var spectrum = reader.ReadMassSpectrum(artificialScanNumber, false);
+
+                        if (expectedScanNumber <= 0)
+                        {
+                            Console.WriteLine("Spectrum {0,4} does not exist; this was expected", artificialScanNumber);
+
+                            Assert.IsNull(spectrum);
+                            continue;
+                        }
+                        Assert.IsNotNull(spectrum);
+
+                        Console.WriteLine("Spectrum {0,4}, NativeID {1,-45}, scan {2,4}", spectrum.ScanNumber, spectrum.NativeId, spectrum.NativeIdScanNumber);
+
+                        Assert.AreEqual(expectedScanNumber, spectrum.NativeIdScanNumber);
+
+                        var comparisonSpectrum = reader.GetSpectrumForScan(spectrum.NativeIdScanNumber, false);
+
+                        Assert.AreEqual(comparisonSpectrum.NativeId, spectrum.NativeId);
+                    }
+                }
+
+                Console.WriteLine();
+            }
+        }
+
         private static SortedSet<int> ParseDelimitedIntegerList(string scanNumberList)
         {
             var scanNumbers = new SortedSet<int>();
+            foreach (var item in scanNumberList.Split(','))
+            {
+                if (int.TryParse(item, out var scanNumber))
+                {
+                    scanNumbers.Add(scanNumber);
+                }
+            }
+
+            return scanNumbers;
+        }
+
+        private static List<int> ParseOrderedIntegerList(string scanNumberList)
+        {
+            var scanNumbers = new List<int>();
             foreach (var item in scanNumberList.Split(','))
             {
                 if (int.TryParse(item, out var scanNumber))
