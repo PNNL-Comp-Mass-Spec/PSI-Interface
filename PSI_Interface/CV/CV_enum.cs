@@ -7096,8 +7096,8 @@ namespace PSI_Interface.CV
             /// <summary>Drift time of an ion or spectrum of ions as measured in an ion mobility mass spectrometer. This time might refer to the central value of a bin into which all ions within a narrow range of drift time have been aggregated.</summary>
             MS_ion_mobility_drift_time = 1002476,
 
-            /// <summary>Array of drift times, averaged from a matrix of binned m/z and drift time values, corresponding to spectrum of individual peaks encoded with an m/z array.</summary>
-            MS_mean_drift_time_array = 1002477,
+            /// <summary>Array of population mean ion mobility values from a drift time device, reported in seconds (or milliseconds), corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_mean_ion_mobility_drift_time_array = 1002477,
 
             /// <summary>Array of mean charge values where the mean charge is calculated as a weighted mean of the charges of individual peaks that are aggregated into a processed spectrum.</summary>
             MS_mean_charge_array = 1002478,
@@ -7783,6 +7783,12 @@ namespace PSI_Interface.CV
             /// <summary>Attrbiute of an entire list of protein groups.</summary>
             MS_protein_group_level_result_list_statistic = 1002706,
 
+            /// <summary>Regular expression for LysargiNase.</summary>
+            MS_____KR__ = 1002707,
+
+            /// <summary>Metalloproteinase found in Methanosarcina acetivorans that cleaves on the N-terminal side of lysine and arginine residues.</summary>
+            MS_LysargiNase = 1002708,
+
             /// <summary>LECO bench-top GC time-of-flight mass spectrometer.</summary>
             MS_Pegasus_BT = 1002719,
 
@@ -8074,7 +8080,7 @@ namespace PSI_Interface.CV
             /// <summary>Ion mobility measurement for an ion or spectrum of ions as measured in an ion mobility mass spectrometer. This might refer to the central value of a bin into which all ions within a narrow range of mobilities have been aggregated.</summary>
             MS_inverse_reduced_ion_mobility = 1002815,
 
-            /// <summary>Array of drift times, averaged from a matrix of binned m/z and ion mobility values, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            /// <summary>Array of population mean ion mobility values (K or K0) based on ion separation in gaseous phase due to different ion mobilities under an electric field based on ion size, m/z and shape, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
             MS_mean_ion_mobility_array = 1002816,
 
             /// <summary>Bruker TDF raw file format.</summary>
@@ -8305,7 +8311,7 @@ namespace PSI_Interface.CV
             /// <summary>An attribute describing ion mobility searches.</summary>
             MS_ion_mobility_attribute = 1002892,
 
-            /// <summary>An array of ion mobility data.</summary>
+            /// <summary>Abstract array of ion mobility data values. A more specific child term concept should be specified in data files to make precise the nature of the data being provided.</summary>
             MS_ion_mobility_array = 1002893,
 
             /// <summary>Unique chemical structure identifier for chemical compounds.</summary>
@@ -8635,13 +8641,13 @@ namespace PSI_Interface.CV
             /// <summary>Bruker Daltonics' timsTOF Pro.</summary>
             MS_timsTOF_Pro = 1003005,
 
-            /// <summary>Array of inverse reduced ion mobilities, averaged from a matrix of binned m/z and ion mobility values, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            /// <summary>Array of population mean ion mobility values based on ion separation in gaseous phase due to different ion mobilities under an electric field based on ion size, m/z and shape, normalized for the local conditions and reported in volt-second per square centimeter, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
             MS_mean_inverse_reduced_ion_mobility_array = 1003006,
 
-            /// <summary>Array of raw drift times.</summary>
+            /// <summary>Array of raw ion mobility values (K or K0) based on ion separation in gaseous phase due to different ion mobilities under an electric field based on ion size, m/z and shape, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
             MS_raw_ion_mobility_array = 1003007,
 
-            /// <summary>Array of raw inverse reduced ion mobilities.</summary>
+            /// <summary>Array of raw ion mobility values based on ion separation in gaseous phase due to different ion mobilities under an electric field based on ion size, m/z and shape, normalized for the local conditions and reported in volt-second per square centimeter, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
             MS_raw_inverse_reduced_ion_mobility_array = 1003008,
 
             /// <summary>Shimadzu Biotech LCD file format.</summary>
@@ -9072,6 +9078,36 @@ namespace PSI_Interface.CV
 
             /// <summary>SHA-256 (member of Secure Hash Algorithm-2 family) is a cryptographic hash function designed by the National Security Agency (NSA) and published by the NIST as a U. S. government standard. It is also used to verify file integrity.</summary>
             MS_SHA_256 = 1003151,
+
+            /// <summary>Shimadzu Scientific Instruments GCMS-QP2010SE.</summary>
+            MS_GCMS_QP2010SE = 1003152,
+
+            /// <summary>Array of raw ion mobility values from a drift time device, reported in seconds (or milliseconds), corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_raw_ion_mobility_drift_time_array = 1003153,
+
+            /// <summary>Array of ion mobility values (K or K0) based on ion separation in gaseous phase due to different ion mobilities under an electric field based on ion size, m/z and shape, as an average property of an analyte post peak-detection, weighted charge state reduction, and/or adduct aggregation, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_deconvoluted_ion_mobility_array = 1003154,
+
+            /// <summary>Array of ion mobility values based on ion separation in gaseous phase due to different ion mobilities under an electric field based on ion size, m/z and shape, normalized for the local conditions and reported in volt-second per square centimeter, as an average property of an analyte post peak-detection, weighted charge state reduction, and/or adduct aggregation, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_deconvoluted_inverse_reduced_ion_mobility_array = 1003155,
+
+            /// <summary>Array of mean ion mobility values from a drift time device, reported in seconds (or milliseconds), as an average property of an analyte post peak-detection, weighted charge state reduction, and/or adduct aggregation, corresponding to a spectrum of individual peaks encoded with an m/z array.</summary>
+            MS_deconvoluted_ion_mobility_drift_time_array = 1003156,
+
+            /// <summary>Array of m/z values representing the lower bound m/z of the quadrupole position at each point in the spectrum.</summary>
+            MS_scanning_quadrupole_position_lower_bound_m_z_array = 1003157,
+
+            /// <summary>Array of m/z values representing the upper bound m/z of the quadrupole position at each point in the spectrum.</summary>
+            MS_scanning_quadrupole_position_upper_bound_m_z_array = 1003158,
+
+            /// <summary>Indicates an acquisition mode in which the isolation window is a full range, rather than a subset of the full range.</summary>
+            MS_isolation_window_full_range = 1003159,
+
+            /// <summary>Proteomics Standards Initiative mzQC format for quality control data.</summary>
+            MS_mzQC_format = 1003160,
+
+            /// <summary>Grouping term for quality control data formats.</summary>
+            MS_quality_control_data_format = 1003161,
 
             /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 400000001,
