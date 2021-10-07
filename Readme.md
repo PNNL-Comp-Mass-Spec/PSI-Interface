@@ -97,7 +97,7 @@ Several runtime options exist:
 Written by Bryson Gibbons for the Department of Energy (PNNL, Richland, WA) \
 Copyright 2017, Battelle Memorial Institute.  All Rights Reserved. \
 E-mail: proteomics@pnnl.gov \
-Website: https://omics.pnl.gov/ or https://panomics.pnnl.gov/
+Website: https://github.com/PNNL-Comp-Mass-Spec/ or https://panomics.pnnl.gov/ or https://www.pnnl.gov/integrative-omics
 
 ## License
 
