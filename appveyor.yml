@@ -10,15 +10,8 @@ build:
 test: off
 artifacts:
 - path: PSI_Interface\bin\Release\PSI_Interface*.nupkg
-deploy:
-- provider: NuGet
-  api_key:
-    secure: Ggkz3LuVG+Bsykyisf0ptmatdvwIizkXhsPpPGSUW4B2y7XHuSAHMwJWk/ScGYSO
-  skip_symbols: true
 notifications:
 - provider: Email
   to:
   - bryson.gibbons@pnnl.gov
-  on_build_success: true
   on_build_failure: true
-  on_build_status_changed: true
