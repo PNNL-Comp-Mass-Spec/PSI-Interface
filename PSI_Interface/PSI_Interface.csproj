@@ -6,9 +6,6 @@
     <AssemblyName>PSI_Interface</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>PSI_Interface</PackageId>
-    <Version>2.4.3</Version>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>$(Version)</FileVersion>
     <Description>Set of classes for reading and writing mzML and mzIdentML files, with classes that allow full access to all features of the formats, and classes designed to quickly read both formats.</Description>
     <Company>Pacific Northwest National Laboratory</Company>
     <Product>PSI Interface</Product>
@@ -29,5 +26,12 @@
 
   <ItemGroup>
     <None Include="..\Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>
