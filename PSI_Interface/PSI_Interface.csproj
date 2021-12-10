@@ -18,6 +18,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/PNNL-Comp-Mass-Spec/PSI-Interface</PackageProjectUrl>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <Copyright>Copyright @ PNNL 2017</Copyright>
     <Title>PSI Interface</Title>
   </PropertyGroup>
@@ -26,4 +27,7 @@
     <DefineConstants>NET_STD2</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>
