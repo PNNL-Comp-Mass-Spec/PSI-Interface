@@ -180,8 +180,8 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_ultraflex_TOF_TOF, new List<CVID> { CVID.MS_Bruker_Daltonics_flex_series, });
             RelationsIsA.Add(CVID.MS_Voyager_DE_PRO, new List<CVID> { CVID.MS_Applied_Biosystems_instrument_model, });
             RelationsIsA.Add(CVID.MS_Voyager_DE_STR, new List<CVID> { CVID.MS_Applied_Biosystems_instrument_model, });
-            RelationsIsA.Add(CVID.MS_selected_ion_monitoring, new List<CVID> { CVID.MS_measurement_method, });
-            RelationsIsA.Add(CVID.MS_selected_reaction_monitoring, new List<CVID> { CVID.MS_measurement_method, });
+            RelationsIsA.Add(CVID.MS_selected_ion_monitoring, new List<CVID> { CVID.MS_data_independent_acquisition, CVID.MS_mass_spectrometry_acquisition_method, });
+            RelationsIsA.Add(CVID.MS_selected_reaction_monitoring, new List<CVID> { CVID.MS_data_independent_acquisition, CVID.MS_mass_spectrometry_acquisition_method, });
             RelationsIsA.Add(CVID.MS_base_peak, new List<CVID> { CVID.MS_peak, });
             RelationsIsA.Add(CVID.MS_field_free_region, new List<CVID> { CVID.MS_ion_optics_attribute, });
             RelationsIsA.Add(CVID.MS_magnetic_deflection, new List<CVID> { CVID.MS_ion_optics_type, });
@@ -1521,7 +1521,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_mz5_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_coefficient_of_variation, new List<CVID> { CVID.MS_transition_validation_attribute, });
             RelationsIsA.Add(CVID.MS_signal_to_noise_ratio, new List<CVID> { CVID.MS_transition_validation_attribute, });
-            RelationsIsA.Add(CVID.MS_command_line_parameters, new List<CVID> { CVID.MS_data_processing_parameter, });
+            RelationsIsA.Add(CVID.MS_command_line_parameters, new List<CVID> { CVID.MS_data_processing_parameter, CVID.MS_library_provenance_attribute, });
             RelationsIsA.Add(CVID.MS_SQID, new List<CVID> { CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_SQID_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_SQID_deltaScore, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
@@ -2250,7 +2250,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_iTRAQ_reagent_118, new List<CVID> { CVID.MS_iTRAQ_reagent, });
             RelationsIsA.Add(CVID.MS_iTRAQ_reagent_119, new List<CVID> { CVID.MS_iTRAQ_reagent, });
             RelationsIsA.Add(CVID.MS_iTRAQ_reagent_121, new List<CVID> { CVID.MS_iTRAQ_reagent, });
-            RelationsIsA.Add(CVID.MS_Electron_Transfer_Higher_Energy_Collision_Dissociation__EThcD_, new List<CVID> { CVID.MS_dissociation_method, });
+            RelationsIsA.Add(CVID.MS_electron_transfer_higher_energy_collision_dissociation, new List<CVID> { CVID.MS_combined_dissociation_method, });
             RelationsIsA.Add(CVID.MS_jPOST_dataset_identifier, new List<CVID> { CVID.MS_external_reference_identifier, });
             RelationsIsA.Add(CVID.MS_jPOST_dataset_URI, new List<CVID> { CVID.MS_external_reference_identifier, });
             RelationsIsA.Add(CVID.MS_Q_Exactive_Plus, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
@@ -2324,6 +2324,10 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_protein_group_level_result_list_statistic, new List<CVID> { CVID.MS_protein_group_level_result_list_attribute, });
             RelationsIsA.Add(CVID.MS_____KR__, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS_LysargiNase, new List<CVID> { CVID.MS_cleavage_agent_name, });
+            RelationsIsA.Add(CVID.MS_list_of_type, new List<CVID> { CVID.MS_compound_data_type, });
+            RelationsIsA.Add(CVID.MS_list_of_strings, new List<CVID> { CVID.MS_list_of_type, });
+            RelationsIsA.Add(CVID.MS_list_of_integers, new List<CVID> { CVID.MS_list_of_type, });
+            RelationsIsA.Add(CVID.MS_list_of_floats, new List<CVID> { CVID.MS_list_of_type, });
             RelationsIsA.Add(CVID.MS_Pegasus_BT, new List<CVID> { CVID.MS_LECO_instrument_model, });
             RelationsIsA.Add(CVID.MS_MSPathFinder, new List<CVID> { CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_MSPathFinder_SpecEValue, new List<CVID> { CVID.MS_PSM_level_e_value, CVID.MS_PSM_level_search_engine_specific_statistic, });
@@ -2754,6 +2758,60 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_isolation_window_full_range, new List<CVID> { CVID.MS_isolation_window_attribute, });
             RelationsIsA.Add(CVID.MS_mzQC_format, new List<CVID> { CVID.MS_quality_control_data_format, });
             RelationsIsA.Add(CVID.MS_quality_control_data_format, new List<CVID> { CVID.MS_file_format, });
+            RelationsIsA.Add(CVID.MS_PTX_QC, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_analyte_mixture_members, new List<CVID> { CVID.MS_interpreted_spectrum_attribute, });
+            RelationsIsA.Add(CVID.MS_QuaMeter_IDFree, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_iMonDB, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS_assigned_intensity_fraction, new List<CVID> { CVID.MS_interpreted_spectrum_attribute, });
+            RelationsIsA.Add(CVID.MS_MSn_1_isolation_window_precursor_purity, new List<CVID> { CVID.MS_interpreted_spectrum_attribute, });
+            RelationsIsA.Add(CVID.MS_library_entry_comment, new List<CVID> { CVID.MS_assigned_intensity_fraction, });
+            RelationsIsA.Add(CVID.MS_proforma_peptidoform_sequence, new List<CVID> { CVID.MS_peptidoform_sequence, });
+            RelationsIsA.Add(CVID.MS_numeric_attribute, new List<CVID> { CVID.MS_object_attribute, });
+            RelationsIsA.Add(CVID.MS_combined_dissociation_method, new List<CVID> { CVID.MS_dissociation_method, });
+            RelationsIsA.Add(CVID.MS_electron_transfer_collision_induced_dissociation, new List<CVID> { CVID.MS_combined_dissociation_method, });
+            RelationsIsA.Add(CVID.MS_Synapt_XS, new List<CVID> { CVID.MS_Waters_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SELECT_SERIES_Cyclic_IMS, new List<CVID> { CVID.MS_Waters_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SELECT_SERIES_MRT, new List<CVID> { CVID.MS_Waters_instrument_model, });
+            RelationsIsA.Add(CVID.MS_library_format_version, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_library_identifier, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_library_name, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_library_description, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_library_version, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_library_URI, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_decoy_spectrum, new List<CVID> { CVID.MS_spectrum_origin_type, });
+            RelationsIsA.Add(CVID.MS_shuffle_and_reposition_decoy_spectrum, new List<CVID> { CVID.MS_decoy_spectrum, });
+            RelationsIsA.Add(CVID.MS_precursor_shift_decoy_spectrum, new List<CVID> { CVID.MS_decoy_spectrum, });
+            RelationsIsA.Add(CVID.MS_unnatural_peptidoform_decoy_spectrum, new List<CVID> { CVID.MS_decoy_spectrum, });
+            RelationsIsA.Add(CVID.MS_unrelated_species_decoy_spectrum, new List<CVID> { CVID.MS_decoy_spectrum, });
+            RelationsIsA.Add(CVID.MS_license_URI, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_copyright_notice, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_change_log, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_software_version, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_library_provenance_attribute, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_constituent_spectrum_file, new List<CVID> { CVID.MS_library_provenance_attribute, });
+            RelationsIsA.Add(CVID.MS_constituent_identification_file, new List<CVID> { CVID.MS_library_provenance_attribute, });
+            RelationsIsA.Add(CVID.MS_constituent_library_file, new List<CVID> { CVID.MS_library_provenance_attribute, });
+            RelationsIsA.Add(CVID.MS_library_creation_log, new List<CVID> { CVID.MS_library_provenance_attribute, });
+            RelationsIsA.Add(CVID.MS_library_creation_software, new List<CVID> { CVID.MS_software, CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_experimental_precursor_monoisotopic_m_z, new List<CVID> { CVID.MS_ion_selection_attribute, });
+            RelationsIsA.Add(CVID.MS_monoisotopic_m_z_deviation, new List<CVID> { CVID.MS_interpreted_spectrum_attribute, });
+            RelationsIsA.Add(CVID.MS_average_m_z_deviation, new List<CVID> { CVID.MS_interpreted_spectrum_attribute, });
+            RelationsIsA.Add(CVID.MS_library_entry_class, new List<CVID> { CVID.MS_spectral_library_attribute, });
+            RelationsIsA.Add(CVID.MS_mass_spectrometry_acquisition_method, new List<CVID> { CVID.MS_data_file_content, CVID.MS_acquisition_parameter, });
+            RelationsIsA.Add(CVID.MS_mass_spectrometry_acquisition_method_aspect, new List<CVID> { CVID.MS_spectrum_generation_information, });
+            RelationsIsA.Add(CVID.MS_data_independent_acquisition, new List<CVID> { CVID.MS_mass_spectrometry_acquisition_method_aspect, });
+            RelationsIsA.Add(CVID.MS_dissociation_of_full_mass_range, new List<CVID> { CVID.MS_mass_spectrometry_acquisition_method_aspect, });
+            RelationsIsA.Add(CVID.MS_dissociation_of_scanning_quadrupole_across_a_specified_mass_range, new List<CVID> { CVID.MS_mass_spectrometry_acquisition_method_aspect, });
+            RelationsIsA.Add(CVID.MS_dissociation_of_sequential_mass_ranges, new List<CVID> { CVID.MS_mass_spectrometry_acquisition_method_aspect, });
+            RelationsIsA.Add(CVID.MS_ion_mobility_separation, new List<CVID> { CVID.MS_mass_spectrometry_acquisition_method_aspect, });
+            RelationsIsA.Add(CVID.MS_adduct_deconvolution, new List<CVID> { CVID.MS_data_processing_action, });
+            RelationsIsA.Add(CVID.MS_data_dependent_acquisition, new List<CVID> { CVID.MS_mass_spectrometry_acquisition_method_aspect, });
+            RelationsIsA.Add(CVID.MS_ion_mobility_deconvolution, new List<CVID> { CVID.MS_data_processing_action, });
+            RelationsIsA.Add(CVID.MS_data_independent_acquisition_from_dissociation_of_sequential_mass_ranges, new List<CVID> { CVID.MS_dissociation_of_sequential_mass_ranges, CVID.MS_data_independent_acquisition, CVID.MS_mass_spectrometry_acquisition_method, });
+            RelationsIsA.Add(CVID.MS_data_independent_acquisition_from_dissociation_of_sequential_mass_ranges_after_ion_mobility_separation, new List<CVID> { CVID.MS_dissociation_of_sequential_mass_ranges, CVID.MS_ion_mobility_separation, CVID.MS_data_independent_acquisition, CVID.MS_mass_spectrometry_acquisition_method, });
+            RelationsIsA.Add(CVID.MS_data_independent_acquisition_from_dissociation_of_full_mass_range_after_ion_mobility_separation, new List<CVID> { CVID.MS_data_independent_acquisition, CVID.MS_ion_mobility_separation, CVID.MS_data_independent_acquisition, CVID.MS_mass_spectrometry_acquisition_method, });
+            RelationsIsA.Add(CVID.MS_data_independent_acquisition_from_dissociation_of_full_mass_range, new List<CVID> { CVID.MS_dissociation_of_full_mass_range, CVID.MS_ion_mobility_separation, CVID.MS_data_independent_acquisition, CVID.MS_mass_spectrometry_acquisition_method, });
+            RelationsIsA.Add(CVID.MS_data_independent_acquisition_from_dissociation_of_scanning_quadrupole_across_mass_range, new List<CVID> { CVID.MS_data_independent_acquisition, CVID.MS_dissociation_of_scanning_quadrupole_across_a_specified_mass_range, CVID.MS_mass_spectrometry_acquisition_method, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>
@@ -2935,7 +2993,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_NeuAc_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_3_HexNAc_2_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_S__1_Se_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Delta_H_1_N__1_18O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Delta_H__1_N__1_18O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NBS_13C_6_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NBS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_BHT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3328,7 +3386,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_ExacTagAmine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_4_ONE_Delta_H__2_O__1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NO_SMX_SEMD, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_NO_SMX_SMCT, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_NO_SMX_SIMD, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Malonyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_3sulfo, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3376,7 +3433,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_ICPL_13C_6_2H_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_QEQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_QQQTGG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Bodipy, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Biotin_Thermo_21325, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_1_2H_3__Oxidation, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_HydroxymethylOP, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3706,7 +3762,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_CresylSaligeninPhosphate, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Ub_Br2, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Ub_VME, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Ub_amide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Ub_fluorescein, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_2_dimethylsuccinyl, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Gly, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -3821,14 +3876,14 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexA_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_Pent_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Phos_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 2</summary>
         private static void FillRelationsIsA_UNIMOD_Part2()
         {
-            RelationsIsA.Add(CVID.UNIMOD_Hex_1_HexNAc_1_Sulf_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Hex_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_HexNAc_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_HexNAc_1_NeuAc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_HexNAc_1_NeuGc_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -4241,7 +4296,7 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Delta_H__4_O_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_H__4_O_3_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_O_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
-            RelationsIsA.Add(CVID.UNIMOD_Delta_H_3_C_3_O_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Delta_H_4_C_3_O_2_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_H_4_C_5_O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_H_10_C_8_O_1_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Delta_H_6_C_7_O_4_, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
@@ -4325,6 +4380,9 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_MBS_peptide, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_3_hydroxybenzyl_phosphate, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_phenyl_phosphate, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_RBS_ID_Uridine, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_shTMTpro, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Biotin_Aha_DADPS, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>

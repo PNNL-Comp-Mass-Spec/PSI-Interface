@@ -11,9 +11,9 @@ namespace PSI_Interface.CV
         /// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>
         public static void PopulateCVInfoList()
         {
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.55"));
-            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.55"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "2021:03:11 13:32"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.64"));
+            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.64"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "28:07:2021 09:44"));
             CVInfoList.Add(new CVInfo("PATO", "Quality Ontology", "http://ontologies.berkeleybop.org/pato.obo", "releases/2019-09-05"));
             CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "http://ontologies.berkeleybop.org/uo.obo", "releases/2020-03-10"));
         }
@@ -35,6 +35,9 @@ namespace PSI_Interface.CV
 
             /// <summary>Description not provided</summary>
             has_domain,
+
+            /// <summary>"'Entity A' has value type 'Entity B', such as xsd:float."</summary>
+            has_value_type,
 
             /// <summary>Description not provided</summary>
             correlates_with,
