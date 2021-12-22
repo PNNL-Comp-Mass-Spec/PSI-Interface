@@ -11,7 +11,6 @@
  *
  ********************************************************************************************************************************/
 
-using System.Collections.Generic;
 using PSI_Interface.CV;
 
 // ReSharper disable RedundantExtendsListEntry
