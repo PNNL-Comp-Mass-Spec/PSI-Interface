@@ -851,7 +851,6 @@ namespace PSI_Interface.MSData.mzML
     /// <summary>
     /// mzML ScanWindowListType
     /// </summary>
-    /// <remarks></remarks>
     public partial class ScanWindowListType
     {
         /// <summary>
@@ -991,7 +990,7 @@ namespace PSI_Interface.MSData.mzML
         /// the format of the identifier is defined in the PSI-MS CV and referred to in the mzML header.
         /// External documents may use this identifier together with the mzML filename or accession to reference a particular spectrum.</summary>
         /// <remarks>Required Attribute</remarks>
-        /// <returns>Regex: "\S+=\S+( \S+=\S+)*"</returns>
+        /// <returns>RegEx: "\S+=\S+( \S+=\S+)*"</returns>
         //public string id
 
         /// <summary>The identifier for the spot from which this spectrum was derived, if a MALDI or similar run.</summary>
@@ -1175,7 +1174,6 @@ namespace PSI_Interface.MSData.mzML
         }
 
         /*
-        /// <remarks></remarks>
         /// <remarks>min 1, max unbounded</remarks>
         //public ChromatogramType[] chromatogram
 
@@ -1370,7 +1368,6 @@ namespace PSI_Interface.MSData.mzML
     /// <summary>
     /// mzML SourceFileRefType
     /// </summary>
-    /// <remarks></remarks>
     public partial class SourceFileRefType
     {
         /// <summary>
@@ -1453,7 +1450,7 @@ namespace PSI_Interface.MSData.mzML
         /// <remarks>min 1, max unbounded</remarks>
         //public SoftwareType[] software
 
-        /// <summary>The number of softwares defined in this mzML file.</summary>
+        /// <summary>The number of software names defined in this mzML file.</summary>
         /// <remarks>Required Attribute</remarks>
         //public string count*/
     }

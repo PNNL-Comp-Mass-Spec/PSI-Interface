@@ -273,7 +273,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /*/// <summary>
     /// MzIdentML AbstractParamType; Used instead of: ParamType, ParamGroup, ParamListType
     /// </summary>
-    /// <remarks>Abstract entity allowing either cvParam or userParam to be referenced in other schemas.</remarks>
+    /// <remarks>Abstract entity allowing either cvParam or userParam to be referenced in other schema.</remarks>
     /// <remarks>PramGroup: A choice of either a cvParam or userParam.</remarks>
     /// <remarks>ParamType: Helper type to allow either a cvParam or a userParam to be provided for an element.</remarks>
     /// <remarks>ParamListType: Helper type to allow multiple cvParams or userParams to be given for an element.</remarks>
@@ -339,7 +339,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <remarks>Optional Attribute</remarks>
         //public override string Value
 
-        /// <summary>The datatype of the parameter, where appropriate (e.g.: xsd:float).</summary>
+        /// <summary>The data type of the parameter, where appropriate (e.g.: xsd:float).</summary>
         /// <remarks>Optional Attribute</remarks>
         //public string Type*/
     }
@@ -755,7 +755,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         //public bool CalculatedMassToChargeSpecified
 
         /// <remarks>The calculated isoelectric point of the (poly)peptide, with relevant modifications included.
-        /// Do not supply this value if the PI cannot be calcuated properly.</remarks>
+        /// Do not supply this value if the PI cannot be calculated properly.</remarks>
         /// <remarks>Optional Attribute</remarks>
         //public float CalculatedPI
 
@@ -1034,7 +1034,6 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <remarks>Optional Attribute</remarks>
         //public long NumResidues
 
-        /// <remarks></remarks>
         /// Attribute Existence
         //public bool NumResiduesSpecified*/
     }
@@ -1433,7 +1432,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         }
 
         /*
-        /// <remarks>The type of filter e.g. database taxonomy filter, pi filter, mw filter</remarks>
+        /// <remarks>The type of filter e.g. database taxonomy filter, pI filter, MW filter</remarks>
         /// <remarks>min 1, max 1</remarks>
         //public ParamType FilterType
 
@@ -1927,13 +1926,13 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML SampleType : Containers AnalysisSampleCollectionType
     /// </summary>
-    /// <remarks>A description of the sample analysed by mass spectrometry using CVParams or UserParams.
-    /// If a composite sample has been analysed, a parent sample should be defined, which references subsamples.
+    /// <remarks>A description of the sample analyzed by mass spectrometry using CVParams or UserParams.
+    /// If a composite sample has been analyzed, a parent sample should be defined, which references subsamples.
     /// This represents any kind of substance used in an experimental workflow, such as whole organisms, cells,
     /// DNA, solutions, compounds and experimental substances (gels, arrays etc.).</remarks>
     ///
-    /// <remarks>AnalysisSampleCollectionType: The samples analysed can optionally be recorded using CV terms for descriptions.
-    /// If a composite sample has been analysed, the subsample association can be used to build a hierarchical description.</remarks>
+    /// <remarks>AnalysisSampleCollectionType: The samples analyzed can optionally be recorded using CV terms for descriptions.
+    /// If a composite sample has been analyzed, the subsample association can be used to build a hierarchical description.</remarks>
     /// <remarks>AnalysisSampleCollectionType: child element Sample of type SampleType, min 1, max unbounded</remarks>
     public partial class SampleType : IdentifiableType, IParamGroup
     {
@@ -2035,7 +2034,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// MzIdentML AuditCollectionType; Also C# representation of AuditCollectionType
     /// </summary>
     /// <remarks>A contact is either a person or an organization.</remarks>
-    /// <remarks>AuditCollectionType: The complete set of Contacts (people and organisations) for this file.</remarks>
+    /// <remarks>AuditCollectionType: The complete set of Contacts (people and organizations) for this file.</remarks>
     /// <remarks>AuditCollectionType: min 1, max unbounded, for PersonType XOR OrganizationType</remarks>
     public abstract partial class AbstractContactType : IdentifiableType, IParamGroup
     {
@@ -2200,7 +2199,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         }
 
         /*
-        /// <remarks>The contact details of the organisation or person that produced the software</remarks>
+        /// <remarks>The contact details of the organization or person that produced the software</remarks>
         /// <remarks>min 0, max 1</remarks>
         //public ContactRoleType ContactRole
 
@@ -2244,7 +2243,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <remarks>min 0, max unbounded</remarks>
         //public List<SearchDatabaseType> SearchDatabase
 
-        /// <remarks>min 1, max unbounde</remarks>
+        /// <remarks>min 1, max unbounded</remarks>
         //public List<SpectraDataType> SpectraData*/
     }
 

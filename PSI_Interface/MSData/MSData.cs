@@ -1257,7 +1257,6 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML ScanWindowListType
     /// </summary>
-    /// <remarks></remarks>
     public partial class ScanWindowListType
     {
         private List<ParamGroupType> scanWindowField;
@@ -1847,7 +1846,6 @@ namespace PSI_Interface.MSData
     /// <summary>
     /// mzML SourceFileRefType
     /// </summary>
-    /// <remarks></remarks>
     public partial class SourceFileRef
     {
         /// <summary>This attribute must reference the 'id' of the appropriate sourceFile.</summary>
@@ -1900,7 +1898,7 @@ namespace PSI_Interface.MSData
             set { softwareField = value.ToList(); }
         }
 
-        /// <summary>The number of softwares defined in this mzML file.</summary>
+        /// <summary>The number of software names defined in this mzML file.</summary>
         /// <remarks>Required Attribute</remarks>
         public string count
         {

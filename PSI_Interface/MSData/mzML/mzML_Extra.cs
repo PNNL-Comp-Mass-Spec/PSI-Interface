@@ -636,7 +636,6 @@ namespace PSI_Interface.MSData.mzML
     /// <summary>
     /// mzML ScanWindowListType
     /// </summary>
-    /// <remarks></remarks>
     public partial class ScanWindowListType
     {
         /// <summary>
@@ -875,7 +874,6 @@ namespace PSI_Interface.MSData.mzML
         }
 
         /*
-        /// <remarks></remarks>
         /// <remarks>min 1, max unbounded</remarks>
         //public ChromatogramType[] chromatogram
 
@@ -1020,7 +1018,6 @@ namespace PSI_Interface.MSData.mzML
     /// <summary>
     /// mzML SourceFileRefType
     /// </summary>
-    /// <remarks></remarks>
     public partial class SourceFileRefType
     {
         /// <summary>

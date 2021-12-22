@@ -15,7 +15,6 @@ namespace PSI_Interface.MSData
         /// </summary>
         /// <param name="compressedBytes"></param>
         /// <param name="expectedBytes"></param>
-        /// <returns></returns>
         public static byte[] DecompressZLib(byte[] compressedBytes, int expectedBytes)
         {
             using (var msCompressed = new MemoryStream(compressedBytes))
@@ -49,7 +48,6 @@ namespace PSI_Interface.MSData
         /// </summary>
         /// <param name="decompressedBytes"></param>
         /// <param name="compressedBytes"></param>
-        /// <returns></returns>
         public static byte[] CompressZLib(byte[] decompressedBytes, out int compressedBytes)
         {
             // Calculate the adler32 checksum of the uncompressed data, that will go at the end of the compressed data, per the zlib spec.

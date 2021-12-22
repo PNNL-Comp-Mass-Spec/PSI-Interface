@@ -344,7 +344,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"Config: {ComponentData.Count} components";
@@ -381,7 +380,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"Component {Order}: {Type}";
@@ -424,7 +422,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 if (UnitInfo != null && UnitInfo.Cvid != CV.CV.CVID.CVID_Unknown)
@@ -479,7 +476,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 if (UnitInfo != null && UnitInfo.Cvid != CV.CV.CVID.CVID_Unknown)
@@ -559,7 +555,6 @@ namespace PSI_Interface.MSData
             /// Get all CVParams that hold an "IsA" relationship with parent
             /// </summary>
             /// <param name="parent"></param>
-            /// <returns></returns>
             public IReadOnlyList<CVParamData> GetCVParamsChildOf(CV.CV.CVID parent)
             {
                 return CVParams.Where(x => CV.CV.CvidIsA(x.TermInfo.Cvid, parent)).ToList();
@@ -684,7 +679,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// Get the separately-determined monoisotopic m/z for Thermo MSn scans
             /// </summary>
-            /// <returns></returns>
             public double GetThermoMonoisotopicMz()
             {
                 foreach (var userParam in UserParams)
@@ -701,7 +695,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"Scan {ScanNumber}: MS{MsLevel}, \"{NativeId}\", {Peaks.Length} peaks";
@@ -790,7 +783,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"{Mz:F4}: {Intensity:F2}";
@@ -835,7 +827,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 if (IsolationWindow != null && !IsolationWindow.TargetMz.Equals(0))
@@ -883,7 +874,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 if (Charge != 0)
@@ -937,7 +927,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"Target: {TargetMz:F4} m/z (Window {TargetMz - LowerOffset:F3}-{TargetMz + UpperOffset:F3} m/z)";
@@ -973,7 +962,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"ScanWindow: {LowerLimit:F2}-{UpperLimit:F2} m/z";
@@ -1064,7 +1052,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"Chromatogram {Index}: {Id}, {Peaks.Length} peaks";
@@ -1100,7 +1087,6 @@ namespace PSI_Interface.MSData
             /// <summary>
             /// ToString override
             /// </summary>
-            /// <returns></returns>
             public override string ToString()
             {
                 return $"{Time:F4}: {Intensity:F2}";
@@ -1462,13 +1448,6 @@ namespace PSI_Interface.MSData
         /// That will cause all spectra in the file to be loaded into memory
         /// </para>
         /// </summary>
-        /// <param name="index">
-        /// 1-based index of the spectrum in the file
-        /// Using index = 1 will return the first spectrum in the file, regardless of its actual scan number
-        /// To obtain the data for a specific scan number, first open the file with randomAccess enabled, then use <see cref="GetSpectrumForScan"/>
-        /// </param>
-        /// <param name="includePeaks">true to include peak data (ignored if _randomAccess is false)</param>
-        /// <returns>Mass spectrum</returns>
         /// <remarks>
         /// <para>
         /// To enable random access, either set randomAccess to true when instantiating the SimpleMzMLReader class, or call TryMakeRandomAccessCapable
@@ -1478,6 +1457,13 @@ namespace PSI_Interface.MSData
         /// If random access mode is off, this will cause the memory usage reducing mode to shut off, and all spectra will be read into memory.
         /// </para>
         /// </remarks>
+        /// <param name="index">
+        /// 1-based index of the spectrum in the file
+        /// Using index = 1 will return the first spectrum in the file, regardless of its actual scan number
+        /// To obtain the data for a specific scan number, first open the file with randomAccess enabled, then use <see cref="GetSpectrumForScan"/>
+        /// </param>
+        /// <param name="includePeaks">true to include peak data (ignored if _randomAccess is false)</param>
+        /// <returns>Mass spectrum</returns>
         public SimpleSpectrum ReadMassSpectrum(int index, bool includePeaks = true)
         {
             if (!_randomAccess)
@@ -1493,7 +1479,6 @@ namespace PSI_Interface.MSData
         /// Uses "yield return" to allow processing one chromatogram at a time if called from a foreach loop statement.
         /// </summary>
         /// <param name="includePeaks">true to include peak data</param>
-        /// <returns></returns>
         public IEnumerable<SimpleChromatogram> ReadAllChromatograms(bool includePeaks = true)
         {
             if (!_randomAccess)
@@ -1507,13 +1492,12 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Returns a single chromatogram from the file
         /// </summary>
-        /// <param name="index">1-based index of the chromatogram in the file</param>
-        /// <param name="includePeaks">true to include peak data (ignored if _randomAccess is false)</param>
-        /// <returns></returns>
         /// <remarks>
         /// If random access mode is turned on, this will respond quickly and use only as much memory as is needed to store the chromatogram.
         /// If random access mode is off, this will cause the memory usage reducing mode to shut of, and all chromatograms will be read into memory.
         /// </remarks>
+        /// <param name="index">1-based index of the chromatogram in the file</param>
+        /// <param name="includePeaks">true to include peak data (ignored if _randomAccess is false)</param>
         public SimpleChromatogram ReadChromatogram(int index, bool includePeaks = true)
         {
             if (!_randomAccess)
@@ -1531,7 +1515,6 @@ namespace PSI_Interface.MSData
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <param name="includePeaks">true to include peak data</param>
-        /// <returns></returns>
         private IEnumerable<SimpleSpectrum> ReadAllSpectraNonRandom(bool includePeaks = true)
         {
             if (_reduceMemoryUsage)
@@ -1619,7 +1602,6 @@ namespace PSI_Interface.MSData
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <param name="includePeaks">true to include peak data</param>
-        /// <returns></returns>
         private IEnumerable<SimpleChromatogram> ReadAllChromatogramsNonRandom(bool includePeaks = true)
         {
             if (_reduceMemoryUsage)
@@ -1703,7 +1685,6 @@ namespace PSI_Interface.MSData
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <param name="includePeaks">true to include peak data</param>
-        /// <returns></returns>
         private IEnumerable<SimpleSpectrum> ReadAllSpectraRandom(bool includePeaks = true)
         {
             if (!_haveIndex || !_haveMetaData)
@@ -1752,7 +1733,6 @@ namespace PSI_Interface.MSData
         /// Uses "yield return" to use less memory when called from a "foreach" statement
         /// </summary>
         /// <param name="includePeaks">true to include peak data</param>
-        /// <returns></returns>
         private IEnumerable<SimpleChromatogram> ReadAllChromatogramsRandom(bool includePeaks = true)
         {
             if (!_haveIndex || !_haveMetaData)
@@ -3623,7 +3603,6 @@ namespace PSI_Interface.MSData
         /// <param name="reader">XmlReader that is only valid for the scope of the single spectrum element</param>
         /// <param name="scans"></param>
         /// <param name="precursors"></param>
-        /// <returns></returns>
         private List<CVParamData> ReadSpectrumDescription(XmlReader reader, ref List<ScanData> scans, ref List<Precursor> precursors)
         {
             reader.MoveToContent();
@@ -3703,7 +3682,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadSpectrum (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single scanList element</param>
-        /// <returns></returns>
         private List<ScanData> ReadScanList(XmlReader reader)
         {
             reader.MoveToContent();
@@ -3781,7 +3759,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadSpectrum (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single scan element</param>
-        /// <returns></returns>
         private ScanData ReadScan(XmlReader reader)
         {
             reader.MoveToContent();
@@ -3898,7 +3875,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadScan (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single scanWindowList element</param>
-        /// <returns></returns>
         private List<ScanWindowData> ReadScanWindowList(XmlReader reader)
         {
             var scanWindows = new List<ScanWindowData>();
@@ -3934,7 +3910,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadScanWindowList (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single scanWindow element</param>
-        /// <returns></returns>
         private ScanWindowData ReadScanWindow(XmlReader reader)
         {
             reader.MoveToContent();
@@ -4008,7 +3983,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadSpectrum (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single precursorList element</param>
-        /// <returns></returns>
         private List<Precursor> ReadPrecursorList(XmlReader reader)
         {
             reader.MoveToContent();
@@ -4045,7 +4019,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadPrecursorList (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single precursor element</param>
-        /// <returns></returns>
         private Precursor ReadPrecursor(XmlReader reader)
         {
             reader.MoveToContent();
@@ -4234,7 +4207,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadChromatogram or (not implemented) ReadProductList (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single product element</param>
-        /// <returns></returns>
         private IsolationWindow ReadProduct(XmlReader reader)
         {
             reader.MoveToContent();
@@ -4271,7 +4243,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadPrecursor or ReadProduct (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single isolationWindow element</param>
-        /// <returns></returns>
         private IsolationWindow ReadIsolationWindow(XmlReader reader)
         {
             reader.MoveToContent();
@@ -4353,7 +4324,6 @@ namespace PSI_Interface.MSData
         /// Called by ReadPrecursor (xml hierarchy)
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single selectedIonList element</param>
-        /// <returns></returns>
         private List<SelectedIon> ReadSelectedIonList(XmlReader reader)
         {
             reader.MoveToContent();
@@ -4457,7 +4427,6 @@ namespace PSI_Interface.MSData
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single binaryDataArrayList element</param>
         /// <param name="defaultArrayLength">Default array length, coming from spectrum attribute</param>
-        /// <returns></returns>
         private List<BinaryDataArray> ReadBinaryDataArrayList(XmlReader reader, int defaultArrayLength)
         {
             reader.MoveToContent();
@@ -4495,7 +4464,6 @@ namespace PSI_Interface.MSData
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single binaryDataArray element</param>
         /// <param name="defaultLength">Default array length, coming from spectrum attribute</param>
-        /// <returns></returns>
         private BinaryDataArray ReadBinaryDataArray(XmlReader reader, int defaultLength)
         {
             reader.MoveToContent();

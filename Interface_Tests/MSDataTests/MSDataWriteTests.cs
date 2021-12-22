@@ -33,7 +33,7 @@ namespace Interface_Tests.MSDataTests
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
+        // Use TestInitialize to run code before running each test
         // [TestInitialize()]
         // public void MyTestInitialize() { }
         //
@@ -91,7 +91,7 @@ namespace Interface_Tests.MSDataTests
             // TODO: Indexed mzML write will write a bad file - the index will be incorrect, and the easiest way to fix it may involve reading the file back in, scanning and storing the offsets, and then replacing them.
             // TODO:
             // TODO: Also, need to have the SHA1 hash of the file up to the hash location....
-            // TODO: 
+            // TODO:
             var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
             MSData mzMLData = new MSData(reader.Read());
             //Assert.AreEqual(expectedSpectra.ToString(), mzMLData.Run.SpectrumList.Count.ToString(), "Stored Count");

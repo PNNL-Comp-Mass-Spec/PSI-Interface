@@ -27,7 +27,6 @@ namespace PSI_Interface.MSData
         /// Convert array to list
         /// </summary>
         /// <param name="items"></param>
-        /// <returns></returns>
         public static implicit operator MSDataList<T>(T[] items)
         {
             return new MSDataList<T>(items);

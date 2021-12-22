@@ -7,7 +7,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// MzIdentML AuditCollectionType; Also C# representation of AuditCollectionType
     /// </summary>
     /// <remarks>A contact is either a person or an organization.</remarks>
-    /// <remarks>AuditCollectionType: The complete set of Contacts (people and organisations) for this file.</remarks>
+    /// <remarks>AuditCollectionType: The complete set of Contacts (people and organizations) for this file.</remarks>
     /// <remarks>AuditCollectionType: min 1, max unbounded, for PersonType XOR OrganizationType</remarks>
     /// <remarks>CVParams, UserParams: Attributes of this contact such as address, email, telephone etc.</remarks>
     public abstract class AbstractContactObj : ParamGroupObj, IIdentifiableType, IEquatable<AbstractContactObj>
