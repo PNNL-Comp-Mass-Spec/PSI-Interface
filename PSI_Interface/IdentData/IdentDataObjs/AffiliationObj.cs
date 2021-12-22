@@ -21,7 +21,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public AffiliationObj(AffiliationType a, IdentDataObj idata)
             : base(idata)
         {
-            this.OrganizationRef = a.organization_ref;
+            OrganizationRef = a.organization_ref;
         }
     }
 }

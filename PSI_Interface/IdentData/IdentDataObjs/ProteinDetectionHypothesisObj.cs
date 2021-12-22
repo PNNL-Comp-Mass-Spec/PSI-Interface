@@ -15,13 +15,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public ProteinDetectionHypothesisObj()
         {
-            this._id = null;
-            this._name = null;
-            this._dBSequenceRef = null;
-            this._passThreshold = false;
+            _id = null;
+            _name = null;
+            _dBSequenceRef = null;
+            _passThreshold = false;
 
-            this._dBSequence = null;
-            this.PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>(1);
+            _dBSequence = null;
+            PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>(1);
         }
 
         /// <summary>
@@ -32,16 +32,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public ProteinDetectionHypothesisObj(ProteinDetectionHypothesisType pdh, IdentDataObj idata)
             : base(pdh, idata)
         {
-            this._id = pdh.id;
-            this._name = pdh.name;
-            this.DBSequenceRef = pdh.dBSequence_ref;
-            this._passThreshold = pdh.passThreshold;
+            _id = pdh.id;
+            _name = pdh.name;
+            DBSequenceRef = pdh.dBSequence_ref;
+            _passThreshold = pdh.passThreshold;
 
-            this.PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>(1);
+            PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>(1);
 
             if (pdh.PeptideHypothesis != null && pdh.PeptideHypothesis.Count > 0)
             {
-                this.PeptideHypotheses.AddRange(pdh.PeptideHypothesis, ph => new PeptideHypothesisObj(ph, this.IdentData));
+                PeptideHypotheses.AddRange(pdh.PeptideHypothesis, ph => new PeptideHypothesisObj(ph, IdentData));
             }
         }
 
@@ -58,28 +58,28 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>Required Attribute</remarks>
         public string Id
         {
-            get => this._id;
-            set => this._id = value;
+            get => _id;
+            set => _id = value;
         }
 
         /// <summary>The potentially ambiguous common identifier, such as a human-readable name for the instance.</summary>
         /// <remarks>Required Attribute</remarks>
         public string Name
         {
-            get => this._name;
-            set => this._name = value;
+            get => _name;
+            set => _name = value;
         }
 
         /// <summary>min 1, max unbounded</summary>
         public IdentDataList<PeptideHypothesisObj> PeptideHypotheses
         {
-            get => this._peptideHypotheses;
+            get => _peptideHypotheses;
             set
             {
-                this._peptideHypotheses = value;
-                if (this._peptideHypotheses != null)
+                _peptideHypotheses = value;
+                if (_peptideHypotheses != null)
                 {
-                    this._peptideHypotheses.IdentData = this.IdentData;
+                    _peptideHypotheses.IdentData = IdentData;
                 }
             }
         }
@@ -96,18 +96,18 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             get
             {
-                if (this._dBSequence != null)
+                if (_dBSequence != null)
                 {
-                    return this._dBSequence.Id;
+                    return _dBSequence.Id;
                 }
-                return this._dBSequenceRef;
+                return _dBSequenceRef;
             }
             set
             {
-                this._dBSequenceRef = value;
+                _dBSequenceRef = value;
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    this.DBSequence = this.IdentData.FindDbSequence(value);
+                    DBSequence = IdentData.FindDbSequence(value);
                 }
             }
         }
@@ -122,14 +122,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </remarks>
         public DbSequenceObj DBSequence
         {
-            get => this._dBSequence;
+            get => _dBSequence;
             set
             {
-                this._dBSequence = value;
-                if (this._dBSequence != null)
+                _dBSequence = value;
+                if (_dBSequence != null)
                 {
-                    this._dBSequence.IdentData = this.IdentData;
-                    this._dBSequenceRef = this._dBSequence.Id;
+                    _dBSequence.IdentData = IdentData;
+                    _dBSequenceRef = _dBSequence.Id;
                 }
             }
         }
@@ -139,8 +139,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>Required Attribute</remarks>
         public bool PassThreshold
         {
-            get => this._passThreshold;
-            set => this._passThreshold = value;
+            get => _passThreshold;
+            set => _passThreshold = value;
         }
 
         #region Object Equality
@@ -175,9 +175,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 return false;
             }
 
-            if (this.Name == other.Name && this.PassThreshold == other.PassThreshold &&
-                Equals(this.DBSequence, other.DBSequence) && Equals(this.PeptideHypotheses, other.PeptideHypotheses) &&
-                Equals(this.CVParams, other.CVParams) && Equals(this.UserParams, other.UserParams))
+            if (Name == other.Name && PassThreshold == other.PassThreshold &&
+                Equals(DBSequence, other.DBSequence) && Equals(PeptideHypotheses, other.PeptideHypotheses) &&
+                Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
             {
                 return true;
             }

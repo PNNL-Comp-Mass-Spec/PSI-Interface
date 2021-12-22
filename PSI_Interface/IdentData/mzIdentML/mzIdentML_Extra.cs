@@ -19,19 +19,19 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public MzIdentMLType()
         {
-            this.cvList = null;
-            this.AnalysisSoftwareList = null;
-            this.Provider = null;
-            this.AuditCollection = null;
-            this.AnalysisSampleCollection = null;
-            this.SequenceCollection = null;
-            this.AnalysisCollection = null;
-            this.AnalysisProtocolCollection = null;
-            this.DataCollection = null;
-            this.BibliographicReference = null;
-            this.creationDate = System.DateTime.Now;
-            this.creationDateSpecified = false;
-            this.version = null;
+            cvList = null;
+            AnalysisSoftwareList = null;
+            Provider = null;
+            AuditCollection = null;
+            AnalysisSampleCollection = null;
+            SequenceCollection = null;
+            AnalysisCollection = null;
+            AnalysisProtocolCollection = null;
+            DataCollection = null;
+            BibliographicReference = null;
+            creationDate = System.DateTime.Now;
+            creationDateSpecified = false;
+            version = null;
         }
 
         /// <summary>
@@ -101,10 +101,10 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public cvType()
         {
-            this.fullName = null;
-            this.version = null;
-            this.uri = null;
-            this.id = null;
+            fullName = null;
+            version = null;
+            uri = null;
+            id = null;
         }
 
         /*
@@ -138,7 +138,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectrumIdentificationItemRefType()
         {
-            this.spectrumIdentificationItem_ref = null;
+            spectrumIdentificationItem_ref = null;
         }
 
         /*
@@ -158,8 +158,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public PeptideHypothesisType()
         {
-            this.SpectrumIdentificationItemRef = null;
-            this.peptideEvidence_ref = null;
+            SpectrumIdentificationItemRef = null;
+            peptideEvidence_ref = null;
         }
 
         /*
@@ -182,8 +182,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public FragmentArrayType()
         {
-            this.values = null;
-            this.measure_ref = null;
+            values = null;
+            measure_ref = null;
         }
 
         /*
@@ -211,10 +211,10 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public IonTypeType()
         {
-            this.FragmentArray = null;
-            this.cvParam = null;
-            this.index = null;
-            this.charge = 0;
+            FragmentArray = null;
+            cvParam = null;
+            index = null;
+            charge = 0;
         }
 
         /*
@@ -247,13 +247,13 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public CVParamType()
         {
-            this.accession = null;
-            this.cvRef = null;
-            this.name = null;
-            this.value = null;
-            this.unitCvRef = null;
-            this.unitAccession = null;
-            this.unitName = null;
+            accession = null;
+            cvRef = null;
+            name = null;
+            value = null;
+            unitCvRef = null;
+            unitAccession = null;
+            unitName = null;
         }
 
         /*
@@ -326,12 +326,12 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public UserParamType()
         {
-            this.name = null;
-            this.value = null;
-            this.unitAccession = null;
-            this.unitName = null;
-            this.unitCvRef = null;
-            this.type = null;
+            name = null;
+            value = null;
+            unitAccession = null;
+            unitName = null;
+            unitCvRef = null;
+            type = null;
         }
 
         /*
@@ -359,7 +359,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ParamType()
         {
-            this.Item = null;
+            Item = null;
         }
 
         /*
@@ -378,7 +378,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ParamListType()
         {
-            this.Items = null;
+            Items = null;
         }
 
         /*
@@ -398,7 +398,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public PeptideEvidenceRefType()
         {
-            this.peptideEvidence_ref = null;
+            peptideEvidence_ref = null;
         }
 
         /*
@@ -418,8 +418,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public AnalysisDataType()
         {
-            this.SpectrumIdentificationList = null;
-            this.ProteinDetectionList = null;
+            SpectrumIdentificationList = null;
+            ProteinDetectionList = null;
         }
 
         /*
@@ -441,12 +441,12 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectrumIdentificationListType()
         {
-            this.FragmentationTable = null;
-            this.SpectrumIdentificationResult = null;
-            this.cvParam = null;
-            this.userParam = null;
-            this.numSequencesSearched = -1;
-            this.numSequencesSearchedSpecified = false;
+            FragmentationTable = null;
+            SpectrumIdentificationResult = null;
+            cvParam = null;
+            userParam = null;
+            numSequencesSearched = -1;
+            numSequencesSearchedSpecified = false;
         }
 
         /*
@@ -486,7 +486,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public MeasureType()
         {
-            this.cvParam = null;
+            cvParam = null;
         }
 
         /*
@@ -507,8 +507,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         // ReSharper disable once PublicConstructorInAbstractClass
         public IdentifiableType()
         {
-            this.id = null;
-            this.name = null;
+            id = null;
+            name = null;
         }
 
         /*
@@ -533,17 +533,17 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public BibliographicReferenceType()
         {
-            this.authors = null;
-            this.publication = null;
-            this.publisher = null;
-            this.editor = null;
-            this.year = -1;
-            this.yearSpecified = false;
-            this.volume = null;
-            this.issue = null;
-            this.pages = null;
-            this.title = null;
-            this.doi = null;
+            authors = null;
+            publication = null;
+            publisher = null;
+            editor = null;
+            year = -1;
+            yearSpecified = false;
+            volume = null;
+            issue = null;
+            pages = null;
+            title = null;
+            doi = null;
         }
 
         /*
@@ -602,11 +602,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ProteinDetectionHypothesisType()
         {
-            this.PeptideHypothesis = null;
-            this.cvParam = null;
-            this.userParam = null;
-            this.dBSequence_ref = null;
-            this.passThreshold = false;
+            PeptideHypothesis = null;
+            cvParam = null;
+            userParam = null;
+            dBSequence_ref = null;
+            passThreshold = false;
         }
 
         /*
@@ -643,9 +643,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ProteinAmbiguityGroupType()
         {
-            this.ProteinDetectionHypothesis = null;
-            this.cvParam = null;
-            this.userParam = null;
+            ProteinDetectionHypothesis = null;
+            cvParam = null;
+            userParam = null;
         }
 
         /*
@@ -672,9 +672,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ProteinDetectionListType()
         {
-            this.ProteinAmbiguityGroup = null;
-            this.cvParam = null;
-            this.userParam = null;
+            ProteinAmbiguityGroup = null;
+            cvParam = null;
+            userParam = null;
         }
 
         /*
@@ -703,21 +703,21 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectrumIdentificationItemType()
         {
-            this.PeptideEvidenceRef = null;
-            this.Fragmentation = null;
-            this.cvParam = null;
-            this.userParam = null;
-            this.chargeState = 0;
-            this.experimentalMassToCharge = -1;
-            this.calculatedMassToCharge = -1;
-            this.calculatedMassToChargeSpecified = false;
-            this.calculatedPI = 0;
-            this.calculatedPISpecified = false;
-            this.peptide_ref = null;
-            this.rank = -1;
-            this.passThreshold = false;
-            this.massTable_ref = null;
-            this.sample_ref = null;
+            PeptideEvidenceRef = null;
+            Fragmentation = null;
+            cvParam = null;
+            userParam = null;
+            chargeState = 0;
+            experimentalMassToCharge = -1;
+            calculatedMassToCharge = -1;
+            calculatedMassToChargeSpecified = false;
+            calculatedPI = 0;
+            calculatedPISpecified = false;
+            peptide_ref = null;
+            rank = -1;
+            passThreshold = false;
+            massTable_ref = null;
+            sample_ref = null;
         }
 
         /*
@@ -805,11 +805,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectrumIdentificationResultType()
         {
-            this.SpectrumIdentificationItem = null;
-            this.cvParam = null;
-            this.userParam = null;
-            this.spectrumID = null;
-            this.spectraData_ref = null;
+            SpectrumIdentificationItem = null;
+            cvParam = null;
+            userParam = null;
+            spectrumID = null;
+            spectraData_ref = null;
         }
 
         /*
@@ -847,9 +847,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ExternalDataType()
         {
-            this.ExternalFormatDocumentation = null;
-            this.FileFormat = null;
-            this.location = null;
+            ExternalFormatDocumentation = null;
+            FileFormat = null;
+            location = null;
         }
 
         /*
@@ -877,7 +877,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public FileFormatType()
         {
-            this.cvParam = null;
+            cvParam = null;
         }
 
         /*
@@ -898,7 +898,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectraDataType()
         {
-            this.SpectrumIDFormat = null;
+            SpectrumIDFormat = null;
         }
 
         /*
@@ -929,7 +929,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectrumIDFormatType()
         {
-            this.cvParam = null;
+            cvParam = null;
         }
 
         /*
@@ -949,8 +949,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SourceFileType()
         {
-            this.cvParam = null;
-            this.userParam = null;
+            cvParam = null;
+            userParam = null;
         }
 
         /*
@@ -986,15 +986,15 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SearchDatabaseType()
         {
-            this.DatabaseName = null;
-            this.cvParam = null;
-            this.version = null;
-            this.releaseDate = System.DateTime.Now;
-            this.releaseDateSpecified = false;
-            this.numDatabaseSequences = -1;
-            this.numDatabaseSequencesSpecified = false;
-            this.numResidues = -1;
-            this.numResiduesSpecified = false;
+            DatabaseName = null;
+            cvParam = null;
+            version = null;
+            releaseDate = System.DateTime.Now;
+            releaseDateSpecified = false;
+            numDatabaseSequences = -1;
+            numDatabaseSequencesSpecified = false;
+            numResidues = -1;
+            numResiduesSpecified = false;
         }
 
         /*
@@ -1054,9 +1054,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ProteinDetectionProtocolType()
         {
-            this.AnalysisParams = null;
-            this.Threshold = null;
-            this.analysisSoftware_ref = null;
+            AnalysisParams = null;
+            Threshold = null;
+            analysisSoftware_ref = null;
         }
 
         /*
@@ -1085,7 +1085,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public TranslationTableType()
         {
-            this.cvParam = null;
+            cvParam = null;
         }
 
         /*
@@ -1106,11 +1106,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public MassTableType()
         {
-            this.Residue = null;
-            this.AmbiguousResidue = null;
-            this.cvParam = null;
-            this.userParam = null;
-            this.msLevel = null;
+            Residue = null;
+            AmbiguousResidue = null;
+            cvParam = null;
+            userParam = null;
+            msLevel = null;
         }
 
         /*
@@ -1145,8 +1145,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ResidueType()
         {
-            this.code = null;
-            this.mass = -1;
+            code = null;
+            mass = -1;
         }
 
         /*
@@ -1172,9 +1172,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public AmbiguousResidueType()
         {
-            this.cvParam = null;
-            this.userParam = null;
-            this.code = null;
+            cvParam = null;
+            userParam = null;
+            code = null;
         }
 
         /*
@@ -1204,16 +1204,16 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public EnzymeType()
         {
-            this.SiteRegexp = null;
-            this.EnzymeName = null;
-            this.nTermGain = null;
-            this.cTermGain = null;
-            this.semiSpecific = false;
-            this.semiSpecificSpecified = false;
-            this.missedCleavages = -1;
-            this.missedCleavagesSpecified = false;
-            this.minDistance = -1;
-            this.minDistanceSpecified = false;
+            SiteRegexp = null;
+            EnzymeName = null;
+            nTermGain = null;
+            cTermGain = null;
+            semiSpecific = false;
+            semiSpecificSpecified = false;
+            missedCleavages = -1;
+            missedCleavagesSpecified = false;
+            minDistance = -1;
+            minDistanceSpecified = false;
         }
 
         /*
@@ -1271,17 +1271,17 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectrumIdentificationProtocolType()
         {
-            this.SearchType = null;
-            this.AdditionalSearchParams = null;
-            this.ModificationParams = null;
-            this.Enzymes = null;
-            this.MassTable = null;
-            this.FragmentTolerance = null;
-            this.ParentTolerance = null;
-            this.Threshold = null;
-            this.DatabaseFilters = null;
-            this.DatabaseTranslation = null;
-            this.analysisSoftware_ref = null;
+            SearchType = null;
+            AdditionalSearchParams = null;
+            ModificationParams = null;
+            Enzymes = null;
+            MassTable = null;
+            FragmentTolerance = null;
+            ParentTolerance = null;
+            Threshold = null;
+            DatabaseFilters = null;
+            DatabaseTranslation = null;
+            analysisSoftware_ref = null;
         }
 
         /*
@@ -1336,7 +1336,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpecificityRulesType()
         {
-            this.cvParam = null;
+            cvParam = null;
         }
 
         /*
@@ -1358,11 +1358,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SearchModificationType()
         {
-            this.SpecificityRules = null;
-            this.cvParam = null;
-            this.fixedMod = false;
-            this.massDelta = 0;
-            this.residues = null;
+            SpecificityRules = null;
+            cvParam = null;
+            fixedMod = false;
+            massDelta = 0;
+            residues = null;
         }
 
         /*
@@ -1400,9 +1400,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public EnzymesType()
         {
-            this.Enzyme = null;
-            this.independent = false;
-            this.independentSpecified = false;
+            Enzyme = null;
+            independent = false;
+            independentSpecified = false;
         }
 
         /*
@@ -1431,9 +1431,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public FilterType()
         {
-            this.FilterType1 = null;
-            this.Include = null;
-            this.Exclude = null;
+            FilterType1 = null;
+            Include = null;
+            Exclude = null;
         }
 
         /*
@@ -1461,8 +1461,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public DatabaseTranslationType()
         {
-            this.TranslationTable = null;
-            this.frames = null;
+            TranslationTable = null;
+            frames = null;
         }
 
         /*
@@ -1488,8 +1488,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         // ReSharper disable once PublicConstructorInAbstractClass
         public ProtocolApplicationType()
         {
-            this.activityDate = System.DateTime.Now;
-            this.activityDateSpecified = false;
+            activityDate = System.DateTime.Now;
+            activityDateSpecified = false;
         }
 
         /*
@@ -1512,9 +1512,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ProteinDetectionType()
         {
-            this.InputSpectrumIdentifications = null;
-            this.proteinDetectionList_ref = null;
-            this.proteinDetectionProtocol_ref = null;
+            InputSpectrumIdentifications = null;
+            proteinDetectionList_ref = null;
+            proteinDetectionProtocol_ref = null;
         }
 
         /*
@@ -1541,7 +1541,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public InputSpectrumIdentificationsType()
         {
-            this.spectrumIdentificationList_ref = null;
+            spectrumIdentificationList_ref = null;
         }
 
         /*
@@ -1562,10 +1562,10 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SpectrumIdentificationType()
         {
-            this.InputSpectra = null;
-            this.SearchDatabaseRef = null;
-            this.spectrumIdentificationProtocol_ref = null;
-            this.spectrumIdentificationList_ref = null;
+            InputSpectra = null;
+            SearchDatabaseRef = null;
+            spectrumIdentificationProtocol_ref = null;
+            spectrumIdentificationList_ref = null;
         }
 
         /*
@@ -1596,7 +1596,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public InputSpectraType()
         {
-            this.spectraData_ref = null;
+            spectraData_ref = null;
         }
 
         /*
@@ -1616,7 +1616,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SearchDatabaseRefType()
         {
-            this.searchDatabase_ref = null;
+            searchDatabase_ref = null;
         }
 
         /*
@@ -1637,20 +1637,20 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public PeptideEvidenceType()
         {
-            this.cvParam = null;
-            this.userParam = null;
-            this.isDecoy = false;
-            this.pre = null;
-            this.post = null;
-            this.start = 0;
-            this.startSpecified = false;
-            this.end = 0;
-            this.endSpecified = false;
-            this.translationTable_ref = null;
-            this.frame = 0;
-            this.frameSpecified = false;
-            this.peptide_ref = null;
-            this.dBSequence_ref = null;
+            cvParam = null;
+            userParam = null;
+            isDecoy = false;
+            pre = null;
+            post = null;
+            start = 0;
+            startSpecified = false;
+            end = 0;
+            endSpecified = false;
+            translationTable_ref = null;
+            frame = 0;
+            frameSpecified = false;
+            peptide_ref = null;
+            dBSequence_ref = null;
         }
 
         /*
@@ -1727,11 +1727,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public PeptideType()
         {
-            this.PeptideSequence = null;
-            this.Modification = null;
-            this.SubstitutionModification = null;
-            this.cvParam = null;
-            this.userParam = null;
+            PeptideSequence = null;
+            Modification = null;
+            SubstitutionModification = null;
+            cvParam = null;
+            userParam = null;
         }
 
         /*
@@ -1772,14 +1772,14 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ModificationType()
         {
-            this.cvParam = null;
-            this.location = -1;
-            this.locationSpecified = false;
-            this.residues = null;
-            this.avgMassDelta = 0;
-            this.avgMassDeltaSpecified = false;
-            this.monoisotopicMassDelta = 0;
-            this.monoisotopicMassDeltaSpecified = false;
+            cvParam = null;
+            location = -1;
+            locationSpecified = false;
+            residues = null;
+            avgMassDelta = 0;
+            avgMassDeltaSpecified = false;
+            monoisotopicMassDelta = 0;
+            monoisotopicMassDeltaSpecified = false;
         }
 
         /*
@@ -1830,14 +1830,14 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SubstitutionModificationType()
         {
-            this.originalResidue = null;
-            this.replacementResidue = null;
-            this.location = -1;
-            this.locationSpecified = false;
-            this.avgMassDelta = 0;
-            this.avgMassDeltaSpecified = false;
-            this.monoisotopicMassDelta = 0;
-            this.monoisotopicMassDeltaSpecified = false;
+            originalResidue = null;
+            replacementResidue = null;
+            location = -1;
+            locationSpecified = false;
+            avgMassDelta = 0;
+            avgMassDeltaSpecified = false;
+            monoisotopicMassDelta = 0;
+            monoisotopicMassDeltaSpecified = false;
         }
 
         /*
@@ -1890,13 +1890,13 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public DBSequenceType()
         {
-            this.Seq = null;
-            this.cvParam = null;
-            this.userParam = null;
-            this.accession = null;
-            this.searchDatabase_ref = null;
-            this.length = -1;
-            this.lengthSpecified = false;
+            Seq = null;
+            cvParam = null;
+            userParam = null;
+            accession = null;
+            searchDatabase_ref = null;
+            length = -1;
+            lengthSpecified = false;
         }
 
         /*
@@ -1947,10 +1947,10 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SampleType()
         {
-            this.ContactRole = null;
-            this.SubSample = null;
-            this.cvParam = null;
-            this.userParam = null;
+            ContactRole = null;
+            SubSample = null;
+            cvParam = null;
+            userParam = null;
         }
 
         /*
@@ -1983,8 +1983,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ContactRoleType()
         {
-            this.Role = null;
-            this.contact_ref = null;
+            Role = null;
+            contact_ref = null;
         }
 
         // min 1, max 1
@@ -2007,7 +2007,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public RoleType()
         {
-            this.cvParam = null;
+            cvParam = null;
         }
 
         /*
@@ -2027,7 +2027,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SubSampleType()
         {
-            this.sample_ref = null;
+            sample_ref = null;
         }
 
         /*
@@ -2049,8 +2049,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         protected AbstractContactType()
         {
-            this.cvParam = null;
-            this.userParam = null;
+            cvParam = null;
+            userParam = null;
         }
 
         /*
@@ -2075,7 +2075,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public OrganizationType()
         {
-            this.Parent = null;
+            Parent = null;
         }
 
         /*
@@ -2094,7 +2094,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ParentOrganizationType()
         {
-            this.organization_ref = null;
+            organization_ref = null;
         }
 
         /*
@@ -2115,10 +2115,10 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public PersonType()
         {
-            this.Affiliation = null;
-            this.lastName = null;
-            this.firstName = null;
-            this.midInitials = null;
+            Affiliation = null;
+            lastName = null;
+            firstName = null;
+            midInitials = null;
         }
 
         /*
@@ -2149,7 +2149,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public AffiliationType()
         {
-            this.organization_ref = null;
+            organization_ref = null;
         }
 
         /*
@@ -2169,8 +2169,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public ProviderType()
         {
-            this.ContactRole = null;
-            this.analysisSoftware_ref = null;
+            ContactRole = null;
+            analysisSoftware_ref = null;
         }
 
         /*
@@ -2197,11 +2197,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public AnalysisSoftwareType()
         {
-            this.ContactRole = null;
-            this.SoftwareName = null;
-            this.Customizations = null;
-            this.version = null;
-            this.uri = null;
+            ContactRole = null;
+            SoftwareName = null;
+            Customizations = null;
+            version = null;
+            uri = null;
         }
 
         /*
@@ -2237,9 +2237,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public InputsType()
         {
-            this.SourceFile = null;
-            this.SearchDatabase = null;
-            this.SpectraData = null;
+            SourceFile = null;
+            SearchDatabase = null;
+            SpectraData = null;
         }
 
         /*
@@ -2264,8 +2264,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public DataCollectionType()
         {
-            this.Inputs = null;
-            this.AnalysisData = null;
+            Inputs = null;
+            AnalysisData = null;
         }
 
         /*
@@ -2287,8 +2287,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public AnalysisProtocolCollectionType()
         {
-            this.SpectrumIdentificationProtocol = null;
-            this.ProteinDetectionProtocol = null;
+            SpectrumIdentificationProtocol = null;
+            ProteinDetectionProtocol = null;
         }
 
         /*
@@ -2311,8 +2311,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public AnalysisCollectionType()
         {
-            this.SpectrumIdentification = null;
-            this.ProteinDetection = null;
+            SpectrumIdentification = null;
+            ProteinDetection = null;
         }
 
         /*
@@ -2335,9 +2335,9 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         public SequenceCollectionType()
         {
-            this.DBSequence = null;
-            this.Peptide = null;
-            this.PeptideEvidence = null;
+            DBSequence = null;
+            Peptide = null;
+            PeptideEvidence = null;
         }
 
         /*

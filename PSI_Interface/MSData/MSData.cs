@@ -44,18 +44,18 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public MSDataList<CVInfo> CVList // TODO: enforce quantity
         {
-            get => this._cvList;
+            get => _cvList;
             set
             {
-                this._cvList = value;
-                if (this._cvList != null)
+                _cvList = value;
+                if (_cvList != null)
                 {
-                    this._cvList.MsData = this;
-                    this.CvTranslator = new CVTranslator(this._cvList);
+                    _cvList.MsData = this;
+                    CvTranslator = new CVTranslator(_cvList);
                 }
                 else
                 {
-                    this.CvTranslator = new CVTranslator();
+                    CvTranslator = new CVTranslator();
                 }
             }
         }
@@ -64,13 +64,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public FileDescription FileDescription // TODO: enforce quantity
         {
-            get => this._fileDescription;
+            get => _fileDescription;
             set
             {
-                this._fileDescription = value;
-                if (this._fileDescription != null)
+                _fileDescription = value;
+                if (_fileDescription != null)
                 {
-                    this._fileDescription.MsData = this;
+                    _fileDescription.MsData = this;
                 }
             }
         }
@@ -79,13 +79,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<ReferenceableParamGroup> ReferenceableParamGroupList
         {
-            get => this._referenceableParamGroupList;
+            get => _referenceableParamGroupList;
             set
             {
-                this._referenceableParamGroupList = value;
-                if (this._referenceableParamGroupList != null)
+                _referenceableParamGroupList = value;
+                if (_referenceableParamGroupList != null)
                 {
-                    this._referenceableParamGroupList.MsData = this;
+                    _referenceableParamGroupList.MsData = this;
                 }
             }
         }
@@ -94,13 +94,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<SampleInfo> SampleList
         {
-            get => this._sampleList;
+            get => _sampleList;
             set
             {
-                this._sampleList = value;
-                if (this._sampleList != null)
+                _sampleList = value;
+                if (_sampleList != null)
                 {
-                    this._sampleList.MsData = this;
+                    _sampleList.MsData = this;
                 }
             }
         }
@@ -109,13 +109,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public MSDataList<SoftwareInfo> SoftwareList // TODO: enforce quantity
         {
-            get => this._softwareList;
+            get => _softwareList;
             set
             {
-                this._softwareList = value;
-                if (this._softwareList != null)
+                _softwareList = value;
+                if (_softwareList != null)
                 {
-                    this._softwareList.MsData = this;
+                    _softwareList.MsData = this;
                 }
             }
         }
@@ -124,13 +124,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<ScanSettingsInfo> ScanSettingsList
         {
-            get => this._scanSettingsList;
+            get => _scanSettingsList;
             set
             {
-                this._scanSettingsList = value;
-                if (this._scanSettingsList != null)
+                _scanSettingsList = value;
+                if (_scanSettingsList != null)
                 {
-                    this._scanSettingsList.MsData = this;
+                    _scanSettingsList.MsData = this;
                 }
             }
         }
@@ -139,13 +139,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public MSDataList<InstrumentConfigurationInfo> InstrumentConfigurationList // TODO: enforce quantity
         {
-            get => this._instrumentConfigurationList;
+            get => _instrumentConfigurationList;
             set
             {
-                this._instrumentConfigurationList = value;
-                if (this._instrumentConfigurationList != null)
+                _instrumentConfigurationList = value;
+                if (_instrumentConfigurationList != null)
                 {
-                    this._instrumentConfigurationList.MsData = this;
+                    _instrumentConfigurationList.MsData = this;
                 }
             }
         }
@@ -154,13 +154,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public MSDataList<DataProcessingInfo> DataProcessingList // TODO: enforce quantity
         {
-            get => this._dataProcessingList;
+            get => _dataProcessingList;
             set
             {
-                this._dataProcessingList = value;
-                if (this._dataProcessingList != null)
+                _dataProcessingList = value;
+                if (_dataProcessingList != null)
                 {
-                    this._dataProcessingList.MsData = this;
+                    _dataProcessingList.MsData = this;
                 }
             }
         }
@@ -169,13 +169,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public Run Run // TODO: enforce quantity
         {
-            get => this._run;
+            get => _run;
             set
             {
-                this._run = value;
-                if (this._run != null)
+                _run = value;
+                if (_run != null)
                 {
-                    this._run.MsData = this;
+                    _run.MsData = this;
                 }
             }
         }
@@ -293,13 +293,13 @@ namespace PSI_Interface.MSData
         /// </remarks>
         public MSDataList<ProcessingMethodInfo> ProcessingMethods // TODO: enforce quantity
         {
-            get => this._processingMethods;
+            get => _processingMethods;
             set
             {
-                this._processingMethods = value;
-                if (this._processingMethods != null)
+                _processingMethods = value;
+                if (_processingMethods != null)
                 {
-                    this._processingMethods.MsData = this.MsData;
+                    _processingMethods.MsData = MsData;
                 }
             }
         }
@@ -338,13 +338,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<ReferenceableParamGroupRef> ReferenceableParamGroupRefs
         {
-            get => this._referenceableParamGroupRefs;
+            get => _referenceableParamGroupRefs;
             set
             {
-                this._referenceableParamGroupRefs = value;
-                if (this._referenceableParamGroupRefs != null)
+                _referenceableParamGroupRefs = value;
+                if (_referenceableParamGroupRefs != null)
                 {
-                    this._referenceableParamGroupRefs.MsData = this.MsData;
+                    _referenceableParamGroupRefs.MsData = MsData;
                 }
             }
         }
@@ -358,13 +358,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<CVParam> CVParams
         {
-            get => this._cVParams;
+            get => _cVParams;
             set
             {
-                this._cVParams = value;
-                if (this._cVParams != null)
+                _cVParams = value;
+                if (_cVParams != null)
                 {
-                    this._cVParams.MsData = this.MsData;
+                    _cVParams.MsData = MsData;
                 }
             }
         }
@@ -373,13 +373,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<UserParam> UserParams
         {
-            get => this._userParams;
+            get => _userParams;
             set
             {
-                this._userParams = value;
-                if (this._userParams != null)
+                _userParams = value;
+                if (_userParams != null)
                 {
-                    this._userParams.MsData = this.MsData;
+                    _userParams.MsData = MsData;
                 }
             }
         }
@@ -423,13 +423,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<CVParam> CVParams
         {
-            get => this._cVParams;
+            get => _cVParams;
             set
             {
-                this._cVParams = value;
-                if (this._cVParams != null)
+                _cVParams = value;
+                if (_cVParams != null)
                 {
-                    this._cVParams.MsData = this.MsData;
+                    _cVParams.MsData = MsData;
                 }
             }
         }
@@ -438,13 +438,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<UserParam> UserParams
         {
-            get => this._userParams;
+            get => _userParams;
             set
             {
-                this._userParams = value;
-                if (this._userParams != null)
+                _userParams = value;
+                if (_userParams != null)
                 {
-                    this._userParams.MsData = this.MsData;
+                    _userParams.MsData = MsData;
                 }
             }
         }
@@ -499,15 +499,15 @@ namespace PSI_Interface.MSData
         /// <returns>IDREF</returns>
         internal string CVRef
         {
-            get => this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.Cvid].CVRef);
-            set => this._cvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
+            get => MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[Cvid].CVRef);
+            set => _cvRef = MsData.CvTranslator.ConvertFileCVRef(value);
         }
 
         /// <summary>The accession number of the referred-to term in the named resource (e.g.: MS:000012).</summary>
         /// <remarks>Required Attribute</remarks>
         internal string Accession
         {
-            get => CV.CV.TermData[this.Cvid].Id;
+            get => CV.CV.TermData[Cvid].Id;
             // TODO: change this return to a value mapped from the cvid
             set
             {
@@ -517,25 +517,25 @@ namespace PSI_Interface.MSData
                 if (CV.CV.TermAccessionLookup.ContainsKey(_cvRef) && CV.CV.TermAccessionLookup[_cvRef].ContainsKey(value))
                 {
                     //this.Cvid = CV.CV.TermAccessionLookup[oboAcc];
-                    this.Cvid = CV.CV.TermAccessionLookup[_cvRef][value];
+                    Cvid = CV.CV.TermAccessionLookup[_cvRef][value];
                 }
                 else
                 {
-                    this.Cvid = CV.CV.CVID.CVID_Unknown;
+                    Cvid = CV.CV.CVID.CVID_Unknown;
                 }
             } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }
 
         /// <summary>The actual name for the parameter, from the referred-to controlled vocabulary. This should be the preferred name associated with the specified accession number.</summary>
         /// <remarks>Required Attribute</remarks>
-        internal string Name => CV.CV.TermData[this.Cvid].Name;
+        internal string Name => CV.CV.TermData[Cvid].Name;
 
         /// <summary>The value for the parameter; may be absent if not appropriate, or a numeric or symbolic value, or may itself be CV (legal values for a parameter should be enumerated and defined in the ontology).</summary>
         /// <remarks>Optional Attribute</remarks>
         public string Value
         {
-            get => this._value;
-            set => this._value = value;
+            get => _value;
+            set => _value = value;
         } // TODO: Perform validation of the value according to CVID/UnitCVID?
 
         /*
@@ -708,11 +708,11 @@ namespace PSI_Interface.MSData
         /// </summary>
         public CV.CV.CVID UnitCvid
         {
-            get => this._unitCvid;
+            get => _unitCvid;
             set
             {
-                this._unitCvid = value;
-                this._unitsSet = true;
+                _unitCvid = value;
+                _unitsSet = true;
             }
         }
 
@@ -724,9 +724,9 @@ namespace PSI_Interface.MSData
             get
             {
                 //return this.UnitAccession.Split(new[] { ':' })[0];
-                if (this._unitsSet)
+                if (_unitsSet)
                 {
-                    return this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.UnitCvid].CVRef);
+                    return MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[UnitCvid].CVRef);
                 }
                 return null;
                 //return this._unitCvRef;
@@ -734,10 +734,10 @@ namespace PSI_Interface.MSData
             }
             set
             {
-                this._unitCvRef = value;
+                _unitCvRef = value;
                 if (value != null)
                 {
-                    this._unitCvRef = this.MsData.CvTranslator.ConvertFileCVRef(value);
+                    _unitCvRef = MsData.CvTranslator.ConvertFileCVRef(value);
                 }
                 // have to set up a dictionary or something similar...
                 //UnitCVRef = cvs[value];
@@ -750,9 +750,9 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                if (this._unitsSet)
+                if (_unitsSet)
                 {
-                    return CV.CV.TermData[this.UnitCvid].Id;
+                    return CV.CV.TermData[UnitCvid].Id;
                 }
                 return null;
                 //return this._unitAccession;
@@ -764,12 +764,12 @@ namespace PSI_Interface.MSData
                 //if (CV.CV.TermAccessionLookup.ContainsKey(oboAcc))
                 if (value != null && CV.CV.TermAccessionLookup.ContainsKey(_unitCvRef) && CV.CV.TermAccessionLookup[_unitCvRef].ContainsKey(value))
                 {
-                    this._unitsSet = true;
-                    this._unitCvid = CV.CV.TermAccessionLookup[_unitCvRef][value];
+                    _unitsSet = true;
+                    _unitCvid = CV.CV.TermAccessionLookup[_unitCvRef][value];
                 }
                 else
                 {
-                    this._unitCvid = CV.CV.CVID.CVID_Unknown;
+                    _unitCvid = CV.CV.CVID.CVID_Unknown;
                 }
             } // TODO: map this to a cvid, and store the cvid, and don't store the accession
         }
@@ -780,9 +780,9 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                if (this._unitsSet)
+                if (_unitsSet)
                 {
-                    return CV.CV.TermData[this.UnitCvid].Name;
+                    return CV.CV.TermData[UnitCvid].Name;
                 }
                 return null;
                 //return this._unitName;
@@ -832,13 +832,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public ParamGroup IsolationWindow
         {
-            get => this._isolationWindow;
+            get => _isolationWindow;
             set
             {
-                this._isolationWindow = value;
-                if (this._isolationWindow != null)
+                _isolationWindow = value;
+                if (_isolationWindow != null)
                 {
-                    this._isolationWindow.MsData = this.MsData;
+                    _isolationWindow.MsData = MsData;
                 }
             }
         }
@@ -848,13 +848,13 @@ namespace PSI_Interface.MSData
         //public SelectedIonListType selectedIonList
         public MSDataList<ParamGroup> SelectedIonList
         {
-            get => this._selectedIonList;
+            get => _selectedIonList;
             set
             {
-                this._selectedIonList = value;
-                if (this._selectedIonList != null)
+                _selectedIonList = value;
+                if (_selectedIonList != null)
                 {
-                    this._selectedIonList.MsData = this.MsData;
+                    _selectedIonList.MsData = MsData;
                 }
             }
         }
@@ -863,13 +863,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public ParamGroup Activation
         {
-            get => this._activation;
+            get => _activation;
             set
             {
-                this._activation = value;
-                if (this._activation != null)
+                _activation = value;
+                if (_activation != null)
                 {
-                    this._activation.MsData = this.MsData;
+                    _activation.MsData = MsData;
                 }
             }
         }
@@ -1045,8 +1045,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public double[] Data
         {
-            get => this._data;
-            set => this._data = value;
+            get => _data;
+            set => _data = value;
         }
 
         /// <summary>
@@ -1054,10 +1054,10 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ArrayType DataType
         {
-            get => this._dataType;
+            get => _dataType;
             set
             {
-                this._dataType = value;
+                _dataType = value;
                 // Make sure the appropriate cvParam is set...
                 for (var i = 0; i < CVParams.Count; i++)
                 {
@@ -1082,7 +1082,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public int DataWidth
         {
-            get => this._dataWidth;
+            get => _dataWidth;
             set
             {
                 if (value != 4 && value != 8)
@@ -1090,7 +1090,7 @@ namespace PSI_Interface.MSData
                     // only 4 and 8 are valid, 2 is obsolete
                     return;
                 }
-                this._dataWidth = value;
+                _dataWidth = value;
                 // Make sure the appropriate cvParam is set...
                 for (var i = 0; i < CVParams.Count; i++)
                 {
@@ -1106,11 +1106,11 @@ namespace PSI_Interface.MSData
                 }
                 var cv = new CVParam();
                 cv.Cvid = CV.CV.CVID.CVID_Unknown;
-                if (this._dataWidth == 4)
+                if (_dataWidth == 4)
                 {
                     cv.Cvid = CV.CV.CVID.MS_32_bit_float;
                 }
-                else if (this._dataWidth == 8)
+                else if (_dataWidth == 8)
                 {
                     cv.Cvid = CV.CV.CVID.MS_64_bit_float;
                 }
@@ -1123,10 +1123,10 @@ namespace PSI_Interface.MSData
         /// </summary>
         public bool IsCompressed
         {
-            get => this._isCompressed;
+            get => _isCompressed;
             set
             {
-                this._isCompressed = value;
+                _isCompressed = value;
                 // Make sure the appropriate cvParam is set...
                 for (var i = 0; i < CVParams.Count; i++)
                 {
@@ -1142,7 +1142,7 @@ namespace PSI_Interface.MSData
                 }
                 var cv = new CVParam();
                 cv.Cvid = CV.CV.CVID.MS_no_compression;
-                if (this._isCompressed)
+                if (_isCompressed)
                 {
                     cv.Cvid = CV.CV.CVID.MS_zlib_compression;
                 }
@@ -1153,14 +1153,14 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Length of the data array
         /// </summary>
-        public int DataLength => this._data.Length;
+        public int DataLength => _data.Length;
 
         /// <summary>The actual base64 encoded binary data. The byte order is always 'little endian'.</summary>
         /// <returns>base64 encoded binary data</returns>
         public byte[] Binary
         {
-            get => Base64Conversion.EncodeBytes(this._data, this._dataWidth, this._isCompressed);
-            set => this._data = Base64Conversion.DecodeBytes(value, this._dataWidth, this._arrayLength, this._isCompressed);
+            get => Base64Conversion.EncodeBytes(_data, _dataWidth, _isCompressed);
+            set => _data = Base64Conversion.DecodeBytes(value, _dataWidth, _arrayLength, _isCompressed);
         }
 
         /// <summary>
@@ -1177,9 +1177,9 @@ namespace PSI_Interface.MSData
         /// <returns>non-negative integer</returns>
         public int ArrayLength // TODO: enforce appropriate usage
         {
-            get => this._data.Length;
+            get => _data.Length;
             // Return value solely based upon present data
-            private set => this._arrayLength = value;
+            private set => _arrayLength = value;
             // Allow setting from other constructors.
         }
 
@@ -1201,13 +1201,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<Scan> Scan // TODO: enforce quantity
         {
-            get => this._scan;
+            get => _scan;
             set
             {
-                this._scan = value;
-                if (this._scan != null)
+                _scan = value;
+                if (_scan != null)
                 {
-                    this._scan.MsData = this.MsData;
+                    _scan.MsData = MsData;
                 }
             }
         }
@@ -1226,13 +1226,13 @@ namespace PSI_Interface.MSData
         //public ScanWindowListType scanWindowList
         public MSDataList<ParamGroup> ScanWindowList
         {
-            get => this._scanWindowList;
+            get => _scanWindowList;
             set
             {
-                this._scanWindowList = value;
-                if (this._scanWindowList != null)
+                _scanWindowList = value;
+                if (_scanWindowList != null)
                 {
-                    this._scanWindowList.MsData = this.MsData;
+                    _scanWindowList.MsData = MsData;
                 }
             }
         }
@@ -1295,13 +1295,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<Spectrum> Spectra
         {
-            get => this._spectra;
+            get => _spectra;
             set
             {
-                this._spectra = value;
-                if (this._spectra != null)
+                _spectra = value;
+                if (_spectra != null)
                 {
-                    this._spectra.MsData = this.MsData;
+                    _spectra.MsData = MsData;
                 }
             }
         }
@@ -1337,13 +1337,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public ScanList ScanList
         {
-            get => this._scanList;
+            get => _scanList;
             set
             {
-                this._scanList = value;
-                if (this._scanList != null)
+                _scanList = value;
+                if (_scanList != null)
                 {
-                    this._scanList.MsData = this.MsData;
+                    _scanList.MsData = MsData;
                 }
             }
         }
@@ -1352,13 +1352,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<Precursor> PrecursorList
         {
-            get => this._precursorList;
+            get => _precursorList;
             set
             {
-                this._precursorList = value;
-                if (this._precursorList != null)
+                _precursorList = value;
+                if (_precursorList != null)
                 {
-                    this._precursorList.MsData = this.MsData;
+                    _precursorList.MsData = MsData;
                 }
             }
         }
@@ -1367,13 +1367,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<Product> ProductList
         {
-            get => this._productList;
+            get => _productList;
             set
             {
-                this._productList = value;
-                if (this._productList != null)
+                _productList = value;
+                if (_productList != null)
                 {
-                    this._productList.MsData = this.MsData;
+                    _productList.MsData = MsData;
                 }
             }
         }
@@ -1382,14 +1382,14 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<BinaryDataArray> BinaryDataArrayList
         {
-            get => this._binaryDataArrayList;
+            get => _binaryDataArrayList;
             set
             {
-                this._binaryDataArrayList = value;
-                if (this._binaryDataArrayList != null)
+                _binaryDataArrayList = value;
+                if (_binaryDataArrayList != null)
                 {
-                    this._binaryDataArrayList.MsData = this.MsData;
-                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                    _binaryDataArrayList.MsData = MsData;
+                    _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                 }
             }
         }
@@ -1430,10 +1430,10 @@ namespace PSI_Interface.MSData
                 }
                 if (mzLength == intensityLength)
                 {
-                    this._defaultArrayLength = mzLength;
-                    if (this._binaryDataArrayList != null)
+                    _defaultArrayLength = mzLength;
+                    if (_binaryDataArrayList != null)
                     {
-                        this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                        _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                     }
                     return mzLength;
                 }
@@ -1444,10 +1444,10 @@ namespace PSI_Interface.MSData
             }
             set
             {
-                this._defaultArrayLength = value;
-                if (this._binaryDataArrayList != null)
+                _defaultArrayLength = value;
+                if (_binaryDataArrayList != null)
                 {
-                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                    _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                 }
             }
         }
@@ -1502,13 +1502,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public ParamGroup IsolationWindow
         {
-            get => this._isolationWindow;
+            get => _isolationWindow;
             set
             {
-                this._isolationWindow = value;
-                if (this._isolationWindow != null)
+                _isolationWindow = value;
+                if (_isolationWindow != null)
                 {
-                    this._isolationWindow.MsData = this.MsData;
+                    _isolationWindow.MsData = MsData;
                 }
             }
         }
@@ -1522,7 +1522,7 @@ namespace PSI_Interface.MSData
     {
         private SpectrumList _spectrumList;
         private ChromatogramList _chromatogramList;
-        private System.DateTime _startTimeStampField;
+        private DateTime _startTimeStampField;
 
         /// <summary>
         /// All mass spectra and the acquisitions underlying them are described and attached here.
@@ -1531,13 +1531,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public SpectrumList SpectrumList
         {
-            get => this._spectrumList;
+            get => _spectrumList;
             set
             {
-                this._spectrumList = value;
-                if (this._spectrumList != null)
+                _spectrumList = value;
+                if (_spectrumList != null)
                 {
-                    this._spectrumList.MsData = this.MsData;
+                    _spectrumList.MsData = MsData;
                 }
             }
         }
@@ -1546,13 +1546,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public ChromatogramList ChromatogramList
         {
-            get => this._chromatogramList;
+            get => _chromatogramList;
             set
             {
-                this._chromatogramList = value;
-                if (this._chromatogramList != null)
+                _chromatogramList = value;
+                if (_chromatogramList != null)
                 {
-                    this._chromatogramList.MsData = this.MsData;
+                    _chromatogramList.MsData = MsData;
                 }
             }
         }
@@ -1584,12 +1584,12 @@ namespace PSI_Interface.MSData
 
         /// <summary>The optional start timestamp of the run, in UT.</summary>
         /// <remarks>Optional Attribute</remarks>
-        public System.DateTime StartTimeStamp
+        public DateTime StartTimeStamp
         {
-            get => this._startTimeStampField;
+            get => _startTimeStampField;
             set
             {
-                this._startTimeStampField = value;
+                _startTimeStampField = value;
                 StartTimeStampSpecified = value > DateTime.MinValue;
             }
         }
@@ -1612,13 +1612,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<Chromatogram> Chromatograms // TODO: enforce quantity
         {
-            get => this._chromatograms;
+            get => _chromatograms;
             set
             {
-                this._chromatograms = value;
-                if (this._chromatograms != null)
+                _chromatograms = value;
+                if (_chromatograms != null)
                 {
-                    this._chromatograms.MsData = this.MsData;
+                    _chromatograms.MsData = MsData;
                 }
             }
         }
@@ -1648,13 +1648,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public Precursor Precursor
         {
-            get => this._precursor;
+            get => _precursor;
             set
             {
-                this._precursor = value;
-                if (this._precursor != null)
+                _precursor = value;
+                if (_precursor != null)
                 {
-                    this._precursor.MsData = this.MsData;
+                    _precursor.MsData = MsData;
                 }
             }
         }
@@ -1663,13 +1663,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public Product Product
         {
-            get => this._product;
+            get => _product;
             set
             {
-                this._product = value;
-                if (this._product != null)
+                _product = value;
+                if (_product != null)
                 {
-                    this._product.MsData = this.MsData;
+                    _product.MsData = MsData;
                 }
             }
         }
@@ -1678,14 +1678,14 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public MSDataList<BinaryDataArray> BinaryDataArrayList // TODO: enforce requirement
         {
-            get => this._binaryDataArrayList;
+            get => _binaryDataArrayList;
             set
             {
-                this._binaryDataArrayList = value;
-                if (this._binaryDataArrayList != null)
+                _binaryDataArrayList = value;
+                if (_binaryDataArrayList != null)
                 {
-                    this._binaryDataArrayList.MsData = this.MsData;
-                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                    _binaryDataArrayList.MsData = MsData;
+                    _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                 }
             }
         }
@@ -1719,10 +1719,10 @@ namespace PSI_Interface.MSData
                 }
                 if (timeLength == intensityLength)
                 {
-                    this._defaultArrayLength = timeLength;
-                    if (this._binaryDataArrayList != null)
+                    _defaultArrayLength = timeLength;
+                    if (_binaryDataArrayList != null)
                     {
-                        this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                        _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                     }
                     return timeLength;
                 }
@@ -1733,10 +1733,10 @@ namespace PSI_Interface.MSData
             }
             set
             {
-                this._defaultArrayLength = value;
-                if (this._binaryDataArrayList != null)
+                _defaultArrayLength = value;
+                if (_binaryDataArrayList != null)
                 {
-                    this._binaryDataArrayList.DefaultArrayLength = this._defaultArrayLength;
+                    _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                 }
             }
         }
@@ -1787,13 +1787,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<SourceFileRef> SourceFileRefList
         {
-            get => this._sourceFileRefList;
+            get => _sourceFileRefList;
             set
             {
-                this._sourceFileRefList = value;
-                if (this._sourceFileRefList != null)
+                _sourceFileRefList = value;
+                if (_sourceFileRefList != null)
                 {
-                    this._sourceFileRefList.MsData = this.MsData;
+                    _sourceFileRefList.MsData = MsData;
                 }
             }
         }
@@ -1803,13 +1803,13 @@ namespace PSI_Interface.MSData
         //public TargetListType targetList
         public MSDataList<ParamGroup> TargetList
         {
-            get => this._targetList;
+            get => _targetList;
             set
             {
-                this._targetList = value;
-                if (this._targetList != null)
+                _targetList = value;
+                if (_targetList != null)
                 {
-                    this._targetList.MsData = this.MsData;
+                    _targetList.MsData = MsData;
                 }
             }
         }
@@ -1973,13 +1973,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public ComponentList ComponentList
         {
-            get => this._componentList;
+            get => _componentList;
             set
             {
-                this._componentList = value;
-                if (this._componentList != null)
+                _componentList = value;
+                if (_componentList != null)
                 {
-                    this._componentList.MsData = this.MsData;
+                    _componentList.MsData = MsData;
                 }
             }
         }
@@ -1988,13 +1988,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public SoftwareRef SoftwareRef
         {
-            get => this._softwareRef;
+            get => _softwareRef;
             set
             {
-                this._softwareRef = value;
-                if (this._softwareRef != null)
+                _softwareRef = value;
+                if (_softwareRef != null)
                 {
-                    this._softwareRef.MsData = this.MsData;
+                    _softwareRef.MsData = MsData;
                 }
             }
         }
@@ -2022,13 +2022,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<SourceComponent> Sources // TODO: enforce quantity
         {
-            get => this._source;
+            get => _source;
             set
             {
-                this._source = value;
-                if (this._source != null)
+                _source = value;
+                if (_source != null)
                 {
-                    this._source.MsData = this.MsData;
+                    _source.MsData = MsData;
                 }
             }
         }
@@ -2037,13 +2037,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<AnalyzerComponent> Analyzers // TODO: enforce quantity
         {
-            get => this._analyzer;
+            get => _analyzer;
             set
             {
-                this._analyzer = value;
-                if (this._analyzer != null)
+                _analyzer = value;
+                if (_analyzer != null)
                 {
-                    this._analyzer.MsData = this.MsData;
+                    _analyzer.MsData = MsData;
                 }
             }
         }
@@ -2052,13 +2052,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max unbounded</remarks>
         public MSDataList<DetectorComponent> Detectors //TODO: enforce quantity
         {
-            get => this._detector;
+            get => _detector;
             set
             {
-                this._detector = value;
-                if (this._detector != null)
+                _detector = value;
+                if (_detector != null)
                 {
-                    this._detector.MsData = this.MsData;
+                    _detector.MsData = MsData;
                 }
             }
         }
@@ -2222,13 +2222,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 1, max 1</remarks>
         public ParamGroup FileContentInfo // TODO: enforce quantity
         {
-            get => this._fileContent;
+            get => _fileContent;
             set
             {
-                this._fileContent = value;
-                if (this._fileContent != null)
+                _fileContent = value;
+                if (_fileContent != null)
                 {
-                    this._fileContent.MsData = this.MsData;
+                    _fileContent.MsData = MsData;
                 }
             }
         }
@@ -2239,13 +2239,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max 1</remarks>
         public MSDataList<SourceFileInfo> SourceFileList
         {
-            get => this._sourceFileList;
+            get => _sourceFileList;
             set
             {
-                this._sourceFileList = value;
-                if (this._sourceFileList != null)
+                _sourceFileList = value;
+                if (_sourceFileList != null)
                 {
-                    this._sourceFileList.MsData = this.MsData;
+                    _sourceFileList.MsData = MsData;
                 }
             }
         }
@@ -2256,13 +2256,13 @@ namespace PSI_Interface.MSData
         /// <remarks>min 0, max unbounded</remarks>
         public MSDataList<ParamGroup> ContactInfo
         {
-            get => this._contact;
+            get => _contact;
             set
             {
-                this._contact = value;
-                if (this._contact != null)
+                _contact = value;
+                if (_contact != null)
                 {
-                    this._contact.MsData = this.MsData;
+                    _contact.MsData = MsData;
                 }
             }
         }

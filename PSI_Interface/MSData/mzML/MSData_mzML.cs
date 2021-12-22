@@ -26,56 +26,56 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="msData"></param>
         public mzMLType(MSData msData)
         {
-            this.idField = msData.Id;
-            this.versionField = msData.Version;
-            this.accessionField = msData.Accession; // Not tied to CV
+            idField = msData.Id;
+            versionField = msData.Version;
+            accessionField = msData.Accession; // Not tied to CV
 
             // Default value
-            this.cvListField = null;
-            this.fileDescriptionField = null;
-            this.referenceableParamGroupListField = null;
-            this.sampleListField = null;
-            this.softwareListField = null;
-            this.scanSettingsListField = null;
-            this.instrumentConfigurationListField = null;
-            this.dataProcessingListField = null;
-            this.runField = null;
+            cvListField = null;
+            fileDescriptionField = null;
+            referenceableParamGroupListField = null;
+            sampleListField = null;
+            softwareListField = null;
+            scanSettingsListField = null;
+            instrumentConfigurationListField = null;
+            dataProcessingListField = null;
+            runField = null;
 
             if (msData.CVList != null)
             {
-                this.cvListField = new CVListType(msData.CVList);
+                cvListField = new CVListType(msData.CVList);
             }
             if (msData.FileDescription != null)
             {
-                this.fileDescriptionField = new FileDescriptionType(msData.FileDescription);
+                fileDescriptionField = new FileDescriptionType(msData.FileDescription);
             }
             if (msData.ReferenceableParamGroupList != null)
             {
-                this.referenceableParamGroupListField = new ReferenceableParamGroupListType(msData.ReferenceableParamGroupList);
+                referenceableParamGroupListField = new ReferenceableParamGroupListType(msData.ReferenceableParamGroupList);
             }
             if (msData.SampleList != null)
             {
-                this.sampleListField = new SampleListType(msData.SampleList);
+                sampleListField = new SampleListType(msData.SampleList);
             }
             if (msData.SoftwareList != null)
             {
-                this.softwareListField = new SoftwareListType(msData.SoftwareList);
+                softwareListField = new SoftwareListType(msData.SoftwareList);
             }
             if (msData.ScanSettingsList != null)
             {
-                this.scanSettingsListField = new ScanSettingsListType(msData.ScanSettingsList);
+                scanSettingsListField = new ScanSettingsListType(msData.ScanSettingsList);
             }
             if (msData.InstrumentConfigurationList != null)
             {
-                this.instrumentConfigurationListField = new InstrumentConfigurationListType(msData.InstrumentConfigurationList);
+                instrumentConfigurationListField = new InstrumentConfigurationListType(msData.InstrumentConfigurationList);
             }
             if (msData.DataProcessingList != null)
             {
-                this.dataProcessingListField = new DataProcessingListType(msData.DataProcessingList);
+                dataProcessingListField = new DataProcessingListType(msData.DataProcessingList);
             }
             if (msData.Run != null)
             {
-                this.runField = new RunType(msData.Run);
+                runField = new RunType(msData.Run);
             }
         }
 
@@ -133,14 +133,14 @@ namespace PSI_Interface.MSData.mzML
         public CVListType(List<CVInfo> ocvList)
         {
             // Default value
-            this.cvField = null;
+            cvField = null;
 
             if (ocvList != null && ocvList.Count > 0)
             {
-                this.cvField = new List<CVType>();
+                cvField = new List<CVType>();
                 foreach (var ocv in ocvList)
                 {
-                    this.cvField.Add(new CVType(ocv));
+                    cvField.Add(new CVType(ocv));
                 }
             }
         }
@@ -166,10 +166,10 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="cv"></param>
         public CVType(CVInfo cv)
         {
-            this.idField = cv.Id;
-            this.fullNameField = cv.FullName;
-            this.versionField = cv.Version;
-            this.uRIField = cv.URI;
+            idField = cv.Id;
+            fullNameField = cv.FullName;
+            versionField = cv.Version;
+            uRIField = cv.URI;
         }
 
         /*
@@ -204,14 +204,14 @@ namespace PSI_Interface.MSData.mzML
         public DataProcessingListType(List<DataProcessingInfo> dpList)
         {
             // Default value
-            this.dataProcessingField = null;
+            dataProcessingField = null;
 
             if (dpList != null && dpList.Count > 0)
             {
-                this.dataProcessingField = new List<DataProcessingType>();
+                dataProcessingField = new List<DataProcessingType>();
                 foreach (var dp in dpList)
                 {
-                    this.dataProcessingField.Add(new DataProcessingType(dp));
+                    dataProcessingField.Add(new DataProcessingType(dp));
                 }
             }
         }
@@ -237,17 +237,17 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="dp"></param>
         public DataProcessingType(DataProcessingInfo dp)
         {
-            this.idField = dp.Id;
+            idField = dp.Id;
 
             // Default value
-            this.processingMethodField = null;
+            processingMethodField = null;
 
             if (dp.ProcessingMethods != null && dp.ProcessingMethods.Count > 0)
             {
-                this.processingMethodField = new List<ProcessingMethodType>();
+                processingMethodField = new List<ProcessingMethodType>();
                 foreach (var pm in dp.ProcessingMethods)
                 {
-                    this.processingMethodField.Add(new ProcessingMethodType(pm));
+                    processingMethodField.Add(new ProcessingMethodType(pm));
                 }
             }
         }
@@ -278,8 +278,8 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="process"></param>
         public ProcessingMethodType(ProcessingMethodInfo process) : base(process)
         {
-            this.orderField = process.Order.ToString();
-            this.softwareRefField = process.SoftwareRef;
+            orderField = process.Order.ToString();
+            softwareRefField = process.SoftwareRef;
         }
 
         /*
@@ -306,32 +306,32 @@ namespace PSI_Interface.MSData.mzML
         public ParamGroupType(ParamGroup pg)
         {
             // Default value
-            this.referenceableParamGroupRefField = null;
-            this.cvParamField = null;
-            this.userParamField = null;
+            referenceableParamGroupRefField = null;
+            cvParamField = null;
+            userParamField = null;
 
             if (pg.ReferenceableParamGroupRefs != null && pg.ReferenceableParamGroupRefs.Count > 0)
             {
-                this.referenceableParamGroupRefField = new List<ReferenceableParamGroupRefType>();
+                referenceableParamGroupRefField = new List<ReferenceableParamGroupRefType>();
                 foreach (var rpgr in pg.ReferenceableParamGroupRefs)
                 {
-                    this.referenceableParamGroupRefField.Add(new ReferenceableParamGroupRefType(rpgr));
+                    referenceableParamGroupRefField.Add(new ReferenceableParamGroupRefType(rpgr));
                 }
             }
             if (pg.CVParams != null && pg.CVParams.Count > 0)
             {
-                this.cvParamField = new List<CVParamType>();
+                cvParamField = new List<CVParamType>();
                 foreach (var cvp in pg.CVParams)
                 {
-                    this.cvParamField.Add(new CVParamType(cvp));
+                    cvParamField.Add(new CVParamType(cvp));
                 }
             }
             if (pg.UserParams != null && pg.UserParams.Count > 0)
             {
-                this.userParamField = new List<UserParamType>();
+                userParamField = new List<UserParamType>();
                 foreach (var up in pg.UserParams)
                 {
-                    this.userParamField.Add(new UserParamType(up));
+                    userParamField.Add(new UserParamType(up));
                 }
             }
         }
@@ -360,14 +360,14 @@ namespace PSI_Interface.MSData.mzML
         public ReferenceableParamGroupListType(List<ReferenceableParamGroup> rpgList)
         {
             // Default value
-            this.referenceableParamGroupField = null;
+            referenceableParamGroupField = null;
 
             if (rpgList != null && rpgList.Count > 0)
             {
-                this.referenceableParamGroupField = new List<ReferenceableParamGroupType>();
+                referenceableParamGroupField = new List<ReferenceableParamGroupType>();
                 foreach (var rpg in rpgList)
                 {
-                    this.referenceableParamGroupField.Add(new ReferenceableParamGroupType(rpg));
+                    referenceableParamGroupField.Add(new ReferenceableParamGroupType(rpg));
                 }
             }
         }
@@ -393,26 +393,26 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="rpg"></param>
         public ReferenceableParamGroupType(ReferenceableParamGroup rpg)
         {
-            this.idField = rpg.Id;
+            idField = rpg.Id;
 
             // Default value
-            this.cvParamField = null;
-            this.userParamField = null;
+            cvParamField = null;
+            userParamField = null;
 
             if (rpg.CVParams != null && rpg.CVParams.Count > 0)
             {
-                this.cvParamField = new List<CVParamType>();
+                cvParamField = new List<CVParamType>();
                 foreach (var cvp in rpg.CVParams)
                 {
-                    this.cvParamField.Add(new CVParamType(cvp));
+                    cvParamField.Add(new CVParamType(cvp));
                 }
             }
             if (rpg.UserParams != null && rpg.UserParams.Count > 0)
             {
-                this.userParamField = new List<UserParamType>();
+                userParamField = new List<UserParamType>();
                 foreach (var up in rpg.UserParams)
                 {
-                    this.userParamField.Add(new UserParamType(up));
+                    userParamField.Add(new UserParamType(up));
                 }
             }
         }
@@ -442,7 +442,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="rpgr"></param>
         public ReferenceableParamGroupRefType(ReferenceableParamGroupRef rpgr)
         {
-            this.refField = rpgr.Ref;
+            refField = rpgr.Ref;
         }
 
         /*
@@ -464,13 +464,13 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="cvp"></param>
         public CVParamType(CVParam cvp)
         {
-            this.cvRefField = cvp.CVRef;
-            this.accessionField = cvp.Accession;
-            this.nameField = cvp.Name;
-            this.valueField = cvp.Value;
-            this.unitCvRefField = cvp.UnitCVRef;
-            this.unitAccessionField = cvp.UnitAccession;
-            this.unitNameField = cvp.UnitName;
+            cvRefField = cvp.CVRef;
+            accessionField = cvp.Accession;
+            nameField = cvp.Name;
+            valueField = cvp.Value;
+            unitCvRefField = cvp.UnitCVRef;
+            unitAccessionField = cvp.UnitAccession;
+            unitNameField = cvp.UnitName;
         }
 
         /*
@@ -519,12 +519,12 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="up"></param>
         public UserParamType(UserParam up)
         {
-            this.nameField = up.Name;
-            this.typeField = up.Type;
-            this.valueField = up.Value;
-            this.unitAccessionField = up.UnitAccession;
-            this.unitNameField = up.UnitName;
-            this.unitCvRefField = up.UnitCVRef;
+            nameField = up.Name;
+            typeField = up.Type;
+            valueField = up.Value;
+            unitAccessionField = up.UnitAccession;
+            unitNameField = up.UnitName;
+            unitCvRefField = up.UnitCVRef;
         }
 
         /*
@@ -567,14 +567,14 @@ namespace PSI_Interface.MSData.mzML
         public PrecursorListType(List<Precursor> precursors)
         {
             // Default value
-            this.precursorField = null;
+            precursorField = null;
 
             if (precursors != null && precursors.Count > 0)
             {
-                this.precursorField = new List<PrecursorType>();
+                precursorField = new List<PrecursorType>();
                 foreach (var p in precursors)
                 {
-                    this.precursorField.Add(new PrecursorType(p));
+                    precursorField.Add(new PrecursorType(p));
                 }
             }
         }
@@ -600,26 +600,26 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="precursor"></param>
         public PrecursorType(Precursor precursor)
         {
-            this.spectrumRefField = precursor.SpectrumRef;
-            this.sourceFileRefField = precursor.SourceFileRef;
-            this.externalSpectrumIDField = precursor.ExternalSpectrumID;
+            spectrumRefField = precursor.SpectrumRef;
+            sourceFileRefField = precursor.SourceFileRef;
+            externalSpectrumIDField = precursor.ExternalSpectrumID;
 
             // Default values
-            this.isolationWindowField = null;
-            this.selectedIonListField = null;
-            this.activationField = null;
+            isolationWindowField = null;
+            selectedIonListField = null;
+            activationField = null;
 
             if (precursor.IsolationWindow != null)
             {
-                this.isolationWindowField = new ParamGroupType(precursor.IsolationWindow);
+                isolationWindowField = new ParamGroupType(precursor.IsolationWindow);
             }
             if (precursor.SelectedIonList != null)
             {
-                this.selectedIonListField = new SelectedIonListType(precursor.SelectedIonList);
+                selectedIonListField = new SelectedIonListType(precursor.SelectedIonList);
             }
             if (precursor.Activation != null)
             {
-                this.activationField = new ParamGroupType(precursor.Activation);
+                activationField = new ParamGroupType(precursor.Activation);
             }
         }
 
@@ -663,14 +663,14 @@ namespace PSI_Interface.MSData.mzML
         public SelectedIonListType(List<ParamGroup> siList)
         {
             // Default value
-            this.selectedIonField = null;
+            selectedIonField = null;
 
             if (siList != null && siList.Count > 0)
             {
-                this.selectedIonField = new List<ParamGroupType>();
+                selectedIonField = new List<ParamGroupType>();
                 foreach (var si in siList)
                 {
-                    this.selectedIonField.Add(new ParamGroupType(si));
+                    selectedIonField.Add(new ParamGroupType(si));
                 }
             }
         }
@@ -697,14 +697,14 @@ namespace PSI_Interface.MSData.mzML
         public BinaryDataArrayListType(List<BinaryDataArray> bdal)
         {
             // Default value
-            this.binaryDataArrayField = null;
+            binaryDataArrayField = null;
 
             if (bdal != null && bdal.Count > 0)
             {
-                this.binaryDataArrayField = new List<BinaryDataArrayType>();
+                binaryDataArrayField = new List<BinaryDataArrayType>();
                 foreach (var bda in bdal)
                 {
-                    this.binaryDataArrayField.Add(new BinaryDataArrayType(bda));
+                    binaryDataArrayField.Add(new BinaryDataArrayType(bda));
                 }
             }
         }
@@ -733,18 +733,18 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="bda"></param>
         public BinaryDataArrayType(BinaryDataArray bda) : base(bda)
         {
-            this.binaryField = bda.Binary;
-            this.arrayLengthField = null;
+            binaryField = bda.Binary;
+            arrayLengthField = null;
             // Array length: (should) never specified for m/z or intensity arrays, otherwise only if different from the default.
             if (bda.DataType != BinaryDataArray.ArrayType.m_z &&
                 bda.DataType != BinaryDataArray.ArrayType.intensity && bda.ArrayLength != bda.BdaDefaultArrayLength)
             {
-                this.arrayLengthField = bda.ArrayLength.ToString();
+                arrayLengthField = bda.ArrayLength.ToString();
             }
-            this.dataProcessingRefField = bda.DataProcessingRef;
+            dataProcessingRefField = bda.DataProcessingRef;
             // Not the length of the binary array, but the length of the base64 string...
             //this.encodedLengthField = binary.Length.ToString();
-            this.encodedLengthField = Convert.ToBase64String(binary).Length.ToString();
+            encodedLengthField = Convert.ToBase64String(binary).Length.ToString();
         }
 
         /*
@@ -781,14 +781,14 @@ namespace PSI_Interface.MSData.mzML
         public ScanListType(ScanList scans) : base(scans)
         {
             // Default value
-            this.scanField = null;
+            scanField = null;
 
             if (scans.Scan != null && scans.Scan.Count > 0)
             {
-                this.scanField = new List<ScanType>();
+                scanField = new List<ScanType>();
                 foreach (var s in scans.Scan)
                 {
-                    this.scanField.Add(new ScanType(s));
+                    scanField.Add(new ScanType(s));
                 }
             }
         }
@@ -814,17 +814,17 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="scan"></param>
         public ScanType(Scan scan) : base(scan)
         {
-            this.spectrumRefField = scan.SpectrumRef;
-            this.sourceFileRefField = scan.SourceFileRef;
-            this.externalSpectrumIDField = scan.ExternalSpectrumID;
-            this.instrumentConfigurationRefField = scan.InstrumentConfigurationRef;
+            spectrumRefField = scan.SpectrumRef;
+            sourceFileRefField = scan.SourceFileRef;
+            externalSpectrumIDField = scan.ExternalSpectrumID;
+            instrumentConfigurationRefField = scan.InstrumentConfigurationRef;
 
             // Default value
-            this.scanWindowListField = null;
+            scanWindowListField = null;
 
             if (scan.ScanWindowList != null)
             {
-                this.scanWindowListField = new ScanWindowListType(scan.ScanWindowList);
+                scanWindowListField = new ScanWindowListType(scan.ScanWindowList);
             }
         }
 
@@ -864,14 +864,14 @@ namespace PSI_Interface.MSData.mzML
         public ScanWindowListType(List<ParamGroup> swList)
         {
             // Default value
-            this.scanWindowField = null;
+            scanWindowField = null;
 
             if (swList != null && swList.Count > 0)
             {
-                this.scanWindowField = new List<ParamGroupType>();
+                scanWindowField = new List<ParamGroupType>();
                 foreach (var sw in swList)
                 {
-                    this.scanWindowField.Add(new ParamGroupType(sw));
+                    scanWindowField.Add(new ParamGroupType(sw));
                 }
             }
         }
@@ -898,17 +898,17 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="specList"></param>
         public SpectrumListType(SpectrumList specList)
         {
-            this.defaultDataProcessingRefField = specList.DefaultDataProcessingRef;
+            defaultDataProcessingRefField = specList.DefaultDataProcessingRef;
 
             // Default value
-            this.spectrumField = null;
+            spectrumField = null;
 
             if (specList.Spectra != null && specList.Spectra.Count > 0)
             {
-                this.spectrumField = new List<SpectrumType>();
+                spectrumField = new List<SpectrumType>();
                 foreach (var s in specList.Spectra)
                 {
-                    this.spectrumField.Add(new SpectrumType(s));
+                    spectrumField.Add(new SpectrumType(s));
                 }
             }
         }
@@ -942,34 +942,34 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="spectrum"></param>
         public SpectrumType(Spectrum spectrum) : base(spectrum)
         {
-            this.idField = spectrum.Id;
-            this.spotIDField = spectrum.SpotID;
-            this.indexField = spectrum.Index;
-            this.defaultArrayLengthField = spectrum.DefaultArrayLength;
-            this.dataProcessingRefField = spectrum.DataProcessingRef;
-            this.sourceFileRefField = spectrum.SourceFileRef;
+            idField = spectrum.Id;
+            spotIDField = spectrum.SpotID;
+            indexField = spectrum.Index;
+            defaultArrayLengthField = spectrum.DefaultArrayLength;
+            dataProcessingRefField = spectrum.DataProcessingRef;
+            sourceFileRefField = spectrum.SourceFileRef;
 
             // Default values
-            this.scanListField = null;
-            this.precursorListField = null;
-            this.productListField = null;
-            this.binaryDataArrayListField = null;
+            scanListField = null;
+            precursorListField = null;
+            productListField = null;
+            binaryDataArrayListField = null;
 
             if (spectrum.ScanList != null)
             {
-                this.scanListField = new ScanListType(spectrum.ScanList);
+                scanListField = new ScanListType(spectrum.ScanList);
             }
             if (spectrum.PrecursorList != null)
             {
-                this.precursorListField = new PrecursorListType(spectrum.PrecursorList);
+                precursorListField = new PrecursorListType(spectrum.PrecursorList);
             }
             if (spectrum.ProductList != null)
             {
-                this.productListField = new ProductListType(spectrum.ProductList);
+                productListField = new ProductListType(spectrum.ProductList);
             }
             if (spectrum.BinaryDataArrayList != null)
             {
-                this.binaryDataArrayListField = new BinaryDataArrayListType(spectrum.BinaryDataArrayList);
+                binaryDataArrayListField = new BinaryDataArrayListType(spectrum.BinaryDataArrayList);
             }
         }
 
@@ -1029,14 +1029,14 @@ namespace PSI_Interface.MSData.mzML
         public ProductListType(List<Product> products)
         {
             // Default value
-            this.productField = null;
+            productField = null;
 
             if (products != null && products.Count > 0)
             {
-                this.productField = new List<ProductType>();
+                productField = new List<ProductType>();
                 foreach (var p in products)
                 {
-                    this.productField.Add(new ProductType(p));
+                    productField.Add(new ProductType(p));
                 }
             }
         }
@@ -1063,11 +1063,11 @@ namespace PSI_Interface.MSData.mzML
         public ProductType(Product product)
         {
             // Default value
-            this.isolationWindowField = null;
+            isolationWindowField = null;
 
             if (product.IsolationWindow != null)
             {
-                this.isolationWindowField = new ParamGroupType(product.IsolationWindow);
+                isolationWindowField = new ParamGroupType(product.IsolationWindow);
             }
         }
 
@@ -1089,24 +1089,24 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="run"></param>
         public RunType(Run run) : base(run)
         {
-            this.idField = run.Id;
-            this.defaultInstrumentConfigurationRefField = run.DefaultInstrumentConfigurationRef;
-            this.defaultSourceFileRefField = run.DefaultSourceFileRef;
-            this.sampleRefField = run.SampleRef;
-            this.startTimeStampField = run.StartTimeStamp;
-            this.startTimeStampFieldSpecified = run.StartTimeStampSpecified;
+            idField = run.Id;
+            defaultInstrumentConfigurationRefField = run.DefaultInstrumentConfigurationRef;
+            defaultSourceFileRefField = run.DefaultSourceFileRef;
+            sampleRefField = run.SampleRef;
+            startTimeStampField = run.StartTimeStamp;
+            startTimeStampFieldSpecified = run.StartTimeStampSpecified;
 
             // Default values
-            this.spectrumListField = null;
-            this.chromatogramListField = null;
+            spectrumListField = null;
+            chromatogramListField = null;
 
             if (run.SpectrumList != null)
             {
-                this.spectrumListField = new SpectrumListType(run.SpectrumList);
+                spectrumListField = new SpectrumListType(run.SpectrumList);
             }
             if (run.ChromatogramList != null)
             {
-                this.chromatogramListField = new ChromatogramListType(run.ChromatogramList);
+                chromatogramListField = new ChromatogramListType(run.ChromatogramList);
             }
         }
 
@@ -1162,17 +1162,17 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="chromList"></param>
         public ChromatogramListType(ChromatogramList chromList)
         {
-            this.defaultDataProcessingRefField = chromList.DefaultDataProcessingRef;
+            defaultDataProcessingRefField = chromList.DefaultDataProcessingRef;
 
             // Default value
-            this.chromatogramField = null;
+            chromatogramField = null;
 
             if (chromList.Chromatograms != null && chromList.Chromatograms.Count > 0)
             {
-                this.chromatogramField = new List<ChromatogramType>();
+                chromatogramField = new List<ChromatogramType>();
                 foreach (var c in chromList.Chromatograms)
                 {
-                    this.chromatogramField.Add(new ChromatogramType(c));
+                    chromatogramField.Add(new ChromatogramType(c));
                 }
             }
         }
@@ -1206,27 +1206,27 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="chromatogram"></param>
         public ChromatogramType(Chromatogram chromatogram) : base(chromatogram)
         {
-            this.indexField = chromatogram.Index;
-            this.idField = chromatogram.Id;
-            this.defaultArrayLengthField = chromatogram.DefaultArrayLength;
-            this.dataProcessingRefField = chromatogram.DataProcessingRef;
+            indexField = chromatogram.Index;
+            idField = chromatogram.Id;
+            defaultArrayLengthField = chromatogram.DefaultArrayLength;
+            dataProcessingRefField = chromatogram.DataProcessingRef;
 
             // Default value
-            this.precursorField = null;
-            this.productField = null;
-            this.binaryDataArrayListField = null;
+            precursorField = null;
+            productField = null;
+            binaryDataArrayListField = null;
 
             if (chromatogram.Precursor != null)
             {
-                this.precursorField = new PrecursorType(chromatogram.Precursor);
+                precursorField = new PrecursorType(chromatogram.Precursor);
             }
             if (chromatogram.Product != null)
             {
-                this.productField = new ProductType(chromatogram.Product);
+                productField = new ProductType(chromatogram.Product);
             }
             if (chromatogram.BinaryDataArrayList != null)
             {
-                this.binaryDataArrayListField = new BinaryDataArrayListType(chromatogram.BinaryDataArrayList);
+                binaryDataArrayListField = new BinaryDataArrayListType(chromatogram.BinaryDataArrayList);
             }
         }
 
@@ -1271,14 +1271,14 @@ namespace PSI_Interface.MSData.mzML
         public ScanSettingsListType(List<ScanSettingsInfo> ssList)
         {
             // Default value
-            this.scanSettingsField = null;
+            scanSettingsField = null;
 
             if (ssList != null && ssList.Count > 0)
             {
-                this.scanSettingsField = new List<ScanSettingsType>();
+                scanSettingsField = new List<ScanSettingsType>();
                 foreach (var ss in ssList)
                 {
-                    this.scanSettingsField.Add(new ScanSettingsType(ss));
+                    scanSettingsField.Add(new ScanSettingsType(ss));
                 }
             }
         }
@@ -1304,19 +1304,19 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="settings"></param>
         public ScanSettingsType(ScanSettingsInfo settings) : base(settings)
         {
-            this.idField = settings.Id;
+            idField = settings.Id;
 
             // Default values
-            this.sourceFileRefListField = null;
-            this.targetListField = null;
+            sourceFileRefListField = null;
+            targetListField = null;
 
             if (settings.SourceFileRefList != null)
             {
-                this.sourceFileRefListField = new SourceFileRefListType(settings.SourceFileRefList);
+                sourceFileRefListField = new SourceFileRefListType(settings.SourceFileRefList);
             }
             if (settings.TargetList != null)
             {
-                this.targetListField = new TargetListType(settings.TargetList);
+                targetListField = new TargetListType(settings.TargetList);
             }
         }
 
@@ -1347,14 +1347,14 @@ namespace PSI_Interface.MSData.mzML
         public SourceFileRefListType(List<SourceFileRef> sfrList)
         {
             // Default value
-            this.sourceFileRefField = null;
+            sourceFileRefField = null;
 
             if (sfrList != null && sfrList.Count > 0)
             {
-                this.sourceFileRefField = new List<SourceFileRefType>();
+                sourceFileRefField = new List<SourceFileRefType>();
                 foreach (var sfr in sfrList)
                 {
-                    this.sourceFileRefField.Add(new SourceFileRefType(sfr));
+                    sourceFileRefField.Add(new SourceFileRefType(sfr));
                 }
             }
         }
@@ -1380,7 +1380,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="sfr"></param>
         public SourceFileRefType(SourceFileRef sfr)
         {
-            this.refField = sfr.Ref;
+            refField = sfr.Ref;
         }
 
         /*
@@ -1403,14 +1403,14 @@ namespace PSI_Interface.MSData.mzML
         public TargetListType(List<ParamGroup> oTargetList)
         {
             // Default value
-            this.targetField = null;
+            targetField = null;
 
             if (oTargetList != null && oTargetList.Count > 0)
             {
-                this.targetField = new List<ParamGroupType>();
+                targetField = new List<ParamGroupType>();
                 foreach (var t in oTargetList)
                 {
-                    this.targetField.Add(new ParamGroupType(t));
+                    targetField.Add(new ParamGroupType(t));
                 }
             }
         }
@@ -1437,14 +1437,14 @@ namespace PSI_Interface.MSData.mzML
         public SoftwareListType(List<SoftwareInfo> scanList)
         {
             // Default value
-            this.softwareField = null;
+            softwareField = null;
 
             if (scanList != null && scanList.Count > 0)
             {
-                this.softwareField = new List<SoftwareType>();
+                softwareField = new List<SoftwareType>();
                 foreach (var s in scanList)
                 {
-                    this.softwareField.Add(new SoftwareType(s));
+                    softwareField.Add(new SoftwareType(s));
                 }
             }
         }
@@ -1471,8 +1471,8 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="software"></param>
         public SoftwareType(SoftwareInfo software) : base(software)
         {
-            this.idField = software.Id;
-            this.versionField = software.Version;
+            idField = software.Id;
+            versionField = software.Version;
         }
 
         /*
@@ -1503,14 +1503,14 @@ namespace PSI_Interface.MSData.mzML
         public InstrumentConfigurationListType(List<InstrumentConfigurationInfo> icList)
         {
             // Default value
-            this.instrumentConfigurationField = null;
+            instrumentConfigurationField = null;
 
             if (icList != null && icList.Count > 0)
             {
-                this.instrumentConfigurationField = new List<InstrumentConfigurationType>();
+                instrumentConfigurationField = new List<InstrumentConfigurationType>();
                 foreach (var ic in icList)
                 {
-                    this.instrumentConfigurationField.Add(new InstrumentConfigurationType(ic));
+                    instrumentConfigurationField.Add(new InstrumentConfigurationType(ic));
                 }
             }
         }
@@ -1539,20 +1539,20 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="ic"></param>
         public InstrumentConfigurationType(InstrumentConfigurationInfo ic) : base(ic)
         {
-            this.idField = ic.Id;
-            this.scanSettingsRefField = ic.ScanSettingsRef;
+            idField = ic.Id;
+            scanSettingsRefField = ic.ScanSettingsRef;
 
             // Default value
-            this.componentListField = null;
-            this.softwareRefField = null;
+            componentListField = null;
+            softwareRefField = null;
 
             if (ic.ComponentList != null)
             {
-                this.componentListField = new ComponentListType(ic.ComponentList);
+                componentListField = new ComponentListType(ic.ComponentList);
             }
             if (ic.SoftwareRef != null)
             {
-                this.softwareRefField = new SoftwareRefType(ic.SoftwareRef);
+                softwareRefField = new SoftwareRefType(ic.SoftwareRef);
             }
         }
 
@@ -1586,32 +1586,32 @@ namespace PSI_Interface.MSData.mzML
         public ComponentListType(ComponentList comp)
         {
             // Default values
-            this.sourceField = null;
-            this.analyzerField = null;
-            this.detectorField = null;
+            sourceField = null;
+            analyzerField = null;
+            detectorField = null;
 
             if (comp.Sources != null && comp.Sources.Count > 0)
             {
-                this.sourceField = new List<SourceComponentType>();
+                sourceField = new List<SourceComponentType>();
                 foreach (var s in comp.Sources)
                 {
-                    this.sourceField.Add(new SourceComponentType(s));
+                    sourceField.Add(new SourceComponentType(s));
                 }
             }
             if (comp.Analyzers != null && comp.Analyzers.Count > 0)
             {
-                this.analyzerField = new List<AnalyzerComponentType>();
+                analyzerField = new List<AnalyzerComponentType>();
                 foreach (var a in comp.Analyzers)
                 {
-                    this.analyzerField.Add(new AnalyzerComponentType(a));
+                    analyzerField.Add(new AnalyzerComponentType(a));
                 }
             }
             if (comp.Detectors != null && comp.Detectors.Count > 0)
             {
-                this.detectorField = new List<DetectorComponentType>();
+                detectorField = new List<DetectorComponentType>();
                 foreach (var d in comp.Detectors)
                 {
-                    this.detectorField.Add(new DetectorComponentType(d));
+                    detectorField.Add(new DetectorComponentType(d));
                 }
             }
         }
@@ -1645,7 +1645,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="comp"></param>
         public ComponentType(Component comp) : base(comp)
         {
-            this.orderField = comp.Order;
+            orderField = comp.Order;
         }
 
         /*
@@ -1716,7 +1716,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="sr"></param>
         public SoftwareRefType(SoftwareRef sr)
         {
-            this.refField = sr.Ref;
+            refField = sr.Ref;
         }
 
         /*
@@ -1739,14 +1739,14 @@ namespace PSI_Interface.MSData.mzML
         public SampleListType(List<SampleInfo> oSampleList)
         {
             // Default value
-            this.sampleField = null;
+            sampleField = null;
 
             if (oSampleList != null && oSampleList.Count > 0)
             {
-                this.sampleField = new List<SampleType>();
+                sampleField = new List<SampleType>();
                 foreach (var s in oSampleList)
                 {
-                    this.sampleField.Add(new SampleType(s));
+                    sampleField.Add(new SampleType(s));
                 }
             }
         }
@@ -1772,8 +1772,8 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="sample"></param>
         public SampleType(SampleInfo sample) : base(sample)
         {
-            this.idField = sample.Id;
-            this.nameField = sample.Name;
+            idField = sample.Id;
+            nameField = sample.Name;
         }
 
         /*
@@ -1800,14 +1800,14 @@ namespace PSI_Interface.MSData.mzML
         public SourceFileListType(List<SourceFileInfo> sfList)
         {
             // Default value
-            this.sourceFileField = null;
+            sourceFileField = null;
 
             if (sfList != null && sfList.Count > 0)
             {
-                this.sourceFileField = new List<SourceFileType>();
+                sourceFileField = new List<SourceFileType>();
                 foreach (var sf in sfList)
                 {
-                    this.sourceFileField.Add(new SourceFileType(sf));
+                    sourceFileField.Add(new SourceFileType(sf));
                 }
             }
         }
@@ -1833,9 +1833,9 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="sf"></param>
         public SourceFileType(SourceFileInfo sf) : base(sf)
         {
-            this.idField = sf.Id;
-            this.nameField = sf.Id;
-            this.locationField = sf.Location;
+            idField = sf.Id;
+            nameField = sf.Id;
+            locationField = sf.Location;
         }
 
         /*
@@ -1866,24 +1866,24 @@ namespace PSI_Interface.MSData.mzML
         public FileDescriptionType(FileDescription fd)
         {
             // Default values
-            this.fileContentField = null;
-            this.sourceFileListField = null;
-            this.contactField = null;
+            fileContentField = null;
+            sourceFileListField = null;
+            contactField = null;
 
             if (fd.FileContentInfo != null)
             {
-                this.fileContentField = new ParamGroupType(fd.FileContentInfo);
+                fileContentField = new ParamGroupType(fd.FileContentInfo);
             }
             if (fd.SourceFileList != null)
             {
-                this.sourceFileListField = new SourceFileListType(fd.SourceFileList);
+                sourceFileListField = new SourceFileListType(fd.SourceFileList);
             }
             if (fd.ContactInfo != null && fd.ContactInfo.Count > 0)
             {
-                this.contactField = new List<ParamGroupType>();
+                contactField = new List<ParamGroupType>();
                 foreach (var c in fd.ContactInfo)
                 {
-                    this.contactField.Add(new ParamGroupType(c));
+                    contactField.Add(new ParamGroupType(c));
                 }
             }
         }

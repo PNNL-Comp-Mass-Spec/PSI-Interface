@@ -17,7 +17,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>By default limit the initial allocation</remarks>
         public IdentDataList() : base(1)
         {
-            this._identData = null;
+            _identData = null;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="capacity">The initial capacity</param>
         public IdentDataList(int capacity) : base(capacity)
         {
-            this._identData = null;
+            _identData = null;
         }
 
         private Dictionary<string, T> idMap;
@@ -110,7 +110,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="items"></param>
         public IdentDataList(IEnumerable<T> items) : base(items)
         {
-            this._identData = null;
+            _identData = null;
         }
 
         private IdentDataObj _identData;
@@ -123,12 +123,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             get => _identData;
             set
             {
-                if (!ReferenceEquals(this._identData, value))
+                if (!ReferenceEquals(_identData, value))
                 {
                     _identData = value;
                     foreach (var item in this)
                     {
-                        item.IdentData = this._identData;
+                        item.IdentData = _identData;
                         //item.CascadeProperties();
                     }
                 }
@@ -139,7 +139,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             foreach (var item in this)
             {
-                item.IdentData = this._identData;
+                item.IdentData = _identData;
                 if (force)
                 {
                     item.CascadeProperties();
@@ -157,7 +157,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             //{
             //    OnAdd(this, null);
             //}
-            item.IdentData = this._identData;
+            item.IdentData = _identData;
             if (idMap != null && item is IIdentifiableType idType && !idMap.ContainsKey(idType.Id))
             {
                 idMap.Add(idType.Id, item);
@@ -176,7 +176,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 // ICollection: make use of the List<T> implementation optimizations for AddRange.
                 foreach (var item in itemsColl)
                 {
-                    item.IdentData = this._identData;
+                    item.IdentData = _identData;
                     if (idMap != null && item is IIdentifiableType idType && !idMap.ContainsKey(idType.Id))
                     {
                         idMap.Add(idType.Id, item);
@@ -189,7 +189,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 foreach (var item in items)
                 {
-                    this.Add(item);
+                    Add(item);
                 }
             }
         }
@@ -233,7 +233,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return false;
             }
-            return this.Equals(o);
+            return Equals(o);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <returns></returns>
         public bool Equals(IdentDataList<T> other)
         {
-            if (this.Count == 0 && (other == null || other.Count == 0))
+            if (Count == 0 && (other == null || other.Count == 0))
             {
                 return true;
             }
@@ -251,7 +251,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return false;
             }
-            if (this.Count != other.Count)
+            if (Count != other.Count)
             {
                 return false;
             }
@@ -284,7 +284,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                if (this.Count == 0)
+                if (Count == 0)
                 {
                     return 0;
                 }

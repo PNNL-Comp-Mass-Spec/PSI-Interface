@@ -9,27 +9,27 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     {
         internal IdentDataInternalTypeAbstract()
         {
-            this._identData = null;
+            _identData = null;
         }
 
         internal IdentDataInternalTypeAbstract(IdentDataObj parent)
         {
-            this.IdentData = parent;
+            IdentData = parent;
         }
 
         private IdentDataObj _identData;
 
         internal IdentDataObj IdentData
         {
-            get => this._identData;
+            get => _identData;
             set
             {
-                if (!ReferenceEquals(this._identData, value))
+                if (!ReferenceEquals(_identData, value))
                 {
-                    this._identData = value;
-                    if (this._identData != null)
+                    _identData = value;
+                    if (_identData != null)
                     {
-                        this.CascadeProperties();
+                        CascadeProperties();
                     }
                 }
             }
@@ -37,13 +37,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         internal void CascadeProperties(bool force = false)
         {
-            if (this._identData == null)
+            if (_identData == null)
             {
                 return;
             }
             //foreach (var prop in this.GetType().GetProperties()) // Only will return public properties...
             // Cascade property setting on down the hierarchy. TODO: TEST THIS EXTENSIVELY!!!
-            foreach (var prop in this.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
+            foreach (var prop in GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
             {
                 var propValue = prop.GetValue(this);
                 var propType = prop.PropertyType.GetTypeInfo();
@@ -56,7 +56,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     if (propValue is IdentDataInternalTypeAbstract)
                     {
                         var value = ((IdentDataInternalTypeAbstract)(prop.GetValue(this)));
-                        value.IdentData = this._identData;
+                        value.IdentData = _identData;
                         if (force)
                         {
                             value.CascadeProperties();
@@ -68,7 +68,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                             .GetProperty("IdentData",
                                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
                                 BindingFlags.FlattenHierarchy);
-                        identDataProp.SetValue(propValue, this._identData);
+                        identDataProp.SetValue(propValue, _identData);
                         if (force)
                         {
                             var cascadeMethod = propValue.GetType()

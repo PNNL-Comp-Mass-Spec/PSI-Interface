@@ -34,24 +34,24 @@ namespace PSI_Interface.MSData
         /// <param name="createTranslator"></param>
         public MSData(bool createTranslator = true)
         {
-            this.CvTranslator = null;
+            CvTranslator = null;
             if (createTranslator)
             {
                 //this.CvTranslator = new CVTranslator();
-                this.DefaultCV();
+                DefaultCV();
             }
-            this.CVList = null;
-            this.FileDescription = null;
-            this.ReferenceableParamGroupList = null;
-            this.SampleList = null;
-            this.SoftwareList = null;
-            this.ScanSettingsList = null;
-            this.InstrumentConfigurationList = null;
-            this.DataProcessingList = null;
-            this.Run = null;
-            this.Accession = null;
-            this.Id = null;
-            this.Version = null;
+            CVList = null;
+            FileDescription = null;
+            ReferenceableParamGroupList = null;
+            SampleList = null;
+            SoftwareList = null;
+            ScanSettingsList = null;
+            InstrumentConfigurationList = null;
+            DataProcessingList = null;
+            Run = null;
+            Accession = null;
+            Id = null;
+            Version = null;
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public void DefaultCV()
         {
-            this.CVList = new MSDataList<CVInfo>();
+            CVList = new MSDataList<CVInfo>();
             foreach (var cv in CV.CV.CVInfoList)
             {
                 if (string.Equals(cv.Id, "pato", System.StringComparison.OrdinalIgnoreCase) ||
@@ -77,9 +77,9 @@ namespace PSI_Interface.MSData
                     Version = cv.Version
                 };
 
-                this.CVList.Add(newcv);
+                CVList.Add(newcv);
             }
-            this.CvTranslator = new CVTranslator(this.CVList);
+            CvTranslator = new CVTranslator(CVList);
         }
     }
     /*
@@ -122,10 +122,10 @@ namespace PSI_Interface.MSData
         /// </summary>
         public CVInfo()
         {
-            this.Id = null;
-            this.FullName = null;
-            this.Version = null;
-            this.URI = null;
+            Id = null;
+            FullName = null;
+            Version = null;
+            URI = null;
         }
     }
     /*
@@ -165,8 +165,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public DataProcessingInfo()
         {
-            this.ProcessingMethods = null;
-            this.Id = null;
+            ProcessingMethods = null;
+            Id = null;
         }
     }
 
@@ -180,8 +180,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ProcessingMethodInfo()
         {
-            this.Order = 0;
-            this.SoftwareRef = null;
+            Order = 0;
+            SoftwareRef = null;
         }
     }
 
@@ -196,9 +196,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ParamGroup()
         {
-            this.ReferenceableParamGroupRefs = null;
-            this.CVParams = null;
-            this.UserParams = null;
+            ReferenceableParamGroupRefs = null;
+            CVParams = null;
+            UserParams = null;
         }
     }
     /*
@@ -238,9 +238,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ReferenceableParamGroup()
         {
-            this.CVParams = null;
-            this.UserParams = null;
-            this.Id = null;
+            CVParams = null;
+            UserParams = null;
+            Id = null;
         }
     }
 
@@ -255,7 +255,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ReferenceableParamGroupRef()
         {
-            this.Ref = null;
+            Ref = null;
         }
     }
 
@@ -271,11 +271,11 @@ namespace PSI_Interface.MSData
         public CVParam()
         {
             //this.CVRef = null;
-            this._cvRef = "??";
-            this.Cvid = CV.CV.CVID.CVID_Unknown;
+            _cvRef = "??";
+            Cvid = CV.CV.CVID.CVID_Unknown;
             //this.Accession = null;
             //this.Name = null;
-            this.Value = null;
+            Value = null;
             //this.UnitCVRef = null;
             //this._unitCvRef = "??";
             //this.UnitCvid = CV.CV.CVID.CVID_Unknown;
@@ -297,9 +297,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public UserParam()
         {
-            this.Name = null;
-            this.Type = null;
-            this.Value = null;
+            Name = null;
+            Type = null;
+            Value = null;
             //this.UnitCVRef = null;
             //this._unitCvRef = "??";
             //this.UnitCvid = CV.CV.CVID.CVID_Unknown;
@@ -321,9 +321,9 @@ namespace PSI_Interface.MSData
         {
             //this.Value = null;
             //this.UnitCVRef = null;
-            this._unitsSet = false;
-            this._unitCvRef = null;
-            this._unitCvid = CV.CV.CVID.CVID_Unknown;
+            _unitsSet = false;
+            _unitCvRef = null;
+            _unitCvid = CV.CV.CVID.CVID_Unknown;
             //this.UnitAccession = null;
             //this.UnitName = null;
         }
@@ -367,12 +367,12 @@ namespace PSI_Interface.MSData
         /// </summary>
         public Precursor()
         {
-            this.IsolationWindow = null;
-            this.SelectedIonList = null;
-            this.Activation = null;
-            this.SpectrumRef = null;
-            this.SourceFileRef = null;
-            this.ExternalSpectrumID = null;
+            IsolationWindow = null;
+            SelectedIonList = null;
+            Activation = null;
+            SpectrumRef = null;
+            SourceFileRef = null;
+            ExternalSpectrumID = null;
         }
     }
 
@@ -443,12 +443,12 @@ namespace PSI_Interface.MSData
         /// </summary>
         public BinaryDataArray()
         {
-            this.DataProcessingRef = null;
-            this.ArrayLength = 0;
-            this._arrayLength = 0;
-            this._isCompressed = false;
-            this._dataWidth = 8;
-            this.Data = null;
+            DataProcessingRef = null;
+            ArrayLength = 0;
+            _arrayLength = 0;
+            _isCompressed = false;
+            _dataWidth = 8;
+            Data = null;
         }
     }
 
@@ -463,7 +463,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ScanList()
         {
-            this.Scan = null;
+            Scan = null;
         }
     }
 
@@ -478,11 +478,11 @@ namespace PSI_Interface.MSData
         /// </summary>
         public Scan()
         {
-            this.ScanWindowList = null;
-            this.SpectrumRef = null;
-            this.SourceFileRef = null;
-            this.ExternalSpectrumID = null;
-            this.InstrumentConfigurationRef = null;
+            ScanWindowList = null;
+            SpectrumRef = null;
+            SourceFileRef = null;
+            ExternalSpectrumID = null;
+            InstrumentConfigurationRef = null;
         }
     }
 
@@ -524,8 +524,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public SpectrumList()
         {
-            this.Spectra = null;
-            this.DefaultDataProcessingRef = null;
+            Spectra = null;
+            DefaultDataProcessingRef = null;
         }
     }
 
@@ -541,15 +541,15 @@ namespace PSI_Interface.MSData
         /// </summary>
         public Spectrum()
         {
-            this.ScanList = null;
-            this.PrecursorList = null;
-            this.BinaryDataArrayList = null;
-            this.Index = null;
-            this.Id = null;
-            this.SpotID = null;
+            ScanList = null;
+            PrecursorList = null;
+            BinaryDataArrayList = null;
+            Index = null;
+            Id = null;
+            SpotID = null;
             //this.DefaultArrayLength = s.defaultArrayLength; // TODO: Fix this.
-            this.DataProcessingRef = null;
-            this.SourceFileRef = null;
+            DataProcessingRef = null;
+            SourceFileRef = null;
         }
     }
 
@@ -591,7 +591,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public Product()
         {
-            this.IsolationWindow = null;
+            IsolationWindow = null;
         }
     }
 
@@ -606,14 +606,14 @@ namespace PSI_Interface.MSData
         /// </summary>
         public Run()
         {
-            this.SpectrumList = null;
-            this.ChromatogramList = null;
-            this.Id = null;
-            this.DefaultInstrumentConfigurationRef = null;
-            this.DefaultSourceFileRef = null;
-            this.SampleRef = null;
-            this.StartTimeStamp = System.DateTime.Now;
-            this.StartTimeStampSpecified = false;
+            SpectrumList = null;
+            ChromatogramList = null;
+            Id = null;
+            DefaultInstrumentConfigurationRef = null;
+            DefaultSourceFileRef = null;
+            SampleRef = null;
+            StartTimeStamp = System.DateTime.Now;
+            StartTimeStampSpecified = false;
         }
     }
 
@@ -628,8 +628,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ChromatogramList()
         {
-            this.Chromatograms = null;
-            this.DefaultDataProcessingRef = null;
+            Chromatograms = null;
+            DefaultDataProcessingRef = null;
         }
     }
 
@@ -644,13 +644,13 @@ namespace PSI_Interface.MSData
         /// </summary>
         public Chromatogram()
         {
-            this.Precursor = null;
-            this.Product = null;
-            this.BinaryDataArrayList = null;
-            this.Index = null;
-            this.Id = null;
+            Precursor = null;
+            Product = null;
+            BinaryDataArrayList = null;
+            Index = null;
+            Id = null;
             //this.DefaultArrayLength = c.defaultArrayLength; // TODO: fix appropriately
-            this.DataProcessingRef = null;
+            DataProcessingRef = null;
         }
     }
 
@@ -692,9 +692,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ScanSettingsInfo()
         {
-            this.SourceFileRefList = null;
-            this.TargetList = null;
-            this.Id = null;
+            SourceFileRefList = null;
+            TargetList = null;
+            Id = null;
         }
     }
 
@@ -735,7 +735,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public SourceFileRef()
         {
-            this.Ref = null;
+            Ref = null;
         }
     }
 
@@ -804,8 +804,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public SoftwareInfo()
         {
-            this.Id = null;
-            this.Version = null;
+            Id = null;
+            Version = null;
         }
     }
 
@@ -854,10 +854,10 @@ namespace PSI_Interface.MSData
         /// </summary>
         public InstrumentConfigurationInfo()
         {
-            this.ComponentList = null;
-            this.SoftwareRef = null;
-            this.Id = null;
-            this.ScanSettingsRef = null;
+            ComponentList = null;
+            SoftwareRef = null;
+            Id = null;
+            ScanSettingsRef = null;
         }
     }
 
@@ -872,9 +872,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public ComponentList()
         {
-            this.Sources = null;
-            this.Analyzers = null;
-            this.Detectors = null;
+            Sources = null;
+            Analyzers = null;
+            Detectors = null;
         }
     }
 
@@ -888,7 +888,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public Component()
         {
-            this.Order = 0;
+            Order = 0;
         }
     }
 
@@ -948,7 +948,7 @@ namespace PSI_Interface.MSData
         /// </summary>
         public SoftwareRef()
         {
-            this.Ref = null;
+            Ref = null;
         }
     }
 
@@ -990,8 +990,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public SampleInfo()
         {
-            this.Id = null;
-            this.Name = null;
+            Id = null;
+            Name = null;
         }
     }
 
@@ -1033,9 +1033,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public SourceFileInfo()
         {
-            this.Id = null;
-            this.Name = null;
-            this.Location = null;
+            Id = null;
+            Name = null;
+            Location = null;
         }
     }
 
@@ -1050,9 +1050,9 @@ namespace PSI_Interface.MSData
         /// </summary>
         public FileDescription()
         {
-            this.FileContentInfo = null;
-            this.SourceFileList = null;
-            this.ContactInfo = null;
+            FileContentInfo = null;
+            SourceFileList = null;
+            ContactInfo = null;
         }
     }
 }
