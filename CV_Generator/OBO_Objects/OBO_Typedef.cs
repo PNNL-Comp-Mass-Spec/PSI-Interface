@@ -137,17 +137,17 @@ namespace CV_Generator.OBO_Objects
         // XRefUnknown deprecated
         public string Domain;
         public string Range;
-        public bool IsAntiSymmetric = false;
-        public bool IsCyclic = false;
-        public bool IsReflexive = false;
-        public bool IsSymmetric = false;
-        public bool IsTransitive = false;
+        public bool IsAntiSymmetric;
+        public bool IsCyclic;
+        public bool IsReflexive;
+        public bool IsSymmetric;
+        public bool IsTransitive;
         // Tags that are not allowed with IsObsolete == true:
         public readonly List<string> IsA = new List<string>();
         public string InverseOf; // zero or one; // only allowed in Typedef
         public readonly List<string> TransitiveOver = new List<string>();
         public readonly List<string> Relationship = new List<string>();
-        public bool IsObsolete = false;
+        public bool IsObsolete;
         // Tags that are only allowed with IsObsolete == true:
         public readonly List<string> ReplacedBy = new List<string>();
         public readonly List<string> Consider = new List<string>();
@@ -155,6 +155,6 @@ namespace CV_Generator.OBO_Objects
         public string CreatedBy;
         public string CreationDate;
 
-        public bool IsMetadataTag = false;
+        public bool IsMetadataTag;
     }
 }

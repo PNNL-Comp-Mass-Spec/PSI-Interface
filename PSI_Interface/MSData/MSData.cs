@@ -700,7 +700,7 @@ namespace PSI_Interface.MSData
         private string _unitCvRef;
         //private CVType _UnitCVRef;
         private CV.CV.CVID _unitCvid = CV.CV.CVID.CVID_Unknown;
-        private bool _unitsSet = false;
+        private bool _unitsSet;
 
         //[System.Xml.Serialization.XmlIgnore]
         /// <summary>

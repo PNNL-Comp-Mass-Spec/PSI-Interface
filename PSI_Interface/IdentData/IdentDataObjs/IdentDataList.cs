@@ -29,7 +29,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             this._identData = null;
         }
 
-        private Dictionary<string, T> idMap = null;
+        private Dictionary<string, T> idMap;
 
         /// <summary>
         /// When called, initializes an internal dictionary that then tracks all adds and allows fast ID-to-object reference resolving (only valid for objects implementing <see cref="IIdentifiableType"/>)

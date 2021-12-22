@@ -134,7 +134,7 @@ namespace CV_Generator.OBO_Objects
         public string Name;
 
         // Optional
-        public bool IsAnonymous = false;
+        public bool IsAnonymous;
         public string Namespace;
         public readonly List<string> AltId = new List<string>();
         public string Def; // zero or one
@@ -154,7 +154,7 @@ namespace CV_Generator.OBO_Objects
         public readonly List<string> DisjointFrom = new List<string>();
         public readonly List<string> Relationship = new List<string>();
         // public string InverseOf; only allowed in Typedef
-        public bool IsObsolete = false;
+        public bool IsObsolete;
         // Tags that are only allowed with IsObsolete == true:
         public readonly List<string> ReplacedBy = new List<string>();
         public readonly List<string> Consider = new List<string>();

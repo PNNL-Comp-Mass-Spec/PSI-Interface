@@ -196,7 +196,7 @@ namespace PSI_Interface.IdentData
         private string softwareName = string.Empty;
         private string softwareVersion = string.Empty;
         private bool isSpectrumIdNotAScanNum;
-        private CancellationToken cancellationToken = default(CancellationToken);
+        private CancellationToken cancellationToken;
         private readonly bool dropDuplicates;
         private readonly Action<string> errorReportAction;
         private readonly List<SearchModification> searchModifications = new List<SearchModification>();

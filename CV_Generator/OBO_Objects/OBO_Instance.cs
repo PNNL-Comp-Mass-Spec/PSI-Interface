@@ -77,7 +77,7 @@ namespace CV_Generator.OBO_Objects
         // XRefAnalog deprecated
         // XRefUnknown deprecated
         public readonly List<string> Property_Value = new List<string>();
-        public bool IsObsolete = false;
+        public bool IsObsolete;
         // Tags that are not allowed with IsObsolete == true:
         // Tags that are only allowed with IsObsolete == true:
         public readonly List<string> ReplacedBy = new List<string>();
