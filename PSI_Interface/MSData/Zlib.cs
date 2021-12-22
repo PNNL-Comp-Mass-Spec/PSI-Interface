@@ -157,7 +157,7 @@ namespace PSI_Interface.MSData
             /// <returns>Returns checksum if the checksum values is successfully calculated, otherwise null</returns>
             public static uint? MakeForBuff(byte[] bytesBuff, uint unAdlerCheckSum)
             {
-                if (object.Equals(bytesBuff, null))
+                if (bytesBuff == null)
                 {
                     return null;
                 }
