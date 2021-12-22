@@ -12,6 +12,9 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
     public partial class MzIdentMLType : IdentifiableType
     {
+        // Ignore Spelling: bool, codons, cv, cvp, daltons, de novo, denovo, immonium, isoelectric
+        // Ignore Spelling: poly, pre, taxon, validator, workflow, xsd
+
         /// <summary>
         /// Default Constructor
         /// </summary>

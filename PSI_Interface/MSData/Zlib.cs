@@ -10,6 +10,8 @@ namespace PSI_Interface.MSData
     /// </summary>
     public static class Zlib
     {
+        // Ignore Spelling: endian, Youry Jukov, zlib
+
         /// <summary>
         /// Decompress zlib-compressed bytes
         /// </summary>

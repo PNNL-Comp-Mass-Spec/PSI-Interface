@@ -27,6 +27,8 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
+        // Ignore Spelling: proteomics
+
         /// <summary>
         /// Constructor
         /// </summary>

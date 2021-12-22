@@ -18,6 +18,9 @@ namespace PSI_Interface.MSData.mzML
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class mzMLType
     {
+        // ReSharper disable once CommentTypo
+        // Ignore Spelling: bool, cv, datatype, endian, proteomics, unmerged, xsd
+
         /// <summary>
         /// Translating Constructor from a MSData object
         /// </summary>

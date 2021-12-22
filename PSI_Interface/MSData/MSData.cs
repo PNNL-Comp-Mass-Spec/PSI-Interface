@@ -26,7 +26,7 @@ namespace PSI_Interface.MSData
     /// the initial processing of that data (to the level of the peak list)</remarks>
     public partial class MSData
     {
-        // Ignore Spelling: cv, cvid, cvs, endian, oboAcc, referenceable, xsd, zlib
+        // Ignore Spelling: cv, cvid, cvs, endian, oboAcc, proteomics, referenceable, unmerged, xsd, zlib
 
         internal CVTranslator CvTranslator;// = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
         private MSDataList<CVInfo> _cvList;
