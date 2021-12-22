@@ -8,13 +8,6 @@ namespace Interface_Tests.IdentDataTests
 {
     class IdentDataWriteTests
     {
-        public IdentDataWriteTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         #region Additional test attributes
 
         //

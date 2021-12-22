@@ -11,13 +11,6 @@ namespace Interface_Tests.MSDataTests.mzMLTests
     [TestFixture]
     public class mzMLWriteTests
     {
-        public mzMLWriteTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         #region Additional test attributes
 
         //

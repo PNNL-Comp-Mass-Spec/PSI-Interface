@@ -13,13 +13,6 @@ namespace Interface_Tests.MSDataTests
     [TestFixture]
     public class MSDataWriteTests
     {
-        public MSDataWriteTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         #region Additional test attributes
 
         //

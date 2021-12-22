@@ -11,13 +11,6 @@ namespace Interface_Tests.CVTests
 {
     class CVTests
     {
-        public CVTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:

@@ -9,13 +9,6 @@ namespace Interface_Tests.MSDataTests
     [TestFixture]
     class MSDataReadTests
     {
-        public MSDataReadTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:

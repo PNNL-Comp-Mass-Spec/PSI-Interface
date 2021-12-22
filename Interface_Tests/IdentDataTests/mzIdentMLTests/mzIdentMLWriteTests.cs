@@ -7,13 +7,6 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
 {
     class mzIdentMLWriteTests
     {
-        public mzIdentMLWriteTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         #region Additional test attributes
 
         //
