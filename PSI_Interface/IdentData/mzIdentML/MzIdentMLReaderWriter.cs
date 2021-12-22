@@ -15,7 +15,6 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <summary>
         /// Read the mzid file into MzIdentMLType objects
         /// </summary>
-        /// <returns></returns>
         public static MzIdentMLType Read(string filePath, int bufferSize = 65536)
         {
             var detectedVersion = DetectFileSchemaVersion(filePath);

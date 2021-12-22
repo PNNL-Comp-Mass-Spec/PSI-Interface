@@ -58,7 +58,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// 1-based indexing
         /// </param>
         /// <param name="monoMassDelta">monoisotopic mass delta</param>
-        /// <returns></returns>
         public ModificationObj(CV.CV.CVID unimodCv, string modificationName = "", int location = int.MinValue, double monoMassDelta = double.NaN) : this()
         {
             if (!monoMassDelta.Equals(double.NaN))
@@ -132,8 +131,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// are given, it is assumed that the exact residue modified is unknown i.e. the modification is to ONE of
         /// the residues listed. Multiple residues would usually only be specified for PMF data.
         /// </summary>
-        /// <returns>listOfChars, string, space-separated RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
         /// <remarks>Optional Attribute</remarks>
+        /// <returns>listOfChars, string, space-separated RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{1}"</returns>
         public List<string> Residues { get; set; }
 
         /// <summary>
@@ -200,7 +199,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as ModificationObj;
@@ -213,7 +211,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(ModificationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -231,7 +228,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked

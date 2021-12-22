@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using PSI_Interface.IdentData.mzIdentML;
 using PSI_Interface.Utils;
@@ -60,8 +60,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>The frames in which the nucleic acid sequence has been translated as a space separated IdentDataList</summary>
-        /// <returns>List of allowed frames: -3, -2, -1, 1, 2, 3</returns>
         /// <remarks>Optional Attribute</remarks>
+        /// <returns>List of allowed frames: -3, -2, -1, 1, 2, 3</returns>
         public List<int> Frames { get; set; }
 
         #region Object Equality
@@ -70,7 +70,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as DatabaseTranslationObj;
@@ -83,7 +82,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(DatabaseTranslationObj other)
         {
             if (ReferenceEquals(this, other))
@@ -100,7 +98,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -61,7 +61,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="pre">prefix residue, "." if the beginning of the sequence</param>
         /// <param name="post">post/suffix residue, "." if the end of the sequence</param>
         /// <param name="isDecoy">true if the peptide is a decoy</param>
-        /// <returns></returns>
         public PeptideEvidenceObj(DbSequenceObj dbSeq, PeptideObj peptide, int start, int end,
             string pre, string post, bool isDecoy = false) : this()
         {
@@ -106,16 +105,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Previous flanking residue. If the peptide is N-terminal, pre="-" and not pre="".
         /// If for any reason it is unknown (e.g. DeNovo), pre="?" should be used.
         /// </summary>
-        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         public string Pre { get; set; }
 
         /// <summary>
         /// Post flanking residue. If the peptide is C-terminal, post="-" and not post="". If for any reason it is unknown
         /// (e.g. DeNovo), post="?" should be used.
         /// </summary>
-        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         /// <remarks>Optional Attribute</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ?\-]{1}"</returns>
         public string Post { get; set; }
 
         /// <summary>
@@ -295,7 +294,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as PeptideEvidenceObj;
@@ -308,7 +306,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(PeptideEvidenceObj other)
         {
             if (ReferenceEquals(this, other))
@@ -327,7 +324,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked

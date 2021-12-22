@@ -245,13 +245,13 @@ namespace Interface_Tests.MSDataTests
         /// <summary>
         /// Open the file with random access and obtain chromatogram data using reader.ReadChromatogram()
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="expectedChromatograms"></param>
-        /// <param name="immediateRandomAccess"></param>
         /// <remarks>
         /// If the file is not initially opened with random access enabled,
         /// reader.NumChromatograms will report 0 and the chromatogram data cannot be read
         /// </remarks>
+        /// <param name="path"></param>
+        /// <param name="expectedChromatograms"></param>
+        /// <param name="immediateRandomAccess"></param>
         [Test]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 1, true)]
         [TestCase(@"MzML\Rush2_p14RR_62_26Oct17_Smeagol-WRUSHCol3_75x20a_SRM.mzML", 967, true)]

@@ -36,13 +36,6 @@ namespace Interface_Tests.IdentDataTests
         /// Read/Write using MzIdentMlReaderWriter
         /// but use PSI_Interface.IdentData.IdentDataObj
         /// </summary>
-        /// <param name="inPath"></param>
-        /// <param name="outFolderName"></param>
-        /// <param name="expectedSpecLists"></param>
-        /// <param name="expectedSpecResults"></param>
-        /// <param name="expectedSpecItems"></param>
-        /// <param name="expectedPeptides"></param>
-        /// <param name="expectedSeqs"></param>
         /// <remarks>
         /// cv id="MS" fullName="Proteomics Standards Initiative Mass Spectrometry Ontology" version="4.0.2"
         ///    uri="https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo"
@@ -51,6 +44,13 @@ namespace Interface_Tests.IdentDataTests
         /// cv id = "UO" fullName="Unit Ontology" version="releases/2016-05-13"
         ///    uri="http://www.berkeleybop.org/ontologies/uo/uo.obo"
         /// </remarks>
+        /// <param name="inPath"></param>
+        /// <param name="outFolderName"></param>
+        /// <param name="expectedSpecLists"></param>
+        /// <param name="expectedSpecResults"></param>
+        /// <param name="expectedSpecItems"></param>
+        /// <param name="expectedPeptides"></param>
+        /// <param name="expectedSeqs"></param>
         [Test]
         // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid",                  "output", 1, 10894, 11612, 8806, 4507)]
         // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid",             "output", 1, 10894, 11612, 8806, 4507)]

@@ -35,13 +35,6 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         /// Read/Write using MzIdentMlReaderWriter
         /// but use PSI_Interface.IdentData.IdentDataObj
         /// </summary>
-        /// <param name="inPath"></param>
-        /// <param name="outFolderName"></param>
-        /// <param name="expectedSpecLists"></param>
-        /// <param name="expectedSpecResults"></param>
-        /// <param name="expectedSpecItems"></param>
-        /// <param name="expectedPeptides"></param>
-        /// <param name="expectedSeqs"></param>
         /// <remarks>
         /// cv id="PSI-MS" fullName="PSI-MS" version="3.30.0"
         ///    uri="http://psidev.cvs.sourceforge.net/viewvc/*checkout*/psidev/psi/psi-ms/mzML/controlledVocabulary/psi-ms.obo"
@@ -50,6 +43,13 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         /// cv id="UO" fullName="UNIT-ONTOLOGY"
         ///    uri="http://obo.cvs.sourceforge.net/*checkout*/obo/obo/ontology/phenotype/unit.obo"
         /// </remarks>
+        /// <param name="inPath"></param>
+        /// <param name="outFolderName"></param>
+        /// <param name="expectedSpecLists"></param>
+        /// <param name="expectedSpecResults"></param>
+        /// <param name="expectedSpecItems"></param>
+        /// <param name="expectedPeptides"></param>
+        /// <param name="expectedSeqs"></param>
         [Test]
         // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid","output", 1, 10894, 11612, 8806, 4507)]
         // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", "output", 1, 10894, 11612, 8806, 4507)]

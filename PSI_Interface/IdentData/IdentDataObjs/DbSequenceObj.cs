@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -71,8 +71,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>The actual sequence of amino acids or nucleic acid.</summary>
-        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"</returns>
         /// <remarks>min 0, max 1</remarks>
+        /// <returns>RegEx: "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"</returns>
         public string Seq { get; set; }
 
         /// <summary>The unique accession of this sequence.</summary>
@@ -147,7 +147,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public new bool Equals(object other)
         {
             var o = other as DbSequenceObj;
@@ -160,7 +159,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(DbSequenceObj other)
         {
             if (ReferenceEquals(this, other))
@@ -178,7 +176,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked

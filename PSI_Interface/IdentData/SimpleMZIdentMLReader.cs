@@ -78,7 +78,6 @@ namespace PSI_Interface.IdentData
             /// </summary>
             /// <param name="nativeId"></param>
             /// <param name="num"></param>
-            /// <returns></returns>
             public static bool TryGetScanNumberLong(string nativeId, out long num)
             {
                 return long.TryParse(GetScanNumber(nativeId), out num);
@@ -89,7 +88,6 @@ namespace PSI_Interface.IdentData
             /// </summary>
             /// <param name="nativeId"></param>
             /// <param name="num"></param>
-            /// <returns></returns>
             public static bool TryGetScanNumberInt(string nativeId, out int num)
             {
                 return int.TryParse(GetScanNumber(nativeId), out num);
@@ -100,7 +98,6 @@ namespace PSI_Interface.IdentData
             /// If the nativeID cannot be interpreted, the original value is returned.
             /// </summary>
             /// <param name="nativeId"></param>
-            /// <returns></returns>
             public static string GetScanNumber(string nativeId)
             {
                 // TODO: Add interpreter for Waters' S0F1, S1F1, S0F2,... format
@@ -435,9 +432,9 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Compares 2 search modifications for equality, excluding <see cref="Residues"/> from the comparison
             /// </summary>
+            /// <remarks>MS-GF+ adds all modifications and affected sites as distinct search modifications, so Phos STY becomes Phos S, Phos T, and Phos Y.</remarks>
             /// <param name="other"></param>
             /// <returns>true if the modifications match (with the exception of the residues)</returns>
-            /// <remarks>MS-GF+ adds all modifications and affected sites as distinct search modifications, so Phos STY becomes Phos S, Phos T, and Phos Y.</remarks>
             public bool AreModificationsSimilar(SearchModification other)
             {
                 return Name.Equals(other.Name) && Mass.Equals(other.Mass) && IsFixed == other.IsFixed && IsNTerm == other.IsNTerm &&
@@ -712,9 +709,6 @@ namespace PSI_Interface.IdentData
         /// Entry point for SimpleMZIdentMLReader
         /// Read the MZIdentML file, map the data to easy-to-use objects, and return the collection of objects
         /// </summary>
-        /// <param name="path">Path to *.mzid/mzIdentML file</param>
-        /// <param name="cancelToken">Cancellation token, to interrupt reading between spectra</param>
-        /// <returns><see cref="SimpleMZIdentMLData"/></returns>
         /// <remarks>
         /// XML Reader parses an MZIdentML file, storing data as follows:
         ///   PeptideRef holds Peptide data, such as sequence, number, and type of modifications
@@ -725,6 +719,9 @@ namespace PSI_Interface.IdentData
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
         /// </remarks>
+        /// <param name="path">Path to *.mzid/mzIdentML file</param>
+        /// <param name="cancelToken">Cancellation token, to interrupt reading between spectra</param>
+        /// <returns><see cref="SimpleMZIdentMLData"/></returns>
         public SimpleMZIdentMLData Read(string path, CancellationToken cancelToken = default)
         {
             cancellationToken = cancelToken;
@@ -764,9 +761,6 @@ namespace PSI_Interface.IdentData
         /// Read the MZIdentML file, map the data to easy-to-use objects, and return the collection of objects
         /// Returns only the metadata, and reads the identifications as they are read from the returned object
         /// </summary>
-        /// <param name="path">Path to *.mzid/mzIdentML file</param>
-        /// <param name="cancelToken">Cancellation token, to interrupt reading between spectra</param>
-        /// <returns><see cref="SimpleMZIdentMLData"/></returns>
         /// <remarks>
         /// XML Reader parses an MZIdentML file, storing data as follows:
         ///   PeptideRef holds Peptide data, such as sequence, number, and type of modifications
@@ -777,6 +771,9 @@ namespace PSI_Interface.IdentData
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
         /// </remarks>
+        /// <param name="path">Path to *.mzid/mzIdentML file</param>
+        /// <param name="cancelToken">Cancellation token, to interrupt reading between spectra</param>
+        /// <returns><see cref="SimpleMZIdentMLData"/></returns>
         public SimpleMZIdentMLDataLowMem ReadLowMem(string path, CancellationToken cancelToken = default)
         {
             cancellationToken = cancelToken;

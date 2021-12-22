@@ -28,7 +28,6 @@ namespace PSI_Interface
         /// </summary>
         /// <param name="nativeId"></param>
         /// <param name="num"></param>
-        /// <returns></returns>
         public static bool TryGetScanNumberLong(string nativeId, out long num)
         {
             return long.TryParse(GetScanNumber(nativeId), out num);
@@ -39,7 +38,6 @@ namespace PSI_Interface
         /// </summary>
         /// <param name="nativeId"></param>
         /// <param name="num"></param>
-        /// <returns></returns>
         public static bool TryGetScanNumberInt(string nativeId, out int num)
         {
             return int.TryParse(GetScanNumber(nativeId), out num);
@@ -50,7 +48,6 @@ namespace PSI_Interface
         /// If the nativeID cannot be interpreted, the original value is returned.
         /// </summary>
         /// <param name="nativeId"></param>
-        /// <returns></returns>
         public static string GetScanNumber(string nativeId)
         {
             // TODO: Add interpreter for Waters' S0F1, S1F1, S0F2,... format

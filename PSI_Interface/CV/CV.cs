@@ -57,7 +57,6 @@ namespace PSI_Interface.CV
         /// </summary>
         /// <param name="child"></param>
         /// <param name="parent"></param>
-        /// <returns></returns>
         public static bool CvidIsA(CVID child, CVID parent)
         {
             if (!RelationsIsA.ContainsKey(child))
@@ -160,7 +159,6 @@ namespace PSI_Interface.CV
             /// Returns true if this term has an IsA relationship with parent
             /// </summary>
             /// <param name="parent"></param>
-            /// <returns></returns>
             public bool IsA(CVID parent)
             {
                 return CvidIsA(Cvid, parent);

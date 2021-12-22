@@ -13,7 +13,6 @@ namespace PSI_Interface.IdentData
         /// <summary>
         /// Get the IdentData object, after tying it all together
         /// </summary>
-        /// <returns></returns>
         public IdentDataObj GetIdentData()
         {
             FinalizeFile();
@@ -236,12 +235,6 @@ namespace PSI_Interface.IdentData
         /// <summary>
         /// Adds information about a search database to the IdentData
         /// </summary>
-        /// <param name="location">Path to the database (absolute path)</param>
-        /// <param name="numberOfSequences">Number of sequences in the database</param>
-        /// <param name="databaseName">Name of the database (can be the filename)</param>
-        /// <param name="publicDatabaseName">Name of the database, if it maps exactly to a CV term; otherwise use CVID_Unknown</param>
-        /// <param name="fileFormatCvid">The format of the database, if it exists in the CV</param>
-        /// <returns>An initialized and added database, can add CVParams that add details about the database. See remarks.</returns>
         /// <remarks>
         /// Valid CVParams to add:
         ///    CVID.MS_MD5
@@ -271,6 +264,12 @@ namespace PSI_Interface.IdentData
         ///    CVID.MS_decoy_DB_accession_regexp
         ///    CVID.MS_decoy_DB_derived_from_OBSOLETE
         /// </remarks>
+        /// <param name="location">Path to the database (absolute path)</param>
+        /// <param name="numberOfSequences">Number of sequences in the database</param>
+        /// <param name="databaseName">Name of the database (can be the filename)</param>
+        /// <param name="publicDatabaseName">Name of the database, if it maps exactly to a CV term; otherwise use CVID_Unknown</param>
+        /// <param name="fileFormatCvid">The format of the database, if it exists in the CV</param>
+        /// <returns>An initialized and added database, can add CVParams that add details about the database. See remarks.</returns>
         public SearchDatabaseInfo AddSearchDatabase(string location, long numberOfSequences, string databaseName, CV.CV.CVID publicDatabaseName = CV.CV.CVID.CVID_Unknown,
             CV.CV.CVID fileFormatCvid = CV.CV.CVID.CVID_Unknown)
         {
@@ -320,7 +319,6 @@ namespace PSI_Interface.IdentData
         /// <param name="name"></param>
         /// <param name="spectrumIdFormat"></param>
         /// <param name="fileFormatCvid"></param>
-        /// <returns></returns>
         public SpectraDataObj AddSpectraData(string location, string name, CV.CV.CVID spectrumIdFormat,
             CV.CV.CVID fileFormatCvid = CV.CV.CVID.CVID_Unknown)
         {

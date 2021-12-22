@@ -137,7 +137,6 @@ namespace PSI_Interface.CV
         /// Convert a file cvRef to the internally used cvRef
         /// </summary>
         /// <param name="cvRef"></param>
-        /// <returns></returns>
         public string ConvertFileCVRef(string cvRef)
         {
             return ConvertCVRef(cvRef, _fileToObo);
@@ -147,7 +146,6 @@ namespace PSI_Interface.CV
         /// Convert an internal cvRef to the cvRef that should be used in the file
         /// </summary>
         /// <param name="cvRef"></param>
-        /// <returns></returns>
         public string ConvertOboCVRef(string cvRef)
         {
             var newCvRef = ConvertCVRef(cvRef, _oboToFile);

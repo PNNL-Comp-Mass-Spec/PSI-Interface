@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -74,7 +74,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as InputSpectrumIdentificationsObj;
@@ -87,7 +86,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(InputSpectrumIdentificationsObj other)
         {
             if (ReferenceEquals(this, other))
@@ -103,7 +101,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             var hashCode = SpectrumIdentificationList != null ? SpectrumIdentificationList.GetHashCode() : 0;

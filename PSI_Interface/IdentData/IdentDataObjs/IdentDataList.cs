@@ -65,7 +65,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Find the first item that matches <paramref name="id"/>. Much faster if <see cref="AddIdMap"/> is called beforehand (and this is called before <see cref="RemoveIdMap"/> is called)
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         public T GetItemById(string id)
         {
             if (idMap != null)
@@ -98,7 +97,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Attempt at converting from an array to an IdentDataList
         /// </summary>
         /// <param name="items"></param>
-        /// <returns></returns>
         public static implicit operator IdentDataList<T>(T[] items)
         {
             return new IdentDataList<T>(items);
@@ -226,7 +224,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="obj"></param>
-        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (!(obj is IdentDataList<T> o))
@@ -240,7 +237,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(IdentDataList<T> other)
         {
             if (Count == 0 && (other == null || other.Count == 0))
@@ -279,7 +275,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
@@ -309,7 +304,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="cvParamList"></param>
         /// <param name="cvid"></param>
         /// <param name="valueIfNotFound"></param>
-        /// <returns></returns>
         public static CVParamObj GetCvParam(this IdentDataList<CVParamObj> cvParamList, CV.CV.CVID cvid, string valueIfNotFound)
         {
             var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);
@@ -334,7 +328,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="paramList"></param>
         /// <param name="cvid"></param>
         /// <param name="valueIfNotFound"></param>
-        /// <returns></returns>
         public static CVParamObj GetCvParam(this IdentDataList<ParamBaseObj> paramList, CV.CV.CVID cvid, string valueIfNotFound)
         {
             var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);

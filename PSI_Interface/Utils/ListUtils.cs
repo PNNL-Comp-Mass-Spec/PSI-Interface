@@ -13,7 +13,6 @@ namespace PSI_Interface.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="first"></param>
         /// <param name="second"></param>
-        /// <returns></returns>
         public static bool ListEqualsUnOrdered<T>(List<T> first, List<T> second)
         {
             if ((first == null || first.Count == 0) && (second == null || second.Count == 0))
@@ -56,7 +55,6 @@ namespace PSI_Interface.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="first"></param>
         /// <param name="second"></param>
-        /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
         public static bool ListEqualsOrdered<T>(List<T> first, List<T> second)
         {

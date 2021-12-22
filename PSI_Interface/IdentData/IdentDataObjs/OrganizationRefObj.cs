@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
@@ -76,7 +76,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(OrganizationRefObj other)
         {
             if (ReferenceEquals(this, other))
@@ -99,7 +98,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as OrganizationRefObj;
@@ -113,7 +111,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             var hashCode = Organization != null ? Organization.GetHashCode() : 0;

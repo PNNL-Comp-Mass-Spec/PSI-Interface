@@ -42,7 +42,6 @@ namespace PSI_Interface.MSData.mzML
         /// <summary>
         /// Read the file specified in the constructor, and return the object
         /// </summary>
-        /// <returns></returns>
         public mzMLType Read()
         {
             if (_hasRead)

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using PSI_Interface.CV;
 using PSI_Interface.IdentData.IdentDataObjs;
@@ -429,7 +429,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="SpectrumIdentificationItemObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal SpectrumIdentificationItemObj FindSpectrumIdentificationItem(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -461,7 +460,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="DbSequenceObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal DbSequenceObj FindDbSequence(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -483,7 +481,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="PeptideObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal PeptideObj FindPeptide(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -505,7 +502,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="PeptideEvidenceObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal PeptideEvidenceObj FindPeptideEvidence(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -527,7 +523,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="MeasureObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal MeasureObj FindMeasure(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -556,7 +551,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="MassTableObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal MassTableObj FindMassTable(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -585,7 +579,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="SampleObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal SampleObj FindSample(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -611,7 +604,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="AnalysisSoftwareObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal AnalysisSoftwareObj FindAnalysisSoftware(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -637,7 +629,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="OrganizationObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal OrganizationObj FindOrganization(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -669,7 +660,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="AbstractContactObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal AbstractContactObj FindContact(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -695,7 +685,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="SearchDatabaseInfo" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal SearchDatabaseInfo FindSearchDatabase(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -721,7 +710,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="SpectraDataObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal SpectraDataObj FindSpectraData(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -747,7 +735,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="SpectrumIdentificationListObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal SpectrumIdentificationListObj FindSpectrumIdentificationList(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -774,7 +761,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="SpectrumIdentificationProtocolObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal SpectrumIdentificationProtocolObj FindSpectrumIdentificationProtocol(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -801,7 +787,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="ProteinDetectionProtocolObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal ProteinDetectionProtocolObj FindProteinDetectionProtocol(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -826,7 +811,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="ProteinDetectionListObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal ProteinDetectionListObj FindProteinDetectionList(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -851,7 +835,6 @@ namespace PSI_Interface.IdentData
         /// Find the <see cref="TranslationTableObj" /> that matches id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
         protected internal TranslationTableObj FindTranslationTable(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -884,7 +867,6 @@ namespace PSI_Interface.IdentData
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(IdentDataObj other)
         {
             if (ReferenceEquals(this, other))
@@ -915,7 +897,6 @@ namespace PSI_Interface.IdentData
         /// Object Equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as IdentDataObj;
@@ -929,7 +910,6 @@ namespace PSI_Interface.IdentData
         /// <summary>
         /// Object Hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked

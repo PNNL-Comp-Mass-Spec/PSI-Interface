@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -129,7 +129,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Convert the value of the CVParam to type T
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         public T ValueAs<T>() where T : IConvertible
         {
             return (T)Convert.ChangeType(Value, typeof(T));
@@ -140,7 +139,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public bool Equals(CVParamObj other)
         {
             if (ReferenceEquals(this, other))
@@ -164,7 +162,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        /// <returns></returns>
         public override bool Equals(object other)
         {
             var o = other as CVParamObj;
@@ -178,7 +175,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Object hash code
         /// </summary>
-        /// <returns></returns>
         public override int GetHashCode()
         {
             unchecked
