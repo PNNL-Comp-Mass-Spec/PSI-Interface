@@ -73,10 +73,12 @@ namespace PSI_Interface.MSData
                 // 78 9C - Default Compression
                 // 78 DA - Best Compression
 
-                var zlibCompressedBytes = new List<byte>();
-                // Add the zlib header bytes to the data
-                zlibCompressedBytes.Add(0x78);
-                zlibCompressedBytes.Add(0x9C);
+                var zlibCompressedBytes = new List<byte>
+                {
+                    // Add the zlib header bytes to the data
+                    0x78,
+                    0x9C
+                };
 
                 // Compress the data using the deflate algorithm
                 using (var deflater = new DeflateStream(msCompressed, CompressionMode.Compress, true))

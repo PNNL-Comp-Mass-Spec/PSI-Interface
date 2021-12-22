@@ -68,11 +68,16 @@ namespace PSI_Interface.MSData
                 {
                     continue;
                 }
-                var newcv = new CVInfo();
-                newcv.FullName = cv.Name;
-                newcv.Id = cv.Id;
-                newcv.URI = cv.URI;
-                newcv.Version = cv.Version;
+
+                // ReSharper disable once IdentifierTypo
+                var newcv = new CVInfo
+                {
+                    FullName = cv.Name,
+                    Id = cv.Id,
+                    URI = cv.URI,
+                    Version = cv.Version
+                };
+
                 this.CVList.Add(newcv);
             }
             this.CvTranslator = new CVTranslator(this.CVList);
