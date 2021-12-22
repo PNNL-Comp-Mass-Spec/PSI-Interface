@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using CV_Generator;
 using CV_Generator.OBO_Objects;
@@ -68,7 +67,7 @@ namespace Interface_Tests.CVTests
             }
         }
 
-        private void WriteCVTerms(FileInfo outFile, OBO_File fileData)
+        private void WriteCVTerms(FileSystemInfo outFile, OBO_File fileData)
         {
             using (var writer = new StreamWriter(new FileStream(outFile.FullName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)))
             {
