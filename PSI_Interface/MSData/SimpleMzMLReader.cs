@@ -3345,9 +3345,9 @@ namespace PSI_Interface.MSData
             //    scanNum = Convert.ToInt32(index) + 1;
             //    // Interpret the NativeID (if the format has an interpreter) and use it instead of the artificial number.
             //    // TODO: Better handling than the artificial ID for other nativeIDs (ones currently not supported)
-            //    if (NativeIdConversion.TryGetScanNumberInt(nativeId, out var num))
+            //    if (NativeIdConversion.TryGetScanNumberInt(nativeId, out var scanNumber))
             //    {
-            //        scanNum = num;
+            //        scanNum = scanNumber;
             //    }
             //}
 
@@ -4666,14 +4666,17 @@ namespace PSI_Interface.MSData
         private byte[] DecompressZLib(byte[] compressedBytes, int expectedBytes)
         {
             var msCompressed = new MemoryStream(compressedBytes);
+
             // We must skip the first two bytes
             // See http://george.chiramattel.com/blog/2007/09/deflatestream-block-length-does-not-match.html
             // Eat the zlib headers, the rest is a normal deflated stream
             msCompressed.ReadByte();
             msCompressed.ReadByte();
+
             //var msInflated = new MemoryStream((int)(msCompressed.Length * 2));
             //var newBytes = new byte[msCompressed.Length * 2];
             var newBytes = new byte[expectedBytes];
+
             // The last 32 bits (4 bytes) are supposed to be an Adler-32 checksum. Might need to remove them as well.
             using (var inflater = new DeflateStream(msCompressed, CompressionMode.Decompress))
             {
@@ -4693,6 +4696,7 @@ namespace PSI_Interface.MSData
                 //  }
                 //}
             }
+
             //newBytes = new byte[msInflated.Length];
             //msInflated.Read(newBytes, 0, (int)msInflated.Length);
             return newBytes;

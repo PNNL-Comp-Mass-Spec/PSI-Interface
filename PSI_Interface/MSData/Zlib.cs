@@ -23,7 +23,7 @@ namespace PSI_Interface.MSData
             {
                 // We must skip the first two bytes
                 // See http://george.chiramattel.com/blog/2007/09/deflatestream-block-length-does-not-match.html
-                // EAT the zlib headers, the rest is usually a normal 'deflate'd stream, with the exception of the last 4 bytes
+                // EAT the zlib headers, the rest is usually a normal 'deflated stream, with the exception of the last 4 bytes
                 msCompressed.ReadByte();
                 msCompressed.ReadByte();
 
@@ -66,7 +66,7 @@ namespace PSI_Interface.MSData
             {
                 // We must skip the first two bytes
                 // See http://george.chiramattel.com/blog/2007/09/deflatestream-block-length-does-not-match.html
-                // EAT the zlib headers, the rest is a normal 'deflate'd stream
+                // EAT the zlib headers, the rest is a normal 'deflated stream
 
                 // https://stackoverflow.com/questions/9050260/what-does-a-zlib-header-look-like
                 // 78 01 - No Compression / low
