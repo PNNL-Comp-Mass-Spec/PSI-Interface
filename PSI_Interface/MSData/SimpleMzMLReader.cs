@@ -317,7 +317,7 @@ namespace PSI_Interface.MSData
 
             public BinaryDataArray()
             {
-                Data = new double[0];
+                Data = Array.Empty<double>();
                 Precision = Precision.Precision32;
                 ArrayType = ArrayType.m_z_array;
                 ArrayLength = 0;
