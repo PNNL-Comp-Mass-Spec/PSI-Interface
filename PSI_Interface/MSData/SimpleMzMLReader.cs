@@ -4626,7 +4626,7 @@ namespace PSI_Interface.MSData
                             // We need to fail out.
                         }
                         //byte[] oneNumber = new byte[dataSize];
-                        //bool swapBytes = true;
+                        //var swapBytes = true;
                         bda.Data = new double[bda.ArrayLength];
                         for (var i = 0; i < bytes.Length; i += dataSize)
                         {

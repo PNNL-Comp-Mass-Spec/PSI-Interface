@@ -126,7 +126,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 if (!ReferenceEquals(this._identData, value))
                 {
                     _identData = value;
-                    foreach (T item in this)
+                    foreach (var item in this)
                     {
                         item.IdentData = this._identData;
                         //item.CascadeProperties();
@@ -137,7 +137,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
         internal void CascadeProperties(bool force = false)
         {
-            foreach (T item in this)
+            foreach (var item in this)
             {
                 item.IdentData = this._identData;
                 if (force)

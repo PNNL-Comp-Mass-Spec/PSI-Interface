@@ -158,15 +158,15 @@ namespace PSI_Interface.MSData
                     return null;
                 }
 
-                int nSize = bytesBuff.GetLength(0);
+                var nSize = bytesBuff.GetLength(0);
                 if (nSize == 0)
                 {
                     return null;
                 }
 
-                uint unSum1 = unAdlerCheckSum & 0xFFFF;
-                uint unSum2 = (unAdlerCheckSum >> 16) & 0xFFFF;
-                for (int i = 0; i < nSize; i++)
+                var unSum1 = unAdlerCheckSum & 0xFFFF;
+                var unSum2 = (unAdlerCheckSum >> 16) & 0xFFFF;
+                for (var i = 0; i < nSize; i++)
                 {
                     unSum1 = (unSum1 + bytesBuff[i]) % AdlerBase;
                     unSum2 = (unSum1 + unSum2) % AdlerBase;
@@ -202,21 +202,17 @@ namespace PSI_Interface.MSData
                         return null;
                     }
 
-                    FileStream fs = new FileStream(sPath, FileMode.Open, FileAccess.Read);
-                    if (object.Equals(fs, null))
-                    {
-                        return null;
-                    }
+                    var fs = new FileStream(sPath, FileMode.Open, FileAccess.Read);
 
                     if (fs.Length == 0)
                     {
                         return null;
                     }
 
-                    byte[] bytesBuff = new byte[AdlerBuff];
+                    var bytesBuff = new byte[AdlerBuff];
                     for (uint i = 0; i < fs.Length; i++)
                     {
-                        uint index = i % AdlerBuff;
+                        var index = i % AdlerBuff;
                         bytesBuff[index] = (byte) fs.ReadByte();
                         if ((index == AdlerBuff - 1) || (i == fs.Length - 1))
                         {

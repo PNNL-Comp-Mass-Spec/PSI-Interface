@@ -1058,7 +1058,7 @@ namespace PSI_Interface.MSData
             {
                 this._dataType = value;
                 // Make sure the appropriate cvParam is set...
-                for (int i = 0; i < CVParams.Count; i++)
+                for (var i = 0; i < CVParams.Count; i++)
                 {
                     foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_array])
                     {
@@ -1091,7 +1091,7 @@ namespace PSI_Interface.MSData
                 }
                 this._dataWidth = value;
                 // Make sure the appropriate cvParam is set...
-                for (int i = 0; i < CVParams.Count; i++)
+                for (var i = 0; i < CVParams.Count; i++)
                 {
                     foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_type])
                     {
@@ -1127,7 +1127,7 @@ namespace PSI_Interface.MSData
             {
                 this._isCompressed = value;
                 // Make sure the appropriate cvParam is set...
-                for (int i = 0; i < CVParams.Count; i++)
+                for (var i = 0; i < CVParams.Count; i++)
                 {
                     foreach (var cvid in CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_compression_type])
                     {
@@ -1139,7 +1139,7 @@ namespace PSI_Interface.MSData
                         }
                     }
                 }
-                CVParam cv = new CVParam();
+                var cv = new CVParam();
                 cv.Cvid = CV.CV.CVID.MS_no_compression;
                 if (this._isCompressed)
                 {
@@ -1414,8 +1414,8 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                int mzLength = 0;
-                int intensityLength = 0;
+                var mzLength = 0;
+                var intensityLength = 0;
                 foreach (var bda in BinaryDataArrayList)
                 {
                     if (bda.DataType == BinaryDataArray.ArrayType.m_z)
@@ -1703,8 +1703,8 @@ namespace PSI_Interface.MSData
         {
             get
             {
-                int timeLength = 0;
-                int intensityLength = 0;
+                var timeLength = 0;
+                var intensityLength = 0;
                 foreach (var bda in BinaryDataArrayList)
                 {
                     if (bda.DataType == BinaryDataArray.ArrayType.time)

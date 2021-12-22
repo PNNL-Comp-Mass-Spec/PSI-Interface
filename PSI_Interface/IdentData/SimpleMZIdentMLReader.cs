@@ -725,7 +725,7 @@ namespace PSI_Interface.IdentData
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
         /// </remarks>
-        public SimpleMZIdentMLData Read(string path, CancellationToken cancelToken = default(CancellationToken))
+        public SimpleMZIdentMLData Read(string path, CancellationToken cancelToken = default)
         {
             cancellationToken = cancelToken;
             var sourceFile = new FileInfo(path);
@@ -777,7 +777,7 @@ namespace PSI_Interface.IdentData
         /// MSGF QValue, MSGR PepQValue, Scan number as well as which peptide it is and which evidences
         /// it has from the analysis run.
         /// </remarks>
-        public SimpleMZIdentMLDataLowMem ReadLowMem(string path, CancellationToken cancelToken = default(CancellationToken))
+        public SimpleMZIdentMLDataLowMem ReadLowMem(string path, CancellationToken cancelToken = default)
         {
             cancellationToken = cancelToken;
             var sourceFile = new FileInfo(path);
@@ -1815,7 +1815,7 @@ namespace PSI_Interface.IdentData
                 }
             }
 
-            bool shouldParseNativeId = !isSpectrumIdNotAScanNum;
+            var shouldParseNativeId = !isSpectrumIdNotAScanNum;
             if (!shouldParseNativeId && scanNum < 0 && !string.IsNullOrWhiteSpace(nativeId) && NativeIdConversion.TryGetScanNumberInt(nativeId, out _))
             {
                 shouldParseNativeId = true;
