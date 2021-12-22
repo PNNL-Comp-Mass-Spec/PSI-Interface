@@ -817,7 +817,7 @@ namespace PSI_Interface.MSData.mzML
             this.defaultSourceFileRef = null;
             this.sampleRef = null;
             this.startTimeStamp = System.DateTime.Now;
-            this.startTimeStampSpecified = startTimeStamp != null;
+            this.startTimeStampSpecified = false;
         }
 
         /*

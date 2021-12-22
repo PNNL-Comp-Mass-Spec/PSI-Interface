@@ -1590,7 +1590,7 @@ namespace PSI_Interface.MSData
             set
             {
                 this._startTimeStampField = value;
-                StartTimeStampSpecified = true;
+                StartTimeStampSpecified = value > DateTime.MinValue;
             }
         }
 
