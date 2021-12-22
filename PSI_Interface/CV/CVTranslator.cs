@@ -38,9 +38,9 @@ namespace PSI_Interface.CV
                 {
                     var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()) && !_oboToFile.ContainsValue(fcv.Id))
+                    if (cvFilename.Equals(fcvFilename, StringComparison.OrdinalIgnoreCase) && !_oboToFile.ContainsValue(fcv.Id))
                     {
-                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.ToLower().Contains("peff"))
+                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.IndexOf("peff", StringComparison.OrdinalIgnoreCase) >= 0)
                         {
                             // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
                             continue;
@@ -74,9 +74,9 @@ namespace PSI_Interface.CV
                 {
                     var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()) && !_oboToFile.ContainsValue(fcv.Id))
+                    if (cvFilename.Equals(fcvFilename, StringComparison.OrdinalIgnoreCase) && !_oboToFile.ContainsValue(fcv.Id))
                     {
-                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.ToLower().Contains("peff"))
+                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.IndexOf("peff", StringComparison.OrdinalIgnoreCase) >= 0)
                         {
                             // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
                             continue;
@@ -110,9 +110,9 @@ namespace PSI_Interface.CV
                 {
                     var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.ToLower().Equals(fcvFilename.ToLower()) && !_oboToFile.ContainsValue(fcv.Id))
+                    if (cvFilename.Equals(fcvFilename, StringComparison.OrdinalIgnoreCase) && !_oboToFile.ContainsValue(fcv.Id))
                     {
-                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.ToLower().Contains("peff"))
+                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.IndexOf("peff", StringComparison.OrdinalIgnoreCase) >= 0)
                         {
                             // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
                             continue;
