@@ -55,9 +55,7 @@
     <Compile Include="TestPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="mzMLDataSetTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CV_Generator\CV_Generator.csproj">
       <Project>{de900d24-6f59-4095-91aa-2807530afa05}</Project>
