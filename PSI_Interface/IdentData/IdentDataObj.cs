@@ -373,7 +373,7 @@ namespace PSI_Interface.IdentData
             foreach (var cv in CV.CV.CVInfoList)
             {
                 // ReSharper disable once StringLiteralTypo
-                if (cv.Id.ToLower() == "pato")
+                if (string.Equals(cv.Id, "pato", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
