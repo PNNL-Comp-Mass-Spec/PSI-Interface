@@ -443,7 +443,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="rpgr"></param>
         public ReferenceableParamGroupRefType(ReferenceableParamGroupRef rpgr)
         {
-            this.@refField = rpgr.Ref;
+            this.refField = rpgr.Ref;
         }
 
         /*
@@ -1381,7 +1381,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="sfr"></param>
         public SourceFileRefType(SourceFileRef sfr)
         {
-            this.@refField = sfr.Ref;
+            this.refField = sfr.Ref;
         }
 
         /*
@@ -1717,7 +1717,7 @@ namespace PSI_Interface.MSData.mzML
         /// <param name="sr"></param>
         public SoftwareRefType(SoftwareRef sr)
         {
-            this.@refField = sr.Ref;
+            this.refField = sr.Ref;
         }
 
         /*
