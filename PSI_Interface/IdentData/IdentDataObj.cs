@@ -409,6 +409,7 @@ namespace PSI_Interface.IdentData
         /// <summary>
         /// Rebuild some of the internal lists using object references
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public void RebuildLists()
         {
             // TODO: Not Implementing for now
@@ -947,9 +948,13 @@ namespace PSI_Interface.IdentData
                 hashCode = (hashCode * 397) ^
                            (BibliographicReferences != null ? BibliographicReferences.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ CreationDate.GetHashCode();
+
+                // ReSharper disable NonReadonlyMemberInGetHashCode
                 hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Id != null ? Id.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                // ReSharper restore NonReadonlyMemberInGetHashCode
+
                 return hashCode;
             }
         }

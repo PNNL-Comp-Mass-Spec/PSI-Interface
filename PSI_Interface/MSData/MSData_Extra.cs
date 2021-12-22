@@ -14,6 +14,9 @@
 using System.Collections.Generic;
 using PSI_Interface.CV;
 
+// ReSharper disable RedundantExtendsListEntry
+// ReSharper disable UnusedMember.Global
+
 namespace PSI_Interface.MSData
 {
     /// <summary>

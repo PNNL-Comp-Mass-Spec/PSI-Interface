@@ -14,6 +14,8 @@
 using PSI_Interface.CV;
 using PSI_Interface.MSData.mzML;
 
+// ReSharper disable RedundantExtendsListEntry
+
 namespace PSI_Interface.MSData
 {
     /// <summary>

@@ -190,6 +190,7 @@ namespace PSI_Interface.MSData
             /// </summary>
             /// <param name="sPath">Path to file for checksum calculation</param>
             /// <returns>Returns checksum if the checksum values is successfully calculated, otherwise null</returns>
+            // ReSharper disable once UnusedMember.Global
             public static uint? MakeForFile(string sPath)
             {
                 var checksumValue = AdlerStart;

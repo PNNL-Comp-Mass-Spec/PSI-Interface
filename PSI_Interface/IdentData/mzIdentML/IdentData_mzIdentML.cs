@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using PSI_Interface.IdentData.IdentDataObjs;
 
+// ReSharper disable RedundantExtendsListEntry
+
 namespace PSI_Interface.IdentData.mzIdentML
 {
     /// <summary>
@@ -689,6 +691,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Constructor - create from corresponding IdentData type
         /// </summary>
         /// <param name="idId"></param>
+        // ReSharper disable once PublicConstructorInAbstractClass
         public IdentifiableType(IIdentifiableType idId)
         {
             this.id = idId.Id;
@@ -1899,6 +1902,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Constructor - create from corresponding IdentData type
         /// </summary>
         /// <param name="pa"></param>
+        // ReSharper disable once PublicConstructorInAbstractClass
         public ProtocolApplicationType(ProtocolApplicationObj pa) : base(pa)
         {
             this.activityDate = pa.ActivityDate;

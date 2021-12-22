@@ -23,7 +23,8 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Default constructor
             /// </summary>
-            public DuplicateKeyException() : base() { }
+            // ReSharper disable once UnusedMember.Global
+            public DuplicateKeyException() { }
 
             /// <summary>
             /// Constructor
@@ -36,6 +37,7 @@ namespace PSI_Interface.IdentData
             /// </summary>
             /// <param name="message"></param>
             /// <param name="innerEx"></param>
+            // ReSharper disable once UnusedMember.Global
             public DuplicateKeyException(string message, Exception innerEx) : base(message, innerEx) { }
         }
 

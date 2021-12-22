@@ -7,6 +7,9 @@ using System.Text;
 using System.Xml;
 using PSI_Interface.CV;
 
+// ReSharper disable MemberCanBePrivate.Local
+// ReSharper disable UnusedMember.Global
+
 namespace PSI_Interface.MSData
 {
     /// <summary>
@@ -163,6 +166,7 @@ namespace PSI_Interface.MSData
             /// Keys are artificial scan number
             /// Values are the NativeID
             /// </summary>
+            // ReSharper disable once CollectionNeverQueried.Local
             public readonly Dictionary<long, string> IdToNativeMap = new Dictionary<long, string>();
 
             /// <summary>
@@ -257,6 +261,7 @@ namespace PSI_Interface.MSData
                 }*/
             }
 
+            // ReSharper disable once UnusedMember.Local
             public void RegenerateMaps()
             {
                 OffsetsMapNative.Clear();
@@ -757,6 +762,7 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Peak data
         /// </summary>
+        // ReSharper disable once StructCanBeMadeReadOnly
         public struct Peak
         {
             /// <summary>

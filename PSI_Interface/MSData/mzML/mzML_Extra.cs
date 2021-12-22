@@ -5,6 +5,8 @@
 
 using System.Collections.Generic;
 
+// ReSharper disable RedundantExtendsListEntry
+
 namespace PSI_Interface.MSData.mzML
 {
     /// <summary>

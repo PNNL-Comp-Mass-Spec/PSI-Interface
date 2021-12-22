@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
+// ReSharper disable RedundantExtendsListEntry
+
 namespace PSI_Interface.IdentData.mzIdentML
 {
     /// <summary>
@@ -500,6 +502,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <summary>
         /// Default Constructor
         /// </summary>
+        // ReSharper disable once PublicConstructorInAbstractClass
         public IdentifiableType()
         {
             this.id = null;
@@ -1480,6 +1483,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <summary>
         /// Default Constructor
         /// </summary>
+        // ReSharper disable once PublicConstructorInAbstractClass
         public ProtocolApplicationType()
         {
             this.activityDate = System.DateTime.Now;

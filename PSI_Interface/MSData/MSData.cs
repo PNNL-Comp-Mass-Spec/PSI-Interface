@@ -14,6 +14,8 @@ using System.IO;
  ********************************************************************************************************************************/
 using PSI_Interface.CV;
 
+// ReSharper disable RedundantExtendsListEntry
+
 namespace PSI_Interface.MSData
 {
     /// <summary>
