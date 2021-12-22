@@ -112,7 +112,7 @@ namespace PSI_Interface.MSData
         ///
         ///  A = 1 + D1 + D2 + ... + DN (mod 65521)
         ///  B = (1 + D1) + (1 + D1 + D2) + ... + (1 + D1 + D2 + ... + DN) (mod 65521)
-        ///    = N�D1 + (N-1)�D2 + (N-2)�D3 + ... + DN + N (mod 65521)
+        ///    = N * D1 + (N-1) * D2 + (N-2) * D3 + ... + DN + N (mod 65521)
         ///
         ///  Adler-32(D) = B * 65536 + A
         ///
