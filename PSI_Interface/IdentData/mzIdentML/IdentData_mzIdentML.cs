@@ -65,7 +65,8 @@ namespace PSI_Interface.IdentData.mzIdentML
                     {
                         return new OrganizationType(o);
                     }
-                    else if (a is PersonObj p)
+
+                    if (a is PersonObj p)
                     {
                         return new PersonType(p);
                     }
@@ -531,7 +532,8 @@ namespace PSI_Interface.IdentData.mzIdentML
                     {
                         return new CVParamType(cvp);
                     }
-                    else if (p is UserParamObj up)
+
+                    if (p is UserParamObj up)
                     {
                         return new UserParamType(up);
                     }
