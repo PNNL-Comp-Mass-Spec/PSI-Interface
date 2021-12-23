@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using NUnit.Framework;
+using PSI_Interface;
 using PSI_Interface.MSData;
 
 namespace Interface_Tests.MSDataTests
@@ -396,6 +396,67 @@ namespace Interface_Tests.MSDataTests
                     chromCount++;
                 }
                 Assert.AreEqual(expectedChromatograms, chromCount);
+            }
+        }
+
+        [TestCase(@"MzML\Angiotensin_AllScans.mzML", 1, 100, -1, -1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, -1, 2, 2, 2, 23, 23, 23, 23, 23, 23, 23, 23, 23, -1, 23, 23, 23, 36, 36, 36, 36, 36, 36, 36, 36, 36, 23, 23, 36, 36, 36, 36, 36, 36, -1, 36, 36, 36, 57, 57, 57, 57, 57, 57, 57, 57, 57, 36, 36, 57, 57, 57, 57, 57, 57, -1, 57, 57, 57, 78, 78, 78, 78, 78, 78, 78, 78, 78, 57, 57, 78, 78, 78, 78, 78, 78, -1, 78)]
+        public void TestGetParentScan(string inputFileRelativePath, int startScan, int endScan, params int[] expectedPrecursorScans)
+        {
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
+            {
+                Console.WriteLine("File not found: " + inputFileRelativePath);
+                return;
+            }
+
+            using (var reader = new SimpleMzMLReader(sourceFile.FullName, true, true))
+            {
+                for (var scanNumber = startScan; scanNumber <= endScan; scanNumber++)
+                {
+                    var spectrum = reader.ReadMassSpectrum(scanNumber, false);
+                    if (spectrum == null)
+                        continue;
+
+                    var targetIndex = scanNumber - startScan;
+                    int expectedPrecursorScan;
+
+                    if (targetIndex >= 0 && targetIndex < expectedPrecursorScans.Length)
+                        expectedPrecursorScan = expectedPrecursorScans[targetIndex];
+                    else
+                        expectedPrecursorScan = 0;
+
+                    if (spectrum.Precursors.Count == 0)
+                    {
+                        Console.WriteLine("Scan {0} is not a fragmentation scan", spectrum.ScanNumber);
+
+                        if (expectedPrecursorScan > 0)
+                        {
+                            Assert.Fail("Scan {0} was supposed to have precursor scan {1}, but it has no precursors", spectrum.ScanNumber, expectedPrecursorScan);
+                        }
+
+                        continue;
+                    }
+
+                    var precursorSpectrumReference = spectrum.Precursors[0].PrecursorSpectrumRef;
+
+                    // Parse out scan number from the precursor spectrum reference
+                    // "controllerType=0 controllerNumber=1 scan=1"
+                    if (!NativeIdConversion.TryGetScanNumberLong(precursorSpectrumReference, out var precursorScan))
+                    {
+                        Assert.Fail("Invalid spectrum reference: " + precursorSpectrumReference);
+                    }
+
+                    Console.WriteLine("Scan {0} has precursor {1:F2} m/z, precursor scan {2}",
+                        spectrum.ScanNumber,
+                        spectrum.Precursors[0].IsolationWindow.TargetMz,
+                        precursorScan);
+
+                    if (expectedPrecursorScan != 0)
+                    {
+                        Assert.AreEqual(expectedPrecursorScan, precursorScan,
+                            "Precursor scan number does not match the expected value for scan {0}",
+                            spectrum.ScanNumber);
+                    }
+                }
             }
         }
     }
