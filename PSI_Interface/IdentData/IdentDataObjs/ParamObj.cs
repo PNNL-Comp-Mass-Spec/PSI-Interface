@@ -45,6 +45,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Parameter value
+        /// </summary>
         /// <remarks>min 1, max 1</remarks>
         public ParamBaseObj Item
         {

@@ -51,6 +51,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// List of items
+        /// </summary>
         /// <remarks>min 1, max unbounded</remarks>
         public IdentDataList<ParamBaseObj> Items
         {
