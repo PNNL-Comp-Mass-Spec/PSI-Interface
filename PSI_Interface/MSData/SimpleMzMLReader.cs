@@ -817,18 +817,31 @@ namespace PSI_Interface.MSData
             public IsolationWindow IsolationWindow { get; }
 
             /// <summary>
+            /// Precursor scan spectrum reference
+            /// </summary>
+            public string PrecursorSpectrumRef { get; }
+
+            /// <summary>
             /// Constructor
             /// </summary>
             /// <param name="selectedIons"></param>
             /// <param name="isolationWindow"></param>
             /// <param name="activationMethod"></param>
+            /// <param name="precursorSpectrumRef"></param>
             /// <param name="cvParams"></param>
             /// <param name="userParams"></param>
-            public Precursor(IReadOnlyList<SelectedIon> selectedIons, IsolationWindow isolationWindow, string activationMethod, IReadOnlyList<CVParamData> cvParams, IReadOnlyList<UserParamData> userParams) : base(cvParams, userParams)
+            public Precursor(
+                IReadOnlyList<SelectedIon> selectedIons,
+                IsolationWindow isolationWindow,
+                string activationMethod,
+                string precursorSpectrumRef,
+                IReadOnlyList<CVParamData> cvParams,
+                IReadOnlyList<UserParamData> userParams) : base(cvParams, userParams)
             {
                 SelectedIons = selectedIons;
                 IsolationWindow = isolationWindow;
                 ActivationMethod = activationMethod;
+                PrecursorSpectrumRef = precursorSpectrumRef;
             }
 
             /// <summary>
@@ -1323,7 +1336,6 @@ namespace PSI_Interface.MSData
                 return (int)_numChromatograms;
             }
         }
-
 
         /// <summary>
         /// The NativeIdFormat stored/used by the source file - needed for tracking purposes.
@@ -4029,7 +4041,13 @@ namespace PSI_Interface.MSData
         private Precursor ReadPrecursor(XmlReader reader)
         {
             reader.MoveToContent();
+
+            // Determine the precursor spectrum reference (if defined)
+
+            var precursorSpectrumRef = TryGetAttributeValue(reader, "spectrumRef");
+
             reader.ReadStartElement("precursor"); // Throws exception if we are not at the "precursor" tag.
+
             IsolationWindow isolationWindow = null;
             var selectedIons = new List<SelectedIon>();
             var activation = "";
@@ -4051,12 +4069,14 @@ namespace PSI_Interface.MSData
                         reader.Read(); // "isolationWindow" might not have child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadIsolationWindow (in case of no child nodes)
                         break;
+
                     case "selectedIonList":
                         // Schema requirements: zero to one instances of this element
                         // mzML_1.0.0: one instance of this element
                         selectedIons.AddRange(ReadSelectedIonList(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "selectedIonList" must have child nodes
                         break;
+
                     case "activation":
                         // Schema requirements: one instance of this element
                         //var activationMethods = new List<ActivationMethod>();
@@ -4102,6 +4122,7 @@ namespace PSI_Interface.MSData
                                     break;
                             }
                         }
+
                         innerReader.Dispose();
                         reader.Read(); // "selectedIon" might not have child nodes
 
@@ -4200,13 +4221,16 @@ namespace PSI_Interface.MSData
 
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
-            return new Precursor(selectedIons, isolationWindow, activation, pd.CVParams, pd.UserParams);
+
+            return new Precursor(selectedIons, isolationWindow, activation, precursorSpectrumRef, pd.CVParams, pd.UserParams);
         }
 
         /// <summary>
@@ -4656,6 +4680,16 @@ namespace PSI_Interface.MSData
             }
             reader.Dispose();
             return bda;
+        }
+
+        private string TryGetAttributeValue(XmlReader reader, string attributeName)
+        {
+            if (!reader.HasAttributes)
+                return string.Empty;
+
+            var attributeValue = reader.GetAttribute(attributeName);
+
+            return string.IsNullOrWhiteSpace(attributeValue) ? string.Empty : attributeValue;
         }
 
         /*********************************************************************************************************************************************
