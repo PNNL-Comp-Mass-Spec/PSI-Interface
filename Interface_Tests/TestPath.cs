@@ -13,7 +13,8 @@ namespace Interface_Tests
 
             // The Execution directory
             var dirFinder = Environment.CurrentDirectory;
-            if (!dirFinder.ToLower().Contains("bin"))
+
+            if (!dirFinder.ToLower().Contains(string.Format("{0}bin", Path.DirectorySeparatorChar)))
             {
                 dirFinder = TestContext.CurrentContext.TestDirectory;
             }
