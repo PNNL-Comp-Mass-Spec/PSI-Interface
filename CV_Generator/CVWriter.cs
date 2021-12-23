@@ -557,10 +557,7 @@ namespace CV_Generator
                             }
                         }
 
-                        if (isAList.Count >= 0)
-                        {
-                            items.Add(new KeyValuePair<OBO_Term, List<string>>(term, isAList));
-                        }
+                        items.Add(new KeyValuePair<OBO_Term, List<string>>(term, isAList));
                     }
                 }
             }
