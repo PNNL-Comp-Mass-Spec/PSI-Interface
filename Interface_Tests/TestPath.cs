@@ -23,12 +23,12 @@ namespace Interface_Tests
             while (!string.IsNullOrWhiteSpace(dirFinder) && !dirFinder.EndsWith("bin"))
             {
                 //Console.WriteLine("Project: " + dirFinder);
-                dirFinder = System.IO.Path.GetDirectoryName(dirFinder);
+                dirFinder = Path.GetDirectoryName(dirFinder);
             }
             //Console.WriteLine("Project: " + dirFinder);
 
             // Local test directory
-            TestDirectory = System.IO.Path.GetDirectoryName(dirFinder);
+            TestDirectory = Path.GetDirectoryName(dirFinder);
 
             if (string.IsNullOrEmpty(TestDirectory))
             {
@@ -36,10 +36,10 @@ namespace Interface_Tests
             }
 
             // Local test\TestData directory
-            TestDataDirectory = System.IO.Path.Combine(TestDirectory, "TestData");
+            TestDataDirectory = Path.Combine(TestDirectory, "TestData");
 
             // The Project/Solution Directory name
-            ProjectDirectory = System.IO.Path.GetDirectoryName(TestDirectory);
+            ProjectDirectory = Path.GetDirectoryName(TestDirectory);
 
             /*
             Console.WriteLine("Remote Test directory: " + ExtTestDataDirectory);
@@ -60,21 +60,21 @@ namespace Interface_Tests
 
         public static bool FindInputFile(string inputFileRelativePath, out FileInfo inputFile)
         {
-            var localSourceFile1 = new FileInfo(Path.Combine(TestPath.TestDataDirectory, inputFileRelativePath));
+            var localSourceFile1 = new FileInfo(Path.Combine(TestDataDirectory, inputFileRelativePath));
             if (localSourceFile1.Exists)
             {
                 inputFile = localSourceFile1;
                 return true;
             }
 
-            var localSourceFile2 = new FileInfo(Path.Combine(TestPath.TestDataDirectory, Path.GetFileName(inputFileRelativePath)));
+            var localSourceFile2 = new FileInfo(Path.Combine(TestDataDirectory, Path.GetFileName(inputFileRelativePath)));
             if (localSourceFile2.Exists)
             {
                 inputFile = localSourceFile2;
                 return true;
             }
 
-            var remoteFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, inputFileRelativePath));
+            var remoteFile = new FileInfo(Path.Combine(ExtTestDataDirectory, inputFileRelativePath));
             if (remoteFile.Exists)
             {
                 inputFile = remoteFile;
