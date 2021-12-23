@@ -447,14 +447,12 @@ namespace PSI_Interface.IdentData
         /// </summary>
         public class PeptideRef
         {
-            private readonly List<KeyValuePair<int, Modification>> mods;
-
             /// <summary>
             /// Constructor
             /// </summary>
             public PeptideRef()
             {
-                mods = new List<KeyValuePair<int, Modification>>(10);
+                Mods = new List<KeyValuePair<int, Modification>>(10);
             }
 
             /// <summary>
@@ -469,7 +467,7 @@ namespace PSI_Interface.IdentData
             /// <param name="mod">modification</param>
             public void ModsAdd(int location, Modification mod)
             {
-                mods.Add(new KeyValuePair<int, Modification>(location, mod));
+                Mods.Add(new KeyValuePair<int, Modification>(location, mod));
             }
 
             /// <summary>
@@ -480,7 +478,7 @@ namespace PSI_Interface.IdentData
             /// should be given the location 0. Modification to the C-terminus should be given as peptide length + 1.
             /// If the modification location is unknown e.g. for PMF data, this attribute should be omitted.
             /// (See mzIdentML specification, version 1.1.0)</remarks>
-            public List<KeyValuePair<int, Modification>> Mods => mods;
+            public List<KeyValuePair<int, Modification>> Mods { get; }
 
             /// <summary>
             /// Peptide sequence with numeric mods but without a prefix or suffix residue
@@ -1430,7 +1428,6 @@ namespace PSI_Interface.IdentData
                         break;
                 }
             }
-
 
             if (searchModifications.Any(x => x.AreModificationsSimilar(modSetting)))
             {
