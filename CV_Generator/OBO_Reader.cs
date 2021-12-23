@@ -68,7 +68,7 @@ namespace CV_Generator
                                                   FileData.Terms[term.Id].Def + "\".");
                                 Console.WriteLine("\tConflict term: \t\"" + term.Id + "\": \"" + term.Def + "\".");
                                 Console.WriteLine("\tChanging conflict id to \"" + term.Id + "_\"");
-                                term.Id = term.Id + "_";
+                                term.Id += "_";
                             }
                             FileData.Terms.Add(term.Id, term);
                             break;

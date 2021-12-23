@@ -109,7 +109,7 @@ namespace CV_Generator.OBO_Objects
             while (Ids.ContainsKey(finalId))
             {
                 Ids[desiredId]++;
-                finalId = finalId + Ids[desiredId];
+                finalId += Ids[desiredId];
             }
             Ids.Add(finalId, 0); // Add it to the dictionary
             return finalId;

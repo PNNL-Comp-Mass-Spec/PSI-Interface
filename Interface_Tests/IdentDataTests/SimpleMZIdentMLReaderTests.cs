@@ -36,7 +36,7 @@ namespace Interface_Tests.IdentDataTests
 
             foreach (var specItem in results.Identifications)
             {
-                specResults += 1;
+                specResults++;
 
                 if (!spectrumIDs.Contains(specItem.NativeId))
                     spectrumIDs.Add(specItem.NativeId);
@@ -93,7 +93,7 @@ namespace Interface_Tests.IdentDataTests
 
                 foreach (var specItem in resultIdentifications)
                 {
-                    specResults += 1;
+                    specResults++;
 
                     if (!spectrumIDs.Contains(specItem.NativeId))
                         spectrumIDs.Add(specItem.NativeId);
