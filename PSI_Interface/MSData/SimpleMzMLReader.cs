@@ -38,8 +38,8 @@ namespace PSI_Interface.MSData
         private long _numSpectra;
         private bool _numChromatogramsRead;
         private long _numChromatograms;
-        private readonly IndexList _spectrumOffsets = new IndexList() { IndexType = IndexList.IndexListType.Spectrum };
-        private readonly IndexList _chromatogramOffsets = new IndexList() { IndexType = IndexList.IndexListType.Chromatogram };
+        private readonly IndexList _spectrumOffsets = new IndexList { IndexType = IndexList.IndexListType.Spectrum };
+        private readonly IndexList _chromatogramOffsets = new IndexList { IndexType = IndexList.IndexListType.Chromatogram };
         private bool _isReadingSpectra;
         private bool _isReadingChromatograms;
         private long _indexListOffset;
@@ -282,7 +282,7 @@ namespace PSI_Interface.MSData
         {
             Precision32,
             Precision64
-        };
+        }
 
         private enum ArrayType
         {
@@ -296,7 +296,7 @@ namespace PSI_Interface.MSData
             flow_rate_array,
             pressure_array,
             temperature_array
-        };
+        }
 
         private enum Instrument
         {
@@ -304,7 +304,7 @@ namespace PSI_Interface.MSData
             Thermo_RAW_format, //MS_Thermo_RAW_format, "MS:1000563", "Thermo RAW format", "Thermo Scientific RAW file format."
             Waters_raw_format, //MS_Waters_raw_format, "MS:1000526", "Waters raw format", "Waters data file format found in a Waters RAW directory, generated from an MS acquisition."
             Unknown
-        };
+        }
 
         private Instrument _instrument;
 
@@ -3297,7 +3297,7 @@ namespace PSI_Interface.MSData
                 {
                     // Schema requirements: one to many instances of this element
                     // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
-                    _chromatograms.Add(ReadChromatogram(reader.ReadSubtree(), true));
+                    _chromatograms.Add(ReadChromatogram(reader.ReadSubtree()));
                     // "chromatogram" must have child node(s)
                     // Read the EndElement
                     reader.ReadEndElement();

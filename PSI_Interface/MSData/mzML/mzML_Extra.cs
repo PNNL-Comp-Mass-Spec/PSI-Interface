@@ -3,6 +3,7 @@
 // Data translation code from MSData to mzML.
 //
 
+using System;
 using System.Collections.Generic;
 
 // ReSharper disable RedundantExtendsListEntry
@@ -816,7 +817,7 @@ namespace PSI_Interface.MSData.mzML
             defaultInstrumentConfigurationRef = null;
             defaultSourceFileRef = null;
             sampleRef = null;
-            startTimeStamp = System.DateTime.Now;
+            startTimeStamp = DateTime.Now;
             startTimeStampSpecified = false;
         }
 

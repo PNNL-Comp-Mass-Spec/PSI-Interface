@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -88,7 +89,7 @@ namespace PSI_Interface.MSData.mzML
                 tempReader = new GZipStream(tempReader, CompressionMode.Decompress);
             }
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
-            var reader = XmlReader.Create(new StreamReader(tempReader, System.Text.Encoding.UTF8, true, _bufferSize), xSettings);
+            var reader = XmlReader.Create(new StreamReader(tempReader, Encoding.UTF8, true, _bufferSize), xSettings);
             using (reader)
             {
                 reader.MoveToContent();

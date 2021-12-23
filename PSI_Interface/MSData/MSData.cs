@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using PSI_Interface.CV;
+
 /*********************************************************************************************************************************
  * Work TODO:
  * TODO: Conversion from array of bytes to numeric arrays (BinaryDataArray)
@@ -13,7 +15,6 @@ using System.IO;
  *
  *
  ********************************************************************************************************************************/
-using PSI_Interface.CV;
 
 // ReSharper disable RedundantExtendsListEntry
 
@@ -463,7 +464,7 @@ namespace PSI_Interface.MSData
         /// <summary>Reference to the id attribute in a referenceableParamGroup.</summary>
         /// <remarks>Required Attribute</remarks>
         /// <returns>IDREF</returns>
-        public string @Ref { get; set; } // TODO: enforce requirement, validity
+        public string Ref { get; set; } // TODO: enforce requirement, validity
     }
 
     /// <summary>
@@ -971,7 +972,7 @@ namespace PSI_Interface.MSData
         /// <summary>
         /// Type of data in the binary data array
         /// </summary>
-        public enum ArrayType : int
+        public enum ArrayType
         {
             /// <summary>m/z data</summary>
             m_z,
@@ -1004,7 +1005,7 @@ namespace PSI_Interface.MSData
             temperature,
         }
 
-        private static readonly Dictionary<ArrayType, CV.CV.CVID> _typeMap = new Dictionary<ArrayType, CV.CV.CVID>()
+        private static readonly Dictionary<ArrayType, CV.CV.CVID> _typeMap = new Dictionary<ArrayType, CV.CV.CVID>
         {
             {ArrayType.m_z, CV.CV.CVID.MS_m_z_array},
             {ArrayType.intensity, CV.CV.CVID.MS_intensity_array},
@@ -1018,7 +1019,7 @@ namespace PSI_Interface.MSData
             {ArrayType.temperature, CV.CV.CVID.MS_temperature_array},
         };
 
-        private static readonly Dictionary<CV.CV.CVID, ArrayType> _revTypeMap = new Dictionary<CV.CV.CVID, ArrayType>()
+        private static readonly Dictionary<CV.CV.CVID, ArrayType> _revTypeMap = new Dictionary<CV.CV.CVID, ArrayType>
         {
             {CV.CV.CVID.MS_m_z_array, ArrayType.m_z},
             {CV.CV.CVID.MS_intensity_array, ArrayType.intensity},
@@ -1437,10 +1438,8 @@ namespace PSI_Interface.MSData
                     }
                     return mzLength;
                 }
-                else
-                {
-                    throw new InvalidDataException("Spectrum: m/z and intensity arrays are not the same length.");
-                }
+
+                throw new InvalidDataException("Spectrum: m/z and intensity arrays are not the same length.");
             }
             set
             {
@@ -1726,10 +1725,8 @@ namespace PSI_Interface.MSData
                     }
                     return timeLength;
                 }
-                else
-                {
-                    throw new InvalidDataException("Spectrum: m/z and intensity arrays are not the same length.");
-                }
+
+                throw new InvalidDataException("Spectrum: m/z and intensity arrays are not the same length.");
             }
             set
             {
@@ -1854,7 +1851,7 @@ namespace PSI_Interface.MSData
         /// <summary>This attribute must reference the 'id' of the appropriate sourceFile.</summary>
         /// <remarks>Required Attribute</remarks>
         /// <returns>IDREF</returns>
-        public string @Ref { get; set; } // TODO: enforce requirement
+        public string Ref { get; set; } // TODO: enforce requirement
     }
 
     /*
@@ -2115,7 +2112,7 @@ namespace PSI_Interface.MSData
         /// <summary>This attribute must be used to reference the 'id' attribute of a software element.</summary>
         /// <remarks>Required Attribute</remarks>
         /// <returns>IDREF</returns>
-        public string @Ref { get; set; } // TODO: restrict to existing software element 'id' attribute // TODO: enforce required attribute (constructor?)
+        public string Ref { get; set; } // TODO: restrict to existing software element 'id' attribute // TODO: enforce required attribute (constructor?)
     }
 
     /*

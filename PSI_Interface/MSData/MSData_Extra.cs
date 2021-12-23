@@ -11,6 +11,7 @@
  *
  ********************************************************************************************************************************/
 
+using System;
 using PSI_Interface.CV;
 
 // ReSharper disable RedundantExtendsListEntry
@@ -62,8 +63,8 @@ namespace PSI_Interface.MSData
             CVList = new MSDataList<CVInfo>();
             foreach (var cv in CV.CV.CVInfoList)
             {
-                if (string.Equals(cv.Id, "pato", System.StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(cv.Id, "unimod", System.StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(cv.Id, "pato", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(cv.Id, "unimod", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
@@ -612,7 +613,7 @@ namespace PSI_Interface.MSData
             DefaultInstrumentConfigurationRef = null;
             DefaultSourceFileRef = null;
             SampleRef = null;
-            StartTimeStamp = System.DateTime.Now;
+            StartTimeStamp = DateTime.Now;
             StartTimeStampSpecified = false;
         }
     }
