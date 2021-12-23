@@ -49,7 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             SpecificityRules = new IdentDataList<SpecificityRulesListObj>(1);
 
-            if ((sm.SpecificityRules != null) && (sm.SpecificityRules.Count > 0))
+            if ((sm.SpecificityRules?.Count > 0))
             {
                 SpecificityRules.AddRange(sm.SpecificityRules, sr => new SpecificityRulesListObj(sr, IdentData));
             }

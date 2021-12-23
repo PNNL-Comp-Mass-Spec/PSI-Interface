@@ -38,7 +38,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             idata.AnalysisProtocolCollection = this;
 
-            if (apc.SpectrumIdentificationProtocol != null && apc.SpectrumIdentificationProtocol.Count > 0)
+            if (apc.SpectrumIdentificationProtocol?.Count > 0)
             {
                 SpectrumIdentificationProtocols.AddRange(apc.SpectrumIdentificationProtocol, sip => new SpectrumIdentificationProtocolObj(sip, IdentData));
             }

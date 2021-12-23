@@ -33,7 +33,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationListObj>(1);
             _proteinDetectionList = null;
 
-            if (ad.SpectrumIdentificationList != null && ad.SpectrumIdentificationList.Count > 0)
+            if (ad.SpectrumIdentificationList?.Count > 0)
             {
                 SpectrumIdentificationList.AddRange(ad.SpectrumIdentificationList, sil => new SpectrumIdentificationListObj(sil, IdentData));
             }

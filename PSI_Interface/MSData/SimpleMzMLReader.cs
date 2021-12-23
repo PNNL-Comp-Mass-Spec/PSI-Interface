@@ -849,7 +849,7 @@ namespace PSI_Interface.MSData
             /// </summary>
             public override string ToString()
             {
-                if (IsolationWindow != null && !IsolationWindow.TargetMz.Equals(0))
+                if (IsolationWindow?.TargetMz.Equals(0) == false)
                 {
                     return $"Precursor: {IsolationWindow.TargetMz:F4} m/z";
                 }

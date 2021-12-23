@@ -41,7 +41,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             InputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentificationsObj>(1);
 
-            if ((pd.InputSpectrumIdentifications != null) && (pd.InputSpectrumIdentifications.Count > 0))
+            if ((pd.InputSpectrumIdentifications?.Count > 0))
             {
                 InputSpectrumIdentifications.AddRange(pd.InputSpectrumIdentifications, isi => new InputSpectrumIdentificationsObj(isi, IdentData));
             }

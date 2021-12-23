@@ -44,11 +44,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             AmbiguousResidues = new IdentDataList<AmbiguousResidueObj>(1);
             MsLevels = null;
 
-            if ((mt.Residue != null) && (mt.Residue.Count > 0))
+            if ((mt.Residue?.Count > 0))
             {
                 Residues.AddRange(mt.Residue, r => new ResidueObj(r, IdentData));
             }
-            if ((mt.AmbiguousResidue != null) && (mt.AmbiguousResidue.Count > 0))
+            if ((mt.AmbiguousResidue?.Count > 0))
             {
                 AmbiguousResidues.AddRange(mt.AmbiguousResidue, ar => new AmbiguousResidueObj(ar, IdentData));
             }

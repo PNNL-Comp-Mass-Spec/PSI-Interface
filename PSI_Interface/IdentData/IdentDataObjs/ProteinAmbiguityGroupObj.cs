@@ -39,7 +39,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             ProteinDetectionHypotheses = new IdentDataList<ProteinDetectionHypothesisObj>(1);
 
-            if ((pag.ProteinDetectionHypothesis != null) && (pag.ProteinDetectionHypothesis.Count > 0))
+            if ((pag.ProteinDetectionHypothesis?.Count > 0))
             {
                 ProteinDetectionHypotheses.AddRange(pag.ProteinDetectionHypothesis, pdh => new ProteinDetectionHypothesisObj(pdh, IdentData));
             }

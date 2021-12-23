@@ -30,7 +30,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             Items = new IdentDataList<ParamBaseObj>(1);
 
-            if (pl != null && pl.Items.Count > 0)
+            if (pl?.Items.Count > 0)
             {
                 Items.AddRange(pl.Items, p =>
                 {

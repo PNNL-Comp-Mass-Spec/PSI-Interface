@@ -29,7 +29,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             UserParams = new IdentDataList<UserParamObj>(1);
 
-            if (pg.userParam != null && pg.userParam.Count > 0)
+            if (pg.userParam?.Count > 0)
             {
                 UserParams.AddRange(pg.userParam, up => new UserParamObj(up, IdentData));
             }

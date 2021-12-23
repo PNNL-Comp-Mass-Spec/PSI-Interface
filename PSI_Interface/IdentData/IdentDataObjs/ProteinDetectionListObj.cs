@@ -36,7 +36,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             ProteinAmbiguityGroups = new IdentDataList<ProteinAmbiguityGroupObj>(1);
 
-            if ((pdl.ProteinAmbiguityGroup != null) && (pdl.ProteinAmbiguityGroup.Count > 0))
+            if ((pdl.ProteinAmbiguityGroup?.Count > 0))
             {
                 ProteinAmbiguityGroups.AddRange(pdl.ProteinAmbiguityGroup, pag => new ProteinAmbiguityGroupObj(pag, IdentData));
             }

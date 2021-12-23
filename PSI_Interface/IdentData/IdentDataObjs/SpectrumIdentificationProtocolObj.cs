@@ -74,27 +74,27 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _searchType = new ParamObj(sip.SearchType, IdentData);
             if (sip.AdditionalSearchParams != null)
                 _additionalSearchParams = new ParamListObj(sip.AdditionalSearchParams, IdentData);
-            if ((sip.ModificationParams != null) && (sip.ModificationParams.Count > 0))
+            if ((sip.ModificationParams?.Count > 0))
             {
                 ModificationParams.AddRange(sip.ModificationParams, mp => new SearchModificationObj(mp, IdentData));
             }
             if (sip.Enzymes != null)
                 _enzymes = new EnzymeListObj(sip.Enzymes, IdentData);
-            if ((sip.MassTable != null) && (sip.MassTable.Count > 0))
+            if ((sip.MassTable?.Count > 0))
             {
                 MassTables.AddRange(sip.MassTable, mt => new MassTableObj(mt, IdentData));
             }
-            if ((sip.FragmentTolerance != null) && (sip.FragmentTolerance.Count > 0))
+            if ((sip.FragmentTolerance?.Count > 0))
             {
                 FragmentTolerances.AddRange(sip.FragmentTolerance, ft => new CVParamObj(ft, IdentData));
             }
-            if (sip.ParentTolerance != null && sip.ParentTolerance.Count > 0)
+            if (sip.ParentTolerance?.Count > 0)
             {
                 ParentTolerances.AddRange(sip.ParentTolerance, pt => new CVParamObj(pt, IdentData));
             }
             if (sip.Threshold != null)
                 _threshold = new ParamListObj(sip.Threshold, IdentData);
-            if (sip.DatabaseFilters != null && sip.DatabaseFilters.Count > 0)
+            if (sip.DatabaseFilters?.Count > 0)
             {
                 DatabaseFilters.AddRange(sip.DatabaseFilters, df => new FilterInfo(df, IdentData));
             }

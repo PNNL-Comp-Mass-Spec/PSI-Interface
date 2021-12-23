@@ -39,7 +39,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             PeptideHypotheses = new IdentDataList<PeptideHypothesisObj>(1);
 
-            if (pdh.PeptideHypothesis != null && pdh.PeptideHypothesis.Count > 0)
+            if (pdh.PeptideHypothesis?.Count > 0)
             {
                 PeptideHypotheses.AddRange(pdh.PeptideHypothesis, ph => new PeptideHypothesisObj(ph, IdentData));
             }

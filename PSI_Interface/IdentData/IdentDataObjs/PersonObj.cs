@@ -40,7 +40,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             Affiliations = new IdentDataList<AffiliationObj>(1);
 
-            if ((p.Affiliation != null) && (p.Affiliation.Count > 0))
+            if ((p.Affiliation?.Count > 0))
             {
                 Affiliations.AddRange(p.Affiliation, a => new AffiliationObj(a, IdentData));
             }

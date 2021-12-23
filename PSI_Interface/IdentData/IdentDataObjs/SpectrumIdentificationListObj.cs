@@ -44,11 +44,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             FragmentationTables = new IdentDataList<MeasureObj>(1);
             SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>(1);
 
-            if ((sil.FragmentationTable != null) && (sil.FragmentationTable.Count > 0))
+            if ((sil.FragmentationTable?.Count > 0))
             {
                 FragmentationTables.AddRange(sil.FragmentationTable, f => new MeasureObj(f, IdentData));
             }
-            if ((sil.SpectrumIdentificationResult != null) && (sil.SpectrumIdentificationResult.Count > 0))
+            if ((sil.SpectrumIdentificationResult?.Count > 0))
             {
                 SpectrumIdentificationResults.AddRange(sil.SpectrumIdentificationResult, sir => new SpectrumIdentificationResultObj(sir, IdentData));
             }

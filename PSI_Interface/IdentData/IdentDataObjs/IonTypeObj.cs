@@ -51,17 +51,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             UserParams = new IdentDataList<UserParamObj>(1);
             Index = new List<string>();
 
-            if (it.FragmentArray != null && it.FragmentArray.Count > 0)
+            if (it.FragmentArray?.Count > 0)
             {
                 FragmentArrays.AddRange(it.FragmentArray, f => new FragmentArrayObj(f, IdentData));
             }
 
-            if (it.cvParam != null && it.cvParam.Count > 0)
+            if (it.cvParam?.Count > 0)
             {
                 CVParams.AddRange(it.cvParam.Select(cvp => new CVParamObj(cvp, idata)));
             }
 
-            if (it.userParam != null && it.userParam.Count > 0)
+            if (it.userParam?.Count > 0)
             {
                 UserParams.AddRange(it.userParam.Select(up => new UserParamObj(up, idata)));
             }

@@ -65,18 +65,18 @@ namespace PSI_Interface.IdentData
             AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>(1);
 
             // Referenced by anything using CV/User params
-            if (mzid.cvList != null && mzid.cvList.Count > 0)
+            if (mzid.cvList?.Count > 0)
             {
                 CVList.AddRange(mzid.cvList, cv => new CVInfo(cv, this));
                 CvTranslator = new CVTranslator(_cvList);
             }
             // Referenced by nothing
-            if (mzid.BibliographicReference != null && mzid.BibliographicReference.Count > 0)
+            if (mzid.BibliographicReference?.Count > 0)
             {
                 BibliographicReferences.AddRange(mzid.BibliographicReference, br => new BibliographicReferenceObj(br, this));
             }
             // Referenced by anything using organization, person, contactRoleInfo - SampleInfo, ProviderInfo, AnalysisSoftwareInfo
-            if (mzid.AuditCollection != null && mzid.AuditCollection.Count > 0)
+            if (mzid.AuditCollection?.Count > 0)
             {
                 AuditCollection.AddRange(mzid.AuditCollection, ac =>
                 {
@@ -94,12 +94,12 @@ namespace PSI_Interface.IdentData
                 });
             }
             // Referenced by anything using SampleInfo: SubSample, SpectrumIdentificationItem
-            if (mzid.AnalysisSampleCollection != null && mzid.AnalysisSampleCollection.Count > 0)
+            if (mzid.AnalysisSampleCollection?.Count > 0)
             {
                 AnalysisSampleCollection.AddRange(mzid.AnalysisSampleCollection, asc => new SampleObj(asc, this));
             }
             // Referenced by ProviderInfo, ProteinDetectionProtocol, SpectrumIdentificationProtocol, references AbstractContactInfo through ContactRoleInfo
-            if (mzid.AnalysisSoftwareList != null && mzid.AnalysisSoftwareList.Count > 0)
+            if (mzid.AnalysisSoftwareList?.Count > 0)
             {
                 AnalysisSoftwareList.AddRange(mzid.AnalysisSoftwareList, asl => new AnalysisSoftwareObj(asl, this));
             }

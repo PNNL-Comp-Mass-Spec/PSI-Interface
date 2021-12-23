@@ -53,7 +53,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemObj>(1);
 
-            if (sir.SpectrumIdentificationItem != null && sir.SpectrumIdentificationItem.Count > 0)
+            if (sir.SpectrumIdentificationItem?.Count > 0)
             {
                 SpectrumIdentificationItems.AddRange(sir.SpectrumIdentificationItem, sii => new SpectrumIdentificationItemObj(sii, IdentData));
             }

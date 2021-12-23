@@ -80,11 +80,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>(1);
             Fragmentations = new IdentDataList<IonTypeObj>(1);
 
-            if ((sii.PeptideEvidenceRef != null) && (sii.PeptideEvidenceRef.Count > 0))
+            if ((sii.PeptideEvidenceRef?.Count > 0))
             {
                 PeptideEvidences.AddRange(sii.PeptideEvidenceRef, pe => new PeptideEvidenceRefObj(pe, IdentData));
             }
-            if ((sii.Fragmentation != null) && (sii.Fragmentation.Count > 0))
+            if ((sii.Fragmentation?.Count > 0))
             {
                 Fragmentations.AddRange(sii.Fragmentation, f => new IonTypeObj(f, IdentData));
             }

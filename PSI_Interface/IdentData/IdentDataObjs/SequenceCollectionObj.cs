@@ -45,17 +45,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             idata.SequenceCollection = this;
 
-            if ((sc.DBSequence != null) && (sc.DBSequence.Count > 0))
+            if ((sc.DBSequence?.Count > 0))
             {
                 DBSequences.AddIdMap();
                 DBSequences.AddRange(sc.DBSequence, dbs => new DbSequenceObj(dbs, IdentData));
             }
-            if ((sc.Peptide != null) && (sc.Peptide.Count > 0))
+            if ((sc.Peptide?.Count > 0))
             {
                 Peptides.AddIdMap();
                 Peptides.AddRange(sc.Peptide, p => new PeptideObj(p, IdentData));
             }
-            if ((sc.PeptideEvidence != null) && (sc.PeptideEvidence.Count > 0))
+            if ((sc.PeptideEvidence?.Count > 0))
             {
                 PeptideEvidences.AddIdMap();
                 PeptideEvidences.AddRange(sc.PeptideEvidence, pe => new PeptideEvidenceObj(pe, IdentData));

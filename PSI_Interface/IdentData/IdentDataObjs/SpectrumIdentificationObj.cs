@@ -47,11 +47,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             InputSpectra = new IdentDataList<InputSpectraRefObj>(1);
             SearchDatabases = new IdentDataList<SearchDatabaseRefObj>(1);
 
-            if ((si.InputSpectra != null) && (si.InputSpectra.Count > 0))
+            if ((si.InputSpectra?.Count > 0))
             {
                 InputSpectra.AddRange(si.InputSpectra, ispec => new InputSpectraRefObj(ispec, IdentData));
             }
-            if ((si.SearchDatabaseRef != null) && (si.SearchDatabaseRef.Count > 0))
+            if ((si.SearchDatabaseRef?.Count > 0))
             {
                 SearchDatabases.AddRange(si.SearchDatabaseRef, sd => new SearchDatabaseRefObj(sd, IdentData));
             }

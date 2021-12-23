@@ -29,7 +29,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             CVParams = new IdentDataList<CVParamObj>(1);
 
-            if (cvpg.cvParam != null && cvpg.cvParam.Count > 0)
+            if (cvpg.cvParam?.Count > 0)
             {
                 CVParams.AddRange(cvpg.cvParam, cvp => new CVParamObj(cvp, IdentData));
             }

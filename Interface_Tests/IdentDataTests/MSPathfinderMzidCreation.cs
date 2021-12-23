@@ -96,7 +96,7 @@ namespace Interface_Tests.IdentDataTests
             using (var reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read)))
             {
                 var line = reader.ReadLine();
-                if (line != null && line.StartsWith("Scan\tPre\tSequence\tPost\tModifications"))
+                if (line?.StartsWith("Scan\tPre\tSequence\tPost\tModifications") == true)
                 {
                     line = reader.ReadLine();
                 }
