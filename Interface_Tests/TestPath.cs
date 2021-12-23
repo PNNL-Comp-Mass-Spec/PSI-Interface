@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace Interface_Tests
@@ -16,6 +17,7 @@ namespace Interface_Tests
             {
                 dirFinder = TestContext.CurrentContext.TestDirectory;
             }
+
             // Find the bin folder...
             while (!string.IsNullOrWhiteSpace(dirFinder) && !dirFinder.EndsWith("bin"))
             {
@@ -54,5 +56,32 @@ namespace Interface_Tests
         public static string TestDataDirectory { get; }
 
         public static string ProjectDirectory { get; }
+
+        public static bool FindInputFile(string inputFileRelativePath, out FileInfo inputFile)
+        {
+            var localSourceFile1 = new FileInfo(Path.Combine(TestPath.TestDataDirectory, inputFileRelativePath));
+            if (localSourceFile1.Exists)
+            {
+                inputFile = localSourceFile1;
+                return true;
+            }
+
+            var localSourceFile2 = new FileInfo(Path.Combine(TestPath.TestDataDirectory, Path.GetFileName(inputFileRelativePath)));
+            if (localSourceFile2.Exists)
+            {
+                inputFile = localSourceFile2;
+                return true;
+            }
+
+            var remoteFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, inputFileRelativePath));
+            if (remoteFile.Exists)
+            {
+                inputFile = remoteFile;
+                return true;
+            }
+
+            inputFile = null;
+            return false;
+        }
     }
 }

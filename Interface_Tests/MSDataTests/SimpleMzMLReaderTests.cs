@@ -11,7 +11,7 @@ namespace Interface_Tests.MSDataTests
         /// <summary>
         /// When using non-random access, iterate through spectra using reader.ReadAllSpectra()
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="inputFileRelativePath"></param>
         /// <param name="expectedSpectra"></param>
         /// <param name="includePeaks"></param>
         [Test]
@@ -19,12 +19,11 @@ namespace Interface_Tests.MSDataTests
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293, false)]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans1-200.mzML", 200, true)]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", 101, true)]
-        public void ReadMzMLTest(string path, int expectedSpectra, bool includePeaks)
+        public void ReadMzMLTest(string inputFileRelativePath, int expectedSpectra, bool includePeaks)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 
@@ -53,7 +52,7 @@ namespace Interface_Tests.MSDataTests
         /// Open the file with random access, either immediately or after instantiating the reader
         /// Obtain spectra data with reader.ReadMassSpectrum()
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="inputFileRelativePath"></param>
         /// <param name="expectedSpectra"></param>
         /// <param name="includePeaks"></param>
         /// <param name="immediateRandomAccess"></param>
@@ -64,12 +63,11 @@ namespace Interface_Tests.MSDataTests
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans1-200.mzML", 200, true, true)]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", 101, true, false)]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", 101, true, true)]
-        public void ReadMzMLTestRandom(string path, int expectedSpectra, bool includePeaks, bool immediateRandomAccess)
+        public void ReadMzMLTestRandom(string inputFileRelativePath, int expectedSpectra, bool includePeaks, bool immediateRandomAccess)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 
@@ -102,7 +100,7 @@ namespace Interface_Tests.MSDataTests
         /// <summary>
         /// Open the file with random access and obtain specific mass spectra by scan number
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="inputFileRelativePath"></param>
         /// <param name="expectedSpectra"></param>
         /// <param name="includePeaks"></param>
         /// <param name="scanNumberList">Comma-separated list of scan numbers to obtain</param>
@@ -112,12 +110,11 @@ namespace Interface_Tests.MSDataTests
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293, false, "1,10,100,3200,6000,9293,10000", "10000")]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans1-200.mzML", 200, true, "1,10,100,175,200,300", "300")]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", 101, true, "1,100,200,215,250,285,300", "1,100")]
-        public void ReadMzMLTestRetrieveByScanNumber(string path, int expectedSpectra, bool includePeaks, string scanNumberList, string expectedMissingScanNumbers)
+        public void ReadMzMLTestRetrieveByScanNumber(string inputFileRelativePath, int expectedSpectra, bool includePeaks, string scanNumberList, string expectedMissingScanNumbers)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 
@@ -157,19 +154,18 @@ namespace Interface_Tests.MSDataTests
         /// Retrieve spectra using the given artificial (1-based) scan number
         /// Compare the actual scan numbers to expected values
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="inputFileRelativePath"></param>
         /// <param name="artificialScanNumberList"></param>
         /// <param name="expectedActualScanNumberList"></param>
         [Test]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", "0,1,10,100,3200,6000,9293,10000", "0,1,10,100,3200,6000,9293,0")]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans1-200.mzML", "1,10,100,175,200,201,300", "1,10,100,175,200,0,0")]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", "1,50,95,101,102,200", "200,249,294,300,0,0")]
-        public void ReadMzMLCompareScanNumbers(string path, string artificialScanNumberList, string expectedActualScanNumberList)
+        public void ReadMzMLCompareScanNumbers(string inputFileRelativePath, string artificialScanNumberList, string expectedActualScanNumberList)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 
@@ -249,7 +245,7 @@ namespace Interface_Tests.MSDataTests
         /// If the file is not initially opened with random access enabled,
         /// reader.NumChromatograms will report 0 and the chromatogram data cannot be read
         /// </remarks>
-        /// <param name="path"></param>
+        /// <param name="inputFileRelativePath"></param>
         /// <param name="expectedChromatograms"></param>
         /// <param name="immediateRandomAccess"></param>
         [Test]
@@ -261,12 +257,11 @@ namespace Interface_Tests.MSDataTests
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans1-200.mzML", 1, true)]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", 1, false)]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", 1, true)]
-        public void ReadMzMLChromatogramsTestDelayedRandom(string path, int expectedChromatograms, bool immediateRandomAccess)
+        public void ReadMzMLChromatogramsTestDelayedRandom(string inputFileRelativePath, int expectedChromatograms, bool immediateRandomAccess)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 
@@ -302,7 +297,7 @@ namespace Interface_Tests.MSDataTests
         /// When using non-random access, iterate through chromatograms using reader.ReadAllChromatograms()
         /// Prior to doing so, all of the spectra must be read using reader.ReadAllSpectra()
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="inputFileRelativePath"></param>
         /// <param name="expectedSpectra"></param>
         /// <param name="expectedChromatograms"></param>
         [Test]
@@ -311,12 +306,11 @@ namespace Interface_Tests.MSDataTests
         [TestCase(@"MzML\Rush2_p14RR_62_26Oct17_Smeagol-WRUSHCol3_75x20a_SRM.mzML", 0, 967)]
         [TestCase(@"MzML\Rush2_p14RR_62_26Oct17_Smeagol-WRUSHCol3_75x20a_srmasspectra.mzML", 104278, 1)]
         [TestCase(@"MzML\TdyQc1_Fnl_All_25Oct17_Balzac-W1sta1_SRM.mzML", 0, 4701)]
-        public void ReadMzMLChromatogramsTestNonRandom(string path, int expectedSpectra, int expectedChromatograms)
+        public void ReadMzMLChromatogramsTestNonRandom(string inputFileRelativePath, int expectedSpectra, int expectedChromatograms)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 
@@ -366,7 +360,7 @@ namespace Interface_Tests.MSDataTests
         /// <summary>
         /// When using random access, we can immediately iterate through chromatograms using reader.ReadAllChromatograms()
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="inputFileRelativePath"></param>
         /// <param name="expectedChromatograms"></param>
         [Test]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 1)]
@@ -376,12 +370,11 @@ namespace Interface_Tests.MSDataTests
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans1-200.mzML", 1)]
         [TestCase(@"MzML\Dionex_BSA_OTOT-08_Scans200-300.mzML", 1)]
         //[TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293)] // implemented, but decompresses first
-        public void ReadMzMLChromatogramsTestRandom(string path, int expectedChromatograms)
+        public void ReadMzMLChromatogramsTestRandom(string inputFileRelativePath, int expectedChromatograms)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 

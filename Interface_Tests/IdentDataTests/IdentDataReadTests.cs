@@ -39,12 +39,11 @@ namespace Interface_Tests.IdentDataTests
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid       ", 1, 15510, 16486, 13486, 4912)]
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz    ", 1, 15510, 16486, 13486, 4912)]
         [TestCase(@"MzIdentML\Cj_media_DOC_R2_23Feb15_Arwen_14-12-03_NoResults_msgfplus.mzid", 1, 0, 0, 0, 0)]
-        public void MzIdentMLReadTest(string path, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
+        public void MzIdentMLReadTest(string inputFileRelativePath, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
         {
-            var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, path));
-            if (!sourceFile.Exists)
+            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
-                Console.WriteLine("File not found: " + sourceFile.FullName);
+                Console.WriteLine("File not found: " + inputFileRelativePath);
                 return;
             }
 
