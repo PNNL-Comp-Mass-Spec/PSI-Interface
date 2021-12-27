@@ -44,7 +44,7 @@ namespace PSI_Interface.MSData
             DataProcessingList = null;
             Run = null;
 
-            if (mzML.cvList != null && mzML.cvList.cv?.Count > 0)
+            if (mzML.cvList?.cv?.Count > 0)
             {
                 CVList = new MSDataList<CVInfo>();
                 foreach (var cv in mzML.cvList.cv)
@@ -57,7 +57,7 @@ namespace PSI_Interface.MSData
             {
                 FileDescription = new FileDescription(mzML.fileDescription, this);
             }
-            if (mzML.referenceableParamGroupList != null && mzML.referenceableParamGroupList.referenceableParamGroup?.Count > 0)
+            if (mzML.referenceableParamGroupList?.referenceableParamGroup?.Count > 0)
             {
                 ReferenceableParamGroupList = new MSDataList<ReferenceableParamGroup>();
                 foreach (var rpg in mzML.referenceableParamGroupList.referenceableParamGroup)
@@ -65,7 +65,7 @@ namespace PSI_Interface.MSData
                     ReferenceableParamGroupList.Add(new ReferenceableParamGroup(rpg, this));
                 }
             }
-            if (mzML.sampleList != null && mzML.sampleList.sample?.Count > 0)
+            if (mzML.sampleList?.sample?.Count > 0)
             {
                 SampleList = new MSDataList<SampleInfo>();
                 foreach (var s in mzML.sampleList.sample)
@@ -73,7 +73,7 @@ namespace PSI_Interface.MSData
                     SampleList.Add(new SampleInfo(s, this));
                 }
             }
-            if (mzML.softwareList != null && mzML.softwareList.software?.Count > 0)
+            if (mzML.softwareList?.software?.Count > 0)
             {
                 SoftwareList = new MSDataList<SoftwareInfo>();
                 foreach (var s in mzML.softwareList.software)
@@ -81,7 +81,7 @@ namespace PSI_Interface.MSData
                     SoftwareList.Add(new SoftwareInfo(s, this));
                 }
             }
-            if (mzML.scanSettingsList != null && mzML.scanSettingsList.scanSettings?.Count > 0)
+            if (mzML.scanSettingsList?.scanSettings?.Count > 0)
             {
                 ScanSettingsList = new MSDataList<ScanSettingsInfo>();
                 foreach (var ss in mzML.scanSettingsList.scanSettings)
@@ -89,7 +89,7 @@ namespace PSI_Interface.MSData
                     ScanSettingsList.Add(new ScanSettingsInfo(ss, this));
                 }
             }
-            if (mzML.instrumentConfigurationList != null && mzML.instrumentConfigurationList.instrumentConfiguration?.Count > 0)
+            if (mzML.instrumentConfigurationList?.instrumentConfiguration?.Count > 0)
             {
                 InstrumentConfigurationList = new MSDataList<InstrumentConfigurationInfo>();
                 foreach (var ic in mzML.instrumentConfigurationList.instrumentConfiguration)
@@ -97,7 +97,7 @@ namespace PSI_Interface.MSData
                     InstrumentConfigurationList.Add(new InstrumentConfigurationInfo(ic, this));
                 }
             }
-            if (mzML.dataProcessingList != null && mzML.dataProcessingList.dataProcessing?.Count > 0)
+            if (mzML.dataProcessingList?.dataProcessing?.Count > 0)
             {
                 DataProcessingList = new MSDataList<DataProcessingInfo>();
                 foreach (var dp in mzML.dataProcessingList.dataProcessing)
@@ -487,7 +487,7 @@ namespace PSI_Interface.MSData
             {
                 IsolationWindow = new ParamGroup(p.isolationWindow, MsData);
             }
-            if (p.selectedIonList != null && p.selectedIonList.selectedIon?.Count > 0)
+            if (p.selectedIonList?.selectedIon?.Count > 0)
             {
                 SelectedIonList = new MSDataList<ParamGroup>();
                 foreach (var si in p.selectedIonList.selectedIon)
@@ -673,7 +673,7 @@ namespace PSI_Interface.MSData
             // Default value
             ScanWindowList = null;
 
-            if (s.scanWindowList != null && s.scanWindowList.scanWindow?.Count > 0)
+            if (s.scanWindowList?.scanWindow?.Count > 0)
             {
                 ScanWindowList = new MSDataList<ParamGroup>();
                 foreach (var sw in s.scanWindowList.scanWindow)
@@ -768,7 +768,7 @@ namespace PSI_Interface.MSData
             {
                 ScanList = new ScanList(s.scanList, MsData);
             }
-            if (s.precursorList != null && s.precursorList.precursor?.Count > 0)
+            if (s.precursorList?.precursor?.Count > 0)
             {
                 PrecursorList = new MSDataList<Precursor>();
                 foreach (var p in s.precursorList.precursor)
@@ -776,7 +776,7 @@ namespace PSI_Interface.MSData
                     PrecursorList.Add(new Precursor(p, MsData));
                 }
             }
-            if (s.binaryDataArrayList != null && s.binaryDataArrayList.binaryDataArray?.Count > 0)
+            if (s.binaryDataArrayList?.binaryDataArray?.Count > 0)
             {
                 BinaryDataArrayList = new MSDataList<BinaryDataArray>();
                 foreach (var bda in s.binaryDataArrayList.binaryDataArray)
@@ -935,7 +935,7 @@ namespace PSI_Interface.MSData
             {
                 Product = new Product(c.product, MsData);
             }
-            if (c.binaryDataArrayList != null && c.binaryDataArrayList.binaryDataArray?.Count > 0)
+            if (c.binaryDataArrayList?.binaryDataArray?.Count > 0)
             {
                 BinaryDataArrayList = new MSDataList<BinaryDataArray>();
                 foreach (var bda in c.binaryDataArrayList.binaryDataArray)
@@ -995,7 +995,7 @@ namespace PSI_Interface.MSData
             SourceFileRefList = null;
             TargetList = null;
 
-            if (ss.sourceFileRefList != null && ss.sourceFileRefList.sourceFileRef?.Count > 0)
+            if (ss.sourceFileRefList?.sourceFileRef?.Count > 0)
             {
                 SourceFileRefList = new MSDataList<SourceFileRef>();
                 foreach (var sfr in ss.sourceFileRefList.sourceFileRef)
@@ -1003,7 +1003,7 @@ namespace PSI_Interface.MSData
                     SourceFileRefList.Add(new SourceFileRef(sfr, MsData));
                 }
             }
-            if (ss.targetList != null && ss.targetList.target?.Count > 0)
+            if (ss.targetList?.target?.Count > 0)
             {
                 TargetList = new MSDataList<ParamGroup>();
                 foreach (var t in ss.targetList.target)
@@ -1448,7 +1448,7 @@ namespace PSI_Interface.MSData
             {
                 FileContentInfo = new ParamGroup(fd.fileContent, MsData);
             }
-            if (fd.sourceFileList != null && fd.sourceFileList.sourceFile?.Count > 0)
+            if (fd.sourceFileList?.sourceFile?.Count > 0)
             {
                 SourceFileList = new MSDataList<SourceFileInfo>();
                 foreach (var sf in fd.sourceFileList.sourceFile)
