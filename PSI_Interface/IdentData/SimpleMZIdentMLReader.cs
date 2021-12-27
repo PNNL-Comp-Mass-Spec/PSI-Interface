@@ -1777,7 +1777,12 @@ namespace PSI_Interface.IdentData
                         else if (reader.GetAttribute("accession") == "MS:1000016")
                         {
                             // Parse out the scan time
-                            double.TryParse(reader.GetAttribute("value"), out var scanTime);
+                            var scanTimeText = reader.GetAttribute("value");
+
+                            if (!double.TryParse(scanTimeText, out var scanTime))
+                            {
+                                Console.WriteLine("Invalid value for scan time (accession MS:1000016): {0}", scanTimeText);
+                            }
 
                             // Determine the units
                             var unitAccession = reader.GetAttribute("unitAccession");

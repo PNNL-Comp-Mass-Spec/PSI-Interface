@@ -26,8 +26,8 @@ namespace PSI_Interface.MSData
         private readonly string _filePath;
         private string _srcFileChecksum = string.Empty;
         private string _fileFormatVersion = string.Empty;
-        private CV.CV.CVID _nativeIdFormat = CV.CV.CVID.CVID_Unknown;
-        private CV.CV.CVID _nativeFormat = CV.CV.CVID.CVID_Unknown;
+        private readonly CV.CV.CVID _nativeIdFormat = CV.CV.CVID.CVID_Unknown;
+        private readonly CV.CV.CVID _nativeFormat = CV.CV.CVID.CVID_Unknown;
         private Stream _file;
         private StreamReader _fileReader;
         private XmlReader _xmlReaderForYield;
