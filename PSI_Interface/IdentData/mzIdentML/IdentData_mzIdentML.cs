@@ -697,7 +697,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         /// <param name="idId"></param>
         // ReSharper disable once PublicConstructorInAbstractClass
-        public IdentifiableType(IIdentifiableType idId)
+        protected IdentifiableType(IIdentifiableType idId)
         {
             id = idId.Id;
             name = idId.Name;
@@ -1908,7 +1908,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// </summary>
         /// <param name="pa"></param>
         // ReSharper disable once PublicConstructorInAbstractClass
-        public ProtocolApplicationType(ProtocolApplicationObj pa) : base(pa)
+        protected ProtocolApplicationType(ProtocolApplicationObj pa) : base(pa)
         {
             activityDate = pa.ActivityDate;
             activityDateSpecified = pa.ActivityDateSpecified;

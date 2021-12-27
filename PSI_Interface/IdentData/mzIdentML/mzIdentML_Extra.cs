@@ -505,7 +505,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Default Constructor
         /// </summary>
         // ReSharper disable once PublicConstructorInAbstractClass
-        public IdentifiableType()
+        protected IdentifiableType()
         {
             id = null;
             name = null;
@@ -1486,7 +1486,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// Default Constructor
         /// </summary>
         // ReSharper disable once PublicConstructorInAbstractClass
-        public ProtocolApplicationType()
+        protected ProtocolApplicationType()
         {
             activityDate = System.DateTime.Now;
             activityDateSpecified = false;
