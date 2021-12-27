@@ -116,6 +116,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
 
             foreach (var specId in IdentData.AnalysisCollection.SpectrumIdentifications)
+            {
                 foreach (var dbSeq in specId.SearchDatabases)
                 {
                     if (_searchDatabases.Any(item => item.Equals(dbSeq.SearchDatabase)))
@@ -125,6 +126,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     _searchDbIdCounter++;
                     _searchDatabases.Add(dbSeq.SearchDatabase);
                 }
+            }
         }
 
         private void RebuildSpectraDataList()
@@ -133,6 +135,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _spectraDataList.Clear();
 
             foreach (var sil in IdentData.DataCollection.AnalysisData.SpectrumIdentificationList)
+            {
                 foreach (var spectraData in sil.SpectrumIdentificationResults)
                 {
                     if (_spectraDataList.Any(item => item.Equals(spectraData.SpectraData)))
@@ -142,8 +145,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     _specDataIdCounter++;
                     _spectraDataList.Add(spectraData.SpectraData);
                 }
+            }
 
             foreach (var specId in IdentData.AnalysisCollection.SpectrumIdentifications)
+            {
                 foreach (var spectraData in specId.InputSpectra)
                 {
                     if (_spectraDataList.Any(item => item.Equals(spectraData.SpectraData)))
@@ -153,6 +158,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     _specDataIdCounter++;
                     _spectraDataList.Add(spectraData.SpectraData);
                 }
+            }
         }
 
         // ReSharper restore ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator

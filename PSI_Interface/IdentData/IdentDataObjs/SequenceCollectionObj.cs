@@ -114,8 +114,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _peptideEvidences.Clear();
 
             foreach (var sil in IdentData.DataCollection.AnalysisData.SpectrumIdentificationList)
+            {
                 foreach (var sir in sil.SpectrumIdentificationResults)
+                {
                     foreach (var sii in sir.SpectrumIdentificationItems)
+                    {
                         foreach (var pepEv in sii.PeptideEvidences)
                         {
                             if (_peptideEvidences.Any(item => item.Equals(pepEv.PeptideEvidence)))
@@ -125,6 +128,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                             _pepEvIdCounter++;
                             _peptideEvidences.Add(pepEv.PeptideEvidence);
                         }
+                    }
+                }
+            }
         }
 
         private void RebuildPeptideList()
@@ -133,7 +139,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             _peptides.Clear();
 
             foreach (var sil in IdentData.DataCollection.AnalysisData.SpectrumIdentificationList)
+            {
                 foreach (var sir in sil.SpectrumIdentificationResults)
+                {
                     foreach (var sii in sir.SpectrumIdentificationItems)
                     {
                         if (_peptides.Any(item => item.Equals(sii.Peptide)))
@@ -143,6 +151,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                         _pepIdCounter++;
                         _peptides.Add(sii.Peptide);
                     }
+                }
+            }
 
             foreach (var pepEv in _peptideEvidences)
             {
