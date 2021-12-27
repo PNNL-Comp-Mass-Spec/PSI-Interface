@@ -106,6 +106,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             RebuildDbSequenceList();
         }
 
+        // ReSharper disable ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
+
         private void RebuildPeptideEvidenceList()
         {
             _pepEvIdCounter = 0;
@@ -168,6 +170,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _dBSequences.Add(pepEv.DBSequence);
             }
         }
+
+        // ReSharper restore ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
 
         #region Object Equality
 

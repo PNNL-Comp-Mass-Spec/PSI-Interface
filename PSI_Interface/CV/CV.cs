@@ -20,16 +20,19 @@ namespace PSI_Interface.CV
         /// <summary>
         /// CV term part-of relationships
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public static readonly Dictionary<CVID, List<CVID>> RelationsPartOf = new Dictionary<CVID, List<CVID>>();
 
         /// <summary>
         /// CV term exact synonym relations
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public static readonly Dictionary<CVID, List<string>> RelationsExactSynonym = new Dictionary<CVID, List<string>>();
 
         /// <summary>
         /// CV term other relations
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public static readonly Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>> RelationsOther = new Dictionary<CVID, Dictionary<RelationsOtherTypes, List<CVID>>>();
 
         /// <summary>

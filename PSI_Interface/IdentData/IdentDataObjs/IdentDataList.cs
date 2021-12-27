@@ -328,6 +328,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="paramList"></param>
         /// <param name="cvid"></param>
         /// <param name="valueIfNotFound"></param>
+        // ReSharper disable once UnusedMember.Global
         public static CVParamObj GetCvParam(this IdentDataList<ParamBaseObj> paramList, CV.CV.CVID cvid, string valueIfNotFound)
         {
             var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);

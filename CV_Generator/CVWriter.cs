@@ -363,6 +363,7 @@ namespace CV_Generator
             return new XElement(tagName, toEscape).ToString(SaveOptions.DisableFormatting);
         }
 
+        // ReSharper disable once UnusedMember.Local
         private StringBuilder GenerateTermInfoObject(string indent)
         {
             if (_cvEnumData.Count == 0)
@@ -490,6 +491,7 @@ namespace CV_Generator
             _bigTermDictPopulated = true;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private StringBuilder RelationsIsAEnum(string indent)
         {
             var items = new Dictionary<string, List<string>>();

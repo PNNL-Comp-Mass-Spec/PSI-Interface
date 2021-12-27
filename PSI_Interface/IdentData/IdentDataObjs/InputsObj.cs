@@ -98,6 +98,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             RebuildSpectraDataList();
         }
 
+        // ReSharper disable ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
+
         private void RebuildSearchDatabaseList()
         {
             _searchDbIdCounter = 0;
@@ -152,6 +154,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     _spectraDataList.Add(spectraData.SpectraData);
                 }
         }
+
+        // ReSharper restore ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
 
         #region Object Equality
 
