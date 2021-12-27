@@ -276,7 +276,11 @@ namespace PSI_Interface.IdentData
         /// <param name="publicDatabaseName">Name of the database, if it maps exactly to a CV term; otherwise use CVID_Unknown</param>
         /// <param name="fileFormatCvid">The format of the database, if it exists in the CV</param>
         /// <returns>An initialized and added database, can add CVParams that add details about the database. See remarks.</returns>
-        public SearchDatabaseInfo AddSearchDatabase(string location, long numberOfSequences, string databaseName, CV.CV.CVID publicDatabaseName = CV.CV.CVID.CVID_Unknown,
+        public SearchDatabaseInfo AddSearchDatabase(
+            string location,
+            long numberOfSequences,
+            string databaseName,
+            CV.CV.CVID publicDatabaseName = CV.CV.CVID.CVID_Unknown,
             CV.CV.CVID fileFormatCvid = CV.CV.CVID.CVID_Unknown)
         {
             var db = new SearchDatabaseInfo
@@ -287,6 +291,7 @@ namespace PSI_Interface.IdentData
                 NumDatabaseSequences = numberOfSequences,
                 DatabaseName = new ParamObj(),
             };
+
             if (publicDatabaseName != CV.CV.CVID.CVID_Unknown)
             {
                 db.DatabaseName.Item = new CVParamObj(publicDatabaseName);
@@ -298,9 +303,11 @@ namespace PSI_Interface.IdentData
                     Name = databaseName,
                 };
             }
+
             if (fileFormatCvid != CV.CV.CVID.CVID_Unknown)
             {
-                db.FileFormat = new FileFormatInfo {
+                db.FileFormat = new FileFormatInfo
+                {
                     CVParam = new CVParamObj(fileFormatCvid)
                 };
             }
@@ -309,10 +316,12 @@ namespace PSI_Interface.IdentData
             {
                 identData.DataCollection.Inputs = new InputsObj();
             }
+
             if (identData.DataCollection.Inputs.SearchDatabases == null)
             {
                 identData.DataCollection.Inputs.SearchDatabases = new IdentDataList<SearchDatabaseInfo>();
             }
+
             identData.DataCollection.Inputs.SearchDatabases.Add(db);
 
             return db;
@@ -338,6 +347,7 @@ namespace PSI_Interface.IdentData
                     CVParam = new CVParamObj(spectrumIdFormat),
                 },
             };
+
             if (fileFormatCvid != CV.CV.CVID.CVID_Unknown)
             {
                 dataFile.FileFormat = new FileFormatInfo()
@@ -345,14 +355,17 @@ namespace PSI_Interface.IdentData
                     CVParam = new CVParamObj(fileFormatCvid),
                 };
             }
+
             if (identData.DataCollection.Inputs == null)
             {
                 identData.DataCollection.Inputs = new InputsObj();
             }
+
             if (identData.DataCollection.Inputs.SpectraDataList == null)
             {
                 identData.DataCollection.Inputs.SpectraDataList = new IdentDataList<SpectraDataObj>();
             }
+
             identData.DataCollection.Inputs.SpectraDataList.Add(dataFile);
 
             return dataFile;
