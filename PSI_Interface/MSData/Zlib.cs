@@ -53,7 +53,7 @@ namespace PSI_Interface.MSData
         public static byte[] CompressZLib(byte[] decompressedBytes, out int compressedBytes)
         {
             // Calculate the adler32 checksum of the uncompressed data, that will go at the end of the compressed data, per the zlib spec.
-            var adler32 = AdlerChecksum.MakeForBuff(decompressedBytes).GetValueOrDefault(0);
+            var adler32 = AdlerChecksum.MakeForBuff(decompressedBytes) ?? 0;
 
             // Get the bytes of the adler32, making sure they are network order/big-endian
             var adler32Bytes = BitConverter.GetBytes(adler32);

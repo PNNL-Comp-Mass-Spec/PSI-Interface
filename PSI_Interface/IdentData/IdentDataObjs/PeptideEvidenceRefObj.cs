@@ -93,7 +93,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             return other != null && Equals(PeptideEvidence, other.PeptideEvidence);
         }
 
-
         /// <summary>
         /// Object equality
         /// </summary>

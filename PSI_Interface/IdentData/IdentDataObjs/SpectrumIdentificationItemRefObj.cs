@@ -95,7 +95,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             return other != null && Equals(SpectrumIdentificationItem, other.SpectrumIdentificationItem);
         }
 
-
         /// <summary>
         /// Object equality
         /// </summary>
