@@ -1059,6 +1059,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _dataType = value;
+
                 // Make sure the appropriate cvParam is set...
                 for (var i = 0; i < CVParams.Count; i++)
                 {
@@ -1072,8 +1073,12 @@ namespace PSI_Interface.MSData
                         }
                     }
                 }
-                var cv = new CVParam();
-                cv.Cvid = _typeMap[_dataType];
+
+                var cv = new CVParam
+                {
+                    Cvid = _typeMap[_dataType]
+                };
+
                 CVParams.Add(cv);
             }
         }
@@ -1105,8 +1110,11 @@ namespace PSI_Interface.MSData
                         }
                     }
                 }
-                var cv = new CVParam();
-                cv.Cvid = CV.CV.CVID.CVID_Unknown;
+                var cv = new CVParam
+                {
+                    Cvid = CV.CV.CVID.CVID_Unknown
+                };
+
                 if (_dataWidth == 4)
                 {
                     cv.Cvid = CV.CV.CVID.MS_32_bit_float;
@@ -1141,8 +1149,11 @@ namespace PSI_Interface.MSData
                         }
                     }
                 }
-                var cv = new CVParam();
-                cv.Cvid = CV.CV.CVID.MS_no_compression;
+                var cv = new CVParam
+                {
+                    Cvid = CV.CV.CVID.MS_no_compression
+                };
+
                 if (_isCompressed)
                 {
                     cv.Cvid = CV.CV.CVID.MS_zlib_compression;
