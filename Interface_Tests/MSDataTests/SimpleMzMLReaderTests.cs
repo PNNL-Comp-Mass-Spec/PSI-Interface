@@ -399,6 +399,14 @@ namespace Interface_Tests.MSDataTests
             }
         }
 
+        /// <summary>
+        /// Test reading the parent scan for fragmentation spectra
+        /// </summary>
+        /// <param name="inputFileRelativePath"></param>
+        /// <param name="startScan"></param>
+        /// <param name="endScan"></param>
+        /// <param name="expectedPrecursorScans"></param>
+        [Test]
         [TestCase(@"MzML\Angiotensin_AllScans.mzML", 1, 100, -1, -1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, -1, 2, 2, 2, 23, 23, 23, 23, 23, 23, 23, 23, 23, -1, 23, 23, 23, 36, 36, 36, 36, 36, 36, 36, 36, 36, 23, 23, 36, 36, 36, 36, 36, 36, -1, 36, 36, 36, 57, 57, 57, 57, 57, 57, 57, 57, 57, 36, 36, 57, 57, 57, 57, 57, 57, -1, 57, 57, 57, 78, 78, 78, 78, 78, 78, 78, 78, 78, 57, 57, 78, 78, 78, 78, 78, 78, -1, 78)]
         public void TestGetParentScan(string inputFileRelativePath, int startScan, int endScan, params int[] expectedPrecursorScans)
         {
