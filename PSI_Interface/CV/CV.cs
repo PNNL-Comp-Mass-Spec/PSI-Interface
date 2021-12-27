@@ -90,22 +90,22 @@ namespace PSI_Interface.CV
             /// <summary>
             /// CV identifier
             /// </summary>
-            public string Id { get; private set; }
+            public string Id { get; }
 
             /// <summary>
             /// CV name
             /// </summary>
-            public string Name { get; private set; }
+            public string Name { get; }
 
             /// <summary>
             /// CV URI
             /// </summary>
-            public string URI { get; private set; }
+            public string URI { get; }
 
             /// <summary>
             /// CV Version
             /// </summary>
-            public string Version { get; private set; }
+            public string Version { get; }
 
             /// <summary>
             /// Constructor
@@ -131,32 +131,32 @@ namespace PSI_Interface.CV
             /// <summary>
             /// Term enum identifier
             /// </summary>
-            public CVID Cvid { get; private set; }
+            public CVID Cvid { get; }
 
             /// <summary>
             /// Term parent CV
             /// </summary>
-            public string CVRef { get; private set; }
+            public string CVRef { get; }
 
             /// <summary>
             /// Term identifier
             /// </summary>
-            public string Id { get; private set; }
+            public string Id { get; }
 
             /// <summary>
             /// Term name
             /// </summary>
-            public string Name { get; private set; }
+            public string Name { get; }
 
             /// <summary>
             /// Term definition
             /// </summary>
-            public string Definition { get; private set; }
+            public string Definition { get; }
 
             /// <summary>
             /// If the term is marked obsolete
             /// </summary>
-            public bool IsObsolete { get; private set; }
+            public bool IsObsolete { get; }
 
             /// <summary>
             /// Returns true if this term has an IsA relationship with parent
