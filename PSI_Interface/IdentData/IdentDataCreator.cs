@@ -176,7 +176,7 @@ namespace PSI_Interface.IdentData
             identData.CascadeProperties();
         }
 
-        private string PepModConcat(PeptideObj pep)
+        private static string PepModConcat(PeptideObj pep)
         {
             var result = "";
             foreach (var mod in pep.Modifications)

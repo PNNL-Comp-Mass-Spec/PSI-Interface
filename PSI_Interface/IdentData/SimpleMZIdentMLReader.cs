@@ -816,7 +816,7 @@ namespace PSI_Interface.IdentData
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="currentNodeName"></param>
-        private void PossiblyReadEndElement(XmlReader reader, string currentNodeName)
+        private static void PossiblyReadEndElement(XmlReader reader, string currentNodeName)
         {
             // If the Node is empty, the end element may not be present
             if (reader.NodeType == XmlNodeType.EndElement)

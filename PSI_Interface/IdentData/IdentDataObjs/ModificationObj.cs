@@ -173,7 +173,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         protected internal bool MonoisotopicMassDeltaSpecified { get; private set; }
 
-        private CV.CV.CVID SearchForUnimodMod(string modName)
+        private static CV.CV.CVID SearchForUnimodMod(string modName)
         {
             if (modName.StartsWith("unimod", StringComparison.OrdinalIgnoreCase))
                 modName = modName.Remove(0, 6);

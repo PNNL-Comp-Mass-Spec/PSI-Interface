@@ -3081,7 +3081,7 @@ namespace PSI_Interface.MSData
         /// Handle the userParam element
         /// </summary>
         /// <param name="reader">XmlReader that is only valid for the scope of the single "userParam" element</param>
-        private UserParamData ReadUserParam(XmlReader reader)
+        private static UserParamData ReadUserParam(XmlReader reader)
         {
             reader.MoveToContent();
             var name = reader.GetAttribute("name");
@@ -4682,7 +4682,7 @@ namespace PSI_Interface.MSData
             return bda;
         }
 
-        private string TryGetAttributeValue(XmlReader reader, string attributeName)
+        private static string TryGetAttributeValue(XmlReader reader, string attributeName)
         {
             if (!reader.HasAttributes)
                 return string.Empty;
@@ -4697,7 +4697,7 @@ namespace PSI_Interface.MSData
          * Do some more work here.
          *
          ********************************************************************************************************************************************/
-        private byte[] DecompressZLib(byte[] compressedBytes, int expectedBytes)
+        private static byte[] DecompressZLib(byte[] compressedBytes, int expectedBytes)
         {
             var msCompressed = new MemoryStream(compressedBytes);
 
