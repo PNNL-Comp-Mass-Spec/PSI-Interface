@@ -7,7 +7,7 @@ using PSI_Interface.MSData.mzML;
 namespace Interface_Tests.MSDataTests
 {
     [TestFixture]
-    class MSDataReadTests
+    internal class MSDataReadTests
     {
         #region Additional test attributes
         //

@@ -8,7 +8,7 @@ using PSI_Interface.IdentData.IdentDataObjs;
 
 namespace Interface_Tests.CVTests
 {
-    class CVTests
+    internal class CVTests
     {
         #region Additional test attributes
         //

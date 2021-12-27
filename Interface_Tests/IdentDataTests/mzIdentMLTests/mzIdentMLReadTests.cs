@@ -5,7 +5,7 @@ using PSI_Interface.IdentData.mzIdentML;
 
 namespace Interface_Tests.IdentDataTests.mzIdentMLTests
 {
-    class mzIdentMLReadTests
+    internal class mzIdentMLReadTests
     {
         #region Additional test attributes
         //
