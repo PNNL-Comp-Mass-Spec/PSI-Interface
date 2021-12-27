@@ -15,6 +15,8 @@ namespace PSI_Interface.IdentData
     /// </summary>
     public class SimpleMZIdentMLReader
     {
+        // Ignore Spelling: gzip, gzipped, mzid, phos, pre, tryptic, unimod
+
         /// <summary>
         /// A wrapper around an exception that provides a single level of abstraction, but no additional detail.
         /// </summary>

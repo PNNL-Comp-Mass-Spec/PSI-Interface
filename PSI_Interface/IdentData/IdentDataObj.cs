@@ -15,6 +15,8 @@ namespace PSI_Interface.IdentData
     /// </remarks>
     public class IdentDataObj : IIdentifiableType, IEquatable<IdentDataObj>
     {
+        // Ignore Spelling: pato
+
         #region Private/Internal Fields
         private AnalysisCollectionObj _analysisCollection;
         private AnalysisProtocolCollectionObj _analysisProtocolCollection;
