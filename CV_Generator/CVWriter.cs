@@ -160,7 +160,7 @@ namespace CV_Generator
         }
 
         /// <summary>
-        /// Append a line with only \n and not \r\n
+        /// Append \n (instead of \r\n)
         /// </summary>
         /// <param name="sb"></param>
         private static void AppendLine(StringBuilder sb)
@@ -169,7 +169,7 @@ namespace CV_Generator
         }
 
         /// <summary>
-        /// Append a line with only \n and not \r\n
+        /// Append text and \n (instead of \r\n)
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="newLine"></param>

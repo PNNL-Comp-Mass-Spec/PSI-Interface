@@ -98,33 +98,44 @@ namespace PSI_Interface.MSData
         }
 
         /// <summary>
-        ///  Adler 32 check sum calculation
-        ///  (From en.wikipedia.org)
+        /// <para>
+        /// Adler 32 check sum calculation
+        /// (From en.wikipedia.org)
+        /// </para>
+        /// <para>
+        /// Adler-32 is a checksum algorithm which was invented by Mark Adler.
+        /// It is almost as reliable as a 32-bit cyclic redundancy check for
+        /// protecting against accidental modification of data, such as distortions
+        /// occurring during a transmission.
+        /// </para>
+        /// <para>
+        /// An Adler-32 checksum is obtained by calculating two 16-bit checksums A and B and
+        /// concatenating their bits into a 32-bit integer. A is the sum of all bytes in the
+        /// string, B is the sum of the individual values of A from each step.
+        /// </para>
+        /// <para>
+        /// At the beginning of an Adler-32 run, A is initialized to 1, B to 0.
+        /// The sums are done modulo 65521 (the largest prime number smaller than 216).
+        /// The bytes are stored in network order (big endian), B occupying
+        /// the two most significant bytes.
+        /// </para>
+        /// <para>
+        /// The function may be expressed as
         ///
-        ///  Adler-32 is a checksum algorithm which was invented by Mark Adler.
-        ///  It is almost as reliable as a 32-bit cyclic redundancy check for
-        ///  protecting against accidental modification of data, such as distortions
-        ///  occurring during a transmission.
-        ///  An Adler-32 checksum is obtained by calculating two 16-bit checksums A and B and
-        ///  concatenating their bits into a 32-bit integer. A is the sum of all bytes in the
-        ///  string, B is the sum of the individual values of A from each step.
-        ///  At the beginning of an Adler-32 run, A is initialized to 1, B to 0.
-        ///  The sums are done modulo 65521 (the largest prime number smaller than 216).
-        ///  The bytes are stored in network order (big endian), B occupying
-        ///  the two most significant bytes.
-        ///  The function may be expressed as
+        /// A = 1 + D1 + D2 + ... + DN (mod 65521)
+        /// B = (1 + D1) + (1 + D1 + D2) + ... + (1 + D1 + D2 + ... + DN) (mod 65521)
+        ///   = N * D1 + (N-1) * D2 + (N-2) * D3 + ... + DN + N (mod 65521)
         ///
-        ///  A = 1 + D1 + D2 + ... + DN (mod 65521)
-        ///  B = (1 + D1) + (1 + D1 + D2) + ... + (1 + D1 + D2 + ... + DN) (mod 65521)
-        ///    = N * D1 + (N-1) * D2 + (N-2) * D3 + ... + DN + N (mod 65521)
+        /// Adler-32(D) = B * 65536 + A
         ///
-        ///  Adler-32(D) = B * 65536 + A
-        ///
-        ///  where D is the string of bytes for which the checksum is to be calculated,
-        ///  and N is the length of D.
+        /// where D is the string of bytes for which the checksum is to be calculated,
+        /// and N is the length of D.
+        /// </para>
+        /// <para>
         /// Written by Youry Jukov (yjukov@hotmail.com)
         /// https://www.codeproject.com/Articles/21083/Adler-Checksum-Calculation
         /// Modified extensively for better usability in this project
+        /// </para>
         /// </summary>
         public static class AdlerChecksum
         {

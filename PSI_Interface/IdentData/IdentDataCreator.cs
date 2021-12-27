@@ -236,10 +236,14 @@ namespace PSI_Interface.IdentData
         /// Adds information about a search database to the IdentData
         /// </summary>
         /// <remarks>
+        /// <para>
         /// Valid CVParams to add:
+        /// </para>
+        /// <para>
         ///    CVID.MS_MD5
         ///    CVID.MS_SHA_1
-        ///
+        /// </para>
+        /// <para>
         ///    CVID.MS_database_source
         ///    CVID.MS_database_name
         ///    CVID.MS_database_local_file_path_OBSOLETE
@@ -257,12 +261,14 @@ namespace PSI_Interface.IdentData
         ///    CVID.MS_translation_table_description
         ///    CVID.MS_decoy_DB_details
         ///    CVID.MS_number_of_decoy_sequences
-        ///
+        /// </para>
+        /// <para>
         ///    CVID.MS_decoy_DB_type_reverse
         ///    CVID.MS_decoy_DB_type_randomized
         ///    CVID.MS_DB_composition_target_decoy
         ///    CVID.MS_decoy_DB_accession_regexp
         ///    CVID.MS_decoy_DB_derived_from_OBSOLETE
+        /// </para>
         /// </remarks>
         /// <param name="location">Path to the database (absolute path)</param>
         /// <param name="numberOfSequences">Number of sequences in the database</param>
