@@ -227,7 +227,7 @@ namespace PSI_Interface.CV
             }
         }
 
-        private static void TermNameLookupSafeAdd(Dictionary<string, CVID> cvDict, TermInfo term)
+        private static void TermNameLookupSafeAdd(IDictionary<string, CVID> cvDict, TermInfo term)
         {
             var safeName = term.Name.ToLower();
             var counter = 0;
