@@ -446,7 +446,7 @@ namespace PSI_Interface.IdentData
                         var result = sir.SpectrumIdentificationItems.Where(item => item.Id == id).ToList();
                         if (result.Count > 0)
                         {
-                            return result.First();
+                            return result[0];
                         }
                     }
                 }
@@ -538,7 +538,7 @@ namespace PSI_Interface.IdentData
                     var result = sil.FragmentationTables.Where(item => item.Id == id).ToList();
                     if (result.Count > 0)
                     {
-                        return result.First();
+                        return result[0];
                     }
                 }
             }
@@ -566,7 +566,7 @@ namespace PSI_Interface.IdentData
                     var result = sip.MassTables.Where(item => item.Id == id).ToList();
                     if (result.Count > 0)
                     {
-                        return result.First();
+                        return result[0];
                     }
                 }
             }
@@ -592,7 +592,7 @@ namespace PSI_Interface.IdentData
                 var result = AnalysisSampleCollection.Where(item => item.Id == id).ToList();
                 if (result.Count > 0)
                 {
-                    return result.First();
+                    return result[0];
                 }
             }
             catch
@@ -617,7 +617,7 @@ namespace PSI_Interface.IdentData
                 var result = AnalysisSoftwareList.Where(item => item.Id == id).ToList();
                 if (result.Count > 0)
                 {
-                    return result.First();
+                    return result[0];
                 }
             }
             catch
@@ -673,7 +673,7 @@ namespace PSI_Interface.IdentData
                 var result = AuditCollection.Where(item => item.Id == id).ToList();
                 if (result.Count > 0)
                 {
-                    return result.First();
+                    return result[0];
                 }
             }
             catch
@@ -698,7 +698,7 @@ namespace PSI_Interface.IdentData
                 var result = DataCollection.Inputs.SearchDatabases.Where(item => item.Id == id).ToList();
                 if (result.Count > 0)
                 {
-                    return result.First();
+                    return result[0];
                 }
             }
             catch
@@ -723,7 +723,7 @@ namespace PSI_Interface.IdentData
                 var result = DataCollection.Inputs.SpectraDataList.Where(item => item.Id == id).ToList();
                 if (result.Count > 0)
                 {
-                    return result.First();
+                    return result[0];
                 }
             }
             catch
@@ -749,7 +749,7 @@ namespace PSI_Interface.IdentData
                     DataCollection.AnalysisData.SpectrumIdentificationList.Where(item => item.Id == id).ToList();
                 if (result.Count > 0)
                 {
-                    return result.First();
+                    return result[0];
                 }
             }
             catch
@@ -775,7 +775,7 @@ namespace PSI_Interface.IdentData
                     AnalysisProtocolCollection.SpectrumIdentificationProtocols.Where(item => item.Id == id).ToList();
                 if (result.Count > 0)
                 {
-                    return result.First();
+                    return result[0];
                 }
             }
             catch
@@ -850,7 +850,7 @@ namespace PSI_Interface.IdentData
                     var result = sip.DatabaseTranslation.TranslationTables.Where(item => item.Id == id).ToList();
                     if (result.Count > 0)
                     {
-                        return result.First();
+                        return result[0];
                     }
                 }
             }
