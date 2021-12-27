@@ -74,7 +74,7 @@ namespace Interface_Tests.CVTests
                 writer.WriteLine("Version=" + fileData.Version);
                 writer.WriteLine();
 
-                var formatString = "{0,-20} {1,-50} {2}";
+                const string formatString = "{0,-20} {1,-50} {2}";
                 writer.WriteLine(formatString, "Key", "Value", "Definition");
                 writer.WriteLine(formatString, "---", "-----", "----------");
 

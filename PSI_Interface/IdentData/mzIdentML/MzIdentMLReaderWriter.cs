@@ -99,7 +99,8 @@ namespace PSI_Interface.IdentData.mzIdentML
             using (var reader = new StreamReader(CreateReader(filePath, 8192)))
             {
                 var count = 0;
-                var nsKey = "http://psidev.info/psi/pi/mzIdentML/";
+                const string nsKey = "http://psidev.info/psi/pi/mzIdentML/";
+
                 while (!reader.EndOfStream && count < 20)
                 {
                     var line = reader.ReadLine();
