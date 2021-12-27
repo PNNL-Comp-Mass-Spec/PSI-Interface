@@ -192,7 +192,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
+                var hashCode = Name?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ UnitCvid.GetHashCode();
                 return hashCode;
             }

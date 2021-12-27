@@ -135,9 +135,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = PeptideEvidence != null ? PeptideEvidence.GetHashCode() : 0;
+                var hashCode = PeptideEvidence?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^
-                           (SpectrumIdentificationItems != null ? SpectrumIdentificationItems.GetHashCode() : 0);
+                           (SpectrumIdentificationItems?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

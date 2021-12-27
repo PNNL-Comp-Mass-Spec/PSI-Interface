@@ -156,8 +156,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 var hashCode = AvgMassDelta.GetHashCode();
                 hashCode = (hashCode * 397) ^ Location;
                 hashCode = (hashCode * 397) ^ MonoisotopicMassDelta.GetHashCode();
-                hashCode = (hashCode * 397) ^ (OriginalResidue != null ? OriginalResidue.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ReplacementResidue != null ? ReplacementResidue.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (OriginalResidue?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ReplacementResidue?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

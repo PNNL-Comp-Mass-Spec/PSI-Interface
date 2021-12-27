@@ -160,12 +160,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
+                var hashCode = Name?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ NumSequencesSearched.GetHashCode();
-                hashCode = (hashCode * 397) ^ (FragmentationTables != null ? FragmentationTables.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpectrumIdentificationResults != null ? SpectrumIdentificationResults.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FragmentationTables?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationResults?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

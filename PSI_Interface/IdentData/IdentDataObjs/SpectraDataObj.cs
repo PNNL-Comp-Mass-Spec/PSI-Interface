@@ -136,11 +136,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (ExternalFormatDocumentation != null ? ExternalFormatDocumentation.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Location != null ? Location.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpectrumIDFormat != null ? SpectrumIDFormat.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (FileFormat != null ? FileFormat.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (ExternalFormatDocumentation?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Location?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIDFormat?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (FileFormat?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

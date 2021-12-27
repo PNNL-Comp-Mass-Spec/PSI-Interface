@@ -132,12 +132,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Residues != null ? Residues.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AmbiguousResidues != null ? AmbiguousResidues.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (MsLevels != null ? MsLevels.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Residues?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (AmbiguousResidues?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (MsLevels?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

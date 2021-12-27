@@ -100,7 +100,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            return Organization != null ? Organization.GetHashCode() : 0;
+            return Organization?.GetHashCode() ?? 0;
         }
         #endregion
     }

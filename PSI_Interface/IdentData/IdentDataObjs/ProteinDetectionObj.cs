@@ -166,10 +166,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (InputSpectrumIdentifications != null ? InputSpectrumIdentifications.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ProteinDetectionList != null ? ProteinDetectionList.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ProteinDetectionProtocol != null ? ProteinDetectionProtocol.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (InputSpectrumIdentifications?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ProteinDetectionList?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ProteinDetectionProtocol?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

@@ -195,14 +195,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (SiteRegexp != null ? SiteRegexp.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (NTermGain != null ? NTermGain.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CTermGain != null ? CTermGain.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (SiteRegexp?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (NTermGain?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CTermGain?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ SemiSpecific.GetHashCode();
                 hashCode = (hashCode * 397) ^ MissedCleavages.GetHashCode();
                 hashCode = (hashCode * 397) ^ MinDistance.GetHashCode();
-                hashCode = (hashCode * 397) ^ (EnzymeName != null ? EnzymeName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (EnzymeName?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

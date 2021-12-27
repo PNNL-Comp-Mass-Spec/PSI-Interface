@@ -116,7 +116,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            return PeptideEvidence != null ? PeptideEvidence.GetHashCode() : 0;
+            return PeptideEvidence?.GetHashCode() ?? 0;
         }
         #endregion
     }

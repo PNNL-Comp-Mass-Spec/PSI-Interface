@@ -125,9 +125,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 var hashCode = FixedMod.GetHashCode();
                 hashCode = (hashCode * 397) ^ MassDelta.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Residues != null ? Residues.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpecificityRules != null ? SpecificityRules.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Residues?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpecificityRules?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

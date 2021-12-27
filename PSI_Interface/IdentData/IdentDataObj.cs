@@ -908,25 +908,25 @@ namespace PSI_Interface.IdentData
         {
             unchecked
             {
-                var hashCode = CVList != null ? CVList.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (AnalysisSoftwareList != null ? AnalysisSoftwareList.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Provider != null ? Provider.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AuditCollection != null ? AuditCollection.GetHashCode() : 0);
+                var hashCode = CVList?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (AnalysisSoftwareList?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Provider?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (AuditCollection?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^
-                           (AnalysisSampleCollection != null ? AnalysisSampleCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SequenceCollection != null ? SequenceCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AnalysisCollection != null ? AnalysisCollection.GetHashCode() : 0);
+                           (AnalysisSampleCollection?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SequenceCollection?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (AnalysisCollection?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^
-                           (AnalysisProtocolCollection != null ? AnalysisProtocolCollection.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DataCollection != null ? DataCollection.GetHashCode() : 0);
+                           (AnalysisProtocolCollection?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (DataCollection?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^
-                           (BibliographicReferences != null ? BibliographicReferences.GetHashCode() : 0);
+                           (BibliographicReferences?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ CreationDate.GetHashCode();
 
                 // ReSharper disable NonReadonlyMemberInGetHashCode
-                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Id != null ? Id.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Version?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Id?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Name?.GetHashCode() ?? 0);
                 // ReSharper restore NonReadonlyMemberInGetHashCode
 
                 return hashCode;

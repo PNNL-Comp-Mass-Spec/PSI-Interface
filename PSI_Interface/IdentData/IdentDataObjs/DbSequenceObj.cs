@@ -180,13 +180,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Accession != null ? Accession.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Accession?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ Length;
-                hashCode = (hashCode * 397) ^ (Seq != null ? Seq.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SearchDatabase != null ? SearchDatabase.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Seq?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SearchDatabase?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

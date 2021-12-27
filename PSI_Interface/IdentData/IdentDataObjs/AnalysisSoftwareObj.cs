@@ -139,12 +139,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Customizations != null ? Customizations.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (URI != null ? URI.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ContactRole != null ? ContactRole.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SoftwareName != null ? SoftwareName.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Customizations?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (URI?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Version?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ContactRole?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SoftwareName?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

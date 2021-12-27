@@ -321,19 +321,19 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (AnalysisSoftware != null ? AnalysisSoftware.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SearchType != null ? SearchType.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (AnalysisSoftware?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SearchType?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^
-                           (AdditionalSearchParams != null ? AdditionalSearchParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (MassTables != null ? MassTables.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ModificationParams != null ? ModificationParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Enzymes != null ? Enzymes.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (FragmentTolerances != null ? FragmentTolerances.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (ParentTolerances != null ? ParentTolerances.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Threshold != null ? Threshold.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DatabaseFilters != null ? DatabaseFilters.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DatabaseTranslation != null ? DatabaseTranslation.GetHashCode() : 0);
+                           (AdditionalSearchParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (MassTables?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ModificationParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Enzymes?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (FragmentTolerances?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (ParentTolerances?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Threshold?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (DatabaseFilters?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (DatabaseTranslation?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

@@ -364,20 +364,20 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
+                var hashCode = Name?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ ChargeState;
                 hashCode = (hashCode * 397) ^ ExperimentalMassToCharge.GetHashCode();
                 hashCode = (hashCode * 397) ^ CalculatedMassToCharge.GetHashCode();
                 hashCode = (hashCode * 397) ^ CalculatedPI.GetHashCode();
                 hashCode = (hashCode * 397) ^ Rank;
                 hashCode = (hashCode * 397) ^ PassThreshold.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Peptide != null ? Peptide.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (MassTable != null ? MassTable.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Sample != null ? Sample.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (PeptideEvidences != null ? PeptideEvidences.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Fragmentations != null ? Fragmentations.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Peptide?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (MassTable?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Sample?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (PeptideEvidences?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Fragmentations?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

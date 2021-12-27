@@ -325,18 +325,18 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
+                var hashCode = Name?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ IsDecoy.GetHashCode();
                 hashCode = (hashCode * 397) ^ Start;
                 hashCode = (hashCode * 397) ^ End;
                 hashCode = (hashCode * 397) ^ Pre.GetHashCode();
                 hashCode = (hashCode * 397) ^ Post.GetHashCode();
                 hashCode = (hashCode * 397) ^ Frame;
-                hashCode = (hashCode * 397) ^ (TranslationTable != null ? TranslationTable.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Peptide != null ? Peptide.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DBSequence != null ? DBSequence.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (TranslationTable?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Peptide?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (DBSequence?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

@@ -179,10 +179,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             unchecked
             {
                 var hashCode = Charge;
-                hashCode = (hashCode * 397) ^ (FragmentArrays != null ? FragmentArrays.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Index != null ? Index.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (FragmentArrays?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Index?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

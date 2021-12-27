@@ -98,8 +98,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = TranslationTables != null ? TranslationTables.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Frames != null ? Frames.GetHashCode() : 0);
+                var hashCode = TranslationTables?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Frames?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

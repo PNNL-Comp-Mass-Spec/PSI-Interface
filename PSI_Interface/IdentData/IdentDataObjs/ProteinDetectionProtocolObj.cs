@@ -161,10 +161,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (AnalysisSoftware != null ? AnalysisSoftware.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (AnalysisParams != null ? AnalysisParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Threshold != null ? Threshold.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (AnalysisSoftware?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (AnalysisParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Threshold?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

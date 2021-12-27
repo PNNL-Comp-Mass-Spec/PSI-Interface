@@ -189,10 +189,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (InputSpectra != null ? InputSpectra.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpectrumIdentificationList != null ? SpectrumIdentificationList.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpectrumIdentificationProtocol != null ? SpectrumIdentificationProtocol.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (InputSpectra?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationList?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationProtocol?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

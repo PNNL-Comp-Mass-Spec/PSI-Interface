@@ -93,7 +93,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            return Item != null ? Item.GetHashCode() : 0;
+            return Item?.GetHashCode() ?? 0;
         }
         #endregion
     }

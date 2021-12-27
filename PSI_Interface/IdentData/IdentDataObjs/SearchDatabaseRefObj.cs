@@ -112,7 +112,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            return SearchDatabase != null ? SearchDatabase.GetHashCode() : 0;
+            return SearchDatabase?.GetHashCode() ?? 0;
         }
         #endregion
     }

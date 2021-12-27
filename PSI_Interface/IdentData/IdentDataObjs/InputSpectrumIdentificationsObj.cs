@@ -96,7 +96,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            return SpectrumIdentificationList != null ? SpectrumIdentificationList.GetHashCode() : 0;
+            return SpectrumIdentificationList?.GetHashCode() ?? 0;
         }
 
         #endregion

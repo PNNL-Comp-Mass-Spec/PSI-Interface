@@ -108,7 +108,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             unchecked
             {
                 var hashCode = Independent.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Enzymes != null ? Enzymes.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Enzymes?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

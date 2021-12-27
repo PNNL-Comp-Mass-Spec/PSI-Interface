@@ -153,15 +153,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Authors != null ? Authors.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DOI != null ? DOI.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Authors?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (DOI?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ Year;
-                hashCode = (hashCode * 397) ^ (Publication != null ? Publication.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Publisher != null ? Publisher.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Editor != null ? Editor.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Pages != null ? Pages.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Title != null ? Title.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Publication?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Publisher?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Editor?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Pages?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Title?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

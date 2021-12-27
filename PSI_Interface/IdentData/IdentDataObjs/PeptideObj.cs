@@ -147,12 +147,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (PeptideSequence != null ? PeptideSequence.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Modifications != null ? Modifications.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SubstitutionModifications != null ? SubstitutionModifications.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (PeptideSequence?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Modifications?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SubstitutionModifications?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

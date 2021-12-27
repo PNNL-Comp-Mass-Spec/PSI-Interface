@@ -110,7 +110,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            return SpectrumIdentificationItem != null ? SpectrumIdentificationItem.GetHashCode() : 0;
+            return SpectrumIdentificationItem?.GetHashCode() ?? 0;
         }
         #endregion
     }

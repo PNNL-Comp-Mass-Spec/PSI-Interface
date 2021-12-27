@@ -205,12 +205,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (SpectrumID != null ? SpectrumID.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpectrumIdentificationItems != null ? SpectrumIdentificationItems.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpectraData != null ? SpectraData.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (UserParams != null ? UserParams.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (SpectrumID?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpectrumIdentificationItems?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpectraData?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

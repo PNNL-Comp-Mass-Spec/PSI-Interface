@@ -196,9 +196,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = SourceFiles != null ? SourceFiles.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (SearchDatabases != null ? SearchDatabases.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (SpectraDataList != null ? SpectraDataList.GetHashCode() : 0);
+                var hashCode = SourceFiles?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (SearchDatabases?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (SpectraDataList?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

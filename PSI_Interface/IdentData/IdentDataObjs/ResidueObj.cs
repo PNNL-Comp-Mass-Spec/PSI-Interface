@@ -75,7 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Code != null ? Code.GetHashCode() : 0;
+                var hashCode = Code?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ Mass.GetHashCode();
                 return hashCode;
             }

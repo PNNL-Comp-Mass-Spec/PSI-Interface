@@ -222,15 +222,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
+                var hashCode = Name?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Version?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ NumDatabaseSequences.GetHashCode();
                 hashCode = (hashCode * 397) ^ NumResidues.GetHashCode();
-                hashCode = (hashCode * 397) ^ (ExternalFormatDocumentation != null ? ExternalFormatDocumentation.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Location != null ? Location.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (DatabaseName != null ? DatabaseName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (FileFormat != null ? FileFormat.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (CVParams != null ? CVParams.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (ExternalFormatDocumentation?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Location?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (DatabaseName?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (FileFormat?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

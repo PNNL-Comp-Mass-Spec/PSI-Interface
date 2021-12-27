@@ -122,9 +122,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = FilterType != null ? FilterType.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Include != null ? Include.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Exclude != null ? Exclude.GetHashCode() : 0);
+                var hashCode = FilterType?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Include?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Exclude?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

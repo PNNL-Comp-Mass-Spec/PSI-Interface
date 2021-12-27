@@ -92,9 +92,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = FullName != null ? FullName.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Version != null ? Version.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (URI != null ? URI.GetHashCode() : 0);
+                var hashCode = FullName?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Version?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (URI?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

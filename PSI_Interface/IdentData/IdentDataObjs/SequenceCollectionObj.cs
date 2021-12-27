@@ -217,9 +217,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = DBSequences != null ? DBSequences.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Peptides != null ? Peptides.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (PeptideEvidences != null ? PeptideEvidences.GetHashCode() : 0);
+                var hashCode = DBSequences?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Peptides?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (PeptideEvidences?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

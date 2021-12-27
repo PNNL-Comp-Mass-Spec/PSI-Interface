@@ -124,8 +124,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             unchecked
             {
-                var hashCode = Contact != null ? Contact.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Role != null ? Role.GetHashCode() : 0);
+                var hashCode = Contact?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (Role?.GetHashCode() ?? 0);
                 return hashCode;
             }
         }

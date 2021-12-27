@@ -88,7 +88,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            return CVParams != null ? CVParams.GetHashCode() : 0;
+            return CVParams?.GetHashCode() ?? 0;
         }
         #endregion
     }
