@@ -99,10 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as ContactRoleObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is ContactRoleObj o && Equals(o);
         }
 
         /// <summary>
@@ -113,12 +110,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Equals(Contact, other.Contact) && Equals(Role, other.Role))
-                return true;
-            return false;
+            return Equals(Contact, other.Contact) && Equals(Role, other.Role);
         }
 
         /// <summary>

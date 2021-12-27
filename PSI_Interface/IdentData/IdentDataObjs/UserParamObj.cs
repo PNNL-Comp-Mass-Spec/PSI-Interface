@@ -99,12 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as UserParamObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is UserParamObj o && Equals(o);
         }
 
         /// <summary>

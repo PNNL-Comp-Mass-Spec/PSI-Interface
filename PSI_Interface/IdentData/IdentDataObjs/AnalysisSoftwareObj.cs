@@ -112,10 +112,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as AnalysisSoftwareObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is AnalysisSoftwareObj o && Equals(o);
         }
 
         /// <summary>
@@ -126,14 +123,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (Customizations == other.Customizations) && (URI == other.URI) &&
-                (Version == other.Version) && Equals(ContactRole, other.ContactRole) &&
-                Equals(SoftwareName, other.SoftwareName))
-                return true;
-            return false;
+            return Name == other.Name && Customizations == other.Customizations && URI == other.URI &&
+                   Version == other.Version && Equals(ContactRole, other.ContactRole) &&
+                   Equals(SoftwareName, other.SoftwareName);
         }
 
         /// <summary>

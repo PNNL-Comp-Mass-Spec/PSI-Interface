@@ -167,10 +167,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as EnzymeObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is EnzymeObj o && Equals(o);
         }
 
         /// <summary>
@@ -181,15 +178,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (SiteRegexp == other.SiteRegexp) && (NTermGain == other.NTermGain) &&
-                (CTermGain == other.CTermGain) && (SemiSpecific == other.SemiSpecific) &&
-                (MissedCleavages == other.MissedCleavages) && (MinDistance == other.MinDistance) &&
-                Equals(EnzymeName, other.EnzymeName))
-                return true;
-            return false;
+            return Name == other.Name && SiteRegexp == other.SiteRegexp && NTermGain == other.NTermGain &&
+                   CTermGain == other.CTermGain && SemiSpecific == other.SemiSpecific &&
+                   MissedCleavages == other.MissedCleavages && MinDistance == other.MinDistance &&
+                   Equals(EnzymeName, other.EnzymeName);
         }
 
         /// <summary>

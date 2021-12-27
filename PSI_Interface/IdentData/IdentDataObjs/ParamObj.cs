@@ -75,16 +75,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
-            if (other == null)
-            {
-                return false;
-            }
 
-            if (Equals(Item, other.Item))
-            {
-                return true;
-            }
-            return false;
+            return other != null && Equals(Item, other.Item);
         }
 
         /// <summary>
@@ -93,12 +85,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as ParamObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is ParamObj o && Equals(o);
         }
 
         /// <summary>
@@ -106,8 +93,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            var hashCode = Item != null ? Item.GetHashCode() : 0;
-            return hashCode;
+            return Item != null ? Item.GetHashCode() : 0;
         }
         #endregion
     }

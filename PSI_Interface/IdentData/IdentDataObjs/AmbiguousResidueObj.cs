@@ -45,12 +45,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as AmbiguousResidueObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is AmbiguousResidueObj o && Equals(o);
         }
 
         /// <summary>
@@ -63,17 +58,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Code == other.Code && Equals(CVParams, other.CVParams) &&
-                Equals(UserParams, other.UserParams))
-            {
-                return true;
-            }
-            return false;
+            return Code == other.Code && Equals(CVParams, other.CVParams) &&
+                   Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

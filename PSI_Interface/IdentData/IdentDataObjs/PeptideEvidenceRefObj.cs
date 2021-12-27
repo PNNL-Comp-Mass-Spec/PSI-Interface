@@ -108,12 +108,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as PeptideEvidenceRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is PeptideEvidenceRefObj o && Equals(o);
         }
 
         /// <summary>
@@ -121,8 +116,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            var hashCode = PeptideEvidence != null ? PeptideEvidence.GetHashCode() : 0;
-            return hashCode;
+            return PeptideEvidence != null ? PeptideEvidence.GetHashCode() : 0;
         }
         #endregion
     }

@@ -91,16 +91,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
-            if (other == null)
-            {
-                return false;
-            }
 
-            if (Equals(SpectrumIdentificationItem, other.SpectrumIdentificationItem))
-            {
-                return true;
-            }
-            return false;
+            return other != null && Equals(SpectrumIdentificationItem, other.SpectrumIdentificationItem);
         }
 
 
@@ -110,12 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SpectrumIdentificationItemRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is SpectrumIdentificationItemRefObj o && Equals(o);
         }
 
         /// <summary>
@@ -123,8 +110,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            var hashCode = SpectrumIdentificationItem != null ? SpectrumIdentificationItem.GetHashCode() : 0;
-            return hashCode;
+            return SpectrumIdentificationItem != null ? SpectrumIdentificationItem.GetHashCode() : 0;
         }
         #endregion
     }

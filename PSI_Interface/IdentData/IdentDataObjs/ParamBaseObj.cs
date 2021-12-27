@@ -167,16 +167,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Name == other.Name && UnitCvid == other.UnitCvid)
-            {
-                return true;
-            }
-            return false;
+            return Name == other.Name && UnitCvid == other.UnitCvid;
         }
 
         /// <summary>
@@ -185,12 +182,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as ParamBaseObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is ParamBaseObj o && Equals(o);
         }
 
         /// <summary>

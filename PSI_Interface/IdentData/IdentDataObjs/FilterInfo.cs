@@ -96,10 +96,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as FilterInfo;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is FilterInfo o && Equals(o);
         }
 
         /// <summary>
@@ -110,13 +107,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Equals(FilterType, other.FilterType) && Equals(Include, other.Include) &&
-                Equals(Exclude, other.Exclude))
-                return true;
-            return false;
+            return Equals(FilterType, other.FilterType) && Equals(Include, other.Include) &&
+                   Equals(Exclude, other.Exclude);
         }
 
         /// <summary>

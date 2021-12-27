@@ -102,12 +102,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as AnalysisProtocolCollectionObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is AnalysisProtocolCollectionObj o && Equals(o);
         }
 
         /// <summary>
@@ -120,17 +115,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Equals(ProteinDetectionProtocol, other.ProteinDetectionProtocol) &&
-                Equals(SpectrumIdentificationProtocols, other.SpectrumIdentificationProtocols))
-            {
-                return true;
-            }
-            return false;
+            return Equals(ProteinDetectionProtocol, other.ProteinDetectionProtocol) &&
+                   Equals(SpectrumIdentificationProtocols, other.SpectrumIdentificationProtocols);
         }
 
         /// <summary>

@@ -873,24 +873,21 @@ namespace PSI_Interface.IdentData
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Name == other.Name && Version == other.Version && Equals(CVList, other.CVList) &&
-                Equals(AnalysisSoftwareList, other.AnalysisSoftwareList) && Equals(Provider, other.Provider) &&
-                Equals(AuditCollection, other.AuditCollection) &&
-                Equals(AnalysisSampleCollection, other.AnalysisSampleCollection) &&
-                Equals(SequenceCollection, other.SequenceCollection) &&
-                Equals(AnalysisCollection, other.AnalysisCollection) &&
-                Equals(AnalysisProtocolCollection, other.AnalysisProtocolCollection) &&
-                Equals(DataCollection, other.DataCollection) &&
-                Equals(BibliographicReferences, other.BibliographicReferences))
-            {
-                return true;
-            }
-            return false;
+            return Name == other.Name && Version == other.Version && Equals(CVList, other.CVList) &&
+                   Equals(AnalysisSoftwareList, other.AnalysisSoftwareList) && Equals(Provider, other.Provider) &&
+                   Equals(AuditCollection, other.AuditCollection) &&
+                   Equals(AnalysisSampleCollection, other.AnalysisSampleCollection) &&
+                   Equals(SequenceCollection, other.SequenceCollection) &&
+                   Equals(AnalysisCollection, other.AnalysisCollection) &&
+                   Equals(AnalysisProtocolCollection, other.AnalysisProtocolCollection) &&
+                   Equals(DataCollection, other.DataCollection) &&
+                   Equals(BibliographicReferences, other.BibliographicReferences);
         }
 
         /// <summary>
@@ -899,12 +896,7 @@ namespace PSI_Interface.IdentData
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as IdentDataObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is IdentDataObj o && Equals(o);
         }
 
         /// <summary>

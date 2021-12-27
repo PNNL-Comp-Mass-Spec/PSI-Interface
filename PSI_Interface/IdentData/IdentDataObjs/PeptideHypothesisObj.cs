@@ -125,12 +125,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as PeptideHypothesisObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is PeptideHypothesisObj o && Equals(o);
         }
 
         /// <summary>

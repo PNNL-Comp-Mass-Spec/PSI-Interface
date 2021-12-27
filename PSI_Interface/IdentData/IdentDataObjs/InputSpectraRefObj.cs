@@ -86,16 +86,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
-            if (other == null)
-            {
-                return false;
-            }
 
-            if (Equals(SpectraData, other.SpectraData))
-            {
-                return true;
-            }
-            return false;
+            return other != null && Equals(SpectraData, other.SpectraData);
         }
 
         /// <summary>
@@ -104,12 +96,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as InputSpectraRefObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is InputSpectraRefObj o && Equals(o);
         }
 
         /// <summary>
@@ -117,8 +104,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public override int GetHashCode()
         {
-            var hashCode = SpectraData != null ? SpectraData.GetHashCode() : 0;
-            return hashCode;
+            return SpectraData != null ? SpectraData.GetHashCode() : 0;
         }
         #endregion
     }

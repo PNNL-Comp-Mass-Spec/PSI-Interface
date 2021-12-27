@@ -296,10 +296,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as PeptideEvidenceObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is PeptideEvidenceObj o && Equals(o);
         }
 
         /// <summary>
@@ -310,15 +307,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
-            if ((IsDecoy == other.IsDecoy) && (Start == other.Start) && (End == other.End) &&
-                (Pre == other.Pre) && (Post == other.Post) && (Frame == other.Frame) && (Name == other.Name) &&
-                Equals(TranslationTable, other.TranslationTable) && Equals(Peptide, other.Peptide) &&
-                Equals(DBSequence, other.DBSequence) && Equals(CVParams, other.CVParams) &&
-                Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+
+            return IsDecoy == other.IsDecoy && Start == other.Start && End == other.End &&
+                   Pre == other.Pre && Post == other.Post && Frame == other.Frame && Name == other.Name &&
+                   Equals(TranslationTable, other.TranslationTable) && Equals(Peptide, other.Peptide) &&
+                   Equals(DBSequence, other.DBSequence) && Equals(CVParams, other.CVParams) &&
+                   Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

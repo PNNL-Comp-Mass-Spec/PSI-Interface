@@ -145,17 +145,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Cvid == other.Cvid && Value == other.Value &&
-                UnitCvid == other.UnitCvid)
-            {
-                return true;
-            }
-            return false;
+            return Cvid == other.Cvid && Value == other.Value &&
+                   UnitCvid == other.UnitCvid;
         }
 
         /// <summary>
@@ -164,12 +161,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as CVParamObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is CVParamObj o && Equals(o);
         }
 
         /// <summary>

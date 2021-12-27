@@ -67,16 +67,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (FullName == other.FullName && Version == other.Version && URI == other.URI)
-            {
-                return true;
-            }
-            return false;
+            return FullName == other.FullName && Version == other.Version && URI == other.URI;
         }
 
         /// <summary>
@@ -85,12 +82,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as CVInfo;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is CVInfo o && Equals(o);
         }
 
         /// <summary>

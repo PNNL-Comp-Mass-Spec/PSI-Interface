@@ -72,10 +72,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as DatabaseTranslationObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is DatabaseTranslationObj o && Equals(o);
         }
 
         /// <summary>
@@ -86,13 +83,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Equals(TranslationTables, other.TranslationTables) &&
-                ListUtils.ListEqualsUnOrdered(Frames, other.Frames))
-                return true;
-            return false;
+            return Equals(TranslationTables, other.TranslationTables) &&
+                   ListUtils.ListEqualsUnOrdered(Frames, other.Frames);
         }
 
         /// <summary>

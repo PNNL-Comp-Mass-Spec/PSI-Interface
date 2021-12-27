@@ -126,10 +126,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SubstitutionModificationObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SubstitutionModificationObj o && Equals(o);
         }
 
         /// <summary>
@@ -140,14 +137,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (AvgMassDelta.Equals(other.AvgMassDelta) && (Location == other.Location) &&
-                MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) &&
-                (OriginalResidue == other.OriginalResidue) && (ReplacementResidue == other.ReplacementResidue))
-                return true;
-            return false;
+            return AvgMassDelta.Equals(other.AvgMassDelta) && Location == other.Location &&
+                   MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) &&
+                   OriginalResidue == other.OriginalResidue && ReplacementResidue == other.ReplacementResidue;
         }
 
         /// <summary>

@@ -104,10 +104,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as MassTableObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is MassTableObj o && Equals(o);
         }
 
         /// <summary>
@@ -118,15 +115,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(Residues, other.Residues) &&
-                Equals(AmbiguousResidues, other.AmbiguousResidues) &&
-                ListUtils.ListEqualsUnOrdered(MsLevels, other.MsLevels) && Equals(CVParams, other.CVParams) &&
-                Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Name == other.Name && Equals(Residues, other.Residues) &&
+                   Equals(AmbiguousResidues, other.AmbiguousResidues) &&
+                   ListUtils.ListEqualsUnOrdered(MsLevels, other.MsLevels) && Equals(CVParams, other.CVParams) &&
+                   Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

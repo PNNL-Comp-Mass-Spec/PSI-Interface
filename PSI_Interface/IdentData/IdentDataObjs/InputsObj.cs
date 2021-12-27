@@ -171,10 +171,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as InputsObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is InputsObj o && Equals(o);
         }
 
         /// <summary>
@@ -188,10 +185,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if (Equals(SourceFiles, other.SourceFiles) && Equals(SearchDatabases, other.SearchDatabases) &&
-                Equals(SpectraDataList, other.SpectraDataList))
-                return true;
-            return false;
+            return Equals(SourceFiles, other.SourceFiles) && Equals(SearchDatabases, other.SearchDatabases) &&
+                   Equals(SpectraDataList, other.SpectraDataList);
         }
 
         /// <summary>

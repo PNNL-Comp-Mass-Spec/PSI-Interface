@@ -52,12 +52,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as AbstractContactObj;
-            if (o == null)
-            {
-                return false;
-            }
-            return Equals(o);
+            return other is AbstractContactObj o && Equals(o);
         }
 
         /// <summary>
@@ -70,17 +65,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Name == other.Name && Equals(CVParams, other.CVParams) &&
-                Equals(UserParams, other.UserParams))
-            {
-                return true;
-            }
-            return false;
+            return Name == other.Name && Equals(CVParams, other.CVParams) &&
+                   Equals(UserParams, other.UserParams);
         }
 
         /// <summary>
