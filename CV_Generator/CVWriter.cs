@@ -172,10 +172,10 @@ namespace CV_Generator
         /// Append text and \n (instead of \r\n)
         /// </summary>
         /// <param name="sb"></param>
-        /// <param name="newLine"></param>
-        private static void AppendLine(StringBuilder sb, string newLine)
+        /// <param name="text"></param>
+        private static void AppendLine(StringBuilder sb, string text)
         {
-            sb.Append(newLine + "\n");
+            sb.AppendFormat("{0}\n", text);
         }
 
         private StringBuilder CVInfoList(string indent)
@@ -193,7 +193,8 @@ namespace CV_Generator
                     AppendLine(values, indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
                 }
             }
-            values.Append(indent + "}");
+
+            values.AppendFormat("{0}}}", indent);
             return values;
         }
 
@@ -242,7 +243,7 @@ namespace CV_Generator
                 AppendLine(enumData);
             }
 
-            enumData.Append(indent + "}");
+            enumData.AppendFormat("{0}}}", indent);
             return enumData;
         }
 
@@ -251,9 +252,13 @@ namespace CV_Generator
 
         private void PopulateCVEnumData()
         {
-            var invalidSymbols = @" @/[():^?*+<=!~`#$%&{}|;'.,>\"; // WARNING: '-' must be at beginning or end, in middle it must be escaped, or it is interpreted as a range
+            // WARNING: '-' must be at beginning or end, in middle it must be escaped, or it is interpreted as a range
+            var invalidSymbols = @" @/[():^?*+<=!~`#$%&{}|;'.,>\";
+
             var invalidSymbolsEscaped = System.Text.RegularExpressions.Regex.Escape(invalidSymbols);
-            var invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]"; // add all whitespace matching, manually escape the ']', since above call doesn't
+
+            // add all whitespace matching, manually escape the ']', since above call doesn't
+            var invalidSymbolsRegex = @"[\]\s" + invalidSymbolsEscaped + "\\-\\\"]";
 
             // Add "CVID_Unknown" to the list first
             var unknown = new OBO_Term
@@ -526,8 +531,9 @@ namespace CV_Generator
 
             foreach (var item in items)
             {
-                //RelationsIsA.Add("name", new List<string> { "ref", "ref2", });
-                fillData.Append(indent + "    RelationsIsA.Add(" + "CVID." + item.Key + ", new List<CVID> { ");
+                //RelationsIsA.Add(CVID.name, new List<CVID> { CVID.ref, CVID.ref2, });
+                fillData.AppendFormat("{0}    RelationsIsA.Add(CVID.{1}, new List<CVID> {{ ", indent, item.Key);
+
                 foreach (var map in item.Value)
                 {
                     fillData.Append("CVID." + map + ", ");
@@ -535,7 +541,7 @@ namespace CV_Generator
                 AppendLine(fillData, "});");
             }
 
-            fillData.Append(indent + "}");
+            fillData.AppendFormat("{0}}}", indent);
             return fillData;
         }
 
@@ -606,8 +612,8 @@ namespace CV_Generator
                 }
                 counter++;
 
-                //RelationsIsA.Add("name", new List<string> { "ref", "ref2", });
-                fillData.Append(indent + "    RelationsIsA.Add(" + "CVID." + item.Key.EnumName + ", new List<CVID> { ");
+                //RelationsIsA.Add(CVID.name, new List<CVID> { CVID.ref, CVID.ref2, });
+                fillData.AppendFormat("{0}    RelationsIsA.Add(CVID.{1}, new List<CVID> {{ ", indent, item.Key.EnumName);
                 foreach (var map in item.Value)
                 {
                     fillData.Append("CVID." + map + ", ");
