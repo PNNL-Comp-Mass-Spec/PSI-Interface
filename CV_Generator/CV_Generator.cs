@@ -5,7 +5,7 @@ namespace CV_Generator
     public static class CV_Generator
     {
         [STAThread]
-        public static void Main(string[] args)
+        public static void Main()
         {
             var cvCreator = new CVWriter();
             Console.WriteLine();
