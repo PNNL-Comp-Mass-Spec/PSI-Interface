@@ -359,7 +359,7 @@ namespace CV_Generator
                 }
             }
 
-            enumData.Append(indent + "}");
+            enumData.AppendFormat("{0}}}", indent);
             return enumData;
         }
 
@@ -445,8 +445,11 @@ namespace CV_Generator
                         }
 
                         var currentFunctionName = $"{functionName}_{lastNamespace}_{functionPart}{functionCounter}";
-                        dictData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                                        functionStartFirst + currentFunctionName + functionStartRest);
+
+                        dictData.AppendFormat("{0}{1}{2}{3}{4}{5}{6}",
+                            commentStart, functionPartCommentInsert, functionCounter, commentEnd,
+                            functionStartFirst, currentFunctionName, functionStartRest);
+
                         subFunctions.Add(currentFunctionName);
                         functionCounter++;
                         first = false;
@@ -466,7 +469,7 @@ namespace CV_Generator
 
             AppendLine(dictData, functionEnd);
             AppendLine(dictData);
-            dictData.Append(commentStart + commentEnd + functionStartFirst + functionName + functionStartRest);
+            dictData.AppendFormat("{0}{1}{2}{3}{4}", commentStart, commentEnd, functionStartFirst, functionName, functionStartRest);
 
             foreach (var part in subFunctions)
             {
@@ -536,7 +539,7 @@ namespace CV_Generator
 
                 foreach (var map in item.Value)
                 {
-                    fillData.Append("CVID." + map + ", ");
+                    fillData.AppendFormat("CVID.{0}, ", map);
                 }
                 AppendLine(fillData, "});");
             }
@@ -604,8 +607,10 @@ namespace CV_Generator
                     }
 
                     var currentFunctionName = $"{functionName}_{lastNamespace}_{functionPart}{functionCounter}";
-                    fillData.Append(commentStart + functionPartCommentInsert + functionCounter + commentEnd +
-                                    functionStartFirst + currentFunctionName + functionStartRest);
+                    fillData.AppendFormat("{0}{1}{2}{3}{4}{5}{6}",
+                        commentStart, functionPartCommentInsert, functionCounter, commentEnd,
+                        functionStartFirst, currentFunctionName, functionStartRest);
+
                     subFunctions.Add(currentFunctionName);
                     functionCounter++;
                     first = false;
@@ -616,14 +621,15 @@ namespace CV_Generator
                 fillData.AppendFormat("{0}    RelationsIsA.Add(CVID.{1}, new List<CVID> {{ ", indent, item.Key.EnumName);
                 foreach (var map in item.Value)
                 {
-                    fillData.Append("CVID." + map + ", ");
+                    fillData.AppendFormat("CVID.{0}, ", map);
                 }
                 AppendLine(fillData, "});");
             }
 
             AppendLine(fillData, functionEnd);
             AppendLine(fillData);
-            fillData.Append(commentStart + commentEnd + functionStartFirst + functionName + functionStartRest);
+            fillData.AppendFormat("{0}{1}{2}{3}{4}",
+                commentStart, commentEnd, functionStartFirst, functionName, functionStartRest);
 
             foreach (var part in subFunctions)
             {
