@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CVTests\CVTests.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IdentDataTests\IdentDataReadTests.cs" />
     <Compile Include="IdentDataTests\IdentDataWriteTests.cs" />
     <Compile Include="IdentDataTests\MsPathfinderMzidCreation.cs" />
