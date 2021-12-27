@@ -132,7 +132,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (PeptideSequence == other.PeptideSequence) &&
+            if (Name == other.Name && PeptideSequence == other.PeptideSequence &&
                 Equals(Modifications, other.Modifications) &&
                 Equals(SubstitutionModifications, other.SubstitutionModifications) &&
                 Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))

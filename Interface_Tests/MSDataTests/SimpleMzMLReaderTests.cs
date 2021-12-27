@@ -79,7 +79,7 @@ namespace Interface_Tests.MSDataTests
                 }
 
                 Assert.AreEqual(expectedSpectra, reader.NumSpectra);
-                var stepSize = Math.Max(1, (expectedSpectra / 100));
+                var stepSize = Math.Max(1, expectedSpectra / 100);
 
                 // Note: calling .ReadMassSpectrum with scanNumber = 1 returns the first spectrum in the file, regardless of its actual scan number
                 var scanNumber = 1;
@@ -280,7 +280,7 @@ namespace Interface_Tests.MSDataTests
                 }
 
                 Assert.AreEqual(expectedChromatograms, reader.NumChromatograms);
-                var stepSize = Math.Max(1, (expectedChromatograms / 100));
+                var stepSize = Math.Max(1, expectedChromatograms / 100);
 
                 var chromatogramNumber = 1;
                 while (chromatogramNumber <= expectedChromatograms)

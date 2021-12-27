@@ -19,7 +19,7 @@ namespace PSI_Interface.Utils
             {
                 return true;
             }
-            if ((first == null || first.Count == 0) || (second == null || second.Count == 0))
+            if (first == null || first.Count == 0 || second == null || second.Count == 0)
             {
                 return false;
             }
@@ -62,7 +62,7 @@ namespace PSI_Interface.Utils
             {
                 return true;
             }
-            if ((first == null || first.Count == 0) || (second == null || second.Count == 0))
+            if (first == null || first.Count == 0 || second == null || second.Count == 0)
             {
                 return false;
             }

@@ -166,8 +166,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Accession == other.Accession) && (Length == other.Length) && (Name == other.Name) &&
-                (Seq == other.Seq) && Equals(SearchDatabase, other.SearchDatabase) &&
+            if (Accession == other.Accession && Length == other.Length && Name == other.Name &&
+                Seq == other.Seq && Equals(SearchDatabase, other.SearchDatabase) &&
                 Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
                 return true;
             return false;

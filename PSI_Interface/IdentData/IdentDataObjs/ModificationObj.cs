@@ -69,7 +69,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 Location = location;
             }
 
-            if ((unimodCv != CV.CV.CVID.CVID_Unknown) && (unimodCv != CV.CV.CVID.MS_unknown_modification))
+            if (unimodCv != CV.CV.CVID.CVID_Unknown && unimodCv != CV.CV.CVID.MS_unknown_modification)
             {
                 CVParams.Add(new CVParamObj(unimodCv));
             }
@@ -217,7 +217,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 return false;
 
             return AvgMassDelta.Equals(other.AvgMassDelta) &&
-                   MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) && (Location == other.Location) &&
+                   MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) && Location == other.Location &&
                    ListUtils.ListEqualsUnOrdered(Residues, other.Residues) && Equals(CVParams, other.CVParams);
         }
 

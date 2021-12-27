@@ -190,7 +190,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (SpectrumID == other.SpectrumID) &&
+            if (Name == other.Name && SpectrumID == other.SpectrumID &&
                 Equals(SpectrumIdentificationItems, other.SpectrumIdentificationItems) &&
                 Equals(SpectraData, other.SpectraData) && Equals(CVParams, other.CVParams) &&
                 Equals(UserParams, other.UserParams))

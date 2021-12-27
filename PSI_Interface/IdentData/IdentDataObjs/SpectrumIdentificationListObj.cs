@@ -44,11 +44,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             FragmentationTables = new IdentDataList<MeasureObj>(1);
             SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>(1);
 
-            if ((sil.FragmentationTable?.Count > 0))
+            if (sil.FragmentationTable?.Count > 0)
             {
                 FragmentationTables.AddRange(sil.FragmentationTable, f => new MeasureObj(f, IdentData));
             }
-            if ((sil.SpectrumIdentificationResult?.Count > 0))
+            if (sil.SpectrumIdentificationResult?.Count > 0)
             {
                 SpectrumIdentificationResults.AddRange(sil.SpectrumIdentificationResult, sir => new SpectrumIdentificationResultObj(sir, IdentData));
             }
@@ -145,7 +145,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (NumSequencesSearched == other.NumSequencesSearched) &&
+            if (Name == other.Name && NumSequencesSearched == other.NumSequencesSearched &&
                 Equals(FragmentationTables, other.FragmentationTables) &&
                 Equals(SpectrumIdentificationResults, other.SpectrumIdentificationResults) &&
                 Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))

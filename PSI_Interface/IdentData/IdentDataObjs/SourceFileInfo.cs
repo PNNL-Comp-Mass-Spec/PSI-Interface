@@ -105,8 +105,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (ExternalFormatDocumentation == other.ExternalFormatDocumentation) &&
-                (Path.GetFileName(Location) == Path.GetFileName(other.Location)) && Equals(FileFormat, other.FileFormat) &&
+            if (Name == other.Name && ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                Path.GetFileName(Location) == Path.GetFileName(other.Location) && Equals(FileFormat, other.FileFormat) &&
                 Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
                 return true;
             return false;

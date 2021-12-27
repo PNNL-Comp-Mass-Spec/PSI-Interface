@@ -148,7 +148,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
+            if (Name == other.Name && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
                 Equals(AnalysisParams, other.AnalysisParams) && Equals(Threshold, other.Threshold))
                 return true;
             return false;

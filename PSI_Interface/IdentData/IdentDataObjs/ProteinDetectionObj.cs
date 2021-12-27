@@ -41,7 +41,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             InputSpectrumIdentifications = new IdentDataList<InputSpectrumIdentificationsObj>(1);
 
-            if ((pd.InputSpectrumIdentifications?.Count > 0))
+            if (pd.InputSpectrumIdentifications?.Count > 0)
             {
                 InputSpectrumIdentifications.AddRange(pd.InputSpectrumIdentifications, isi => new InputSpectrumIdentificationsObj(isi, IdentData));
             }
@@ -152,7 +152,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(InputSpectrumIdentifications, other.InputSpectrumIdentifications) &&
+            if (Name == other.Name && Equals(InputSpectrumIdentifications, other.InputSpectrumIdentifications) &&
                 Equals(ProteinDetectionList, other.ProteinDetectionList) &&
                 Equals(ProteinDetectionProtocol, other.ProteinDetectionProtocol))
                 return true;

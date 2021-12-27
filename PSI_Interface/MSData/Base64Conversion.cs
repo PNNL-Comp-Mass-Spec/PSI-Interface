@@ -110,7 +110,7 @@ namespace PSI_Interface.MSData
                 {
                     //bda.Data[i / dataSize] = BitConverter.ToSingle(oneNumber, 0);
                     //data[i / bytesPerValue] = BitConverter.ToSingle(bytes, i);
-                    Array.Copy(BitConverter.GetBytes((Single)(data[i])), 0, bytes, i * bytesPerValue, bytesPerValue);
+                    Array.Copy(BitConverter.GetBytes((Single)data[i]), 0, bytes, i * bytesPerValue, bytesPerValue);
                 }
                 else if (bytesPerValue == 8)
                 {

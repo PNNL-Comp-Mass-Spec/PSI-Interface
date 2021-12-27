@@ -80,11 +80,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>(1);
             Fragmentations = new IdentDataList<IonTypeObj>(1);
 
-            if ((sii.PeptideEvidenceRef?.Count > 0))
+            if (sii.PeptideEvidenceRef?.Count > 0)
             {
                 PeptideEvidences.AddRange(sii.PeptideEvidenceRef, pe => new PeptideEvidenceRefObj(pe, IdentData));
             }
-            if ((sii.Fragmentation?.Count > 0))
+            if (sii.Fragmentation?.Count > 0)
             {
                 Fragmentations.AddRange(sii.Fragmentation, f => new IonTypeObj(f, IdentData));
             }
@@ -344,11 +344,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (ChargeState == other.ChargeState) &&
+            if (Name == other.Name && ChargeState == other.ChargeState &&
                 ExperimentalMassToCharge.Equals(other.ExperimentalMassToCharge) &&
                 CalculatedMassToCharge.Equals(other.CalculatedMassToCharge) &&
-                CalculatedPI.Equals(other.CalculatedPI) && (Rank == other.Rank) &&
-                (PassThreshold == other.PassThreshold) && Equals(Peptide, other.Peptide) &&
+                CalculatedPI.Equals(other.CalculatedPI) && Rank == other.Rank &&
+                PassThreshold == other.PassThreshold && Equals(Peptide, other.Peptide) &&
                 Equals(MassTable, other.MassTable) && Equals(Sample, other.Sample) &&
                 Equals(PeptideEvidences, other.PeptideEvidences) &&
                 Equals(Fragmentations, other.Fragmentations) && Equals(CVParams, other.CVParams) &&

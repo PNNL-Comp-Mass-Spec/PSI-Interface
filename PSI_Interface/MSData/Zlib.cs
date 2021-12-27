@@ -229,7 +229,7 @@ namespace PSI_Interface.MSData
                     {
                         var index = i % AdlerBuff;
                         bytesBuff[index] = (byte) fs.ReadByte();
-                        if ((index == AdlerBuff - 1) || (i == fs.Length - 1))
+                        if (index == AdlerBuff - 1 || i == fs.Length - 1)
                         {
                             var checksumValueX = MakeForBuff(bytesBuff, checksumValue);
                             if (checksumValueX.HasValue)

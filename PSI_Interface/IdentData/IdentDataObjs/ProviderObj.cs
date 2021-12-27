@@ -130,7 +130,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(ContactRole, other.ContactRole) &&
+            if (Name == other.Name && Equals(ContactRole, other.ContactRole) &&
                 Equals(AnalysisSoftware, other.AnalysisSoftware))
                 return true;
             return false;

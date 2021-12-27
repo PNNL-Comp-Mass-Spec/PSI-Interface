@@ -2358,7 +2358,7 @@ namespace PSI_Interface.MSData
                         break;
                     case "fileDescription":
                         // Schema requirements: one instance of this element
-                        if (!_randomAccess || (_randomAccess && !_haveMetaData))
+                        if (!_randomAccess || _randomAccess && !_haveMetaData)
                         {
                             ReadFileDescription(reader.ReadSubtree());
                             reader.ReadEndElement(); // "fileDescription" must have child nodes
@@ -2370,7 +2370,7 @@ namespace PSI_Interface.MSData
                         break;
                     case "referenceableParamGroupList":
                         // Schema requirements: zero to one instances of this element
-                        if (!_randomAccess || (_randomAccess && !_haveMetaData))
+                        if (!_randomAccess || _randomAccess && !_haveMetaData)
                         {
                             ReadReferenceableParamGroupList(reader.ReadSubtree());
                             reader.ReadEndElement(); // "referenceableParamGroupList" must have child nodes
@@ -2386,7 +2386,7 @@ namespace PSI_Interface.MSData
                         break;
                     case "softwareList":
                         // Schema requirements: one instance of this element
-                        if (!_randomAccess || (_randomAccess && !_haveMetaData))
+                        if (!_randomAccess || _randomAccess && !_haveMetaData)
                         {
                             ReadSoftwareList(reader.ReadSubtree());
                             reader.ReadEndElement(); // "softwareList" must have child nodes
@@ -2402,7 +2402,7 @@ namespace PSI_Interface.MSData
                         break;
                     case "instrumentConfigurationList":
                         // Schema requirements: one instance of this element
-                        if (!_randomAccess || (_randomAccess && !_haveMetaData))
+                        if (!_randomAccess || _randomAccess && !_haveMetaData)
                         {
                             ReadInstrumentConfigurationList(reader.ReadSubtree());
                             reader.ReadEndElement(); // "instrumentConfigurationList" must have child nodes

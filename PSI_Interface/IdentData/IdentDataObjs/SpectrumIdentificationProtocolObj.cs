@@ -74,17 +74,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 _searchType = new ParamObj(sip.SearchType, IdentData);
             if (sip.AdditionalSearchParams != null)
                 _additionalSearchParams = new ParamListObj(sip.AdditionalSearchParams, IdentData);
-            if ((sip.ModificationParams?.Count > 0))
+            if (sip.ModificationParams?.Count > 0)
             {
                 ModificationParams.AddRange(sip.ModificationParams, mp => new SearchModificationObj(mp, IdentData));
             }
             if (sip.Enzymes != null)
                 _enzymes = new EnzymeListObj(sip.Enzymes, IdentData);
-            if ((sip.MassTable?.Count > 0))
+            if (sip.MassTable?.Count > 0)
             {
                 MassTables.AddRange(sip.MassTable, mt => new MassTableObj(mt, IdentData));
             }
-            if ((sip.FragmentTolerance?.Count > 0))
+            if (sip.FragmentTolerance?.Count > 0)
             {
                 FragmentTolerances.AddRange(sip.FragmentTolerance, ft => new CVParamObj(ft, IdentData));
             }
@@ -302,7 +302,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
+            if (Name == other.Name && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
                 Equals(SearchType, other.SearchType) &&
                 Equals(AdditionalSearchParams, other.AdditionalSearchParams) &&
                 Equals(MassTables, other.MassTables) && Equals(ModificationParams, other.ModificationParams) &&

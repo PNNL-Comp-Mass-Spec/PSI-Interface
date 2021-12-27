@@ -71,7 +71,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(CVParams, other.CVParams))
+            if (Name == other.Name && Equals(CVParams, other.CVParams))
                 return true;
             return false;
         }

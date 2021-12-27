@@ -205,10 +205,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (Version == other.Version) &&
-                (NumDatabaseSequences == other.NumDatabaseSequences) && (NumResidues == other.NumResidues) &&
-                (ExternalFormatDocumentation == other.ExternalFormatDocumentation) &&
-                (Path.GetFileName(Location) == Path.GetFileName(other.Location)) &&
+            if (Name == other.Name && Version == other.Version &&
+                NumDatabaseSequences == other.NumDatabaseSequences && NumResidues == other.NumResidues &&
+                ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                Path.GetFileName(Location) == Path.GetFileName(other.Location) &&
                 Equals(DatabaseName, other.DatabaseName) && Equals(FileFormat, other.FileFormat) &&
                 Equals(CVParams, other.CVParams))
                 return true;

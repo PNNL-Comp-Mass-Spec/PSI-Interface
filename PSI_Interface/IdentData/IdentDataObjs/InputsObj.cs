@@ -42,15 +42,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             SourceFiles = new IdentDataList<SourceFileInfo>(1);
             SearchDatabases = new IdentDataList<SearchDatabaseInfo>(1);
             SpectraDataList = new IdentDataList<SpectraDataObj>(1);
-            if ((i.SourceFile?.Count > 0))
+            if (i.SourceFile?.Count > 0)
             {
                 SourceFiles.AddRange(i.SourceFile, sf => new SourceFileInfo(sf, IdentData));
             }
-            if ((i.SearchDatabase?.Count > 0))
+            if (i.SearchDatabase?.Count > 0)
             {
                 SearchDatabases.AddRange(i.SearchDatabase, sd => new SearchDatabaseInfo(sd, IdentData));
             }
-            if ((i.SpectraData?.Count > 0))
+            if (i.SpectraData?.Count > 0)
             {
                 SpectraDataList.AddRange(i.SpectraData, sd => new SpectraDataObj(sd, IdentData));
             }

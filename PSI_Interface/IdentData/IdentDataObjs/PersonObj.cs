@@ -40,7 +40,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             Affiliations = new IdentDataList<AffiliationObj>(1);
 
-            if ((p.Affiliation?.Count > 0))
+            if (p.Affiliation?.Count > 0)
             {
                 Affiliations.AddRange(p.Affiliation, a => new AffiliationObj(a, IdentData));
             }
@@ -96,8 +96,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (LastName == other.LastName) && (FirstName == other.FirstName) &&
-                (MidInitials == other.MidInitials) && Equals(Affiliations, other.Affiliations) &&
+            if (Name == other.Name && LastName == other.LastName && FirstName == other.FirstName &&
+                MidInitials == other.MidInitials && Equals(Affiliations, other.Affiliations) &&
                 Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
                 return true;
             return false;

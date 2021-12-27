@@ -49,11 +49,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             ContactRoles = new IdentDataList<ContactRoleObj>(1);
             SubSamples = new IdentDataList<SubSampleObj>(1);
 
-            if ((s.ContactRole?.Count > 0))
+            if (s.ContactRole?.Count > 0)
             {
                 ContactRoles.AddRange(s.ContactRole, cr => new ContactRoleObj(cr, IdentData));
             }
-            if ((s.SubSample?.Count > 0))
+            if (s.SubSample?.Count > 0)
             {
                 SubSamples.AddRange(s.SubSample, ss => new SubSampleObj(ss, IdentData));
             }
@@ -98,7 +98,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(ContactRoles, other.ContactRoles) &&
+            if (Name == other.Name && Equals(ContactRoles, other.ContactRoles) &&
                 Equals(SubSamples, other.SubSamples) && Equals(CVParams, other.CVParams) &&
                 Equals(UserParams, other.UserParams))
                 return true;

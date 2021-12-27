@@ -36,7 +36,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             Enzymes = new IdentDataList<EnzymeObj>(1);
 
-            if ((el.Enzyme?.Count > 0))
+            if (el.Enzyme?.Count > 0)
             {
                 Enzymes.AddRange(el.Enzyme, e => new EnzymeObj(e, IdentData));
             }

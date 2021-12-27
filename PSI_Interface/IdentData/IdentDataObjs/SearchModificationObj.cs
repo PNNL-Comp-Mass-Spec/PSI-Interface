@@ -49,7 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             SpecificityRules = new IdentDataList<SpecificityRulesListObj>(1);
 
-            if ((sm.SpecificityRules?.Count > 0))
+            if (sm.SpecificityRules?.Count > 0)
             {
                 SpecificityRules.AddRange(sm.SpecificityRules, sr => new SpecificityRulesListObj(sr, IdentData));
             }
@@ -109,8 +109,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((FixedMod == other.FixedMod) && MassDelta.Equals(other.MassDelta) &&
-                (Residues == other.Residues) && Equals(SpecificityRules, other.SpecificityRules) &&
+            if (FixedMod == other.FixedMod && MassDelta.Equals(other.MassDelta) &&
+                Residues == other.Residues && Equals(SpecificityRules, other.SpecificityRules) &&
                 Equals(CVParams, other.CVParams))
                 return true;
             return false;

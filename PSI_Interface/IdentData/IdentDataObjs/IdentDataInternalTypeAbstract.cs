@@ -55,7 +55,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     }
                     if (propValue is IdentDataInternalTypeAbstract)
                     {
-                        var value = ((IdentDataInternalTypeAbstract)(prop.GetValue(this)));
+                        var value = (IdentDataInternalTypeAbstract)prop.GetValue(this);
                         value.IdentData = _identData;
                         if (force)
                         {

@@ -63,7 +63,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Code == other.Code) && Mass.Equals(other.Mass))
+            if (Code == other.Code && Mass.Equals(other.Mass))
                 return true;
             return false;
         }

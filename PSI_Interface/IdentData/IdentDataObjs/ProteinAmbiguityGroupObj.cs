@@ -39,7 +39,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             ProteinDetectionHypotheses = new IdentDataList<ProteinDetectionHypothesisObj>(1);
 
-            if ((pag.ProteinDetectionHypothesis?.Count > 0))
+            if (pag.ProteinDetectionHypothesis?.Count > 0)
             {
                 ProteinDetectionHypotheses.AddRange(pag.ProteinDetectionHypothesis, pdh => new ProteinDetectionHypothesisObj(pdh, IdentData));
             }
@@ -93,7 +93,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && Equals(ProteinDetectionHypotheses, other.ProteinDetectionHypotheses) &&
+            if (Name == other.Name && Equals(ProteinDetectionHypotheses, other.ProteinDetectionHypotheses) &&
                 Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
                 return true;
             return false;

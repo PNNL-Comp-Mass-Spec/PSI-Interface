@@ -122,8 +122,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            if ((Name == other.Name) && (ExternalFormatDocumentation == other.ExternalFormatDocumentation) &&
-                (Path.GetFileName(Location) == Path.GetFileName(other.Location)) && Equals(SpectrumIDFormat, other.SpectrumIDFormat) &&
+            if (Name == other.Name && ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                Path.GetFileName(Location) == Path.GetFileName(other.Location) && Equals(SpectrumIDFormat, other.SpectrumIDFormat) &&
                 Equals(FileFormat, other.FileFormat))
                 return true;
             return false;
