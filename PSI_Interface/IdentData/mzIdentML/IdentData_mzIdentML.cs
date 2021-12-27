@@ -1936,7 +1936,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         public ProteinDetectionType(ProteinDetectionObj pd) : base(pd)
         {
             proteinDetectionList_ref = pd.ProteinDetectionListRef;
-            proteinDetectionProtocol_ref = proteinDetectionProtocol_ref;
+            proteinDetectionProtocol_ref = pd.ProteinDetectionProtocolRef;
 
             InputSpectrumIdentifications = null;
             if (pd.InputSpectrumIdentifications?.Count > 0)
