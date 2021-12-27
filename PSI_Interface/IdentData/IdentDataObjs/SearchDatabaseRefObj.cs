@@ -86,16 +86,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
-            if (other == null)
-            {
-                return false;
-            }
 
-            if (Equals(SearchDatabase, other.SearchDatabase))
-            {
-                return true;
-            }
-            return false;
+            return other != null && Equals(SearchDatabase, other.SearchDatabase);
         }
 
         /// <summary>

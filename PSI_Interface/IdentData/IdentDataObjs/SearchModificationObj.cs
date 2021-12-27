@@ -92,10 +92,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SearchModificationObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SearchModificationObj o && Equals(o);
         }
 
         /// <summary>
@@ -106,14 +103,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (FixedMod == other.FixedMod && MassDelta.Equals(other.MassDelta) &&
-                Residues == other.Residues && Equals(SpecificityRules, other.SpecificityRules) &&
-                Equals(CVParams, other.CVParams))
-                return true;
-            return false;
+            return FixedMod == other.FixedMod && MassDelta.Equals(other.MassDelta) &&
+                   Residues == other.Residues && Equals(SpecificityRules, other.SpecificityRules) &&
+                   Equals(CVParams, other.CVParams);
         }
 
         /// <summary>

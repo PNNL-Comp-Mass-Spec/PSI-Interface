@@ -285,10 +285,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SpectrumIdentificationProtocolObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SpectrumIdentificationProtocolObj o && Equals(o);
         }
 
         /// <summary>
@@ -299,19 +296,18 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
-                Equals(SearchType, other.SearchType) &&
-                Equals(AdditionalSearchParams, other.AdditionalSearchParams) &&
-                Equals(MassTables, other.MassTables) && Equals(ModificationParams, other.ModificationParams) &&
-                Equals(Enzymes, other.Enzymes) && Equals(FragmentTolerances, other.FragmentTolerances) &&
-                Equals(ParentTolerances, other.ParentTolerances) && Equals(Threshold, other.Threshold) &&
-                Equals(DatabaseFilters, other.DatabaseFilters) &&
-                Equals(DatabaseTranslation, other.DatabaseTranslation))
-                return true;
-            return false;
+            return Name == other.Name && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
+                   Equals(SearchType, other.SearchType) &&
+                   Equals(AdditionalSearchParams, other.AdditionalSearchParams) &&
+                   Equals(MassTables, other.MassTables) && Equals(ModificationParams, other.ModificationParams) &&
+                   Equals(Enzymes, other.Enzymes) && Equals(FragmentTolerances, other.FragmentTolerances) &&
+                   Equals(ParentTolerances, other.ParentTolerances) && Equals(Threshold, other.Threshold) &&
+                   Equals(DatabaseFilters, other.DatabaseFilters) &&
+                   Equals(DatabaseTranslation, other.DatabaseTranslation);
         }
 
         /// <summary>

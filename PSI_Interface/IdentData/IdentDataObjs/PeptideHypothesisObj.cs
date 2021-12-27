@@ -106,17 +106,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Equals(PeptideEvidence, other.PeptideEvidence) &&
-                Equals(SpectrumIdentificationItems, other.SpectrumIdentificationItems))
-            {
-                return true;
-            }
-            return false;
+            return Equals(PeptideEvidence, other.PeptideEvidence) &&
+                   Equals(SpectrumIdentificationItems, other.SpectrumIdentificationItems);
         }
 
         /// <summary>

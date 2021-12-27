@@ -131,10 +131,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as ProteinDetectionProtocolObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is ProteinDetectionProtocolObj o && Equals(o);
         }
 
         /// <summary>
@@ -145,13 +142,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
-                Equals(AnalysisParams, other.AnalysisParams) && Equals(Threshold, other.Threshold))
-                return true;
-            return false;
+            return Name == other.Name && Equals(AnalysisSoftware, other.AnalysisSoftware) &&
+                   Equals(AnalysisParams, other.AnalysisParams) && Equals(Threshold, other.Threshold);
         }
 
         /// <summary>

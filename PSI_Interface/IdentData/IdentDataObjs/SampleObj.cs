@@ -95,14 +95,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && Equals(ContactRoles, other.ContactRoles) &&
-                Equals(SubSamples, other.SubSamples) && Equals(CVParams, other.CVParams) &&
-                Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Name == other.Name && Equals(ContactRoles, other.ContactRoles) &&
+                   Equals(SubSamples, other.SubSamples) && Equals(CVParams, other.CVParams) &&
+                   Equals(UserParams, other.UserParams);
         }
 
         /// <summary>
@@ -122,10 +121,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public new bool Equals(object other)
         {
-            var o = other as SampleObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SampleObj o && Equals(o);
         }
 
         /// <summary>

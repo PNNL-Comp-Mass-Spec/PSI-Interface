@@ -188,10 +188,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SearchDatabaseInfo;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SearchDatabaseInfo o && Equals(o);
         }
 
         /// <summary>
@@ -202,17 +199,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && Version == other.Version &&
-                NumDatabaseSequences == other.NumDatabaseSequences && NumResidues == other.NumResidues &&
-                ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
-                Path.GetFileName(Location) == Path.GetFileName(other.Location) &&
-                Equals(DatabaseName, other.DatabaseName) && Equals(FileFormat, other.FileFormat) &&
-                Equals(CVParams, other.CVParams))
-                return true;
-            return false;
+            return Name == other.Name && Version == other.Version &&
+                   NumDatabaseSequences == other.NumDatabaseSequences && NumResidues == other.NumResidues &&
+                   ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                   Path.GetFileName(Location) == Path.GetFileName(other.Location) &&
+                   Equals(DatabaseName, other.DatabaseName) && Equals(FileFormat, other.FileFormat) &&
+                   Equals(CVParams, other.CVParams);
         }
 
         /// <summary>

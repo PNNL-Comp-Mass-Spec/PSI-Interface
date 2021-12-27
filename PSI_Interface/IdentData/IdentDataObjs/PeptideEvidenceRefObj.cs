@@ -89,16 +89,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
-            if (other == null)
-            {
-                return false;
-            }
 
-            if (Equals(PeptideEvidence, other.PeptideEvidence))
-            {
-                return true;
-            }
-            return false;
+            return other != null && Equals(PeptideEvidence, other.PeptideEvidence);
         }
 
 

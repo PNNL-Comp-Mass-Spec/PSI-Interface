@@ -92,13 +92,15 @@ namespace CV_Generator.OBO_Objects
                 {
                     return string.Empty;
                 }
+
                 var cleaned = Def;
+
                 if (cleaned.Contains("["))
                 {
                     cleaned = cleaned.Substring(0, Def.IndexOf("[", StringComparison.Ordinal)).Trim();
                 }
-                cleaned = cleaned.Replace('"', ' ').Trim();
-                return cleaned;
+
+                return cleaned.Replace('"', ' ').Trim();
             }
         }
 

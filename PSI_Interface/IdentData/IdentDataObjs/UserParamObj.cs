@@ -80,17 +80,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;
             }
 
-            if (Name == other.Name && Value == other.Value && Type == other.Type &&
-                UnitCvid == other.UnitCvid)
-            {
-                return true;
-            }
-            return false;
+            return Name == other.Name && Value == other.Value && Type == other.Type &&
+                   UnitCvid == other.UnitCvid;
         }
 
         /// <summary>

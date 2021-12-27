@@ -88,10 +88,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SourceFileInfo;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SourceFileInfo o && Equals(o);
         }
 
         /// <summary>
@@ -102,14 +99,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
-                Path.GetFileName(Location) == Path.GetFileName(other.Location) && Equals(FileFormat, other.FileFormat) &&
-                Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Name == other.Name && ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
+                   Path.GetFileName(Location) == Path.GetFileName(other.Location) && Equals(FileFormat, other.FileFormat) &&
+                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

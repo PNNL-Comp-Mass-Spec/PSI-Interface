@@ -46,10 +46,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as ResidueObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is ResidueObj o && Equals(o);
         }
 
         /// <summary>
@@ -60,12 +57,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Code == other.Code && Mass.Equals(other.Mass))
-                return true;
-            return false;
+            return Code == other.Code && Mass.Equals(other.Mass);
         }
 
         /// <summary>

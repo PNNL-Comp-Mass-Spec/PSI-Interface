@@ -76,10 +76,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as ProteinAmbiguityGroupObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is ProteinAmbiguityGroupObj o && Equals(o);
         }
 
         /// <summary>
@@ -90,13 +87,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && Equals(ProteinDetectionHypotheses, other.ProteinDetectionHypotheses) &&
-                Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Name == other.Name && Equals(ProteinDetectionHypotheses, other.ProteinDetectionHypotheses) &&
+                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

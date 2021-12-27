@@ -76,10 +76,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SubSampleObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SubSampleObj o && Equals(o);
         }
 
         /// <summary>
@@ -90,12 +87,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
-            if (other == null)
-                return false;
 
-            if (Equals(Sample, other.Sample))
-                return true;
-            return false;
+            return other != null && Equals(Sample, other.Sample);
         }
 
         /// <summary>

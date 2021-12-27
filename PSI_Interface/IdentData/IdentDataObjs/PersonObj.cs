@@ -79,10 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as PersonObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is PersonObj o && Equals(o);
         }
 
         /// <summary>
@@ -93,14 +90,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && LastName == other.LastName && FirstName == other.FirstName &&
-                MidInitials == other.MidInitials && Equals(Affiliations, other.Affiliations) &&
-                Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Name == other.Name && LastName == other.LastName && FirstName == other.FirstName &&
+                   MidInitials == other.MidInitials && Equals(Affiliations, other.Affiliations) &&
+                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

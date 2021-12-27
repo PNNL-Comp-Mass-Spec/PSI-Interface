@@ -128,10 +128,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SpectrumIdentificationListObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SpectrumIdentificationListObj o && Equals(o);
         }
 
         /// <summary>
@@ -142,15 +139,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && NumSequencesSearched == other.NumSequencesSearched &&
-                Equals(FragmentationTables, other.FragmentationTables) &&
-                Equals(SpectrumIdentificationResults, other.SpectrumIdentificationResults) &&
-                Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Name == other.Name && NumSequencesSearched == other.NumSequencesSearched &&
+                   Equals(FragmentationTables, other.FragmentationTables) &&
+                   Equals(SpectrumIdentificationResults, other.SpectrumIdentificationResults) &&
+                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

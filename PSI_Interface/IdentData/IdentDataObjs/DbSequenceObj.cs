@@ -149,10 +149,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public new bool Equals(object other)
         {
-            var o = other as DbSequenceObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is DbSequenceObj o && Equals(o);
         }
 
         /// <summary>
@@ -163,14 +160,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Accession == other.Accession && Length == other.Length && Name == other.Name &&
-                Seq == other.Seq && Equals(SearchDatabase, other.SearchDatabase) &&
-                Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Accession == other.Accession && Length == other.Length && Name == other.Name &&
+                   Seq == other.Seq && Equals(SearchDatabase, other.SearchDatabase) &&
+                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
         }
 
         /// <summary>

@@ -327,10 +327,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <param name="other"></param>
         public override bool Equals(object other)
         {
-            var o = other as SpectrumIdentificationItemObj;
-            if (o == null)
-                return false;
-            return Equals(o);
+            return other is SpectrumIdentificationItemObj o && Equals(o);
         }
 
         /// <summary>
@@ -341,20 +338,19 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 
-            if (Name == other.Name && ChargeState == other.ChargeState &&
-                ExperimentalMassToCharge.Equals(other.ExperimentalMassToCharge) &&
-                CalculatedMassToCharge.Equals(other.CalculatedMassToCharge) &&
-                CalculatedPI.Equals(other.CalculatedPI) && Rank == other.Rank &&
-                PassThreshold == other.PassThreshold && Equals(Peptide, other.Peptide) &&
-                Equals(MassTable, other.MassTable) && Equals(Sample, other.Sample) &&
-                Equals(PeptideEvidences, other.PeptideEvidences) &&
-                Equals(Fragmentations, other.Fragmentations) && Equals(CVParams, other.CVParams) &&
-                Equals(UserParams, other.UserParams))
-                return true;
-            return false;
+            return Name == other.Name && ChargeState == other.ChargeState &&
+                   ExperimentalMassToCharge.Equals(other.ExperimentalMassToCharge) &&
+                   CalculatedMassToCharge.Equals(other.CalculatedMassToCharge) &&
+                   CalculatedPI.Equals(other.CalculatedPI) && Rank == other.Rank &&
+                   PassThreshold == other.PassThreshold && Equals(Peptide, other.Peptide) &&
+                   Equals(MassTable, other.MassTable) && Equals(Sample, other.Sample) &&
+                   Equals(PeptideEvidences, other.PeptideEvidences) &&
+                   Equals(Fragmentations, other.Fragmentations) && Equals(CVParams, other.CVParams) &&
+                   Equals(UserParams, other.UserParams);
         }
 
         /// <summary>
