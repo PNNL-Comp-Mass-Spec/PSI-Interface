@@ -9,7 +9,7 @@ namespace CV_Generator.OBO_Objects
 
         public OBO_Header Header
         {
-            get { return _header; }
+            get => _header;
             set
             {
                 _header = value;
@@ -33,13 +33,13 @@ namespace CV_Generator.OBO_Objects
         public readonly Dictionary<string, OBO_Instance> Instances;
         private static readonly Dictionary<string, int> Ids = new Dictionary<string, int>();
 
-        public string Url { get; private set; }
+        public string Url { get; }
         public string Name { get; private set; }
         private string _id;
 
         public string Id
         {
-            get { return _id; }
+            get => _id;
             set
             {
                 if (IsGeneratedId)
