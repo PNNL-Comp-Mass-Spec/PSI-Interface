@@ -78,7 +78,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             }
 
             var results = this.Where(x => x is IIdentifiableType idType && id.Equals(idType.Id)).ToList();
-            if (results.Any())
+
+            if (results.Count > 0)
             {
                 return results[0];
             }

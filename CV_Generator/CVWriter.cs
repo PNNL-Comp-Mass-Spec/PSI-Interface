@@ -515,7 +515,7 @@ namespace CV_Generator
                                 items[term.EnumName].Add(_bigTermDict[rel2].EnumName);
                             }
                         }
-                        if (items[term.EnumName].Count <= 0)
+                        if (items[term.EnumName].Count == 0)
                         {
                             items.Remove(term.EnumName);
                         }

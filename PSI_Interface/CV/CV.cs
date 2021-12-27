@@ -201,7 +201,7 @@ namespace PSI_Interface.CV
 
         private static void CreateLookups()
         {
-            if (CVInfoList.Count <= 0)
+            if (CVInfoList.Count == 0)
             {
                 return;
             }
