@@ -133,9 +133,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             unchecked
             {
                 var hashCode = PeptideEvidence?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^
+                return (hashCode * 397) ^
                            (SpectrumIdentificationItems?.GetHashCode() ?? 0);
-                return hashCode;
             }
         }
         #endregion

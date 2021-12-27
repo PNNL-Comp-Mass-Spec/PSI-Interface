@@ -116,9 +116,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             unchecked
             {
                 var hashCode = ProteinDetection?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^
+                return (hashCode * 397) ^
                            (SpectrumIdentifications?.GetHashCode() ?? 0);
-                return hashCode;
             }
         }
 

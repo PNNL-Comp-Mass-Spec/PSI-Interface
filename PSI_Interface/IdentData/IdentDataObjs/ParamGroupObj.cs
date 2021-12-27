@@ -91,8 +91,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             unchecked
             {
                 var hashCode = CVParams?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
-                return hashCode;
+                return (hashCode * 397) ^ (UserParams?.GetHashCode() ?? 0);
             }
         }
         #endregion

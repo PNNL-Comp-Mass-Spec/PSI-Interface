@@ -80,8 +80,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             unchecked
             {
                 var hashCode = Name?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
-                return hashCode;
+                return (hashCode * 397) ^ (CVParams?.GetHashCode() ?? 0);
             }
         }
 
