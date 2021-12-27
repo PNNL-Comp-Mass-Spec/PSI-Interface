@@ -339,8 +339,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             foreach (var p in paramList)
             {
-                var cvp = p as CVParamObj;
-                if (cvp != null && cvp.Cvid == cvid)
+                if (p is CVParamObj cvp && cvp.Cvid == cvid)
                 {
                     return cvp;
                 }
