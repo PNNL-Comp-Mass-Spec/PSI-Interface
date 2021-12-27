@@ -20,12 +20,12 @@ namespace Interface_Tests.IdentDataTests
             var datasetName = "QC_ShewIntact_16_12AUG16_Bane_16-03-19";
             var input = Path.Combine(dir, "QC_ShewIntact_16_12AUG16_Bane_16-03-19_IcTda.tsv");
             var dbName = "ID_005435_435B0CDA.fasta";
-            var database = Path.Combine(dir, "ID_005435_435B0CDA.fasta");
+            // Unused: var database = Path.Combine(dir, "ID_005435_435B0CDA.fasta");
             var output = Path.Combine(dir, "QC_ShewIntact_16_12AUG16_Bane_16-03-19.mzid");
 
             var creator = new IdentDataCreator("MSPathFinder_" + datasetName, "MSPathFinder_" + datasetName);
-            var soft = creator.AddAnalysisSoftware("Software_1", "MSPathFinder", "1.3", CV.CVID.CVID_Unknown, "MSPathFinder");
-            var settings = creator.AddAnalysisSettings(soft, "Settings_1", CV.CVID.MS_ms_ms_search);
+            // Unused: var soft = creator.AddAnalysisSoftware("Software_1", "MSPathFinder", "1.3", CV.CVID.CVID_Unknown, "MSPathFinder");
+            // Unused: var settings = creator.AddAnalysisSettings(soft, "Settings_1", CV.CVID.MS_ms_ms_search);
             var searchDb = creator.AddSearchDatabase(Path.Combine(dir, dbName), 1000000, dbName, CV.CVID.CVID_Unknown,
                 CV.CVID.MS_FASTA_format);
             var specData = creator.AddSpectraData(Path.Combine(dir, datasetName + ".raw"), datasetName, CV.CVID.MS_Thermo_nativeID_format,
