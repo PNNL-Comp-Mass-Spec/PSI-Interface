@@ -208,7 +208,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                    ExternalFormatDocumentation == other.ExternalFormatDocumentation &&
                    Path.GetFileName(Location) == Path.GetFileName(other.Location) &&
                    Equals(DatabaseName, other.DatabaseName) && Equals(FileFormat, other.FileFormat) &&
-                   Equals(CVParams, other.CVParams);
+                   ParamsEquals(other);
         }
 
         /// <summary>

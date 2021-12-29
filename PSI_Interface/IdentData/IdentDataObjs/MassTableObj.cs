@@ -121,8 +121,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             return Name == other.Name && Equals(Residues, other.Residues) &&
                    Equals(AmbiguousResidues, other.AmbiguousResidues) &&
-                   ListUtils.ListEqualsUnOrdered(MsLevels, other.MsLevels) && Equals(CVParams, other.CVParams) &&
-                   Equals(UserParams, other.UserParams);
+                   ListUtils.ListEqualsUnOrdered(MsLevels, other.MsLevels) && ParamsEquals(other);
         }
 
         /// <summary>

@@ -147,7 +147,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        public new bool Equals(object other)
+        public override bool Equals(object other)
         {
             return other is DbSequenceObj o && Equals(o);
         }
@@ -166,7 +166,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             return Accession == other.Accession && Length == other.Length && Name == other.Name &&
                    Seq == other.Seq && Equals(SearchDatabase, other.SearchDatabase) &&
-                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
+                   ParamsEquals(other);
         }
 
         /// <summary>

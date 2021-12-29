@@ -89,7 +89,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 return false;
 
             return Name == other.Name && Equals(ProteinAmbiguityGroups, other.ProteinAmbiguityGroups) &&
-                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
+                   ParamsEquals(other);
         }
 
         /// <summary>

@@ -349,8 +349,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                    PassThreshold == other.PassThreshold && Equals(Peptide, other.Peptide) &&
                    Equals(MassTable, other.MassTable) && Equals(Sample, other.Sample) &&
                    Equals(PeptideEvidences, other.PeptideEvidences) &&
-                   Equals(Fragmentations, other.Fragmentations) && Equals(CVParams, other.CVParams) &&
-                   Equals(UserParams, other.UserParams);
+                   Equals(Fragmentations, other.Fragmentations) && ParamsEquals(other);
         }
 
         /// <summary>

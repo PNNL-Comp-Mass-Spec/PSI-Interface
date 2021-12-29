@@ -218,7 +218,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             return AvgMassDelta.Equals(other.AvgMassDelta) &&
                    MonoisotopicMassDelta.Equals(other.MonoisotopicMassDelta) && Location == other.Location &&
-                   ListUtils.ListEqualsUnOrdered(Residues, other.Residues) && Equals(CVParams, other.CVParams);
+                   ListUtils.ListEqualsUnOrdered(Residues, other.Residues) && ParamsEquals(other);
         }
 
         /// <summary>

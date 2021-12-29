@@ -146,7 +146,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             return Name == other.Name && NumSequencesSearched == other.NumSequencesSearched &&
                    Equals(FragmentationTables, other.FragmentationTables) &&
                    Equals(SpectrumIdentificationResults, other.SpectrumIdentificationResults) &&
-                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
+                   ParamsEquals(other);
         }
 
         /// <summary>

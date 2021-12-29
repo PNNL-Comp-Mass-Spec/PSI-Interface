@@ -109,7 +109,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             return FixedMod == other.FixedMod && MassDelta.Equals(other.MassDelta) &&
                    Residues == other.Residues && Equals(SpecificityRules, other.SpecificityRules) &&
-                   Equals(CVParams, other.CVParams);
+                   ParamsEquals(other);
         }
 
         /// <summary>

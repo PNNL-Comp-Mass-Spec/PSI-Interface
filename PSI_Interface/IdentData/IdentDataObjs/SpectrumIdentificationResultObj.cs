@@ -190,8 +190,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             return Name == other.Name && SpectrumID == other.SpectrumID &&
                    Equals(SpectrumIdentificationItems, other.SpectrumIdentificationItems) &&
-                   Equals(SpectraData, other.SpectraData) && Equals(CVParams, other.CVParams) &&
-                   Equals(UserParams, other.UserParams);
+                   Equals(SpectraData, other.SpectraData) && ParamsEquals(other);
         }
 
         /// <summary>

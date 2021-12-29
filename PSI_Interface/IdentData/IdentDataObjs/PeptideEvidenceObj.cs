@@ -314,8 +314,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             return IsDecoy == other.IsDecoy && Start == other.Start && End == other.End &&
                    Pre == other.Pre && Post == other.Post && Frame == other.Frame && Name == other.Name &&
                    Equals(TranslationTable, other.TranslationTable) && Equals(Peptide, other.Peptide) &&
-                   Equals(DBSequence, other.DBSequence) && Equals(CVParams, other.CVParams) &&
-                   Equals(UserParams, other.UserParams);
+                   Equals(DBSequence, other.DBSequence) && ParamsEquals(other);
         }
 
         /// <summary>

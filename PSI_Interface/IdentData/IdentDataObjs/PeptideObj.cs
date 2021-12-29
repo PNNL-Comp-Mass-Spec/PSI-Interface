@@ -133,7 +133,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             return Name == other.Name && PeptideSequence == other.PeptideSequence &&
                    Equals(Modifications, other.Modifications) &&
                    Equals(SubstitutionModifications, other.SubstitutionModifications) &&
-                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
+                   ParamsEquals(other);
         }
 
         /// <summary>

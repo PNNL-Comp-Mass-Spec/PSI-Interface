@@ -100,8 +100,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 return false;
 
             return Name == other.Name && Equals(ContactRoles, other.ContactRoles) &&
-                   Equals(SubSamples, other.SubSamples) && Equals(CVParams, other.CVParams) &&
-                   Equals(UserParams, other.UserParams);
+                   Equals(SubSamples, other.SubSamples) && ParamsEquals(other);
         }
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// Object equality
         /// </summary>
         /// <param name="other"></param>
-        public new bool Equals(object other)
+        public override bool Equals(object other)
         {
             return other is SampleObj o && Equals(o);
         }

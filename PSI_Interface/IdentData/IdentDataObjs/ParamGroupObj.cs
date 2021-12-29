@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -10,7 +11,6 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     {
         private IdentDataList<UserParamObj> _userParams;
 
-        #region Constructors
         /// <summary>
         /// Constructor
         /// </summary>
@@ -34,9 +34,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 UserParams.AddRange(pg.userParam, up => new UserParamObj(up, IdentData));
             }
         }
-        #endregion
 
-        #region Properties
         /// <summary>
         /// List of UserParams
         /// </summary>
@@ -52,7 +50,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 }
             }
         }
-        #endregion
+
+        /// <summary>
+        /// Object equality, with no null check
+        /// </summary>
+        /// <param name="other"></param>
+        public bool ParamsEquals([NotNull] ParamGroupObj other)
+        {
+            return Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
+        }
 
         #region Object Equality
         /// <summary>
@@ -71,7 +77,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 return false;
             }
 
-            return Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
+            return ParamsEquals(other);
         }
 
         /// <summary>

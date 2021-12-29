@@ -155,7 +155,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             return Name == other.Name && PassThreshold == other.PassThreshold &&
                    Equals(DBSequence, other.DBSequence) && Equals(PeptideHypotheses, other.PeptideHypotheses) &&
-                   Equals(CVParams, other.CVParams) && Equals(UserParams, other.UserParams);
+                   ParamsEquals(other);
         }
 
         /// <summary>
