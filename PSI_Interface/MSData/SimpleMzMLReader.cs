@@ -1826,7 +1826,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
+            GC.SuppressFinalize(this);
+            DisposeImpl();
         }
 
         /// <summary>
@@ -1834,19 +1835,14 @@ namespace PSI_Interface.MSData
         /// </summary>
         ~SimpleMzMLReader()
         {
-            Dispose(false);
+            DisposeImpl();
         }
 
         /// <summary>
         /// Dispose, with a decreased chance of issues/failure
         /// </summary>
-        /// <param name="disposing"></param>
-        private void Dispose(bool disposing)
+        private void DisposeImpl()
         {
-            if (disposing)
-            {
-                GC.SuppressFinalize(this);
-            }
             Close();
             Cleanup();
         }

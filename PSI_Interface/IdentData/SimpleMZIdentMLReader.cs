@@ -701,6 +701,7 @@ namespace PSI_Interface.IdentData
             /// </summary>
             public void Dispose()
             {
+                GC.SuppressFinalize(this);
                 xmlDataReader?.Dispose();
             }
         }
