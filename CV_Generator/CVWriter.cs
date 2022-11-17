@@ -330,21 +330,25 @@ namespace CV_Generator
                     {
                         idValue = -1;
                     }
-                    else if (cv.Key.Equals("UNIMOD"))
+                    else if (term.Id_Namespace.Equals("NCIT"))
                     {
                         idValue += 100000000;
                     }
-                    else if (cv.Key.Equals("UO"))
+                    else if (term.Id_Namespace.Equals("PEFF"))
                     {
                         idValue += 200000000;
                     }
-                    else if (cv.Key.Equals("PATO"))
+                    else if (term.Id_Namespace.Equals("UNIMOD"))
                     {
                         idValue += 300000000;
                     }
-                    else if (term.Id_Namespace.Equals("PEFF"))
+                    else if (term.Id_Namespace.Equals("UO"))
                     {
                         idValue += 400000000;
+                    }
+                    else if (term.Id_Namespace.Equals("PATO"))
+                    {
+                        idValue += 500000000;
                     }
                     if (!string.IsNullOrWhiteSpace(term.Def))
                     {
