@@ -23,7 +23,12 @@ namespace CV_Generator.OBO_Objects
                         IsAnonymous = Convert.ToBoolean(datum.Value);
                         break;
                     case "name":
-                        Name = datum.Value;
+                        // Some UniMod modifications have a gamma character in the name
+                        // For example, "Di_L-Glu_Nγ-propargyl-L-Gln_desthiobiotin" at http://www.unimod.org/modifications_view.php?editid1=2068
+
+                        // The script that automatically generates file unimod.obo converts γ into "Î³"
+                        // Replace with _gamma (since enum names cannot contain γ)
+                        Name = datum.Value.Replace("Î³", "_gamma").Replace("γ", "_gamma");
                         break;
                     case "namespace":
                         Namespace = datum.Value;
@@ -32,7 +37,8 @@ namespace CV_Generator.OBO_Objects
                         AltId.Add(datum.Value);
                         break;
                     case "def":
-                        Def = datum.Value;
+                        // Replace "Î³" with γ (gamma), as explained above
+                        Def = datum.Value.Replace("Î³", "γ");
                         break;
                     case "comment":
                         Comment = datum.Value;
