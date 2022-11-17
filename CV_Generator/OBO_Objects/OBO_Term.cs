@@ -9,75 +9,73 @@ namespace CV_Generator.OBO_Objects
         {
             Id_Value = int.MinValue;
 
-            if (data != null)
+            if (data == null)
+                return;
+
+            foreach (var datum in data)
             {
-                foreach (var datum in data)
+                switch (datum.Key.ToLower())
                 {
-                    switch (datum.Key.ToLower())
-                    {
-                        case "id":
-                            Id = datum.Value;
-                            break;
-                        case "is_anonymous":
-                            IsAnonymous = Convert.ToBoolean(datum.Value);
-                            break;
-                        case "name":
-                            Name = datum.Value;
-                            break;
-                        case "namespace":
-                            Namespace = datum.Value;
-                            break;
-                        case "alt_id":
-                            AltId.Add(datum.Value);
-                            break;
-                        case "def":
-                            Def = datum.Value;
-                            break;
-                        case "comment":
-                            Comment = datum.Value;
-                            break;
-                        case "subset":
-                            Subset.Add(datum.Value);
-                            break;
-                        case "synonym":
-                            Synonym.Add(datum.Value);
-                            break;
-                        case "xref":
-                            XRef.Add(datum.Value);
-                            break;
-                        case "is_a":
-                            IsA.Add(datum.Value);
-                            break;
-                        case "intersection_of":
-                            IntersectionOf.Add(datum.Value);
-                            break;
-                        case "union_of":
-                            UnionOf.Add(datum.Value);
-                            break;
-                        case "disjoint_from":
-                            DisjointFrom.Add(datum.Value);
-                            break;
-                        case "relationship":
-                            Relationship.Add(datum.Value);
-                            break;
-                        case "is_obsolete":
-                            IsObsolete = Convert.ToBoolean(datum.Value);
-                            break;
-                        case "replaced_by":
-                            ReplacedBy.Add(datum.Value);
-                            break;
-                        case "consider":
-                            Consider.Add(datum.Value);
-                            break;
-                        case "created_by":
-                            CreatedBy = datum.Value;
-                            break;
-                        case "creation_date":
-                            CreationDate = datum.Value;
-                            break;
-                        default:
-                            break;
-                    }
+                    case "id":
+                        Id = datum.Value;
+                        break;
+                    case "is_anonymous":
+                        IsAnonymous = Convert.ToBoolean(datum.Value);
+                        break;
+                    case "name":
+                        Name = datum.Value;
+                        break;
+                    case "namespace":
+                        Namespace = datum.Value;
+                        break;
+                    case "alt_id":
+                        AltId.Add(datum.Value);
+                        break;
+                    case "def":
+                        Def = datum.Value;
+                        break;
+                    case "comment":
+                        Comment = datum.Value;
+                        break;
+                    case "subset":
+                        Subset.Add(datum.Value);
+                        break;
+                    case "synonym":
+                        Synonym.Add(datum.Value);
+                        break;
+                    case "xref":
+                        XRef.Add(datum.Value);
+                        break;
+                    case "is_a":
+                        IsA.Add(datum.Value);
+                        break;
+                    case "intersection_of":
+                        IntersectionOf.Add(datum.Value);
+                        break;
+                    case "union_of":
+                        UnionOf.Add(datum.Value);
+                        break;
+                    case "disjoint_from":
+                        DisjointFrom.Add(datum.Value);
+                        break;
+                    case "relationship":
+                        Relationship.Add(datum.Value);
+                        break;
+                    case "is_obsolete":
+                        IsObsolete = Convert.ToBoolean(datum.Value);
+                        break;
+                    case "replaced_by":
+                        ReplacedBy.Add(datum.Value);
+                        break;
+                    case "consider":
+                        Consider.Add(datum.Value);
+                        break;
+                    case "created_by":
+                        CreatedBy = datum.Value;
+                        break;
+                    case "creation_date":
+                        CreationDate = datum.Value;
+                        break;
                 }
             }
         }
