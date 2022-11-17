@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace CV_Generator.OBO_Objects
 {
     public class OBO_Term
     {
+        /// <summary>
+        /// Used to match ID names that start with a letter, e.g. "C25330" in NCIT:C25330
+        /// </summary>
+        private static readonly Regex _alphaIdMatcher = new Regex(@"(?<Prefix>[a-z])(?<ID>\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         public OBO_Term(List<KeyValuePair<string, string>> data = null)
         {
             Id_Value = int.MinValue;
@@ -122,7 +128,23 @@ namespace CV_Generator.OBO_Objects
             }
             var split = Id.Split(':');
             Id_Namespace = split[0];
-            Id_Value = int.Parse(split[1].Trim('_',' '));
+
+            var match = _alphaIdMatcher.Match(split[1]);
+
+            if (match.Success)
+            {
+                // Special logic for terms with an ID that starts with a letter, e.g. NCIT:C25330
+
+                // Convert A to 1, B to 2, C to 3, etc.
+                var letterCode = match.Groups["Prefix"].Value.ToUpper()[0] - 64;
+
+                // When letterCode is C, add 300000 to ID
+                Id_Value = letterCode * 100000 + int.Parse(match.Groups["ID"].Value.Trim('_', ' '));
+            }
+            else
+            {
+                Id_Value = int.Parse(split[1].Trim('_', ' '));
+            }
         }
 
         private string id;
