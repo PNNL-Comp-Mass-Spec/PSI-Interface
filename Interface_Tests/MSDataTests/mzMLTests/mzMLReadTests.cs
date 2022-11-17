@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using PSI_Interface.MSData.mzML;
 using NUnit.Framework;
 
