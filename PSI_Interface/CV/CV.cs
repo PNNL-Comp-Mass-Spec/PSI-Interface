@@ -121,6 +121,15 @@ namespace PSI_Interface.CV
                 URI = pURI;
                 Version = pVersion;
             }
+
+            /// <summary>
+            /// Show the ontology ID and name
+            /// </summary>
+            /// <returns></returns>
+            public override string ToString()
+            {
+                return string.Format("{0}: {1}", Id, Name);
+            }
         }
 
         /// <summary>
