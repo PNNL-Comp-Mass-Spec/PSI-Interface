@@ -13,6 +13,8 @@ namespace CV_Generator.OBO_Objects
 
         public OBO_Term(List<KeyValuePair<string, string>> data = null)
         {
+            // Ignore Spelling: desthiobiotin, namespace, propargyl, xref
+
             Id_Value = int.MinValue;
 
             if (data == null)

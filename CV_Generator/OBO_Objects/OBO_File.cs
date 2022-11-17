@@ -5,6 +5,8 @@ namespace CV_Generator.OBO_Objects
 {
     public class OBO_File
     {
+        // Ignore Spelling: obo, Proteomics
+
         private OBO_Header _header;
 
         public OBO_Header Header
@@ -109,13 +111,16 @@ namespace CV_Generator.OBO_Objects
         private string GetAvailableId(string desiredId)
         {
             var finalId = desiredId;
+
             // Id safety mechanism: If the Id already exists, add a number and continue.
             while (Ids.ContainsKey(finalId))
             {
                 Ids[desiredId]++;
                 finalId += Ids[desiredId];
             }
+
             Ids.Add(finalId, 0); // Add it to the dictionary
+
             return finalId;
         }
     }

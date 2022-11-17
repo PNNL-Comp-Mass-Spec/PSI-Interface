@@ -4,6 +4,8 @@ namespace CV_Generator.OBO_Objects
 {
     public class OBO_Header
     {
+        // Ignore Spelling: idspace, namespace, subsetdef, synonymtypedef
+
         public OBO_Header(List<KeyValuePair<string, string>> data = null)
         {
             if (data == null)
