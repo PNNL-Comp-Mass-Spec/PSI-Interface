@@ -90,6 +90,10 @@ namespace CV_Generator.OBO_Objects
                     Name = "Quality Ontology";
                     _id = GetAvailableId("PATO");
                     break;
+                case "stato.owl":
+                    Name = "STATO: the statistical methods ontology";
+                    _id = GetAvailableId("STATO");
+                    break;
                 case "unimod.obo":
                     Name = "UNIMOD";
                     _id = GetAvailableId("UNIMOD");

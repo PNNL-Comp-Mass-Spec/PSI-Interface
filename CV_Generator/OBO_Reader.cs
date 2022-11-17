@@ -10,6 +10,20 @@ namespace CV_Generator
     public class OBO_Reader
     {
         public OBO_File FileData;
+
+        /// <summary>
+        /// Ignored ontologies
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// pato.obo is ignored, since, if included, auto-generated values for enum RelationsOtherTypes will have unsupported characters in the name (e.g. RO:0002100)
+        /// </para>
+        /// <para>
+        /// stato.owl is ignored because it is an XML file, not an OBO file
+        /// </para>
+        /// </remarks>
+        private readonly SortedSet<string> IgnoredOntologies = new SortedSet<string> { "pato.obo", "stato.owl" };
+
         public readonly List<OBO_File> ImportedFileData = new List<OBO_File>();
 
         public void Read(string url)
@@ -102,6 +116,14 @@ namespace CV_Generator
 
             foreach (var import in FileData.Header.Import)
             {
+                var urlParts = import.Split('/');
+
+                if (IgnoredOntologies.Contains(urlParts.LastOrDefault()))
+                {
+                    Console.WriteLine("Ignoring ontology " + import);
+                    continue;
+                }
+
                 var reader = new OBO_Reader();
                 reader.Read(import);
                 ImportedFileData.Add(reader.FileData);
