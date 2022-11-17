@@ -152,7 +152,7 @@ namespace CV_Generator.OBO_Objects
         // Required
         public string Id
         {
-            get { return id; }
+            get => id;
             set
             {
                 id = value;
