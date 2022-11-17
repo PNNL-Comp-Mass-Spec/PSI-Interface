@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using CV_Generator.OBO_Objects;
@@ -323,7 +324,7 @@ namespace CV_Generator
 
             foreach (var cv in _cvMapData)
             {
-                foreach (var term in cv.Value.Values)
+                foreach (var term in cv.Value.Values.OrderBy(x => x.Id_Namespace).ThenBy(x => x.Id_Value))
                 {
                     var idValue = term.Id_Value;
                     if (cv.Key.Equals("??") && term.EnumName.Equals("CVID_Unknown"))
@@ -429,7 +430,7 @@ namespace CV_Generator
             var first = true;
             foreach (var cv in _cvMapData)
             {
-                foreach (var term in cv.Value.Values)
+                foreach (var term in cv.Value.Values.OrderBy( x => x.Id_Namespace).ThenBy( x=> x.Id_Value))
                 {
                     if (counter % 1000 == 0 || !lastNamespace.Equals(term.Id_Namespace, StringComparison.OrdinalIgnoreCase) || first)
                     {
