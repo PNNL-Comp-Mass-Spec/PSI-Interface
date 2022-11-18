@@ -166,13 +166,21 @@ namespace CV_Generator
             values.AppendNewLine(indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>");
             values.AppendNewLine(indent + "public static void PopulateCVInfoList()");
             values.AppendNewLine(indent + "{");
+            values.AppendNewLine(indent + "    // NOTE: psi-ms.obo directly includes a subset of some other ontologies rather than importing the entire ontology.");
+            values.AppendNewLine(indent + "    // NOTE: psi-ms.obo is the official/sole source of the MS and PEFF namespaces, but (for example) UO and NCIT terms are copied from their respective ontologies.");
 
             foreach (var cv in _allObo)
             {
                 values.AppendNewLine(indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
                 foreach (var ns in cv.AdditionalNamespaces)
                 {
-                    values.AppendNewLine(indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
+                    var name = cv.Name;
+                    if (cv.Id.Equals("MS") && !ns.Equals("PEFF"))
+                    {
+                        name = "Ontology terms copied in " + name;
+                    }
+
+                    values.AppendNewLine(indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
                 }
             }
 
@@ -308,7 +316,7 @@ namespace CV_Generator
                 foreach (var term in cv.Value.Values.OrderBy(x => x.Id_Namespace).ThenBy(x => x.Id_Value))
                 {
                     var idValue = term.Id_Value;
-                    if (cv.Key.Equals("??") && term.EnumName.Equals("CVID_Unknown"))
+                    if (term.Id_Namespace.Equals("??") && term.EnumName.Equals("CVID_Unknown"))
                     {
                         idValue = -1;
                     }
@@ -374,7 +382,7 @@ namespace CV_Generator
                     dictData.AppendNewLine(indent + "    TermData.Add(" +
                                         "CVID." + term.EnumName + ", new TermInfo(" +
                                         "CVID." + term.EnumName + ", " +
-                                        "@\"" + cv.Key + "\", " +
+                                        "@\"" + term.Id_Namespace + "\", " +
                                         "@\"" + term.Id + "\", " +
                                         "@\"" + term.Name + "\", " +
                                         "@\"" + term.DefShort + "\", " +
@@ -445,7 +453,7 @@ namespace CV_Generator
                     dictData.AppendNewLine(indent + "    TermData.Add(" +
                                         "CVID." + term.EnumName + ", new TermInfo(" +
                                         "CVID." + term.EnumName + ", " +
-                                        "@\"" + cv.Key + "\", " +
+                                        "@\"" + term.Id_Namespace + "\", " +
                                         "@\"" + term.Id + "\", " +
                                         "@\"" + term.Name + "\", " +
                                         "@\"" + term.DefShort + "\", " +
