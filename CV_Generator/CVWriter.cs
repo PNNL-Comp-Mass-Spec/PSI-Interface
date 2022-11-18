@@ -21,19 +21,25 @@ namespace CV_Generator
 
         public const string PSI_MS_OBO_URI = "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo";
         public const string UNIMOD_OBO_URI = "http://www.unimod.org/obo/unimod.obo";
+        public const string UNIT_OBO_URI = "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/unit.obo";
 
         private void Read()
         {
             // Ontology import 'pato.obo' is ignored, since, if included, auto-generated values for enum RelationsOtherTypes will have unsupported characters in the name (e.g. RO:0002100)
             // Ontology import 'stato.owl' is ignored because it is an XML file, not an OBO file
-            var psiMs = new OBO_Reader(new[] { "pato.obo", "stato.owl" });
+            // Term namespace 'UO' is ignored because we separately import the complete unit ontology
+            var psiMs = new OBO_Reader(new[] { "pato.obo", "stato.owl" }, new[] { "UO" });
             psiMs.Read(PSI_MS_OBO_URI);
 
             var unimod = new OBO_Reader();
             unimod.Read(UNIMOD_OBO_URI);
 
+            var unit = new OBO_Reader();
+            unit.Read(UNIT_OBO_URI);
+
             _allObo.Add(psiMs.FileData);
             _allObo.Add(unimod.FileData);
+            _allObo.Add(unit.FileData);
             _allObo.AddRange(psiMs.ImportedFileData);
         }
 

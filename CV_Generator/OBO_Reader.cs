@@ -13,9 +13,11 @@ namespace CV_Generator
         /// Constructor
         /// </summary>
         /// <param name="ignoredOntologyImports">imported ontology file names to ignore/exclude</param>
-        public OBO_Reader(IEnumerable<string> ignoredOntologyImports = null)
+        /// <param name="ignoredTermNamespaces">term namespaces that should be excluded from the import (e.g., because they are copied from another ontology that is separately included)</param>
+        public OBO_Reader(IEnumerable<string> ignoredOntologyImports = null, IEnumerable<string> ignoredTermNamespaces = null)
         {
             _ignoredOntologyImports = new SortedSet<string>(ignoredOntologyImports ?? Enumerable.Empty<string>());
+            _ignoredTermNamespaces = new SortedSet<string>(ignoredTermNamespaces ?? Enumerable.Empty<string>());
         }
 
         public OBO_File FileData { get; private set; }
@@ -24,6 +26,11 @@ namespace CV_Generator
         /// Ignored ontology imports (because they are either never used, or because there is a problem with importing their terms)
         /// </summary>
         private readonly SortedSet<string> _ignoredOntologyImports = new SortedSet<string> { "pato.obo", "stato.owl" };
+
+        /// <summary>
+        /// Ignored term namespaces (because they are either never used, or because the terms are copied from another ontology that is separately included)
+        /// </summary>
+        private readonly SortedSet<string> _ignoredTermNamespaces;
 
         public readonly List<OBO_File> ImportedFileData = new List<OBO_File>();
 
@@ -85,7 +92,12 @@ namespace CV_Generator
                                 Console.WriteLine("\tChanging conflict id to \"" + term.Id + "_\"");
                                 term.Id += "_";
                             }
-                            FileData.Terms.Add(term.Id, term);
+
+                            if (!_ignoredTermNamespaces.Contains(term.Id_Namespace))
+                            {
+                                FileData.Terms.Add(term.Id, term);
+                            }
+
                             break;
                         case "[typedef]":
                             var typeDef = new OBO_Typedef(data);
