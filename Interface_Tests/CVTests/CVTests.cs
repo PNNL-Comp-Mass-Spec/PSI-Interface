@@ -38,8 +38,8 @@ namespace Interface_Tests.CVTests
         {
             var outFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, outFileName));
 
-            var reader = new Unimod_obo_Reader();
-            reader.Read();
+            var reader = new OBO_Reader();
+            reader.Read(CVWriter.UNIMOD_OBO_URI);
             var fileData = reader.FileData;
 
             WriteCVTerms(outFile, fileData);
@@ -51,8 +51,8 @@ namespace Interface_Tests.CVTests
         {
             var outFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, outFileName));
 
-            var reader = new PSI_MS_obo_Reader();
-            reader.Read();
+            var reader = new OBO_Reader(new[] { "pato.obo", "stato.owl" });
+            reader.Read(CVWriter.PSI_MS_OBO_URI);
             var fileData = reader.FileData;
             var imports = reader.ImportedFileData;
 

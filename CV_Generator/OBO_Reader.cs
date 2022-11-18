@@ -9,20 +9,21 @@ namespace CV_Generator
 {
     public class OBO_Reader
     {
-        public OBO_File FileData;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="ignoredOntologyImports">imported ontology file names to ignore/exclude</param>
+        public OBO_Reader(IEnumerable<string> ignoredOntologyImports = null)
+        {
+            _ignoredOntologyImports = new SortedSet<string>(ignoredOntologyImports ?? Enumerable.Empty<string>());
+        }
+
+        public OBO_File FileData { get; private set; }
 
         /// <summary>
-        /// Ignored ontologies
+        /// Ignored ontology imports (because they are either never used, or because there is a problem with importing their terms)
         /// </summary>
-        /// <remarks>
-        /// <para>
-        /// pato.obo is ignored, since, if included, auto-generated values for enum RelationsOtherTypes will have unsupported characters in the name (e.g. RO:0002100)
-        /// </para>
-        /// <para>
-        /// stato.owl is ignored because it is an XML file, not an OBO file
-        /// </para>
-        /// </remarks>
-        private readonly SortedSet<string> IgnoredOntologies = new SortedSet<string> { "pato.obo", "stato.owl" };
+        private readonly SortedSet<string> _ignoredOntologyImports = new SortedSet<string> { "pato.obo", "stato.owl" };
 
         public readonly List<OBO_File> ImportedFileData = new List<OBO_File>();
 
@@ -118,7 +119,7 @@ namespace CV_Generator
             {
                 var urlParts = import.Split('/');
 
-                if (IgnoredOntologies.Contains(urlParts.LastOrDefault()))
+                if (_ignoredOntologyImports.Contains(urlParts.LastOrDefault()))
                 {
                     Console.WriteLine("Ignoring ontology " + import);
                     continue;

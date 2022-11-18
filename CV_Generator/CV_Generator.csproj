@@ -52,9 +52,7 @@
     <Compile Include="OBO_Objects\OBO_Term.cs" />
     <Compile Include="OBO_Objects\OBO_Typedef.cs" />
     <Compile Include="OBO_Reader.cs" />
-    <Compile Include="PSI_MS_obo_Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unimod_obo_Reader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
