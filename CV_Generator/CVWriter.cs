@@ -160,38 +160,19 @@ namespace CV_Generator
             return "}";
         }
 
-        /// <summary>
-        /// Append \n (instead of \r\n)
-        /// </summary>
-        /// <param name="sb"></param>
-        private static void AppendLine(StringBuilder sb)
-        {
-            sb.Append("\n");
-        }
-
-        /// <summary>
-        /// Append text and \n (instead of \r\n)
-        /// </summary>
-        /// <param name="sb"></param>
-        /// <param name="text"></param>
-        private static void AppendLine(StringBuilder sb, string text)
-        {
-            sb.AppendFormat("{0}\n", text);
-        }
-
         private StringBuilder CVInfoList(string indent)
         {
             var values = new StringBuilder();
-            AppendLine(values, indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>");
-            AppendLine(values, indent + "public static void PopulateCVInfoList()");
-            AppendLine(values, indent + "{");
+            values.AppendNewLine(indent + "/// <summary>Populate the list of included Controlled Vocabularies, with descriptive information</summary>");
+            values.AppendNewLine(indent + "public static void PopulateCVInfoList()");
+            values.AppendNewLine(indent + "{");
 
             foreach (var cv in _allObo)
             {
-                AppendLine(values, indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
+                values.AppendNewLine(indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
                 foreach (var ns in cv.AdditionalNamespaces)
                 {
-                    AppendLine(values, indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
+                    values.AppendNewLine(indent + "    CVInfoList.Add(new CVInfo(\"" + ns + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
                 }
             }
 
@@ -204,9 +185,9 @@ namespace CV_Generator
         private StringBuilder GenerateRelationOtherTypesEnum(string indent)
         {
             var enumData = new StringBuilder();
-            AppendLine(enumData, indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>");
-            AppendLine(enumData, indent + "public enum " + RelationsOtherTypesEnumName + " : int");
-            AppendLine(enumData, indent + "{");
+            enumData.AppendNewLine(indent + "/// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>");
+            enumData.AppendNewLine(indent + "public enum " + RelationsOtherTypesEnumName + " : int");
+            enumData.AppendNewLine(indent + "{");
 
             var dict = new Dictionary<string, OBO_Typedef>();
             var unknownDef = new OBO_Typedef {
@@ -230,18 +211,18 @@ namespace CV_Generator
             {
                 if (!string.IsNullOrWhiteSpace(item.Value.Def))
                 {
-                    AppendLine(enumData, indent + "    /// " + EscapeXmlEntities("summary", item.Value.DefShort));
+                    enumData.AppendNewLine(indent + "    /// " + EscapeXmlEntities("summary", item.Value.DefShort));
                 }
                 else
                 {
-                    AppendLine(enumData, indent + "    /// <summary>Description not provided</summary>");
+                    enumData.AppendNewLine(indent + "    /// <summary>Description not provided</summary>");
                 }
                 if (!string.IsNullOrWhiteSpace(item.Value.Comment))
                 {
-                    AppendLine(enumData, indent + "    /// " + EscapeXmlEntities("remarks", item.Value.Comment));
+                    enumData.AppendNewLine(indent + "    /// " + EscapeXmlEntities("remarks", item.Value.Comment));
                 }
-                AppendLine(enumData, indent + "    " + item.Key + ",");
-                AppendLine(enumData);
+                enumData.AppendNewLine(indent + "    " + item.Key + ",");
+                enumData.AppendNewLine();
             }
 
             enumData.AppendFormat("{0}}}", indent);
@@ -316,11 +297,11 @@ namespace CV_Generator
             }
 
             var enumData = new StringBuilder();
-            AppendLine(enumData, indent + "/// <summary>");
-            AppendLine(enumData, indent + "/// A full enumeration of the Controlled Vocabularies PSI-MS, UNIMOD, and the vocabularies they depend on");
-            AppendLine(enumData, indent + "/// </summary>");
-            AppendLine(enumData, indent + "public enum CVID : int");
-            AppendLine(enumData, indent + "{");
+            enumData.AppendNewLine(indent + "/// <summary>");
+            enumData.AppendNewLine(indent + "/// A full enumeration of the Controlled Vocabularies PSI-MS, UNIMOD, and the vocabularies they depend on");
+            enumData.AppendNewLine(indent + "/// </summary>");
+            enumData.AppendNewLine(indent + "public enum CVID : int");
+            enumData.AppendNewLine(indent + "{");
 
             foreach (var cv in _cvMapData)
             {
@@ -353,14 +334,14 @@ namespace CV_Generator
                     }
                     if (!string.IsNullOrWhiteSpace(term.Def))
                     {
-                        AppendLine(enumData, indent + "    /// " + EscapeXmlEntities("summary", term.DefShort));
+                        enumData.AppendNewLine(indent + "    /// " + EscapeXmlEntities("summary", term.DefShort));
                     }
                     else
                     {
-                        AppendLine(enumData, indent +  "    /// <summary>Description not provided</summary>");
+                        enumData.AppendNewLine(indent +  "    /// <summary>Description not provided</summary>");
                     }
-                    AppendLine(enumData, indent + "    " + term.EnumName + " = " + idValue + ",");
-                    AppendLine(enumData);
+                    enumData.AppendNewLine(indent + "    " + term.EnumName + " = " + idValue + ",");
+                    enumData.AppendNewLine();
                 }
             }
 
@@ -382,15 +363,15 @@ namespace CV_Generator
             }
 
             var dictData = new StringBuilder();
-            AppendLine(dictData, indent + "/// <summary>Populate the CV Term data objects</summary>");
-            AppendLine(dictData, indent + "private static void PopulateTermData()");
-            AppendLine(dictData, indent + "{");
+            dictData.AppendNewLine(indent + "/// <summary>Populate the CV Term data objects</summary>");
+            dictData.AppendNewLine(indent + "private static void PopulateTermData()");
+            dictData.AppendNewLine(indent + "{");
 
             foreach (var cv in _cvMapData)
             {
                 foreach (var term in cv.Value.Values)
                 {
-                    AppendLine(dictData, indent + "    TermData.Add(" +
+                    dictData.AppendNewLine(indent + "    TermData.Add(" +
                                         "CVID." + term.EnumName + ", new TermInfo(" +
                                         "CVID." + term.EnumName + ", " +
                                         "@\"" + cv.Key + "\", " +
@@ -401,7 +382,7 @@ namespace CV_Generator
                 }
             }
 
-            AppendLine(dictData, indent + "}");
+            dictData.AppendNewLine(indent + "}");
             return dictData;
         }
 
@@ -436,8 +417,8 @@ namespace CV_Generator
                     {
                         if (!first)
                         {
-                            AppendLine(dictData, functionEnd);
-                            AppendLine(dictData);
+                            dictData.AppendNewLine(functionEnd);
+                            dictData.AppendNewLine();
                         }
 
                         if (!lastNamespace.Equals(term.Id_Namespace) || string.IsNullOrWhiteSpace(lastNamespace))
@@ -461,7 +442,7 @@ namespace CV_Generator
                     }
                     counter++;
 
-                    AppendLine(dictData, indent + "    TermData.Add(" +
+                    dictData.AppendNewLine(indent + "    TermData.Add(" +
                                         "CVID." + term.EnumName + ", new TermInfo(" +
                                         "CVID." + term.EnumName + ", " +
                                         "@\"" + cv.Key + "\", " +
@@ -472,13 +453,13 @@ namespace CV_Generator
                 }
             }
 
-            AppendLine(dictData, functionEnd);
-            AppendLine(dictData);
+            dictData.AppendNewLine(functionEnd);
+            dictData.AppendNewLine();
             dictData.AppendFormat("{0}{1}{2}{3}{4}", commentStart, commentEnd, functionStartFirst, functionName, functionStartRest);
 
             foreach (var part in subFunctions)
             {
-                AppendLine(dictData, indent + "    " + part + "();");
+                dictData.AppendNewLine(indent + "    " + part + "();");
             }
 
             dictData.Append(functionEnd);
@@ -533,9 +514,9 @@ namespace CV_Generator
 
             var fillData = new StringBuilder();
 
-            AppendLine(fillData, indent + "/// <summary>Populate the relationships between CV terms</summary>");
-            AppendLine(fillData, indent + "private static void FillRelationsIsA()");
-            AppendLine(fillData, indent + "{");
+            fillData.AppendNewLine(indent + "/// <summary>Populate the relationships between CV terms</summary>");
+            fillData.AppendNewLine(indent + "private static void FillRelationsIsA()");
+            fillData.AppendNewLine(indent + "{");
 
             foreach (var item in items)
             {
@@ -546,7 +527,7 @@ namespace CV_Generator
                 {
                     fillData.AppendFormat("CVID.{0}, ", map);
                 }
-                AppendLine(fillData, "});");
+                fillData.AppendNewLine("});");
             }
 
             fillData.AppendFormat("{0}}}", indent);
@@ -600,8 +581,8 @@ namespace CV_Generator
                 {
                     if (!first)
                     {
-                        AppendLine(fillData, functionEnd);
-                        AppendLine(fillData);
+                        fillData.AppendNewLine(functionEnd);
+                        fillData.AppendNewLine();
                     }
 
                     if (!lastNamespace.Equals(item.Key.Id_Namespace))
@@ -628,17 +609,17 @@ namespace CV_Generator
                 {
                     fillData.AppendFormat("CVID.{0}, ", map);
                 }
-                AppendLine(fillData, "});");
+                fillData.AppendNewLine("});");
             }
 
-            AppendLine(fillData, functionEnd);
-            AppendLine(fillData);
+            fillData.AppendNewLine(functionEnd);
+            fillData.AppendNewLine();
             fillData.AppendFormat("{0}{1}{2}{3}{4}",
                 commentStart, commentEnd, functionStartFirst, functionName, functionStartRest);
 
             foreach (var part in subFunctions)
             {
-                AppendLine(fillData, indent + "    " + part + "();");
+                fillData.AppendNewLine(indent + "    " + part + "();");
             }
 
             fillData.Append(functionEnd);

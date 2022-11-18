@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CVWriter.cs" />
     <Compile Include="CV_Generator.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="OBO_Objects\OBO_File.cs" />
     <Compile Include="OBO_Objects\OBO_Header.cs" />
