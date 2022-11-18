@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PSI_Interface.SharedInterfaces;
 
 namespace PSI_Interface.CV
 {
@@ -85,7 +86,7 @@ namespace PSI_Interface.CV
         /// <summary>
         /// Primary identifying information about a particular CV
         /// </summary>
-        public class CVInfo
+        public class CVInfo : ICVInfo
         {
             /// <summary>
             /// CV identifier
@@ -96,6 +97,11 @@ namespace PSI_Interface.CV
             /// CV name
             /// </summary>
             public string Name { get; }
+
+            /// <summary>
+            /// CV name
+            /// </summary>
+            public string FullName => Name;
 
             /// <summary>
             /// CV URI

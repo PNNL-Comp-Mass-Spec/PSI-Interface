@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PSI_Interface.MSData;
+using PSI_Interface.SharedInterfaces;
 
 namespace PSI_Interface.CV
 {
@@ -29,79 +30,28 @@ namespace PSI_Interface.CV
         /// Create a translator between a CVInfo object and the internal values
         /// </summary>
         /// <param name="fileCvInfo"></param>
-        public CVTranslator(IEnumerable<CV.CVInfo> fileCvInfo)
-        {
-            var cvInfos = fileCvInfo.ToList();
-            foreach (var cv in CV.CVInfoList)
-            {
-                foreach (var fcv in cvInfos)
-                {
-                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.Equals(fcvFilename, StringComparison.OrdinalIgnoreCase) && !_oboToFile.ContainsValue(fcv.Id))
-                    {
-                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.IndexOf("peff", StringComparison.OrdinalIgnoreCase) >= 0)
-                        {
-                            // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
-                            continue;
-                        }
-
-                        _oboToFile.Add(cv.Id, fcv.Id);
-                    }
-                }
-                if (!_oboToFile.ContainsKey(cv.Id))
-                {
-                    _oboToFile.Add(cv.Id, cv.Id);
-                }
-            }
-
-            foreach (var mapping in _oboToFile)
-            {
-                _fileToObo.Add(mapping.Value, mapping.Key);
-            }
-        }
+        public CVTranslator(IEnumerable<CV.CVInfo> fileCvInfo) : this(fileCvInfo.Cast<ICVInfo>())
+        { }
 
         /// <summary>
         /// Create a translator between a mzid file and the internal values
         /// </summary>
         /// <param name="fileCvInfo"></param>
-        public CVTranslator(IEnumerable<IdentData.IdentDataObjs.CVInfo> fileCvInfo)
-        {
-            var cvInfos = fileCvInfo.ToList();
-            foreach (var cv in CV.CVInfoList)
-            {
-                foreach (var fcv in cvInfos)
-                {
-                    var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
-                    if (cvFilename.Equals(fcvFilename, StringComparison.OrdinalIgnoreCase) && !_oboToFile.ContainsValue(fcv.Id))
-                    {
-                        if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.IndexOf("peff", StringComparison.OrdinalIgnoreCase) >= 0)
-                        {
-                            // XOR: if only one or the other is PEFF, don't add it here since it is probably going to mess up the main MS cv namespace
-                            continue;
-                        }
-
-                        _oboToFile.Add(cv.Id, fcv.Id);
-                    }
-                }
-                if (!_oboToFile.ContainsKey(cv.Id))
-                {
-                    _oboToFile.Add(cv.Id, cv.Id);
-                }
-            }
-
-            foreach (var mapping in _oboToFile)
-            {
-                _fileToObo.Add(mapping.Value, mapping.Key);
-            }
-        }
+        public CVTranslator(IEnumerable<IdentData.IdentDataObjs.CVInfo> fileCvInfo) : this(fileCvInfo.Cast<ICVInfo>())
+        { }
 
         /// <summary>
         /// Create a translator between a mzML file and the internal values
         /// </summary>
         /// <param name="fileCvInfo"></param>
-        public CVTranslator(IEnumerable<CVInfo> fileCvInfo)
+        public CVTranslator(IEnumerable<CVInfo> fileCvInfo) : this(fileCvInfo.Cast<ICVInfo>())
+        { }
+
+        /// <summary>
+        /// Create a translator between a file type and the internal values
+        /// </summary>
+        /// <param name="fileCvInfo"></param>
+        private CVTranslator(IEnumerable<ICVInfo> fileCvInfo)
         {
             var cvInfos = fileCvInfo.ToList();
             foreach (var cv in CV.CVInfoList)

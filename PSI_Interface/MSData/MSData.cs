@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using PSI_Interface.CV;
+using PSI_Interface.SharedInterfaces;
 
 /*********************************************************************************************************************************
  * Work TODO:
@@ -226,7 +227,7 @@ namespace PSI_Interface.MSData
     /// mzML CVType
     /// </summary>
     /// <remarks>Information about an ontology or CV source and a short 'lookup' tag to refer to.</remarks>
-    public partial class CVInfo
+    public partial class CVInfo : ICVInfo
     {
         /// <summary>
         /// The short label to be used as a reference tag with which to refer to this particular Controlled Vocabulary source description

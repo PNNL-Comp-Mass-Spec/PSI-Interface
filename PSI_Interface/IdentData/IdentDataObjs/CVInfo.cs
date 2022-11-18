@@ -1,5 +1,6 @@
 ﻿using System;
 using PSI_Interface.IdentData.mzIdentML;
+using PSI_Interface.SharedInterfaces;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
 {
@@ -9,7 +10,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// <remarks>A source controlled vocabulary from which cvParams will be obtained.</remarks>
     /// <remarks>CVListType: The list of controlled vocabularies used in the file.</remarks>
     /// <remarks>CVListType: child element cv of type cvType, min 1, max unbounded</remarks>
-    public class CVInfo : IdentDataInternalTypeAbstract, IEquatable<CVInfo>
+    public class CVInfo : IdentDataInternalTypeAbstract, ICVInfo, IEquatable<CVInfo>
     {
         #region Constructors
         /// <summary>
