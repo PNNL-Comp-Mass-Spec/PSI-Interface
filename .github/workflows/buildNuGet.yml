@@ -16,7 +16,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0 # avoid shallow clone so NerdBank.GitVersioning can calculate version
 
@@ -33,13 +33,13 @@ jobs:
       run: msbuild /m /t:restore /t:build /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
 
     - name: Archive compiled binaries for .NET 4.6.2
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Compiled binaries, .NET 4.6.2
         path: PSI_Interface/bin/Release/net462/*.*
 
     - name: Archive compiled .nupkg
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Compiled .nupkg
         path: PSI_Interface/bin/Release/*.nupkg
