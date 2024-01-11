@@ -46,10 +46,11 @@ namespace CV_Generator.OBO_Objects
                         break;
                     case "def":
                         // Replace "Î³" with γ (gamma), as explained above
-                        Def = datum.Value.Replace("Î³", "γ");
+                        def = datum.Value.Replace("Î³", "γ");
                         break;
                     case "comment":
-                        Comment = datum.Value;
+                        // Replace "Î³" with γ (gamma), as explained above
+                        Comment = datum.Value.Replace("Î³", "γ");
                         break;
                     case "subset":
                         Subset.Add(datum.Value);
@@ -96,6 +97,20 @@ namespace CV_Generator.OBO_Objects
 
         // Added for ease of use
         public string EnumName;
+
+        public string Def
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(def))
+                {
+                    return def;
+                }
+
+                return Comment;
+            }
+            set => def = value;
+        }
         public string DefShort
         {
             get
@@ -109,7 +124,7 @@ namespace CV_Generator.OBO_Objects
 
                 if (cleaned.Contains("["))
                 {
-                    cleaned = cleaned.Substring(0, Def.IndexOf("[", StringComparison.Ordinal)).Trim();
+                    cleaned = cleaned.Substring(0, cleaned.IndexOf("[", StringComparison.Ordinal)).Trim();
                 }
 
                 return cleaned.Replace('"', ' ').Trim();
@@ -172,7 +187,7 @@ namespace CV_Generator.OBO_Objects
         public bool IsAnonymous;
         public string Namespace;
         public readonly List<string> AltId = new List<string>();
-        public string Def; // zero or one
+        private string def; // zero or one
         public string Comment; // zero or one
         public readonly List<string> Subset = new List<string>();
         public readonly List<string> Synonym = new List<string>();
