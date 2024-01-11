@@ -1,9 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/Nerdbank.GitVersioning/master/src/NerdBank.GitVersioning/version.schema.json",
-  "version": "2.5",
+  "version": "2.6",
   "assemblyVersion": {
     "precision": "revision"
   },
+  "versionHeightOffset": "1", // REMOVE THIS LINE when version is bumped to 2.7!
   "publicReleaseRefSpec": [
     "^refs/heads/master$" // we release out of master; added to remove commit ID from the NuGet package version
   ],

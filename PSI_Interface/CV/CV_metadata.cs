@@ -13,11 +13,11 @@ namespace PSI_Interface.CV
         {
             // NOTE: psi-ms.obo directly includes a subset of some other ontologies rather than importing the entire ontology.
             // NOTE: psi-ms.obo is the official/sole source of the MS and PEFF namespaces, but (for example) UO and NCIT terms are copied from their respective ontologies.
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.108"));
-            CVInfoList.Add(new CVInfo("NCIT", "Ontology terms copied in Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.108"));
-            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.108"));
-            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "20:10:2022 14:06"));
-            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/unit.obo", "09:04:2014 13:37"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.138"));
+            CVInfoList.Add(new CVInfo("NCIT", "Ontology terms copied in Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.138"));
+            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.138"));
+            CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "05:10:2023 14:38"));
+            CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/uo.obo", "releases/2023-05-25"));
         }
 
         /// <summary>Enum listing all relationships between CV terms used in the included CVs</summary>
