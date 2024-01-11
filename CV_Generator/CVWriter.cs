@@ -21,7 +21,7 @@ namespace CV_Generator
 
         public const string PSI_MS_OBO_URI = "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo";
         public const string UNIMOD_OBO_URI = "http://www.unimod.org/obo/unimod.obo";
-        public const string UNIT_OBO_URI = "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/unit.obo";
+        public const string UNIT_OBO_URI = "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/uo.obo";
 
         private void Read()
         {
