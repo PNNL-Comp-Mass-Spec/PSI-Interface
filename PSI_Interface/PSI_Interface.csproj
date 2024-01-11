@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net462;netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net462;netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
     <RootNamespace>PSI_Interface</RootNamespace>
     <AssemblyName>PSI_Interface</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -28,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.119">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="JetBrains.Annotations" Version="2022.3.1">
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
