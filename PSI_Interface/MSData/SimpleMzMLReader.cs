@@ -4153,7 +4153,7 @@ namespace PSI_Interface.MSData
                              *   e.g.: MS:1000250 "electron capture dissociation"
                              *   e.g.: MS:1000262 "infrared multiphoton dissociation"
                              *   e.g.: MS:1000282 "sustained off-resonance irradiation"
-                             *   e.g.: MS:1000422 "beam-type collision-induced dissociation"
+                             *   e.g.: MS:1000422 "beam-type collision-induced dissociation" (HCD)
                              *   e.g.: MS:1000433 "low-energy collision-induced dissociation"
                              *   e.g.: MS:1000435 "photodissociation"
                              *   e.g.: MS:1000598 "electron transfer dissociation"
@@ -4173,8 +4173,7 @@ namespace PSI_Interface.MSData
                                 case "MS:1000250": // name="electron capture dissociation"
                                 case "MS:1000262": // name="infrared multiphoton dissociation"
                                 case "MS:1000282": // name="sustained off-resonance irradiation"
-                                case "MS:1000422":
-                                // name="beam-type collision-induced dissociation", "high-energy collision-induced dissociation"
+                                case "MS:1000422": // name="beam-type collision-induced dissociation", "high-energy collision-induced dissociation" (HCD)
                                 case "MS:1000433": // name="low-energy collision-induced dissociation"
                                 case "MS:1000435": // name="photodissociation"
                                 case "MS:1000598": // name="electron transfer dissociation"
