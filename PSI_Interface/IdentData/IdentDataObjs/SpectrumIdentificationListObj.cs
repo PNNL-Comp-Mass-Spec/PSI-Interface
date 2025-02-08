@@ -62,6 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _fragmentationTables = value;
+
                 if (_fragmentationTables != null)
                     _fragmentationTables.IdentData = IdentData;
             }
@@ -74,6 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIdentificationResults = value;
+
                 if (_spectrumIdentificationResults != null)
                     _spectrumIdentificationResults.IdentData = IdentData;
             }

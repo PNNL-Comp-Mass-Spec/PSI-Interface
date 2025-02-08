@@ -67,6 +67,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIdentificationItems = value;
+
                 if (_spectrumIdentificationItems != null)
                     _spectrumIdentificationItems.IdentData = IdentData;
             }
@@ -92,6 +93,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectraDataRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     SpectraData = IdentData.FindSpectraData(value);
             }
@@ -105,6 +107,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectraData = value;
+
                 if (_spectraData != null)
                 {
                     _spectraData.IdentData = IdentData;

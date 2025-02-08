@@ -55,10 +55,12 @@ namespace PSI_Interface.IdentData
         private void FinalizeFile()
         {
             identData.DataCollection.AnalysisData.SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationListObj>();
+
             var specList = new SpectrumIdentificationListObj()
             {
                 Id = "SI_LIST_" + specListCounter++,
             };
+
             identData.DataCollection.AnalysisData.SpectrumIdentificationList.Add(specList);
 
             var analysisCollection = new SpectrumIdentificationObj()
@@ -85,21 +87,25 @@ namespace PSI_Interface.IdentData
                     SearchDatabase = searchDb
                 });
             }
+
             identData.AnalysisCollection.SpectrumIdentifications.Add(analysisCollection);
 
             specList.SpectrumIdentificationResults = new IdentDataList<SpectrumIdentificationResultObj>();
             var dbSeqList = new List<DbSequenceObj>();
             var peptideList = new List<PeptideObj>();
             var pepEvList = new List<PeptideEvidenceObj>();
+
             foreach (var result in identificationResults.Values)
             {
                 specList.SpectrumIdentificationResults.Add(result);
+
                 foreach (var sii in result.SpectrumIdentificationItems)
                 {
                     if (sii.Peptide != null)
                     {
                         peptideList.Add(sii.Peptide);
                     }
+
                     foreach (var pepEv in sii.PeptideEvidences)
                     {
                         dbSeqList.Add(pepEv.PeptideEvidence.DBSequence);
@@ -128,11 +134,13 @@ namespace PSI_Interface.IdentData
                     dbSeqDeDup.Add(dbSeq.Accession, dbSeq);
                 }
             }
+
             //identData.SequenceCollection.DBSequences.AddRange(dbSeqList);
             identData.SequenceCollection.DBSequences.AddRange(dbSeqDeDup.Values);
 
             var pepDeDup = new Dictionary<string, Dictionary<string, PeptideObj>>();
             var peptideListFinal = new List<PeptideObj>();
+
             foreach (var pep in peptideList)
             {
                 var modKey = PepModConcat(pep);
@@ -151,24 +159,28 @@ namespace PSI_Interface.IdentData
                     similar = new Dictionary<string, PeptideObj>();
                     pepDeDup.Add(pep.PeptideSequence, similar);
                 }
+
                 // TODO: Make id more meaningful. Doing this earlier might make deduplication easier too.
                 pep.Id = "Pep_" + peptideCounter++;
                 peptideListFinal.Add(pep);
                 similar.Add(modKey, pep);
             }
+
             //identData.SequenceCollection.Peptides.AddRange(peptideList);
             identData.SequenceCollection.Peptides.AddRange(peptideListFinal);
 
             var pepEvDeDup = new Dictionary<string, PeptideEvidenceObj>();
+
             foreach (var pepEv in pepEvList)
             {
-                pepEv.Id = "PepEv_" + pepEv.DBSequence.Id.Remove(0, 5) + "_" + pepEv.Peptide.Id.Remove(0, 4) + "_" +
-                           pepEv.Start;
+                pepEv.Id = "PepEv_" + pepEv.DBSequence.Id.Remove(0, 5) + "_" + pepEv.Peptide.Id.Remove(0, 4) + "_" + pepEv.Start;
+
                 if (!pepEvDeDup.ContainsKey(pepEv.Id))
                 {
                     pepEvDeDup.Add(pepEv.Id, pepEv);
                 }
             }
+
             //identData.SequenceCollection.PeptideEvidences.AddRange(pepEvList);
             identData.SequenceCollection.PeptideEvidences.AddRange(pepEvDeDup.Values);
 
@@ -194,6 +206,7 @@ namespace PSI_Interface.IdentData
                 {
                     modName = modCv.Name;
                 }
+
                 result += string.Format("{0} {1},", modName, mod.Location);
             }
 
@@ -219,6 +232,7 @@ namespace PSI_Interface.IdentData
                 Version = version,
                 SoftwareName = new ParamObj(),
             };
+
             if (cvid != CV.CV.CVID.CVID_Unknown)
             {
                 software.SoftwareName.Item = new CVParamObj(cvid);
@@ -411,18 +425,23 @@ namespace PSI_Interface.IdentData
             {
                 settings.SearchType.Item = new CVParamObj(searchType);
             }
+
             settings.AdditionalSearchParams = new ParamListObj()
             {
                 Items = new IdentDataList<ParamBaseObj>()
             };
+
             settings.ModificationParams = new IdentDataList<SearchModificationObj>();
+
             settings.Enzymes = new EnzymeListObj()
             {
                 Enzymes = new IdentDataList<EnzymeObj>(),
             };
 
             settings.FragmentTolerances = new IdentDataList<CVParamObj>();
+
             settings.ParentTolerances = new IdentDataList<CVParamObj>();
+
             settings.Threshold = new ParamListObj()
             {
                 Items = new IdentDataList<ParamBaseObj>(),
@@ -432,6 +451,7 @@ namespace PSI_Interface.IdentData
             {
                 identData.AnalysisProtocolCollection.SpectrumIdentificationProtocols = new IdentDataList<SpectrumIdentificationProtocolObj>();
             }
+
             identData.AnalysisProtocolCollection.SpectrumIdentificationProtocols.Add(settings);
 
             return settings;
@@ -460,14 +480,17 @@ namespace PSI_Interface.IdentData
                     CVParams = new IdentDataList<CVParamObj>(),
                     UserParams = new IdentDataList<UserParamObj>(),
                 };
+
                 identificationResults.Add(nativeId, specResult);
 
                 var number = nativeId.Split('=').Last();
                 specResult.Id = "SIR_" + number;
+
                 var rt = new CVParamObj(CV.CV.CVID.MS_scan_start_time, retentionTimeMinutes.ToString(CultureInfo.InvariantCulture))
                 {
                     UnitCvid = CV.CV.CVID.UO_minute,
                 };
+
                 specResult.CVParams.Add(rt);
             }
 
@@ -482,6 +505,7 @@ namespace PSI_Interface.IdentData
                 CVParams = new IdentDataList<CVParamObj>(),
                 UserParams = new IdentDataList<UserParamObj>(),
             };
+
             if (!calcMz.Equals(double.NaN))
             {
                 specIdent.CalculatedMassToCharge = calcMz;

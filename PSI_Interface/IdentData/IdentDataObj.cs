@@ -18,6 +18,7 @@ namespace PSI_Interface.IdentData
         // Ignore Spelling: pato
 
         #region Private/Internal Fields
+
         private AnalysisCollectionObj _analysisCollection;
         private AnalysisProtocolCollectionObj _analysisProtocolCollection;
         private IdentDataList<SampleObj> _analysisSampleCollection;
@@ -31,6 +32,7 @@ namespace PSI_Interface.IdentData
         private SequenceCollectionObj _sequenceCollection;
 
         internal CVTranslator CvTranslator;
+
         #endregion
 
         #region Constructors
@@ -72,11 +74,13 @@ namespace PSI_Interface.IdentData
                 CVList.AddRange(mzid.cvList, cv => new CVInfo(cv, this));
                 CvTranslator = new CVTranslator(_cvList);
             }
+
             // Referenced by nothing
             if (mzid.BibliographicReference?.Count > 0)
             {
                 BibliographicReferences.AddRange(mzid.BibliographicReference, br => new BibliographicReferenceObj(br, this));
             }
+
             // Referenced by anything using organization, person, contactRoleInfo - SampleInfo, ProviderInfo, AnalysisSoftwareInfo
             if (mzid.AuditCollection?.Count > 0)
             {
@@ -95,26 +99,31 @@ namespace PSI_Interface.IdentData
                     return null;
                 });
             }
+
             // Referenced by anything using SampleInfo: SubSample, SpectrumIdentificationItem
             if (mzid.AnalysisSampleCollection?.Count > 0)
             {
                 AnalysisSampleCollection.AddRange(mzid.AnalysisSampleCollection, asc => new SampleObj(asc, this));
             }
+
             // Referenced by ProviderInfo, ProteinDetectionProtocol, SpectrumIdentificationProtocol, references AbstractContactInfo through ContactRoleInfo
             if (mzid.AnalysisSoftwareList?.Count > 0)
             {
                 AnalysisSoftwareList.AddRange(mzid.AnalysisSoftwareList, asl => new AnalysisSoftwareObj(asl, this));
             }
+
             // Referenced by nothing, references AnalysisSoftwareInfo
             if (mzid.Provider != null)
             {
                 _provider = new ProviderObj(mzid.Provider, this);
             }
+
             // Referenced by SpectrumIdentification, ProteinDetection, SpectrumIdentificationItem, PeptideEvidence, references AnalysisSoftwareInfo
             if (mzid.AnalysisProtocolCollection != null)
             {
                 _analysisProtocolCollection = new AnalysisProtocolCollectionObj(mzid.AnalysisProtocolCollection, this);
             }
+
             // InputsInfo referenced by DBSequence, SpectrumIdentification.SearchDatabaseRefInfo, SpectrumIdentificationResult, SpectrumIdentification.InputSpectraRef
             if (mzid.DataCollection != null)
             {
@@ -123,17 +132,20 @@ namespace PSI_Interface.IdentData
                     Inputs = new InputsObj(mzid.DataCollection.Inputs, this)
                 };
             }
+
             // Referenced by SpectrumIdentificationItem, ProteinDetectionHypothesis, PeptideHypothesis
             // References InputsInfo.DBSequence, AnalysisProtocolCollection.SoftwareIdentificationProtocol.DatabaseTranslation.TranslationTable
             if (mzid.SequenceCollection != null)
             {
                 _sequenceCollection = new SequenceCollectionObj(mzid.SequenceCollection, this);
             }
+
             // AnalysisData referenced by SpectrumIdentification, InputSpectrumIdentifications, ProteinDetection, references Peptides, PeptideEvidence, SampleInfo, MassTable,
             if (mzid.DataCollection != null && _dataCollection != null)
             {
                 _dataCollection.AnalysisData = new AnalysisDataObj(mzid.DataCollection.AnalysisData, this);
             }
+
             // References SpectrumIdentificationProtocol, SpectrumIdentificationList, SpectraData, SearchDatabaseInfo, ProteinDetectionList, ProteinDetectionProtocol
             if (mzid.AnalysisCollection != null)
             {
@@ -161,11 +173,13 @@ namespace PSI_Interface.IdentData
             //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
             CvTranslator = null;
             CVList = new IdentDataList<CVInfo>(1);
+
             if (createTranslator)
             {
                 //this.CvTranslator = new CVTranslator(); // Create a generic translator by default; must be re-mapped when reading a file
                 DefaultCV(); // Create a generic translator by default; must be re-mapped when reading a file
             }
+
             AnalysisSoftwareList = new IdentDataList<AnalysisSoftwareObj>(1);
             _provider = null;
             AuditCollection = new IdentDataList<AbstractContactObj>(1);
@@ -176,6 +190,7 @@ namespace PSI_Interface.IdentData
             _dataCollection = null;
             BibliographicReferences = new IdentDataList<BibliographicReferenceObj>(1);
         }
+
         #endregion
 
         #region Properties
@@ -198,6 +213,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _cvList = value;
+
                 if (_cvList != null)
                 {
                     _cvList.IdentData = this;
@@ -217,6 +233,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _analysisSoftwareList = value;
+
                 if (_analysisSoftwareList != null)
                 {
                     _analysisSoftwareList.IdentData = this;
@@ -232,6 +249,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _provider = value;
+
                 if (_provider != null)
                 {
                     _provider.IdentData = this;
@@ -246,6 +264,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _auditCollection = value;
+
                 if (_auditCollection != null)
                 {
                     _auditCollection.IdentData = this;
@@ -260,6 +279,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _analysisSampleCollection = value;
+
                 if (_analysisSampleCollection != null)
                 {
                     _analysisSampleCollection.IdentData = this;
@@ -274,6 +294,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _sequenceCollection = value;
+
                 if (_sequenceCollection != null)
                 {
                     _sequenceCollection.IdentData = this;
@@ -288,6 +309,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _analysisCollection = value;
+
                 if (_analysisCollection != null)
                 {
                     _analysisCollection.IdentData = this;
@@ -302,6 +324,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _analysisProtocolCollection = value;
+
                 if (_analysisProtocolCollection != null)
                 {
                     _analysisProtocolCollection.IdentData = this;
@@ -316,6 +339,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _dataCollection = value;
+
                 if (_dataCollection != null)
                 {
                     _dataCollection.IdentData = this;
@@ -331,6 +355,7 @@ namespace PSI_Interface.IdentData
             set
             {
                 _bibliographicReferences = value;
+
                 if (_bibliographicReferences != null)
                 {
                     _bibliographicReferences.IdentData = this;
@@ -366,12 +391,14 @@ namespace PSI_Interface.IdentData
 #endregion
 
         #region Utility Functions
+
         /// <summary>
         /// Set the default CV lists for CV term reference and mapping
         /// </summary>
         public void DefaultCV()
         {
             CVList = new IdentDataList<CVInfo>(CV.CV.CVInfoList.Count);
+
             foreach (var cv in CV.CV.CVInfoList)
             {
                 // ReSharper disable once StringLiteralTypo
@@ -379,6 +406,7 @@ namespace PSI_Interface.IdentData
                 {
                     continue;
                 }
+
                 var newCV = new CVInfo
                 {
                     FullName = cv.Name,
@@ -386,8 +414,10 @@ namespace PSI_Interface.IdentData
                     URI = cv.URI,
                     Version = cv.Version
                 };
+
                 CVList.Add(newCV);
             }
+
             CvTranslator = new CVTranslator(CVList);
         }
 
@@ -437,6 +467,7 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 foreach (var sil in DataCollection.AnalysisData.SpectrumIdentificationList)
@@ -444,6 +475,7 @@ namespace PSI_Interface.IdentData
                     foreach (var sir in sil.SpectrumIdentificationResults)
                     {
                         var result = sir.SpectrumIdentificationItems.Where(item => item.Id == id).ToList();
+
                         if (result.Count > 0)
                         {
                             return result[0];
@@ -455,6 +487,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -468,6 +501,7 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 return SequenceCollection?.DBSequences?.GetItemById(id);
@@ -476,6 +510,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -489,6 +524,7 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 return SequenceCollection?.Peptides?.GetItemById(id);
@@ -497,6 +533,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -510,6 +547,7 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 return SequenceCollection?.PeptideEvidences?.GetItemById(id);
@@ -518,6 +556,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -531,11 +570,13 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 foreach (var sil in DataCollection.AnalysisData.SpectrumIdentificationList)
                 {
                     var result = sil.FragmentationTables.Where(item => item.Id == id).ToList();
+
                     if (result.Count > 0)
                     {
                         return result[0];
@@ -546,6 +587,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -559,11 +601,13 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 foreach (var sip in AnalysisProtocolCollection.SpectrumIdentificationProtocols)
                 {
                     var result = sip.MassTables.Where(item => item.Id == id).ToList();
+
                     if (result.Count > 0)
                     {
                         return result[0];
@@ -574,6 +618,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -587,9 +632,11 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result = AnalysisSampleCollection.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -599,6 +646,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -612,9 +660,11 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result = AnalysisSoftwareList.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -624,6 +674,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -637,9 +688,11 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result = AuditCollection.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     foreach (var item in result)
@@ -655,6 +708,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -668,9 +722,11 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result = AuditCollection.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -680,6 +736,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -693,9 +750,11 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result = DataCollection.Inputs.SearchDatabases.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -705,6 +764,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -718,9 +778,11 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result = DataCollection.Inputs.SpectraDataList.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -730,6 +792,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -743,10 +806,12 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result =
                     DataCollection.AnalysisData.SpectrumIdentificationList.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -756,6 +821,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -769,10 +835,12 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 var result =
                     AnalysisProtocolCollection.SpectrumIdentificationProtocols.Where(item => item.Id == id).ToList();
+
                 if (result.Count > 0)
                 {
                     return result[0];
@@ -782,6 +850,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -795,6 +864,7 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 if (AnalysisProtocolCollection.ProteinDetectionProtocol.Id == id)
@@ -806,6 +876,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -819,6 +890,7 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 if (DataCollection.AnalysisData.ProteinDetectionList.Id == id)
@@ -830,6 +902,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -843,11 +916,13 @@ namespace PSI_Interface.IdentData
             {
                 return null;
             }
+
             try
             {
                 foreach (var sip in AnalysisProtocolCollection.SpectrumIdentificationProtocols)
                 {
                     var result = sip.DatabaseTranslation.TranslationTables.Where(item => item.Id == id).ToList();
+
                     if (result.Count > 0)
                     {
                         return result[0];
@@ -858,6 +933,7 @@ namespace PSI_Interface.IdentData
             {
                 // Ignore errors; must resolve reference later...
             }
+
             return null;
         }
 
@@ -932,6 +1008,7 @@ namespace PSI_Interface.IdentData
                 return hashCode;
             }
         }
+
         #endregion
     }
 }

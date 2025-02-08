@@ -99,6 +99,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptideEvidences = value;
+
                 if (_peptideEvidences != null)
                     _peptideEvidences.IdentData = IdentData;
             }
@@ -111,6 +112,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _fragmentations = value;
+
                 if (_fragmentations != null)
                     _fragmentations.IdentData = IdentData;
             }
@@ -231,6 +233,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _massTableRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     MassTable = IdentData.FindMassTable(value);
             }
@@ -247,6 +250,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _massTable = value;
+
                 if (_massTable != null)
                 {
                     _massTable.IdentData = IdentData;
@@ -271,6 +275,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _sampleRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     Sample = IdentData.FindSample(value);
             }
@@ -287,6 +292,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _sample = value;
+
                 if (_sample != null)
                 {
                     _sample.IdentData = IdentData;

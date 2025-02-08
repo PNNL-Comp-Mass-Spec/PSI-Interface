@@ -41,6 +41,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return;
             }
+
             //foreach (var prop in this.GetType().GetProperties()) // Only will return public properties...
             // Cascade property setting on down the hierarchy. TODO: TEST THIS EXTENSIVELY!!!
             foreach (var prop in GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy))
@@ -53,6 +54,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     {
                         continue;
                     }
+
                     if (propValue is IdentDataInternalTypeAbstract)
                     {
                         var value = (IdentDataInternalTypeAbstract)prop.GetValue(this);
@@ -62,6 +64,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                             value.CascadeProperties();
                         }
                     }
+
                     if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(IdentDataList<>))
                     {
                         var identDataProp = propValue.GetType()
@@ -69,6 +72,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
                                 BindingFlags.FlattenHierarchy);
                         identDataProp.SetValue(propValue, _identData);
+
                         if (force)
                         {
                             var cascadeMethod = propValue.GetType()

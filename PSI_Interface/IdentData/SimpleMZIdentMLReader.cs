@@ -55,6 +55,7 @@ namespace PSI_Interface.IdentData
         }
 
         #region NativeId Conversion
+
         /// <summary>
         /// Provides functionality to interpret a NativeID as a integer scan number
         /// Code is ported from MSData.cpp in ProteoWizard
@@ -65,6 +66,7 @@ namespace PSI_Interface.IdentData
             {
                 var tokens = nativeId.Split(new[] { '\t', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
                 var map = new Dictionary<string, string>();
+
                 foreach (var token in tokens)
                 {
                     var equals = token.IndexOf('=');
@@ -72,6 +74,7 @@ namespace PSI_Interface.IdentData
                     var value = token.Substring(equals + 1);
                     map.Add(name, value);
                 }
+
                 return map;
             }
 
@@ -186,8 +189,10 @@ namespace PSI_Interface.IdentData
             //        default:
             //            return "";
             //    }
+
             //}
         }
+
         #endregion
 
         private readonly Dictionary<string, DatabaseSequence> m_database = new Dictionary<string, DatabaseSequence>();
@@ -346,6 +351,7 @@ namespace PSI_Interface.IdentData
                     {
                         return num;
                     }
+
                     return scanNum;
                 }
                 set => scanNum = value;
@@ -360,6 +366,7 @@ namespace PSI_Interface.IdentData
             /// Spectrum native id (if mzid contains this information)
             /// </summary>
             public string NativeId { get; set; }
+
             #endregion
 
         }
@@ -499,28 +506,35 @@ namespace PSI_Interface.IdentData
                     {
                         var sequenceText = Sequence; // Strings are immutable, don't need a copy (cannot change the value of Sequence using sequenceText)
                         var sequenceOrigLength = Sequence.Length;
+
                         // Insert the mods from the last occurring to the first.
                         foreach (var mod in Mods.OrderByDescending(x => x.Key))
                         {
                             var sign = "+";
+
                             if (mod.Value.Mass < 0)
                             {
                                 // Mod is negative, C# will include the minus sign before the number
                                 sign = string.Empty;
                             }
+
                             // Using "0.0##" to use 3 decimal places, but drop trailing zeros - "F3" would keep trailing zeros.
                             var loc = mod.Key;
+
                             if (loc > sequenceOrigLength)
                             {
                                 // C-terminal modification - the location is sequence length + 1, but it really just goes at the end.
                                 loc = sequenceOrigLength;
                             }
+
                             var leftSide = sequenceText.Substring(0, loc);
                             var rightSide = sequenceText.Substring(loc);
                             sequenceText = leftSide + sign + string.Format("{0:0.0##}", mod.Value.Mass) + rightSide;
                         }
+
                         sequenceWithNumericMods = sequenceText;
                     }
+
                     return sequenceWithNumericMods;
                 }
             }
@@ -584,6 +598,7 @@ namespace PSI_Interface.IdentData
                         sequenceText = Pre + "." + sequenceText + "." + Post;
                         sequenceWithNumericMods = sequenceText;
                     }
+
                     return sequenceWithNumericMods;
                 }
             }
@@ -732,12 +747,14 @@ namespace PSI_Interface.IdentData
         {
             cancellationToken = cancelToken;
             var sourceFile = new FileInfo(path);
+
             if (!sourceFile.Exists)
                 throw new FileNotFoundException(".mzID file not found", path);
 
             // Set a large buffer size. Doesn't affect gzip reading speed, but speeds up non-gzipped
             // Stream file should be closed properly via close/dispose chaining from the XmlReader
             Stream file = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
+
             if (sourceFile.Name.Trim().EndsWith(".mzid.gz", StringComparison.OrdinalIgnoreCase))
             {
                 file = new GZipStream(file, CompressionMode.Decompress);
@@ -745,6 +762,7 @@ namespace PSI_Interface.IdentData
 
             var results = new SimpleMZIdentMLData(sourceFile.FullName);
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
+
             using (var reader = XmlReader.Create(new StreamReader(file, System.Text.Encoding.UTF8, true, 65536), xSettings))
             {
                 // Read in the file
@@ -759,6 +777,7 @@ namespace PSI_Interface.IdentData
                 results.AnalysisSoftwareCvAccession = softwareCvAccession;
                 results.SearchModifications.AddRange(searchModifications);
             }
+
             return results;
         }
 
@@ -784,6 +803,7 @@ namespace PSI_Interface.IdentData
         {
             cancellationToken = cancelToken;
             var sourceFile = new FileInfo(path);
+
             if (!sourceFile.Exists)
                 throw new FileNotFoundException(".mzID file not found", path);
 
@@ -852,6 +872,7 @@ namespace PSI_Interface.IdentData
                 // Throws exception if we are not at the "MzIdentML" tag.
                 // This is a critical error; we want to stop processing for this file if we encounter this error
                 reader.ReadStartElement("MzIdentML");
+
                 // Read the next node - should be the first child node
                 while (reader.ReadState == ReadState.Interactive)
                 {
@@ -859,12 +880,14 @@ namespace PSI_Interface.IdentData
                     {
                         break;
                     }
+
                     // Handle exiting out properly at EndElement tags
                     if (reader.NodeType != XmlNodeType.Element)
                     {
                         reader.Read();
                         continue;
                     }
+
                     // Handle each 1st level as a chunk
                     switch (reader.Name)
                     {
@@ -872,38 +895,46 @@ namespace PSI_Interface.IdentData
                             // Schema requirements: one instance of this element
                             reader.Skip();
                             break;
+
                         case "AnalysisSoftwareList":
                             // Schema requirements: zero to one instances of this element
                             ReadAnalysisSoftwareList(reader.ReadSubtree());
                             PossiblyReadEndElement(reader, "AnalysisSoftwareList");
                             break;
+
                         case "Provider":
                             // Schema requirements: zero to one instances of this element
                             reader.Skip();
                             break;
+
                         case "AuditCollection":
                             // Schema requirements: zero to one instances of this element
                             reader.Skip();
                             break;
+
                         case "AnalysisSampleCollection":
                             // Schema requirements: zero to one instances of this element
                             reader.Skip();
                             break;
+
                         case "SequenceCollection":
                             // Schema requirements: zero to one instances of this element
                             // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                             ReadSequenceCollection(reader.ReadSubtree());
                             PossiblyReadEndElement(reader, "SequenceCollection");
                             break;
+
                         case "AnalysisCollection":
                             // Schema requirements: one instance of this element
                             reader.Skip();
                             break;
+
                         case "AnalysisProtocolCollection":
                             // Schema requirements: one instance of this element
                             ReadAnalysisProtocolCollection(reader.ReadSubtree());
                             PossiblyReadEndElement(reader, "AnalysisProtocolCollection");
                             break;
+
                         case "DataCollection":
                             // Schema requirements: one instance of this element
                             // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
@@ -912,12 +943,15 @@ namespace PSI_Interface.IdentData
                             {
                                 yield return item;
                             }
+
                             PossiblyReadEndElement(reader, "DataCollection");
                             break;
+
                         case "BibliographicReference":
                             // Schema requirements: zero to many instances of this element
                             reader.Skip();
                             break;
+
                         default:
                             // We are not reading anything out of the tag, so bypass it
                             reader.Skip();
@@ -936,6 +970,7 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("AnalysisSoftwareList"); // Throws exception if we are not at the "SequenceCollection" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -944,6 +979,7 @@ namespace PSI_Interface.IdentData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "AnalysisSoftware":
@@ -952,11 +988,13 @@ namespace PSI_Interface.IdentData
                         ReadAnalysisSoftware(reader.ReadSubtree());
                         PossiblyReadEndElement(reader, "AnalysisSoftware");
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -969,11 +1007,14 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             var version = reader.GetAttribute("version");
+
             if (!string.IsNullOrWhiteSpace(version) && string.IsNullOrWhiteSpace(softwareVersion))
             {
                 softwareVersion = version;
             }
+
             reader.ReadStartElement("AnalysisSoftware"); // Throws exception if we are not at the "AnalysisSoftware" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -982,6 +1023,7 @@ namespace PSI_Interface.IdentData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "SoftwareName":
@@ -990,6 +1032,7 @@ namespace PSI_Interface.IdentData
                         var innerReader = reader.ReadSubtree();
                         innerReader.MoveToContent();
                         innerReader.ReadStartElement("SoftwareName");
+
                         while (innerReader.ReadState == ReadState.Interactive)
                         {
                             if (innerReader.NodeType != XmlNodeType.Element)
@@ -997,30 +1040,38 @@ namespace PSI_Interface.IdentData
                                 innerReader.Read();
                                 continue;
                             }
+
                             if (innerReader.Name.Equals("cvParam") || innerReader.Name.Equals("userParam"))
                             {
                                 var name = innerReader.GetAttribute("name");
+
                                 if (!string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(softwareName))
                                 {
                                     softwareName = name;
                                 }
+
                                 var accession = reader.GetAttribute("accession");
+
                                 if (!string.IsNullOrWhiteSpace(accession) && string.IsNullOrWhiteSpace(softwareCvAccession))
                                 {
                                     softwareCvAccession = accession;
                                 }
                             }
+
                             innerReader.Read();
                         }
+
                         innerReader.Dispose();
                         // Consume the EndElement
                         PossiblyReadEndElement(reader, "SoftwareName");
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1033,18 +1084,21 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("SequenceCollection"); // Throws exception if we are not at the "SequenceCollection" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
+
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "DBSequence":
@@ -1055,6 +1109,7 @@ namespace PSI_Interface.IdentData
                         // We will either consume the EndElement, or the same element that was passed to ReadDBSequence (in case of no child nodes)
                         reader.Read();
                         break;
+
                     case "Peptide":
                         // Schema requirements: zero to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
@@ -1063,6 +1118,7 @@ namespace PSI_Interface.IdentData
                         // We will either consume the EndElement, or the same element that was passed to ReadPeptide (in case of no child nodes)
                         reader.Read();
                         break;
+
                     case "PeptideEvidence":
                         // Schema requirements: zero to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
@@ -1071,11 +1127,13 @@ namespace PSI_Interface.IdentData
                         // We will either consume the EndElement, or the same element that was passed to ReadPeptideEvidence (in case of no child nodes)
                         reader.Read();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1089,6 +1147,7 @@ namespace PSI_Interface.IdentData
             reader.MoveToContent();
             var id = reader.GetAttribute("id");
             var dbId = reader.GetAttribute("searchDatabase_ref");
+
             if (id != null)
             {
                 var dbSeq = new DatabaseSequence
@@ -1097,6 +1156,7 @@ namespace PSI_Interface.IdentData
                     Length = Convert.ToInt32(reader.GetAttribute("length")),
                     Accession = reader.GetAttribute("accession")
                 };
+
                 if (reader.ReadToDescendant("cvParam"))
                 {
                     dbSeq.ProteinDescription = reader.GetAttribute("value"); //.Split(' ')[0];
@@ -1116,6 +1176,7 @@ namespace PSI_Interface.IdentData
                     m_database.Add(id, dbSeq);
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1128,11 +1189,13 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             var id = reader.GetAttribute("id");
+
             if (id != null)
             {
                 var pepRef = new PeptideRef();
                 reader.ReadToDescendant("PeptideSequence");
                 pepRef.Sequence = reader.ReadElementContentAsString(); // record the peptide sequence, and consume the start and end elements
+
                 // Read in all the modifications
                 // If a modification exists, we are already on the start tag for it
                 while (reader.Name == "Modification")
@@ -1141,6 +1204,7 @@ namespace PSI_Interface.IdentData
                     {
                         Mass = Convert.ToDouble(reader.GetAttribute("monoisotopicMassDelta"))
                     };
+
                     var mods = new KeyValuePair<int, Modification>(Convert.ToInt32(reader.GetAttribute("location")), mod);
                     // Read down to get the name of the modification, then add the modification to the peptide reference
                     reader.ReadToDescendant("cvParam"); // The cvParam child node is required
@@ -1148,12 +1212,14 @@ namespace PSI_Interface.IdentData
                     mod.Name = reader.GetAttribute("name");
                     var modAcc = reader.GetAttribute("accession");
                     var modVal = reader.GetAttribute("value");
+
                     if ("MS:1001460".Equals(modAcc) && !string.IsNullOrWhiteSpace(modVal))
                     {
                         // MS-GF+ stores a modification name given in the mods file as the value for "unknown modification"
                         // Read it and use it, instead of the less useful "unknown modification"
                         mod.Name = modVal;
                     }
+
                     // TODO: neutral losses are also defined here, so make sure to read those appropriately...
                     pepRef.ModsAdd(mods.Key, mods.Value);
 
@@ -1163,6 +1229,7 @@ namespace PSI_Interface.IdentData
                         // TODO: A neutral loss may be defined here.
                         // This is supposed to be empty. The loop condition does everything that needs to happen
                     }
+
                     reader.ReadEndElement(); // Consume EndElement for Modification
                 }
 
@@ -1180,6 +1247,7 @@ namespace PSI_Interface.IdentData
                     m_peptides.Add(id, pepRef);
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1191,6 +1259,7 @@ namespace PSI_Interface.IdentData
         private void ReadPeptideEvidence(XmlReader reader)
         {
             reader.MoveToContent();
+
             var pepEvidence = new PeptideEvidence
             {
                 IsDecoy = Convert.ToBoolean(reader.GetAttribute("isDecoy")),
@@ -1204,6 +1273,7 @@ namespace PSI_Interface.IdentData
                 // ReSharper disable once AssignNullToNotNullAttribute
                 DbSeq = m_database[reader.GetAttribute("dBSequence_ref")]
             };
+
             var id = reader.GetAttribute("id");
 
             // ReSharper disable once AssignNullToNotNullAttribute
@@ -1233,18 +1303,21 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("AnalysisProtocolCollection"); // Throws exception if we are not at the "AnalysisProtocolCollection" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
+
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "SpectrumIdentificationProtocol":
@@ -1253,15 +1326,18 @@ namespace PSI_Interface.IdentData
                         ReadSpectrumIdentificationProtocol(reader.ReadSubtree());
                         PossiblyReadEndElement(reader, "SpectrumIdentificationProtocol");
                         break;
+
                     case "ProteinDetectionProtocol":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1274,67 +1350,81 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("SpectrumIdentificationProtocol"); // Throws exception if we are not at the "SpectrumIdentificationProtocol" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
+
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "SearchType":
                         // Schema requirements: one instance of this element
                         reader.Skip();
                         break;
+
                     case "AdditionalSearchParams":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "ModificationParams":
                         // Schema requirements: zero to one instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         ReadModificationParams(reader.ReadSubtree());
                         PossiblyReadEndElement(reader, "ModificationParams");
                         break;
+
                     case "Enzymes":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "MassTable":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "FragmentTolerance":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "ParentTolerance":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "Threshold":
                         // Schema requirements: one instance of this element
                         reader.Skip();
                         break;
+
                     case "DatabaseFilters":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "DatabaseTranslation":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1347,18 +1437,21 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("ModificationParams"); // Throws exception if we are not at the "ModificationParams" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
+
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "SearchModification":
@@ -1367,11 +1460,13 @@ namespace PSI_Interface.IdentData
                         ReadSearchModification(reader.ReadSubtree());
                         PossiblyReadEndElement(reader, "SearchModification");
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1390,18 +1485,21 @@ namespace PSI_Interface.IdentData
             modSetting.Residues = reader.GetAttribute("residues");
 
             reader.ReadStartElement("SearchModification"); // Throws exception if we are not at the "SearchModification" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
+
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "SpecificityRules":
@@ -1410,10 +1508,12 @@ namespace PSI_Interface.IdentData
                         ReadSpecificityRules(reader.ReadSubtree(), modSetting);
                         PossiblyReadEndElement(reader, "SpecificityRules");
                         break;
+
                     case "cvParam":
                         // Schema requirements: one to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         var accession = reader.GetAttribute("accession");
+
                         if (accession != null)
                         {
                             if (accession.IndexOf("unimod", StringComparison.OrdinalIgnoreCase) >= 0 || accession.Equals("MS:1001460"))
@@ -1427,10 +1527,13 @@ namespace PSI_Interface.IdentData
                                     modSetting.Name = value;
                                 }
                             }
+
                             // TODO: neutral losses are also defined here, so make sure to read those appropriately...
                         }
+
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
@@ -1461,24 +1564,28 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("SpecificityRules"); // Throws exception if we are not at the "SpecificityRules" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;
                 }
+
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "cvParam":
                         // Schema requirements: one to many instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         var accession = reader.GetAttribute("accession");
+
                         if (accession != null)
                         {
                             if (accession.Equals("MS:1001189") || accession.Equals("MS:1002057"))
@@ -1494,8 +1601,10 @@ namespace PSI_Interface.IdentData
                                 modSetting.IsCTerm = true;
                             }
                         }
+
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
@@ -1514,6 +1623,7 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("DataCollection"); // Throws exception if we are not at the "DataCollection" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -1522,12 +1632,14 @@ namespace PSI_Interface.IdentData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "Inputs":
                         ReadInputs(reader.ReadSubtree());
                         PossiblyReadEndElement(reader, "Inputs");
                         break;
+
                     case "AnalysisData":
                         // Schema requirements: one and only one instance of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
@@ -1536,13 +1648,16 @@ namespace PSI_Interface.IdentData
                         {
                             yield return item;
                         }
+
                         PossiblyReadEndElement(reader, "AnalysisData");
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1556,6 +1671,7 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("Inputs"); // Throws exception if we are not at the "AnalysisData" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -1574,28 +1690,34 @@ namespace PSI_Interface.IdentData
                         // SpectrumIDFormat child element: required
                         var location = reader.GetAttribute("location");
                         spectrumFile = Path.GetFileName(location);
+
                         if (location != null && (location.Trim().EndsWith("_dta.txt", StringComparison.OrdinalIgnoreCase)
                                                  || location.Trim().EndsWith(".mgf", StringComparison.OrdinalIgnoreCase)
                                                  || location.Trim().EndsWith(".ms2", StringComparison.OrdinalIgnoreCase)))
                         {
                             isSpectrumIdNotAScanNum = true;
                         }
+
                         reader.Skip(); // "SpectraData" child nodes - we currently don't use them.
                         break;
+
                     case "SearchDatabase":
                         // Schema requirements: zero to many instances of this element
                         ReadSearchDatabase(reader.ReadSubtree());
                         PossiblyReadEndElement(reader, "SearchDatabase");
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
 
             if (m_decoyDbAccessionRegex.Count > 0)
@@ -1626,6 +1748,7 @@ namespace PSI_Interface.IdentData
             reader.MoveToContent();
             var id = reader.GetAttribute("id");
             reader.ReadStartElement("SearchDatabase"); // Throws exception if we are not at the "AnalysisData" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -1641,10 +1764,12 @@ namespace PSI_Interface.IdentData
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "DatabaseName":
                         // Schema requirements: one instance of this element
                         reader.Skip();
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         if (reader.GetAttribute("accession") == "MS:1001283")
@@ -1657,13 +1782,16 @@ namespace PSI_Interface.IdentData
                             // ReSharper disable once AssignNullToNotNullAttribute
                             m_decoyDbAccessionRegex.Add(id, regex);
                         }
+
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1677,6 +1805,7 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("AnalysisData"); // Throws exception if we are not at the "AnalysisData" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -1685,6 +1814,7 @@ namespace PSI_Interface.IdentData
                     reader.Read();
                     continue;
                 }
+
                 if (reader.Name == "SpectrumIdentificationList")
                 {
                     // Schema requirements: one to many instances of this element
@@ -1694,6 +1824,7 @@ namespace PSI_Interface.IdentData
                     {
                         yield return item;
                     }
+
                     PossiblyReadEndElement(reader, "SpectrumIdentificationList");
                 }
                 else
@@ -1701,6 +1832,7 @@ namespace PSI_Interface.IdentData
                     reader.Skip();
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1713,18 +1845,21 @@ namespace PSI_Interface.IdentData
         {
             reader.MoveToContent();
             reader.ReadStartElement("SpectrumIdentificationList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
                     break;
                 }
+
                 // Handle exiting out properly at EndElement tags
                 if (reader.NodeType != XmlNodeType.Element)
                 {
                     reader.Read();
                     continue;
                 }
+
                 if (reader.Name == "SpectrumIdentificationResult")
                 {
                     // Schema requirements: one to many instances of this element
@@ -1734,6 +1869,7 @@ namespace PSI_Interface.IdentData
                     {
                         yield return item;
                     }
+
                     PossiblyReadEndElement(reader, "SpectrumIdentificationResult");
                 }
                 else
@@ -1741,6 +1877,7 @@ namespace PSI_Interface.IdentData
                     reader.Skip();
                 }
             }
+
             reader.Dispose();
         }
 
@@ -1759,6 +1896,7 @@ namespace PSI_Interface.IdentData
             var scanTimeMinutes = 0d;
 
             reader.ReadStartElement("SpectrumIdentificationResult"); // Throws exception if we are not at the "SpectrumIdentificationResult" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -1775,6 +1913,7 @@ namespace PSI_Interface.IdentData
                         specRes.Add(ReadSpectrumIdentificationItem(reader.ReadSubtree()));
                         PossiblyReadEndElement(reader, "SpectrumIdentificationItem");
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         if (reader.GetAttribute("accession") == "MS:1001115")
@@ -1813,10 +1952,12 @@ namespace PSI_Interface.IdentData
 
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
@@ -1824,6 +1965,7 @@ namespace PSI_Interface.IdentData
             }
 
             var shouldParseNativeId = !isSpectrumIdNotAScanNum;
+
             if (!shouldParseNativeId && scanNum < 0 && !string.IsNullOrWhiteSpace(nativeId) && NativeIdConversion.TryGetScanNumberInt(nativeId, out _))
             {
                 shouldParseNativeId = true;
@@ -1837,6 +1979,7 @@ namespace PSI_Interface.IdentData
                 item.IsSpectrumIdNotTheScanNumber = !shouldParseNativeId;
                 yield return item;
             }
+
             reader.Dispose();
         }
 
@@ -1865,11 +2008,13 @@ namespace PSI_Interface.IdentData
 
             // Read all child PeptideEvidenceRef tags
             reader.ReadToDescendant("PeptideEvidenceRef");
+
             while (reader.Name == "PeptideEvidenceRef")
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
                 specItem.PepEvidence.Add(m_evidences[reader.GetAttribute("peptideEvidence_ref")]);
                 reader.Read();
+
                 if (reader.NodeType == XmlNodeType.EndElement)
                 {
                     reader.ReadEndElement();
@@ -1881,45 +2026,56 @@ namespace PSI_Interface.IdentData
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
                 specItem.AllParamsDict.Add(reader.GetAttribute("name"), reader.GetAttribute("value"));
+
                 switch (reader.GetAttribute("name"))
                 {
                     case "MSPathFinder:RawScore":
                     case "MS-GF:RawScore":
                         specItem.RawScore = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+
                     case "MS-GF:DeNovoScore":
                         specItem.DeNovoScore = Convert.ToInt32(reader.GetAttribute("value"));
                         break;
+
                     case "MSPathFinder:SpecEValue":
                     case "MS-GF:SpecEValue":
                         specItem.SpecEv = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+
                     case "MSPathFinder:EValue":
                     case "MS-GF:EValue":
                         specItem.EValue = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+
                     case "MSPathFinder:QValue":
                     case "MS-GF:QValue":
                         specItem.QValue = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+
                     case "MSPathFinder:PepQValue":
                     case "MS-GF:PepQValue":
                         specItem.PepQValue = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+
                     case "IsotopeError":
                         // userParam field
                         specItem.IsoError = Convert.ToInt32(reader.GetAttribute("value"));
                         break;
+
                     case "AssumedDissociationMethod":
                         // userParam field
                         break;
                 }
+
                 reader.Read();
+
                 if (reader.NodeType == XmlNodeType.EndElement)
                 {
                     reader.ReadEndElement();
                 }
             }
+
             specItem.PepEvCount = specItem.PepEvidence.Count;
 
             reader.Dispose();

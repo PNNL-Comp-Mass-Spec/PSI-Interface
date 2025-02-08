@@ -31,9 +31,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         {
             CopyCVParamGroup(target, source);
             target.userParam = null;
+
             if (source.UserParams != null)
             {
                 target.userParam = new List<UserParamType>();
+
                 foreach (var up in source.UserParams)
                 {
                     target.userParam.Add(new UserParamType(up));
@@ -44,9 +46,11 @@ namespace PSI_Interface.IdentData.mzIdentML
         public static void CopyCVParamGroup(ICVParamGroup target, CVParamGroupObj source)
         {
             target.cvParam = null;
+
             if (source.CVParams != null)
             {
                 target.cvParam = new List<CVParamType>();
+
                 foreach (var cvp in source.CVParams)
                 {
                     target.cvParam.Add(new CVParamType(cvp));

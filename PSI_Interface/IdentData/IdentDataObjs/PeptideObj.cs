@@ -79,6 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _modifications = value;
+
                 if (_modifications != null)
                     _modifications.IdentData = IdentData;
             }
@@ -91,6 +92,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _substitutionModifications = value;
+
                 if (_substitutionModifications != null)
                     _substitutionModifications.IdentData = IdentData;
             }

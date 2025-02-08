@@ -23,6 +23,7 @@ namespace PSI_Interface.MSData
         // Ignore Spelling: Biosystems, Biotech, Bioworks, Bruker, Micromass, PerSeptive, Phenyx, Proteinscape, Sciex, Shimadzu, Xcalibur
 
         #region Private Members
+
         private readonly string _filePath;
         private string _srcFileChecksum = string.Empty;
         private string _fileFormatVersion = string.Empty;
@@ -59,9 +60,11 @@ namespace PSI_Interface.MSData
         private readonly List<InstrumentData> instrumentParams = new List<InstrumentData>(2);
         private string startTimeStampString;
         private DateTime startTimeStamp = DateTime.MinValue;
+
         #endregion
 
         #region Internal Objects
+
         /// <summary>
         /// Enumeration of common mzML versions
         /// </summary>
@@ -139,6 +142,7 @@ namespace PSI_Interface.MSData
             }
 
             public IndexListType IndexType = IndexListType.Unknown;
+
             public enum IndexListType
             {
                 Spectrum,
@@ -269,6 +273,7 @@ namespace PSI_Interface.MSData
                 OffsetsMapInt.Clear();
                 IdToNativeMap.Clear();
                 NativeToIdMap.Clear();
+
                 foreach (var offset in Offsets)
                 {
                     AddMapForOffset(offset);
@@ -323,6 +328,7 @@ namespace PSI_Interface.MSData
                 ArrayLength = 0;
             }
         }
+
         #endregion
 
         #region Public Interface Objects
@@ -625,6 +631,7 @@ namespace PSI_Interface.MSData
                     return 0;
                 }
             }
+
             /// <summary>
             /// Elution time (scan start time)
             /// </summary>
@@ -728,6 +735,7 @@ namespace PSI_Interface.MSData
 
                 var points = mzs?.Count ?? 0;
                 Peaks = new Peak[points];
+
                 for (var i = 0; i < points; i++)
                 {
                     // ReSharper disable once PossibleNullReferenceException
@@ -743,14 +751,17 @@ namespace PSI_Interface.MSData
                             // name="centroid spectrum"
                             Centroided = true;
                             break;
+
                         case "MS:1000128":
                             // name="profile spectrum"
                             Centroided = false;
                             break;
+
                         case "MS:1000511":
                             // name="ms level"
                             MsLevel = Convert.ToInt32(cvParam.Value);
                             break;
+
                         case "MS:1000285":
                             // name="total ion current"
                             TotalIonCurrent = Convert.ToDouble(cvParam.Value);
@@ -1062,6 +1073,7 @@ namespace PSI_Interface.MSData
 
                 var points = times?.Count ?? 0;
                 Peaks = new ChromatogramPeak[points];
+
                 for (var i = 0; i < points; i++)
                 {
                     // ReSharper disable once PossibleNullReferenceException
@@ -1143,6 +1155,7 @@ namespace PSI_Interface.MSData
             _file?.Dispose();
 
             var sourceFile = new FileInfo(_filePath);
+
             if (!sourceFile.Exists)
                 throw new FileNotFoundException(".mzML file not found", _filePath);
 
@@ -1157,6 +1170,7 @@ namespace PSI_Interface.MSData
             {
                 _isGzipped = true;
                 var zipStreamFile = new GZipStream(_file, CompressionMode.Decompress);
+
                 if (!_randomAccess)
                 {
                     _file = zipStreamFile;
@@ -1165,6 +1179,7 @@ namespace PSI_Interface.MSData
                 {
                     // Unzip the file to the temp path
                     _unzippedFilePath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(sourceFile.Name));
+
                     using (_file)
                     using (zipStreamFile)
                     using (
@@ -1173,9 +1188,11 @@ namespace PSI_Interface.MSData
                     {
                         zipStreamFile.CopyTo(tempFile/*, 65536*/);
                     }
+
                     _file = new FileStream(_unzippedFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 65536);
                 }
             }
+
             _fileReader = new StreamReader(_file, Encoding.UTF8, true, 65536);
 
             if (!_isGzipped || _randomAccess) // can't reset the position on a gzipped file...
@@ -1313,6 +1330,7 @@ namespace PSI_Interface.MSData
                 {
                     ReadMetaDataAndReset();
                 }
+
                 return (int)_numSpectra;
             }
         }
@@ -1333,6 +1351,7 @@ namespace PSI_Interface.MSData
                 {
                     ReadMetaDataAndReset();
                 }
+
                 return (int)_numChromatograms;
             }
         }
@@ -1455,6 +1474,7 @@ namespace PSI_Interface.MSData
             {
                 return ReadAllSpectraNonRandom(includePeaks);
             }
+
             return ReadAllSpectraRandom(includePeaks);
         }
 
@@ -1490,6 +1510,7 @@ namespace PSI_Interface.MSData
                 // Proper functionality when not random access
                 return ReadMassSpectrumNonRandom(index);
             }
+
             return ReadMassSpectrumRandom(index, includePeaks);
         }
 
@@ -1524,11 +1545,14 @@ namespace PSI_Interface.MSData
                 // Proper functionality when not random access
                 return ReadChromatogramNonRandom(index);
             }
+
             return ReadChromatogramRandom(index, includePeaks);
         }
+
         #endregion
 
         #region Interface Helper Functions: Non-Random Access
+
         /// <summary>
         /// Read all mass spectra in the file, not using random access
         /// Uses "yield return" to use less memory when called from a "foreach" statement
@@ -1539,6 +1563,7 @@ namespace PSI_Interface.MSData
             if (_reduceMemoryUsage)
             {
                 //_artificialScanNum = 1;
+
                 if (!_haveMetaData)
                 {
                     ReadMzMl();
@@ -1557,6 +1582,7 @@ namespace PSI_Interface.MSData
                         _xmlReaderForYield.Read();
                         continue;
                     }
+
                     if (_xmlReaderForYield.Name == "spectrum")
                     {
                         // Schema requirements: zero to many instances of this element
@@ -1582,6 +1608,7 @@ namespace PSI_Interface.MSData
                 {
                     ReadMzMl();
                 }
+
                 foreach (var spec in _spectra)
                 {
                     yield return spec;
@@ -1643,6 +1670,7 @@ namespace PSI_Interface.MSData
                         _xmlReaderForYield.Read();
                         continue;
                     }
+
                     if (_xmlReaderForYield.Name == "chromatogram")
                     {
                         // Schema requirements: one to many instances of this element
@@ -1667,6 +1695,7 @@ namespace PSI_Interface.MSData
                 {
                     ReadMzMl();
                 }
+
                 foreach (var chrom in _chromatograms)
                 {
                     yield return chrom;
@@ -1696,9 +1725,11 @@ namespace PSI_Interface.MSData
 
             return _chromatograms[index - 1];
         }
+
         #endregion
 
         #region Interface Helper Functions: Random Access
+
         /// <summary>
         /// Read all mass spectra in the file, using random access
         /// Uses "yield return" to use less memory when called from a "foreach" statement
@@ -1710,6 +1741,7 @@ namespace PSI_Interface.MSData
             {
                 ReadMzMl(); // Read the index and metadata so that the offsets get populated.
             }
+
             foreach (var specIndex in _spectrumOffsets.Offsets)
             {
                 yield return ReadMassSpectrumRandom(specIndex.IdNum, includePeaks);
@@ -1739,6 +1771,7 @@ namespace PSI_Interface.MSData
 
             _fileReader.DiscardBufferedData();
             _fileReader.BaseStream.Position = _spectrumOffsets.OffsetsMapInt[index];
+
             // Not allowed for a GZipStream.....
             using (var reader = XmlReader.Create(_fileReader, _xSettings))
             {
@@ -1758,6 +1791,7 @@ namespace PSI_Interface.MSData
             {
                 ReadMzMl(); // Read the index and metadata so that the offsets get populated.
             }
+
             foreach (var chromIndex in _chromatogramOffsets.Offsets)
             {
                 yield return ReadChromatogramRandom(chromIndex.IdNum, includePeaks);
@@ -1783,6 +1817,7 @@ namespace PSI_Interface.MSData
 
             _fileReader.DiscardBufferedData();
             _fileReader.BaseStream.Position = _chromatogramOffsets.OffsetsMapInt[index];
+
             // Not allowed for a GZipStream.....
             using (var reader = XmlReader.Create(_fileReader, _xSettings))
             {
@@ -1790,9 +1825,11 @@ namespace PSI_Interface.MSData
                 return ReadChromatogram(reader.ReadSubtree(), includePeaks);
             }
         }
+
         #endregion
 
         #region Cleanup functions
+
         /// <summary>
         /// Close out the file handle and delete any temp files
         /// </summary>
@@ -1815,6 +1852,7 @@ namespace PSI_Interface.MSData
                 {
                     File.Delete(_unzippedFilePath);
                 }
+
                 // ReSharper disable once EmptyGeneralCatchClause
                 catch
                 { } // We failed, it's not optimal, but it's okay.
@@ -1855,9 +1893,11 @@ namespace PSI_Interface.MSData
             _spectra.Clear();
             _allRead = false;
         }
+
         #endregion
 
         #region Index reading functions
+
         /// <summary>
         /// Find and read the index information, starting at the end of the file...
         /// </summary>
@@ -1877,6 +1917,7 @@ namespace PSI_Interface.MSData
                 testPos -= bufSize;
                 stream.Position = testPos;
                 var byteBuffer = new byte[bufSize];
+
                 while (stream.Position < stream.Length && !haveOffset)
                 {
                     var bufStart = stream.Position;
@@ -1885,6 +1926,7 @@ namespace PSI_Interface.MSData
                     // set up the rewind to ensure full tags
                     var lastTagEnd = stringBuffer.LastIndexOf('>');
                     var lastTagStart = stringBuffer.LastIndexOf('<');
+
                     if (lastTagStart != -1 && lastTagEnd != -1 && lastTagStart > lastTagEnd)
                     {
                         var endOfString = lastTagStart;
@@ -1894,11 +1936,13 @@ namespace PSI_Interface.MSData
                     }
 
                     var found = stringBuffer.IndexOf("<indexListOffset", StringComparison.OrdinalIgnoreCase);
+
                     if (found >= 0)
                     {
                         var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
                         streamReader.DiscardBufferedData();
                         streamReader.BaseStream.Position = pos;
+
                         using (var reader = XmlReader.Create(streamReader, _xSettings))
                         {
                             reader.MoveToContent();
@@ -1907,10 +1951,12 @@ namespace PSI_Interface.MSData
                             _indexListOffset = reader2.ReadElementContentAsLong();
                             reader2.Dispose();
                         }
+
                         haveOffset = true;
                     }
                 }
             }
+
             if (_indexListOffset < stream.Length / 2) // Probably invalid, now we must search...
             {
                 // "<indexList"
@@ -1918,11 +1964,13 @@ namespace PSI_Interface.MSData
                 streamReader.DiscardBufferedData();
                 const int bufSize = 524588; //65536 (17 bits), 131072 (18 bits), 262144 (19 bits), 524288 (20 bits)
                 testPos = stream.Length;
+
                 while (!haveOffset)
                 {
                     testPos -= bufSize;
                     stream.Position = testPos;
                     var byteBuffer = new byte[bufSize];
+
                     while (stream.Position < stream.Length && !haveOffset)
                     {
                         var bufStart = stream.Position;
@@ -1931,6 +1979,7 @@ namespace PSI_Interface.MSData
                         // set up the rewind to ensure full tags
                         var lastTagEnd = stringBuffer.LastIndexOf('>');
                         var lastTagStart = stringBuffer.LastIndexOf('<');
+
                         if (lastTagStart != -1 && lastTagEnd != -1 && lastTagStart > lastTagEnd)
                         {
                             var endOfString = lastTagStart;
@@ -1940,6 +1989,7 @@ namespace PSI_Interface.MSData
                         }
 
                         var found = stringBuffer.IndexOf("<indexList ", StringComparison.OrdinalIgnoreCase);
+
                         if (found >= 0)
                         {
                             var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, found));
@@ -1954,14 +2004,17 @@ namespace PSI_Interface.MSData
             // Create the XmlReader at the right position, and read.
             streamReader.DiscardBufferedData();
             streamReader.BaseStream.Position = _indexListOffset;
+
             using (var reader = XmlReader.Create(streamReader, _xSettings))
             {
                 reader.MoveToContent();
                 ReadIndexList(reader.ReadSubtree());
             }
+
             var isValid = true;
             // Validate the index - if there are duplicate offsets, it is probably invalid
             var collisions = new Dictionary<long, int>();
+
             foreach (var index in _spectrumOffsets.Offsets)
             {
                 if (!collisions.ContainsKey(index.Offset))
@@ -1974,6 +2027,7 @@ namespace PSI_Interface.MSData
                     collisions[index.Offset]++;
                 }
             }
+
             _haveIndex = isValid;
 
             if (isValid)
@@ -2006,6 +2060,7 @@ namespace PSI_Interface.MSData
                     streamReader.DiscardBufferedData();
                     var data = streamReader.ReadToEnd();
                     var pos = data.IndexOf("<fileChecksum", StringComparison.OrdinalIgnoreCase);
+
                     if (pos >= 0)
                     {
                         data = data.Substring(pos);
@@ -2013,6 +2068,7 @@ namespace PSI_Interface.MSData
                         data = data.Substring(pos);
                         pos = data.IndexOf('<');
                         data = data.Substring(0, pos);
+
                         if (data.Length == 40)
                         {
                             _srcFileChecksum = data;
@@ -2044,6 +2100,7 @@ namespace PSI_Interface.MSData
                 const string chromTag = "chromatogram";
                 const int maxRead = 524288; //65536 (17 bits), 131072 (18 bits), 262144 (19 bits), 524288 (20 bits)
                 var byteBuffer = new byte[maxRead];
+
                 while (file.Position < file.Length)
                 {
                     var bufStart = file.Position;
@@ -2052,6 +2109,7 @@ namespace PSI_Interface.MSData
                     // set up the rewind to ensure full tags
                     var lastTagEnd = stringBuffer.LastIndexOf('>');
                     var lastTagStart = stringBuffer.LastIndexOf('<');
+
                     if (lastTagStart != -1 && lastTagEnd != -1 && lastTagStart > lastTagEnd)
                     {
                         var endOfString = lastTagStart;
@@ -2061,10 +2119,12 @@ namespace PSI_Interface.MSData
                     }
 
                     var searchPoint = 0;
+
                     while (searchPoint < stringBuffer.Length)
                     {
                         var foundSpec = stringBuffer.IndexOf("<" + specTag + " ", searchPoint, StringComparison.OrdinalIgnoreCase);
                         var foundChrom = stringBuffer.IndexOf("<" + chromTag + " ", searchPoint, StringComparison.OrdinalIgnoreCase);
+
                         if (foundSpec >= 0)
                         {
                             searchPoint = foundSpec;
@@ -2077,16 +2137,19 @@ namespace PSI_Interface.MSData
                         {
                             break;
                         }
+
                         var pos = bufStart + _encoding.GetByteCount(stringBuffer.Substring(0, searchPoint));
                         var end = stringBuffer.IndexOf('>', searchPoint + 1);
                         // Grab everything between '<' and the next '>'
                         var builder = stringBuffer.Substring(searchPoint + 1, end - 1 - (searchPoint + 1));
                         // Get the ID of the tag
                         var attributeName = "id";
+
                         if (_version == MzML_Version.mzML1_0_0)
                         {
                             attributeName = "nativeID";
                         }
+
                         var idIndex = builder.IndexOf(attributeName + "=\"", StringComparison.OrdinalIgnoreCase);
                         var idOpenQuote = builder.IndexOf("\"", idIndex, StringComparison.OrdinalIgnoreCase);
                         var idCloseQuote = builder.IndexOf("\"", idOpenQuote + 1, StringComparison.OrdinalIgnoreCase);
@@ -2128,21 +2191,25 @@ namespace PSI_Interface.MSData
                         {
                             pos = file.Position - 1; // position of caret
                             int spaceCaretSlash = 0;
+
                             for (int i = 0; i < 13; i++) // 13: "chromatogram "
                             {
                                 char c = (char)(file.ReadByte());
                                 builder += c;
+
                                 if (" >/".IndexOf(c) >= 0)
                                 {
                                     spaceCaretSlash = i;
                                     break;
                                 }
                             }
+
                             if (builder[0] == 's' || builder[0] == 'c')
                             {
                                 if (spaceCaretSlash == specTag.Length || spaceCaretSlash == chromTag.Length)
                                 {
                                     string tagName = builder.Substring(0, spaceCaretSlash);
+
                                     if (string.Equals(tagName.ToLower(), specTag) ||
                                         string.Equals(tagName.ToLower(), chromTag))
                                     {
@@ -2150,10 +2217,12 @@ namespace PSI_Interface.MSData
                                     }
                                 }
                             }
+
                             // reset to empty if we didn't break out
                             builder = string.Empty;
                         }
                     }
+
                     // We have a '<', followed by 's' or 'c'. Store position, and check the tag name.
                     // searching for "spectrum" and "chromatogram"
                     // We have "spectrum" or "chromatogram"
@@ -2161,12 +2230,15 @@ namespace PSI_Interface.MSData
                     while (file.Position < file.Length)
                     {
                         char c = (char)(file.ReadByte());
+
                         if (c == '>')
                         {
                             break;
                         }
+
                         builder += c;
                     }
+
                     // Get the ID of the tag
                     var idIndex = builder.IndexOf("id=\"");
                     var idOpenQuote = builder.IndexOf("\"", idIndex);
@@ -2183,6 +2255,7 @@ namespace PSI_Interface.MSData
                         _chromatogramOffsets.AddOffset(id, pos);
                     }
                 }*/
+
                 _haveIndex = true;
             }
         }
@@ -2196,6 +2269,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("indexList"); // Throws exception if we are not at the "run" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2204,6 +2278,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "index":
@@ -2214,11 +2289,13 @@ namespace PSI_Interface.MSData
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrumList (in case of no child nodes)
                         reader.Read();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             _haveIndex = true;
             reader.Dispose();
         }
@@ -2233,6 +2310,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             var iType = reader.GetAttribute("name");
             var eType = IndexList.IndexListType.Unknown;
+
             if (iType != null && string.Equals(iType, "spectrum", StringComparison.OrdinalIgnoreCase))
             {
                 eType = IndexList.IndexListType.Spectrum;
@@ -2241,7 +2319,9 @@ namespace PSI_Interface.MSData
             {
                 eType = IndexList.IndexListType.Chromatogram;
             }
+
             reader.ReadStartElement("index"); // Throws exception if we are not at the "run" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2250,6 +2330,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "offset":
@@ -2257,26 +2338,33 @@ namespace PSI_Interface.MSData
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         var idRef = reader.GetAttribute("idRef");
                         var offset = reader.ReadElementContentAsString(); // Reads the start element, content, and end element
+
                         switch (eType)
                         {
                             case IndexList.IndexListType.Spectrum:
                                 _spectrumOffsets.AddOffset(idRef, offset);
                                 break;
+
                             case IndexList.IndexListType.Chromatogram:
                                 _chromatogramOffsets.AddOffset(idRef, offset);
                                 break;
                         }
+
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
+
         #endregion
 
         #region Root tag reader
+
         /// <summary>
         /// Read and parse a .mzML file
         /// Files are commonly larger than 100 MB, so use a streaming reader instead of a DOM reader
@@ -2288,6 +2376,7 @@ namespace PSI_Interface.MSData
             {
                 return;
             }
+
             // Handle disposal of allocated object correctly
 
             if (!_isGzipped || _randomAccess) // can't reset the position on a gzipped file...
@@ -2303,38 +2392,48 @@ namespace PSI_Interface.MSData
             var reader = XmlReader.Create(_fileReader, _xSettings);
             // Guarantee a move to the root node
             reader.MoveToContent();
+
             if (_encoding == null)
             {
                 _encoding = _fileReader.CurrentEncoding;
             }
+
             XmlReader indexReader = null;
+
             if (reader.Name == "indexedmzML")
             {
                 indexReader = reader;
                 // Read to the mzML root tag, and ignore the extra indexed mzML data
                 reader.ReadToDescendant("mzML");
+
                 if (_randomAccess && !_haveIndex)
                 {
                     // run to the end of the file (using stream.position = stream.length) and jump backwards to read the index first, and then read the file for needed data
                     ReadIndexFromEnd();
                 }
+
                 ReadChecksum();
                 reader = reader.ReadSubtree();
                 reader.MoveToContent();
             }
+
             var schemaName = reader.GetAttribute("xsi:schemaLocation");
+
             // We automatically assume it uses the mzML_1.1.0 schema. Check for the old version.
             //if (!schemaName.Contains("mzML1.1.0.xsd"))
             if (schemaName?.Contains("mzML1.0.0.xsd") == true)
             {
                 _version = MzML_Version.mzML1_0_0;
             }
+
             _fileFormatVersion = reader.GetAttribute("version");
+
             // Consume the mzML root tag
             // Throws exception if we are not at the "mzML" tag.
             // This is a critical error; we want to stop processing for this file if we encounter this error
             reader.ReadStartElement("mzML");
             var continueReading = true;
+
             // Read the next node - should be the first child node
             while (reader.ReadState == ReadState.Interactive && continueReading)
             {
@@ -2344,6 +2443,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 // Handle each 1st level as a chunk
                 switch (reader.Name)
                 {
@@ -2352,6 +2452,7 @@ namespace PSI_Interface.MSData
                         ReadCVList(reader.ReadSubtree());
                         reader.ReadEndElement(); // "cvList" must have child nodes
                         break;
+
                     case "fileDescription":
                         // Schema requirements: one instance of this element
                         if (!_randomAccess || _randomAccess && !_haveMetaData)
@@ -2364,6 +2465,7 @@ namespace PSI_Interface.MSData
                             reader.Skip();
                         }
                         break;
+
                     case "referenceableParamGroupList":
                         // Schema requirements: zero to one instances of this element
                         if (!_randomAccess || _randomAccess && !_haveMetaData)
@@ -2376,10 +2478,12 @@ namespace PSI_Interface.MSData
                             reader.Skip();
                         }
                         break;
+
                     case "sampleList":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "softwareList":
                         // Schema requirements: one instance of this element
                         if (!_randomAccess || _randomAccess && !_haveMetaData)
@@ -2392,10 +2496,12 @@ namespace PSI_Interface.MSData
                             reader.Skip();
                         }
                         break;
+
                     case "scanSettingsList":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "instrumentConfigurationList":
                         // Schema requirements: one instance of this element
                         if (!_randomAccess || _randomAccess && !_haveMetaData)
@@ -2408,18 +2514,22 @@ namespace PSI_Interface.MSData
                             reader.Skip();
                         }
                         break;
+
                     case "dataProcessingList":
                         // Schema requirements: one instance of this element
                         reader.Skip();
                         break;
+
                     case "acquisitionSettingsList": // mzML 1.0.0 compatibility
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "run":
                         // Schema requirements: one instance of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         ReadRunData(reader.ReadSubtree());
+
                         if (_randomAccess || _reduceMemoryUsage)
                         {
                             // Kill the read, since we already have a valid index
@@ -2434,22 +2544,27 @@ namespace PSI_Interface.MSData
                             reader.Read();
                         }
                         break;
+
                     default:
                         // We are not reading anything out of the tag, so bypass it
                         reader.Skip();
                         break;
                 }
             }
+
             _haveMetaData = true;
+
             if (!_randomAccess && !_reduceMemoryUsage)
             {
                 _allRead = true;
             }
+
             //_numSpectra = _spectrumOffsets.Offsets.Count;
             /* // Now read before any of the metadata.
             if (indexReader != null)
             {
                 reader = indexReader;
+
                 //_reader.ReadStartElement("mzML");
                 // Read the next node - should be the first child node
                 while (reader.ReadState == ReadState.Interactive)
@@ -2460,6 +2575,7 @@ namespace PSI_Interface.MSData
                         reader.Read();
                         continue;
                     }
+
                     // Handle each 1st level as a chunk
                     switch (reader.Name)
                     {
@@ -2468,20 +2584,24 @@ namespace PSI_Interface.MSData
                             ReadIndexList(reader.ReadSubtree());
                             reader.ReadEndElement(); // "fileDescription" must have child nodes
                             break;
+
                         case "indexListOffset":
                             // Schema requirements: zero to one instances of this element
                             _indexListOffset = Int64.Parse(reader.ReadElementContentAsString());
                             break;
+
                         case "fileChecksum":
                             // Schema requirements: zero to one instances of this element
                             reader.Skip();
                             break;
+
                         default:
                             // We are not reading anything out of the tag, so bypass it
                             reader.Skip();
                             break;
                     }
                 }
+
                 reader.Dispose();
             } */
             if (!_reduceMemoryUsage)
@@ -2498,9 +2618,11 @@ namespace PSI_Interface.MSData
                 }
             }
         }
+
         #endregion
 
         #region Metadata tag readers
+
         /// <summary>
         /// Handle the child nodes of the cvList element
         /// Called by ReadMzML (xml hierarchy)
@@ -2511,6 +2633,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             reader.ReadStartElement("cvList"); // Throws exception if we are not at the "cvList" tag.
             var cvs = new List<CV.CV.CVInfo>();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2519,6 +2642,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "cv":
@@ -2526,6 +2650,7 @@ namespace PSI_Interface.MSData
                         cvs.Add(new CV.CV.CVInfo(reader.GetAttribute("id"), reader.GetAttribute("name"), reader.GetAttribute("URI"), reader.GetAttribute("version")));
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
@@ -2544,6 +2669,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("fileDescription"); // Throws exception if we are not at the "fileDescription" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2552,6 +2678,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "fileContent":
@@ -2560,20 +2687,24 @@ namespace PSI_Interface.MSData
                         sourceFileParams.AddParams(pd);
                         reader.Read(); // "fileContent" might not have child nodes
                         break;
+
                     case "sourceFileList":
                         // Schema requirements: zero to one instances of this element
                         ReadSourceFileList(reader.ReadSubtree());
                         reader.ReadEndElement(); // "sourceFileList" must have child nodes
                         break;
+
                     case "contact":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -2587,6 +2718,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             reader.ReadStartElement(expectedStartElement); // Throws exception if we are not at the "expectedStartElement" tag.
             var pd = new ParamData();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2595,6 +2727,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":
@@ -2610,21 +2743,25 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         pd.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         pd.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the userParam element (no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return pd;
         }
@@ -2648,6 +2785,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 if (reader.Name == "sourceFile")
                 {
                     // Schema requirements: one to many instances of this element
@@ -2655,6 +2793,7 @@ namespace PSI_Interface.MSData
                     innerReader.MoveToContent();
                     innerReader.ReadStartElement("sourceFile"); // Throws exception if we are not at the "sourceFile" tag.
                     var cvParams = new List<CVParamData>();
+
                     while (innerReader.ReadState == ReadState.Interactive)
                     {
                         // Handle exiting out properly at EndElement tags
@@ -2663,6 +2802,7 @@ namespace PSI_Interface.MSData
                             innerReader.Read();
                             continue;
                         }
+
                         switch (innerReader.Name)
                         {
                             case "referenceableParamGroupRef":
@@ -2678,25 +2818,30 @@ namespace PSI_Interface.MSData
 
                                 innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                 break;
+
                             case "cvParam":
                                 // Schema requirements: zero to many instances of this element
                                 cvParams.Add(ReadCvParam(innerReader.ReadSubtree()));
                                 innerReader.Read(); // Consume the cvParam element (no child nodes)
                                 break;
+
                             case "userParam":
                                 // Schema requirements: zero to many instances of this element
                                 sourceFileParams.AddParam(ReadUserParam(innerReader.ReadSubtree()));
                                 innerReader.Skip();
                                 break;
+
                             default:
                                 innerReader.Skip();
                                 break;
                         }
                     }
+
                     innerReader.Dispose();
                     reader.Read();
 
                     sourceFileParams.AddParams(cvParams);
+
                     foreach (var cvParam in cvParams)
                     {
                         /* MUST supply a *child* term of MS:1000767 (native spectrum identifier format) only once
@@ -2765,68 +2910,89 @@ namespace PSI_Interface.MSData
                                 // name="Thermo nativeID format"
                                 _instrument = Instrument.Thermo_RAW_format;
                                 break;
+
                             case "MS:1000769":
                                 // name="Waters nativeID format"
                                 _instrument = Instrument.Waters_raw_format;
                                 break;
+
                             case "MS:1000770":
                                 // name="WIFF nativeID format"
                                 _instrument = Instrument.ABI_WIFF_format;
                                 break;
+
                             case "MS:1000771":
                                 // name="Bruker/Agilent YEP nativeID format"
                                 break;
+
                             case "MS:1000772":
                                 // name="Bruker BAF nativeID format"
                                 break;
+
                             case "MS:1000773":
                                 // name="Bruker FID nativeID format"
                                 break;
+
                             case "MS:1000774":
                                 // name="multiple peak list nativeID format"
                                 break;
+
                             case "MS:1000775":
                                 // name="single peak list nativeID format"
                                 break;
+
                             case "MS:1000776":
                                 // name="scan number only nativeID format"
                                 break;
+
                             case "MS:1000777":
                                 // name="spectrum identifier nativeID format"
                                 break;
+
                             case "MS:1000823":
                                 // name="Bruker U2 nativeID format"
                                 break;
+
                             case "MS:1000824":
                                 // name="no nativeID format"
                                 break;
+
                             case "MS:1000929":
                                 // name="Shimadzu Biotech nativeID format"
                                 break;
+
                             case "MS:1001480":
                                 // name="AB SCIEX TOF/TOF nativeID format"
                                 break;
+
                             case "MS:1001508":
                                 // name="Agilent MassHunter nativeID format"
                                 break;
+
                             case "MS:1001526":
                                 // name="spectrum from database integer nativeID format"
                                 break;
+
                             case "MS:1001528":
                                 // name="Mascot query number"
                                 break;
+
                             case "MS:1001531":
                                 // name="spectrum from ProteinScape database nativeID format"
                                 break;
+
                             case "MS:1001532":
                                 // name="spectrum from database string nativeID format"
                                 break;
+
                             case "MS:1001559":
                                 // name="AB SCIEX TOF/TOF T2D nativeID format"
                                 break;
+
                             case "MS:1001562":
                                 // name="Scaffold nativeID format"
                                 break;
+
                             case "MS:1002303":
                                 // name="Bruker Container nativeID format"
                                 break;
@@ -2838,6 +3004,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                 }
             }
+
             reader.Dispose();
         }
 
@@ -2852,6 +3019,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             // var count = Convert.ToInt32(reader.GetAttribute("count"));
             reader.ReadStartElement("referenceableParamGroupList"); // Throws exception if we are not at the "referenceableParamGroupList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2867,6 +3035,7 @@ namespace PSI_Interface.MSData
                     var id = reader.GetAttribute("id");
                     var paramData = ReadParamContainer(reader.ReadSubtree(), "referenceableParamGroup");
                     reader.Read(); // No child nodes required in schema, but generally will read the end element because otherwise a 'referenceableParamGroup' is pointless
+
                     if (id != null)
                         _referenceableParamGroups.Add(id, paramData);
                 }
@@ -2875,6 +3044,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                 }
             }
+
             reader.Dispose();
         }
 
@@ -2887,6 +3057,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("softwareList"); // Throws exception if we are not at the "softwareList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2909,6 +3080,7 @@ namespace PSI_Interface.MSData
                     reader.Skip();
                 }
             }
+
             reader.Dispose();
         }
 
@@ -2921,6 +3093,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("instrumentConfigurationList"); // Throws exception if we are not at the "instrumentConfigurationList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2929,6 +3102,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 if (reader.Name.Equals("instrumentConfiguration"))
                 {
                     var instData = ReadInstrumentConfiguration(reader.ReadSubtree());
@@ -2940,6 +3114,7 @@ namespace PSI_Interface.MSData
                     reader.Skip();
                 }
             }
+
             reader.Dispose();
         }
 
@@ -2953,6 +3128,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             reader.ReadStartElement("instrumentConfiguration"); // Throws exception if we are not at the "instrumentConfiguration" tag.
             var instData = new InstrumentData();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -2961,6 +3137,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":
@@ -2976,30 +3153,36 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         instData.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         instData.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the userParam element (no child nodes)
                         break;
+
                     case "componentList":
                         // Schema requirements: zero to one instance of this element
                         ReadComponentList(reader.ReadSubtree(), instData);
                         reader.ReadEndElement(); // Consume the componentList end element
                         break;
+
                     case "softwareRef":
                         // Schema requirements: zero to one instance of this element
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return instData;
         }
@@ -3014,6 +3197,7 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             reader.ReadStartElement("componentList"); // Throws exception if we are not at the "componentList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3022,6 +3206,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "source":
@@ -3034,11 +3219,13 @@ namespace PSI_Interface.MSData
                         instData.AddComponent(new ComponentInfo(order, name, pd));
                         reader.Read(); // Consume the end element
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -3107,9 +3294,11 @@ namespace PSI_Interface.MSData
             reader.Dispose();
             return new UserParamData(name, value, type, unitInfo);
         }
+
         #endregion
 
         #region Run and SpectrumList Tags
+
         /// <summary>
         /// Handle the child nodes of the run element
         /// Called by ReadMzML (xml hierarchy)
@@ -3119,12 +3308,14 @@ namespace PSI_Interface.MSData
         {
             reader.MoveToContent();
             startTimeStampString = reader.GetAttribute("startTimeStamp") ?? "";
+
             if (DateTime.TryParse(startTimeStampString, out var dateTime))
             {
                 startTimeStamp = dateTime;
             }
 
             reader.ReadStartElement("run"); // Throws exception if we are not at the "run" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3133,56 +3324,68 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "sourceFileRefList": // mzML_1.0.0 compatibility
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "spectrumList":
                         // Schema requirements: zero to one instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         ReadSpectrumList(reader.ReadSubtree());
+
                         if (_randomAccess || _reduceMemoryUsage)
                         {
                             _xmlReaderForAfterYield = reader;
                             // Don't worry about reading anything more, and closing the XmlReader will take more time than it is worth.
                             return;
                         }
+
                         // "spectrumList" might not have any child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrumList (in case of no child nodes)
                         reader.Read();
                         break;
+
                     case "chromatogramList":
                         // Schema requirements: zero to one instances of this element
                         // Use reader.ReadSubtree() to provide an XmlReader that is only valid for the element and child nodes
                         ReadChromatogramList(reader.ReadSubtree());
+
                         if (_randomAccess || _reduceMemoryUsage)
                         {
                             _xmlReaderForAfterYield = reader;
                             // Don't worry about reading anything more, and closing the XmlReader will take more time than it is worth.
                             return;
                         }
+
                         // "chromatogramList" must have child nodes
                         reader.ReadEndElement();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
         }
 
@@ -3194,6 +3397,7 @@ namespace PSI_Interface.MSData
             }
 
             _xmlReaderForAfterYield.ReadEndElement();
+
             if (_xmlReaderForAfterYield.Name.Equals("chromatogramList"))
             {
                 ReadChromatogramList(_xmlReaderForAfterYield.ReadSubtree());
@@ -3210,18 +3414,23 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             _numSpectra = Convert.ToInt64(reader.GetAttribute("count"));
             _numSpectraRead = true;
+
             if (_randomAccess)
             {
                 // randomAccess: We only read to this point for the count of spectra.
                 // We only want to read for offsets if we weren't able to get valid offsets from an index
                 //reader.Dispose(); // Closing can be slow for a subtree...
+
                 if (!_haveIndex)
                 {
                     ReadRunForOffsets();
                 }
+
                 return;
             }
+
             reader.ReadStartElement("spectrumList"); // Throws exception if we are not at the "SpectrumIdentificationList" tag.
+
             if (_reduceMemoryUsage)
             {
                 // Kill the read, we are at the first spectrum
@@ -3231,6 +3440,7 @@ namespace PSI_Interface.MSData
                 // If in the "ReadAllSpectra" call stack, we don't want the reader closed - we still need the subtree
                 return;
             }
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3239,6 +3449,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 if (reader.Name == "spectrum")
                 {
                     // Schema requirements: zero to many instances of this element
@@ -3253,6 +3464,7 @@ namespace PSI_Interface.MSData
                     reader.Skip();
                 }
             }
+
             reader.Dispose();
         }
 
@@ -3266,18 +3478,23 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             _numChromatograms = Convert.ToInt64(reader.GetAttribute("count"));
             _numChromatogramsRead = true;
+
             if (_randomAccess)
             {
                 // randomAccess: We only read to this point for the count of chromatograms.
                 // We only want to read for offsets if we weren't able to get valid offsets from an index
                 //reader.Dispose(); // Closing can be slow for a subtree...
+
                 if (!_haveIndex)
                 {
                     ReadRunForOffsets();
                 }
+
                 return;
             }
+
             reader.ReadStartElement("chromatogramList"); // Throws exception if we are not at the "chromatogramList" tag.
+
             if (_reduceMemoryUsage)
             {
                 // Kill the read, we are at the first chromatogram
@@ -3287,6 +3504,7 @@ namespace PSI_Interface.MSData
                 // If in the "ReadAllChromatograms" call stack, we don't want the reader closed - we still need the subtree
                 return;
             }
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3295,6 +3513,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 if (reader.Name == "chromatogram")
                 {
                     // Schema requirements: one to many instances of this element
@@ -3309,11 +3528,14 @@ namespace PSI_Interface.MSData
                     reader.Skip();
                 }
             }
+
             reader.Dispose();
         }
+
         #endregion
 
         #region Spectrum Tag
+
         /// <summary>
         /// Handle a single spectrum element and child nodes
         /// Called by ReadSpectrumList (xml hierarchy)
@@ -3328,6 +3550,7 @@ namespace PSI_Interface.MSData
             // This is correct for Thermo files converted by msConvert, but need to implement for others as well
             var spectrumId = reader.GetAttribute("id"); // Native ID in mzML_1.1.0; unique identifier in mzML_1.0.0, often same as nativeID
             var nativeId = spectrumId;
+
             if (_version == MzML_Version.mzML1_0_0)
             {
                 nativeId = reader.GetAttribute("nativeID"); // Native ID in mzML_1.0.0
@@ -3353,6 +3576,7 @@ namespace PSI_Interface.MSData
             //{
             //    scanNum = (int)(_spectrumOffsets.NativeToIdMap[nativeId]);
             //}
+
             //else
             //{
             //    //scanNum = (int)(_artificialScanNum++);
@@ -3363,6 +3587,7 @@ namespace PSI_Interface.MSData
             //    {
             //        scanNum = scanNumber;
             //    }
+
             //}
 
             var defaultArraySize = Convert.ToInt32(reader.GetAttribute("defaultArrayLength"));
@@ -3371,6 +3596,7 @@ namespace PSI_Interface.MSData
             var scans = new List<ScanData>();
             var binaryData = new List<BinaryDataArray>();
             var specParams = new ParamData();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3379,6 +3605,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":
@@ -3394,6 +3621,7 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         specParams.AddParam(ReadCvParam(reader.ReadSubtree()));
@@ -3435,30 +3663,36 @@ namespace PSI_Interface.MSData
                          *   et al.
                          */
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         specParams.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the userParam element (no child nodes)
                         break;
+
                     case "spectrumDescription": // mzML_1.0.0 compatibility
                         // Schema requirements: one instance of this element
                         specParams.AddParams(ReadSpectrumDescription(reader.ReadSubtree(), ref scans, ref precursors));
                         reader.ReadEndElement(); // "spectrumDescription" must have child nodes
                         break;
+
                     case "scanList":
                         // Schema requirements: zero to one instances of this element
                         scans.AddRange(ReadScanList(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "scanList" must have child nodes
                         break;
+
                     case "precursorList":
                         // Schema requirements: zero to one instances of this element
                         precursors.AddRange(ReadPrecursorList(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "precursorList" must have child nodes
                         break;
+
                     case "productList":
                         // Schema requirements: zero to one instances of this element
                         reader.Skip();
                         break;
+
                     case "binaryDataArrayList":
                         // Schema requirements: zero to one instances of this element
                         if (includePeaks)
@@ -3471,16 +3705,19 @@ namespace PSI_Interface.MSData
                             reader.Skip();
                         }
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
 
             // Process the spectrum data
             var mzs = new BinaryDataArray();
             var intensities = new BinaryDataArray();
+
             foreach (var dataArray in binaryData)
             {
                 if (dataArray.ArrayType == ArrayType.m_z_array)
@@ -3494,6 +3731,7 @@ namespace PSI_Interface.MSData
             }
 
             ScanData scan;
+
             if (scans.Count == 1)
             {
                 scan = scans[0];
@@ -3515,9 +3753,11 @@ namespace PSI_Interface.MSData
 
             return spectrum;
         }
+
         #endregion
 
         #region Chromatogram Tag
+
         /// <summary>
         /// Handle a single chromatogram element and child nodes
         /// Called by ReadChromatogramList (xml hierarchy)
@@ -3537,6 +3777,7 @@ namespace PSI_Interface.MSData
             var chromParams = new ParamData();
             Precursor precursor = null;
             IsolationWindow product = null;
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3545,6 +3786,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":
@@ -3560,26 +3802,31 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         chromParams.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         chromParams.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the userParam element (no child nodes)
                         break;
+
                     case "precursor":
                         // Schema requirements: zero to one instances of this element
                         precursor = ReadPrecursor(reader.ReadSubtree());
                         reader.ReadEndElement(); // "precursor" must have child nodes
                         break;
+
                     case "product":
                         // Schema requirements: zero to one instances of this element
                         product = ReadProduct(reader.ReadSubtree());
                         reader.Read(); // "product" may have child nodes
                         break;
+
                     case "binaryDataArrayList":
                         // Schema requirements: zero to one instances of this element
                         if (includePeaks)
@@ -3592,16 +3839,19 @@ namespace PSI_Interface.MSData
                             reader.Skip();
                         }
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
 
             // Process the chromatogram data
             var times = new BinaryDataArray();
             var intensities = new BinaryDataArray();
+
             foreach (var dataArray in binaryData)
             {
                 if (dataArray.ArrayType == ArrayType.time_array)
@@ -3616,6 +3866,7 @@ namespace PSI_Interface.MSData
 
             return new SimpleChromatogram(times.Data, intensities.Data, index, chromatogramId, chromParams.CVParams, chromParams.UserParams, precursor, product);
         }
+
         #endregion
 
         #region Spectrum internal Tags
@@ -3634,6 +3885,7 @@ namespace PSI_Interface.MSData
             // This is correct for Thermo files converted by msConvert, but need to implement for others as well
             reader.ReadStartElement("spectrumDescription"); // Throws exception if we are not at the "spectrumDescription" tag.
             var cvParams = new List<CVParamData>();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3642,6 +3894,7 @@ namespace PSI_Interface.MSData
                     reader.Read();
                     continue;
                 }
+
                 switch (reader.Name)
                 {
                     case "referenceableParamGroupRef":
@@ -3656,6 +3909,7 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         cvParams.Add(ReadCvParam(reader.ReadSubtree()));
@@ -3674,26 +3928,31 @@ namespace PSI_Interface.MSData
                          *   e.g.: MS:1000619 (lowest wavelength value)
                          */
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "acquisitionList":
                         // Schema requirements: zero to one instances of this element
                         // Very comparable to mzML_1.1.0's scanList. Use it.
                         scans.AddRange(ReadScanList(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "acquisitionList" must have child nodes
                         break;
+
                     case "precursorList":
                         // Schema requirements: zero to one instances of this element
                         precursors.AddRange(ReadPrecursorList(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "precursorList" must have child nodes
                         break;
+
                     case "scan":
                         // Schema requirements: zero to one instances of this element
                         scans.Add(ReadScan(reader.ReadSubtree()));
                         reader.Read(); // "scan" might not have child nodes
                         break;
+
                     default:
                         reader.Skip();
                         break;
@@ -3714,6 +3973,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             // var count = Convert.ToInt32(reader.GetAttribute("count"));
             var scans = new List<ScanData>();
+
             if (_version == MzML_Version.mzML1_0_0)
             {
                 reader.ReadStartElement("acquisitionList"); // Throws exception if we are not at the "scanList" tag.
@@ -3722,6 +3982,7 @@ namespace PSI_Interface.MSData
             {
                 reader.ReadStartElement("scanList"); // Throws exception if we are not at the "scanList" tag.
             }
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3737,6 +3998,7 @@ namespace PSI_Interface.MSData
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         /* MUST supply a *child* term of MS:1000570 (spectra combination) only once
@@ -3750,33 +4012,41 @@ namespace PSI_Interface.MSData
                             case "MS:1000571":
                                 // name="sum of spectra"
                                 break;
+
                             case "MS:1000573":
                                 // name="median of spectra"
                                 break;
+
                             case "MS:1000575":
                                 // name="mean of spectra"
                                 break;
+
                             case "MS:1000795":
                                 // name="no combination"
                                 break;
                         }
+
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     case "scan":
                     case "acquisition": // mzML_1.0.0 compatibility
                         // Schema requirements: one to many instances of this element
                         scans.Add(ReadScan(reader.ReadSubtree()));
                         reader.Read(); // "scan" might not have child nodes
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return scans;
         }
@@ -3789,20 +4059,25 @@ namespace PSI_Interface.MSData
         private ScanData ReadScan(XmlReader reader)
         {
             reader.MoveToContent();
+
             if (_version == MzML_Version.mzML1_0_0)
             {
                 var name = reader.Name;
+
                 if (!name.Equals("scan") && !name.Equals("acquisition"))
                 {
                     throw new XmlException("Invalid schema");
                 }
+
                 reader.ReadStartElement(name);
             }
             else
             {
                 reader.ReadStartElement("scan"); // Throws exception if we are not at the "scan" tag.
             }
+
             var scan = new ScanData();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3827,26 +4102,31 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         scan.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         scan.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the userParam element (no child nodes)
                         break;
+
                     case "scanWindowList":
                         // Schema requirements: zero to one instances of this element
                         scan.ScanWindows = ReadScanWindowList(reader.ReadSubtree());
                         reader.ReadEndElement(); // "scanWindowList" must have child nodes
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
 
             foreach (var cvParam in scan.CVParams)
@@ -3880,15 +4160,19 @@ namespace PSI_Interface.MSData
                         scan.StartTime = isSeconds ? time / 60.0 : time;
                         //scan.StartTime = Convert.ToDouble(reader.GetAttribute("value"));
                         break;
+
                     case "MS:1000512":
                         // name="filter string"
                         break;
+
                     case "MS:1000616":
                         // name="preset scan configuration"
                         break;
+
                     case "MS:1000927":
                         // name="ion injection time"
                         break;
+
                     case "MS:1000826":
                         // name="elution time"
                         //startTime = Convert.ToDouble(reader.GetAttribute("value"));
@@ -3909,6 +4193,7 @@ namespace PSI_Interface.MSData
             var scanWindows = new List<ScanWindowData>();
             reader.MoveToContent();
             reader.ReadStartElement("scanWindowList"); // Throws exception if we are not at the "scanWindowList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3925,11 +4210,13 @@ namespace PSI_Interface.MSData
                         scanWindows.Add(ReadScanWindow(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "scanWindow" must have child nodes
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return scanWindows;
         }
@@ -3944,6 +4231,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             reader.ReadStartElement("scanWindow"); // Throws exception if we are not at the "scanWindow" tag.
             var cvParams = new List<CVParamData>();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -3967,24 +4255,29 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         cvParams.Add(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         reader.Skip();
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
 
             var lowerLimit = 0.0;
             var upperLimit = 0.0;
+
             foreach (var cvParam in cvParams)
             {
                 /* MAY supply a* child*term of MS:1000549(selection window attribute) one or more times
@@ -3999,6 +4292,7 @@ namespace PSI_Interface.MSData
                         // name="scan window lower limit"
                         lowerLimit = Convert.ToDouble(cvParam.Value);
                         break;
+
                     case "MS:1000500":
                         // name="scan window upper limit"
                         upperLimit = Convert.ToDouble(cvParam.Value);
@@ -4020,6 +4314,7 @@ namespace PSI_Interface.MSData
             // var count = Convert.ToInt32(reader.GetAttribute("count"));
             var precursors = new List<Precursor>();
             reader.ReadStartElement("precursorList"); // Throws exception if we are not at the "precursorList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -4036,11 +4331,13 @@ namespace PSI_Interface.MSData
                         precursors.Add(ReadPrecursor(reader.ReadSubtree()));
                         reader.ReadEndElement(); // "SpectrumIdentificationItem" must have child nodes
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return precursors;
         }
@@ -4064,6 +4361,7 @@ namespace PSI_Interface.MSData
             var selectedIons = new List<SelectedIon>();
             var activation = string.Empty;
             var pd = new ParamData();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -4098,6 +4396,7 @@ namespace PSI_Interface.MSData
                         innerReader.MoveToContent();
                         innerReader.ReadStartElement("activation"); // Throws exception if we are not at the "activation" tag.
                         var pga = new ParamData();
+
                         while (innerReader.ReadState == ReadState.Interactive)
                         {
                             // Handle exiting out properly at EndElement tags
@@ -4106,6 +4405,7 @@ namespace PSI_Interface.MSData
                                 innerReader.Read();
                                 continue;
                             }
+
                             switch (innerReader.Name)
                             {
                                 case "referenceableParamGroupRef":
@@ -4121,16 +4421,19 @@ namespace PSI_Interface.MSData
 
                                     innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                     break;
+
                                 case "cvParam":
                                     // Schema requirements: zero to many instances of this element
                                     pga.AddParam(ReadCvParam(innerReader.ReadSubtree()));
                                     innerReader.Read(); // Consume the cvParam element (no child nodes)
                                     break;
+
                                 case "userParam":
                                     // Schema requirements: zero to many instances of this element
                                     pga.AddParam(ReadUserParam(innerReader.ReadSubtree()));
                                     innerReader.Read(); // Consume the userParam element (no child nodes)
                                     break;
+
                                 default:
                                     innerReader.Skip();
                                     break;
@@ -4201,6 +4504,7 @@ namespace PSI_Interface.MSData
                                 case "MS:1002472": // name="trap-type collision-induced dissociation"
                                 case "MS:1002631": // name="Electron-Transfer/Higher-Energy Collision Dissociation (EThcD)"
                                     var actName = cvParam.TermInfo.Name;
+
                                     if (string.IsNullOrWhiteSpace(activation))
                                     {
                                         activation = actName;
@@ -4210,14 +4514,17 @@ namespace PSI_Interface.MSData
                                         activation += ", " + actName;
                                     }
                                     break;
+
                                 case "MS:1002678": // name="supplemental beam-type collision-induced dissociation"
                                 case "MS:1002679": // name="supplemental collision-induced dissociation"
                                     supplementalActivation = cvParam.TermInfo.Name;
                                     break;
+
                                 case "MS:1000045":
                                     // name="collision energy"
                                     //energy = Convert.ToDouble(innerReader.GetAttribute("value"));
                                     break;
+
                                 case "MS:1002680": // name="supplemental collision energy"
                                                    //supplementalCollisionEnergy = Convert.ToDouble(innerReader.GetAttribute("value"));
                                     break;
@@ -4256,6 +4563,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             reader.ReadStartElement("product"); // Throws exception if we are not at the "product" tag.
             var isolationWindow = new IsolationWindow();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -4273,11 +4581,13 @@ namespace PSI_Interface.MSData
                         reader.Read(); // "IsolationWindow" might not have child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return isolationWindow;
         }
@@ -4292,6 +4602,7 @@ namespace PSI_Interface.MSData
             reader.MoveToContent();
             reader.ReadStartElement("isolationWindow"); // Throws exception if we are not at the "isolationWindow" tag.
             var pgiw = new ParamData();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -4316,16 +4627,19 @@ namespace PSI_Interface.MSData
 
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         pgiw.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         pgiw.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the userParam element (no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
@@ -4337,6 +4651,7 @@ namespace PSI_Interface.MSData
             var targetMz = 0.0;
             var lowerOffset = 0.0;
             var upperOffset = 0.0;
+
             foreach (var cvParam in pgiw.CVParams)
             {
                 /* MUST supply a *child* term of MS:1000792 (isolation window attribute) one or more times
@@ -4350,10 +4665,12 @@ namespace PSI_Interface.MSData
                         // name="isolation window target m/z"
                         targetMz = Convert.ToDouble(cvParam.Value);
                         break;
+
                     case "MS:1000828":
                         // name="isolation window lower offset"
                         lowerOffset = Convert.ToDouble(cvParam.Value);
                         break;
+
                     case "MS:1000829":
                         // name="isolation window upper offset"
                         upperOffset = Convert.ToDouble(cvParam.Value);
@@ -4376,6 +4693,7 @@ namespace PSI_Interface.MSData
             //int count = Convert.ToInt32(reader.GetAttribute("count"));
             var ions = new List<SelectedIon>();
             reader.ReadStartElement("selectedIonList"); // Throws exception if we are not at the "selectedIonList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -4393,6 +4711,7 @@ namespace PSI_Interface.MSData
                         var innerReader = reader.ReadSubtree();
                         innerReader.MoveToContent();
                         innerReader.ReadStartElement("selectedIon"); // Throws exception if we are not at the "selectedIon" tag.
+
                         while (innerReader.ReadState == ReadState.Interactive)
                         {
                             // Handle exiting out properly at EndElement tags
@@ -4401,6 +4720,7 @@ namespace PSI_Interface.MSData
                                 innerReader.Read();
                                 continue;
                             }
+
                             switch (innerReader.Name)
                             {
                                 case "referenceableParamGroupRef":
@@ -4416,25 +4736,30 @@ namespace PSI_Interface.MSData
 
                                     innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                     break;
+
                                 case "cvParam":
                                     // Schema requirements: zero to many instances of this element
                                     pd.AddParam(ReadCvParam(innerReader.ReadSubtree()));
                                     innerReader.Read(); // Consume the cvParam element (no child nodes)
                                     break;
+
                                 case "userParam":
                                     // Schema requirements: zero to many instances of this element
                                     pd.AddParam(ReadUserParam(innerReader.ReadSubtree()));
                                     innerReader.Read();
                                     break;
+
                                 default:
                                     innerReader.Skip();
                                     break;
                             }
                         }
+
                         innerReader.Dispose();
 
                         var charge = 0;
                         var selectedIon = 0.0;
+
                         foreach (var cvParam in pd.CVParams)
                         {
                             /* MUST supply a *child* term of MS:1000455 (ion selection attribute) one or more times
@@ -4449,6 +4774,7 @@ namespace PSI_Interface.MSData
                                     // name="charge state"
                                     charge = (int)Convert.ToDouble(cvParam.Value);
                                     break;
+
                                 case "MS:1000744":
                                     // name="selected ion m/z"
                                     selectedIon = Convert.ToDouble(cvParam.Value);
@@ -4460,11 +4786,13 @@ namespace PSI_Interface.MSData
                         reader.Read(); // "selectedIon" might not have child nodes
                         // We will either consume the EndElement, or the same element that was passed to ReadSpectrum (in case of no child nodes)
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return ions;
         }
@@ -4481,6 +4809,7 @@ namespace PSI_Interface.MSData
             // var binaryDataArrays = Convert.ToInt32(reader.GetAttribute("count"));
             var binaryData = new List<BinaryDataArray>();
             reader.ReadStartElement("binaryDataArrayList"); // Throws exception if we are not at the "binaryDataArrayList" tag.
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -4497,11 +4826,13 @@ namespace PSI_Interface.MSData
                         binaryData.Add(ReadBinaryDataArray(reader.ReadSubtree(), defaultArrayLength));
                         reader.ReadEndElement(); // "SpectrumIdentificationItem" must have child nodes
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return binaryData;
         }
@@ -4515,19 +4846,26 @@ namespace PSI_Interface.MSData
         private BinaryDataArray ReadBinaryDataArray(XmlReader reader, int defaultLength)
         {
             reader.MoveToContent();
+
             var bda = new BinaryDataArray
             {
                 ArrayLength = defaultLength
             };
+
             // var encLength = Convert.ToInt32(reader.GetAttribute("encodedLength"));
+
             var arrLength = Convert.ToInt32(reader.GetAttribute("arrayLength")); // Override the default; if non-existent, should get 0
+
             if (arrLength > 0)
             {
                 bda.ArrayLength = arrLength;
             }
+
             var compressed = false;
             reader.ReadStartElement("binaryDataArray"); // Throws exception if we are not at the "spectrum" tag.
+
             var paramGroup = new ParamData();
+
             while (reader.ReadState == ReadState.Interactive)
             {
                 // Handle exiting out properly at EndElement tags
@@ -4555,16 +4893,19 @@ namespace PSI_Interface.MSData
 
                         reader.Read();
                         break;
+
                     case "cvParam":
                         // Schema requirements: zero to many instances of this element
                         paramGroup.AddParam(ReadCvParam(reader.ReadSubtree()));
                         reader.Read(); // Consume the cvParam element (no child nodes)
                         break;
+
                     case "userParam":
                         // Schema requirements: zero to many instances of this element
                         paramGroup.AddParam(ReadUserParam(reader.ReadSubtree()));
                         reader.Read();
                         break;
+
                     case "binary":
                         // Schema requirements: zero to many instances of this element
                         // Process the ParamList first.
@@ -4596,6 +4937,7 @@ namespace PSI_Interface.MSData
                                     //   e.g.: MS:1000574 (zlib compression)
                                     compressed = true;
                                     break;
+
                                 case "MS:1000576":
                                     //   e.g.: MS:1000576 (no compression)
                                     compressed = false;
@@ -4605,38 +4947,47 @@ namespace PSI_Interface.MSData
                                     //   e.g.: MS:1000514 (m/z array)
                                     bda.ArrayType = ArrayType.m_z_array;
                                     break;
+
                                 case "MS:1000515":
                                     //   e.g.: MS:1000515 (intensity array)
                                     bda.ArrayType = ArrayType.intensity_array;
                                     break;
+
                                 case "MS:1000516":
                                     //   e.g.: MS:1000516 (charge array)
                                     bda.ArrayType = ArrayType.charge_array;
                                     break;
+
                                 case "MS:1000517":
                                     //   e.g.: MS:1000517 (signal to noise array)
                                     bda.ArrayType = ArrayType.signal_to_noise_array;
                                     break;
+
                                 case "MS:1000595":
                                     //   e.g.: MS:1000595 (time array)
                                     bda.ArrayType = ArrayType.time_array;
                                     break;
+
                                 case "MS:1000617":
                                     //   e.g.: MS:1000617 (wavelength array)
                                     bda.ArrayType = ArrayType.wavelength_array;
                                     break;
+
                                 case "MS:1000786":
                                     //   e.g.: MS:1000786 (non-standard data array)
                                     bda.ArrayType = ArrayType.non_standard_data_array;
                                     break;
+
                                 case "MS:1000820":
                                     //   e.g.: MS:1000820 (flow rate array)
                                     bda.ArrayType = ArrayType.flow_rate_array;
                                     break;
+
                                 case "MS:1000821":
                                     //   e.g.: MS:1000821 (pressure array)
                                     bda.ArrayType = ArrayType.pressure_array;
                                     break;
+
                                 case "MS:1000822":
                                     //   e.g.: MS:1000822 (temperature array)
                                     bda.ArrayType = ArrayType.temperature_array;
@@ -4646,30 +4997,38 @@ namespace PSI_Interface.MSData
                                     //   e.g.: MS:1000521 (32-bit float)
                                     bda.Precision = Precision.Precision32;
                                     break;
+
                                 case "MS:1000523":
                                     //   e.g.: MS:1000523 (64-bit float)
                                     bda.Precision = Precision.Precision64;
                                     break;
                             }
                         }
+
                         var dataSize = 8;
+
                         if (bda.Precision == Precision.Precision32)
                         {
                             dataSize = 4;
                         }
+
                         var bytes = Convert.FromBase64String(reader.ReadElementContentAsString()); // Consumes the start and end elements.
                         //var bytesRead = reader.ReadContentAsBase64(bytes, 0, dataSize);
+
                         if (compressed)
                         {
                             bytes = DecompressZLib(bytes, bda.ArrayLength * dataSize);
                         }
+
                         if (bytes.Length % dataSize != 0 || bytes.Length / dataSize != bda.ArrayLength)
                         {
                             // We need to fail out.
                         }
+
                         //byte[] oneNumber = new byte[dataSize];
                         //var swapBytes = true;
                         bda.Data = new double[bda.ArrayLength];
+
                         for (var i = 0; i < bytes.Length; i += dataSize)
                         {
                             // mzML binary data should always be Little Endian. Some other data formats may use Big Endian, which would require a byte swap
@@ -4678,6 +5037,7 @@ namespace PSI_Interface.MSData
                             //{
                             //  Array.Reverse(oneNumber);
                             //}
+
                             if (dataSize == 4)
                             {
                                 //bda.Data[i / dataSize] = BitConverter.ToSingle(oneNumber, 0);
@@ -4690,11 +5050,13 @@ namespace PSI_Interface.MSData
                             }
                         }
                         break;
+
                     default:
                         reader.Skip();
                         break;
                 }
             }
+
             reader.Dispose();
             return bda;
         }
@@ -4732,10 +5094,12 @@ namespace PSI_Interface.MSData
             using (var inflater = new DeflateStream(msCompressed, CompressionMode.Decompress))
             {
                 var bytesRead = inflater.Read(newBytes, 0, expectedBytes);
+
                 if (bytesRead != expectedBytes)
                 {
                     throw new XmlException("Fail decompressing data...");
                 }
+
                 //while (inflater.CanRead)
                 //{
                 //  var readBytes = new byte[4095];
@@ -4745,6 +5109,7 @@ namespace PSI_Interface.MSData
                 //  {
                 //      msInflated.Write(readBytes, 0, bytesRead);
                 //  }
+
                 //}
             }
 
@@ -4752,6 +5117,7 @@ namespace PSI_Interface.MSData
             //msInflated.Read(newBytes, 0, (int)msInflated.Length);
             return newBytes;
         }
+
         #endregion
     }
 }

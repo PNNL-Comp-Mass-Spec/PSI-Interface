@@ -20,6 +20,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             var detectedVersion = DetectFileSchemaVersion(filePath);
 
             XmlSerializer serializer;
+
             if (detectedVersion.StartsWith("1.2"))
             {
                 var overrides = GetMzIdentMl12Overrides(out _, out _);
@@ -39,14 +40,17 @@ namespace PSI_Interface.IdentData.mzIdentML
         private static Stream CreateReader(string filePath, int bufferSize)
         {
             var sourceFile = new FileInfo(filePath);
+
             if (!sourceFile.Exists)
                 throw new FileNotFoundException(".mzID file not found", filePath);
 
             Stream reader = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize);
+
             if (sourceFile.Name.Trim().EndsWith(".gz", StringComparison.OrdinalIgnoreCase))
             {
                 reader = new GZipStream(reader, CompressionMode.Decompress);
             }
+
             return reader;
         }
 
@@ -59,6 +63,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         public static void Write(MzIdentMLType identData, string filePath, int bufferSize = 65536)
         {
             XmlSerializer serializer;
+
             if (identData.version.StartsWith("1.2"))
             {
                 var overrides = GetMzIdentMl12Overrides(out var ns, out var xsdUrl);
@@ -79,11 +84,14 @@ namespace PSI_Interface.IdentData.mzIdentML
         private static XmlWriter CreateWriter(string filePath, int bufferSize)
         {
             Stream writer = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite, bufferSize);
+
             if (filePath.Trim().EndsWith(".gz", StringComparison.OrdinalIgnoreCase))
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
             }
+
             var utf8EncodingNoMark = new UTF8Encoding(false); // DO NOT ADD THE BYTE ORDER MARK!!!
+
             var xSettings = new XmlWriterSettings()
             {
                 CloseOutput = true,
@@ -91,6 +99,7 @@ namespace PSI_Interface.IdentData.mzIdentML
                 Indent = true,
                 Encoding = utf8EncodingNoMark,
             };
+
             return XmlWriter.Create(new StreamWriter(writer, utf8EncodingNoMark, bufferSize), xSettings);
         }
 
@@ -110,6 +119,7 @@ namespace PSI_Interface.IdentData.mzIdentML
                         continue;
 
                     var index = line.IndexOf(nsKey, StringComparison.OrdinalIgnoreCase);
+
                     if (index < 0)
                         continue;
 
@@ -153,6 +163,7 @@ namespace PSI_Interface.IdentData.mzIdentML
                 Namespace = namespaceUrl,
                 IsNullable = false
             };
+
             xmlRootOverrides.XmlRoot = xmlRootOverride;
 
             xmlOverrides.Add(typeof(MzIdentMLType), xmlRootOverrides);
