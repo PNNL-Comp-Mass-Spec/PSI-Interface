@@ -228,7 +228,7 @@ namespace PSI_Interface.CV
                 }
                 else
                 {
-                    TermAccessionLookup.Add(term.CVRef, new Dictionary<string, CVID>() {{term.Id, term.Cvid}});
+                    TermAccessionLookup.Add(term.CVRef, new Dictionary<string, CVID> {{term.Id, term.Cvid}});
                 }
                 if (TermNameLookup.ContainsKey(term.CVRef))
                 {
@@ -237,7 +237,7 @@ namespace PSI_Interface.CV
                 }
                 else
                 {
-                    TermNameLookup.Add(term.CVRef, new Dictionary<string, CVID>() {{term.Name.ToLower(), term.Cvid}});
+                    TermNameLookup.Add(term.CVRef, new Dictionary<string, CVID> {{term.Name.ToLower(), term.Cvid}});
                 }
             }
         }
@@ -267,7 +267,7 @@ namespace PSI_Interface.CV
                     }
                     else
                     {
-                        RelationsChildren.Add(parent, new List<CVID>(){ cvid.Key });
+                        RelationsChildren.Add(parent, new List<CVID> { cvid.Key });
                     }
                 }
             }

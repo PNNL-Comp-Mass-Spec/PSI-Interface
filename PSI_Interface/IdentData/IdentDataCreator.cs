@@ -38,17 +38,17 @@ namespace PSI_Interface.IdentData
         /// <param name="name">Name of the file. Can be the name of the dataset or analysis software</param>
         public IdentDataCreator(string identifier, string name)
         {
-            identData = new IdentDataObj()
+            identData = new IdentDataObj
             {
                 Id = identifier,
                 Name = name,
                 AnalysisProtocolCollection = new AnalysisProtocolCollectionObj(),
-                DataCollection = new DataCollectionObj()
+                DataCollection = new DataCollectionObj
                 {
                     AnalysisData = new AnalysisDataObj(),
                 },
                 AnalysisCollection = new AnalysisCollectionObj(),
-                SequenceCollection = new SequenceCollectionObj(),
+                SequenceCollection = new SequenceCollectionObj()
             };
         }
 
@@ -56,25 +56,25 @@ namespace PSI_Interface.IdentData
         {
             identData.DataCollection.AnalysisData.SpectrumIdentificationList = new IdentDataList<SpectrumIdentificationListObj>();
 
-            var specList = new SpectrumIdentificationListObj()
+            var specList = new SpectrumIdentificationListObj
             {
-                Id = "SI_LIST_" + specListCounter++,
+                Id = "SI_LIST_" + specListCounter++
             };
 
             identData.DataCollection.AnalysisData.SpectrumIdentificationList.Add(specList);
 
-            var analysisCollection = new SpectrumIdentificationObj()
+            var analysisCollection = new SpectrumIdentificationObj
             {
                 SpectrumIdentificationProtocol = identData.AnalysisProtocolCollection.SpectrumIdentificationProtocols[0],
                 SpectrumIdentificationList = identData.DataCollection.AnalysisData.SpectrumIdentificationList[0],
                 Id = "SpecIdent_1",
                 InputSpectra = new IdentDataList<InputSpectraRefObj>(),
-                SearchDatabases = new IdentDataList<SearchDatabaseRefObj>(),
+                SearchDatabases = new IdentDataList<SearchDatabaseRefObj>()
             };
 
             foreach (var inputSpectrum in identData.DataCollection.Inputs.SpectraDataList)
             {
-                analysisCollection.InputSpectra.Add(new InputSpectraRefObj()
+                analysisCollection.InputSpectra.Add(new InputSpectraRefObj
                 {
                     SpectraData = inputSpectrum
                 });
@@ -82,7 +82,7 @@ namespace PSI_Interface.IdentData
 
             foreach (var searchDb in identData.DataCollection.Inputs.SearchDatabases)
             {
-                analysisCollection.SearchDatabases.Add(new SearchDatabaseRefObj()
+                analysisCollection.SearchDatabases.Add(new SearchDatabaseRefObj
                 {
                     SearchDatabase = searchDb
                 });
@@ -230,7 +230,7 @@ namespace PSI_Interface.IdentData
                 Name = name,
                 Id = id,
                 Version = version,
-                SoftwareName = new ParamObj(),
+                SoftwareName = new ParamObj()
             };
 
             if (cvid != CV.CV.CVID.CVID_Unknown)
@@ -239,9 +239,9 @@ namespace PSI_Interface.IdentData
             }
             else
             {
-                software.SoftwareName.Item = new UserParamObj()
+                software.SoftwareName.Item = new UserParamObj
                 {
-                    Name = userParamSoftwareName,
+                    Name = userParamSoftwareName
                 };
             }
 
@@ -307,7 +307,7 @@ namespace PSI_Interface.IdentData
                 Location = location,
                 Name = databaseName,
                 NumDatabaseSequences = numberOfSequences,
-                DatabaseName = new ParamObj(),
+                DatabaseName = new ParamObj()
             };
 
             if (publicDatabaseName != CV.CV.CVID.CVID_Unknown)
@@ -316,9 +316,9 @@ namespace PSI_Interface.IdentData
             }
             else
             {
-                db.DatabaseName.Item = new UserParamObj()
+                db.DatabaseName.Item = new UserParamObj
                 {
-                    Name = databaseName,
+                    Name = databaseName
                 };
             }
 
@@ -360,17 +360,17 @@ namespace PSI_Interface.IdentData
                 Id = "SD_" + specDataCounter++,
                 Location = location,
                 Name = name,
-                SpectrumIDFormat = new SpectrumIDFormatObj()
+                SpectrumIDFormat = new SpectrumIDFormatObj
                 {
                     CVParam = new CVParamObj(spectrumIdFormat),
-                },
+                }
             };
 
             if (fileFormatCvid != CV.CV.CVID.CVID_Unknown)
             {
-                dataFile.FileFormat = new FileFormatInfo()
+                dataFile.FileFormat = new FileFormatInfo
                 {
-                    CVParam = new CVParamObj(fileFormatCvid),
+                    CVParam = new CVParamObj(fileFormatCvid)
                 };
             }
 
@@ -418,7 +418,7 @@ namespace PSI_Interface.IdentData
                 Id = "SearchProtocol_" + searchProtocolCounter++,
                 AnalysisSoftware = analysisSoftwareInfo,
                 Name = name,
-                SearchType = new ParamObj(),
+                SearchType = new ParamObj()
             };
 
             if (searchType != CV.CV.CVID.CVID_Unknown)
@@ -426,25 +426,25 @@ namespace PSI_Interface.IdentData
                 settings.SearchType.Item = new CVParamObj(searchType);
             }
 
-            settings.AdditionalSearchParams = new ParamListObj()
+            settings.AdditionalSearchParams = new ParamListObj
             {
                 Items = new IdentDataList<ParamBaseObj>()
             };
 
             settings.ModificationParams = new IdentDataList<SearchModificationObj>();
 
-            settings.Enzymes = new EnzymeListObj()
+            settings.Enzymes = new EnzymeListObj
             {
-                Enzymes = new IdentDataList<EnzymeObj>(),
+                Enzymes = new IdentDataList<EnzymeObj>()
             };
 
             settings.FragmentTolerances = new IdentDataList<CVParamObj>();
 
             settings.ParentTolerances = new IdentDataList<CVParamObj>();
 
-            settings.Threshold = new ParamListObj()
+            settings.Threshold = new ParamListObj
             {
-                Items = new IdentDataList<ParamBaseObj>(),
+                Items = new IdentDataList<ParamBaseObj>()
             };
 
             if (identData.AnalysisProtocolCollection.SpectrumIdentificationProtocols == null)
@@ -472,13 +472,13 @@ namespace PSI_Interface.IdentData
         {
             if (!identificationResults.TryGetValue(nativeId, out var specResult))
             {
-                specResult = new SpectrumIdentificationResultObj()
+                specResult = new SpectrumIdentificationResultObj
                 {
                     SpectrumID = nativeId,
                     SpectraData = spectraSource,
                     SpectrumIdentificationItems = new IdentDataList<SpectrumIdentificationItemObj>(),
                     CVParams = new IdentDataList<CVParamObj>(),
-                    UserParams = new IdentDataList<UserParamObj>(),
+                    UserParams = new IdentDataList<UserParamObj>()
                 };
 
                 identificationResults.Add(nativeId, specResult);
@@ -488,13 +488,13 @@ namespace PSI_Interface.IdentData
 
                 var rt = new CVParamObj(CV.CV.CVID.MS_scan_start_time, retentionTimeMinutes.ToString(CultureInfo.InvariantCulture))
                 {
-                    UnitCvid = CV.CV.CVID.UO_minute,
+                    UnitCvid = CV.CV.CVID.UO_minute
                 };
 
                 specResult.CVParams.Add(rt);
             }
 
-            var specIdent = new SpectrumIdentificationItemObj()
+            var specIdent = new SpectrumIdentificationItemObj
             {
                 Id = specResult.Id + "_" + (specResult.SpectrumIdentificationItems.Count + 1),
                 PeptideEvidences = new IdentDataList<PeptideEvidenceRefObj>(),
@@ -503,7 +503,7 @@ namespace PSI_Interface.IdentData
                 Rank = rank,
                 PassThreshold = true,
                 CVParams = new IdentDataList<CVParamObj>(),
-                UserParams = new IdentDataList<UserParamObj>(),
+                UserParams = new IdentDataList<UserParamObj>()
             };
 
             if (!calcMz.Equals(double.NaN))

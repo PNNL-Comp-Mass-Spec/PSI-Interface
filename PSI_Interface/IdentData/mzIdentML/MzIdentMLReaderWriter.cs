@@ -92,12 +92,12 @@ namespace PSI_Interface.IdentData.mzIdentML
 
             var utf8EncodingNoMark = new UTF8Encoding(false); // DO NOT ADD THE BYTE ORDER MARK!!!
 
-            var xSettings = new XmlWriterSettings()
+            var xSettings = new XmlWriterSettings
             {
                 CloseOutput = true,
                 NewLineChars = "\n",
                 Indent = true,
-                Encoding = utf8EncodingNoMark,
+                Encoding = utf8EncodingNoMark
             };
 
             return XmlWriter.Create(new StreamWriter(writer, utf8EncodingNoMark, bufferSize), xSettings);

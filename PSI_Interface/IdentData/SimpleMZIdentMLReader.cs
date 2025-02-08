@@ -828,7 +828,7 @@ namespace PSI_Interface.IdentData
                 SpectrumFile = spectrumFile,
                 AnalysisSoftware = softwareName,
                 AnalysisSoftwareVersion = softwareVersion,
-                AnalysisSoftwareCvAccession = softwareCvAccession,
+                AnalysisSoftwareCvAccession = softwareCvAccession
             };
 
             results.SearchModifications.AddRange(searchModifications);
