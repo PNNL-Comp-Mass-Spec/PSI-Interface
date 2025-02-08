@@ -501,7 +501,7 @@ namespace PSI_Interface.IdentData
                             if (mod.Value.Mass < 0)
                             {
                                 // Mod is negative, C# will include the minus sign before the number
-                                sign = "";
+                                sign = string.Empty;
                             }
                             // Using "0.0##" to use 3 decimal places, but drop trailing zeros - "F3" would keep trailing zeros.
                             var loc = mod.Key;

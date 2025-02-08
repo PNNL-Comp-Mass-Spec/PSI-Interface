@@ -4046,7 +4046,7 @@ namespace PSI_Interface.MSData
 
             IsolationWindow isolationWindow = null;
             var selectedIons = new List<SelectedIon>();
-            var activation = "";
+            var activation = string.Empty;
             var pd = new ParamData();
             while (reader.ReadState == ReadState.Interactive)
             {
@@ -4076,7 +4076,7 @@ namespace PSI_Interface.MSData
                     case "activation":
                         // Schema requirements: one instance of this element
                         //var activationMethods = new List<ActivationMethod>();
-                        var supplementalActivation = "";
+                        var supplementalActivation = string.Empty;
                         //var supplementalCollisionEnergy = 0d;
                         var innerReader = reader.ReadSubtree();
                         innerReader.MoveToContent();

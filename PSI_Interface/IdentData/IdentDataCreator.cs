@@ -63,8 +63,8 @@ namespace PSI_Interface.IdentData
 
             var analysisCollection = new SpectrumIdentificationObj()
             {
-                SpectrumIdentificationProtocol = identData.AnalysisProtocolCollection.SpectrumIdentificationProtocols.First(),
-                SpectrumIdentificationList = identData.DataCollection.AnalysisData.SpectrumIdentificationList.First(),
+                SpectrumIdentificationProtocol = identData.AnalysisProtocolCollection.SpectrumIdentificationProtocols[0],
+                SpectrumIdentificationList = identData.DataCollection.AnalysisData.SpectrumIdentificationList[0],
                 Id = "SpecIdent_1",
                 InputSpectra = new IdentDataList<InputSpectraRefObj>(),
                 SearchDatabases = new IdentDataList<SearchDatabaseRefObj>(),
@@ -136,6 +136,7 @@ namespace PSI_Interface.IdentData
             foreach (var pep in peptideList)
             {
                 var modKey = PepModConcat(pep);
+
                 if (pepDeDup.TryGetValue(pep.PeptideSequence, out var similar))
                 {
                     if (similar.TryGetValue(modKey, out var other))
@@ -178,11 +179,13 @@ namespace PSI_Interface.IdentData
 
         private static string PepModConcat(PeptideObj pep)
         {
-            var result = "";
+            var result = string.Empty;
+
             foreach (var mod in pep.Modifications)
             {
-                var modCv = mod.CVParams.First();
+                var modCv = mod.CVParams[0];
                 string modName;
+
                 if (modCv.Cvid == CV.CV.CVID.MS_unknown_modification)
                 {
                     modName = modCv.Value;
@@ -193,6 +196,7 @@ namespace PSI_Interface.IdentData
                 }
                 result += string.Format("{0} {1},", modName, mod.Location);
             }
+
             return result;
         }
 
