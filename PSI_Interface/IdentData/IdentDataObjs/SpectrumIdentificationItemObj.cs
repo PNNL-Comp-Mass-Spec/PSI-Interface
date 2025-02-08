@@ -84,6 +84,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 PeptideEvidences.AddRange(sii.PeptideEvidenceRef, pe => new PeptideEvidenceRefObj(pe, IdentData));
             }
+
             if (sii.Fragmentation?.Count > 0)
             {
                 Fragmentations.AddRange(sii.Fragmentation, f => new IonTypeObj(f, IdentData));
@@ -169,11 +170,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_peptide != null)
                     return _peptide.Id;
+
                 return _peptideRef;
             }
             set
             {
                 _peptideRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     Peptide = IdentData.FindPeptide(value);
             }
@@ -188,6 +191,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptide = value;
+
                 if (_peptide != null)
                 {
                     _peptide.IdentData = IdentData;
@@ -317,6 +321,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public double GetSpecEValue()
         {
             return CVParams.GetCvParam(CV.CV.CVID.MS_MS_GF_SpecEValue, "1").ValueAs<double>();
+        }
+
+        /// <summary>
+        /// Show the peptide sequence and the modification count (if non-zero)
+        /// </summary>
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}", Id, Peptide?.ToString() ?? "Spectrum ID with an undefined peptide");
         }
 
         #region Object Equality

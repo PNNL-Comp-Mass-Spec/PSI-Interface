@@ -107,6 +107,24 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <remarks>Required Attribute</remarks>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Show the peptide sequence and the modification count (if non-zero)
+        /// </summary>
+        public override string ToString()
+        {
+            var modCount = Modifications?.Count ?? 0;
+
+            if (modCount == 0)
+            {
+                return string.Format("{0}", PeptideSequence ?? string.Empty);
+            }
+
+            return string.Format("{0} ({1} {2})",
+                PeptideSequence ?? string.Empty,
+                modCount,
+                modCount == 1 ? "mod" : "mods");
+        }
+
         #region Object Equality
 
         /// <summary>
@@ -130,7 +148,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             if (other == null)
                 return false;
 
-            return Name == other.Name && PeptideSequence == other.PeptideSequence &&
+            return Name == other.Name &&
+                   PeptideSequence == other.PeptideSequence &&
                    Equals(Modifications, other.Modifications) &&
                    Equals(SubstitutionModifications, other.SubstitutionModifications) &&
                    ParamsEquals(other);
