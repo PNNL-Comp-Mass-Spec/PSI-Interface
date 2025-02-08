@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PSI_Interface.IdentData.mzIdentML;
 
@@ -132,7 +133,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         }
 
         /// <summary>
-        /// The lowest specEvalue in the SpectrumIdentificationItems
+        /// Determine the lowest specEValue in the SpectrumIdentificationItems
         /// </summary>
         public double BestSpecEVal()
         {
@@ -171,8 +172,61 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public void RemoveMatchesNotBestSpecEValue()
         {
-            var best = BestSpecEVal();
-            SpectrumIdentificationItems.RemoveAll(item => item.GetSpecEValue() > best);
+            if (SpectrumIdentificationItems.Count < 2)
+                return;
+
+            // Previously, we used .RemoveAll() to remove all spectrum ID items that had a higher SpecEValue than the "best" SpecEValue
+            // This had the side effect of losing parent protein references, which is less than ideal
+            // Instead, when looking for IDs to remove, do not remove items that are the same peptide, since we want to keep track of the parent sequences (and thus proteins) for each peptide
+
+            // This was in use before February 2025
+            // var best = BestSpecEVal();
+            // SpectrumIdentificationItems.RemoveAll(item => item.GetSpecEValue() > bestEVal);
+
+            var specIDsByEValue = SpectrumIDsBySpecEValue();
+            var bestEVal = specIDsByEValue.First().Key;
+
+            var highestScoringPeptides = specIDsByEValue.First().Value.ConvertAll(item => item.Peptide);
+
+            // When removing the other IDs, do not remove items that are the same peptide, since we want to keep track of the parent sequences (and thus proteins) for all of the peptides
+
+            // Use .ToList() to create a distinct list, and allow modification of the original
+            foreach (var specId in SpectrumIdentificationItems.ToList())
+            {
+                if (specId.GetSpecEValue() <= bestEVal)
+                    continue;
+
+                var keepItem = highestScoringPeptides.Any(comparisonPeptide => comparisonPeptide.Equals(specId.Peptide));
+
+                if (!keepItem)
+                {
+                    SpectrumIdentificationItems.Remove(specId);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Return a dictionary that maps specEValues to spectrum ID
+        /// </summary>
+        public SortedDictionary<double, List<SpectrumIdentificationItemObj>> SpectrumIDsBySpecEValue()
+        {
+            var specIDsByEValue = new SortedDictionary<double, List<SpectrumIdentificationItemObj>>();
+
+            foreach (var specID in SpectrumIdentificationItems)
+            {
+                var eValue = specID.GetSpecEValue();
+
+                if (specIDsByEValue.TryGetValue(eValue, out var matchingSpecId))
+                {
+                    matchingSpecId.Add(specID);
+                }
+                else
+                {
+                    specIDsByEValue.Add(eValue, new List<SpectrumIdentificationItemObj> { specID });
+                }
+            }
+
+            return specIDsByEValue;
         }
 
         #region Object Equality
