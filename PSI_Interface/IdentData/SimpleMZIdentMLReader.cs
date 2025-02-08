@@ -131,24 +131,29 @@ namespace PSI_Interface.IdentData
                 //        else if (bal::starts_with(id, "index=")) return value(id, "index");
                 //        return "";
                 //}
-                if (nativeId.Contains("="))
+
+                if (nativeId.Contains('='))
                 {
                     var map = ParseNativeId(nativeId);
-                    if (map.ContainsKey("spectrum"))
+
+                    if (map.TryGetValue("spectrum", out var spectrum))
                     {
-                        return map["spectrum"];
+                        return spectrum;
                     }
-                    if (map.ContainsKey("index"))
+
+                    if (map.TryGetValue("index", out var index))
                     {
-                        return map["index"];
+                        return index;
                     }
-                    if (map.ContainsKey("scanId"))
+
+                    if (map.TryGetValue("scanId", out var scanId))
                     {
-                        return map["scanId"];
+                        return scanId;
                     }
-                    if (map.ContainsKey("scan"))
+
+                    if (map.TryGetValue("scan", out var scan))
                     {
-                        return map["scan"];
+                        return scan;
                     }
                 }
 
@@ -1600,9 +1605,10 @@ namespace PSI_Interface.IdentData
                     if (!pepEv.HadDecoyAttribute)
                     {
                         var dbSeq = pepEv.DbSeq;
-                        if (m_decoyDbAccessionRegex.ContainsKey(dbSeq.DatabaseId))
+
+                        if (m_decoyDbAccessionRegex.TryGetValue(dbSeq.DatabaseId, out var databaseId))
                         {
-                            pepEv.IsDecoy = m_decoyDbAccessionRegex[dbSeq.DatabaseId].IsMatch(dbSeq.Accession);
+                            pepEv.IsDecoy = databaseId.IsMatch(dbSeq.Accession);
                         }
                     }
                 }
