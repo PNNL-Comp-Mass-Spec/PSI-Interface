@@ -688,7 +688,7 @@ namespace PSI_Interface.IdentData
                         yield return identEnumerator.Current;
                     }
 
-                    // Return all of the items
+                    // Return the items
                     while (identEnumerator.MoveNext())
                     {
                         yield return identEnumerator.Current;
@@ -1870,7 +1870,7 @@ namespace PSI_Interface.IdentData
                 }
             }
 
-            // Parse all of the cvParam/userParam fields
+            // Parse the cvParam/userParam fields
             while (reader.Name == "cvParam" || reader.Name == "userParam")
             {
                 // ReSharper disable once AssignNullToNotNullAttribute

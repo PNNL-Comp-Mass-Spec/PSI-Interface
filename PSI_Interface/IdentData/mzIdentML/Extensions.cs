@@ -16,8 +16,8 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <typeparam name="TInput">Input IEnumerable contained type</typeparam>
         /// <param name="list">target list</param>
         /// <param name="items">
-        /// source list/IEnumerable. If a list, the target list will have capacity changed
-        /// to allow adding all of the items in this list without further re-allocations.
+        /// Source list/IEnumerable. If a list, the target list will have capacity changed
+        /// to allow adding the items in this list without further re-allocations.
         /// </param>
         /// <param name="transform">Transform function to convert source items to target items</param>
         /// <param name="dropNull">If set to false, null items (after the transform) will be added to the target list</param>

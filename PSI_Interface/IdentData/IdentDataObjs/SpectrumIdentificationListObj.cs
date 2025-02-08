@@ -48,6 +48,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 FragmentationTables.AddRange(sil.FragmentationTable, f => new MeasureObj(f, IdentData));
             }
+
             if (sil.SpectrumIdentificationResult?.Count > 0)
             {
                 SpectrumIdentificationResults.AddRange(sil.SpectrumIdentificationResult, sir => new SpectrumIdentificationResultObj(sir, IdentData));
@@ -116,6 +117,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             foreach (var sir in SpectrumIdentificationResults)
                 sir.Sort();
+
             SpectrumIdentificationResults.Sort((a, b) =>
                     a.BestSpecEVal().CompareTo(b.BestSpecEVal()));
         }
