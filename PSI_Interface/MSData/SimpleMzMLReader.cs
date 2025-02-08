@@ -764,7 +764,7 @@ namespace PSI_Interface.MSData
         /// Peak data
         /// </summary>
         // ReSharper disable once StructCanBeMadeReadOnly
-        public struct Peak
+        public readonly struct Peak
         {
             /// <summary>
             /// Peak m/z
@@ -2600,12 +2600,14 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             pd.AddParams(paramGroup.CVParams);
                             pd.AddParams(paramGroup.UserParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -2666,12 +2668,14 @@ namespace PSI_Interface.MSData
                             case "referenceableParamGroupRef":
                                 // Schema requirements: zero to many instances of this element
                                 var reference = innerReader.GetAttribute("ref");
+
                                 if (!string.IsNullOrWhiteSpace(reference) &&
                                     _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                                 {
                                     cvParams.AddRange(paramGroup.CVParams);
                                     sourceFileParams.AddParams(paramGroup.UserParams);
                                 }
+
                                 innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                 break;
                             case "cvParam":
@@ -2962,12 +2966,14 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             instData.AddParams(paramGroup.CVParams);
                             instData.AddParams(paramGroup.UserParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -3378,12 +3384,14 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             specParams.AddParams(paramGroup.CVParams);
                             specParams.AddParams(paramGroup.UserParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -3542,12 +3550,14 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             chromParams.AddParams(paramGroup.CVParams);
                             chromParams.AddParams(paramGroup.UserParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -3637,11 +3647,13 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             cvParams.AddRange(paramGroup.CVParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -3805,12 +3817,14 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             scan.AddParams(paramGroup.CVParams);
                             scan.AddParams(paramGroup.UserParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -3944,11 +3958,13 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             cvParams.AddRange(paramGroup.CVParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -4095,12 +4111,14 @@ namespace PSI_Interface.MSData
                                 case "referenceableParamGroupRef":
                                     // Schema requirements: zero to many instances of this element
                                     var reference = innerReader.GetAttribute("ref");
+
                                     if (!string.IsNullOrWhiteSpace(reference) &&
                                         _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                                     {
                                         pga.AddParams(paramGroup.CVParams);
                                         pga.AddParams(paramGroup.UserParams);
                                     }
+
                                     innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                     break;
                                 case "cvParam":
@@ -4288,12 +4306,14 @@ namespace PSI_Interface.MSData
                     case "referenceableParamGroupRef":
                         // Schema requirements: zero to many instances of this element
                         var reference = reader.GetAttribute("ref");
+
                         if (!string.IsNullOrWhiteSpace(reference) &&
                             _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                         {
                             pgiw.AddParams(paramGroup.CVParams);
                             pgiw.AddParams(paramGroup.UserParams);
                         }
+
                         reader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                         break;
                     case "cvParam":
@@ -4386,12 +4406,14 @@ namespace PSI_Interface.MSData
                                 case "referenceableParamGroupRef":
                                     // Schema requirements: zero to many instances of this element
                                     var reference = innerReader.GetAttribute("ref");
+
                                     if (!string.IsNullOrWhiteSpace(reference) &&
                                         _referenceableParamGroups.TryGetValue(reference, out var paramGroup))
                                     {
                                         pd.AddParams(paramGroup.CVParams);
                                         pd.AddParams(paramGroup.UserParams);
                                     }
+
                                     innerReader.Read(); // Consume the referenceableParamGroupRef element (no child nodes)
                                     break;
                                 case "cvParam":
