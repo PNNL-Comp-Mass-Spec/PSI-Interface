@@ -10,7 +10,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// <summary>
         /// Constructor
         /// </summary>
-        public AffiliationObj() : base()
+        public AffiliationObj()
         { }
 
         /// <summary>

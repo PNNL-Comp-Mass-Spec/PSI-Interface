@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PSI_Interface.MSData;
+using PSI_Interface.IdentData.IdentDataObjs;
 using PSI_Interface.SharedInterfaces;
 
 namespace PSI_Interface.CV
@@ -37,14 +37,14 @@ namespace PSI_Interface.CV
         /// Create a translator between a mzid file and the internal values
         /// </summary>
         /// <param name="fileCvInfo"></param>
-        public CVTranslator(IEnumerable<IdentData.IdentDataObjs.CVInfo> fileCvInfo) : this(fileCvInfo.Cast<ICVInfo>())
+        public CVTranslator(IEnumerable<CVInfo> fileCvInfo) : this(fileCvInfo.Cast<ICVInfo>())
         { }
 
         /// <summary>
         /// Create a translator between a mzML file and the internal values
         /// </summary>
         /// <param name="fileCvInfo"></param>
-        public CVTranslator(IEnumerable<CVInfo> fileCvInfo) : this(fileCvInfo.Cast<ICVInfo>())
+        public CVTranslator(IEnumerable<MSData.CVInfo> fileCvInfo) : this(fileCvInfo.Cast<ICVInfo>())
         { }
 
         /// <summary>
