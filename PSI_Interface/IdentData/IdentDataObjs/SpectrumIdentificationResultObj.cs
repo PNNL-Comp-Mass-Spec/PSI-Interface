@@ -146,13 +146,23 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public void ReRankBySpecEValue()
         {
             var siiIdBase = Id.ToUpper().Replace("SIR", "SII") + "_";
-            SpectrumIdentificationItems.Sort((a, b) => a.GetSpecEValue().CompareTo(b.GetSpecEValue()));
-            for (var i = 0; i < SpectrumIdentificationItems.Count; i++)
+            var idCount = SpectrumIdentificationItems.Count;
+
+            if (idCount > 1)
+            {
+                SpectrumIdentificationItems.Sort((a, b) => a.GetSpecEValue().CompareTo(b.GetSpecEValue()));
+            }
+
+            for (var i = 0; i < idCount; i++)
             {
                 var rank = i + 1;
                 SpectrumIdentificationItems[i].Rank = rank;
                 SpectrumIdentificationItems[i].Id = siiIdBase + rank;
             }
+
+            if (idCount < 2)
+                return;
+
             Sort();
         }
 
