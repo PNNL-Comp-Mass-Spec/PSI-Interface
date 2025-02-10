@@ -189,9 +189,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             var specIDsByEValue = SpectrumIDsBySpecEValue();
             var bestEVal = specIDsByEValue.First().Key;
 
-            var highestScoringPeptides = specIDsByEValue.First().Value.ConvertAll(item => item.Peptide);
+            var highestScoringItems = specIDsByEValue.First().Value;
 
             // When removing the other IDs, do not remove items that are the same peptide, since we want to keep track of the parent sequences (and thus proteins) for all of the peptides
+            // If they are the same peptide, then we need to merge the SpectrumIdentificationItems, which really only requires copying the PeptideEvidenceRef to the better-scoring SpectrumIdentificationItem
 
             // Use .ToList() to create a distinct list, and allow modification of the original
             foreach (var specId in SpectrumIdentificationItems.ToList())
@@ -199,12 +200,16 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 if (specId.GetSpecEValue() <= bestEVal)
                     continue;
 
-                var keepItem = highestScoringPeptides.Any(comparisonPeptide => comparisonPeptide.Equals(specId.Peptide));
+                var matchedItem = highestScoringItems.FirstOrDefault(comparisonItem => comparisonItem.Peptide.Equals(specId.Peptide));
 
-                if (!keepItem)
+                if (matchedItem != null)
                 {
-                    SpectrumIdentificationItems.Remove(specId);
+                    // Matched an existing peptide match; copy the PeptideEvidenceRefs to the higher-scoring peptide match
+                    matchedItem.PeptideEvidences.AddRange(specId.PeptideEvidences);
                 }
+
+                // Remove the item from the list
+                SpectrumIdentificationItems.Remove(specId);
             }
         }
 
