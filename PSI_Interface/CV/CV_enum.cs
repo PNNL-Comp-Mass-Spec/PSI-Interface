@@ -1198,6 +1198,9 @@ namespace PSI_Interface.CV
             /// <summary>The formation of gas-phase ions by the interaction of a pulsed laser with a solid or liquid material.</summary>
             MS_laser_desorption_ionization = 1000393,
 
+            /// <summary>No reference sequence database was used in the search process to determine the identified peptide sequence, for example as with de novo sequencing.</summary>
+            MS_no_sequence_database = 1000394,
+
             /// <summary>The ionization of any species by the interaction of a focused beam of ions with a sample that is dissolved in a solvent matrix. See also fast atom bombardment and secondary ionization.</summary>
             MS_liquid_secondary_ionization = 1000395,
 
@@ -1993,6 +1996,9 @@ namespace PSI_Interface.CV
             /// <summary>SCIEX or Applied Biosystems software for data acquisition and analysis.</summary>
             MS_4000_Series_Explorer_Software = 1000659,
 
+            /// <summary>Waters Corporation Xevo MRT Mass Spectrometer.</summary>
+            MS_Xevo_MRT_MS = 1000660,
+
             /// <summary>SCIEX or Applied Biosystems software for data acquisition and analysis.</summary>
             MS_GPS_Explorer = 1000661,
 
@@ -2500,6 +2506,9 @@ namespace PSI_Interface.CV
             /// <summary>The extent of the isolation window in m/z above the isolation window target m/z. The lower and upper offsets may be asymmetric about the target m/z.</summary>
             MS_isolation_window_upper_offset = 1000829,
 
+            /// <summary>Precision is the degree of how close repeated measurements are to each other. This can, for example, be expressed using the standard deviation.</summary>
+            MS_precision = 1000830,
+
             /// <summary>Properties of the preparation steps which took place before the measurement was performed.</summary>
             MS_sample_preparation = 1000831,
 
@@ -2612,7 +2621,7 @@ namespace PSI_Interface.CV
             MS_structural_formula = 1000867,
 
             /// <summary>The simplified molecular input line entry specification or SMILES is a specification for unambiguously describing the structure of a chemical compound using a short ASCII string.</summary>
-            MS_SMILES_formula = 1000868,
+            MS_SMILES_string = 1000868,
 
             /// <summary>The gas pressure of the collision gas used for collisional excitation.</summary>
             MS_collision_gas_pressure = 1000869,
@@ -3119,7 +3128,7 @@ namespace PSI_Interface.CV
             MS_single_protein_identification_statistic = 1001116,
 
             /// <summary>The theoretical neutral mass of the molecule (e.g. the peptide sequence and its modifications) not including its charge carrier.</summary>
-            MS_theoretical_mass = 1001117,
+            MS_theoretical_neutral_mass = 1001117,
 
             /// <summary>Parameter information, type of product: b ion with charge on the N-terminal side.</summary>
             MS_param__b_ion = 1001118,
@@ -3309,6 +3318,12 @@ namespace PSI_Interface.CV
 
             /// <summary>The details of the actual run of the search.</summary>
             MS_search_statistics = 1001184,
+
+            /// <summary>Mobilion MBI file format.</summary>
+            MS_Mobilion_MBI_format = 1001185,
+
+            /// <summary>Native format defined by frame=xsd:nonNegativeInteger scan=xsd:nonNegativeInteger.</summary>
+            MS_Mobilion_MBI_nativeID_format = 1001186,
 
             /// <summary>As parameter for search engine: apply the modification only at the N-terminus of a peptide.</summary>
             MS_modification_specificity_peptide_N_term = 1001189,
@@ -6704,7 +6719,7 @@ namespace PSI_Interface.CV
             MS_second_pass_peptide_identification = 1002341,
 
             /// <summary>A framework for differential analysis of mass spectrometry data.</summary>
-            MS_MZmine = 1002342,
+            MS_mzmine = 1002342,
 
             /// <summary>OBSOLETE Stability type of the ion.</summary>
             MS_ion_stability_type_OBSOLETE = 1002343,
@@ -7818,6 +7833,15 @@ namespace PSI_Interface.CV
 
             /// <summary>Ultrafast, High-Quality Feature Deconvolution for Top-Down Proteomics.</summary>
             MS_FLASHDeconv = 1002714,
+
+            /// <summary>Representation of temperature versus time.</summary>
+            MS_temperature_chromatogram = 1002715,
+
+            /// <summary>The component or dimension of an object being measured, for example the temperature of an instrument component over time.</summary>
+            MS_measured_element = 1002716,
+
+            /// <summary>Software for processing and exporting Waters MassLynx and waters_connect data.</summary>
+            MS_Waters_DATA_Convert = 1002717,
 
             /// <summary>LECO bench-top GC time-of-flight mass spectrometer.</summary>
             MS_Pegasus_BT = 1002719,
@@ -9853,6 +9877,105 @@ namespace PSI_Interface.CV
             /// <summary>A Python package for reading, validating, and writing mzQC files.</summary>
             MS_pymzqc = 1003402,
 
+            /// <summary>IUPAC International Chemical Identifier.</summary>
+            MS_InChI = 1003403,
+
+            /// <summary>Bruker Daltonics' timsTOF HT.</summary>
+            MS_timsTOF_HT = 1003404,
+
+            /// <summary>MS1 recalibration using identified peptides as internal calibrants.</summary>
+            MS_mzRecal = 1003405,
+
+            /// <summary>Software designed to group multiple mass spectra by high similarity, generally with the goal of grouping replicate spectra derived from the same analyte.</summary>
+            MS_spectrum_clustering_software = 1003406,
+
+            /// <summary>Identifying crosslinked peptides in complex protein mixtures</summary>
+            MS_Scout = 1003407,
+
+            /// <summary>Scout identification search engine score</summary>
+            MS_Scout_score = 1003408,
+
+            /// <summary>Thermo Scientific Stellar mass spectrometer contains a quadrupole mass filter, a collision cell, and a quadrupole linear ion trap mass analyzer.</summary>
+            MS_Stellar = 1003409,
+
+            /// <summary>The kinetic energy of the electron beam used in dissociation methods induced by a free electron beam, such as electron-capture dissociation (ECD), electron-detachment dissociation (EDD), and electron-activated dissociation (EAD).</summary>
+            MS_electron_beam_energy = 1003410,
+
+            /// <summary>Thermo Scientific Orbitrap IQ-X mass spectrometer with Tribrid architecture consisting of quadrupole mass filter, linear ion trap and Orbitrap mass analyzers.</summary>
+            MS_Orbitrap_IQ_X = 1003411,
+
+            /// <summary>Bruker Daltonics timsTOF Ultra 2.</summary>
+            MS_timsTOF_Ultra_2 = 1003412,
+
+            /// <summary>Kojak open-source crosslinked peptide sequence search engine developed at the Institute for Systems Biology.</summary>
+            MS_Kojak = 1003413,
+
+            /// <summary>The Kojak score for an individual peptide sequence, similar to Comet:xcorr.</summary>
+            MS_Kojak_score = 1003414,
+
+            /// <summary>The Kojak expectation value for an individual peptide sequence.</summary>
+            MS_Kojak_expectation_value = 1003415,
+
+            /// <summary>The number of matched ions for an individual peptide sequence in a Kojak result.</summary>
+            MS_Kojak_matched_ions = 1003416,
+
+            /// <summary>The highest run of consecutive matched ions for an individual peptide sequence in a Kojak result.</summary>
+            MS_Kojak_consecutive_matched_ions = 1003417,
+
+            /// <summary>The difference between the top Kojak score and the next best Kojak score for a PSM.</summary>
+            MS_Kojak_delta_score = 1003418,
+
+            /// <summary>The rank of an individual peptide from the first pass of the Kojak scoring algorithm. Applies only to sequences in a crosslinked result.</summary>
+            MS_Kojak_rank = 1003419,
+
+            /// <summary>The Kojak score for a crosslinked pair of peptide sequences, similar to Comet:xcorr.</summary>
+            MS_Kojak_score_xlink = 1003420,
+
+            /// <summary>The Kojak expectation value for a crosslinked pair of peptide sequences.</summary>
+            MS_Kojak_expectation_value_xlink = 1003421,
+
+            /// <summary>The number of matched ions for a crosslinked pair of peptide sequences in a Kojak result.</summary>
+            MS_Kojak_matched_ions_xlink = 1003422,
+
+            /// <summary>Orbitrap Exploris GC 240 Mass Spectrometer.</summary>
+            MS_Orbitrap_Exploris_GC_240 = 1003423,
+
+            /// <summary>Spectrum for which the peaks are limited to a subset of known product ions that are important for subsequent identification, whose m/z values are corrected to theoretical values, and intensity values are experimentally derived.</summary>
+            MS_selected_fragment_theoretical_m_z_observed_intensity_spectrum = 1003424,
+
+            /// <summary>Cloud-based pipeline for quantitative proteomics that enables the reanalysis of public proteomics data.</summary>
+            MS_quantms = 1003425,
+
+            /// <summary>A software to identify cross-linked peptides from LC-MS/MS spectra.</summary>
+            MS_xQuest_xProphet = 1003426,
+
+            /// <summary>A software for spectral analysis and data interrogation in qualitative review of LC-MS and MS/MS data.</summary>
+            MS_PeakView = 1003427,
+
+            /// <summary>A software for interpreting protein quantification, interaction and post-translational modification data.</summary>
+            MS_Perseus = 1003428,
+
+            /// <summary>A computational platform for analyzing mass spectrometry-based proteomics data.</summary>
+            MS_FragPipe = 1003429,
+
+            /// <summary>A software for LC-MS data management and analysis.</summary>
+            MS_OpenMS = 1003430,
+
+            /// <summary>A tool for the analysis of chemically cross-linked proteins using mass spectrometry.</summary>
+            MS_pLink = 1003431,
+
+            /// <summary>Upgraded version of pLink tool, provides a graphical user interface and faster with newly designed index structure.</summary>
+            MS_pLink2 = 1003432,
+
+            /// <summary>Score difference to the second best identified peptide with a different amino acid sequence.</summary>
+            MS_Andromeda_delta_score = 1003433,
+
+            /// <summary>A serine protease that hydrolyzes peptide bonds at the C-terminus of threonine, alanine, serine, and valine. (EC:3.4.21.12)</summary>
+            MS_AlphaLP = 1003434,
+
+            /// <summary>Regular expression for alphaLP.</summary>
+            MS______TSAV__ = 1003435,
+
             /// <summary>PSI Quality Control controlled vocabulary term.</summary>
             MS_PSI_MS_CV_Quality_Control_Vocabulary = 4000000,
 
@@ -9925,32 +10048,53 @@ namespace PSI_Interface.CV
             /// <summary>QC metric related to measurements of the ambient environment, such as the laboratory.</summary>
             MS_environment_metric = 4000024,
 
+            /// <summary>Representation of the ion current assigned to detected precursors in the series of all MS1 spectra versus time.</summary>
+            MS_precursor_ion_current_chromatogram = 4000025,
+
+            /// <summary>The median of the distribution of observed fragment mass accuracies (MS:4000072)</summary>
+            MS_fragment_ppm_deviation_median = 4000026,
+
+            /// <summary>The mean of the distribution of observed fragment mass accuracies (MS:4000072)</summary>
+            MS_fragment_ppm_deviation_mean = 4000027,
+
+            /// <summary>The standard deviation of the distribution of observed fragment mass accuracies (MS:4000072)</summary>
+            MS_fragment_ppm_deviation_sigma = 4000028,
+
+            /// <summary>The area under the total ion current chromatogram (MS:1000235) of all MS1 spectra.</summary>
+            MS_area_under_TIC_in_MS1 = 4000029,
+
+            /// <summary>The area under the total ion current chromatogram (MS:1000235) of all MS2 spectra.</summary>
+            MS_area_under_TIC_in_MS2 = 4000030,
+
+            /// <summary>The ratio of the area under TIC of MS1 (MS:4000029) divided by the area under the TIC of MS2 (MS:4000030).</summary>
+            MS_peak_area_of_MS1_vs_MS2_signal_ratio = 4000031,
+
             /// <summary>The number of XIC that account for the top half of all XIC-FWHM divided by the number of all XIC.</summary>
             MS_XIC50_fraction = 4000050,
 
             /// <summary>The first to n-th quantile of peak widths for XICs. A metric's value triplet represents the related QuaMeter metrics of XIC-FWHM-Q1,Q2,Q3.</summary>
             MS_XIC_FWHM_quantiles = 4000051,
 
-            /// <summary>The log ratio of successive XIC height quartiles. The metric's value triplet represents the log ratios of XIC-height-Q2 to XIC-height-Q1, XIC-height-Q3 to XIC-height-Q2, XIC-height max to XIC-height-Q3.</summary>
-            MS_XIC_Height_quartile_ratios = 4000052,
+            /// <summary>OBSOLETE. The log ratio of successive XIC height quartiles. The metric's value triplet represents the log ratios of XIC-height-Q2 to XIC-height-Q1, XIC-height-Q3 to XIC-height-Q2, XIC-height max to XIC-height-Q3.</summary>
+            MS_obsolete_XIC_Height_quartile_ratios_OBSOLETE = 4000052,
 
             /// <summary>The retention time duration of the chromatography in seconds.</summary>
             MS_chromatography_duration = 4000053,
 
-            /// <summary>The interval when the respective quarter of the TIC accumulates divided by retention time duration.</summary>
-            MS_TIC_quarters_RT_fraction = 4000054,
+            /// <summary>OBSOLETE. The interval when the respective quarter of the TIC accumulates divided by retention time duration.</summary>
+            MS_obsolete_TIC_quarters_RT_fraction_OBSOLETE = 4000054,
 
-            /// <summary>The interval used for acquisition of the first, second, third, and fourth quarter of all MS1 events divided by retention time duration.</summary>
-            MS_MS1_quarter_RT_fraction = 4000055,
+            /// <summary>OBSOLETE. The interval used for acquisition of the first, second, third, and fourth quarter of all MS1 events divided by retention time duration.</summary>
+            MS_obsolete_MS1_quarter_RT_fraction_OBSOLETE = 4000055,
 
-            /// <summary>The interval used for acquisition of the first, second, third, and fourth quarter of all MS2 events divided by retention time duration.</summary>
-            MS_MS2_quarter_RT_fraction = 4000056,
+            /// <summary>OBSOLETE. The interval used for acquisition of the first, second, third, and fourth quarter of all MS2 events divided by retention time duration.</summary>
+            MS_obsolete_MS2_quarter_RT_fraction_OBSOLETE = 4000056,
 
-            /// <summary>The log ratios of successive TIC-change quartiles. The TIC changes are the list of MS1 total ion current (TIC) value changes from one to the next scan, produced when each MS1 TIC is subtracted from the preceding MS1 TIC. The metric's value triplet represents the log ratio of the TIC-change Q2 to Q1, Q3 to Q2, TIC-change-max to Q3</summary>
-            MS_MS1_TIC_change_quartile_ratios = 4000057,
+            /// <summary>OBSOLETE. The log ratios of successive TIC-change quartiles. The TIC changes are the list of MS1 total ion current (TIC) value changes from one to the next scan, produced when each MS1 TIC is subtracted from the preceding MS1 TIC. The metric's value triplet represents the log ratio of the TIC-change Q2 to Q1, Q3 to Q2, TIC-change-max to Q3</summary>
+            MS_obsolete_MS1_TIC_change_quartile_ratios_OBSOLETE = 4000057,
 
-            /// <summary>The log ratios of successive TIC quartiles. The metric's value triplet represents the log ratios of TIC-Q2 to TIC-Q1, TIC-Q3 to TIC-Q2, TIC-max to TIC-Q3.</summary>
-            MS_MS1_TIC_quartile_ratios = 4000058,
+            /// <summary>OBSOLETE. The log ratios of successive TIC quartiles. The metric's value triplet represents the log ratios of TIC-Q2 to TIC-Q1, TIC-Q3 to TIC-Q2, TIC-max to TIC-Q3.</summary>
+            MS_obsolete_MS1_TIC_quartile_ratios_OBSOLETE = 4000058,
 
             /// <summary>The number of MS1 events in the run.</summary>
             MS_number_of_MS1_spectra = 4000059,
@@ -10277,22 +10421,22 @@ namespace PSI_Interface.CV
             MS_unidentified_MS2_precursor_intensity_distribution_sigma = 4000166,
 
             /// <summary>The ratio of 1+ over 2+ MS2 precursor charge count of all spectra.</summary>
-            MS_ratio_of_1__over_2__of_all_MS2_known_precursor_charges_ = 4000167,
+            MS_ratio_of_1__over_2__of_all_MS2_known_precursor_charges = 4000167,
 
             /// <summary>The ratio of 1+ over 2+ MS2 precursor charge count of identified spectra. The used type of identification should be noted in the metadata or analysis methods section of the recording file for the respective run. In case of multiple acceptance criteria (FDR) available in proteomics, PSM-level FDR should be used for better comparability.</summary>
-            MS_ratio_of_1__over_2__of_identified_MS2_known_precursor_charges_ = 4000168,
+            MS_ratio_of_1__over_2__of_identified_MS2_known_precursor_charges = 4000168,
 
             /// <summary>The ratio of 3+ over 2+ MS2 precursor charge count of all spectra.</summary>
-            MS_ratio_of_3__over_2__of_all_MS2_known_precursor_charges_ = 4000169,
+            MS_ratio_of_3__over_2__of_all_MS2_known_precursor_charges = 4000169,
 
             /// <summary>The ratio of 3+ over 2+ MS2 precursor charge count of identified spectra. The used type of identification should be noted in the metadata or analysis methods section of the recording file for the respective run. In case of multiple acceptance criteria (FDR) available in proteomics, PSM-level FDR should be used for better comparability.</summary>
-            MS_ratio_of_3__over_2__of_identified_MS2_known_precursor_charges_ = 4000170,
+            MS_ratio_of_3__over_2__of_identified_MS2_known_precursor_charges = 4000170,
 
             /// <summary>The ratio of 4+ over 2+ MS2 precursor charge count of all spectra.</summary>
-            MS_ratio_of_4__over_2__of_all_MS2_known_precursor_charges_ = 4000171,
+            MS_ratio_of_4__over_2__of_all_MS2_known_precursor_charges = 4000171,
 
             /// <summary>The ratio of 4+ over 2+ MS2 precursor charge count of identified spectra. The used type of identification should be noted in the metadata or analysis methods section of the recording file for the respective run. In case of multiple acceptance criteria (FDR) available in proteomics, PSM-level FDR should be used for better comparability.</summary>
-            MS_ratio_of_4__over_2__of_identified_MS2_known_precursor_charges_ = 4000172,
+            MS_ratio_of_4__over_2__of_identified_MS2_known_precursor_charges = 4000172,
 
             /// <summary>Mean MS2 precursor charge in all spectra</summary>
             MS_mean_MS2_precursor_charge_in_all_spectra = 4000173,
@@ -10305,6 +10449,42 @@ namespace PSI_Interface.CV
 
             /// <summary>Median MS2 precursor charge in identified spectra. The used type of identification should be noted in the metadata or analysis methods section of the recording file for the respective run. In case of multiple acceptance criteria (FDR) available in proteomics, PSM-level FDR should be used for better comparability.</summary>
             MS_median_MS2_precursor_charge_in_identified_spectra = 4000176,
+
+            /// <summary>The fraction of total protein abundance in a mass spectrometry run or a group of runs which can be attributed to a user-defined list of contaminant proteins (e.g. using the cRAP contaminant database).</summary>
+            MS_contaminant_protein_abundance_fraction = 4000177,
+
+            /// <summary>The mean of the distribution of observed precursor mass accuracies (MS:4000072)</summary>
+            MS_precursor_ppm_deviation_mean = 4000178,
+
+            /// <summary>The standard deviation of the distribution of observed precursor mass accuracies (MS:4000072)</summary>
+            MS_precursor_ppm_deviation_sigma = 4000179,
+
+            /// <summary>The number of identified peptides with corresponding number of missed cleavages after user-defined acceptance criteria are applied. The number of missed cleavages per peptide is given in the 'number of missed cleavages' column, the respective count of such peptides identified in the 'Number of Occurrences' column. The highest 'missed cleavages' row is to be interpreted as that number of missed cleavages or higher.</summary>
+            MS_table_of_missed_cleavage_counts = 4000180,
+
+            /// <summary>OBSOLETE. The interval used for acquisition of the first, second, third, and fourth quarter of all identified MS2 events divided by retention time duration.</summary>
+            MS_obsolete_identified_MS2_quarter_RT_fraction_OBSOLETE = 4000181,
+
+            /// <summary>The log ratio of successive XIC height quantiles. A value triplet represents the original QuaMeter metrics, the log ratios of XIC-Height-Q2 to XIC-Height-Q1, XIC-Height-Q3 to XIC-Height-Q2, XIC-Height max to XIC-Height-Q3. The number of values in the tuple implies the quantile mode.</summary>
+            MS_XIC_Height_quantile_ratios = 4000182,
+
+            /// <summary>The interval when the respective quantile of the TIC accumulates divided by retention time duration. The number of values in the tuple implies the quantile mode.</summary>
+            MS_TIC_quantile_RT_fraction = 4000183,
+
+            /// <summary>The interval used for acquisition of quantiles of all MS1 events divided by retention time duration. The number of values in the tuple implies the quantile mode.</summary>
+            MS_MS1_quantile_RT_fraction = 4000184,
+
+            /// <summary>The interval used for acquisition of quantiles of all MS2 events divided by retention time duration. The number of values in the tuple implies the quantile mode.</summary>
+            MS_MS2_quantile_RT_fraction = 4000185,
+
+            /// <summary>The log ratios of successive TIC-change quantiles. The TIC changes are the list of MS1 total ion current (TIC) value changes from one to the next scan, produced when each MS1 TIC is subtracted from the preceding MS1 TIC. A value triplet represents the original QuaMeter metrics, the log ratio of the TIC-change Q2 to Q1, Q3 to Q2, TIC-change-max to Q3. The number of values in the tuple implies the quantile mode.</summary>
+            MS_MS1_TIC_change_quantile_ratios = 4000186,
+
+            /// <summary>The log ratios of successive TIC quantiles. A value triplet represents the original QuaMeter metrics, the log ratios of TIC-Q2 to TIC-Q1, TIC-Q3 to TIC-Q2, TIC-max to TIC-Q3. The number of values in the tuple implies the quantile mode.</summary>
+            MS_MS1_TIC_quantile_ratios = 4000187,
+
+            /// <summary>The interval used for acquisition of quantiles of all identified MS2 events, after user-defined acceptance criteria are applied, divided by retention time duration. The number of values in the tuple implies the quantile mode. In case of multiple acceptance criteria (FDR) available in proteomics, PSM-level FDR should be used for better comparability.</summary>
+            MS_identified_MS2_quantile_RT_fraction = 4000188,
 
             /// <summary>A practiced and regimented skill or series of actions.</summary>
             NCIT_Technique = 100316847,
@@ -10323,6 +10503,9 @@ namespace PSI_Interface.CV
 
             /// <summary>The period of time during which something continues.</summary>
             NCIT_Duration = 100325330,
+
+            /// <summary>A numeral or string of numerals expressing value, quantity, or identification.</summary>
+            NCIT_Number = 100325337,
 
             /// <summary>A thing done.</summary>
             NCIT_Action = 100325404,
@@ -10347,6 +10530,9 @@ namespace PSI_Interface.CV
 
             /// <summary>An observation in a data set that is numerically distant from the rest of the data.</summary>
             NCIT_Outlier = 100379083,
+
+            /// <summary>The number of times something happened.</summary>
+            NCIT_Number_of_Occurrences = 100450827,
 
             /// <summary>PSI Extended FASTA Format controlled vocabulary term.</summary>
             PEFF_PEFF_CV_term = 200000001,
@@ -15049,14 +15235,14 @@ namespace PSI_Interface.CV
             /// <summary>Desthiobiotinylation of cysteine with DBIA probe.</summary>
             UNIMOD_DBIA = 300002062,
 
-            /// <summary>Monomodification of Nγ-propargyl-L-Gln probe with clicked desthiobiotin-azide.</summary>
-            UNIMOD_Mono_N_gamma_propargyl_L_Gln_desthiobiotin = 300002067,
+            /// <summary>Monomodification of Ngamma-propargyl-L-Gln probe with clicked desthiobiotin-azide.</summary>
+            UNIMOD_Mono_Ngamma_propargyl_L_Gln_desthiobiotin = 300002067,
 
-            /// <summary>Dimodification of L-Glu and Nγ-propargyl-L-Gln probe with clicked desthiobiotin-azide.</summary>
-            UNIMOD_Di_L_Glu_N_gamma_propargyl_L_Gln_desthiobiotin = 300002068,
+            /// <summary>Dimodification of L-Glu and Ngamma-propargyl-L-Gln probe with clicked desthiobiotin-azide.</summary>
+            UNIMOD_Di_L_Glu_Ngamma_propargyl_L_Gln_desthiobiotin = 300002068,
 
-            /// <summary>Dimodification of L-Gln and Nγ-propargyl-L-Gln probe with clicked desthiobiotin-azide.</summary>
-            UNIMOD_Di_L_Gln_N_gamma_propargyl_L_Gln_desthiobiotin = 300002069,
+            /// <summary>Dimodification of L-Gln and Ngamma-propargyl-L-Gln probe with clicked desthiobiotin-azide.</summary>
+            UNIMOD_Di_L_Gln_Ngamma_propargyl_L_Gln_desthiobiotin = 300002069,
 
             /// <summary>Monomodification with glutamine.</summary>
             UNIMOD_L_Gln = 300002070,
@@ -15090,6 +15276,69 @@ namespace PSI_Interface.CV
 
             /// <summary>SUMOylation by Endogenous SUMO2/3 following Lys C and Asp-N serial digestion.</summary>
             UNIMOD_DVFQQQTGG = 300002085,
+
+            /// <summary>Preomics iST-NHS Kit specific cysteine modification.</summary>
+            UNIMOD_iST_NHS_specific_cysteine_modification = 300002086,
+
+            /// <summary>13C(2) 15N(1) Silac label.</summary>
+            UNIMOD_Label_13C_2_15N_1_ = 300002088,
+
+            /// <summary>Desthiobiotinylation of cysteine with DPIA (Desthiobiotin polyethyleneoxide iodoacetamide) probe.</summary>
+            UNIMOD_DPIA = 300002106,
+
+            /// <summary>Acetoacetylation.</summary>
+            UNIMOD_Acetoacetyl = 300002107,
+
+            /// <summary>Isovalerylation.</summary>
+            UNIMOD_Isovaleryl = 300002108,
+
+            /// <summary>2-methylbutyrylation.</summary>
+            UNIMOD_2_methylbutyryl = 300002109,
+
+            /// <summary>Tiglylation.</summary>
+            UNIMOD_Tiglyl = 300002110,
+
+            /// <summary>3-methylglutarylation.</summary>
+            UNIMOD_3_methylglutaryl = 300002111,
+
+            /// <summary>3-methylglutaconylation.</summary>
+            UNIMOD_3_methylglutaconyl = 300002112,
+
+            /// <summary>3-hydroxy-3-methylglutarylation.</summary>
+            UNIMOD_3_hydroxy_3_methylglutaryl = 300002113,
+
+            /// <summary>Lactylation(Lac).</summary>
+            UNIMOD_Lactylation = 300002114,
+
+            /// <summary>Pyruvoylation.</summary>
+            UNIMOD_Pyruvoyl = 300002115,
+
+            /// <summary>Glyoxylylation.</summary>
+            UNIMOD_Glyoxylyl = 300002116,
+
+            /// <summary>Itaconatylation.</summary>
+            UNIMOD_Itaconatyl = 300002117,
+
+            /// <summary>Itaconylation.</summary>
+            UNIMOD_Itaconyl = 300002118,
+
+            /// <summary>UFMylation residue.</summary>
+            UNIMOD_ValGly = 300002119,
+
+            /// <summary>Pentanoylation.</summary>
+            UNIMOD_Pentanoyl = 300002120,
+
+            /// <summary>Hexanoylation.</summary>
+            UNIMOD_Hexanoyl = 300002121,
+
+            /// <summary>Sixplex Tandem Mass Tag 13C(6) 15N(2) Silac label.</summary>
+            UNIMOD_Label_13C_6_15N_2__TMT6plex = 300002122,
+
+            /// <summary>TMTpro Tandem Mass Tag 13C(6) 15N(2) Silac label.</summary>
+            UNIMOD_Label_13C_6_15N_2__TMTpro = 300002123,
+
+            /// <summary>Cleaved 2PCA clicked to biotin-SS-azide.</summary>
+            UNIMOD_2PCA_triazole_ethanethiol = 300002126,
 
             /// <summary>A unit of measurement is a standardized quantity of a physical quality.</summary>
             UO_unit = 400000000,
