@@ -211,6 +211,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 // Remove the item from the list
                 SpectrumIdentificationItems.Remove(specId);
             }
+
+            foreach (var specId in SpectrumIdentificationItems)
+            {
+                specId.PeptideEvidences.Sort(PeptideEvidenceRefObj.SortByDbNameAndStartIndexComparer);
+            }
         }
 
         /// <summary>

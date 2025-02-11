@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using PSI_Interface.IdentData.mzIdentML;
 
 namespace PSI_Interface.IdentData.IdentDataObjs
@@ -12,6 +14,11 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// </remarks>
     public class PeptideEvidenceRefObj : IdentDataInternalTypeAbstract, IEquatable<PeptideEvidenceRefObj>
     {
+        /// <summary>
+        /// IComparer class to sort lists of <see cref="PeptideEvidenceRefObj"/> by database name, then by start index of the peptide in the database file
+        /// </summary>
+        public static IComparer<PeptideEvidenceRefObj> SortByDbNameAndStartIndexComparer { get; } = new SortByDbAndStartIndex();
+
         private PeptideEvidenceObj _peptideEvidence;
         private string _peptideEvidenceRef;
 
@@ -110,5 +117,77 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             return PeptideEvidence?.GetHashCode() ?? 0;
         }
         #endregion
+
+        /// <summary>
+        /// IComparer class to sort lists of <see cref="PeptideEvidenceRefObj"/> by database name, then by start index of the peptide in the database file
+        /// </summary>
+        public class SortByDbAndStartIndex : IComparer<PeptideEvidenceRefObj>
+        {
+            private readonly Regex _msgfPlusPepEvFastaIndexRegex = new Regex(@"^PepEv_(?<index>\d+)_", RegexOptions.Compiled);
+
+            /// <summary>
+            /// Use a regex to extract the index MS-GF+ uses in peptide evidence IDs, if possible
+            /// </summary>
+            /// <param name="obj"></param>
+            /// <param name="index"></param>
+            /// <returns></returns>
+            private bool TryGetMsgfPlusFastaIndex(PeptideEvidenceRefObj obj, out int index)
+            {
+                index = -1;
+                var match = _msgfPlusPepEvFastaIndexRegex.Match(obj.PeptideEvidenceRef);
+                if (!match.Success)
+                {
+                    return false;
+                }
+
+                index = int.Parse(match.Groups["index"].Value);
+                return true;
+            }
+
+            /// <summary>
+            /// IComparer implementation
+            /// </summary>
+            /// <param name="x"></param>
+            /// <param name="y"></param>
+            /// <returns></returns>
+            public int Compare(PeptideEvidenceRefObj x, PeptideEvidenceRefObj y)
+            {
+                if (ReferenceEquals(x, y)) return 0;
+                if (y is null) return 1;
+                if (x is null) return -1;
+
+                if (x.PeptideEvidence?.DBSequence?.SearchDatabase?.Location is null ||
+                    y.PeptideEvidence?.DBSequence?.SearchDatabase?.Location is null)
+                {
+                    // For MS-GF+, avoid using string comparison directly on PeptideEvidenceRef because the first sortable text is a number
+                    if (TryGetMsgfPlusFastaIndex(x, out var xI) && TryGetMsgfPlusFastaIndex(y, out var yI))
+                    {
+                        return xI.CompareTo(yI);
+                    }
+
+                    return string.Compare(x.PeptideEvidenceRef, y.PeptideEvidenceRef, StringComparison.Ordinal);
+                }
+
+                var compare1 = string.Compare(x.PeptideEvidence.DBSequence.SearchDatabase.Name, y.PeptideEvidence.DBSequence.SearchDatabase.Name, StringComparison.Ordinal);
+                if (x.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null &&
+                    y.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null)
+                {
+                    compare1 = string.Compare(x.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName.Item.Name, y.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName.Item.Name, StringComparison.Ordinal);
+                }
+
+                if (compare1 != 0)
+                {
+                    return compare1;
+                }
+
+                // For MS-GF+, avoid using string comparison directly on PeptideEvidenceRef because the first sortable text is a number
+                if (TryGetMsgfPlusFastaIndex(x, out var xIndex) && TryGetMsgfPlusFastaIndex(y, out var yIndex))
+                {
+                    return xIndex.CompareTo(yIndex);
+                }
+
+                return string.Compare(x.PeptideEvidenceRef, y.PeptideEvidenceRef, StringComparison.Ordinal);
+            }
+        }
     }
 }
