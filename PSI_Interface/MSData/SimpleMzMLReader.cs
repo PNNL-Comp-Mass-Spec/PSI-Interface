@@ -4678,8 +4678,7 @@ namespace PSI_Interface.MSData
                 }
             }
 
-            var isolationWindow = new IsolationWindow(targetMz, lowerOffset, upperOffset, pgiw.CVParams, pgiw.UserParams);
-            return isolationWindow;
+            return new IsolationWindow(targetMz, lowerOffset, upperOffset, pgiw.CVParams, pgiw.UserParams);
         }
 
         /// <summary>
