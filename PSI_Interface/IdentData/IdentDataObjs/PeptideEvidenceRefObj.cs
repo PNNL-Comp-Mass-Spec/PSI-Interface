@@ -134,14 +134,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         /// </summary>
         public class SortByDbAndStartIndex : IComparer<PeptideEvidenceRefObj>
         {
+            // ReSharper disable once ArrangeObjectCreationWhenTypeEvident
             private readonly Regex _msgfPlusPepEvFastaIndexRegex = new Regex(@"^PepEv_(?<index>\d+)_", RegexOptions.Compiled);
 
             /// <summary>
             /// Use a regex to extract the index MS-GF+ uses in peptide evidence IDs, if possible
             /// </summary>
-            /// <param name="obj"></param>
-            /// <param name="index"></param>
-            /// <returns></returns>
+            /// <param name="obj">Peptide evidence object</param>
+            /// <param name="index">Output: FASTA file index</param>
+            /// <returns>True if the index is found, otherwise false</returns>
             private bool TryGetMsgfPlusFastaIndex(PeptideEvidenceRefObj obj, out int index)
             {
                 index = -1;
