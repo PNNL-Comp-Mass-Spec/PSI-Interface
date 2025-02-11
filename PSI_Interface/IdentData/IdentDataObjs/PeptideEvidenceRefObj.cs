@@ -155,9 +155,9 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             /// <summary>
             /// IComparer implementation
             /// </summary>
-            /// <param name="x"></param>
-            /// <param name="y"></param>
-            /// <returns></returns>
+            /// <param name="x">Peptide evidence ref object 1</param>
+            /// <param name="y">Peptide evidence ref object 2</param>
+            /// <returns>Comparison result</returns>
             public int Compare(PeptideEvidenceRefObj x, PeptideEvidenceRefObj y)
             {
                 if (ReferenceEquals(x, y)) return 0;
