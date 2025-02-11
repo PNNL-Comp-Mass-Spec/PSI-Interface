@@ -168,7 +168,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     return string.Compare(x.PeptideEvidenceRef, y.PeptideEvidenceRef, StringComparison.Ordinal);
                 }
 
-                var compare1 = string.Compare(x.PeptideEvidence.DBSequence.SearchDatabase.Name, y.PeptideEvidence.DBSequence.SearchDatabase.Name, StringComparison.Ordinal);
+                var compare1 = string.Compare(x.PeptideEvidence.DBSequence.SearchDatabase.Location, y.PeptideEvidence.DBSequence.SearchDatabase.Location, StringComparison.Ordinal);
                 if (x.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null &&
                     y.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null)
                 {
