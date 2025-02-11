@@ -178,15 +178,15 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                         return xI.CompareTo(yI);
                     }
 
-                    return string.Compare(x.PeptideEvidenceRef, y.PeptideEvidenceRef, StringComparison.Ordinal);
+                    return string.CompareOrdinal(x.PeptideEvidenceRef, y.PeptideEvidenceRef);
                 }
 
-                var compare1 = string.Compare(x.PeptideEvidence.DBSequence.SearchDatabase.Location, y.PeptideEvidence.DBSequence.SearchDatabase.Location, StringComparison.Ordinal);
+                var compare1 = string.CompareOrdinal(x.PeptideEvidence.DBSequence.SearchDatabase.Location, y.PeptideEvidence.DBSequence.SearchDatabase.Location);
 
                 if (x.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null &&
                     y.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null)
                 {
-                    compare1 = string.Compare(x.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName.Item.Name, y.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName.Item.Name, StringComparison.Ordinal);
+                    compare1 = string.CompareOrdinal(x.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName.Item.Name, y.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName.Item.Name);
                 }
 
                 if (compare1 != 0)
@@ -200,7 +200,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     return xIndex.CompareTo(yIndex);
                 }
 
-                return string.Compare(x.PeptideEvidenceRef, y.PeptideEvidenceRef, StringComparison.Ordinal);
+                return string.CompareOrdinal(x.PeptideEvidenceRef, y.PeptideEvidenceRef);
             }
         }
     }
