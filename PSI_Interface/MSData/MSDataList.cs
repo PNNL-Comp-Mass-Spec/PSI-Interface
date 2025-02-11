@@ -56,6 +56,7 @@ namespace PSI_Interface.MSData
                 if (!ReferenceEquals(_msData, value))
                 {
                     _msData = value;
+
                     foreach (var item in this)
                     {
                         item.MsData = _msData;
@@ -73,6 +74,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _defaultArrayLength = value;
+
                 foreach (var item in this)
                 {
                     item.BdaDefaultArrayLength = _defaultArrayLength;

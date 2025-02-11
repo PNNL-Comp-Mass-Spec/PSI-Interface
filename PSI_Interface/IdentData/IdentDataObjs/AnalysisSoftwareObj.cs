@@ -48,6 +48,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (asi.ContactRole != null)
                 _contactRole = new ContactRoleObj(asi.ContactRole, IdentData);
+
             if (asi.SoftwareName != null)
                 _softwareName = new ParamObj(asi.SoftwareName, IdentData);
         }
@@ -60,6 +61,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _contactRole = value;
+
                 if (_contactRole != null)
                     _contactRole.IdentData = IdentData;
             }
@@ -73,6 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _softwareName = value;
+
                 if (_softwareName != null)
                     _softwareName.IdentData = IdentData;
             }

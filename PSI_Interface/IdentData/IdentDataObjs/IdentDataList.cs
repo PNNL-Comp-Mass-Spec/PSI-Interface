@@ -125,6 +125,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 if (!ReferenceEquals(_identData, value))
                 {
                     _identData = value;
+
                     foreach (var item in this)
                     {
                         item.IdentData = _identData;
@@ -139,6 +140,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             foreach (var item in this)
             {
                 item.IdentData = _identData;
+
                 if (force)
                 {
                     item.CascadeProperties();
@@ -157,10 +159,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             //    OnAdd(this, null);
             //}
             item.IdentData = _identData;
+
             if (idMap != null && item is IIdentifiableType idType && !idMap.ContainsKey(idType.Id))
             {
                 idMap.Add(idType.Id, item);
             }
+
             base.Add(item);
         }
 
@@ -176,6 +180,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 foreach (var item in itemsColl)
                 {
                     item.IdentData = _identData;
+
                     if (idMap != null && item is IIdentifiableType idType && !idMap.ContainsKey(idType.Id))
                     {
                         idMap.Add(idType.Id, item);
@@ -231,6 +236,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return false;
             }
+
             return Equals(o);
         }
 
@@ -244,14 +250,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null || other.Count == 0)
             {
                 return false;
             }
+
             if (Count != other.Count)
             {
                 return false;
             }
+
             foreach (var item in this)
             {
                 var found = false;
@@ -270,6 +279,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -284,11 +294,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return 0;
                 }
+
                 var hashCode = 1;
+
                 foreach (var item in this)
                 {
                     hashCode = (hashCode * 397) ^ item.GetHashCode();
                 }
+
                 return hashCode;
             }
         }
@@ -308,6 +321,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public static CVParamObj GetCvParam(this IdentDataList<CVParamObj> cvParamList, CV.CV.CVID cvid, string valueIfNotFound)
         {
             var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);
+
             if (cvParamList == null || cvParamList.Count == 0)
             {
                 return defaultCvParam;
@@ -320,6 +334,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     return cvp;
                 }
             }
+
             return defaultCvParam;
         }
 
@@ -333,6 +348,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         public static CVParamObj GetCvParam(this IdentDataList<ParamBaseObj> paramList, CV.CV.CVID cvid, string valueIfNotFound)
         {
             var defaultCvParam = new CVParamObj(CV.CV.CVID.CVID_Unknown, valueIfNotFound);
+
             if (paramList == null || paramList.Count == 0)
             {
                 return defaultCvParam;
@@ -345,6 +361,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     return cvp;
                 }
             }
+
             return defaultCvParam;
         }
     }

@@ -62,6 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _specificityRules = value;
+
                 if (_specificityRules != null)
                     _specificityRules.IdentData = IdentData;
             }

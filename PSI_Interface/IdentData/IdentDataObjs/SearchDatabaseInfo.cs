@@ -67,6 +67,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (sd.DatabaseName != null)
                 _databaseName = new ParamObj(sd.DatabaseName, IdentData);
+
             if (sd.FileFormat != null)
                 _fileFormat = new FileFormatInfo(sd.FileFormat, IdentData);
         }
@@ -82,6 +83,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _databaseName = value;
+
                 if (_databaseName != null)
                     _databaseName.IdentData = IdentData;
             }
@@ -171,6 +173,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _fileFormat = value;
+
                 if (_fileFormat != null)
                     _fileFormat.IdentData = IdentData;
             }

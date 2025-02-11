@@ -50,6 +50,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIdentificationItems = value;
+
                 if (_spectrumIdentificationItems != null)
                 {
                     _spectrumIdentificationItems.IdentData = IdentData;
@@ -67,11 +68,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return _peptideEvidence.Id;
                 }
+
                 return _peptideEvidenceRef;
             }
             set
             {
                 _peptideEvidenceRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     PeptideEvidence = IdentData.FindPeptideEvidence(value);
@@ -87,6 +90,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptideEvidence = value;
+
                 if (_peptideEvidence != null)
                 {
                     _peptideEvidence.IdentData = IdentData;

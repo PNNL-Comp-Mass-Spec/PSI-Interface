@@ -139,6 +139,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         {
             mzIdentMl12Url = "http://psidev.info/psi/pi/mzIdentML/1.2";
             xsdUrl = "https://raw.githubusercontent.com/HUPO-PSI/mzIdentML/master/schema/mzIdentML1.2.0.xsd";
+
             return GenerateMzIdentMlOverrides(mzIdentMl12Url);
         }
 

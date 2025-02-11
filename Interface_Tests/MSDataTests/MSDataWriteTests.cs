@@ -45,6 +45,7 @@ namespace Interface_Tests.MSDataTests
         public void MzMLWriteTest(string inPath, string outFolderName, int expectedSpectra)
         {
             var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
+
             if (!sourceFile.Exists)
             {
                 Console.WriteLine("File not found: " + sourceFile.FullName);
@@ -55,6 +56,7 @@ namespace Interface_Tests.MSDataTests
                 throw new DirectoryNotFoundException("Cannot determine the parent folder of " + sourceFile.FullName);
 
             var outFolder = new DirectoryInfo(Path.Combine(sourceFile.DirectoryName, outFolderName));
+
             if (!outFolder.Exists)
                 outFolder.Create();
 

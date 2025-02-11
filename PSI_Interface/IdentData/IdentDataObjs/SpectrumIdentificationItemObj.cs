@@ -228,6 +228,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_massTable != null)
                     return _massTable.Id;
+
                 return _massTableRef;
             }
             set
@@ -270,6 +271,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_sample != null)
                     return _sample.Id;
+
                 return _sampleRef;
             }
             set

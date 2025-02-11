@@ -40,9 +40,11 @@ namespace CV_Generator
 
             var fileData = (new WebClient()).DownloadString(url);
             FileData = new OBO_File(url);
+
             using (var reader = new StringReader(fileData))
             {
                 var line = reader.ReadLine();
+
                 while (string.IsNullOrWhiteSpace(line) && line != null)
                 {
                     line = reader.ReadLine();
@@ -50,6 +52,7 @@ namespace CV_Generator
 
                 var type = "header";
                 var data = new List<KeyValuePair<string, string>>();
+
                 while (reader.Peek() != -1 && !string.IsNullOrWhiteSpace(line))
                 {
                     if (line.StartsWith("["))
@@ -57,12 +60,15 @@ namespace CV_Generator
                         type = line;
 
                         line = reader.ReadLine();
+
                         while (string.IsNullOrWhiteSpace(line) && line != null)
                         {
                             line = reader.ReadLine();
                         }
                     }
+
                     data.Clear();
+
                     while (!string.IsNullOrWhiteSpace(line) && !line.StartsWith("["))
                     {
                         var keyStop = line.IndexOf(':');
@@ -70,6 +76,7 @@ namespace CV_Generator
                         data.Add(new KeyValuePair<string, string>(line.Substring(0, keyStop), line.Substring(valueStart)));
 
                         line = reader.ReadLine();
+
                         while (string.IsNullOrWhiteSpace(line) && line != null)
                         {
                             line = reader.ReadLine();
@@ -83,6 +90,7 @@ namespace CV_Generator
                             break;
                         case "[term]":
                             var term = new OBO_Term(data);
+
                             if (FileData.Terms.ContainsKey(term.Id))
                             {
                                 Console.WriteLine("Warning: Duplicate term id found");
@@ -114,6 +122,7 @@ namespace CV_Generator
             if (FileData.Terms.Count > 0)
             {
                 var namespaces = FileData.Terms.Values.Select(x => x.Id_Namespace).Distinct();
+
                 foreach (var ns in namespaces)
                 {
                     if (FileData.IsGeneratedId)

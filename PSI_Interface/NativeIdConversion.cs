@@ -13,6 +13,7 @@ namespace PSI_Interface
         {
             var tokens = nativeId.Split(new[] { '\t', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             var map = new Dictionary<string, string>();
+
             foreach (var token in tokens)
             {
                 var equals = token.IndexOf('=');
@@ -20,6 +21,7 @@ namespace PSI_Interface
                 var value = token.Substring(equals + 1);
                 map.Add(name, value);
             }
+
             return map;
         }
 
@@ -79,21 +81,26 @@ namespace PSI_Interface
             //        else if (bal::starts_with(id, "index=")) return value(id, "index");
             //        return "";
             //}
+
             if (nativeId.Contains("="))
             {
                 var map = ParseNativeId(nativeId);
+
                 if (map.ContainsKey("spectrum"))
                 {
                     return map["spectrum"];
                 }
+
                 if (map.ContainsKey("index"))
                 {
                     return map["index"];
                 }
+
                 if (map.ContainsKey("scanId"))
                 {
                     return map["scanId"];
                 }
+
                 if (map.ContainsKey("scan"))
                 {
                     return map["scan"];

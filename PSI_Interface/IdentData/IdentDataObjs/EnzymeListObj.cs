@@ -49,6 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _enzymes = value;
+
                 if (_enzymes != null)
                     _enzymes.IdentData = IdentData;
             }

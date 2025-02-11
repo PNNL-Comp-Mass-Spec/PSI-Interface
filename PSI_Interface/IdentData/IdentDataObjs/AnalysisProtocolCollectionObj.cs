@@ -42,6 +42,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 SpectrumIdentificationProtocols.AddRange(apc.SpectrumIdentificationProtocol, sip => new SpectrumIdentificationProtocolObj(sip, IdentData));
             }
+
             if (apc.ProteinDetectionProtocol != null)
             {
                 _proteinDetectionProtocol = new ProteinDetectionProtocolObj(apc.ProteinDetectionProtocol, IdentData);
@@ -55,6 +56,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIdentificationProtocols = value;
+
                 if (_spectrumIdentificationProtocols != null)
                 {
                     _spectrumIdentificationProtocols.IdentData = IdentData;
@@ -69,6 +71,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _proteinDetectionProtocol = value;
+
                 if (_proteinDetectionProtocol != null)
                 {
                     _proteinDetectionProtocol.IdentData = IdentData;

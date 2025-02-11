@@ -19,10 +19,12 @@ namespace PSI_Interface.Utils
             {
                 return true;
             }
+
             if (first == null || first.Count == 0 || second == null || second.Count == 0)
             {
                 return false;
             }
+
             if (first.Count != second.Count)
             {
                 return false;
@@ -46,6 +48,7 @@ namespace PSI_Interface.Utils
                     return false;
                 }
             }
+
             return true;
         }
 
@@ -62,10 +65,12 @@ namespace PSI_Interface.Utils
             {
                 return true;
             }
+
             if (first == null || first.Count == 0 || second == null || second.Count == 0)
             {
                 return false;
             }
+
             if (first.Count != second.Count)
             {
                 return false;
@@ -78,6 +83,7 @@ namespace PSI_Interface.Utils
                     return false;
                 }
             }
+
             return true;
         }
     }

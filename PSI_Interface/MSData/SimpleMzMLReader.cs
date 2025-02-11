@@ -2656,6 +2656,7 @@ namespace PSI_Interface.MSData
                         break;
                 }
             }
+
             cvTranslator = new CVTranslator(cvs);
             reader.Dispose();
         }

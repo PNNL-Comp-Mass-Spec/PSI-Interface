@@ -15,6 +15,7 @@ namespace CV_Generator.OBO_Objects
             set
             {
                 _header = value;
+
                 if (!string.IsNullOrWhiteSpace(_header.DataVersion))
                 {
                     Version = _header.DataVersion;

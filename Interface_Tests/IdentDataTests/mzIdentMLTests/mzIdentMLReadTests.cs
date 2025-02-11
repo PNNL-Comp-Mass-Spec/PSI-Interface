@@ -46,9 +46,11 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
             var identData = MzIdentMlReaderWriter.Read(sourceFile.FullName);
             var specResults = 0;
             var specItems = 0;
+
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
             {
                 specResults += specList.SpectrumIdentificationResult.Count;
+
                 foreach (var specResult in specList.SpectrumIdentificationResult)
                 {
                     specItems += specResult.SpectrumIdentificationItem.Count;

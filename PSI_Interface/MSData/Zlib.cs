@@ -33,6 +33,7 @@ namespace PSI_Interface.MSData
                     var newBytes = new byte[expectedBytes];
                     // Don't need to remove the last 4 bytes, we never attempt to decompress them
                     var bytesRead = inflater.Read(newBytes, 0, expectedBytes);
+
                     if (bytesRead != expectedBytes)
                     {
                         throw new InvalidDataException("Fail decompressing data...");
@@ -57,6 +58,7 @@ namespace PSI_Interface.MSData
 
             // Get the bytes of the adler32, making sure they are network order/big-endian
             var adler32Bytes = BitConverter.GetBytes(adler32);
+
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(adler32Bytes);
@@ -93,6 +95,7 @@ namespace PSI_Interface.MSData
                 zlibCompressedBytes.AddRange(adler32Bytes);
 
                 compressedBytes = zlibCompressedBytes.Count;
+
                 return zlibCompressedBytes.ToArray();
             }
         }
@@ -174,6 +177,7 @@ namespace PSI_Interface.MSData
                 }
 
                 var nSize = bytesBuff.GetLength(0);
+
                 if (nSize == 0)
                 {
                     return null;
@@ -181,6 +185,7 @@ namespace PSI_Interface.MSData
 
                 var unSum1 = unAdlerCheckSum & 0xFFFF;
                 var unSum2 = (unAdlerCheckSum >> 16) & 0xFFFF;
+
                 for (var i = 0; i < nSize; i++)
                 {
                     unSum1 = (unSum1 + bytesBuff[i]) % AdlerBase;
@@ -225,13 +230,16 @@ namespace PSI_Interface.MSData
                     }
 
                     var bytesBuff = new byte[AdlerBuff];
+
                     for (uint i = 0; i < fs.Length; i++)
                     {
                         var index = i % AdlerBuff;
                         bytesBuff[index] = (byte) fs.ReadByte();
+
                         if (index == AdlerBuff - 1 || i == fs.Length - 1)
                         {
                             var checksumValueX = MakeForBuff(bytesBuff, checksumValue);
+
                             if (checksumValueX.HasValue)
                             {
                                 checksumValue = checksumValueX.Value;

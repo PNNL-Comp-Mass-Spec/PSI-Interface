@@ -52,6 +52,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _proteinDetectionHypotheses = value;
+
                 if (_proteinDetectionHypotheses != null)
                     _proteinDetectionHypotheses.IdentData = IdentData;
             }

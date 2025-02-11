@@ -39,6 +39,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 TranslationTables.AddRange(dt.TranslationTable, t => new TranslationTableObj(t, IdentData));
             }
+
             if (dt.frames != null)
                 Frames = new List<int>(dt.frames);
         }
@@ -53,6 +54,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _translationTables = value;
+
                 if (_translationTables != null)
                     _translationTables.IdentData = IdentData;
             }

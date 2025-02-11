@@ -74,6 +74,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _fragmentArrays = value;
+
                 if (_fragmentArrays != null)
                 {
                     _fragmentArrays.IdentData = IdentData;
@@ -92,6 +93,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _userParams = value;
+
                 if (_userParams != null)
                 {
                     _userParams.IdentData = IdentData;
@@ -112,6 +114,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _cvParams = value;
+
                 if (_cvParams != null)
                 {
                     _cvParams.IdentData = IdentData;

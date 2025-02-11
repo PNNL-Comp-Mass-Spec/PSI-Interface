@@ -72,32 +72,41 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (sip.SearchType != null)
                 _searchType = new ParamObj(sip.SearchType, IdentData);
+
             if (sip.AdditionalSearchParams != null)
                 _additionalSearchParams = new ParamListObj(sip.AdditionalSearchParams, IdentData);
+
             if (sip.ModificationParams?.Count > 0)
             {
                 ModificationParams.AddRange(sip.ModificationParams, mp => new SearchModificationObj(mp, IdentData));
             }
+
             if (sip.Enzymes != null)
                 _enzymes = new EnzymeListObj(sip.Enzymes, IdentData);
+
             if (sip.MassTable?.Count > 0)
             {
                 MassTables.AddRange(sip.MassTable, mt => new MassTableObj(mt, IdentData));
             }
+
             if (sip.FragmentTolerance?.Count > 0)
             {
                 FragmentTolerances.AddRange(sip.FragmentTolerance, ft => new CVParamObj(ft, IdentData));
             }
+
             if (sip.ParentTolerance?.Count > 0)
             {
                 ParentTolerances.AddRange(sip.ParentTolerance, pt => new CVParamObj(pt, IdentData));
             }
+
             if (sip.Threshold != null)
                 _threshold = new ParamListObj(sip.Threshold, IdentData);
+
             if (sip.DatabaseFilters?.Count > 0)
             {
                 DatabaseFilters.AddRange(sip.DatabaseFilters, df => new FilterInfo(df, IdentData));
             }
+
             if (sip.DatabaseTranslation != null)
                 _databaseTranslation = new DatabaseTranslationObj(sip.DatabaseTranslation, IdentData);
         }
@@ -110,6 +119,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _searchType = value;
+
                 if (_searchType != null)
                     _searchType.IdentData = IdentData;
             }
@@ -123,6 +133,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _additionalSearchParams = value;
+
                 if (_additionalSearchParams != null)
                     _additionalSearchParams.IdentData = IdentData;
             }
@@ -136,6 +147,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _modificationParams = value;
+
                 if (_modificationParams != null)
                     _modificationParams.IdentData = IdentData;
             }
@@ -148,6 +160,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _enzymes = value;
+
                 if (_enzymes != null)
                     _enzymes.IdentData = IdentData;
             }
@@ -160,6 +173,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _massTables = value;
+
                 if (_massTables != null)
                     _massTables.IdentData = IdentData;
             }
@@ -173,6 +187,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _fragmentTolerances = value;
+
                 if (_fragmentTolerances != null)
                     _fragmentTolerances.IdentData = IdentData;
             }
@@ -186,6 +201,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _parentTolerances = value;
+
                 if (_parentTolerances != null)
                     _parentTolerances.IdentData = IdentData;
             }
@@ -202,6 +218,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _threshold = value;
+
                 if (_threshold != null)
                     _threshold.IdentData = IdentData;
             }
@@ -215,6 +232,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _databaseFilters = value;
+
                 if (_databaseFilters != null)
                     _databaseFilters.IdentData = IdentData;
             }
@@ -227,6 +245,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _databaseTranslation = value;
+
                 if (_databaseTranslation != null)
                     _databaseTranslation.IdentData = IdentData;
             }
@@ -240,11 +259,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_analysisSoftware != null)
                     return _analysisSoftware.Id;
+
                 return _analysisSoftwareRef;
             }
             set
             {
                 _analysisSoftwareRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     AnalysisSoftware = IdentData.FindAnalysisSoftware(value);
             }
@@ -258,6 +279,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _analysisSoftware = value;
+
                 if (_analysisSoftware != null)
                 {
                     _analysisSoftware.IdentData = IdentData;

@@ -27,6 +27,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 if (!ReferenceEquals(_identData, value))
                 {
                     _identData = value;
+
                     if (_identData != null)
                     {
                         CascadeProperties();
@@ -48,6 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 var propValue = prop.GetValue(this);
                 var propType = prop.PropertyType.GetTypeInfo();
+
                 if (propValue != null)
                 {
                     if (prop.Name.Equals("IdentData"))
@@ -59,6 +61,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                     {
                         var value = (IdentDataInternalTypeAbstract)prop.GetValue(this);
                         value.IdentData = _identData;
+
                         if (force)
                         {
                             value.CascadeProperties();

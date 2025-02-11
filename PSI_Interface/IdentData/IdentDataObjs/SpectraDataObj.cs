@@ -46,6 +46,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (sd.SpectrumIDFormat != null)
                 _spectrumIDFormat = new SpectrumIDFormatObj(sd.SpectrumIDFormat, IdentData);
+
             if (sd.FileFormat != null)
                 _fileFormat = new FileFormatInfo(sd.FileFormat, IdentData);
         }
@@ -57,6 +58,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIDFormat = value;
+
                 if (_spectrumIDFormat != null)
                     _spectrumIDFormat.IdentData = IdentData;
             }
@@ -88,6 +90,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _fileFormat = value;
+
                 if (_fileFormat != null)
                     _fileFormat.IdentData = IdentData;
             }

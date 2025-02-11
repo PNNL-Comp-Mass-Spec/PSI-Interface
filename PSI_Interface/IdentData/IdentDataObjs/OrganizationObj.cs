@@ -44,6 +44,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _parent = value;
+
                 if (_parent != null)
                     _parent.IdentData = IdentData;
             }

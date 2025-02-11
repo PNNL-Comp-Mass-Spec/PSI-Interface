@@ -37,11 +37,13 @@ namespace Interface_Tests.IdentDataTests
                 var spec = creator.AddSpectrumIdentification(specData, native, result.Scan, result.MostAbundantIsotopeMz,
                     result.Charge, 1, result.MostAbundantIsotopeMz);
                 var pep = new PeptideObj(result.Sequence);
+
                 foreach (var mod in result.Modifications)
                 {
                     var modObj = new ModificationObj(CV.CVID.MS_unknown_modification, mod.Item1, mod.Item2);
                     pep.Modifications.Add(modObj);
                 }
+
                 spec.Peptide = pep;
 
                 var dbSeq = new DbSequenceObj(searchDb, result.ProteinLength, result.ProteinName,
@@ -96,97 +98,120 @@ namespace Interface_Tests.IdentDataTests
             using (var reader = new StreamReader(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read)))
             {
                 var line = reader.ReadLine();
+
                 if (line?.StartsWith("Scan\tPre\tSequence\tPost\tModifications") == true)
                 {
                     line = reader.ReadLine();
                 }
+
                 while (line != null && !reader.EndOfStream)
                 {
                     var tokens = line.Split('\t');
                     var result = new MsPathfinderResult {
                         Modifications = new List<Tuple<string, int>>()
                     };
+
                     if (tokens.Length > 0)
                     {
                         result.Scan = int.Parse(tokens[0]);
                     }
+
                     if (tokens.Length > 1)
                     {
                         result.Pre = tokens[1];
                     }
+
                     if (tokens.Length > 2)
                     {
                         result.Sequence = tokens[2];
                     }
+
                     if (tokens.Length > 3)
                     {
                         result.Post = tokens[3];
                     }
+
                     if (tokens.Length > 4 && !string.IsNullOrWhiteSpace(tokens[4]))
                     {
                         var modList = tokens[4];
+
                         foreach (var token in modList.Split(','))
                         {
                             var tokens3 = token.Split(' ');
                             result.Modifications.Add(new Tuple<string, int>(tokens3[0], int.Parse(tokens3[1])));
                         }
                     }
+
                     if (tokens.Length > 5)
                     {
                         result.Composition = tokens[5];
                     }
+
                     if (tokens.Length > 6)
                     {
                         result.ProteinName = tokens[6];
                     }
+
                     if (tokens.Length > 7)
                     {
                         result.ProteinDesc = tokens[7];
                     }
+
                     if (tokens.Length > 8)
                     {
                         result.ProteinLength = int.Parse(tokens[8]);
                     }
+
                     if (tokens.Length > 9)
                     {
                         result.Start = int.Parse(tokens[9]);
                     }
+
                     if (tokens.Length > 10)
                     {
                         result.End = int.Parse(tokens[10]);
                     }
+
                     if (tokens.Length > 11)
                     {
                         result.Charge = int.Parse(tokens[11]);
                     }
+
                     if (tokens.Length > 12)
                     {
                         result.MostAbundantIsotopeMz = double.Parse(tokens[12]);
                     }
+
                     if (tokens.Length > 13)
                     {
                         result.Mass = double.Parse(tokens[13]);
                     }
+
                     if (tokens.Length > 14)
                     {
                         result.NumMatchedFragments = int.Parse(tokens[14]);
                     }
+
                     if (tokens.Length > 15)
                     {
                         result.Probability = double.Parse(tokens[15]);
                     }
+
                     if (tokens.Length > 16)
                     {
                         result.SpecEValue = double.Parse(tokens[16]);
                     }
+
                     if (tokens.Length > 17)
                     {
                         result.EValue = double.Parse(tokens[17]);
                     }
+
                     if (tokens.Length > 18)
                     {
                         result.QValue = double.Parse(tokens[18]);
                     }
+
                     if (tokens.Length > 19)
                     {
                         result.PepQValue = double.Parse(tokens[19]);

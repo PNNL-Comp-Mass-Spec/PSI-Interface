@@ -43,8 +43,10 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (f.FilterType1 != null)
                 _filterType = new ParamObj(f.FilterType1, IdentData);
+
             if (f.Include != null)
                 _include = new ParamListObj(f.Include, IdentData);
+
             if (f.Exclude != null)
                 _exclude = new ParamListObj(f.Exclude, IdentData);
         }
@@ -57,6 +59,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _filterType = value;
+
                 if (_filterType != null)
                     _filterType.IdentData = IdentData;
             }
@@ -70,6 +73,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _include = value;
+
                 if (_include != null)
                     _include.IdentData = IdentData;
             }
@@ -83,6 +87,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _exclude = value;
+
                 if (_exclude != null)
                     _exclude.IdentData = IdentData;
             }

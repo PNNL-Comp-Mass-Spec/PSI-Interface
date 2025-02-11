@@ -88,6 +88,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_spectraData != null)
                     return _spectraData.Id;
+
                 return _spectraDataRef;
             }
             set

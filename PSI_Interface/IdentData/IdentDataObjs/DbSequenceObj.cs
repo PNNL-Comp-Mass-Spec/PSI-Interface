@@ -87,11 +87,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_searchDatabase != null)
                     return _searchDatabase.Id;
+
                 return _searchDatabaseRef;
             }
             set
             {
                 _searchDatabaseRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     SearchDatabase = IdentData.FindSearchDatabase(value);
             }
@@ -105,6 +107,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _searchDatabase = value;
+
                 if (_searchDatabase != null)
                 {
                     _searchDatabase.IdentData = IdentData;

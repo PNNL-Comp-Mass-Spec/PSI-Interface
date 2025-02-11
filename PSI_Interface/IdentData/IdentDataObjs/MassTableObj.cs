@@ -48,10 +48,12 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 Residues.AddRange(mt.Residue, r => new ResidueObj(r, IdentData));
             }
+
             if (mt.AmbiguousResidue?.Count > 0)
             {
                 AmbiguousResidues.AddRange(mt.AmbiguousResidue, ar => new AmbiguousResidueObj(ar, IdentData));
             }
+
             if (mt.msLevel != null)
                 MsLevels = new List<string>(mt.msLevel);
         }
@@ -64,6 +66,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _residues = value;
+
                 if (_residues != null)
                     _residues.IdentData = IdentData;
             }
@@ -76,6 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _ambiguousResidues = value;
+
                 if (_ambiguousResidues != null)
                     _ambiguousResidues.IdentData = IdentData;
             }

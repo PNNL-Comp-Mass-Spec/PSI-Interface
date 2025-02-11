@@ -50,11 +50,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 DBSequences.AddIdMap();
                 DBSequences.AddRange(sc.DBSequence, dbs => new DbSequenceObj(dbs, IdentData));
             }
+
             if (sc.Peptide?.Count > 0)
             {
                 Peptides.AddIdMap();
                 Peptides.AddRange(sc.Peptide, p => new PeptideObj(p, IdentData));
             }
+
             if (sc.PeptideEvidence?.Count > 0)
             {
                 PeptideEvidences.AddIdMap();
@@ -70,6 +72,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _dBSequences = value;
+
                 if (_dBSequences != null)
                     _dBSequences.IdentData = IdentData;
             }
@@ -82,6 +85,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptides = value;
+
                 if (_peptides != null)
                     _peptides.IdentData = IdentData;
             }
@@ -94,6 +98,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptideEvidences = value;
+
                 if (_peptideEvidences != null)
                     _peptideEvidences.IdentData = IdentData;
             }

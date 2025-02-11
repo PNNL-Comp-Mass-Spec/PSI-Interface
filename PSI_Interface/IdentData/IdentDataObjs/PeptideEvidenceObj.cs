@@ -165,11 +165,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_translationTable != null)
                     return _translationTable.Id;
+
                 return _translationTableRef;
             }
             set
             {
                 _translationTableRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     TranslationTable = IdentData.FindTranslationTable(value);
             }
@@ -183,6 +185,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _translationTable = value;
+
                 if (_translationTable != null)
                 {
                     _translationTable.IdentData = IdentData;
@@ -217,11 +220,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_peptide != null)
                     return _peptide.Id;
+
                 return _peptideRef;
             }
             set
             {
                 _peptideRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     Peptide = IdentData.FindPeptide(value);
             }
@@ -235,6 +240,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptide = value;
+
                 if (_peptide != null)
                 {
                     _peptide.IdentData = IdentData;
@@ -251,11 +257,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_dBSequence != null)
                     return _dBSequence.Id;
+
                 return _dBSequenceRef;
             }
             set
             {
                 _dBSequenceRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     DBSequence = IdentData.FindDbSequence(value);
             }
@@ -269,6 +277,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _dBSequence = value;
+
                 if (_dBSequence != null)
                 {
                     _dBSequence.IdentData = IdentData;

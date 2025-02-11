@@ -54,6 +54,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _inputSpectrumIdentifications = value;
+
                 if (_inputSpectrumIdentifications != null)
                     _inputSpectrumIdentifications.IdentData = IdentData;
             }
@@ -67,11 +68,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_proteinDetectionList != null)
                     return _proteinDetectionList.Id;
+
                 return _proteinDetectionListRef;
             }
             set
             {
                 _proteinDetectionListRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     ProteinDetectionList = IdentData.FindProteinDetectionList(value);
             }
@@ -85,6 +88,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _proteinDetectionList = value;
+
                 if (_proteinDetectionList != null)
                 {
                     _proteinDetectionList.IdentData = IdentData;
@@ -101,11 +105,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_proteinDetectionProtocol != null)
                     return _proteinDetectionProtocol.Id;
+
                 return _proteinDetectionProtocolRef;
             }
             set
             {
                 _proteinDetectionProtocolRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     ProteinDetectionProtocol = IdentData.FindProteinDetectionProtocol(value);
             }
@@ -119,6 +125,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _proteinDetectionProtocol = value;
+
                 if (_proteinDetectionProtocol != null)
                 {
                     _proteinDetectionProtocol.IdentData = IdentData;

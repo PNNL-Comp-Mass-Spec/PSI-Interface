@@ -94,12 +94,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return CV.CV.TermData[UnitCvid].Id;
                 }
+
                 return null;
                 //return this._unitAccession;
             }
             set
             {
                 //this._unitAccession = value;
+
                 if (value != null && CV.CV.TermAccessionLookup.ContainsKey(_unitCvRef) &&
                     CV.CV.TermAccessionLookup[_unitCvRef].ContainsKey(value))
                 {
@@ -123,6 +125,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return CV.CV.TermData[UnitCvid].Name;
                 }
+
                 return null;
                 //return this._unitName;
             }
@@ -142,12 +145,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return IdentData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[UnitCvid].CVRef);
                 }
+
                 return null;
                 //return this._unitCvRef;
             }
             set
             {
                 _unitCvRef = value;
+
                 if (value != null)
                 {
                     _unitCvRef = IdentData.CvTranslator.ConvertFileCVRef(value);

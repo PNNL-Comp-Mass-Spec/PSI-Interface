@@ -97,10 +97,12 @@ namespace Interface_Tests.CVTests
         public void TestUnimodNameMapping()
         {
             var termGroup = CV.TermAccessionLookup["UNIMOD"].Where(x => x.Value != CV.CVID.UNIMOD_unimod_root_node);
+
             foreach (var term in termGroup)
             {
                 var info = CV.TermData[term.Value];
                 var mod = new ModificationObj(CV.CVID.CVID_Unknown, info.Name, 5, 42);
+
                 if (mod.CVParams.Count == 1)
                 {
                     Assert.AreEqual(term.Value, mod.CVParams[0].Cvid, "Enums do not match!");
@@ -108,6 +110,7 @@ namespace Interface_Tests.CVTests
                 else
                 {
                     var foundMatch = false;
+
                     foreach (var cvParam in mod.CVParams)
                     {
                         if (cvParam.Cvid.Equals(term.Value))
@@ -116,6 +119,7 @@ namespace Interface_Tests.CVTests
                             break;
                         }
                     }
+
                     if (!foundMatch)
                     {
                         Assert.Fail("No matching enum found! {0}", term.Value);

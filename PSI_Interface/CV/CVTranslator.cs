@@ -54,12 +54,14 @@ namespace PSI_Interface.CV
         private CVTranslator(IEnumerable<ICVInfo> fileCvInfo)
         {
             var cvInfos = fileCvInfo.ToList();
+
             foreach (var cv in CV.CVInfoList)
             {
                 foreach (var fcv in cvInfos)
                 {
                     var cvFilename = cv.URI.Substring(cv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
                     var fcvFilename = fcv.URI.Substring(fcv.URI.LastIndexOf("/", StringComparison.Ordinal) + 1);
+
                     if (cvFilename.Equals(fcvFilename, StringComparison.OrdinalIgnoreCase) && !_oboToFile.ContainsValue(fcv.Id))
                     {
                         if (cv.Id.Equals("PEFF", StringComparison.OrdinalIgnoreCase) ^ fcv.Id.IndexOf("PEFF", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -77,6 +79,7 @@ namespace PSI_Interface.CV
                         _oboToFile.Add(cv.Id, fcv.Id);
                     }
                 }
+
                 if (!_oboToFile.ContainsKey(cv.Id))
                 {
                     _oboToFile.Add(cv.Id, cv.Id);
@@ -105,6 +108,7 @@ namespace PSI_Interface.CV
         public string ConvertOboCVRef(string cvRef)
         {
             var newCvRef = ConvertCVRef(cvRef, _oboToFile);
+
             if (string.IsNullOrWhiteSpace(newCvRef))
             {
                 return null;
@@ -119,10 +123,12 @@ namespace PSI_Interface.CV
             {
                 return "";
             }
+
             if (map.ContainsKey(cvRef))
             {
                 return map[cvRef];
             }
+
             return "";
         }
 }

@@ -140,14 +140,17 @@ namespace CV_Generator.OBO_Objects
             if (string.IsNullOrWhiteSpace(Id) || Id.Equals("??:0000000"))
             {
                 Id_Namespace = "";
+
                 if (Id.StartsWith("??"))
                 {
                     Id_Namespace = "??";
                 }
 
                 Id_Value = -1;
+
                 return;
             }
+
             var split = Id.Split(':');
             Id_Namespace = split[0];
 
@@ -181,6 +184,7 @@ namespace CV_Generator.OBO_Objects
                 ParseId();
             }
         }
+
         public string Name;
 
         // Optional

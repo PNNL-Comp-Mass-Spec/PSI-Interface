@@ -45,34 +45,42 @@ namespace PSI_Interface.MSData.mzML
             {
                 cvListField = new CVListType(msData.CVList);
             }
+
             if (msData.FileDescription != null)
             {
                 fileDescriptionField = new FileDescriptionType(msData.FileDescription);
             }
+
             if (msData.ReferenceableParamGroupList != null)
             {
                 referenceableParamGroupListField = new ReferenceableParamGroupListType(msData.ReferenceableParamGroupList);
             }
+
             if (msData.SampleList != null)
             {
                 sampleListField = new SampleListType(msData.SampleList);
             }
+
             if (msData.SoftwareList != null)
             {
                 softwareListField = new SoftwareListType(msData.SoftwareList);
             }
+
             if (msData.ScanSettingsList != null)
             {
                 scanSettingsListField = new ScanSettingsListType(msData.ScanSettingsList);
             }
+
             if (msData.InstrumentConfigurationList != null)
             {
                 instrumentConfigurationListField = new InstrumentConfigurationListType(msData.InstrumentConfigurationList);
             }
+
             if (msData.DataProcessingList != null)
             {
                 dataProcessingListField = new DataProcessingListType(msData.DataProcessingList);
             }
+
             if (msData.Run != null)
             {
                 runField = new RunType(msData.Run);
@@ -138,6 +146,7 @@ namespace PSI_Interface.MSData.mzML
             if (ocvList?.Count > 0)
             {
                 cvField = new List<CVType>();
+
                 foreach (var ocv in ocvList)
                 {
                     cvField.Add(new CVType(ocv));
@@ -209,6 +218,7 @@ namespace PSI_Interface.MSData.mzML
             if (dpList?.Count > 0)
             {
                 dataProcessingField = new List<DataProcessingType>();
+
                 foreach (var dp in dpList)
                 {
                     dataProcessingField.Add(new DataProcessingType(dp));
@@ -245,6 +255,7 @@ namespace PSI_Interface.MSData.mzML
             if (dp.ProcessingMethods?.Count > 0)
             {
                 processingMethodField = new List<ProcessingMethodType>();
+
                 foreach (var pm in dp.ProcessingMethods)
                 {
                     processingMethodField.Add(new ProcessingMethodType(pm));
@@ -313,22 +324,27 @@ namespace PSI_Interface.MSData.mzML
             if (pg.ReferenceableParamGroupRefs?.Count > 0)
             {
                 referenceableParamGroupRefField = new List<ReferenceableParamGroupRefType>();
+
                 foreach (var rpgr in pg.ReferenceableParamGroupRefs)
                 {
                     referenceableParamGroupRefField.Add(new ReferenceableParamGroupRefType(rpgr));
                 }
             }
+
             if (pg.CVParams?.Count > 0)
             {
                 cvParamField = new List<CVParamType>();
+
                 foreach (var cvp in pg.CVParams)
                 {
                     cvParamField.Add(new CVParamType(cvp));
                 }
             }
+
             if (pg.UserParams?.Count > 0)
             {
                 userParamField = new List<UserParamType>();
+
                 foreach (var up in pg.UserParams)
                 {
                     userParamField.Add(new UserParamType(up));
@@ -365,6 +381,7 @@ namespace PSI_Interface.MSData.mzML
             if (rpgList?.Count > 0)
             {
                 referenceableParamGroupField = new List<ReferenceableParamGroupType>();
+
                 foreach (var rpg in rpgList)
                 {
                     referenceableParamGroupField.Add(new ReferenceableParamGroupType(rpg));
@@ -402,14 +419,17 @@ namespace PSI_Interface.MSData.mzML
             if (rpg.CVParams?.Count > 0)
             {
                 cvParamField = new List<CVParamType>();
+
                 foreach (var cvp in rpg.CVParams)
                 {
                     cvParamField.Add(new CVParamType(cvp));
                 }
             }
+
             if (rpg.UserParams?.Count > 0)
             {
                 userParamField = new List<UserParamType>();
+
                 foreach (var up in rpg.UserParams)
                 {
                     userParamField.Add(new UserParamType(up));
@@ -572,6 +592,7 @@ namespace PSI_Interface.MSData.mzML
             if (precursors?.Count > 0)
             {
                 precursorField = new List<PrecursorType>();
+
                 foreach (var p in precursors)
                 {
                     precursorField.Add(new PrecursorType(p));
@@ -613,10 +634,12 @@ namespace PSI_Interface.MSData.mzML
             {
                 isolationWindowField = new ParamGroupType(precursor.IsolationWindow);
             }
+
             if (precursor.SelectedIonList != null)
             {
                 selectedIonListField = new SelectedIonListType(precursor.SelectedIonList);
             }
+
             if (precursor.Activation != null)
             {
                 activationField = new ParamGroupType(precursor.Activation);
@@ -668,6 +691,7 @@ namespace PSI_Interface.MSData.mzML
             if (siList?.Count > 0)
             {
                 selectedIonField = new List<ParamGroupType>();
+
                 foreach (var si in siList)
                 {
                     selectedIonField.Add(new ParamGroupType(si));
@@ -702,6 +726,7 @@ namespace PSI_Interface.MSData.mzML
             if (bdal?.Count > 0)
             {
                 binaryDataArrayField = new List<BinaryDataArrayType>();
+
                 foreach (var bda in bdal)
                 {
                     binaryDataArrayField.Add(new BinaryDataArrayType(bda));
@@ -741,7 +766,9 @@ namespace PSI_Interface.MSData.mzML
             {
                 arrayLengthField = bda.ArrayLength.ToString();
             }
+
             dataProcessingRefField = bda.DataProcessingRef;
+
             // Not the length of the binary array, but the length of the base64 string...
             //this.encodedLengthField = binary.Length.ToString();
             encodedLengthField = Convert.ToBase64String(binary).Length.ToString();
@@ -786,6 +813,7 @@ namespace PSI_Interface.MSData.mzML
             if (scans.Scan?.Count > 0)
             {
                 scanField = new List<ScanType>();
+
                 foreach (var s in scans.Scan)
                 {
                     scanField.Add(new ScanType(s));
@@ -869,6 +897,7 @@ namespace PSI_Interface.MSData.mzML
             if (swList?.Count > 0)
             {
                 scanWindowField = new List<ParamGroupType>();
+
                 foreach (var sw in swList)
                 {
                     scanWindowField.Add(new ParamGroupType(sw));
@@ -906,6 +935,7 @@ namespace PSI_Interface.MSData.mzML
             if (specList.Spectra?.Count > 0)
             {
                 spectrumField = new List<SpectrumType>();
+
                 foreach (var s in specList.Spectra)
                 {
                     spectrumField.Add(new SpectrumType(s));
@@ -959,14 +989,17 @@ namespace PSI_Interface.MSData.mzML
             {
                 scanListField = new ScanListType(spectrum.ScanList);
             }
+
             if (spectrum.PrecursorList != null)
             {
                 precursorListField = new PrecursorListType(spectrum.PrecursorList);
             }
+
             if (spectrum.ProductList != null)
             {
                 productListField = new ProductListType(spectrum.ProductList);
             }
+
             if (spectrum.BinaryDataArrayList != null)
             {
                 binaryDataArrayListField = new BinaryDataArrayListType(spectrum.BinaryDataArrayList);
@@ -1034,6 +1067,7 @@ namespace PSI_Interface.MSData.mzML
             if (products?.Count > 0)
             {
                 productField = new List<ProductType>();
+
                 foreach (var p in products)
                 {
                     productField.Add(new ProductType(p));
@@ -1104,6 +1138,7 @@ namespace PSI_Interface.MSData.mzML
             {
                 spectrumListField = new SpectrumListType(run.SpectrumList);
             }
+
             if (run.ChromatogramList != null)
             {
                 chromatogramListField = new ChromatogramListType(run.ChromatogramList);
@@ -1170,6 +1205,7 @@ namespace PSI_Interface.MSData.mzML
             if (chromList.Chromatograms?.Count > 0)
             {
                 chromatogramField = new List<ChromatogramType>();
+
                 foreach (var c in chromList.Chromatograms)
                 {
                     chromatogramField.Add(new ChromatogramType(c));
@@ -1220,10 +1256,12 @@ namespace PSI_Interface.MSData.mzML
             {
                 precursorField = new PrecursorType(chromatogram.Precursor);
             }
+
             if (chromatogram.Product != null)
             {
                 productField = new ProductType(chromatogram.Product);
             }
+
             if (chromatogram.BinaryDataArrayList != null)
             {
                 binaryDataArrayListField = new BinaryDataArrayListType(chromatogram.BinaryDataArrayList);
@@ -1276,6 +1314,7 @@ namespace PSI_Interface.MSData.mzML
             if (ssList?.Count > 0)
             {
                 scanSettingsField = new List<ScanSettingsType>();
+
                 foreach (var ss in ssList)
                 {
                     scanSettingsField.Add(new ScanSettingsType(ss));
@@ -1314,6 +1353,7 @@ namespace PSI_Interface.MSData.mzML
             {
                 sourceFileRefListField = new SourceFileRefListType(settings.SourceFileRefList);
             }
+
             if (settings.TargetList != null)
             {
                 targetListField = new TargetListType(settings.TargetList);
@@ -1352,6 +1392,7 @@ namespace PSI_Interface.MSData.mzML
             if (sfrList?.Count > 0)
             {
                 sourceFileRefField = new List<SourceFileRefType>();
+
                 foreach (var sfr in sfrList)
                 {
                     sourceFileRefField.Add(new SourceFileRefType(sfr));
@@ -1408,6 +1449,7 @@ namespace PSI_Interface.MSData.mzML
             if (oTargetList?.Count > 0)
             {
                 targetField = new List<ParamGroupType>();
+
                 foreach (var t in oTargetList)
                 {
                     targetField.Add(new ParamGroupType(t));
@@ -1442,6 +1484,7 @@ namespace PSI_Interface.MSData.mzML
             if (scanList?.Count > 0)
             {
                 softwareField = new List<SoftwareType>();
+
                 foreach (var s in scanList)
                 {
                     softwareField.Add(new SoftwareType(s));
@@ -1508,6 +1551,7 @@ namespace PSI_Interface.MSData.mzML
             if (icList?.Count > 0)
             {
                 instrumentConfigurationField = new List<InstrumentConfigurationType>();
+
                 foreach (var ic in icList)
                 {
                     instrumentConfigurationField.Add(new InstrumentConfigurationType(ic));
@@ -1550,6 +1594,7 @@ namespace PSI_Interface.MSData.mzML
             {
                 componentListField = new ComponentListType(ic.ComponentList);
             }
+
             if (ic.SoftwareRef != null)
             {
                 softwareRefField = new SoftwareRefType(ic.SoftwareRef);
@@ -1593,22 +1638,27 @@ namespace PSI_Interface.MSData.mzML
             if (comp.Sources?.Count > 0)
             {
                 sourceField = new List<SourceComponentType>();
+
                 foreach (var s in comp.Sources)
                 {
                     sourceField.Add(new SourceComponentType(s));
                 }
             }
+
             if (comp.Analyzers?.Count > 0)
             {
                 analyzerField = new List<AnalyzerComponentType>();
+
                 foreach (var a in comp.Analyzers)
                 {
                     analyzerField.Add(new AnalyzerComponentType(a));
                 }
             }
+
             if (comp.Detectors?.Count > 0)
             {
                 detectorField = new List<DetectorComponentType>();
+
                 foreach (var d in comp.Detectors)
                 {
                     detectorField.Add(new DetectorComponentType(d));
@@ -1744,6 +1794,7 @@ namespace PSI_Interface.MSData.mzML
             if (oSampleList?.Count > 0)
             {
                 sampleField = new List<SampleType>();
+
                 foreach (var s in oSampleList)
                 {
                     sampleField.Add(new SampleType(s));
@@ -1805,6 +1856,7 @@ namespace PSI_Interface.MSData.mzML
             if (sfList?.Count > 0)
             {
                 sourceFileField = new List<SourceFileType>();
+
                 foreach (var sf in sfList)
                 {
                     sourceFileField.Add(new SourceFileType(sf));
@@ -1874,13 +1926,16 @@ namespace PSI_Interface.MSData.mzML
             {
                 fileContentField = new ParamGroupType(fd.FileContentInfo);
             }
+
             if (fd.SourceFileList != null)
             {
                 sourceFileListField = new SourceFileListType(fd.SourceFileList);
             }
+
             if (fd.ContactInfo?.Count > 0)
             {
                 contactField = new List<ParamGroupType>();
+
                 foreach (var c in fd.ContactInfo)
                 {
                     contactField.Add(new ParamGroupType(c));

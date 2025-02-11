@@ -67,11 +67,14 @@ namespace PSI_Interface.CV
             {
                 return false;
             }
+
             var relList = RelationsIsA[child];
+
             if (relList.Contains(parent))
             {
                 return true;
             }
+
             // Dig deeper - check grandparents, etc.
             foreach (var ancestor in RelationsIsA[child])
             {
@@ -80,6 +83,7 @@ namespace PSI_Interface.CV
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -219,6 +223,7 @@ namespace PSI_Interface.CV
             {
                 return;
             }
+
             foreach (var term in TermData.Values)
             {
                 if (TermAccessionLookup.ContainsKey(term.CVRef))
@@ -229,6 +234,7 @@ namespace PSI_Interface.CV
                 {
                     TermAccessionLookup.Add(term.CVRef, new Dictionary<string, CVID> {{term.Id, term.Cvid}});
                 }
+
                 if (TermNameLookup.ContainsKey(term.CVRef))
                 {
                     //TermNameLookup[term.CVRef].Add(term.Name, term.Cvid);
@@ -245,6 +251,7 @@ namespace PSI_Interface.CV
         {
             var safeName = term.Name.ToLower();
             var counter = 0;
+
             while (cvDict.ContainsKey(safeName))
             {
                 counter++;

@@ -50,6 +50,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _cvList = value;
+
                 if (_cvList != null)
                 {
                     _cvList.MsData = this;
@@ -70,6 +71,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _fileDescription = value;
+
                 if (_fileDescription != null)
                 {
                     _fileDescription.MsData = this;
@@ -85,6 +87,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _referenceableParamGroupList = value;
+
                 if (_referenceableParamGroupList != null)
                 {
                     _referenceableParamGroupList.MsData = this;
@@ -100,6 +103,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _sampleList = value;
+
                 if (_sampleList != null)
                 {
                     _sampleList.MsData = this;
@@ -115,6 +119,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _softwareList = value;
+
                 if (_softwareList != null)
                 {
                     _softwareList.MsData = this;
@@ -130,6 +135,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _scanSettingsList = value;
+
                 if (_scanSettingsList != null)
                 {
                     _scanSettingsList.MsData = this;
@@ -145,6 +151,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _instrumentConfigurationList = value;
+
                 if (_instrumentConfigurationList != null)
                 {
                     _instrumentConfigurationList.MsData = this;
@@ -160,6 +167,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _dataProcessingList = value;
+
                 if (_dataProcessingList != null)
                 {
                     _dataProcessingList.MsData = this;
@@ -175,6 +183,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _run = value;
+
                 if (_run != null)
                 {
                     _run.MsData = this;
@@ -299,6 +308,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _processingMethods = value;
+
                 if (_processingMethods != null)
                 {
                     _processingMethods.MsData = MsData;
@@ -344,6 +354,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _referenceableParamGroupRefs = value;
+
                 if (_referenceableParamGroupRefs != null)
                 {
                     _referenceableParamGroupRefs.MsData = MsData;
@@ -364,6 +375,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _cVParams = value;
+
                 if (_cVParams != null)
                 {
                     _cVParams.MsData = MsData;
@@ -379,6 +391,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _userParams = value;
+
                 if (_userParams != null)
                 {
                     _userParams.MsData = MsData;
@@ -429,6 +442,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _cVParams = value;
+
                 if (_cVParams != null)
                 {
                     _cVParams.MsData = MsData;
@@ -444,6 +458,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _userParams = value;
+
                 if (_userParams != null)
                 {
                     _userParams.MsData = MsData;
@@ -549,6 +564,7 @@ namespace PSI_Interface.MSData
             get
             {
                 //return this.UnitAccession.Split(new[] { ':' })[0];
+
                 return this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.UnitCvid].CVRef);
                 //return this._unitCvRef;
                 //return this._UnitCVRef.Id;
@@ -677,6 +693,7 @@ namespace PSI_Interface.MSData
             get
             {
                 //return this.UnitAccession.Split(new[] {':'})[0];
+
                 return this.MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[this.UnitCvid].CVRef);
                 //return this._unitCvRef;
                 //return this._unitCVRef.Id;
@@ -726,10 +743,12 @@ namespace PSI_Interface.MSData
             get
             {
                 //return this.UnitAccession.Split(new[] { ':' })[0];
+
                 if (_unitsSet)
                 {
                     return MsData.CvTranslator.ConvertOboCVRef(CV.CV.TermData[UnitCvid].CVRef);
                 }
+
                 return null;
                 //return this._unitCvRef;
                 //return this._UnitCVRef.Id;
@@ -737,6 +756,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _unitCvRef = value;
+
                 if (value != null)
                 {
                     _unitCvRef = MsData.CvTranslator.ConvertFileCVRef(value);
@@ -756,6 +776,7 @@ namespace PSI_Interface.MSData
                 {
                     return CV.CV.TermData[UnitCvid].Id;
                 }
+
                 return null;
                 //return this._unitAccession;
             } // TODO: change this return to a value mapped from the cvid
@@ -786,6 +807,7 @@ namespace PSI_Interface.MSData
                 {
                     return CV.CV.TermData[UnitCvid].Name;
                 }
+
                 return null;
                 //return this._unitName;
             } // TODO: change this return to a value mapped from the cvid
@@ -838,6 +860,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _isolationWindow = value;
+
                 if (_isolationWindow != null)
                 {
                     _isolationWindow.MsData = MsData;
@@ -854,6 +877,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _selectedIonList = value;
+
                 if (_selectedIonList != null)
                 {
                     _selectedIonList.MsData = MsData;
@@ -869,6 +893,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _activation = value;
+
                 if (_activation != null)
                 {
                     _activation.MsData = MsData;
@@ -1111,6 +1136,7 @@ namespace PSI_Interface.MSData
                         }
                     }
                 }
+
                 var cv = new CVParam
                 {
                     Cvid = CV.CV.CVID.CVID_Unknown
@@ -1137,6 +1163,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _isCompressed = value;
+
                 // Make sure the appropriate cvParam is set...
                 for (var i = 0; i < CVParams.Count; i++)
                 {
@@ -1150,6 +1177,7 @@ namespace PSI_Interface.MSData
                         }
                     }
                 }
+
                 var cv = new CVParam
                 {
                     Cvid = CV.CV.CVID.MS_no_compression
@@ -1218,6 +1246,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _scan = value;
+
                 if (_scan != null)
                 {
                     _scan.MsData = MsData;
@@ -1243,6 +1272,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _scanWindowList = value;
+
                 if (_scanWindowList != null)
                 {
                     _scanWindowList.MsData = MsData;
@@ -1312,6 +1342,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _spectra = value;
+
                 if (_spectra != null)
                 {
                     _spectra.MsData = MsData;
@@ -1354,6 +1385,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _scanList = value;
+
                 if (_scanList != null)
                 {
                     _scanList.MsData = MsData;
@@ -1369,6 +1401,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _precursorList = value;
+
                 if (_precursorList != null)
                 {
                     _precursorList.MsData = MsData;
@@ -1384,6 +1417,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _productList = value;
+
                 if (_productList != null)
                 {
                     _productList.MsData = MsData;
@@ -1399,6 +1433,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _binaryDataArrayList = value;
+
                 if (_binaryDataArrayList != null)
                 {
                     _binaryDataArrayList.MsData = MsData;
@@ -1430,6 +1465,7 @@ namespace PSI_Interface.MSData
             {
                 var mzLength = 0;
                 var intensityLength = 0;
+
                 foreach (var bda in BinaryDataArrayList)
                 {
                     if (bda.DataType == BinaryDataArray.ArrayType.m_z)
@@ -1441,13 +1477,16 @@ namespace PSI_Interface.MSData
                         intensityLength = bda.DataLength;
                     }
                 }
+
                 if (mzLength == intensityLength)
                 {
                     _defaultArrayLength = mzLength;
+
                     if (_binaryDataArrayList != null)
                     {
                         _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                     }
+
                     return mzLength;
                 }
 
@@ -1456,6 +1495,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _defaultArrayLength = value;
+
                 if (_binaryDataArrayList != null)
                 {
                     _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
@@ -1517,6 +1557,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _isolationWindow = value;
+
                 if (_isolationWindow != null)
                 {
                     _isolationWindow.MsData = MsData;
@@ -1546,6 +1587,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _spectrumList = value;
+
                 if (_spectrumList != null)
                 {
                     _spectrumList.MsData = MsData;
@@ -1561,6 +1603,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _chromatogramList = value;
+
                 if (_chromatogramList != null)
                 {
                     _chromatogramList.MsData = MsData;
@@ -1627,6 +1670,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _chromatograms = value;
+
                 if (_chromatograms != null)
                 {
                     _chromatograms.MsData = MsData;
@@ -1663,6 +1707,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _precursor = value;
+
                 if (_precursor != null)
                 {
                     _precursor.MsData = MsData;
@@ -1678,6 +1723,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _product = value;
+
                 if (_product != null)
                 {
                     _product.MsData = MsData;
@@ -1693,6 +1739,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _binaryDataArrayList = value;
+
                 if (_binaryDataArrayList != null)
                 {
                     _binaryDataArrayList.MsData = MsData;
@@ -1717,6 +1764,7 @@ namespace PSI_Interface.MSData
             {
                 var timeLength = 0;
                 var intensityLength = 0;
+
                 foreach (var bda in BinaryDataArrayList)
                 {
                     if (bda.DataType == BinaryDataArray.ArrayType.time)
@@ -1728,13 +1776,16 @@ namespace PSI_Interface.MSData
                         intensityLength = bda.DataLength;
                     }
                 }
+
                 if (timeLength == intensityLength)
                 {
                     _defaultArrayLength = timeLength;
+
                     if (_binaryDataArrayList != null)
                     {
                         _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
                     }
+
                     return timeLength;
                 }
 
@@ -1743,6 +1794,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _defaultArrayLength = value;
+
                 if (_binaryDataArrayList != null)
                 {
                     _binaryDataArrayList.DefaultArrayLength = _defaultArrayLength;
@@ -1800,6 +1852,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _sourceFileRefList = value;
+
                 if (_sourceFileRefList != null)
                 {
                     _sourceFileRefList.MsData = MsData;
@@ -1816,6 +1869,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _targetList = value;
+
                 if (_targetList != null)
                 {
                     _targetList.MsData = MsData;
@@ -1986,6 +2040,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _componentList = value;
+
                 if (_componentList != null)
                 {
                     _componentList.MsData = MsData;
@@ -2001,6 +2056,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _softwareRef = value;
+
                 if (_softwareRef != null)
                 {
                     _softwareRef.MsData = MsData;
@@ -2035,6 +2091,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _source = value;
+
                 if (_source != null)
                 {
                     _source.MsData = MsData;
@@ -2050,6 +2107,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _analyzer = value;
+
                 if (_analyzer != null)
                 {
                     _analyzer.MsData = MsData;
@@ -2065,6 +2123,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _detector = value;
+
                 if (_detector != null)
                 {
                     _detector.MsData = MsData;
@@ -2235,6 +2294,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _fileContent = value;
+
                 if (_fileContent != null)
                 {
                     _fileContent.MsData = MsData;
@@ -2252,6 +2312,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _sourceFileList = value;
+
                 if (_sourceFileList != null)
                 {
                     _sourceFileList.MsData = MsData;
@@ -2269,6 +2330,7 @@ namespace PSI_Interface.MSData
             set
             {
                 _contact = value;
+
                 if (_contact != null)
                 {
                     _contact.MsData = MsData;

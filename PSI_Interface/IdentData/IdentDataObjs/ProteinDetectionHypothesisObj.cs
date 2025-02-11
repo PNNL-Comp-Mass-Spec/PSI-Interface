@@ -65,6 +65,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptideHypotheses = value;
+
                 if (_peptideHypotheses != null)
                 {
                     _peptideHypotheses.IdentData = IdentData;
@@ -88,11 +89,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return _dBSequence.Id;
                 }
+
                 return _dBSequenceRef;
             }
             set
             {
                 _dBSequenceRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     DBSequence = IdentData.FindDbSequence(value);
@@ -114,6 +117,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _dBSequence = value;
+
                 if (_dBSequence != null)
                 {
                     _dBSequence.IdentData = IdentData;

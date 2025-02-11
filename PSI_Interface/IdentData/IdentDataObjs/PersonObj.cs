@@ -54,6 +54,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _affiliations = value;
+
                 if (_affiliations != null)
                     _affiliations.IdentData = IdentData;
             }

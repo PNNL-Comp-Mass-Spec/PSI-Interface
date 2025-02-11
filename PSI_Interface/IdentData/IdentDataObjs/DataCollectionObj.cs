@@ -37,6 +37,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (dc.Inputs != null)
                 _inputs = new InputsObj(dc.Inputs, IdentData);
+
             if (dc.AnalysisData != null)
                 _analysisData = new AnalysisDataObj(dc.AnalysisData, IdentData);
         }
@@ -48,6 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _inputs = value;
+
                 if (_inputs != null)
                     _inputs.IdentData = IdentData;
             }
@@ -60,6 +62,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _analysisData = value;
+
                 if (_analysisData != null)
                     _analysisData.IdentData = IdentData;
             }

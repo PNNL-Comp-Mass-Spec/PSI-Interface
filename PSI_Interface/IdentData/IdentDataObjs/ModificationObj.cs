@@ -64,6 +64,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 MonoisotopicMassDelta = monoMassDelta;
             }
+
             if (location != int.MinValue)
             {
                 Location = location;
@@ -76,6 +77,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             else if (!string.IsNullOrWhiteSpace(modificationName))
             {
                 var result = SearchForUnimodMod(modificationName);
+
                 if (result != CV.CV.CVID.MS_unknown_modification)
                     CVParams.Add(new CVParamObj(result));
                 else
@@ -186,6 +188,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 // If searching for the name fails, try a last ditch attempt to parse it as an enum, before giving up
                 modName = modName.Trim('_').Trim().Replace(' ', '_');
                 var testEnum = "UNIMOD_" + modName;
+
                 if (!Enum.TryParse(testEnum, true, out result))
                     result = CV.CV.CVID.MS_unknown_modification;
             }

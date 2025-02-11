@@ -42,14 +42,17 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             SourceFiles = new IdentDataList<SourceFileInfo>(1);
             SearchDatabases = new IdentDataList<SearchDatabaseInfo>(1);
             SpectraDataList = new IdentDataList<SpectraDataObj>(1);
+
             if (i.SourceFile?.Count > 0)
             {
                 SourceFiles.AddRange(i.SourceFile, sf => new SourceFileInfo(sf, IdentData));
             }
+
             if (i.SearchDatabase?.Count > 0)
             {
                 SearchDatabases.AddRange(i.SearchDatabase, sd => new SearchDatabaseInfo(sd, IdentData));
             }
+
             if (i.SpectraData?.Count > 0)
             {
                 SpectraDataList.AddRange(i.SpectraData, sd => new SpectraDataObj(sd, IdentData));
@@ -63,6 +66,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _sourceFiles = value;
+
                 if (_sourceFiles != null)
                     _sourceFiles.IdentData = IdentData;
             }
@@ -75,6 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _searchDatabases = value;
+
                 if (_searchDatabases != null)
                     _searchDatabases.IdentData = IdentData;
             }
@@ -87,6 +92,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectraDataList = value;
+
                 if (_spectraDataList != null)
                     _spectraDataList.IdentData = IdentData;
             }
@@ -182,6 +188,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         {
             if (ReferenceEquals(this, other))
                 return true;
+
             if (other == null)
                 return false;
 

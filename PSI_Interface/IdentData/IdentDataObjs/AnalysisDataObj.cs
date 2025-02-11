@@ -37,6 +37,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 SpectrumIdentificationList.AddRange(ad.SpectrumIdentificationList, sil => new SpectrumIdentificationListObj(sil, IdentData));
             }
+
             if (ad.ProteinDetectionList != null)
             {
                 _proteinDetectionList = new ProteinDetectionListObj(ad.ProteinDetectionList, IdentData);
@@ -50,6 +51,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIdentificationList = value;
+
                 if (_spectrumIdentificationList != null)
                 {
                     _spectrumIdentificationList.IdentData = IdentData;
@@ -64,6 +66,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _proteinDetectionList = value;
+
                 if (_proteinDetectionList != null)
                 {
                     _proteinDetectionList.IdentData = IdentData;
@@ -102,6 +105,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 return true;
             }
+
             if (other == null)
             {
                 return false;

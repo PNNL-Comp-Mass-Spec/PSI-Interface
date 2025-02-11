@@ -26,6 +26,7 @@ namespace PSI_Interface.MSData
                 if (!ReferenceEquals(_msData, value))
                 {
                     _msData = value;
+
                     if (_msData != null)
                     {
                         CascadeProperties();
@@ -49,6 +50,7 @@ namespace PSI_Interface.MSData
                         // TODO: how to handle the change of the BdaDefaultArrayLength, without wiping out the values of spectrum inappropriately? Probably best is to override the BdaDefaultArrayLength in spectrum?
                         ((MSDataInternalTypeAbstract)(prop.GetValue(this))).MsData = this._msData;
                     }
+
                     if (prop.GetValue(this) is MSDataList<MSDataInternalTypeAbstract>)
                     {
                         ((MSDataList<MSDataInternalTypeAbstract>)(prop.GetValue(this))).MsData = this._msData;

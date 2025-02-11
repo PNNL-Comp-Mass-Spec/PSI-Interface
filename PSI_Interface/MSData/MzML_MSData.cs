@@ -47,68 +47,84 @@ namespace PSI_Interface.MSData
             if (mzML.cvList?.cv?.Count > 0)
             {
                 CVList = new MSDataList<CVInfo>();
+
                 foreach (var cv in mzML.cvList.cv)
                 {
                     CVList.Add(new CVInfo(cv, this));
                 }
                 CvTranslator = new CVTranslator(CVList);
             }
+
             if (mzML.fileDescription != null)
             {
                 FileDescription = new FileDescription(mzML.fileDescription, this);
             }
+
             if (mzML.referenceableParamGroupList?.referenceableParamGroup?.Count > 0)
             {
                 ReferenceableParamGroupList = new MSDataList<ReferenceableParamGroup>();
+
                 foreach (var rpg in mzML.referenceableParamGroupList.referenceableParamGroup)
                 {
                     ReferenceableParamGroupList.Add(new ReferenceableParamGroup(rpg, this));
                 }
             }
+
             if (mzML.sampleList?.sample?.Count > 0)
             {
                 SampleList = new MSDataList<SampleInfo>();
+
                 foreach (var s in mzML.sampleList.sample)
                 {
                     SampleList.Add(new SampleInfo(s, this));
                 }
             }
+
             if (mzML.softwareList?.software?.Count > 0)
             {
                 SoftwareList = new MSDataList<SoftwareInfo>();
+
                 foreach (var s in mzML.softwareList.software)
                 {
                     SoftwareList.Add(new SoftwareInfo(s, this));
                 }
             }
+
             if (mzML.scanSettingsList?.scanSettings?.Count > 0)
             {
                 ScanSettingsList = new MSDataList<ScanSettingsInfo>();
+
                 foreach (var ss in mzML.scanSettingsList.scanSettings)
                 {
                     ScanSettingsList.Add(new ScanSettingsInfo(ss, this));
                 }
             }
+
             if (mzML.instrumentConfigurationList?.instrumentConfiguration?.Count > 0)
             {
                 InstrumentConfigurationList = new MSDataList<InstrumentConfigurationInfo>();
+
                 foreach (var ic in mzML.instrumentConfigurationList.instrumentConfiguration)
                 {
                     InstrumentConfigurationList.Add(new InstrumentConfigurationInfo(ic, this));
                 }
             }
+
             if (mzML.dataProcessingList?.dataProcessing?.Count > 0)
             {
                 DataProcessingList = new MSDataList<DataProcessingInfo>();
+
                 foreach (var dp in mzML.dataProcessingList.dataProcessing)
                 {
                     DataProcessingList.Add(new DataProcessingInfo(dp, this));
                 }
             }
+
             if (mzML.run != null)
             {
                 Run = new Run(mzML.run, this);
             }
+
             Accession = mzML.accession;
             Id = mzML.id;
             Version = mzML.version;
@@ -209,6 +225,7 @@ namespace PSI_Interface.MSData
             if (dp.processingMethod?.Count > 0)
             {
                 ProcessingMethods = new MSDataList<ProcessingMethodInfo>();
+
                 foreach (var pm in dp.processingMethod)
                 {
                     ProcessingMethods.Add(new ProcessingMethodInfo(pm, MsData));
@@ -258,22 +275,27 @@ namespace PSI_Interface.MSData
             if (pg.referenceableParamGroupRef?.Count > 0)
             {
                 ReferenceableParamGroupRefs = new MSDataList<ReferenceableParamGroupRef>();
+
                 foreach (var rpg in pg.referenceableParamGroupRef)
                 {
                     ReferenceableParamGroupRefs.Add(new ReferenceableParamGroupRef(rpg, MsData));
                 }
             }
+
             if (pg.cvParam?.Count > 0)
             {
                 CVParams = new MSDataList<CVParam>();
+
                 foreach (var cv in pg.cvParam)
                 {
                     CVParams.Add(new CVParam(cv, MsData));
                 }
             }
+
             if (pg.userParam?.Count > 0)
             {
                 UserParams = new MSDataList<UserParam>();
+
                 foreach (var up in pg.userParam)
                 {
                     UserParams.Add(new UserParam(up, MsData));
@@ -328,19 +350,23 @@ namespace PSI_Interface.MSData
             if (rpg.cvParam?.Count > 0)
             {
                 CVParams = new MSDataList<CVParam>();
+
                 foreach (var cv in rpg.cvParam)
                 {
                     CVParams.Add(new CVParam(cv, MsData));
                 }
             }
+
             if (rpg.userParam?.Count > 0)
             {
                 UserParams = new MSDataList<UserParam>();
+
                 foreach (var up in rpg.userParam)
                 {
                     UserParams.Add(new UserParam(up, MsData));
                 }
             }
+
             Id = rpg.id;
         }
     }
@@ -487,18 +513,22 @@ namespace PSI_Interface.MSData
             {
                 IsolationWindow = new ParamGroup(p.isolationWindow, MsData);
             }
+
             if (p.selectedIonList?.selectedIon?.Count > 0)
             {
                 SelectedIonList = new MSDataList<ParamGroup>();
+
                 foreach (var si in p.selectedIonList.selectedIon)
                 {
                     SelectedIonList.Add(new ParamGroup(si, MsData));
                 }
             }
+
             if (p.activation != null)
             {
                 Activation = new ParamGroup(p.activation, MsData);
             }
+
             SpectrumRef = p.spectrumRef;
             SourceFileRef = p.sourceFileRef;
             ExternalSpectrumID = p.externalSpectrumID;
@@ -577,6 +607,7 @@ namespace PSI_Interface.MSData
             : base(bda, instance)
         {
             DataProcessingRef = bda.dataProcessingRef;
+
             if (bda.arrayLength != null)
             {
                 ArrayLength = int.Parse(bda.arrayLength);
@@ -586,8 +617,10 @@ namespace PSI_Interface.MSData
                 //this._arrayLength = this.BdaDefaultArrayLength;
                 _arrayLength = defaultArrayLength;
             }
+
             _isCompressed = false;
             _dataWidth = 4;
+
             foreach (var cv in CVParams)
             {
                 if (CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_array].Contains(cv.Cvid))
@@ -597,6 +630,7 @@ namespace PSI_Interface.MSData
                         _dataType = _revTypeMap[cv.Cvid];
                     }
                 }
+
                 if (CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_type].Contains(cv.Cvid))
                 {
                     if (cv.Cvid == CV.CV.CVID.MS_16_bit_float_OBSOLETE)
@@ -612,6 +646,7 @@ namespace PSI_Interface.MSData
                         _dataWidth = 8;
                     }
                 }
+
                 if (CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_compression_type].Contains(cv.Cvid))
                 {
                     if (cv.Cvid == CV.CV.CVID.MS_no_compression)
@@ -624,6 +659,7 @@ namespace PSI_Interface.MSData
                     }
                 }
             }
+
             Binary = bda.binary;
         }
     }
@@ -648,6 +684,7 @@ namespace PSI_Interface.MSData
             if (sl.scan?.Count > 0)
             {
                 Scan = new MSDataList<Scan>();
+
                 foreach (var s in sl.scan)
                 {
                     Scan.Add(new Scan(s, MsData));
@@ -676,6 +713,7 @@ namespace PSI_Interface.MSData
             if (s.scanWindowList?.scanWindow?.Count > 0)
             {
                 ScanWindowList = new MSDataList<ParamGroup>();
+
                 foreach (var sw in s.scanWindowList.scanWindow)
                 {
                     ScanWindowList.Add(new ParamGroup(sw, MsData));
@@ -735,6 +773,7 @@ namespace PSI_Interface.MSData
             if (sl.spectrum?.Count > 0)
             {
                 Spectra = new MSDataList<Spectrum>();
+
                 foreach (var s in sl.spectrum)
                 {
                     Spectra.Add(new Spectrum(s, MsData));
@@ -768,17 +807,21 @@ namespace PSI_Interface.MSData
             {
                 ScanList = new ScanList(s.scanList, MsData);
             }
+
             if (s.precursorList?.precursor?.Count > 0)
             {
                 PrecursorList = new MSDataList<Precursor>();
+
                 foreach (var p in s.precursorList.precursor)
                 {
                     PrecursorList.Add(new Precursor(p, MsData));
                 }
             }
+
             if (s.binaryDataArrayList?.binaryDataArray?.Count > 0)
             {
                 BinaryDataArrayList = new MSDataList<BinaryDataArray>();
+
                 foreach (var bda in s.binaryDataArrayList.binaryDataArray)
                 {
                     BinaryDataArrayList.Add(new BinaryDataArray(bda, MsData, s.defaultArrayLength));
@@ -866,10 +909,12 @@ namespace PSI_Interface.MSData
             {
                 SpectrumList = new SpectrumList(r.spectrumList, MsData);
             }
+
             if (r.chromatogramList != null)
             {
                 ChromatogramList = new ChromatogramList(r.chromatogramList, MsData);
             }
+
             Id = r.id;
             DefaultInstrumentConfigurationRef = r.defaultInstrumentConfigurationRef;
             DefaultSourceFileRef = r.defaultSourceFileRef;
@@ -899,6 +944,7 @@ namespace PSI_Interface.MSData
             if (cl.chromatogram?.Count > 0)
             {
                 Chromatograms = new MSDataList<Chromatogram>();
+
                 foreach (var c in cl.chromatogram)
                 {
                     Chromatograms.Add(new Chromatogram(c, MsData));
@@ -931,18 +977,22 @@ namespace PSI_Interface.MSData
             {
                 Precursor = new Precursor(c.precursor, MsData);
             }
+
             if (c.product != null)
             {
                 Product = new Product(c.product, MsData);
             }
+
             if (c.binaryDataArrayList?.binaryDataArray?.Count > 0)
             {
                 BinaryDataArrayList = new MSDataList<BinaryDataArray>();
+
                 foreach (var bda in c.binaryDataArrayList.binaryDataArray)
                 {
                     BinaryDataArrayList.Add(new BinaryDataArray(bda, MsData, c.defaultArrayLength));
                 }
             }
+
             Index = c.index;
             Id = c.id;
             DefaultArrayLength = c.defaultArrayLength;
@@ -998,19 +1048,23 @@ namespace PSI_Interface.MSData
             if (ss.sourceFileRefList?.sourceFileRef?.Count > 0)
             {
                 SourceFileRefList = new MSDataList<SourceFileRef>();
+
                 foreach (var sfr in ss.sourceFileRefList.sourceFileRef)
                 {
                     SourceFileRefList.Add(new SourceFileRef(sfr, MsData));
                 }
             }
+
             if (ss.targetList?.target?.Count > 0)
             {
                 TargetList = new MSDataList<ParamGroup>();
+
                 foreach (var t in ss.targetList.target)
                 {
                     TargetList.Add(new ParamGroup(t, MsData));
                 }
             }
+
             Id = ss.id;
         }
     }
@@ -1188,10 +1242,12 @@ namespace PSI_Interface.MSData
             {
                 ComponentList = new ComponentList(ic.componentList, MsData);
             }
+
             if (ic.softwareRef != null)
             {
                 SoftwareRef = new SoftwareRef(ic.softwareRef, MsData);
             }
+
             Id = ic.id;
             ScanSettingsRef = ic.scanSettingsRef;
         }
@@ -1219,22 +1275,27 @@ namespace PSI_Interface.MSData
             if (cl.source?.Count > 0)
             {
                 Sources = new MSDataList<SourceComponent>();
+
                 foreach (var s in cl.source)
                 {
                     Sources.Add(new SourceComponent(s, MsData));
                 }
             }
+
             if (cl.analyzer?.Count > 0)
             {
                 Analyzers = new MSDataList<AnalyzerComponent>();
+
                 foreach (var a in cl.analyzer)
                 {
                     Analyzers.Add(new AnalyzerComponent(a, MsData));
                 }
             }
+
             if (cl.detector?.Count > 0)
             {
                 Detectors = new MSDataList<DetectorComponent>();
+
                 foreach (var d in cl.detector)
                 {
                     Detectors.Add(new DetectorComponent(d, MsData));
@@ -1448,17 +1509,21 @@ namespace PSI_Interface.MSData
             {
                 FileContentInfo = new ParamGroup(fd.fileContent, MsData);
             }
+
             if (fd.sourceFileList?.sourceFile?.Count > 0)
             {
                 SourceFileList = new MSDataList<SourceFileInfo>();
+
                 foreach (var sf in fd.sourceFileList.sourceFile)
                 {
                     SourceFileList.Add(new SourceFileInfo(sf, MsData));
                 }
             }
+
             if (fd.contact?.Count > 0)
             {
                 ContactInfo = new MSDataList<ParamGroup>();
+
                 foreach (var pg in fd.contact)
                 {
                     ContactInfo.Add(new ParamGroup(pg, MsData));

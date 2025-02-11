@@ -51,6 +51,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 InputSpectra.AddRange(si.InputSpectra, ispec => new InputSpectraRefObj(ispec, IdentData));
             }
+
             if (si.SearchDatabaseRef?.Count > 0)
             {
                 SearchDatabases.AddRange(si.SearchDatabaseRef, sd => new SearchDatabaseRefObj(sd, IdentData));
@@ -65,6 +66,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _inputSpectra = value;
+
                 if (_inputSpectra != null)
                     _inputSpectra.IdentData = IdentData;
             }
@@ -77,6 +79,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _searchDatabases = value;
+
                 if (_searchDatabases != null)
                     _searchDatabases.IdentData = IdentData;
             }
@@ -90,11 +93,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_spectrumIdentificationProtocol != null)
                     return _spectrumIdentificationProtocol.Id;
+
                 return _spectrumIdentificationProtocolRef;
             }
             set
             {
                 _spectrumIdentificationProtocolRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     SpectrumIdentificationProtocol = IdentData.FindSpectrumIdentificationProtocol(value);
             }
@@ -108,6 +113,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIdentificationProtocol = value;
+
                 if (_spectrumIdentificationProtocol != null)
                 {
                     _spectrumIdentificationProtocol.IdentData = IdentData;
@@ -124,11 +130,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_spectrumIdentificationList != null)
                     return _spectrumIdentificationList.Id;
+
                 return _spectrumIdentificationListRef;
             }
             set
             {
                 _spectrumIdentificationListRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     SpectrumIdentificationList = IdentData.FindSpectrumIdentificationList(value);
             }
@@ -142,6 +150,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _spectrumIdentificationList = value;
+
                 if (_spectrumIdentificationList != null)
                 {
                     _spectrumIdentificationList.IdentData = IdentData;

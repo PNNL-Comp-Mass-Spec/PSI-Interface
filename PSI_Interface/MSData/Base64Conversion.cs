@@ -22,6 +22,7 @@ namespace PSI_Interface.MSData
                 //throw new NotSupportedException("Invalid bitsPerValue");
                 return null;
             }
+
             return DecodeBytes(Convert.FromBase64String(encoded), bytesPerValue, expectedLength, isCompressed);
         }
 
@@ -51,13 +52,16 @@ namespace PSI_Interface.MSData
             {
                 bytes = Zlib.DecompressZLib(bytes, expectedLength * bytesPerValue);
             }
+
             if (bytes.Length % bytesPerValue != 0 || bytes.Length / bytesPerValue != expectedLength)
             {
                 // We need to fail out.
             }
+
             //byte[] oneNumber = new byte[dataSize];
             //bool swapBytes = true;
             var data = new double[expectedLength];
+
             for (var i = 0; i < bytes.Length; i += bytesPerValue)
             {
                 // mzML binary data should always be Little Endian. Some other data formats may use Big Endian, which would require a byte swap
@@ -66,6 +70,7 @@ namespace PSI_Interface.MSData
                 //{
                 //  Array.Reverse(oneNumber);
                 //}
+
                 if (bytesPerValue == 4)
                 {
                     //bda.Data[i / dataSize] = BitConverter.ToSingle(oneNumber, 0);
@@ -77,6 +82,7 @@ namespace PSI_Interface.MSData
                     data[i / bytesPerValue] = BitConverter.ToDouble(bytes, i);
                 }
             }
+
             return data;
         }
 
@@ -95,9 +101,11 @@ namespace PSI_Interface.MSData
                 //throw NotSupportedException("Invalid bitsPerValue");
                 return null;
             }
+
             //byte[] oneNumber = new byte[dataSize];
             //bool swapBytes = true;
             var bytes = new byte[data.Length * bytesPerValue];
+
             for (var i = 0; i < data.Length; i++)
             {
                 // mzML binary data should always be Little Endian. Some other data formats may use Big Endian, which would require a byte swap
@@ -106,6 +114,7 @@ namespace PSI_Interface.MSData
                 //{
                 //  Array.Reverse(oneNumber);
                 //}
+
                 if (bytesPerValue == 4)
                 {
                     //bda.Data[i / dataSize] = BitConverter.ToSingle(oneNumber, 0);
@@ -119,11 +128,14 @@ namespace PSI_Interface.MSData
                     Array.Copy(BitConverter.GetBytes(data[i]), 0, bytes, i * bytesPerValue, bytesPerValue);
                 }
             }
+
             //byte[] bytes = Convert.FromBase64String(encoded);
+
             if (compress)
             {
                 bytes = Zlib.CompressZLib(bytes, out _);
             }
+
             return bytes;
         }
     }

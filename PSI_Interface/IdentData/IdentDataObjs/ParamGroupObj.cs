@@ -44,6 +44,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _userParams = value;
+
                 if (_userParams != null)
                 {
                     _userParams.IdentData = IdentData;

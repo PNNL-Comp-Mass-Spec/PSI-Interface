@@ -71,6 +71,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _fileFormat = value;
+
                 if (_fileFormat != null)
                     _fileFormat.IdentData = IdentData;
             }

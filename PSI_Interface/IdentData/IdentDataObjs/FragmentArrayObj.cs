@@ -38,6 +38,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             MeasureRef = fa.measure_ref;
 
             Values = new List<float>(1);
+
             if (fa.values != null)
             {
                 Values = new List<float>(fa.values);
@@ -58,11 +59,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return _measure.Id;
                 }
+
                 return _measureRef;
             }
             internal set
             {
                 _measureRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     Measure = IdentData.FindMeasure(value);
@@ -78,6 +81,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _measure = value;
+
                 if (_measure != null)
                 {
                     _measure.IdentData = IdentData;

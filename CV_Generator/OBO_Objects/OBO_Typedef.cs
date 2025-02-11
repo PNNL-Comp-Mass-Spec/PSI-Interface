@@ -108,11 +108,14 @@ namespace CV_Generator.OBO_Objects
                 {
                     return string.Empty;
                 }
+
                 var pos = Def.IndexOf("[", StringComparison.Ordinal);
+
                 if (pos >= 0)
                 {
                     return Def.Substring(0, pos).Trim();
                 }
+
                 return Def.Trim();
             }
         }

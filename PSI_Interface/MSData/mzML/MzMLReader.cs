@@ -49,15 +49,19 @@ namespace PSI_Interface.MSData.mzML
             {
                 throw new Exception("File has already been read!");
             }
+
             var xRoot = new XmlRootAttribute();
+
             if (MzMLType == MzMLSchemaType.MzML)
             {
                 xRoot.ElementName = "mzML";
             }
+
             xRoot.Namespace = "http://psi.hupo.org/ms/mzml";
             xRoot.IsNullable = false;
             var serializer = new XmlSerializer(_mzMLType, xRoot);
             var mzMLData = new mzMLType();
+
             using (_reader)
             {
                 switch (MzMLType)
@@ -71,25 +75,30 @@ namespace PSI_Interface.MSData.mzML
                         break;
                 }
             }
+
             return mzMLData;
         }
 
         private void ConfigureReader()
         {
             var sourceFile = new FileInfo(_filePath);
+
             if (!sourceFile.Exists)
                 throw new FileNotFoundException(".mzML file not found", _filePath);
 
             _reader = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, _bufferSize);
             // Temp reader to determine mzML schema type - indexed or not
             Stream tempReader = new FileStream(sourceFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, _bufferSize);
+
             if (sourceFile.Name.Trim().EndsWith(".gz"))
             {
                 _reader = new GZipStream(_reader, CompressionMode.Decompress);
                 tempReader = new GZipStream(tempReader, CompressionMode.Decompress);
             }
+
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
             var reader = XmlReader.Create(new StreamReader(tempReader, Encoding.UTF8, true, _bufferSize), xSettings);
+
             using (reader)
             {
                 reader.MoveToContent();

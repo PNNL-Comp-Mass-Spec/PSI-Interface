@@ -49,6 +49,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _proteinAmbiguityGroups = value;
+
                 if (_proteinAmbiguityGroups != null)
                     _proteinAmbiguityGroups.IdentData = IdentData;
             }

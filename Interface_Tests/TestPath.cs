@@ -61,27 +61,34 @@ namespace Interface_Tests
         public static bool FindInputFile(string inputFileRelativePath, out FileInfo inputFile)
         {
             var localSourceFile1 = new FileInfo(Path.Combine(TestDataDirectory, inputFileRelativePath));
+
             if (localSourceFile1.Exists)
             {
                 inputFile = localSourceFile1;
+
                 return true;
             }
 
             var localSourceFile2 = new FileInfo(Path.Combine(TestDataDirectory, Path.GetFileName(inputFileRelativePath)));
+
             if (localSourceFile2.Exists)
             {
                 inputFile = localSourceFile2;
+
                 return true;
             }
 
             var remoteFile = new FileInfo(Path.Combine(ExtTestDataDirectory, inputFileRelativePath));
+
             if (remoteFile.Exists)
             {
                 inputFile = remoteFile;
+
                 return true;
             }
 
             inputFile = null;
+
             return false;
         }
     }

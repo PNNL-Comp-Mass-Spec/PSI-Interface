@@ -50,12 +50,14 @@ namespace Interface_Tests.IdentDataTests
             var identData = new IdentDataObj(MzIdentMlReaderWriter.Read(sourceFile.FullName));
             var specResults = 0;
             var specItems = 0;
+
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
             {
                 if (specList.SpectrumIdentificationResults == null)
                     continue;
 
                 specResults += specList.SpectrumIdentificationResults.Count;
+
                 foreach (var specResult in specList.SpectrumIdentificationResults)
                 {
                     specItems += specResult.SpectrumIdentificationItems.Count;
@@ -63,10 +65,12 @@ namespace Interface_Tests.IdentDataTests
             }
 
             var observedPeptides = 0;
+
             if (identData.SequenceCollection.Peptides != null)
                 observedPeptides = identData.SequenceCollection.Peptides.Count;
 
             var observeProteins = 0;
+
             if (identData.SequenceCollection.DBSequences != null)
                 observeProteins = identData.SequenceCollection.DBSequences.Count;
 

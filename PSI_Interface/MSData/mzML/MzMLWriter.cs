@@ -46,13 +46,16 @@ namespace PSI_Interface.MSData.mzML
         {
             ConfigureWriter();
             var xRoot = new XmlRootAttribute();
+
             if (MzMLType == MzMLSchemaType.MzML)
             {
                 xRoot.ElementName = "mzML";
             }
+
             xRoot.Namespace = "http://psi.hupo.org/ms/mzml";
             xRoot.IsNullable = false;
             var serializer = new XmlSerializer(_mzMLType, xRoot);
+
             using (_writer)
             {
                 switch (MzMLType)
@@ -70,10 +73,12 @@ namespace PSI_Interface.MSData.mzML
         private void ConfigureWriter()
         {
             Stream writer = new FileStream(_filePath, FileMode.Create, FileAccess.Write, FileShare.None, _bufferSize);
+
             if (_filePath.Trim().EndsWith(".gz", StringComparison.OrdinalIgnoreCase))
             {
                 writer = new GZipStream(writer, CompressionMode.Compress);
             }
+
             var xSettings = new XmlWriterSettings
             {
                 CloseOutput = true,
@@ -81,6 +86,7 @@ namespace PSI_Interface.MSData.mzML
                 Indent = true,
                 Encoding = Encoding.UTF8
             };
+
             //xSettings.WriteEndDocumentOnClose = false; // This will be necessary to properly output a checksum for indexedmzML.
             _writer = XmlWriter.Create(new StreamWriter(writer, Encoding.UTF8, _bufferSize), xSettings);
         }

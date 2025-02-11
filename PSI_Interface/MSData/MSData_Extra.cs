@@ -36,11 +36,13 @@ namespace PSI_Interface.MSData
         public MSData(bool createTranslator = true)
         {
             CvTranslator = null;
+
             if (createTranslator)
             {
                 //this.CvTranslator = new CVTranslator();
                 DefaultCV();
             }
+
             CVList = null;
             FileDescription = null;
             ReferenceableParamGroupList = null;
@@ -61,6 +63,7 @@ namespace PSI_Interface.MSData
         public void DefaultCV()
         {
             CVList = new MSDataList<CVInfo>();
+
             foreach (var cv in CV.CV.CVInfoList)
             {
                 if (string.Equals(cv.Id, "pato", StringComparison.OrdinalIgnoreCase) ||
@@ -80,6 +83,7 @@ namespace PSI_Interface.MSData
 
                 CVList.Add(newcv);
             }
+
             CvTranslator = new CVTranslator(CVList);
         }
     }

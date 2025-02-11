@@ -56,11 +56,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 {
                     return _peptideEvidence.Id;
                 }
+
                 return _peptideEvidenceRef;
             }
             set
             {
                 _peptideEvidenceRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     PeptideEvidence = IdentData.FindPeptideEvidence(value);
@@ -76,6 +78,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _peptideEvidence = value;
+
                 if (_peptideEvidence != null)
                 {
                     _peptideEvidence.IdentData = IdentData;
@@ -143,6 +146,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 index = -1;
                 var match = _msgfPlusPepEvFastaIndexRegex.Match(obj.PeptideEvidenceRef);
+
                 if (!match.Success)
                 {
                     return false;
@@ -177,6 +181,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
                 }
 
                 var compare1 = string.Compare(x.PeptideEvidence.DBSequence.SearchDatabase.Location, y.PeptideEvidence.DBSequence.SearchDatabase.Location, StringComparison.Ordinal);
+
                 if (x.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null &&
                     y.PeptideEvidence.DBSequence.SearchDatabase.DatabaseName?.Item?.Name != null)
                 {

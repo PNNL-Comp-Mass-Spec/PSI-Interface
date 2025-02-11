@@ -55,6 +55,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _contactRole = value;
+
                 if (_contactRole != null)
                     _contactRole.IdentData = IdentData;
             }
@@ -68,11 +69,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_analysisSoftware != null)
                     return _analysisSoftware.Id;
+
                 return _analysisSoftwareRef;
             }
             set
             {
                 _analysisSoftwareRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     AnalysisSoftware = IdentData.FindAnalysisSoftware(value);
             }
@@ -86,6 +89,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _analysisSoftware = value;
+
                 if (_analysisSoftware != null)
                 {
                     _analysisSoftware.IdentData = IdentData;

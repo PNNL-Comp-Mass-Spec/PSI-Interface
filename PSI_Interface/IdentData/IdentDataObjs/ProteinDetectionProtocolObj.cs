@@ -45,6 +45,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
 
             if (pdp.AnalysisParams != null)
                 _analysisParams = new ParamListObj(pdp.AnalysisParams, IdentData);
+
             if (pdp.Threshold != null)
                 _threshold = new ParamListObj(pdp.Threshold, IdentData);
         }
@@ -57,6 +58,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _analysisParams = value;
+
                 if (_analysisParams != null)
                     _analysisParams.IdentData = IdentData;
             }
@@ -73,6 +75,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _threshold = value;
+
                 if (_threshold != null)
                     _threshold.IdentData = IdentData;
             }
@@ -86,11 +89,13 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 if (_analysisSoftware != null)
                     return _analysisSoftware.Id;
+
                 return _analysisSoftwareRef;
             }
             set
             {
                 _analysisSoftwareRef = value;
+
                 if (!string.IsNullOrWhiteSpace(value))
                     AnalysisSoftware = IdentData.FindAnalysisSoftware(value);
             }
@@ -104,6 +109,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _analysisSoftware = value;
+
                 if (_analysisSoftware != null)
                 {
                     _analysisSoftware.IdentData = IdentData;

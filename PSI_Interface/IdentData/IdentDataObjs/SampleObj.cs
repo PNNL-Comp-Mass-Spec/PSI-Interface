@@ -53,6 +53,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             {
                 ContactRoles.AddRange(s.ContactRole, cr => new ContactRoleObj(cr, IdentData));
             }
+
             if (s.SubSample?.Count > 0)
             {
                 SubSamples.AddRange(s.SubSample, ss => new SubSampleObj(ss, IdentData));
@@ -70,6 +71,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _contactRoles = value;
+
                 if (_contactRoles != null)
                     _contactRoles.IdentData = IdentData;
             }
@@ -82,6 +84,7 @@ namespace PSI_Interface.IdentData.IdentDataObjs
             set
             {
                 _subSamples = value;
+
                 if (_subSamples != null)
                     _subSamples.IdentData = IdentData;
             }

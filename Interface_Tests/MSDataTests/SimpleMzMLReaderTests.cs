@@ -31,6 +31,7 @@ namespace Interface_Tests.MSDataTests
             {
                 Assert.AreEqual(expectedSpectra, reader.NumSpectra);
                 var specCount = 0;
+
                 foreach (var spec in reader.ReadAllSpectra(includePeaks))
                 {
                     if (specCount < 100 || specCount >= expectedSpectra - 100)
@@ -44,6 +45,7 @@ namespace Interface_Tests.MSDataTests
 
                     specCount++;
                 }
+
                 Assert.AreEqual(expectedSpectra, specCount);
             }
         }
@@ -83,6 +85,7 @@ namespace Interface_Tests.MSDataTests
 
                 // Note: calling .ReadMassSpectrum with scanNumber = 1 returns the first spectrum in the file, regardless of its actual scan number
                 var scanNumber = 1;
+
                 while (scanNumber <= expectedSpectra)
                 {
                     var spec = reader.ReadMassSpectrum(scanNumber, includePeaks);
@@ -137,6 +140,7 @@ namespace Interface_Tests.MSDataTests
                             Console.WriteLine("Scan {0} not found; this is expected", scanNumber);
                             continue;
                         }
+
                         Assert.Fail("GetSpectrumForScan returned null for scan {0}", scanNumber);
                     }
 
@@ -194,6 +198,7 @@ namespace Interface_Tests.MSDataTests
                             Assert.IsNull(spectrum);
                             continue;
                         }
+
                         Assert.IsNotNull(spectrum);
 
                         Console.WriteLine("Spectrum {0,4}, NativeID {1,-45}, scan {2,4}", spectrum.ScanNumber, spectrum.NativeId, spectrum.NativeIdScanNumber);
@@ -213,6 +218,7 @@ namespace Interface_Tests.MSDataTests
         private static SortedSet<int> ParseDelimitedIntegerList(string scanNumberList)
         {
             var scanNumbers = new SortedSet<int>();
+
             foreach (var item in scanNumberList.Split(','))
             {
                 if (int.TryParse(item, out var scanNumber))
@@ -227,6 +233,7 @@ namespace Interface_Tests.MSDataTests
         private static List<int> ParseOrderedIntegerList(string scanNumberList)
         {
             var scanNumbers = new List<int>();
+
             foreach (var item in scanNumberList.Split(','))
             {
                 if (int.TryParse(item, out var scanNumber))
@@ -283,6 +290,7 @@ namespace Interface_Tests.MSDataTests
                 var stepSize = Math.Max(1, expectedChromatograms / 100);
 
                 var chromatogramNumber = 1;
+
                 while (chromatogramNumber <= expectedChromatograms)
                 {
                     var chrom = reader.ReadChromatogram(chromatogramNumber);
@@ -317,11 +325,14 @@ namespace Interface_Tests.MSDataTests
             using (var reader = new SimpleMzMLReader(sourceFile.FullName, false, true))
             {
                 Assert.AreEqual(expectedSpectra, reader.NumSpectra);
+
                 if (expectedSpectra != 0)
                 {
                     Assert.AreEqual(0, reader.NumChromatograms);
                 }
+
                 var specCount = 0;
+
                 foreach (var spec in reader.ReadAllSpectra(true))
                 {
                     if (specCount < 100 || specCount >= expectedSpectra - 100)
@@ -335,10 +346,12 @@ namespace Interface_Tests.MSDataTests
 
                     specCount++;
                 }
+
                 Assert.AreEqual(expectedSpectra, specCount);
                 Assert.AreEqual(expectedChromatograms, reader.NumChromatograms);
 
                 var chromCount = 0;
+
                 foreach (var chrom in reader.ReadAllChromatograms(false))
                 {
                     if (chrom == null)
@@ -352,6 +365,7 @@ namespace Interface_Tests.MSDataTests
 
                     chromCount++;
                 }
+
                 Assert.AreEqual(expectedChromatograms, reader.NumChromatograms);
                 Assert.AreEqual(expectedChromatograms, chromCount);
             }
@@ -382,6 +396,7 @@ namespace Interface_Tests.MSDataTests
             {
                 Assert.AreEqual(expectedChromatograms, reader.NumChromatograms);
                 var chromCount = 0;
+
                 foreach (var chrom in reader.ReadAllChromatograms(true))
                 {
                     if (chrom == null)
@@ -395,6 +410,7 @@ namespace Interface_Tests.MSDataTests
 
                     chromCount++;
                 }
+
                 Assert.AreEqual(expectedChromatograms, chromCount);
             }
         }
@@ -421,6 +437,7 @@ namespace Interface_Tests.MSDataTests
                 for (var scanNumber = startScan; scanNumber <= endScan; scanNumber++)
                 {
                     var spectrum = reader.ReadMassSpectrum(scanNumber, false);
+
                     if (spectrum == null)
                         continue;
 

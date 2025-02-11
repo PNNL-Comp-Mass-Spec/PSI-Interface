@@ -58,6 +58,7 @@ namespace CV_Generator
             var relationshipsFile = new FileInfo(filenameBase + "_relationships.cs");
 
             Console.WriteLine("Writing data to " + metadataFile.FullName);
+
             using (var file = new StreamWriter(new FileStream(metadataFile.FullName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
@@ -75,6 +76,7 @@ namespace CV_Generator
             }
 
             Console.WriteLine("Writing data to " + enumFile.FullName);
+
             using (var file = new StreamWriter(new FileStream(enumFile.FullName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
@@ -89,6 +91,7 @@ namespace CV_Generator
             }
 
             Console.WriteLine("Writing data to " + termDataFile.FullName);
+
             using (var file = new StreamWriter(new FileStream(termDataFile.FullName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
@@ -104,6 +107,7 @@ namespace CV_Generator
             }
 
             Console.WriteLine("Writing data to " + relationshipsFile.FullName);
+
             using (var file = new StreamWriter(new FileStream(relationshipsFile.FullName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)))
             {
                 file.NewLine = "\n";
@@ -129,6 +133,7 @@ namespace CV_Generator
         private string UsingAndNamespace(bool needsGenericCollections = true, bool disableStringLiteralWarning = false)
         {
             var headerText = new StringBuilder();
+
             if (needsGenericCollections)
             {
                 headerText.Append("// Using statements:\n");
@@ -177,9 +182,11 @@ namespace CV_Generator
             foreach (var cv in _allObo)
             {
                 values.AppendNewLine(indent + "    CVInfoList.Add(new CVInfo(\"" + cv.Id + "\", \"" + cv.Name + "\", \"" + cv.Url + "\", \"" + cv.Version + "\"));");
+
                 foreach (var ns in cv.AdditionalNamespaces)
                 {
                     var name = cv.Name;
+
                     if (cv.Id.Equals("MS") && !ns.Equals("PEFF"))
                     {
                         name = "Ontology terms copied in " + name;
@@ -190,6 +197,7 @@ namespace CV_Generator
             }
 
             values.AppendFormat("{0}}}", indent);
+
             return values;
         }
 
@@ -203,10 +211,13 @@ namespace CV_Generator
             enumData.AppendNewLine(indent + "{");
 
             var dict = new Dictionary<string, OBO_Typedef>();
+
             var unknownDef = new OBO_Typedef {
                 Def = "Unknown term relationship"
             };
+
             dict.Add("Unknown", unknownDef);
+
             foreach (var obo in _allObo)
             {
                 foreach (var typedef in obo.Typedefs.Values)
@@ -220,6 +231,7 @@ namespace CV_Generator
             {
                 dict.Remove("part_of");
             }
+
             foreach (var item in dict)
             {
                 if (!string.IsNullOrWhiteSpace(item.Value.Def))
@@ -230,15 +242,18 @@ namespace CV_Generator
                 {
                     enumData.AppendNewLine(indent + "    /// <summary>Description not provided</summary>");
                 }
+
                 if (!string.IsNullOrWhiteSpace(item.Value.Comment))
                 {
                     enumData.AppendNewLine(indent + "    /// " + EscapeXmlEntities("remarks", item.Value.Comment));
                 }
+
                 enumData.AppendNewLine(indent + "    " + item.Key + ",");
                 enumData.AppendNewLine();
             }
 
             enumData.AppendFormat("{0}}}", indent);
+
             return enumData;
         }
 
@@ -268,6 +283,7 @@ namespace CV_Generator
             _cvMapData.Add("??", new Dictionary<string, OBO_Term>() { { "CVID_Unknown", unknown } });
 
             const string obsolete = "_OBSOLETE";
+
             foreach (var obo in _allObo)
             {
                 var id = obo.Id;
@@ -277,24 +293,31 @@ namespace CV_Generator
                 foreach (var term in obo.Terms.Values)
                 {
                     var name = id + "_";
+
                     if (!string.IsNullOrWhiteSpace(term.Id_Namespace))
                     {
                         name = term.Id_Namespace + "_";
                     }
+
                     //name += term.Name.Replace(' ', '_');
                     name += System.Text.RegularExpressions.Regex.Replace(term.Name, invalidSymbolsRegex, "_");
+
                     //name += System.Text.RegularExpressions.Regex.Replace(term.Name.Replace(' ', '_'), invalidSymbolsRegex, "_");
+
                     if (term.IsObsolete)
                     {
                         name += obsolete;
                     }
+
                     var tName = name;
                     var counter = 0;
+
                     while (_cvEnumData.ContainsKey(name))
                     {
                         counter++;
                         name = tName + counter;
                     }
+
                     _cvEnumData.Add(name, term);
                     parent.Add(name, term);
                     term.EnumName = name;
@@ -321,6 +344,7 @@ namespace CV_Generator
                 foreach (var term in cv.Value.Values.OrderBy(x => x.Id_Namespace).ThenBy(x => x.Id_Value))
                 {
                     var idValue = term.Id_Value;
+
                     if (term.Id_Namespace.Equals("??") && term.EnumName.Equals("CVID_Unknown"))
                     {
                         idValue = -1;
@@ -345,6 +369,7 @@ namespace CV_Generator
                     {
                         idValue += 500000000;
                     }
+
                     if (!string.IsNullOrWhiteSpace(term.Def))
                     {
                         enumData.AppendNewLine(indent + "    /// " + EscapeXmlEntities("summary", term.DefShort));
@@ -353,12 +378,14 @@ namespace CV_Generator
                     {
                         enumData.AppendNewLine(indent +  "    /// <summary>Description not provided</summary>");
                     }
+
                     enumData.AppendNewLine(indent + "    " + term.EnumName + " = " + idValue + ",");
                     enumData.AppendNewLine();
                 }
             }
 
             enumData.AppendFormat("{0}}}", indent);
+
             return enumData;
         }
 
@@ -396,6 +423,7 @@ namespace CV_Generator
             }
 
             dictData.AppendNewLine(indent + "}");
+
             return dictData;
         }
 
@@ -422,6 +450,7 @@ namespace CV_Generator
 
             var counter = 0;
             var first = true;
+
             foreach (var cv in _cvMapData)
             {
                 foreach (var term in cv.Value.Values.OrderBy( x => x.Id_Namespace).ThenBy( x=> x.Id_Value))
@@ -439,6 +468,7 @@ namespace CV_Generator
                             counter = 0;
                             functionCounter = 1;
                             lastNamespace = term.Id_Namespace;
+
                             if (lastNamespace.Equals("??") || string.IsNullOrWhiteSpace(lastNamespace))
                                 lastNamespace = "MS";
                         }
@@ -453,6 +483,7 @@ namespace CV_Generator
                         functionCounter++;
                         first = false;
                     }
+
                     counter++;
 
                     dictData.AppendNewLine(indent + "    TermData.Add(" +
@@ -476,6 +507,7 @@ namespace CV_Generator
             }
 
             dictData.Append(functionEnd);
+
             return dictData;
         }
 
@@ -488,6 +520,7 @@ namespace CV_Generator
             {
                 return;
             }
+
             foreach (var obo in _allObo)
             {
                 foreach (var term in obo.Terms)
@@ -495,6 +528,7 @@ namespace CV_Generator
                     _bigTermDict.Add(term.Key, term.Value);
                 }
             }
+
             _bigTermDictPopulated = true;
         }
 
@@ -502,6 +536,7 @@ namespace CV_Generator
         private StringBuilder RelationsIsAEnum(string indent)
         {
             var items = new Dictionary<string, List<string>>();
+
             foreach (var obo in _allObo)
             {
                 foreach (var term in obo.Terms.Values)
@@ -509,14 +544,17 @@ namespace CV_Generator
                     if (term.IsA.Count > 0)
                     {
                         items.Add(term.EnumName, new List<string>());
+
                         foreach (var rel in term.IsA)
                         {
                             var rel2 = rel.Trim().Split(' ')[0];
+
                             if (_bigTermDict.ContainsKey(rel2))
                             {
                                 items[term.EnumName].Add(_bigTermDict[rel2].EnumName);
                             }
                         }
+
                         if (items[term.EnumName].Count == 0)
                         {
                             items.Remove(term.EnumName);
@@ -540,10 +578,12 @@ namespace CV_Generator
                 {
                     fillData.AppendFormat("CVID.{0}, ", map);
                 }
+
                 fillData.AppendNewLine("});");
             }
 
             fillData.AppendFormat("{0}}}", indent);
+
             return fillData;
         }
 
@@ -551,6 +591,7 @@ namespace CV_Generator
         {
             // Use a list to maintain order
             var items = new List<KeyValuePair<OBO_Term, List<string>>>();
+
             foreach (var obo in _allObo)
             {
                 foreach (var term in obo.Terms.Values)
@@ -558,9 +599,11 @@ namespace CV_Generator
                     if (term.IsA.Count > 0)
                     {
                         var isAList = new List<string>();
+
                         foreach (var rel in term.IsA)
                         {
                             var rel2 = rel.Trim().Split(' ')[0];
+
                             if (_bigTermDict.ContainsKey(rel2))
                             {
                                 isAList.Add(_bigTermDict[rel2].EnumName);
@@ -588,6 +631,7 @@ namespace CV_Generator
 
             var counter = 0;
             var first = true;
+
             foreach (var item in items)
             {
                 if (counter % 1000 == 0 || !lastNamespace.Equals(item.Key.Id_Namespace, StringComparison.OrdinalIgnoreCase) || first)
@@ -614,14 +658,17 @@ namespace CV_Generator
                     functionCounter++;
                     first = false;
                 }
+
                 counter++;
 
                 //RelationsIsA.Add(CVID.name, new List<CVID> { CVID.ref, CVID.ref2, });
                 fillData.AppendFormat("{0}    RelationsIsA.Add(CVID.{1}, new List<CVID> {{ ", indent, item.Key.EnumName);
+
                 foreach (var map in item.Value)
                 {
                     fillData.AppendFormat("CVID.{0}, ", map);
                 }
+
                 fillData.AppendNewLine("});");
             }
 
@@ -636,6 +683,7 @@ namespace CV_Generator
             }
 
             fillData.Append(functionEnd);
+
             return fillData;
         }
     }

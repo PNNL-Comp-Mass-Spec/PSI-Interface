@@ -61,6 +61,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         public void MzIdentMLWriteTest(string inPath, string outFolderName, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
         {
             var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
+
             if (!sourceFile.Exists)
             {
                 Console.WriteLine("File not found: " + sourceFile.FullName);
@@ -71,6 +72,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
                 throw new DirectoryNotFoundException("Cannot determine the parent folder of " + sourceFile.FullName);
 
             var outFolder = new DirectoryInfo(Path.Combine(sourceFile.DirectoryName, outFolderName));
+
             if (!outFolder.Exists)
                 outFolder.Create();
 
@@ -78,9 +80,11 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
             var identData = MzIdentMlReaderWriter.Read(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
             var specResults = 0;
             var specItems = 0;
+
             foreach (var specList in identData.DataCollection.AnalysisData.SpectrumIdentificationList)
             {
                 specResults += specList.SpectrumIdentificationResult.Count;
+
                 foreach (var specResult in specList.SpectrumIdentificationResult)
                 {
                     specItems += specResult.SpectrumIdentificationItem.Count;
