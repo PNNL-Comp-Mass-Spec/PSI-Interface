@@ -119,6 +119,14 @@ namespace PSI_Interface.IdentData.IdentDataObjs
         #endregion
 
         /// <summary>
+        /// Show the peptide evidence ID
+        /// </summary>
+        public override string ToString()
+        {
+            return PeptideEvidenceRef;
+        }
+
+        /// <summary>
         /// IComparer class to sort lists of <see cref="PeptideEvidenceRefObj"/> by database name, then by start index of the peptide in the database file
         /// </summary>
         public class SortByDbAndStartIndex : IComparer<PeptideEvidenceRefObj>
