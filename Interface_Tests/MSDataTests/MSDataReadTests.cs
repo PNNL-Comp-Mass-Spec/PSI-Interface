@@ -32,8 +32,6 @@ namespace Interface_Tests.MSDataTests
         #endregion
 
         [Test]
-        //[TestCase(@"mzML\VA139IMSMS_noIndex.mzML", 3145)]
-        //[TestCase(@"mzML\VA139IMSMS_noIndex.mzML.gz", 3145)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293)]
         public void TestMzMLRead(string inputFileRelativePath, int expectedSpectra)
@@ -45,30 +43,6 @@ namespace Interface_Tests.MSDataTests
             }
 
             var reader = new MzMLReader(sourceFile.FullName);
-            //mzMLType mzMLData = reader.Read();
-            var mzMLData = new MSData(reader.Read());
-
-            Console.WriteLine("Spectrum count: " + mzMLData.Run.SpectrumList.Spectra.Count);
-            Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Spectrum count");
-        }
-
-        [Test]
-        //[TestCase(@"mzML\VA139IMSMS.mzML", 3145)]
-        //[TestCase(@"mzML\VA139IMSMS_compressed.mzML", 3145)]
-        //[TestCase(@"mzML\VA139IMSMS.mzML.gz", 3145)]
-        //[TestCase(@"mzML\sample1-A_BB2_01_922.mzML", 43574)]
-        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293)]
-        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293)]
-        public void TestMzMLReadIndexed(string inputFileRelativePath, int expectedSpectra)
-        {
-            if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
-            {
-                Console.WriteLine("File not found: " + inputFileRelativePath);
-                return;
-            }
-
-            var reader = new MzMLReader(sourceFile.FullName);
-            //mzMLType mzMLData = reader.Read();
             var mzMLData = new MSData(reader.Read());
 
             Console.WriteLine("Spectrum count: " + mzMLData.Run.SpectrumList.Spectra.Count);
