@@ -32,10 +32,16 @@ namespace Interface_Tests.MSDataTests
         #endregion
 
         [Test]
+        [TestCase(@"MzML\Angiotensin_AllScans.mzML", 1775, false)]
+        [TestCase(@"MzML\Angiotensin_AllScans_NoIndex.mzML", 1775, false)]
+        [TestCase(@"MzML\Angiotensin_AllScans.mzML", 1775, true)]
+        [TestCase(@"MzML\Angiotensin_AllScans_NoIndex.mzML", 1775, true)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293, false)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293, false)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14_NoIndex.mzML", 9293, false)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293, true)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293, true)]
+        [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14_NoIndex.mzML", 9293, true)]
         public void TestDeleteMzMLAfterRead(string inputFileRelativePath, int expectedSpectra, bool useMSDataWrapper)
         {
             if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
