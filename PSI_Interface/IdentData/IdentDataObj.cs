@@ -10,12 +10,12 @@ namespace PSI_Interface.IdentData
     /// MzIdentML MzIdentMLType
     /// </summary>
     /// <remarks>
-    /// The upper-most hierarchy level of mzIdentML with sub-containers for example describing software,
+    /// The uppermost hierarchy level of mzIdentML with sub-containers for example describing software,
     /// protocols and search results (spectrum identifications or protein detection results).
     /// </remarks>
     public class IdentDataObj : IIdentifiableType, IEquatable<IdentDataObj>
     {
-        // Ignore Spelling: pato
+        // Ignore Spelling: ident, mzid, pato
 
         #region Private/Internal Fields
 

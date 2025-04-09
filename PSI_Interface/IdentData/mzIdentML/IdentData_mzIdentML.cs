@@ -8,11 +8,11 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML MzIdentMLType
     /// </summary>
-    /// <remarks>The upper-most hierarchy level of mzIdentML with sub-containers for example describing software,
+    /// <remarks>The uppermost hierarchy level of mzIdentML with sub-containers for example describing software,
     /// protocols and search results (spectrum identifications or protein detection results).</remarks>
     public partial class MzIdentMLType : IdentifiableType
     {
-        // Ignore Spelling: bool, codons, cv, cvp, daltons, de novo, denovo, immonium, isoelectric
+        // Ignore Spelling: bool, codons, cv, cvp, daltons, de novo, denovo, ident, immonium, isoelectric
         // Ignore Spelling: poly, pre, taxon, validator, workflow, xsd
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <summary>
         /// Constructor - create from corresponding IdentData type
         /// </summary>
-        /// <param name="fa"></param>
+        /// <param name="fa">Fragment array object</param>
         public FragmentArrayType(FragmentArrayObj fa)
         {
             measure_ref = fa.MeasureRef;
@@ -350,7 +350,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         /// <remarks>
         /// In case more information about the ions annotation has to be conveyed, that has no fit in FragmentArray.
         /// Note: It is suggested that the value attribute takes the form of a list of the same size as FragmentArray values.
-        /// However, there is no formal encoding and it cannot be expected that other software will process or impart that information properly.
+        /// However, there is no formal encoding, and it cannot be expected that other software will process or impart that information properly.
         /// </remarks>
         /// <remarks>min 0, max unbounded</remarks>
         //public List<UserParamType> userParam // mzIdentML 1.2
@@ -707,7 +707,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// <summary>
     /// MzIdentML IdentifiableType
     /// </summary>
-    /// <remarks>Other classes in the model can be specified as sub-classes, inheriting from Identifiable.
+    /// <remarks>Other classes in the model can be specified as subclasses, inheriting from Identifiable.
     /// Identifiable gives classes a unique identifier within the scope and a name that need not be unique.</remarks>
     public abstract partial class IdentifiableType
     {
@@ -1091,7 +1091,7 @@ namespace PSI_Interface.IdentData.mzIdentML
         //public List<SpectrumIdentificationItemType> SpectrumIdentificationItems
 
         /// <remarks>___ParamGroup___: Scores or parameters associated with the SpectrumIdentificationResult
-        /// (i.e the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide
+        /// (i.e. the set of SpectrumIdentificationItems derived from one spectrum) e.g. the number of peptide
         /// sequences within the parent tolerance for this spectrum.</remarks>
         /// <remarks>min 0, max unbounded</remarks>
         //public List<CVParamType> CVParams
@@ -2048,7 +2048,7 @@ namespace PSI_Interface.IdentData.mzIdentML
             if (si.InputSpectra?.Count > 0)
             {
                 InputSpectra = new List<InputSpectraType>(si.InputSpectra.Count);
-                InputSpectra.AddRange(si.InputSpectra, ispec => new InputSpectraType(ispec));
+                InputSpectra.AddRange(si.InputSpectra, inputSpec => new InputSpectraType(inputSpec));
             }
 
             if (si.SearchDatabases?.Count > 0)
@@ -2272,7 +2272,7 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// be n instances of Modification. If multiple modifications are provided as cvParams, it is assumed that the
     /// modification is ambiguous i.e. one modification or another. A cvParam must be provided with the identification
     /// of the modification sourced from a suitable CV e.g. UNIMOD. If the modification is not present in the CV (and
-    /// this will be checked by the semantic validator within a given tolerance window), there is a unknown
+    /// this will be checked by the semantic validator within a given tolerance window), there is an unknown
     /// modification CV term that must be used instead. A neutral loss should be defined as an additional CVParam
     /// within Modification. If more complex information should be given about neutral losses (such as presence/absence
     /// on particular product ions), this can additionally be encoded within the FragmentationArray.</remarks>

@@ -7,6 +7,8 @@ namespace PSI_Interface.IdentData.IdentDataObjs
     /// </summary>
     public abstract class IdentDataInternalTypeAbstract
     {
+        // Ignore Spelling: ident, Objs
+
         internal IdentDataInternalTypeAbstract()
         {
             _identData = null;

@@ -10,6 +10,8 @@ namespace PSI_Interface.IdentData
     /// </summary>
     public class IdentDataCreator
     {
+        // Ignore Spelling: calc, cvid, ident
+
         /// <summary>
         /// Get the IdentData object, after tying it all together
         /// </summary>

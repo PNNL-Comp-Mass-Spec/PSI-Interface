@@ -15,7 +15,7 @@ namespace PSI_Interface.IdentData
     /// </summary>
     public class SimpleMZIdentMLReader
     {
-        // Ignore Spelling: gzip, gzipped, mzid, phos, pre, tryptic, unimod
+        // Ignore Spelling: Dict, gzip, gzipped, ident, mem, mzid, Novo, phos, pre, tryptic, unimod
 
         /// <summary>
         /// A wrapper around an exception that provides a single level of abstraction, but no additional detail.
@@ -31,14 +31,14 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="message"></param>
+            /// <param name="message">Message</param>
             public DuplicateKeyException(string message) : base(message) { }
 
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="message"></param>
-            /// <param name="innerEx"></param>
+            /// <param name="message">Message</param>
+            /// <param name="innerEx">Inner exception</param>
             // ReSharper disable once UnusedMember.Global
             public DuplicateKeyException(string message, Exception innerEx) : base(message, innerEx) { }
         }
@@ -57,7 +57,7 @@ namespace PSI_Interface.IdentData
         #region NativeId Conversion
 
         /// <summary>
-        /// Provides functionality to interpret a NativeID as a integer scan number
+        /// Provides functionality to interpret a NativeID as an integer scan number
         /// Code is ported from MSData.cpp in ProteoWizard
         /// </summary>
         public static class NativeIdConversion
@@ -78,21 +78,25 @@ namespace PSI_Interface.IdentData
                 return map;
             }
 
+            // ReSharper disable once UnusedMember.Global
+
             /// <summary>
             /// Performs a "long.TryParse" on the interpreted scan number (single shot function)
             /// </summary>
-            /// <param name="nativeId"></param>
-            /// <param name="num"></param>
+            /// <param name="nativeId">Native ID</param>
+            /// <param name="num">Output: parsed value</param>
+            /// <returns>True if successful, false if not an integer</returns>
             public static bool TryGetScanNumberLong(string nativeId, out long num)
             {
                 return long.TryParse(GetScanNumber(nativeId), out num);
             }
 
             /// <summary>
-            /// Performs a "int.TryParse" on the interpreted scan number (single shot function)
+            /// Performs "int.TryParse" on the interpreted scan number (single shot function)
             /// </summary>
-            /// <param name="nativeId"></param>
-            /// <param name="num"></param>
+            /// <param name="nativeId">Native ID</param>
+            /// <param name="num">Output: parsed value</param>
+            /// <returns>True if successful, false if not an integer</returns>
             public static bool TryGetScanNumberInt(string nativeId, out int num)
             {
                 return int.TryParse(GetScanNumber(nativeId), out num);
@@ -102,7 +106,8 @@ namespace PSI_Interface.IdentData
             /// Returns the integer-only portion of the nativeID that can be used for a scan number
             /// If the nativeID cannot be interpreted, the original value is returned.
             /// </summary>
-            /// <param name="nativeId"></param>
+            /// <param name="nativeId">Native ID</param>
+            /// <returns>Integer portion of the Native ID, as a string</returns>
             public static string GetScanNumber(string nativeId)
             {
                 // TODO: Add interpreter for Waters' S0F1, S1F1, S0F2,... format
@@ -332,6 +337,8 @@ namespace PSI_Interface.IdentData
             /// </summary>
             public bool IsSpectrumIdNotTheScanNumber { get; set; }
 
+            // ReSharper disable once UnusedMember.Global
+
             /// <summary>
             /// Scan number, as specified in the mzid using a CVParam (if available)
             /// </summary>
@@ -392,7 +399,7 @@ namespace PSI_Interface.IdentData
             public string ProteinDescription { get; set; }
 
             /// <summary>
-            /// Database Id - internal reference in mzid file
+            /// Database ID - internal reference in mzid file
             /// </summary>
             internal string DatabaseId { get; set; }
         }
@@ -447,8 +454,8 @@ namespace PSI_Interface.IdentData
             /// Compares 2 search modifications for equality, excluding <see cref="Residues"/> from the comparison
             /// </summary>
             /// <remarks>MS-GF+ adds all modifications and affected sites as distinct search modifications, so Phos STY becomes Phos S, Phos T, and Phos Y.</remarks>
-            /// <param name="other"></param>
-            /// <returns>true if the modifications match (with the exception of the residues)</returns>
+            /// <param name="other">Modification to compare to this modification</param>
+            /// <returns>True if the modifications match (ignoring the affected residues)</returns>
             public bool AreModificationsSimilar(SearchModification other)
             {
                 return Name.Equals(other.Name) && Mass.Equals(other.Mass) && IsFixed == other.IsFixed && IsNTerm == other.IsNTerm &&
@@ -619,7 +626,7 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="path">path to the mzid file</param>
+            /// <param name="path">Path to the mzid file</param>
             protected SimpleMZIdentMLMetaData(string path)
             {
                 DatasetFile = path;
@@ -664,7 +671,7 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="path">path to the mzid file</param>
+            /// <param name="path">Path to the mzid file</param>
             internal SimpleMZIdentMLData(string path) : base(path)
             {
             }
@@ -683,9 +690,9 @@ namespace PSI_Interface.IdentData
             /// <summary>
             /// Constructor
             /// </summary>
-            /// <param name="path">path to the mzid file</param>
-            /// <param name="identificationsEnumerator"></param>
-            /// <param name="dataReader"></param>
+            /// <param name="path">Path to the mzid file</param>
+            /// <param name="identificationsEnumerator">Identifications enumerator</param>
+            /// <param name="dataReader">XML data reader</param>
             internal SimpleMZIdentMLDataLowMem(string path, IEnumerator<SpectrumIdItem> identificationsEnumerator, XmlReader dataReader) : base(path)
             {
                 identEnumerator = identificationsEnumerator;
@@ -840,8 +847,8 @@ namespace PSI_Interface.IdentData
         /// If the reader is at an EndElement, read it so we can move on to the next node
         /// Otherwise, if the element name matches currentNodeName, move to the next node
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="currentNodeName"></param>
+        /// <param name="reader">XML data reader</param>
+        /// <param name="currentNodeName">Current node name</param>
         private static void PossiblyReadEndElement(XmlReader reader, string currentNodeName)
         {
             // If the Node is empty, the end element may not be present

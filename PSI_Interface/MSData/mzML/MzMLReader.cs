@@ -15,8 +15,8 @@ namespace PSI_Interface.MSData.mzML
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="bufferSize"></param>
+        /// <param name="path">.mzML file path</param>
+        /// <param name="bufferSize">Buffer size, in bytes</param>
         public MzMLReader(string path, int bufferSize = 65536)
         {
             _filePath = path;
@@ -38,6 +38,9 @@ namespace PSI_Interface.MSData.mzML
         /// <summary>
         /// Schema of the file being read
         /// </summary>
+        /// <remarks>
+        /// The constructor initially sets this to IndexedMzML, but the call to ConfigureReader() will auto-change this to MzML if the file does not have an index
+        /// </remarks>
         public MzMLSchemaType MzMLType { get; private set; }
 
         /// <summary>

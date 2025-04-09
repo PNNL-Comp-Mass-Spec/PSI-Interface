@@ -7,7 +7,7 @@ namespace PSI_Interface.MSData.mzML
     public enum MzMLSchemaType : byte
     {
         /// <summary>
-        /// MzML schema
+        /// MzML schema (no index)
         /// </summary>
         MzML,
         /// <summary>

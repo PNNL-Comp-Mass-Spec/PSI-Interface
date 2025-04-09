@@ -12,6 +12,8 @@ namespace PSI_Interface.IdentData.mzIdentML
     /// </summary>
     public static class MzIdentMlReaderWriter
     {
+        // Ignore Spelling: ident
+
         /// <summary>
         /// Read the mzid file into MzIdentMLType objects
         /// </summary>
