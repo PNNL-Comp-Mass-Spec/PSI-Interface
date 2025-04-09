@@ -7,6 +7,8 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
 {
     internal class mzIdentMLWriteTests
     {
+        // Ignore Spelling: Ident
+
         #region Additional test attributes
 
         //

@@ -18,6 +18,9 @@ using PSI_Interface.MSData.mzML;
 
 namespace PSI_Interface.MSData
 {
+    // ReSharper disable once CommentTypo
+    // Ignore Spelling: bda, cvp, Referenceable, rpg, rpgr, sfr
+
     /// <summary>
     /// mzML mzMLType
     /// </summary>

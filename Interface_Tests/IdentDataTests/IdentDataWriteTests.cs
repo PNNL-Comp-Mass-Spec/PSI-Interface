@@ -8,6 +8,8 @@ namespace Interface_Tests.IdentDataTests
 {
     internal class IdentDataWriteTests
     {
+        // Ignore Spelling: Ident
+
         #region Additional test attributes
 
         //

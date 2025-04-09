@@ -5,6 +5,8 @@ namespace CV_Generator.OBO_Objects
 {
     public class OBO_Instance
     {
+        // Ignore Spelling: OBO
+
         public OBO_Instance(List<KeyValuePair<string, string>> data = null)
         {
             if (data != null)

@@ -5,7 +5,7 @@ namespace CV_Generator.OBO_Objects
 {
     public class OBO_File
     {
-        // Ignore Spelling: obo, Proteomics
+        // Ignore Spelling: Namespaces, OBO, Proteomics
 
         private OBO_Header _header;
 

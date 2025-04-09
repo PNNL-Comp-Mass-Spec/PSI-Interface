@@ -10,6 +10,8 @@ namespace Interface_Tests.IdentDataTests
     [TestFixture]
     public class SimpleMZIdentMLReaderTests
     {
+        // Ignore Spelling: Ident
+
         [Test]
         [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid           ", 11443, 12172, 8898, 4361)]
         [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid.gz        ", 11443, 12172, 8898, 4361)]
