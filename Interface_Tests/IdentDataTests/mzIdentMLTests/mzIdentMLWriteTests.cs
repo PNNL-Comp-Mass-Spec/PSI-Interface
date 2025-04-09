@@ -51,7 +51,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         /// <param name="expectedSpecResults"></param>
         /// <param name="expectedSpecItems"></param>
         /// <param name="expectedPeptides"></param>
-        /// <param name="expectedSeqs"></param>
+        /// <param name="expectedProteinSequences"></param>
         [Test]
         // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02.mzid","output", 1, 10894, 11612, 8806, 4507)]
         // [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_pwiz.mzid", "output", 1, 10894, 11612, 8806, 4507)]
@@ -60,7 +60,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
         [TestCase(@"MzIdentML\Cyano_GC_07_11_25Aug09_Draco_09-05-02_msgfplus.mzid.gz        ", "output_MzIdentMLType", 1, 11443, 12172, 8889, 4361)]
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid       ", "output_MzIdentMLType", 1, 15510, 16486, 13486, 4912)]
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz    ", "output_MzIdentMLType", 1, 15510, 16486, 13486, 4912)]
-        public void MzIdentMLWriteTest(string inPath, string outFolderName, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
+        public void MzIdentMLWriteTest(string inPath, string outFolderName, int expectedSpecLists, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedProteinSequences)
         {
             var sourceFile = new FileInfo(Path.Combine(TestPath.ExtTestDataDirectory, inPath));
 
@@ -104,7 +104,7 @@ namespace Interface_Tests.IdentDataTests.mzIdentMLTests
             Assert.AreEqual(expectedSpecResults, specResults, "Spectrum Identification Results");
             Assert.AreEqual(expectedSpecItems, specItems, "Spectrum Identification Items");
             Assert.AreEqual(expectedPeptides, identData.SequenceCollection.Peptide.Count, "Unique Peptides");
-            Assert.AreEqual(expectedSeqs, identData.SequenceCollection.DBSequence.Count, "Unique Protein Sequences");
+            Assert.AreEqual(expectedProteinSequences, identData.SequenceCollection.DBSequence.Count, "Unique Protein Sequences");
 
             MzIdentMlReaderWriter.Write(identData, outFile.FullName);
         }

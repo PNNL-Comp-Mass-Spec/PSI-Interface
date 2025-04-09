@@ -40,7 +40,7 @@ namespace Interface_Tests.IdentDataTests
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid       ", 15510, 16486, 13486, 4912)]
         [TestCase(@"MzIdentML\Mixed_subcell-50a_31Aug10_Falcon_10-07-40_msgfplus.mzid.gz    ", 15510, 16486, 13486, 4912)]
         [TestCase(@"MzIdentML\Cj_media_DOC_R2_23Feb15_Arwen_14-12-03_NoResults_msgfplus.mzid", 0, 0, 0, 0)]
-        public void MzIdentMLReadTest(string inputFileRelativePath, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedSeqs)
+        public void MzIdentMLReadTest(string inputFileRelativePath, int expectedSpecResults, int expectedSpecItems, int expectedPeptides, int expectedProteinSequences)
         {
             if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
@@ -84,7 +84,7 @@ namespace Interface_Tests.IdentDataTests
             Assert.AreEqual(expectedSpecResults, specResults, "Spectrum Identification Results");
             Assert.AreEqual(expectedSpecItems, specItems, "Native IDs");
             Assert.AreEqual(expectedPeptides, observedPeptides, "Unique Peptides");
-            Assert.AreEqual(expectedSeqs, observeProteins, "Unique Protein Sequences");
+            Assert.AreEqual(expectedProteinSequences, observeProteins, "Unique Protein Sequences");
         }
     }
 }
