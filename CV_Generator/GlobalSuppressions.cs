@@ -12,3 +12,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("General", "RCS1118:Mark local variable as const.", Justification = "Leave as-is for readability", Scope = "member", Target = "~M:CV_Generator.CVWriter.RelationsIsAEnumSplit(System.String)~System.Text.StringBuilder")]
 [assembly: SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Keep for reference", Scope = "member", Target = "~M:CV_Generator.CVWriter.GenerateTermInfoObject(System.String)~System.Text.StringBuilder")]
 [assembly: SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Keep for reference", Scope = "member", Target = "~M:CV_Generator.CVWriter.RelationsIsAEnum(System.String)~System.Text.StringBuilder")]
+[assembly: SuppressMessage("Roslynator", "RCS1123:Add parentheses when necessary", Justification = "Parentheses not needed", Scope = "member", Target = "~M:CV_Generator.OBO_Objects.OBO_Term.ParseId")]
