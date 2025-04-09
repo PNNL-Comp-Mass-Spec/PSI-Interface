@@ -59,7 +59,7 @@ namespace Interface_Tests.MSDataTests
 
                 var reader = new MzMLReader(tempFile.FullName);
 
-                if (useMSDataWrapper)
+                if (!useMSDataWrapper)
                 {
                     // Option 1:
                     var mzMLData = reader.Read();
