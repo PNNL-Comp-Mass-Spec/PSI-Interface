@@ -93,7 +93,21 @@ namespace Interface_Tests.MSDataTests
             }
             finally
             {
-                tempFile.Delete();
+                try
+                {
+                    tempFile.Delete();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Error deleting file {0}: {1}", tempFile.FullName, ex.Message);
+
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    tempFile.Delete();
+
+                    Console.WriteLine("File successfully deleted after garbage collection");
+                }
             }
         }
 
