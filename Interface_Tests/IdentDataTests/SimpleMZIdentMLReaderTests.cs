@@ -39,16 +39,16 @@ namespace Interface_Tests.IdentDataTests
             {
                 specResults++;
 
-                if (!spectrumIDs.Contains(specItem.NativeId))
-                    spectrumIDs.Add(specItem.NativeId);
+                // Add the NativeID if not yet present
+                spectrumIDs.Add(specItem.NativeId);
 
                 foreach (var evidenceItem in specItem.PepEvidence)
                 {
-                    if (!peptides.Contains(evidenceItem.SequenceWithNumericMods))
-                        peptides.Add(evidenceItem.SequenceWithNumericMods);
+                    // Add the peptide if not yet present
+                    peptides.Add(evidenceItem.SequenceWithNumericMods);
 
-                    if (!proteinSeqs.Contains(evidenceItem.DbSeq.Accession))
-                        proteinSeqs.Add(evidenceItem.DbSeq.Accession);
+                    // Add the protein if not yet present
+                    proteinSeqs.Add(evidenceItem.DbSeq.Accession);
                 }
 
                 if (specResults % 1000 == 0)
@@ -96,16 +96,16 @@ namespace Interface_Tests.IdentDataTests
                 {
                     specResults++;
 
-                    if (!spectrumIDs.Contains(specItem.NativeId))
-                        spectrumIDs.Add(specItem.NativeId);
+                    // Add the NativeID if not yet present
+                    spectrumIDs.Add(specItem.NativeId);
 
                     foreach (var evidenceItem in specItem.PepEvidence)
                     {
-                        if (!peptides.Contains(evidenceItem.SequenceWithNumericMods))
-                            peptides.Add(evidenceItem.SequenceWithNumericMods);
+                        // Add the peptide if not yet present
+                        peptides.Add(evidenceItem.SequenceWithNumericMods);
 
-                        if (!proteinSeqs.Contains(evidenceItem.DbSeq.Accession))
-                            proteinSeqs.Add(evidenceItem.DbSeq.Accession);
+                        // Add the protein if not yet present
+                        proteinSeqs.Add(evidenceItem.DbSeq.Accession);
                     }
 
                     if (specResults % 1000 == 0)
