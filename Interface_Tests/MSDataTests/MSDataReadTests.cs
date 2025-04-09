@@ -36,7 +36,7 @@ namespace Interface_Tests.MSDataTests
         //[TestCase(@"mzML\VA139IMSMS_noIndex.mzML.gz", 3145)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293)]
-        public void MzMLReadTest(string inputFileRelativePath, int expectedSpectra)
+        public void TestMzMLRead(string inputFileRelativePath, int expectedSpectra)
         {
             if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
@@ -59,7 +59,7 @@ namespace Interface_Tests.MSDataTests
         //[TestCase(@"mzML\sample1-A_BB2_01_922.mzML", 43574)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML", 9293)]
         [TestCase(@"MzML\QC_Shew_16_01-15f_MPA_02redo_8Nov16_Tiger_16-02-14.mzML.gz", 9293)]
-        public void MzMLIndexedReadTest(string inputFileRelativePath, int expectedSpectra)
+        public void TestMzMLReadIndexed(string inputFileRelativePath, int expectedSpectra)
         {
             if (!TestPath.FindInputFile(inputFileRelativePath, out var sourceFile))
             {
