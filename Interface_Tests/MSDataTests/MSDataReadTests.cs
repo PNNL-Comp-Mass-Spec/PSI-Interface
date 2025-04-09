@@ -44,7 +44,7 @@ namespace Interface_Tests.MSDataTests
                 return;
             }
 
-            var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, sourceFile.FullName));
+            var reader = new MzMLReader(sourceFile.FullName);
             //mzMLType mzMLData = reader.Read();
             var mzMLData = new MSData(reader.Read());
 
@@ -67,7 +67,7 @@ namespace Interface_Tests.MSDataTests
                 return;
             }
 
-            var reader = new MzMLReader(Path.Combine(TestPath.ExtTestDataDirectory, sourceFile.FullName));
+            var reader = new MzMLReader(sourceFile.FullName);
             //mzMLType mzMLData = reader.Read();
             var mzMLData = new MSData(reader.Read());
 

@@ -65,7 +65,6 @@ namespace Interface_Tests
             if (localSourceFile1.Exists)
             {
                 inputFile = localSourceFile1;
-
                 return true;
             }
 
@@ -74,7 +73,6 @@ namespace Interface_Tests
             if (localSourceFile2.Exists)
             {
                 inputFile = localSourceFile2;
-
                 return true;
             }
 
@@ -83,12 +81,10 @@ namespace Interface_Tests
             if (remoteFile.Exists)
             {
                 inputFile = remoteFile;
-
                 return true;
             }
 
             inputFile = null;
-
             return false;
         }
     }
