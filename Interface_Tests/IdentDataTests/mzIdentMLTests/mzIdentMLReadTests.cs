@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using NUnit.Framework;
 using PSI_Interface.IdentData.mzIdentML;
 
