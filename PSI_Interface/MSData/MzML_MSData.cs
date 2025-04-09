@@ -628,9 +628,9 @@ namespace PSI_Interface.MSData
             {
                 if (CV.CV.RelationsChildren[CV.CV.CVID.MS_binary_data_array].Contains(cv.Cvid))
                 {
-                    if (_revTypeMap.ContainsKey(cv.Cvid))
+                    if (_revTypeMap.TryGetValue(cv.Cvid, out var dataType))
                     {
-                        _dataType = _revTypeMap[cv.Cvid];
+                        _dataType = dataType;
                     }
                 }
 
