@@ -31,8 +31,6 @@ namespace PSI_Interface.MSData.mzML
 
         private readonly string _filePath;
 
-        private readonly bool _hasRead = false;
-
         private Stream _reader;
 
         /// <summary>
@@ -48,7 +46,7 @@ namespace PSI_Interface.MSData.mzML
         /// </summary>
         public mzMLType Read()
         {
-            if (_hasRead)
+            if (_reader?.CanRead != true)
             {
                 throw new Exception("File has already been read!");
             }
@@ -78,6 +76,9 @@ namespace PSI_Interface.MSData.mzML
                         break;
                 }
             }
+
+            _reader.Close();
+            _reader.Dispose();
 
             return mzMLData;
         }
