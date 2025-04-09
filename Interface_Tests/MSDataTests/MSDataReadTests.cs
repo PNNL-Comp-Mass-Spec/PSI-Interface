@@ -73,6 +73,19 @@ namespace Interface_Tests.MSDataTests
                     Console.WriteLine("Spectrum count reported by MSData: " + mzMLData.Run.SpectrumList.Spectra.Count);
                     Assert.AreEqual(expectedSpectra, mzMLData.Run.SpectrumList.Spectra.Count, "Spectrum count");
                 }
+
+                Console.WriteLine();
+
+                try
+                {
+                    // Call .Read() again; an exception should occur
+                    reader.Read();
+                    Assert.Fail("Repeated call to reader.Read() should have raised an exception");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("As expected, calling .Read() again results in exception \"{0}\"", ex.Message);
+                }
             }
             catch (Exception ex)
             {
