@@ -50,7 +50,7 @@ namespace PSI_Interface.MSData
         private string _unzippedFilePath;
         private bool _randomAccess;
         private bool _allRead;
-        private readonly XmlReaderSettings _xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
+        private readonly XmlReaderSettings _xSettings = new XmlReaderSettings { IgnoreWhitespace = true, CloseInput = false };
         private Encoding _encoding;
         private readonly List<SimpleSpectrum> _spectra = new List<SimpleSpectrum>();
         private readonly List<SimpleChromatogram> _chromatograms = new List<SimpleChromatogram>();
@@ -1864,8 +1864,8 @@ namespace PSI_Interface.MSData
         /// </summary>
         public void Dispose()
         {
-            GC.SuppressFinalize(this);
             DisposeImpl();
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -2044,6 +2044,9 @@ namespace PSI_Interface.MSData
                     _numChromatogramsRead = true;
                 }
             }
+
+            streamReader.Dispose();
+            stream.Dispose();
         }
 
         /// <summary>
@@ -2604,6 +2607,9 @@ namespace PSI_Interface.MSData
 
                 reader.Dispose();
             } */
+
+            // Be careful about closing/disposing instances of XmlSubtreeReader if _reduceMemoryUsage is true,
+            // because it reads the rest of the subtree, which takes time and can cause side effects
             if (!_reduceMemoryUsage)
             {
                 // Don't worry about closing the subtree readers, just close the root reader.
@@ -2614,6 +2620,7 @@ namespace PSI_Interface.MSData
                 }
                 else
                 {
+                    //reader.Dispose(); This will just take unnecessary extra time.
                     indexReader.Dispose();
                 }
             }
@@ -5068,6 +5075,7 @@ namespace PSI_Interface.MSData
 
             var attributeValue = reader.GetAttribute(attributeName);
 
+            // Intentional no dispose of the reader.
             return string.IsNullOrWhiteSpace(attributeValue) ? string.Empty : attributeValue;
         }
 
