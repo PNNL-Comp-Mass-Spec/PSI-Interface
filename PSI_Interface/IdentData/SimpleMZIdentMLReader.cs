@@ -693,13 +693,17 @@ namespace PSI_Interface.IdentData
             /// <param name="path">Path to the mzid file</param>
             /// <param name="identificationsEnumerator">Identifications enumerator</param>
             /// <param name="dataReader">XML data reader</param>
-            internal SimpleMZIdentMLDataLowMem(string path, IEnumerator<SpectrumIdItem> identificationsEnumerator, XmlReader dataReader) : base(path)
+            /// <param name="readerBaseStream">Backing stream for <paramref name="dataReader"/>, to ensure proper close/dispose of stream</param>
+            internal SimpleMZIdentMLDataLowMem(string path, IEnumerator<SpectrumIdItem> identificationsEnumerator, XmlReader dataReader, StreamReader readerBaseStream) : base(path)
             {
                 identEnumerator = identificationsEnumerator;
                 xmlDataReader = dataReader;
+                baseStream = readerBaseStream;
+
             }
 
             private readonly XmlReader xmlDataReader;
+            private readonly StreamReader baseStream;
             private readonly IEnumerator<SpectrumIdItem> identEnumerator;
 
             /// <summary>
@@ -728,8 +732,15 @@ namespace PSI_Interface.IdentData
             /// </summary>
             public void Dispose()
             {
-                GC.SuppressFinalize(this);
                 xmlDataReader?.Dispose();
+                baseStream?.Dispose();
+                GC.SuppressFinalize(this);
+            }
+
+            ~SimpleMZIdentMLDataLowMem()
+            {
+                xmlDataReader?.Dispose();
+                baseStream?.Dispose();
             }
         }
 
@@ -770,7 +781,9 @@ namespace PSI_Interface.IdentData
             var results = new SimpleMZIdentMLData(sourceFile.FullName);
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
 
-            using (var reader = XmlReader.Create(new StreamReader(file, System.Text.Encoding.UTF8, true, 65536), xSettings))
+            // Note: By default, XmlReaderSettings specifies to not close the input stream, so make sure we close the stream when done.
+            using (var stream = new StreamReader(file, System.Text.Encoding.UTF8, true, 65536))
+            using (var reader = XmlReader.Create(stream, xSettings))
             {
                 // Read in the file
                 var spectrumMatches = ReadMzIdentMl(reader);
@@ -822,15 +835,17 @@ namespace PSI_Interface.IdentData
                 file = new GZipStream(file, CompressionMode.Decompress);
             }
 
-            var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
-            var reader = XmlReader.Create(new StreamReader(file, System.Text.Encoding.UTF8, true, 65536), xSettings);
+            // Note: By default, XmlReaderSettings specifies to not close the input stream, so make sure we close the stream when done.
+            var xSettings = new XmlReaderSettings { IgnoreWhitespace = true, CloseInput = true };
+            var streamReader = new StreamReader(file, System.Text.Encoding.UTF8, true, 65536);
+            var reader = XmlReader.Create(streamReader, xSettings);
 
             var enumerator = ReadMzIdentMl(reader).GetEnumerator();
 
             // Read in the file metadata, stopping after the first yield return.
             enumerator.MoveNext();
 
-            var results = new SimpleMZIdentMLDataLowMem(sourceFile.FullName, enumerator, reader)
+            var results = new SimpleMZIdentMLDataLowMem(sourceFile.FullName, enumerator, reader, streamReader)
             {
                 SpectrumFile = spectrumFile,
                 AnalysisSoftware = softwareName,

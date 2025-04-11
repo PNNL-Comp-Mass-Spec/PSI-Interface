@@ -101,9 +101,10 @@ namespace PSI_Interface.MSData.mzML
             }
 
             var xSettings = new XmlReaderSettings { IgnoreWhitespace = true };
-            var reader = XmlReader.Create(new StreamReader(tempReader, Encoding.UTF8, true, _bufferSize), xSettings);
 
-            using (reader)
+            // Note: By default, XmlReaderSettings specifies to not close the input stream, so make sure we close the stream when done.
+            using (var streamReader = new StreamReader(tempReader, Encoding.UTF8, true, _bufferSize))
+            using (var reader = XmlReader.Create(streamReader, xSettings))
             {
                 reader.MoveToContent();
                 switch (reader.Name)
