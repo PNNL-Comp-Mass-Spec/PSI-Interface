@@ -112,7 +112,7 @@ namespace Interface_Tests.MSDataTests
                     GC.WaitForPendingFinalizers();
                     tempFile.Delete();
 
-                    Console.WriteLine("File successfully deleted after garbage collection");
+                    Assert.Fail("File successfully deleted after garbage collection, but use of GC should not have been required");
                 }
             }
         }
