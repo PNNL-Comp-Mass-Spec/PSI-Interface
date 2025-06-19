@@ -3034,6 +3034,23 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_pLink, new List<CVID> { CVID.MS_quantitation_software_name, CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_pLink2, new List<CVID> { CVID.MS_pLink, CVID.MS_quantitation_software_name, CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Andromeda_delta_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_lowest_observed_ion_mobility, new List<CVID> { CVID.MS_chromatogram_attribute, CVID.MS_spectrum_property, });
+            RelationsIsA.Add(CVID.MS_highest_observed_ion_mobility, new List<CVID> { CVID.MS_chromatogram_attribute, CVID.MS_spectrum_property, });
+            RelationsIsA.Add(CVID.MS_ion_mobility_frame_representation, new List<CVID> { CVID.MS_spectrum_attribute, });
+            RelationsIsA.Add(CVID.MS_ion_mobility_profile_frame, new List<CVID> { CVID.MS_ion_mobility_frame_representation, });
+            RelationsIsA.Add(CVID.MS_ion_mobility_centroid_frame, new List<CVID> { CVID.MS_ion_mobility_frame_representation, });
+            RelationsIsA.Add(CVID.MS_Orbitrap_Astral_Zoom, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+            RelationsIsA.Add(CVID.MS_ZenoTOF_8600, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+        }
+
+        /// <summary>Populate the relationships between CV terms, breakdown part 4</summary>
+        private static void FillRelationsIsA_MS_Part4()
+        {
+            RelationsIsA.Add(CVID.MS_ZenoTOF_7600_, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SCIEX_7500_, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
+            RelationsIsA.Add(CVID.MS_SCIEX_OS, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_SCIEX_MS_Data_Converter, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_data_processing_software, });
+            RelationsIsA.Add(CVID.MS_SCIEX_WIFF2_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_single_value, new List<CVID> { CVID.MS_QC_metric_value_type, });
             RelationsIsA.Add(CVID.MS_n_tuple, new List<CVID> { CVID.MS_QC_metric_value_type, });
             RelationsIsA.Add(CVID.MS_table, new List<CVID> { CVID.MS_QC_metric_value_type, });
@@ -3041,11 +3058,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_ID_based_metric, new List<CVID> { CVID.MS_QC_metric_category, });
             RelationsIsA.Add(CVID.MS_ID_free_metric, new List<CVID> { CVID.MS_QC_metric_category, });
             RelationsIsA.Add(CVID.MS_quantification_based_metric, new List<CVID> { CVID.MS_QC_metric_category, });
-        }
-
-        /// <summary>Populate the relationships between CV terms, breakdown part 4</summary>
-        private static void FillRelationsIsA_MS_Part4()
-        {
             RelationsIsA.Add(CVID.MS_single_run_based_metric, new List<CVID> { CVID.MS_QC_metric_category, });
             RelationsIsA.Add(CVID.MS_multiple_runs_based_metric, new List<CVID> { CVID.MS_QC_metric_category, });
             RelationsIsA.Add(CVID.MS_single_spectrum_based_metric, new List<CVID> { CVID.MS_QC_metric_category, });
@@ -4819,6 +4831,14 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_6_15N_2__TMT6plex, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_Label_13C_6_15N_2__TMTpro, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
             RelationsIsA.Add(CVID.UNIMOD_2PCA_triazole_ethanethiol, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Desthiobiotin_Phenol, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cys_vinyl_sulfone_amine_probe_addition, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cys__fGly_diol, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cys__sulfo_fGly_dio, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_Cys__Ser_O_sulfate, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_b_type_ion, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_PnTAG, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
+            RelationsIsA.Add(CVID.UNIMOD_DMA_PEG3, new List<CVID> { CVID.UNIMOD_unimod_root_node, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>

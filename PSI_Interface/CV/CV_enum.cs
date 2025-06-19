@@ -379,7 +379,7 @@ namespace PSI_Interface.CV
             /// <summary>A detector acquisition mode used for detecting transient signals.</summary>
             MS_transient_recorder = 1000120,
 
-            /// <summary>The brand of instruments from the joint venture between Applied Biosystems and MDS Analytical Technologies (formerly MDS SCIEX). Previously branded as \ Applied Biosystems|MDS SCIEX\ .</summary>
+            /// <summary>SCIEX instrument model.</summary>
             MS_SCIEX_instrument_model = 1000121,
 
             /// <summary>Bruker Daltonics' instrument model.</summary>
@@ -1516,10 +1516,10 @@ namespace PSI_Interface.CV
             /// <summary>Nonphysical characteristic attributed to a spectrum.</summary>
             MS_spectrum_attribute = 1000499,
 
-            /// <summary>The lower m/z bound of a mass spectrometer scan window.</summary>
+            /// <summary>The upper m/z bound of a mass spectrometer scan window.</summary>
             MS_scan_window_upper_limit = 1000500,
 
-            /// <summary>The upper m/z bound of a mass spectrometer scan window.</summary>
+            /// <summary>The lower m/z bound of a mass spectrometer scan window.</summary>
             MS_scan_window_lower_limit = 1000501,
 
             /// <summary>The time spent gathering data across a peak.</summary>
@@ -9976,6 +9976,42 @@ namespace PSI_Interface.CV
             /// <summary>Regular expression for alphaLP.</summary>
             MS______TSAV__ = 1003435,
 
+            /// <summary>Lowest ion mobility value observed in the ion mobility measurement array.</summary>
+            MS_lowest_observed_ion_mobility = 1003437,
+
+            /// <summary>Highest ion mobility value observed in the ion mobility measurement array.</summary>
+            MS_highest_observed_ion_mobility = 1003438,
+
+            /// <summary>Representation of one or more spectra acquired across an ion mobility dimension.</summary>
+            MS_ion_mobility_frame_representation = 1003439,
+
+            /// <summary>An ion mobility frame where the ion mobility dimension is continuous.</summary>
+            MS_ion_mobility_profile_frame = 1003440,
+
+            /// <summary>An ion mobility frame where the ion mobility dimension is processed into discrete peaks of zero width.</summary>
+            MS_ion_mobility_centroid_frame = 1003441,
+
+            /// <summary>Thermo Scientific Orbitrap Astral Zoom mass spectrometer contains three mass analyzers: a quadrupole analyzer, an Orbitrap analyzer, and an Astral analyzer.</summary>
+            MS_Orbitrap_Astral_Zoom = 1003442,
+
+            /// <summary>SCIEX ZenoTOF 8600 system.</summary>
+            MS_ZenoTOF_8600 = 1003443,
+
+            /// <summary>SCIEX ZenoTOF 7600+ system.</summary>
+            MS_ZenoTOF_7600_ = 1003444,
+
+            /// <summary>SCIEX 7500+ system.</summary>
+            MS_SCIEX_7500_ = 1003445,
+
+            /// <summary>SCIEX OS software.</summary>
+            MS_SCIEX_OS = 1003446,
+
+            /// <summary>A software for converting SCIEX wiff or wiff2 format to mzML.</summary>
+            MS_SCIEX_MS_Data_Converter = 1003447,
+
+            /// <summary>SCIEX WIFF2 file format.</summary>
+            MS_SCIEX_WIFF2_format = 1003448,
+
             /// <summary>PSI Quality Control controlled vocabulary term.</summary>
             MS_PSI_MS_CV_Quality_Control_Vocabulary = 4000000,
 
@@ -15339,6 +15375,30 @@ namespace PSI_Interface.CV
 
             /// <summary>Cleaved 2PCA clicked to biotin-SS-azide.</summary>
             UNIMOD_2PCA_triazole_ethanethiol = 300002126,
+
+            /// <summary>Desthiobiotin-Phenol.</summary>
+            UNIMOD_Desthiobiotin_Phenol = 300002127,
+
+            /// <summary>Michael addition of a vinyl sulfone amine desthiobiotin probe to cysteine.</summary>
+            UNIMOD_Cys_vinyl_sulfone_amine_probe_addition = 300002128,
+
+            /// <summary>Formylglycinediol, activated in sulfatases.</summary>
+            UNIMOD_Cys__fGly_diol = 300002129,
+
+            /// <summary>Sulphated formylglycinediol, activated in sulfatases.</summary>
+            UNIMOD_Cys__sulfo_fGly_dio = 300002130,
+
+            /// <summary>Serine O-sulfate.</summary>
+            UNIMOD_Cys__Ser_O_sulfate = 300002131,
+
+            /// <summary>Dehydration of C-terminus as reaction inside the mass spectrometer.</summary>
+            UNIMOD_b_type_ion = 300002132,
+
+            /// <summary>6-Phosphonohexanoylation.</summary>
+            UNIMOD_PnTAG = 300002135,
+
+            /// <summary>DimethylaminoPEG3ylation.</summary>
+            UNIMOD_DMA_PEG3 = 300002136,
 
             /// <summary>A unit of measurement is a standardized quantity of a physical quality.</summary>
             UO_unit = 400000000,
