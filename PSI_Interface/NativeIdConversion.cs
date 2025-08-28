@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PSI_Interface
 {
@@ -11,11 +12,14 @@ namespace PSI_Interface
     {
         private static Dictionary<string, string> ParseNativeId(string nativeId)
         {
+            // Pwiz chromatograms have id starting with "SRM SIC". Splitting on space character results tokens with no '=' character
             var tokens = nativeId.Split(new[] { '\t', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             var map = new Dictionary<string, string>();
 
             foreach (var token in tokens)
             {
+                if (!token.Contains('='))
+                    continue;
                 var equals = token.IndexOf('=');
                 var name = token.Substring(0, equals);
                 var value = token.Substring(equals + 1);
