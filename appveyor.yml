@@ -1,12 +1,11 @@
-version: 1.2.0.{build}
+version: 2.8.0.{build}
 image: Visual Studio 2022
 configuration: Release
 platform: Any CPU
-before_build:
-- cmd: nuget.exe restore PSI_Interface.sln
-build:
-  project: PSI_Interface.sln
-  verbosity: minimal
+nuget:
+  disable_publish_on_pr: true
+build_script:
+- ps: msbuild PSI_Interface.sln /t:restore /t:build /p:Configuration=Release /p:Platform="Any CPU" /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 test: off
 artifacts:
 - path: PSI_Interface\bin\Release\PSI_Interface*.nupkg
@@ -14,4 +13,6 @@ notifications:
 - provider: Email
   to:
   - bryson.gibbons@pnnl.gov
+  on_build_success: false
   on_build_failure: true
+  on_build_status_changed: true
