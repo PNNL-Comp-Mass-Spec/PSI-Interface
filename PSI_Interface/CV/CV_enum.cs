@@ -8662,6 +8662,15 @@ namespace PSI_Interface.CV
             /// <summary>python-psims, a library for generating mzML and mzIdentML.</summary>
             MS_python_psims = 1002991,
 
+            /// <summary>Thermo Scientific Orbitrap Exploris GC-MS.</summary>
+            MS_Orbitrap_Exploris_GC_MS = 1002992,
+
+            /// <summary>Q Exactive Focus Hybrid Quadrupole-Orbitrap Mass Spectrometer.</summary>
+            MS_Q_Exactive_Focus = 1002993,
+
+            /// <summary>Thermo Scientific Orbitrap Excedion Pro.</summary>
+            MS_Orbitrap_Excedion_Pro = 1002994,
+
             /// <summary>Posterior error probability of the best identified peptide of the Andromeda search engine.</summary>
             MS_Andromeda_PEP = 1002995,
 
@@ -10012,6 +10021,15 @@ namespace PSI_Interface.CV
             /// <summary>SCIEX WIFF2 file format.</summary>
             MS_SCIEX_WIFF2_format = 1003448,
 
+            /// <summary>Thermo Scientific ISQ 7000 Single Quadrupole GC-MS System.</summary>
+            MS_ISQ_7000 = 1003449,
+
+            /// <summary>DC potential at the start of the FAIMS voltage ramp.</summary>
+            MS_FAIMS_compensation_voltage_ramp_start = 1003450,
+
+            /// <summary>DC potential at the end of the FAIMS voltage ramp.</summary>
+            MS_FAIMS_compensation_voltage_ramp_end = 1003451,
+
             /// <summary>PSI Quality Control controlled vocabulary term.</summary>
             MS_PSI_MS_CV_Quality_Control_Vocabulary = 4000000,
 
@@ -10521,6 +10539,45 @@ namespace PSI_Interface.CV
 
             /// <summary>The interval used for acquisition of quantiles of all identified MS2 events, after user-defined acceptance criteria are applied, divided by retention time duration. The number of values in the tuple implies the quantile mode. In case of multiple acceptance criteria (FDR) available in proteomics, PSM-level FDR should be used for better comparability.</summary>
             MS_identified_MS2_quantile_RT_fraction = 4000188,
+
+            /// <summary>DIAMetric is a Data-Independent Acquisition Quality Metric Generator.</summary>
+            MS_DIAMetric = 4000189,
+
+            /// <summary>The amount of time elapsed since the start of the data acquisition until the implied quantile of all MS1 TIC has been accumulated. The number of values in the tuple implies the quantile mode.</summary>
+            MS__MS1_TIC_quantile_RT = 4000190,
+
+            /// <summary>The amount of time elapsed since the start of the data acquisition until the implied quantile of all MS2 TIC has been accumulated. The number of values in the tuple implies the quantile mode.</summary>
+            MS__MS2_TIC_quantile_RT = 4000191,
+
+            /// <summary>The median time between consecutive MS1 scans across the full run.</summary>
+            MS_MS1_median_cycle_time = 4000192,
+
+            /// <summary>The median time between consecutive measurements of the same DIA isolation window across the full run.</summary>
+            MS_DIA_isolation_window_median_cycle_time = 4000193,
+
+            /// <summary>The number of distinct DIA isolation windows (i.e. sharing the same low m/z boundary, high m/z boundary, and ion mobility parameters).</summary>
+            MS_DIA_isolation_window_count = 4000194,
+
+            /// <summary>The minimum and maximum m/z width of the DIA isolation windows, defined as the subtraction between the high m/z boundary and the low m/z boundary. For fixed-window DIA methods, the same value is reported twice.</summary>
+            MS_DIA_isolation_window_m_z_widths = 4000195,
+
+            /// <summary>The minimum and maximum number of times any specific DIA isolation window is measured via MS/MS. In case all isolation windows are sampled the same number of times, this value is reported twice.</summary>
+            MS_DIA_isolation_window_count1 = 4000196,
+
+            /// <summary>The minimum and maximum retention time in which at least half of the TIC for any given DIA isolation window compared to the full TIC in this isolation window has been collected.</summary>
+            MS_DIA_isolation_window_half_TIC_RT = 4000197,
+
+            /// <summary>The minimum and maximum TIC collected in any given DIA isolation window.</summary>
+            MS_DIA_isolation_window_TIC = 4000198,
+
+            /// <summary>For each DIA isolation window, we compute the median number of peaks per MS/MS measurement. This metric reports the lowest and highest peak count medians among the isolation windows.</summary>
+            MS_DIA_isolation_window_peak_count = 4000199,
+
+            /// <summary>Outlier score for MS runs based on the median Euclidean distance for each run to every other run after robust PCA transformation of the QC metrics for all runs.</summary>
+            MS_run_outlier_score_PCA_distance = 4000200,
+
+            /// <summary>Outlier score for MS runs based on the local outlier probabilities (LoOP) algorithm applied to QC metrics from all runs.</summary>
+            MS_run_outlier_score_LoOP = 4000201,
 
             /// <summary>A practiced and regimented skill or series of actions.</summary>
             NCIT_Technique = 100316847,

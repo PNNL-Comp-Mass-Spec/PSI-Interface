@@ -989,7 +989,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PepsinA, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_TrypChymo, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_Trypsin_P, new List<CVID> { CVID.MS_cleavage_agent_name, });
-            RelationsIsA.Add(CVID.MS_AlphaLP, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_V8_DE, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_V8_E, new List<CVID> { CVID.MS_cleavage_agent_name, });
             RelationsIsA.Add(CVID.MS_Mascot_SigThreshold, new List<CVID> { CVID.MS_Mascot_input_parameter, });
@@ -1031,12 +1030,12 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_NBRF_PIR, new List<CVID> { CVID.MS_database_file_formats, });
             RelationsIsA.Add(CVID.MS_peptide_descriptions, new List<CVID> { CVID.MS_peptide_sequence_level_identification_attribute, });
             RelationsIsA.Add(CVID.MS_spectrum_descriptions, new List<CVID> { CVID.MS_search_input_details, });
+            RelationsIsA.Add(CVID.MS_spectrum_quality_descriptions, new List<CVID> { CVID.MS_spectrum_descriptions, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 2</summary>
         private static void FillRelationsIsA_MS_Part2()
         {
-            RelationsIsA.Add(CVID.MS_spectrum_quality_descriptions, new List<CVID> { CVID.MS_spectrum_descriptions, });
             RelationsIsA.Add(CVID.MS_msmsEval_quality, new List<CVID> { CVID.MS_spectrum_quality_descriptions, });
             RelationsIsA.Add(CVID.MS_alternate_single_letter_codes, new List<CVID> { CVID.MS_ambiguous_residues, });
             RelationsIsA.Add(CVID.MS_alternate_mass, new List<CVID> { CVID.MS_ambiguous_residues, });
@@ -1613,7 +1612,6 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS______HKR_P____P_, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS_______E_E_, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS_____W_, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
-            RelationsIsA.Add(CVID.MS______TSAV__, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS_Mascot_C13_counts, new List<CVID> { CVID.MS_Mascot_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteinExtractor_Weighting, new List<CVID> { CVID.MS_ProteinExtractor_input_parameter, });
             RelationsIsA.Add(CVID.MS_ProteinScape_second_round_Mascot, new List<CVID> { CVID.MS_ProteinScape_input_parameter, });
@@ -2036,13 +2034,13 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_PIA_XML_format, new List<CVID> { CVID.MS_intermediate_analysis_format, });
             RelationsIsA.Add(CVID.MS_PIA_workflow_parameter, new List<CVID> { CVID.MS_software_specific_input_parameter, CVID.MS_search_engine_specific_input_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_FDRScore_calculated, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
+            RelationsIsA.Add(CVID.MS_PIA_Combined_FDRScore_calculated, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
+            RelationsIsA.Add(CVID.MS_PIA_PSM_sets_created, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 3</summary>
         private static void FillRelationsIsA_MS_Part3()
         {
-            RelationsIsA.Add(CVID.MS_PIA_Combined_FDRScore_calculated, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
-            RelationsIsA.Add(CVID.MS_PIA_PSM_sets_created, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_used_top_identifications_for_FDR, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
             RelationsIsA.Add(CVID.MS_PIA_protein_score, new List<CVID> { CVID.MS_search_engine_specific_score_for_proteins, });
             RelationsIsA.Add(CVID.MS_PIA_protein_inference, new List<CVID> { CVID.MS_PIA_workflow_parameter, });
@@ -2631,6 +2629,9 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_IdentiPy_hyperscore, new List<CVID> { CVID.MS_search_engine_specific_score, });
             RelationsIsA.Add(CVID.MS_ms_deisotope, new List<CVID> { CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_python_psims, new List<CVID> { CVID.MS_conversion_software, });
+            RelationsIsA.Add(CVID.MS_Orbitrap_Exploris_GC_MS, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Q_Exactive_Focus, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+            RelationsIsA.Add(CVID.MS_Orbitrap_Excedion_Pro, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
             RelationsIsA.Add(CVID.MS_Andromeda_PEP, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
             RelationsIsA.Add(CVID.MS_Andromeda_apl_file_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
             RelationsIsA.Add(CVID.MS_ProteomeXchange_dataset_identifier_reanalysis_number, new List<CVID> { CVID.MS_external_reference_identifier, });
@@ -3034,23 +3035,28 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_pLink, new List<CVID> { CVID.MS_quantitation_software_name, CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_pLink2, new List<CVID> { CVID.MS_pLink, CVID.MS_quantitation_software_name, CVID.MS_analysis_software, });
             RelationsIsA.Add(CVID.MS_Andromeda_delta_score, new List<CVID> { CVID.MS_PSM_level_search_engine_specific_statistic, });
+            RelationsIsA.Add(CVID.MS_AlphaLP, new List<CVID> { CVID.MS_cleavage_agent_name, });
+            RelationsIsA.Add(CVID.MS______TSAV__, new List<CVID> { CVID.MS_Cleavage_agent_regular_expression, });
             RelationsIsA.Add(CVID.MS_lowest_observed_ion_mobility, new List<CVID> { CVID.MS_chromatogram_attribute, CVID.MS_spectrum_property, });
             RelationsIsA.Add(CVID.MS_highest_observed_ion_mobility, new List<CVID> { CVID.MS_chromatogram_attribute, CVID.MS_spectrum_property, });
             RelationsIsA.Add(CVID.MS_ion_mobility_frame_representation, new List<CVID> { CVID.MS_spectrum_attribute, });
             RelationsIsA.Add(CVID.MS_ion_mobility_profile_frame, new List<CVID> { CVID.MS_ion_mobility_frame_representation, });
-            RelationsIsA.Add(CVID.MS_ion_mobility_centroid_frame, new List<CVID> { CVID.MS_ion_mobility_frame_representation, });
-            RelationsIsA.Add(CVID.MS_Orbitrap_Astral_Zoom, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
-            RelationsIsA.Add(CVID.MS_ZenoTOF_8600, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 4</summary>
         private static void FillRelationsIsA_MS_Part4()
         {
+            RelationsIsA.Add(CVID.MS_ion_mobility_centroid_frame, new List<CVID> { CVID.MS_ion_mobility_frame_representation, });
+            RelationsIsA.Add(CVID.MS_Orbitrap_Astral_Zoom, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+            RelationsIsA.Add(CVID.MS_ZenoTOF_8600, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_ZenoTOF_7600_, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_SCIEX_7500_, new List<CVID> { CVID.MS_SCIEX_instrument_model, });
             RelationsIsA.Add(CVID.MS_SCIEX_OS, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_acquisition_software, CVID.MS_analysis_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_SCIEX_MS_Data_Converter, new List<CVID> { CVID.MS_SCIEX_software, CVID.MS_data_processing_software, });
             RelationsIsA.Add(CVID.MS_SCIEX_WIFF2_format, new List<CVID> { CVID.MS_mass_spectrometer_file_format, });
+            RelationsIsA.Add(CVID.MS_ISQ_7000, new List<CVID> { CVID.MS_Thermo_Scientific_instrument_model, });
+            RelationsIsA.Add(CVID.MS_FAIMS_compensation_voltage_ramp_start, new List<CVID> { CVID.MS_ion_mobility_attribute, CVID.MS_ion_selection_attribute, CVID.MS_peak_attribute, });
+            RelationsIsA.Add(CVID.MS_FAIMS_compensation_voltage_ramp_end, new List<CVID> { CVID.MS_ion_mobility_attribute, CVID.MS_ion_selection_attribute, CVID.MS_peak_attribute, });
             RelationsIsA.Add(CVID.MS_single_value, new List<CVID> { CVID.MS_QC_metric_value_type, });
             RelationsIsA.Add(CVID.MS_n_tuple, new List<CVID> { CVID.MS_QC_metric_value_type, });
             RelationsIsA.Add(CVID.MS_table, new List<CVID> { CVID.MS_QC_metric_value_type, });
@@ -3216,6 +3222,19 @@ namespace PSI_Interface.CV
             RelationsIsA.Add(CVID.MS_MS1_TIC_change_quantile_ratios, new List<CVID> { CVID.MS_n_tuple, });
             RelationsIsA.Add(CVID.MS_MS1_TIC_quantile_ratios, new List<CVID> { CVID.MS_n_tuple, });
             RelationsIsA.Add(CVID.MS_identified_MS2_quantile_RT_fraction, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS_DIAMetric, new List<CVID> { CVID.MS_analysis_software, });
+            RelationsIsA.Add(CVID.MS__MS1_TIC_quantile_RT, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS__MS2_TIC_quantile_RT, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS_MS1_median_cycle_time, new List<CVID> { CVID.MS_single_value, });
+            RelationsIsA.Add(CVID.MS_DIA_isolation_window_median_cycle_time, new List<CVID> { CVID.MS_single_value, });
+            RelationsIsA.Add(CVID.MS_DIA_isolation_window_count, new List<CVID> { CVID.MS_single_value, });
+            RelationsIsA.Add(CVID.MS_DIA_isolation_window_m_z_widths, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS_DIA_isolation_window_count1, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS_DIA_isolation_window_half_TIC_RT, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS_DIA_isolation_window_TIC, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS_DIA_isolation_window_peak_count, new List<CVID> { CVID.MS_n_tuple, });
+            RelationsIsA.Add(CVID.MS_run_outlier_score_PCA_distance, new List<CVID> { CVID.MS_table, });
+            RelationsIsA.Add(CVID.MS_run_outlier_score_LoOP, new List<CVID> { CVID.MS_table, });
         }
 
         /// <summary>Populate the relationships between CV terms, breakdown part 1</summary>

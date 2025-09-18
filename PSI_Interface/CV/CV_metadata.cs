@@ -13,9 +13,9 @@ namespace PSI_Interface.CV
         {
             // NOTE: psi-ms.obo directly includes a subset of some other ontologies rather than importing the entire ontology.
             // NOTE: psi-ms.obo is the official/sole source of the MS and PEFF namespaces, but (for example) UO and NCIT terms are copied from their respective ontologies.
-            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.195"));
-            CVInfoList.Add(new CVInfo("NCIT", "Ontology terms copied in Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.195"));
-            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.195"));
+            CVInfoList.Add(new CVInfo("MS", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.200"));
+            CVInfoList.Add(new CVInfo("NCIT", "Ontology terms copied in Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.200"));
+            CVInfoList.Add(new CVInfo("PEFF", "Proteomics Standards Initiative Mass Spectrometry Ontology", "https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo", "4.1.200"));
             CVInfoList.Add(new CVInfo("UNIMOD", "UNIMOD", "http://www.unimod.org/obo/unimod.obo", "17:06:2025 11:31"));
             CVInfoList.Add(new CVInfo("UO", "Unit Ontology", "https://raw.githubusercontent.com/bio-ontology-research-group/unit-ontology/master/uo.obo", "releases/2023-05-25"));
         }
