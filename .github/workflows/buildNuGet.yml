@@ -14,9 +14,12 @@ env:
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0 # avoid shallow clone so NerdBank.GitVersioning can calculate version
 
@@ -24,7 +27,7 @@ jobs:
       run: git branch --remote --contains | grep origin/master
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -33,20 +36,25 @@ jobs:
       run: msbuild /m /t:restore /t:build /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
 
     - name: Archive compiled binaries for .NET 4.8
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Compiled binaries, .NET 4.8
         path: PSI_Interface/bin/Release/net48/*.*
 
     - name: Archive compiled .nupkg
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Compiled .nupkg
         path: PSI_Interface/bin/Release/*.nupkg
 
+    # Get a short-lived NuGet API key
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: FarmGeek4Life
+
+    # Push the package
     - name: Push NuGet package
       working-directory: ./PSI_Interface/bin/Release/
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_PNNLCOMPMASSSPEC }}
-        SOURCE_URL: https://api.nuget.org/v3/index.json
-      run: nuget push PSI_Interface.*.nupkg -Source ${{env.SOURCE_URL}} -ApiKey ${{ env.NUGET_AUTH_TOKEN }} -SkipDuplicate
+      run: nuget push PSI_Interface.*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ steps.login.outputs.NUGET_API_KEY }} -SkipDuplicate
